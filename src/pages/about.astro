@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroStandard from '../components/heroes/HeroStandard.astro';
+import TextSection from '../components/content/TextSection.astro';
+import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+
+const leftItems = [
+  'Are building on GCP or seriously considering it',
+  'Have 6–500 employees and growing data needs',
+  'Are frustrated by unreliable pipelines, confusing metrics, or runaway BigQuery costs',
+  'Want a senior technical partner, not just hands on keyboards',
+  'Are based in Europe or operate under GDPR',
+];
+
+const rightItems = [
+  'Need AWS or Azure expertise',
+  'Are looking for the cheapest option',
+  'Need a large team of analysts or data scientists (we\'re data engineers)',
+  'Want a fully outsourced data function indefinitely',
+  'Need real-time streaming infrastructure at high scale (Kafka, Flink)',
+];
+
+const principles = [
+  {
+    title: 'Infrastructure first, insights second',
+    body: 'The most beautiful dashboard is worthless if the data feeding it is unreliable. We build the plumbing before we talk about the taps.',
+  },
+  {
+    title: 'GCP-only, by design',
+    body: 'We don\'t offer multi-cloud flexibility because we don\'t think it\'s a virtue. Depth of expertise in one stack is more valuable than surface familiarity with five.',
+  },
+  {
+    title: 'Transparent pricing, defined scope',
+    body: 'Data consulting has a reputation for ballooning engagements. We quote fixed-price projects where possible and don\'t upsell services you don\'t need.',
+  },
+  {
+    title: 'We leave teams more capable, not more dependent',
+    body: 'Every engagement includes documentation, knowledge transfer, and training. The goal is that your team understands what we built and why.',
+  },
+  {
+    title: 'We say no to bad fits',
+    body: 'We don\'t take every project. If you need multi-cloud or tools we don\'t specialize in, we\'ll tell you upfront and recommend someone better suited.',
+  },
+  {
+    title: 'Long-term architecture over short-term speed',
+    body: 'We design for the company you\'re becoming, not just the one you are today — while being honest about when simplicity is the right answer.',
+  },
+];
+---
+
+<BaseLayout
+  title="About | Nimzo Data"
+  description="Nimzo Data is a boutique GCP data consulting agency based in France. We specialize in BigQuery, Dataform, and the full GCP analytics stack."
+>
+  <HeroStandard
+    title="A boutique GCP data consulting agency."
+    subtitle="We're not a large firm trying to be everything to everyone. We specialize in one stack, work with a small number of clients at a time, and prioritize depth over breadth."
+  />
+
+  <TextSection title="How Nimzo Data started">
+    <p class="placeholder-text">[Company story — to be completed with Antoine's personal background and the specific moment he decided to launch Nimzo Data.]</p>
+  </TextSection>
+
+  <TextSection title="Why Nimzo?">
+    <p>Nimzo Data takes its name from the Nimzo-Indian Defense — a chess opening known for controlling the center through indirect pressure rather than direct occupation. The Nimzo-Indian doesn't charge forward. It creates the conditions for a structural advantage that compounds over time. We build data infrastructure the same way. We're not interested in impressive-looking dashboards that don't connect to decisions. We're interested in creating the conditions for insight: clean pipelines, reliable models, clear metrics, and systems that compound in value as your data grows.</p>
+  </TextSection>
+
+  <SectionWrapper bg="card" py="lg">
+    <h2 class="principles-heading">How we work</h2>
+    <div class="principles-grid">
+      {principles.map((p) => (
+        <div class="principle-item">
+          <h3 class="principle-title">{p.title}</h3>
+          <p class="principle-body">{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper py="lg">
+    <TwoColumnSplit
+      variant="is-for"
+      leftTitle="Nimzo Data is for companies that:"
+      leftItems={leftItems}
+      rightTitle="We're not the right fit if you:"
+      rightItems={rightItems}
+    />
+  </SectionWrapper>
+
+  <CTABanner
+    heading="Ready to talk?"
+    buttonText="Book a free call"
+    buttonHref="/contact/"
+    dataTrack="about-cta"
+  />
+</BaseLayout>
+
+<style>
+  .placeholder-text {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+    border-left: 3px solid var(--color-border, #e2e8f0);
+    padding-left: 16px;
+  }
+
+  .principles-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 40px 0;
+    line-height: 1.2;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .principles-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+
+  .principle-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .principle-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .principle-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.65;
+  }
+</style>

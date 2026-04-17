@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroStandard from '../components/heroes/HeroStandard.astro';
+import TextSection from '../components/content/TextSection.astro';
+import CalendlyEmbed from '../components/integrations/CalendlyEmbed.astro';
+import CTACard from '../components/cards/CTACard.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+---
+
+<BaseLayout
+  title="Contact | Nimzo Data"
+  description="Book a free 30-minute call with Nimzo Data. We'll discuss your data stack, current challenges, and whether we're a good fit."
+>
+  <HeroStandard
+    title="Work with us"
+    subtitle="The best way to start is a 30-minute call. We'll ask about your current setup, what's not working, and what you're trying to achieve. No sales pitch — just an honest conversation about whether we're a good fit."
+  />
+
+  <SectionWrapper py="lg">
+    <CalendlyEmbed url="https://calendly.com/nimzodata/free-call" minHeight="630px" />
+    <p class="email-fallback">
+      Prefer email? Write us directly at <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a> — we respond within one business day.
+    </p>
+  </SectionWrapper>
+
+  <TextSection title="What happens next">
+    <ol class="next-steps">
+      <li>We'll ask for a brief overview of your data stack and main challenge</li>
+      <li>We'll schedule a 30-minute discovery call</li>
+      <li>If there's a fit, we'll send a scoping questionnaire and proposal within 5 business days</li>
+    </ol>
+  </TextSection>
+
+  <TextSection title="Where we are" bg="card">
+    <p>Based in France. We work remotely across Europe, with occasional on-site visits for larger engagements.</p>
+  </TextSection>
+
+  <SectionWrapper py="lg">
+    <div class="cta-cards-grid">
+      <CTACard
+        title="Not ready to book?"
+        description="Browse our service pages to see what a typical engagement looks like, including scope and pricing."
+        href="/services/data-analytics-platform-implementation/"
+        dataTrack="contact-cta-services"
+      />
+      <CTACard
+        title="Explore our stack"
+        description="See all the tools we work with and how we approach each one."
+        href="/technologies/google-cloud-platform/"
+        dataTrack="contact-cta-tech"
+      />
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .email-fallback {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+
+  .email-fallback a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .email-fallback a:hover {
+    opacity: 0.75;
+  }
+
+  .next-steps {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+  }
+</style>
