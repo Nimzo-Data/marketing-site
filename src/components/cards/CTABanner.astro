@@ -1,0 +1,113 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  heading: string;
+  buttonText: string;
+  buttonHref: string;
+  email?: string;
+  dataTrack?: string;
+  bg?: 'primary' | 'accent';
+}
+
+const {
+  heading,
+  buttonText,
+  buttonHref,
+  email,
+  dataTrack,
+  bg = 'primary',
+} = Astro.props;
+
+const buttonVariant = bg === 'accent' ? 'primary' : 'secondary';
+---
+
+<section class={`cta-banner cta-banner--${bg}`}>
+  <div class="banner-inner">
+    <h2 class="banner-heading">{heading}</h2>
+    <Button
+      href={buttonHref}
+      variant={bg === 'accent' ? 'primary' : 'secondary'}
+      size="lg"
+      dataTrack={dataTrack}
+      class="banner-btn"
+    >
+      {buttonText}
+    </Button>
+    {email && (
+      <a href={`mailto:${email}`} class="banner-email">{email}</a>
+    )}
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    width: 100%;
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .cta-banner--primary {
+    background-color: var(--color-primary);
+  }
+
+  .cta-banner--accent {
+    background-color: var(--color-accent);
+  }
+
+  .banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .banner-inner {
+      padding: 0 48px;
+    }
+  }
+
+  .banner-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 1.75rem;
+    margin: 0;
+    line-height: 1.25;
+    max-width: 600px;
+  }
+
+  @media (min-width: 768px) {
+    .banner-heading {
+      font-size: 2.25rem;
+    }
+  }
+
+  .banner-email {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: underline;
+    transition: color 150ms ease;
+  }
+
+  .banner-email:hover {
+    color: #ffffff;
+  }
+
+  /* Override Button secondary border/text color inside dark banner */
+  .cta-banner--primary :global(.btn-secondary) {
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  .cta-banner--primary :global(.btn-secondary:hover) {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+  }
+</style>
