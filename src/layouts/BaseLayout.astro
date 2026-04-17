@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import CookieConsent from '../components/ui/CookieConsent.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   title: string;
@@ -43,7 +45,11 @@ const canonical = canonicalUrl || Astro.url.href;
     <div id="ga4-container"></div>
   </head>
   <body>
-    <slot />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
     <CookieConsent />
   </body>
 </html>
