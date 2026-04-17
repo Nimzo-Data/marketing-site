@@ -10,6 +10,15 @@
   --color-text-secondary: #6b7280;
   --color-white: #ffffff;
 
+  /* Surfaces & borders */
+  --color-border: #e5e7eb;
+  --color-surface-hover: #f0f4f4;
+  --color-surface-subtle: #f9fbfb;
+
+  /* Semantic (success/error) */
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+
   /* Typography */
   --font-heading: 'Archivo', sans-serif;
   --font-body: 'Roboto', sans-serif;
