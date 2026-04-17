@@ -1,12 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+import Button from '../components/ui/Button.astro';
 ---
 <BaseLayout
   title="Nimzo Data — GCP Data Consulting"
   description="Boutique GCP data consulting for European companies. Data platform implementation, optimization, and ongoing support."
 >
-  <div style="max-width: 800px; margin: 40px auto; padding: 0 24px;">
-    <h1>Nimzo Data</h1>
-    <p>GCP Data Consulting Agency — Site coming soon.</p>
-  </div>
+  <SectionWrapper py="xl">
+    <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 24px; line-height: 1.15;">
+      Boutique GCP data consulting<br />for European companies.
+    </h1>
+    <p style="font-size: 18px; color: var(--color-text-secondary); max-width: 600px; margin-bottom: 40px; line-height: 1.6;">
+      We help European businesses build, optimize, and maintain modern data platforms on Google Cloud.
+    </p>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <Button href="/contact/" variant="primary" size="lg">Book a free call</Button>
+      <Button href="/services/data-analytics-platform-implementation/" variant="secondary" size="lg">See our services</Button>
+    </div>
+  </SectionWrapper>
 </BaseLayout>
