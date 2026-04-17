@@ -132,29 +132,38 @@ import { navItems, ctaLink } from '../../data/navigation';
     menu.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
       link.addEventListener('click', closeMenu);
     });
+
+    // Close menu when resizing to desktop to unlock body scroll
+    const mql = window.matchMedia('(min-width: 1024px)');
+    mql.addEventListener('change', (e) => {
+      if (e.matches && menu.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
   }
 </script>
 
 <style>
   /* Overlay backdrop */
   .mobile-overlay {
-    display: none;
+    display: block;
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 149;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 200ms ease;
   }
 
   .mobile-overlay.is-visible {
-    display: block;
     opacity: 1;
+    pointer-events: auto;
   }
 
   @media (min-width: 1024px) {
     .mobile-overlay {
-      display: none !important;
+      display: none;
     }
   }
 
