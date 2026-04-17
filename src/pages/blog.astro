@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+---
+
+<BaseLayout
+  title="Blog | Nimzo Data"
+  description="Data engineering articles from Nimzo Data — BigQuery, Dataform, GCP analytics."
+>
+  <SectionWrapper py="xl">
+    <div class="blog-placeholder">
+      <h1 class="blog-heading">Blog</h1>
+      <p class="blog-body">Articles coming soon. Check back for posts on GCP data engineering, BigQuery optimization, and the tools we work with.</p>
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .blog-placeholder {
+    max-width: 720px;
+  }
+
+  .blog-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+
+  .blog-body {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>

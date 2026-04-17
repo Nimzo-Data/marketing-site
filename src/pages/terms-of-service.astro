@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+---
+
+<BaseLayout
+  title="Terms of Service | Nimzo Data"
+  description="Nimzo Data terms of service — governing our consulting engagements."
+>
+  <SectionWrapper py="xl">
+    <div class="legal-content">
+      <h1>Terms of Service</h1>
+      <p><em>Draft — pending legal review. Last updated: April 2026.</em></p>
+
+      <h2>1. Services</h2>
+      <p>Nimzo Data provides GCP data consulting services as described in individual project proposals. Each engagement is governed by a separate proposal and statement of work.</p>
+
+      <h2>2. Payment</h2>
+      <p>Fixed-price projects: 50% invoiced at project start, 50% on completion. Retainer engagements: invoiced monthly in advance. Payment terms: 30 days from invoice date.</p>
+
+      <h2>3. Confidentiality</h2>
+      <p>We treat all client data, systems, and business information as strictly confidential. We do not share client information with third parties and are happy to sign an NDA at engagement start.</p>
+
+      <h2>4. Intellectual property</h2>
+      <p>All work product delivered to the client becomes the client's property upon full payment. We retain the right to describe the engagement type (without identifying the client) in our portfolio and marketing materials.</p>
+
+      <h2>5. Limitation of liability</h2>
+      <p>Our total liability for any claim arising from an engagement is limited to the fees paid for that engagement. We are not liable for indirect, consequential, or incidental damages.</p>
+
+      <h2>6. Governing law</h2>
+      <p>These terms are governed by French law. Any disputes will be resolved in the courts of France.</p>
+
+      <h2>7. Contact</h2>
+      <p>For questions about these terms: hello@nimzodata.com</p>
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .legal-content {
+    max-width: 720px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .legal-content h1 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 24px 0;
+    line-height: 1.2;
+  }
+
+  .legal-content h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 40px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .legal-content p {
+    margin: 0 0 16px 0;
+  }
+
+  .legal-content p:last-child {
+    margin-bottom: 0;
+  }
+</style>
