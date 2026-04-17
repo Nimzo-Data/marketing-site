@@ -1,0 +1,31 @@
+---
+interface Props {
+  url?: string;
+  minHeight?: string;
+}
+
+const {
+  url = 'https://calendly.com/nimzodata/free-call',
+  minHeight = '630px',
+} = Astro.props;
+---
+
+<link
+  rel="stylesheet"
+  href="https://assets.calendly.com/assets/external/widget.css"
+/>
+
+<div
+  class="calendly-inline-widget"
+  data-url={url}
+  style={`min-width:320px;height:${minHeight}`}
+></div>
+
+<script is:inline>
+  (function () {
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+  })();
+</script>

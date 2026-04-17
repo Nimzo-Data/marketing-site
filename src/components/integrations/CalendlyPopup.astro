@@ -1,0 +1,164 @@
+---
+interface Props {
+  url?: string;
+  buttonText?: string;
+  variant?: 'primary' | 'accent' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  dataTrack?: string;
+}
+
+const {
+  url = 'https://calendly.com/nimzodata/free-call',
+  buttonText = 'Book a free call',
+  variant = 'primary',
+  size = 'md',
+  dataTrack,
+} = Astro.props;
+
+const uid = `calendly-popup-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<button
+  id={uid}
+  type="button"
+  class={`btn btn-${variant} btn-${size}`}
+  data-calendly-url={url}
+  data-track={dataTrack}
+>
+  {buttonText}
+</button>
+
+<script is:inline>
+  (function () {
+    /** @type {Promise<void> | null} */
+    var calendlyLoadPromise = null;
+
+    function loadCalendly() {
+      if (calendlyLoadPromise) return calendlyLoadPromise;
+
+      calendlyLoadPromise = new Promise(function (resolve, reject) {
+        // Load CSS
+        if (!document.querySelector('link[href*="calendly.com/assets/external/widget.css"]')) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://assets.calendly.com/assets/external/widget.css';
+          document.head.appendChild(link);
+        }
+
+        // Load JS
+        var script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        script.onload = function () { resolve(); };
+        script.onerror = function () { reject(new Error('Calendly script failed to load')); };
+        document.head.appendChild(script);
+      });
+
+      return calendlyLoadPromise;
+    }
+
+    function attachHandlers() {
+      document.querySelectorAll('[data-calendly-url]').forEach(function (btn) {
+        if (btn.dataset.calendlyAttached) return;
+        btn.dataset.calendlyAttached = 'true';
+
+        btn.addEventListener('click', function () {
+          var url = btn.dataset.calendlyUrl;
+
+          if (window.Calendly) {
+            window.Calendly.initPopupWidget({ url: url });
+            return;
+          }
+
+          loadCalendly()
+            .then(function () {
+              window.Calendly.initPopupWidget({ url: url });
+            })
+            .catch(function () {
+              window.location.href = '/contact/';
+            });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachHandlers);
+    } else {
+      attachHandlers();
+    }
+  })();
+</script>
+
+<style>
+  .btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-heading, 'Archivo', sans-serif);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+    border: 1px solid transparent;
+    line-height: 1.2;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Variant: primary */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Variant: accent */
+  .btn-accent {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Variant: secondary */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
+  /* Variant: ghost */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: none;
+  }
+
+  .btn-ghost:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+
+  /* Size: sm */
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  /* Size: md */
+  .btn-md {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  /* Size: lg */
+  .btn-lg {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+</style>
