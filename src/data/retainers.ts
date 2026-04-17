@@ -1,8 +1,3 @@
-export interface RetainerFeature {
-  text: string;
-  included: boolean;
-}
-
 export interface RetainerTier {
   name: string;
   priceRange: string;
