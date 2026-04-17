@@ -48,13 +48,18 @@ const {
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
-    transition: opacity 150ms ease;
+    transition: opacity 150ms ease, transform 100ms ease;
     border: 1px solid transparent;
     line-height: 1.2;
   }
 
   .btn:hover {
     opacity: 0.9;
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+    opacity: 0.85;
   }
 
   a:focus-visible,
