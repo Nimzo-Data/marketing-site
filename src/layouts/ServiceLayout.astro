@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroStandard from '../components/heroes/HeroStandard.astro';
+import CTACard from '../components/cards/CTACard.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  ogImage?: string;
+}
+
+const { title, description, heroTitle, heroSubtitle, ogImage } = Astro.props;
+---
+
+<BaseLayout {title} {description} {ogImage}>
+  <HeroStandard title={heroTitle} subtitle={heroSubtitle} />
+  <slot />
+  <SectionWrapper py="lg">
+    <CTACard
+      title="Need ongoing support?"
+      description="After implementation, keep your platform healthy with a monthly retainer."
+      href="/services/ongoing-support-retainers/"
+    />
+  </SectionWrapper>
+  <CTABanner
+    heading="Ready to talk about your data stack?"
+    buttonText="Book a free call"
+    buttonHref="/contact/"
+    dataTrack="service-layout-cta"
+  />
+</BaseLayout>

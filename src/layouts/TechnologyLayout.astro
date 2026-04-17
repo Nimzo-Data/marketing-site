@@ -1,0 +1,75 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroTech from '../components/heroes/HeroTech.astro';
+import CTACard from '../components/cards/CTACard.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  toolName: string;
+  toolLogo?: string;
+  toolCategory: string;
+  heroPositioning: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  toolName,
+  toolLogo,
+  toolCategory,
+  heroPositioning,
+  ogImage,
+} = Astro.props;
+---
+
+<BaseLayout {title} {description} {ogImage}>
+  <HeroTech
+    toolName={toolName}
+    toolLogo={toolLogo}
+    toolCategory={toolCategory}
+    positioning={heroPositioning}
+  />
+  <slot />
+  <SectionWrapper py="lg">
+    <div class="cta-cards-grid">
+      <CTACard
+        title="No data platform yet?"
+        description="Build your data platform from scratch on GCP — end-to-end."
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <CTACard
+        title="Platform not working well?"
+        description="We audit and fix what's broken, expensive, or unreliable."
+        href="/services/data-analytics-platform-optimization/"
+      />
+      <CTACard
+        title={`Need help with ${toolName}?`}
+        description="Targeted implementation help for a specific layer of your stack."
+        href="/services/expert-implementation-services/"
+      />
+    </div>
+  </SectionWrapper>
+  <CTABanner
+    heading="Ready to talk about your data stack?"
+    buttonText="Book a free call"
+    buttonHref="/contact/"
+  />
+</BaseLayout>
+
+<style>
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
