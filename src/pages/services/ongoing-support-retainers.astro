@@ -1,0 +1,105 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import RetainerGrid from '../../components/content/RetainerGrid.astro';
+import CTACard from '../../components/cards/CTACard.astro';
+import FAQSchema from '../../components/content/FAQSchema.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { retainerTiers } from '../../data/retainers';
+---
+
+<ServiceLayout
+  title="Ongoing Support & Retainers | Nimzo Data"
+  description="Monthly GCP data platform retainers — monitoring, incident response, and continuous improvement. Starting at €1,000/month."
+  heroTitle="Your data platform keeps running. We make sure it does."
+  heroSubtitle="Monthly retainers for monitoring, incident response, and continuous improvement — so you don't need to hire a full-time data engineer to keep your platform healthy."
+>
+  <TextSection title="Who this is for">
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Companies that completed a platform build and need ongoing reliability
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Organizations where the data lead wears many hats and can't dedicate time to platform maintenance
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Teams that want a senior technical resource available without full-time hiring cost
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Companies experiencing rapid data growth that want architecture guidance as they scale
+      </li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper py="md" bg="white">
+    <RetainerGrid tiers={retainerTiers} />
+  </SectionWrapper>
+
+  <TextSection title="Terms">
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        <strong>Minimum commitment:</strong> 3 months
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        <strong>Notice period:</strong> 30 days written notice to end or change tier
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        <strong>Scope boundaries:</strong> Retainers cover ongoing operations and incremental improvements. New platform builds are scoped separately.
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        <strong>Hours don't roll over:</strong> Included hours in Growth and Partnership tiers are for that month only.
+      </li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper py="md" bg="white">
+    <div class="cta-cards-grid">
+      <CTACard
+        title="Need to build a platform first?"
+        description="We design and implement end-to-end GCP data platforms."
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <CTACard
+        title="Platform not working well?"
+        description="We audit and fix what's broken or expensive before you support it."
+        href="/services/data-analytics-platform-optimization/"
+      />
+      <CTACard
+        title="Need a specific fix?"
+        description="Targeted expert implementation for a defined technical problem."
+        href="/services/expert-implementation-services/"
+      />
+    </div>
+  </SectionWrapper>
+
+  <FAQSchema
+    faqs={[
+      { question: "We didn't build our platform with you. Can we still get a retainer?", answer: "Yes, but we require a platform audit first (€3,000–€5,000) so we understand the architecture and can support it properly." },
+      { question: "What counts as an incident?", answer: "Pipeline failure, dashboard returning incorrect data, BigQuery slot exhaustion causing query failures, or any other outage affecting business operations." },
+      { question: "What if we need more hours than included in our tier?", answer: "Additional hours are billed at our standard rate. We'll always flag if a request is likely to exceed the monthly inclusion before starting." },
+      { question: "Can we pause the retainer?", answer: "No. Retainers are continuous commitments. If you need to pause, give 30 days notice and restart when ready." },
+    ]}
+  />
+</ServiceLayout>
+
+<style>
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
