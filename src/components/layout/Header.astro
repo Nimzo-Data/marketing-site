@@ -102,8 +102,14 @@ import { navItems, ctaLink } from '../../data/navigation';
     const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
     if (!trigger) return;
 
+    let isOpen = false;
+
+    const setOpen = (val: boolean) => {
+      isOpen = val;
+      trigger.setAttribute('aria-expanded', String(val));
+    };
+
     const handleExpand = () => {
-      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
       // Close all others
       dropdownItems.forEach((other) => {
         const otherTrigger = other.querySelector<HTMLButtonElement>('.nav-trigger');
@@ -111,17 +117,17 @@ import { navItems, ctaLink } from '../../data/navigation';
           otherTrigger.setAttribute('aria-expanded', 'false');
         }
       });
-      trigger.setAttribute('aria-expanded', String(!isExpanded));
+      setOpen(!isOpen);
     };
 
     // Focus-within toggling for keyboard users
     item.addEventListener('focusin', () => {
-      trigger.setAttribute('aria-expanded', 'true');
+      if (!isOpen) setOpen(true);
     });
 
     item.addEventListener('focusout', (e) => {
       if (!item.contains((e as FocusEvent).relatedTarget as Node)) {
-        trigger.setAttribute('aria-expanded', 'false');
+        setOpen(false);
       }
     });
 
@@ -134,6 +140,7 @@ import { navItems, ctaLink } from '../../data/navigation';
       dropdownItems.forEach((item) => {
         const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
         if (trigger) {
+          // Dispatch a synthetic focusout so each closure's isOpen resets cleanly
           trigger.setAttribute('aria-expanded', 'false');
           trigger.blur();
         }
