@@ -1,5 +1,5 @@
 ---
-import { serviceLinks, technologyLinks, companyLinks } from '../../data/navigation';
+import { serviceLinks, technologyGroups, companyLinks } from '../../data/navigation';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -32,13 +32,20 @@ const currentYear = new Date().getFullYear();
       <!-- Column 3: Technology -->
       <div class="footer-col">
         <h3 class="footer-heading">Technology</h3>
-        <ul class="footer-links" role="list">
-          {technologyLinks.map((link) => (
-            <li>
-              <a href={link.href} class="footer-link">{link.label}</a>
-            </li>
+        <div class="footer-tech-groups">
+          {technologyGroups.map((group) => (
+            <div class="footer-tech-group">
+              <p class="footer-tech-category">{group.category}</p>
+              <ul class="footer-links" role="list">
+                {group.links.map((link) => (
+                  <li>
+                    <a href={link.href} class="footer-link">{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
 
       <!-- Column 4: Company -->
@@ -163,6 +170,28 @@ const currentYear = new Date().getFullYear();
 
   .footer-link:hover {
     color: #ffffff;
+  }
+
+  /* Technology grouped column */
+  .footer-tech-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-tech-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-tech-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
   }
 
   /* Bottom bar */
