@@ -1,0 +1,163 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import CTACard from '../../components/cards/CTACard.astro';
+import FAQSchema from '../../components/content/FAQSchema.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+---
+
+<ServiceLayout
+  title="Expert Implementation Services | Nimzo Data"
+  description="Targeted GCP data engineering help — BigQuery optimization, Dataform setup, ETL pipelines, or BI implementation. Fixed-price. Defined scope."
+  heroTitle="Targeted help with a specific layer of your data stack."
+  heroSubtitle="Not every engagement needs a full platform build. Sometimes you need senior expertise on a specific technical problem — BigQuery performance, a new Dataform project, or a BI tool implementation."
+>
+  <TextSection title="Who this is for">
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Companies with an existing GCP data stack that has a specific technical gap
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Engineering teams that need specialist expertise for a defined problem
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Organizations that have done a platform audit and want to implement specific improvements
+      </li>
+      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
+        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
+        Startups that need a specific capability built fast, without a long-term engagement
+      </li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper py="md" bg="white">
+    <div class="services-grid">
+      <ServiceCardSmall
+        title="BigQuery Performance Optimization"
+        priceRange="€5,000 – €12,000"
+        timeline="2–4 weeks"
+        details={[
+          "Query cost audit and optimization",
+          "Partitioning and clustering improvements",
+          "Materialized views setup",
+          "Slot governance configuration",
+        ]}
+        href="/services/data-analytics-platform-optimization/"
+      />
+      <ServiceCardSmall
+        title="Dataform / dbt Implementation"
+        priceRange="€7,000 – €15,000"
+        timeline="3–6 weeks"
+        details={[
+          "Project architecture setup",
+          "Staging and mart layer models",
+          "Data quality tests and CI/CD",
+          "Team training and documentation",
+        ]}
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <ServiceCardSmall
+        title="ETL/ELT Pipeline Setup"
+        priceRange="€6,000 – €12,000"
+        timeline="3–5 weeks"
+        details={[
+          "Airbyte or Fivetran configuration",
+          "Source-to-BigQuery pipelines",
+          "Monitoring and alerting setup",
+          "Custom connectors for unusual sources",
+        ]}
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <ServiceCardSmall
+        title="BI Tool Implementation"
+        priceRange="€5,000 – €10,000"
+        timeline="2–4 weeks"
+        details={[
+          "Looker, Lightdash, or Steep setup",
+          "Semantic layer design",
+          "Initial dashboard build",
+          "User training and access control",
+        ]}
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <ServiceCardSmall
+        title="Data Platform Audit"
+        priceRange="€3,000 – €5,000"
+        timeline="1–2 weeks"
+        details={[
+          "GCP architecture review",
+          "Cost and pipeline reliability analysis",
+          "Data quality assessment",
+          "Written report with prioritized roadmap",
+        ]}
+        href="/services/data-analytics-platform-optimization/"
+      />
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper py="md">
+    <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-primary); margin: 0 0 40px 0; line-height: 1.2;">How it works</h2>
+    <ProcessSteps
+      steps={[
+        { number: 1, title: "Scoping call", description: "We spend 30 minutes understanding the specific problem and what success looks like." },
+        { number: 2, title: "Technical assessment", description: "For most expert services, we need read access to your GCP environment and a 1–2 hour technical interview with your data lead." },
+        { number: 3, title: "Fixed-price proposal", description: "We send a proposal with defined scope, deliverables, timeline, and fixed price within 3 business days." },
+        { number: 4, title: "Implementation & handover", description: "We do the work, check in weekly, and end with documentation and a walkthrough session." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <SectionWrapper py="md" bg="white">
+    <div class="cta-cards-grid">
+      <CTACard
+        title="Need a full platform build?"
+        description="Build your data platform from scratch — ingestion, transformation, and dashboards."
+        href="/services/data-analytics-platform-implementation/"
+      />
+      <CTACard
+        title="Platform needs fixing?"
+        description="Audit and fix what's broken, expensive, or unreliable in your current setup."
+        href="/services/data-analytics-platform-optimization/"
+      />
+    </div>
+  </SectionWrapper>
+
+  <FAQSchema
+    faqs={[
+      { question: "Can we combine multiple expert services?", answer: "Yes. Common combinations include BigQuery optimization + Dataform implementation, or Pipeline setup + BI implementation. Combined engagements are scoped holistically and priced accordingly." },
+      { question: "Do you work alongside our internal team?", answer: "Yes. We're happy to run knowledge transfer sessions so your team can maintain what we build." },
+      { question: "How quickly can you start?", answer: "We typically have capacity to start within 2–3 weeks of a signed proposal." },
+    ]}
+  />
+</ServiceLayout>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

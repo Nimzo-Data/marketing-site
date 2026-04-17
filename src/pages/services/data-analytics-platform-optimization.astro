@@ -1,0 +1,139 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import FAQSchema from '../../components/content/FAQSchema.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+---
+
+<ServiceLayout
+  title="Data Analytics Platform Optimization | Nimzo Data"
+  description="We audit and fix GCP data platforms — BigQuery costs, slow dashboards, broken pipelines. Two-phase: audit then fix. Fixed-price."
+  heroTitle="Your data platform exists. It's not working well. Let's fix it."
+  heroSubtitle="We audit your current GCP data setup, find what's broken or expensive, and implement a structured improvement plan. Two phases: understand first, then fix."
+>
+  <SectionWrapper py="md">
+    <TwoColumnSplit
+      variant="challenges-solution"
+      leftTitle="What brings clients here"
+      leftItems={[
+        "BigQuery costs grew 3x in 6 months and nobody knows why",
+        "Dashboards take 45 seconds to load and analysts have stopped trusting them",
+        "Pipelines break every few weeks — you find out when someone files a ticket",
+        "Inherited a data platform from a previous team and don't understand what it does",
+        "Metrics inconsistent across teams — finance calculates revenue differently than product",
+      ]}
+      rightTitle="What you get"
+      rightItems={[
+        "A written audit report: what's working, broken, and costing money",
+        "A prioritized remediation roadmap with effort and impact estimates",
+        "Implementation of approved improvements with documented changes",
+        "Monitoring and alerting configured so problems surface early",
+        "30-day support window after implementation",
+      ]}
+    />
+  </SectionWrapper>
+
+  <SectionWrapper py="md" bg="white">
+    <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-primary); margin: 0 0 32px 0; line-height: 1.2;">Two-phase engagement</h2>
+    <div class="phases-grid">
+      <div class="phase-card">
+        <div class="phase-label">Phase 1</div>
+        <h3 class="phase-title">Audit</h3>
+        <div class="phase-price">€3,000 – €5,000</div>
+        <div class="phase-duration">2–3 weeks</div>
+        <p class="phase-description">We review your GCP architecture, query costs, pipeline reliability, and data quality. We interview your team and produce a written report with a prioritized remediation roadmap.</p>
+      </div>
+      <div class="phase-card phase-card--right">
+        <div class="phase-label">Phase 2</div>
+        <h3 class="phase-title">Implementation</h3>
+        <div class="phase-price">€15,000 – €45,000</div>
+        <div class="phase-duration">6–12 weeks</div>
+        <p class="phase-description">We implement the approved items from the audit roadmap. Scope is agreed before starting, price is fixed, and we document every change. Priced based on audit findings.</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <TextSection title="Why optimization costs more than implementation">
+    <p>When we build a platform from scratch, every decision is ours. When we optimize a platform we didn't design, we spend the first part of every engagement understanding decisions made by engineers who may no longer be there — and working around constraints we didn't create.</p>
+    <p>Most platforms that come to us for optimization have interconnected problems. Fixing the slow dashboard requires fixing the transformation model, which requires fixing the ingestion pipeline. We price this work to reflect the investigation time, not just the implementation time.</p>
+  </TextSection>
+
+  <FAQSchema
+    faqs={[
+      { question: "What if we just want the audit, not the implementation?", answer: "The audit is available as a standalone engagement. Many clients use the report to brief an internal team or to get budget approval for the implementation phase." },
+      { question: "How disruptive is the audit process?", answer: "We work from read-only access to your GCP environment and query logs. We typically need 3–4 hours of stakeholder time for interviews and questions." },
+      { question: "Can you give us a ballpark before the audit?", answer: "We can give you a range based on a 30-minute scoping call. The audit is designed to give us the information we need to quote the implementation accurately." },
+      { question: "We've already tried to fix some of these problems. Why would this be different?", answer: "Usually because internal teams are too close to the problem. We've seen the same failure patterns across many clients and can diagnose quickly what others have been debugging for months." },
+    ]}
+  />
+</ServiceLayout>
+
+<style>
+  .phases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .phases-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .phase-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-card--right {
+    border-color: var(--color-primary);
+    border-width: 2px;
+  }
+
+  .phase-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .phase-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.375rem;
+    color: var(--color-primary);
+    margin: 0 0 4px 0;
+  }
+
+  .phase-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  .phase-duration {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .phase-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+  }
+</style>

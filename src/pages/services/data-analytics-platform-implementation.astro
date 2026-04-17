@@ -1,0 +1,91 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.astro';
+import PricingRange from '../../components/content/PricingRange.astro';
+import FAQSchema from '../../components/content/FAQSchema.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+---
+
+<ServiceLayout
+  title="Data Analytics Platform Implementation | Nimzo Data"
+  description="We build end-to-end GCP data platforms — ingestion, BigQuery, Dataform, and BI — on a fixed-price basis. For European companies ready to do data properly."
+  heroTitle="Build your data platform on GCP — from raw data to reliable dashboards."
+  heroSubtitle="We design and implement end-to-end data platforms for companies starting from scratch or replacing a fragile existing setup. Fixed-price engagements. Senior engineer on every project."
+>
+  <SectionWrapper py="md">
+    <TwoColumnSplit
+      variant="challenges-solution"
+      leftTitle="What brings clients here"
+      leftItems={[
+        "Pulling data manually from multiple sources into spreadsheets, losing hours every week",
+        "Data lives in silos — CRM, product database, marketing tools — no single place to see it",
+        "Tried to build something internally but it's unreliable, undocumented, only one person understands it",
+        "About to hire a data analyst but have no clean data to give them",
+        "Leadership making decisions on gut feel because data isn't trustworthy or accessible",
+      ]}
+      rightTitle="What you get"
+      rightItems={[
+        "A fully functional GCP data platform: ingestion → storage → transformation → reporting",
+        "Documented architecture your team can operate and extend",
+        "Reliable pipelines with monitoring and alerting configured",
+        "Transformation models with data quality tests built in",
+        "Final walkthrough session and 30-day support window",
+      ]}
+    />
+  </SectionWrapper>
+
+  <SectionWrapper py="md" bg="white">
+    <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-primary); margin: 0 0 32px 0; line-height: 1.2;">What we build</h2>
+    <DataPlatformDiagram />
+  </SectionWrapper>
+
+  <SectionWrapper py="md">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 32px;">
+      <div>
+        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Ingestion layer</h3>
+        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran. Data lands in BigQuery on a reliable schedule with failure alerting.</p>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Transformation layer</h3>
+        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">Raw data is cleaned, modeled, and documented using Dataform or dbt. We build the staging, intermediate, and reporting models your team needs.</p>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Reporting layer</h3>
+        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">We connect a BI tool (Looker, Lightdash, or Steep depending on your needs) and build the initial dashboards your team will actually use.</p>
+      </div>
+    </div>
+    <style>
+      @media (min-width: 768px) {
+        .layers-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+      }
+    </style>
+  </SectionWrapper>
+
+  <SectionWrapper py="md" bg="white">
+    <PricingRange
+      priceRange="€15,000 – €35,000"
+      factors={[
+        { name: "Number of data sources", low: "2–3 sources", high: "6–10 sources" },
+        { name: "Transformation complexity", low: "Simple pass-through", high: "Complex multi-join business logic" },
+        { name: "BI tool choice", low: "Lightdash or Steep", high: "Looker with LookML" },
+      ]}
+      scenarios={[
+        { label: "Small team, 3 sources, Lightdash", price: "€15,000 – €18,000", duration: "6–8 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Lightdash for dashboards." },
+        { label: "Mid-size, 6–8 sources, Looker", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Scale-up with product databases, marketing APIs, finance tools. Looker with LookML." },
+        { label: "Data migration + rebuild", price: "€20,000 – €30,000", duration: "8–12 weeks", description: "Company with existing fragile pipelines that need replacing without downtime." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <FAQSchema
+    faqs={[
+      { question: "Do we need to be on GCP already?", answer: "No. We can help you migrate to GCP from AWS or Azure as part of the engagement, or start from scratch if you have no existing cloud data infrastructure." },
+      { question: "How involved do we need to be?", answer: "We ask for a dedicated point of contact for weekly check-ins and key decisions. Day-to-day implementation is handled by us." },
+      { question: "What happens after the engagement ends?", answer: "Every project ends with full documentation and a handover session. After the 30-day support window, you can extend with a retainer, book ad-hoc work, or operate independently." },
+      { question: "Do you offer ongoing support after implementation?", answer: "Yes. We offer monthly retainers starting at €1,000/month for monitoring and incident response." },
+    ]}
+  />
+</ServiceLayout>
