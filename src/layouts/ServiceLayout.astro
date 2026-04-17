@@ -14,9 +14,25 @@ interface Props {
 }
 
 const { title, description, heroTitle, heroSubtitle, ogImage } = Astro.props;
+
+// Strip " | Nimzo Data" suffix to get the bare service name
+const serviceName = title.replace(/ \| Nimzo Data$/, '');
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  provider: {
+    '@type': 'Organization',
+    name: 'Nimzo Data',
+  },
+  name: serviceName,
+  description,
+  areaServed: 'Europe',
+  serviceType: 'Data Consulting',
+};
 ---
 
-<BaseLayout {title} {description} {ogImage}>
+<BaseLayout {title} {description} {ogImage} structuredData={serviceSchema}>
   <HeroStandard title={heroTitle} subtitle={heroSubtitle} />
   <slot />
   <SectionWrapper py="lg">
