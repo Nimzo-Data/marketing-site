@@ -1,0 +1,74 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+---
+
+<TechnologyLayout
+  title="Lightdash | Nimzo Data"
+  description="Lightdash implementation on dbt and BigQuery — metric definition, explores, dashboards, and Lightdash Cloud or self-hosted deployment."
+  toolName="Lightdash"
+  toolCategory="Business Intelligence"
+  heroPositioning="Lightdash turns your dbt project into a BI tool — if you're already writing dbt models, your metrics are already defined. We make them explorable."
+>
+  <TextSection title="What It Is">
+    <p>Lightdash is an open-source BI tool built on top of dbt. Metrics and dimensions are defined in your dbt YAML files — the same place where you define tests and documentation. Lightdash reads those definitions and generates an explorable interface without any additional modeling layer.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>For dbt-native teams, Lightdash is the most coherent choice. Metrics live in version control alongside transformations. There's no semantic layer to maintain separately. And for teams with 5–20 users, Lightdash Cloud pricing is a fraction of Looker while delivering the key capabilities most teams actually need.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Configure Lightdash to connect to BigQuery and read dbt project YAML</li>
+      <li>Define explores, metrics, and custom dimensions in dbt models for Lightdash</li>
+      <li>Build dashboards for operational and executive reporting</li>
+      <li>Set up Lightdash Cloud or self-hosted deployment on GCP</li>
+      <li>Implement row-level security via dbt's access controls</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="card">
+    <div class="comparison-section">
+      <h2 class="comparison-title">When to choose Lightdash vs. alternatives</h2>
+      <ul class="comparison-list">
+        <li><strong>Choose Lightdash when:</strong> already using dbt, want version-controlled metrics, 5–20 users, budget €500–€2,000/month.</li>
+        <li><strong>Choose Looker instead when:</strong> need enterprise governance, 20+ users, or LookML's semantic layer capabilities.</li>
+        <li><strong>Choose Steep instead when:</strong> primary audience is non-technical users who need a no-code interface.</li>
+      </ul>
+    </div>
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .comparison-section {
+    max-width: 720px;
+  }
+
+  .comparison-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+
+  .comparison-list {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  .comparison-list li {
+    margin-bottom: 12px;
+  }
+
+  .comparison-list li:last-child {
+    margin-bottom: 0;
+  }
+</style>

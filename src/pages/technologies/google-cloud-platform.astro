@@ -1,0 +1,30 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+---
+
+<TechnologyLayout
+  title="Google Cloud Platform | Nimzo Data"
+  description="We build exclusively on GCP — BigQuery, Dataform, Looker, Cloud Storage. Expert GCP data consulting for European companies."
+  toolName="Google Cloud Platform"
+  toolCategory="Cloud Platform"
+  heroPositioning="We build exclusively on GCP — not because it's what we know, but because it's the right choice for European data teams that need compliance, global reach, and a best-in-class analytics stack."
+>
+  <TextSection title="What It Is">
+    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack — from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) — all designed to work together without custom glue code.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data — serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure and more time building value.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Design and provision GCP project architecture with proper IAM, VPC, and billing structure</li>
+      <li>Configure BigQuery datasets, access controls, and cost governance (slot reservations, column-level security)</li>
+      <li>Set up Cloud Composer (managed Airflow) or Cloud Workflows for orchestration</li>
+      <li>Implement Cloud Storage lifecycle policies and data landing zones for ingestion pipelines</li>
+      <li>Advise on GCP region selection for EU data residency requirements (GDPR compliance)</li>
+    </ul>
+  </TextSection>
+</TechnologyLayout>

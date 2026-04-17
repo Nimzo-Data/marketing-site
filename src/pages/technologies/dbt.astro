@@ -1,0 +1,31 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+---
+
+<TechnologyLayout
+  title="dbt | Nimzo Data"
+  description="dbt implementation on BigQuery — project architecture, staging and mart layers, data tests, CI/CD, and team training."
+  toolName="dbt"
+  toolCategory="SQL Transformation"
+  heroPositioning="When clients need open-source portability or are already on a dbt workflow, we bring the same rigor — tested models, version control, and documentation as code."
+>
+  <TextSection title="What It Is">
+    <p>dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. It works with BigQuery as well as Snowflake, Redshift, and others.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>dbt is the most widely adopted transformation tool in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Build and restructure dbt projects following the staging → intermediate → marts layer convention</li>
+      <li>Write Jinja-templated SQL macros for reusable transformation logic</li>
+      <li>Implement dbt tests (not null, unique, referential integrity, custom) across critical models</li>
+      <li>Configure dbt documentation and lineage graphs so new team members understand data flow</li>
+      <li>Set up dbt Cloud jobs with CI/CD integration — run tests on PRs before merging</li>
+      <li>Advise on Dataform vs. dbt tradeoffs for greenfield GCP projects</li>
+    </ul>
+  </TextSection>
+</TechnologyLayout>

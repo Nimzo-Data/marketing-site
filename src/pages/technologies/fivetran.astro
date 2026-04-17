@@ -1,0 +1,30 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+---
+
+<TechnologyLayout
+  title="Fivetran | Nimzo Data"
+  description="Fivetran setup and optimization on BigQuery — connector configuration, MAR cost control, and reliability monitoring."
+  toolName="Fivetran"
+  toolCategory="ELT / Data Ingestion"
+  heroPositioning="When setup speed and managed reliability matter more than cost control, Fivetran gets pipelines running in hours — not weeks."
+>
+  <TextSection title="What It Is">
+    <p>Fivetran is a fully managed ELT platform with 500+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>Fivetran's managed reliability is its main selling point. For companies that want pipelines that simply work — without a data engineer babysitting connector updates — Fivetran is hard to beat. The MAR pricing model is predictable for stable data volumes, and the connector quality for major SaaS tools (Salesforce, HubSpot, Stripe) is best-in-class.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Evaluate whether Fivetran or Airbyte is the right fit based on data volume, team capacity, and connector needs</li>
+      <li>Provision and configure Fivetran connectors for CRM, marketing, finance, and product analytics sources</li>
+      <li>Optimize Fivetran sync frequency and filtering to control MAR costs</li>
+      <li>Integrate Fivetran-normalized schemas with downstream dbt or Dataform transformation layers</li>
+      <li>Set up dbt source freshness tests to detect Fivetran sync failures before they affect dashboards</li>
+    </ul>
+  </TextSection>
+</TechnologyLayout>

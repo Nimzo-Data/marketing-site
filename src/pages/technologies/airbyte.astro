@@ -1,0 +1,30 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+---
+
+<TechnologyLayout
+  title="Airbyte | Nimzo Data"
+  description="Airbyte implementation on GCP — connector setup, custom Python connectors, Kubernetes deployment, and pipeline monitoring."
+  toolName="Airbyte"
+  toolCategory="ELT / Data Ingestion"
+  heroPositioning="Airbyte is our preferred open-source ELT tool — hundreds of connectors, full control over your infrastructure, and no per-connector pricing surprises."
+>
+  <TextSection title="What It Is">
+    <p>Airbyte is an open-source data integration platform with 300+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. You can run it self-hosted on GCP or use Airbyte Cloud for a managed experience.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>Airbyte's open-source model means no vendor lock-in and no connector-based pricing tiers. For companies with many data sources, the cost difference versus Fivetran at scale is significant. The custom connector framework (Python CDK) also lets us build connectors for internal APIs or unusual sources when needed.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Deploy and maintain Airbyte on GCP using Kubernetes (GKE) or Cloud Run for cost-efficient self-hosting</li>
+      <li>Configure and monitor sync jobs from CRMs, marketing platforms, databases, and internal APIs</li>
+      <li>Build custom Python connectors for sources without official Airbyte support</li>
+      <li>Implement normalized schema conventions that work cleanly with downstream Dataform or dbt models</li>
+      <li>Set up alerting on sync failures using Airbyte's webhook notifications and Cloud Monitoring</li>
+    </ul>
+  </TextSection>
+</TechnologyLayout>
