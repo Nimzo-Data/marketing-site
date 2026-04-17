@@ -6,7 +6,9 @@ export default defineConfig({
   site: 'https://nimzodata.com',
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/blog/'),
+      filter: (page) =>
+        page !== 'https://nimzodata.com/blog/' &&
+        !page.startsWith('https://nimzodata.com/blog/'),
     }),
   ],
   vite: {

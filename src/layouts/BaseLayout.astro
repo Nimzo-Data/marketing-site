@@ -35,8 +35,8 @@ const organizationSchema = {
   areaServed: 'Europe',
 };
 
-// BreadcrumbList JSON-LD (skip on homepage)
-const isHomepage = Astro.url.pathname === '/';
+// BreadcrumbList JSON-LD (skip on homepage and 404)
+const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '/404/';
 const breadcrumbLabel = title.replace(/ \| Nimzo Data$/, '');
 
 const breadcrumbSchema = !isHomepage
@@ -62,7 +62,10 @@ const breadcrumbSchema = !isHomepage
 
 // Helper to safely serialise JSON-LD (XSS prevention)
 function toJsonLd(schema: object): string {
-  return JSON.stringify(schema).replace(/</g, '\\u003c');
+  return JSON.stringify(schema)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
 }
 
 // Collect all extra structuredData schemas passed via prop
