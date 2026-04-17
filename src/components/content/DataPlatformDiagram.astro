@@ -1,0 +1,126 @@
+---
+const stages = [
+  {
+    label: 'Ingest',
+    tools: ['Airbyte', 'Fivetran'],
+  },
+  {
+    label: 'Store',
+    tools: ['BigQuery'],
+  },
+  {
+    label: 'Transform',
+    tools: ['Dataform', 'dbt'],
+  },
+  {
+    label: 'Visualize',
+    tools: ['Looker', 'Lightdash', 'Steep'],
+  },
+  {
+    label: 'Monitor',
+    tools: ['Cloud Monitoring'],
+  },
+];
+---
+
+<div class="diagram-outer">
+  <div class="diagram-scroll">
+    <div class="pipeline">
+      {stages.map((stage, index) => (
+        <>
+          <div class="stage">
+            <div class="stage-label">{stage.label}</div>
+            <div class="stage-tools">
+              {stage.tools.map((tool) => (
+                <span class="stage-tool">{tool}</span>
+              ))}
+            </div>
+          </div>
+          {index < stages.length - 1 && (
+            <div class="arrow" aria-hidden="true">&#8594;</div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .diagram-outer {
+    width: 100%;
+  }
+
+  .diagram-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-card) transparent;
+    padding-bottom: 8px;
+  }
+
+  .diagram-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .diagram-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .diagram-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-card);
+    border-radius: 3px;
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 600px;
+    width: 100%;
+  }
+
+  .stage {
+    flex: 1;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+  }
+
+  .stage-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    text-align: center;
+  }
+
+  .stage-tools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .stage-tool {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .arrow {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    padding: 0 8px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+</style>
