@@ -1,0 +1,102 @@
+---
+interface Props {
+  toolName: string;
+  toolLogo?: string;
+  toolCategory: string;
+  positioning: string;
+}
+
+const { toolName, toolLogo, toolCategory, positioning } = Astro.props;
+---
+
+<section class="hero-tech">
+  <div class="hero-inner">
+    <div class="hero-logo-area">
+      {toolLogo ? (
+        <img src={toolLogo} alt={`${toolName} logo`} class="tool-logo" width="64" height="64" />
+      ) : (
+        <div class="tool-logo-placeholder" aria-hidden="true"></div>
+      )}
+    </div>
+    <span class="category-badge">{toolCategory}</span>
+    <h1 class="hero-title">{toolName}</h1>
+    <p class="hero-positioning">{positioning}</p>
+  </div>
+</section>
+
+<style>
+  .hero-tech {
+    width: 100%;
+    background-color: var(--color-background);
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .hero-inner {
+      padding: 0 48px;
+    }
+  }
+
+  .hero-logo-area {
+    margin-bottom: 16px;
+  }
+
+  .tool-logo {
+    display: block;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .tool-logo-placeholder {
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-primary);
+    border-radius: 8px;
+  }
+
+  .category-badge {
+    display: inline-block;
+    background-color: var(--color-card);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .hero-positioning {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 560px;
+  }
+</style>

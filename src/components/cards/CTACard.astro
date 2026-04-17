@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const { title, description, href } = Astro.props;
+---
+
+<a href={href} class="cta-card">
+  <div class="cta-card-content">
+    <h3 class="cta-title">{title}</h3>
+    <p class="cta-description">{description}</p>
+  </div>
+  <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+</a>
+
+<style>
+  .cta-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background-color: var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 28px 32px;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+  }
+
+  .cta-card:hover {
+    opacity: 0.85;
+  }
+
+  .cta-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.0625rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cta-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cta-arrow {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    font-weight: 600;
+    line-height: 1;
+  }
+</style>

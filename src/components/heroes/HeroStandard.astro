@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<section class="hero-standard">
+  <div class="hero-inner">
+    <h1 class="hero-title">{title}</h1>
+    <p class="hero-subtitle">{subtitle}</p>
+  </div>
+</section>
+
+<style>
+  .hero-standard {
+    width: 100%;
+    background-color: var(--color-background);
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .hero-inner {
+      padding: 0 48px;
+    }
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>
