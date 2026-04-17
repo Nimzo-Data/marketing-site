@@ -75,7 +75,7 @@ const buttonVariant = bg === 'accent' ? 'primary' : 'secondary';
   .banner-heading {
     font-family: var(--font-heading);
     font-weight: 600;
-    color: #ffffff;
+    color: var(--color-white);
     font-size: 1.75rem;
     margin: 0;
     line-height: 1.25;
@@ -97,13 +97,13 @@ const buttonVariant = bg === 'accent' ? 'primary' : 'secondary';
   }
 
   .banner-email:hover {
-    color: #ffffff;
+    color: var(--color-white);
   }
 
   /* Override Button secondary border/text color inside dark banner */
   .cta-banner--primary :global(.btn-secondary) {
-    color: #ffffff;
-    border-color: #ffffff;
+    color: var(--color-white);
+    border-color: var(--color-white);
   }
 
   .cta-banner--primary :global(.btn-secondary:hover) {
