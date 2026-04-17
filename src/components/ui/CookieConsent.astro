@@ -22,8 +22,8 @@
     left: 0;
     right: 0;
     width: 100%;
-    background-color: #004f4c;
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: white;
     padding: 16px 24px;
     z-index: 1000;
     display: flex;
@@ -48,8 +48,8 @@
   }
 
   #cookie-accept {
-    background-color: #ffffff;
-    color: #493441;
+    background-color: white;
+    color: var(--color-accent);
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
@@ -64,9 +64,14 @@
     opacity: 0.9;
   }
 
+  #cookie-accept:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
   #cookie-decline {
     background-color: transparent;
-    color: #ffffff;
+    color: white;
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 8px;
     padding: 8px 16px;
@@ -79,6 +84,11 @@
 
   #cookie-decline:hover {
     opacity: 0.8;
+  }
+
+  #cookie-decline:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
   }
 </style>
 
