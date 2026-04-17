@@ -1,0 +1,81 @@
+---
+interface Props {
+  bg?: 'default' | 'card' | 'primary' | 'white';
+  py?: 'sm' | 'md' | 'lg' | 'xl';
+  id?: string;
+  class?: string;
+}
+
+const {
+  bg = 'default',
+  py = 'md',
+  id,
+  class: className = '',
+} = Astro.props;
+---
+
+<section
+  id={id}
+  class={`section-wrapper section-bg-${bg} section-py-${py} ${className}`}
+>
+  <div class="section-inner">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-wrapper {
+    width: 100%;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  @media (min-width: 768px) {
+    .section-inner {
+      padding: 0 48px;
+    }
+  }
+
+  /* Background variants */
+  .section-bg-default {
+    background-color: var(--color-background);
+  }
+
+  .section-bg-card {
+    background-color: var(--color-card);
+  }
+
+  .section-bg-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .section-bg-white {
+    background-color: #ffffff;
+  }
+
+  /* Padding variants */
+  .section-py-sm {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .section-py-md {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-py-lg {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .section-py-xl {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+</style>
