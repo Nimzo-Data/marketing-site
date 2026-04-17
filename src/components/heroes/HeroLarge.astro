@@ -23,7 +23,7 @@ const { title, subtitle, primaryCta, secondaryCta } = Astro.props;
       <a
         href={primaryCta.href}
         class="btn btn-primary btn-lg"
-        data-track={primaryCta.dataTrack}
+        data-track={primaryCta.dataTrack || undefined}
       >
         {primaryCta.text}
       </a>
