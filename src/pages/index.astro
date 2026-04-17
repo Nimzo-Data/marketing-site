@@ -1,22 +1,168 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroLarge from '../components/heroes/HeroLarge.astro';
+import ServiceCard from '../components/cards/ServiceCard.astro';
+import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
+import ProcessSteps from '../components/content/ProcessSteps.astro';
+import TextSection from '../components/content/TextSection.astro';
+import LogoGrid from '../components/content/LogoGrid.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
-import Button from '../components/ui/Button.astro';
+import { technologies } from '../data/technologies';
 ---
+
 <BaseLayout
-  title="Nimzo Data — GCP Data Consulting"
-  description="Boutique GCP data consulting for European companies. Data platform implementation, optimization, and ongoing support."
+  title="Nimzo Data — GCP Data Consulting for European Companies"
+  description="Boutique GCP data consulting — BigQuery, Dataform, Looker, and the full GCP analytics stack. Fixed-price projects. Based in France, serving Europe."
 >
-  <SectionWrapper py="xl">
-    <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 24px; line-height: 1.15;">
-      Boutique GCP data consulting<br />for European companies.
-    </h1>
-    <p style="font-size: 18px; color: var(--color-text-secondary); max-width: 600px; margin-bottom: 40px; line-height: 1.6;">
-      We help European businesses build, optimize, and maintain modern data platforms on Google Cloud.
-    </p>
-    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-      <Button href="/contact/" variant="primary" size="lg">Book a free call</Button>
-      <Button href="/services/data-analytics-platform-implementation/" variant="secondary" size="lg">See our services</Button>
+  <!-- Section 1: Hero -->
+  <HeroLarge
+    title="Your GCP data infrastructure, done right."
+    subtitle="We build and optimize data platforms on Google Cloud for European companies — from raw ingestion to reliable dashboards. No buzzwords. Fixed-price projects. Senior expertise only."
+    primaryCta={{
+      text: "Book a free call",
+      href: "/contact/",
+      dataTrack: "hero-book-call",
+    }}
+    secondaryCta={{
+      text: "See our services",
+      href: "/services/data-analytics-platform-implementation/",
+    }}
+  />
+
+  <!-- Section 2: Service Cards -->
+  <SectionWrapper bg="card" py="lg">
+    <h2 class="section-heading">What we do</h2>
+    <div class="services-grid">
+      <ServiceCard
+        title="Build your data platform from scratch"
+        description="We design and implement end-to-end data platforms for companies starting from scratch or replacing a fragile existing setup. Fixed-price engagements. Senior engineer on every project."
+        priceRange="€15,000 – €35,000"
+        timeline="6–14 weeks"
+        href="/services/data-analytics-platform-implementation/"
+        dataTrack="service-card-implementation"
+      />
+      <ServiceCard
+        title="Fix what's broken, costly, or slow"
+        description="Your pipelines exist but something's wrong: costs are high, dashboards are slow, or nobody trusts the numbers. We find out why and fix it."
+        priceRange="Audit from €3,000"
+        timeline="2–15 weeks"
+        href="/services/data-analytics-platform-optimization/"
+        dataTrack="service-card-optimization"
+      />
+      <ServiceCard
+        title="Targeted help for a specific layer"
+        description="Need help with BigQuery performance, Dataform setup, ETL pipelines, or BI tooling? We scope and fix specific problems without a full platform engagement."
+        priceRange="€3,000 – €15,000"
+        href="/services/expert-implementation-services/"
+        dataTrack="service-card-expert"
+      />
     </div>
   </SectionWrapper>
+
+  <!-- Section 3: Is for / Isn't for -->
+  <SectionWrapper bg="default" py="lg">
+    <TwoColumnSplit
+      variant="is-for"
+      leftTitle="We work best with teams that:"
+      leftItems={[
+        "Are on GCP or planning to move there",
+        "Have 10–500 employees and growing data complexity",
+        "Are spending more than €5,000/month on BigQuery without a clear picture of why",
+        "Want a senior technical partner who can explain decisions, not just execute them",
+      ]}
+      rightTitle="We're probably not the right fit if you:"
+      rightItems={[
+        "Need AWS or Azure expertise",
+        "Are looking for the lowest hourly rate available",
+        "Need a team of data analysts or data scientists (we're data engineers)",
+        "Need a fully outsourced, indefinite data team",
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Section 4: Process Steps -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">How it works</h2>
+    <ProcessSteps
+      steps={[
+        {
+          number: 1,
+          title: "Discovery call (free)",
+          description: "We spend 30 minutes understanding your stack, your problems, and your goals. If we're not a good fit, we'll say so.",
+        },
+        {
+          number: 2,
+          title: "Scoping & proposal",
+          description: "We document the engagement scope, deliverables, timeline, and fixed price. No hidden fees or change orders without your approval.",
+        },
+        {
+          number: 3,
+          title: "Implementation",
+          description: "We build. You're involved in reviews and decisions, but we handle the technical execution. Weekly updates, async communication.",
+        },
+        {
+          number: 4,
+          title: "Handover & documentation",
+          description: "Every engagement ends with documentation, a walkthrough session, and a 30-day support window for questions.",
+        },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Section 5: Why GCP Only -->
+  <TextSection
+    title="Why we only work on GCP"
+    bg="default"
+    py="lg"
+  >
+    <p>
+      We don't offer multi-cloud consulting. This isn't a limitation — it's a deliberate choice.
+      Google Cloud's analytics stack — BigQuery, Dataform, Looker, Cloud Storage — is the most
+      cohesive data platform available today. The services are designed to work together, billed
+      together, and managed together. When you specialize in one stack, you develop the kind of
+      depth that only comes from running it in production across dozens of engagements: you know
+      the failure modes, the hidden costs, the features that sound good in the docs but don't work
+      as advertised, and the patterns that scale. Multi-cloud expertise is largely a myth.
+      Consultants who claim to be equally expert in AWS, Azure, and GCP are usually mediocre at
+      all three. We'd rather be genuinely excellent at one thing.
+    </p>
+  </TextSection>
+
+  <!-- Section 6: Logo Grid -->
+  <SectionWrapper bg="card" py="lg">
+    <h2 class="section-heading">The tools we work with</h2>
+    <LogoGrid technologies={technologies} />
+  </SectionWrapper>
+
+  <!-- Section 7: CTA Banner -->
+  <CTABanner
+    heading="Ready to talk about your data stack?"
+    buttonText="Book a free 30-minute call"
+    buttonHref="/contact/"
+    dataTrack="homepage-cta-banner"
+  />
 </BaseLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 40px 0;
+    line-height: 1.2;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
