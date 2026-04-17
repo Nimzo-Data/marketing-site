@@ -31,7 +31,7 @@ import { navItems, ctaLink } from '../../data/navigation';
                     <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                <div class="dropdown" role="region">
+                <div class="dropdown" role="region" aria-label={item.label}>
                   {item.groups.length === 1 ? (
                     /* Single-group dropdown (Services) */
                     <ul class="dropdown-list" role="list">
@@ -97,6 +97,7 @@ import { navItems, ctaLink } from '../../data/navigation';
 <script>
   // Desktop dropdown: aria-expanded toggle
   const dropdownItems = document.querySelectorAll<HTMLLIElement>('.nav-item--dropdown');
+  const closers: Array<() => void> = [];
 
   dropdownItems.forEach((item) => {
     const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
@@ -109,15 +110,14 @@ import { navItems, ctaLink } from '../../data/navigation';
       trigger.setAttribute('aria-expanded', String(val));
     };
 
+    closers.push(() => setOpen(false));
+
     const handleExpand = () => {
-      // Close all others
-      dropdownItems.forEach((other) => {
-        const otherTrigger = other.querySelector<HTMLButtonElement>('.nav-trigger');
-        if (otherTrigger && otherTrigger !== trigger) {
-          otherTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-      setOpen(!isOpen);
+      // Capture intended next state before closers reset isOpen
+      const nextState = !isOpen;
+      // Close all via their own setOpen to keep closures in sync
+      closers.forEach((close) => close());
+      if (nextState) setOpen(true);
     };
 
     // Focus-within toggling for keyboard users

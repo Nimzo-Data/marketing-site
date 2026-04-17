@@ -10,15 +10,10 @@ const {
 } = Astro.props;
 ---
 
-<link
-  rel="stylesheet"
-  href="https://assets.calendly.com/assets/external/widget.css"
-/>
-
 <div
   class="calendly-inline-widget"
   data-url={url}
-  style={`min-width:320px;height:${minHeight}`}
+  style={`min-width:320px;min-height:${minHeight}`}
 ></div>
 
 <script is:inline>
