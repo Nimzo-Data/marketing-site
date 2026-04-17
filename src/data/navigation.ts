@@ -120,12 +120,41 @@ export const serviceLinks: NavLink[] = [
   },
 ];
 
-export const technologyLinks: NavLink[] = [
-  { label: 'GCP', href: '/technologies/google-cloud-platform/' },
-  { label: 'BigQuery', href: '/technologies/bigquery/' },
-  { label: 'Dataform & dbt', href: '/technologies/dataform/' },
-  { label: 'Airbyte & Fivetran', href: '/technologies/airbyte/' },
-  { label: 'Looker / Lightdash & Steep', href: '/technologies/looker/' },
+export interface TechnologyGroup {
+  category: string;
+  links: NavLink[];
+}
+
+export const technologyGroups: TechnologyGroup[] = [
+  {
+    category: 'Cloud & Warehouse',
+    links: [
+      { label: 'Google Cloud Platform', href: '/technologies/google-cloud-platform/' },
+      { label: 'BigQuery', href: '/technologies/bigquery/' },
+    ],
+  },
+  {
+    category: 'Transformation',
+    links: [
+      { label: 'Dataform', href: '/technologies/dataform/' },
+      { label: 'dbt', href: '/technologies/dbt/' },
+    ],
+  },
+  {
+    category: 'ETL / ELT',
+    links: [
+      { label: 'Airbyte', href: '/technologies/airbyte/' },
+      { label: 'Fivetran', href: '/technologies/fivetran/' },
+    ],
+  },
+  {
+    category: 'Business Intelligence',
+    links: [
+      { label: 'Looker', href: '/technologies/looker/' },
+      { label: 'Lightdash', href: '/technologies/lightdash/' },
+      { label: 'Steep', href: '/technologies/steep/' },
+    ],
+  },
 ];
 
 export const companyLinks: NavLink[] = [
