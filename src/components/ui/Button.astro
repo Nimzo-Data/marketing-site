@@ -1,0 +1,110 @@
+---
+interface Props {
+  variant?: 'primary' | 'accent' | 'secondary' | 'ghost';
+  href?: string;
+  size?: 'sm' | 'md' | 'lg';
+  dataTrack?: string;
+  class?: string;
+  type?: 'button' | 'submit';
+  [key: string]: any;
+}
+
+const {
+  variant = 'primary',
+  href,
+  size = 'md',
+  dataTrack,
+  class: className = '',
+  type = 'button',
+  ...attrs
+} = Astro.props;
+---
+
+{href ? (
+  <a
+    href={href}
+    class={`btn btn-${variant} btn-${size} ${className}`}
+    data-track={dataTrack}
+    {...attrs}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class={`btn btn-${variant} btn-${size} ${className}`}
+    data-track={dataTrack}
+    {...attrs}
+  >
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-heading, 'Archivo', sans-serif);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+    border: 1px solid transparent;
+    line-height: 1.2;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Variant: primary */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Variant: accent */
+  .btn-accent {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Variant: secondary */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
+  /* Variant: ghost */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: none;
+  }
+
+  .btn-ghost:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+
+  /* Size: sm */
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  /* Size: md (default) */
+  .btn-md {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  /* Size: lg */
+  .btn-lg {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+</style>
