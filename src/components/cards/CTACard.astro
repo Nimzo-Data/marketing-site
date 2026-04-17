@@ -3,12 +3,13 @@ interface Props {
   title: string;
   description: string;
   href: string;
+  dataTrack?: string;
 }
 
-const { title, description, href } = Astro.props;
+const { title, description, href, dataTrack } = Astro.props;
 ---
 
-<a href={href} class="cta-card">
+<a href={href} class="cta-card" data-track={dataTrack || undefined}>
   <div class="cta-card-content">
     <h3 class="cta-title">{title}</h3>
     <p class="cta-description">{description}</p>
