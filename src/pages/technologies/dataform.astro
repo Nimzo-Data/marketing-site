@@ -1,0 +1,30 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+---
+
+<TechnologyLayout
+  title="Dataform | Nimzo Data"
+  description="Dataform experts for BigQuery — SQLX modeling, incremental models, data quality tests, and production deployment workflows."
+  toolName="Dataform"
+  toolCategory="SQL Transformation"
+  heroPositioning="Dataform is our first choice for SQL transformation on GCP — it turns raw BigQuery data into production-grade, version-controlled analytics models."
+>
+  <TextSection title="What It Is">
+    <p>Dataform is Google's managed SQL transformation tool, natively integrated into the GCP console. It lets you write modular SQL workflows (SQLX files), define dependencies between tables, run tests on your data, and deploy changes through a Git-based workflow — all without leaving BigQuery.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>For GCP-native teams, Dataform is the lowest-friction path to well-structured SQL. No external orchestrator needed — Dataform handles scheduling, dependencies, and retries. The GCP integration means no credentials to manage and billing tied directly to your existing BigQuery setup.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Migrate spaghetti SQL scripts into structured Dataform projects with clear staging, intermediate, and output layers</li>
+      <li>Implement incremental models that only process new data, reducing BigQuery costs significantly</li>
+      <li>Write SQLX assertions and data tests to catch data quality issues before they reach dashboards</li>
+      <li>Set up scheduled releases tied to Git tags for controlled production deployments</li>
+      <li>Configure Dataform compilation variables for environment-specific logic (dev/staging/prod)</li>
+    </ul>
+  </TextSection>
+</TechnologyLayout>

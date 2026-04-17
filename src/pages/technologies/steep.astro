@@ -1,0 +1,74 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+---
+
+<TechnologyLayout
+  title="Steep | Nimzo Data"
+  description="Steep implementation for self-service business intelligence on BigQuery — no-code dashboards and reporting for non-technical teams."
+  toolName="Steep"
+  toolCategory="Business Intelligence"
+  heroPositioning="Steep puts self-service analytics in the hands of business users who shouldn't need to know SQL — we implement it when the goal is broad data access, not deep technical analysis."
+>
+  <TextSection title="What It Is">
+    <p>Steep is a no-code BI tool designed for business users. It connects to BigQuery and provides a drag-and-drop interface for exploring data, building charts, and sharing reports — without writing a single line of SQL. It's particularly strong for companies where the primary data consumers are in marketing, sales, or operations rather than engineering.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="card">
+    <p>Not every company needs a LookML semantic layer or dbt-driven metrics. When the audience is non-technical and the primary need is 'let me explore this data and share a chart,' Steep delivers at a fraction of the cost of Looker. It's honest about what it is: an accessible, affordable BI tool.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It">
+    <ul>
+      <li>Connect Steep to BigQuery and configure dataset access</li>
+      <li>Design simplified table structures in BigQuery that work well for Steep's no-code interface</li>
+      <li>Train business users on Steep's exploration and charting features</li>
+      <li>Set up scheduled report delivery for regular stakeholder updates</li>
+      <li>Implement Steep alongside Lightdash or Looker in organizations with mixed technical audiences</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="card">
+    <div class="comparison-section">
+      <h2 class="comparison-title">When to choose Steep vs. alternatives</h2>
+      <ul class="comparison-list">
+        <li><strong>Choose Steep when:</strong> primary users are non-technical, budget under €500/month, self-service exploration is the goal, no SQL access needed.</li>
+        <li><strong>Choose Lightdash instead when:</strong> users need metric version control or SQL access, team is on dbt.</li>
+        <li><strong>Choose Looker instead when:</strong> enterprise governance and a centralized semantic layer are required.</li>
+      </ul>
+    </div>
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .comparison-section {
+    max-width: 720px;
+  }
+
+  .comparison-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+
+  .comparison-list {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  .comparison-list li {
+    margin-bottom: 12px;
+  }
+
+  .comparison-list li:last-child {
+    margin-bottom: 0;
+  }
+</style>
