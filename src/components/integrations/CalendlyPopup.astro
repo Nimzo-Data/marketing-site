@@ -30,13 +30,10 @@ const uid = `calendly-popup-${Math.random().toString(36).slice(2, 9)}`;
 
 <script is:inline>
   (function () {
-    /** @type {Promise<void> | null} */
-    var calendlyLoadPromise = null;
-
     function loadCalendly() {
-      if (calendlyLoadPromise) return calendlyLoadPromise;
+      if (window.__calendlyLoadPromise) return window.__calendlyLoadPromise;
 
-      calendlyLoadPromise = new Promise(function (resolve, reject) {
+      window.__calendlyLoadPromise = new Promise(function (resolve, reject) {
         // Load CSS
         if (!document.querySelector('link[href*="calendly.com/assets/external/widget.css"]')) {
           var link = document.createElement('link');
@@ -54,7 +51,7 @@ const uid = `calendly-popup-${Math.random().toString(36).slice(2, 9)}`;
         document.head.appendChild(script);
       });
 
-      return calendlyLoadPromise;
+      return window.__calendlyLoadPromise;
     }
 
     function attachHandlers() {
@@ -62,17 +59,27 @@ const uid = `calendly-popup-${Math.random().toString(36).slice(2, 9)}`;
         if (btn.dataset.calendlyAttached) return;
         btn.dataset.calendlyAttached = 'true';
 
+        var popupOpening = false;
+
         btn.addEventListener('click', function () {
           var url = btn.dataset.calendlyUrl;
 
           if (window.Calendly) {
-            window.Calendly.initPopupWidget({ url: url });
+            if (!popupOpening) {
+              popupOpening = true;
+              window.Calendly.initPopupWidget({ url: url });
+              setTimeout(function () { popupOpening = false; }, 2000);
+            }
             return;
           }
 
           loadCalendly()
             .then(function () {
-              window.Calendly.initPopupWidget({ url: url });
+              if (!popupOpening) {
+                popupOpening = true;
+                window.Calendly.initPopupWidget({ url: url });
+                setTimeout(function () { popupOpening = false; }, 2000);
+              }
             })
             .catch(function () {
               window.location.href = '/contact/';
