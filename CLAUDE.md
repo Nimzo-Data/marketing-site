@@ -37,6 +37,10 @@ Tell Claude to execute the plan. Superpowers auto-activates.
 ### Phase 5 — COMPOUND (CE) — Model: Sonnet
 /ce:compound — NEVER skip this step.
 
+## Documented solutions
+
+`docs/solutions/` — learnings from past problems (bugs, best practices, workflow patterns), organized by category with YAML frontmatter (`module`, `tags`, `problem_type`). Relevant when implementing or debugging in documented areas. Written by `/ce:compound`.
+
 ## Bug fixing
 For non-obvious bugs, use /gstack-investigate instead of jumping to a fix. It enforces "no fixes without investigation."
 
