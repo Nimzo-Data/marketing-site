@@ -1,0 +1,74 @@
+---
+import SectionWrapper from '../ui/SectionWrapper.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  bg?: 'default' | 'card' | 'primary' | 'white';
+  py?: 'sm' | 'md' | 'lg' | 'xl';
+  id?: string;
+  align?: 'left' | 'center';
+}
+
+const {
+  title,
+  subtitle,
+  bg = 'default',
+  py = 'md',
+  id,
+  align = 'left',
+} = Astro.props;
+---
+
+<SectionWrapper bg={bg} py={py} id={id}>
+  <div class={`text-section text-section--${align}`}>
+    <h2 class="text-section-title">{title}</h2>
+    {subtitle && <p class="text-section-subtitle">{subtitle}</p>}
+    <div class="text-section-body">
+      <slot />
+    </div>
+  </div>
+</SectionWrapper>
+
+<style>
+  .text-section {
+    max-width: 720px;
+  }
+
+  .text-section--center {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .text-section-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+
+  .text-section-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+  }
+
+  .text-section-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .text-section-body :global(p) {
+    margin: 0 0 16px 0;
+  }
+
+  .text-section-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

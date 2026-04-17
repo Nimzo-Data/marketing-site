@@ -1,0 +1,201 @@
+---
+interface PriceFactor {
+  name: string;
+  low: string;
+  high: string;
+}
+
+interface PriceScenario {
+  label: string;
+  price: string;
+  duration: string;
+  description: string;
+}
+
+interface Props {
+  priceRange: string;
+  factors: PriceFactor[];
+  scenarios: PriceScenario[];
+}
+
+const { priceRange, factors, scenarios } = Astro.props;
+---
+
+<div class="pricing-range">
+  <div class="price-heading">
+    <span class="price-range-text">{priceRange}</span>
+  </div>
+
+  {factors.length > 0 && (
+    <div class="factors-section">
+      <h3 class="factors-title">What affects the price</h3>
+      <div class="table-scroll">
+        <table class="factors-table">
+          <thead>
+            <tr>
+              <th class="th-factor">Factor</th>
+              <th class="th-low">Lower price</th>
+              <th class="th-high">Higher price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {factors.map((factor) => (
+              <tr>
+                <td class="td-factor">{factor.name}</td>
+                <td class="td-low">{factor.low}</td>
+                <td class="td-high">{factor.high}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+
+  {scenarios.length > 0 && (
+    <div class="scenarios-section">
+      <h3 class="scenarios-title">Example scenarios</h3>
+      <div class="scenarios-grid">
+        {scenarios.map((scenario) => (
+          <div class="scenario-card">
+            <div class="scenario-label">{scenario.label}</div>
+            <div class="scenario-price">{scenario.price}</div>
+            <div class="scenario-duration">{scenario.duration}</div>
+            <p class="scenario-description">{scenario.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .pricing-range {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* Price heading */
+  .price-heading {
+    text-align: center;
+  }
+
+  .price-range-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--color-primary);
+    line-height: 1.1;
+  }
+
+  /* Factors table */
+  .factors-title,
+  .scenarios-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .factors-table {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .factors-table th {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: left;
+    padding: 12px 16px;
+  }
+
+  .factors-table td {
+    padding: 12px 16px;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-card);
+  }
+
+  .factors-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .factors-table tbody tr:nth-child(even) td {
+    background-color: #f9fbfb;
+  }
+
+  .td-factor {
+    font-weight: 500;
+    color: var(--color-primary) !important;
+    width: 35%;
+  }
+
+  /* Scenarios grid */
+  .scenarios-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .scenarios-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .scenario-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: 24px 20px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-card);
+  }
+
+  .scenario-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .scenario-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+
+  .scenario-duration {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .scenario-description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>

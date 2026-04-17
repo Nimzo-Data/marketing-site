@@ -1,0 +1,188 @@
+---
+import type { RetainerTier } from '../../data/retainers';
+
+interface Props {
+  tiers: RetainerTier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<div class="retainer-scroll">
+  <div class="retainer-grid">
+    {tiers.map((tier) => (
+      <div class={`retainer-card${tier.recommended ? ' retainer-card--recommended' : ''}`}>
+        {tier.recommended && (
+          <div class="recommended-badge">Recommended</div>
+        )}
+        <div class="tier-header">
+          <h3 class="tier-name">{tier.name}</h3>
+          <div class="tier-price">{tier.priceRange}</div>
+          <p class="tier-best-for">{tier.bestFor}</p>
+        </div>
+
+        <ul class="features-list">
+          {tier.features.map((feature) => (
+            <li class="feature-item">
+              <span class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#004f4c" fill-opacity="0.1"/>
+                  <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#004f4c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="feature-text">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="tier-meta">
+          <div class="meta-item">
+            <span class="meta-label">Response time</span>
+            <span class="meta-value">{tier.responseTime}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Check-ins</span>
+            <span class="meta-value">{tier.checkInFrequency}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .retainer-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .retainer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 24px;
+    min-width: 600px;
+  }
+
+  @media (min-width: 900px) {
+    .retainer-grid {
+      min-width: 0;
+    }
+  }
+
+  .retainer-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-card);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+  }
+
+  .retainer-card--recommended {
+    border: 2px solid var(--color-primary);
+  }
+
+  .recommended-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .tier-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tier-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .tier-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-text);
+  }
+
+  .tier-best-for {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    font-style: italic;
+  }
+
+  .features-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+  }
+
+  .feature-text {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .tier-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--color-card);
+    padding-top: 16px;
+  }
+
+  .meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  .meta-value {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-align: right;
+  }
+</style>
