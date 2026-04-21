@@ -1,16 +1,34 @@
 ---
+interface CTA {
+  text: string;
+  href: string;
+  dataTrack?: string;
+}
+
 interface Props {
   title: string;
   subtitle: string;
+  cta?: CTA | null;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, cta } = Astro.props;
 ---
 
 <section class="hero-standard">
   <div class="hero-inner">
     <h1 class="hero-title">{title}</h1>
     <p class="hero-subtitle">{subtitle}</p>
+    {cta && (
+      <div class="hero-actions">
+        <a
+          href={cta.href}
+          class="btn btn-primary btn-lg"
+          data-track={cta.dataTrack || undefined}
+        >
+          {cta.text}
+        </a>
+      </div>
+    )}
   </div>
 </section>
 
@@ -26,7 +44,7 @@ const { title, subtitle } = Astro.props;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
-    text-align: left;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
@@ -55,7 +73,45 @@ const { title, subtitle } = Astro.props;
     font-size: 1.125rem;
     color: var(--color-text-secondary);
     max-width: 640px;
-    margin: 0;
+    margin: 0 auto;
     line-height: 1.6;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+    border: 1px solid transparent;
+    line-height: 1.2;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: #3a2934;
+    opacity: 1;
   }
 </style>

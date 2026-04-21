@@ -6,12 +6,25 @@ interface Props {
   timeline?: string;
   href: string;
   dataTrack?: string;
+  variant?: 'flagship' | 'subordinate';
+  accent?: 'teal' | 'plum';
+  linkText?: string;
 }
 
-const { title, description, priceRange, timeline, href, dataTrack } = Astro.props;
+const {
+  title,
+  description,
+  priceRange,
+  timeline,
+  href,
+  dataTrack,
+  variant = 'flagship',
+  accent = 'teal',
+  linkText = 'Learn more',
+} = Astro.props;
 ---
 
-<article class="service-card">
+<article class={`service-card service-card--${variant} service-card--accent-${accent}`}>
   <div class="card-icon" aria-hidden="true"></div>
   <h3 class="card-title">{title}</h3>
   <p class="card-description">{description}</p>
@@ -22,34 +35,61 @@ const { title, description, priceRange, timeline, href, dataTrack } = Astro.prop
     </div>
   )}
   <a href={href} class="card-link" data-track={dataTrack}>
-    Learn more &rarr;
+    {linkText} &rarr;
   </a>
 </article>
 
 <style>
   .service-card {
-    background-color: var(--color-card);
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
     padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    height: 100%;
+  }
+
+  /* Flagship (Style A): white bg, 1px colored border */
+  .service-card--flagship {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .service-card--flagship.service-card--accent-teal {
+    border-top: 3px solid var(--color-primary);
+  }
+
+  .service-card--flagship.service-card--accent-plum {
+    border-top: 3px solid var(--color-accent);
+  }
+
+  /* Subordinate (Style B): light grey-teal bg, no shadow */
+  .service-card--subordinate {
+    background-color: var(--color-card);
+    border: 1px solid transparent;
   }
 
   .card-icon {
-    width: 48px;
-    height: 48px;
-    background-color: var(--color-primary);
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
     flex-shrink: 0;
+  }
+
+  .service-card--accent-teal .card-icon {
+    background-color: var(--color-primary);
+  }
+
+  .service-card--accent-plum .card-icon {
+    background-color: var(--color-accent);
   }
 
   .card-title {
     font-family: var(--font-heading);
     font-weight: 600;
     color: var(--color-primary);
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     margin: 0;
     line-height: 1.3;
   }
@@ -57,9 +97,9 @@ const { title, description, priceRange, timeline, href, dataTrack } = Astro.prop
   .card-description {
     font-family: var(--font-body);
     font-size: 0.9375rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.65;
     flex: 1;
   }
 
@@ -80,14 +120,14 @@ const { title, description, priceRange, timeline, href, dataTrack } = Astro.prop
   }
 
   .badge-price {
-    background-color: var(--color-primary);
+    background-color: var(--color-accent);
     color: var(--color-white);
   }
 
   .badge-timeline {
     background-color: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
   }
 
   .card-link {

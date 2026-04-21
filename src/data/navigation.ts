@@ -17,6 +17,7 @@ export interface NavItemSimple {
 export interface NavItemDropdown {
   type: 'dropdown';
   label: string;
+  href?: string;
   groups: NavDropdownGroup[];
 }
 
@@ -52,7 +53,13 @@ export const navItems: NavItem[] = [
   {
     type: 'dropdown',
     label: 'Technology',
+    href: '/technologies/',
     groups: [
+      {
+        links: [
+          { label: 'All technologies', href: '/technologies/' },
+        ],
+      },
       {
         groupLabel: 'Cloud & Warehouse',
         links: [
@@ -82,6 +89,12 @@ export const navItems: NavItem[] = [
           { label: 'Steep', href: '/technologies/steep/' },
         ],
       },
+      {
+        groupLabel: 'Orchestration',
+        links: [
+          { label: 'Dagster', href: '/technologies/dagster/' },
+        ],
+      },
     ],
   },
   {
@@ -97,7 +110,7 @@ export const navItems: NavItem[] = [
 ];
 
 export const ctaLink: NavLink = {
-  label: 'Book a free call',
+  label: "Let's talk",
   href: '/contact/',
 };
 

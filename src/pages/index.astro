@@ -4,7 +4,6 @@ import HeroLarge from '../components/heroes/HeroLarge.astro';
 import ServiceCard from '../components/cards/ServiceCard.astro';
 import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import ProcessSteps from '../components/content/ProcessSteps.astro';
-import TextSection from '../components/content/TextSection.astro';
 import LogoGrid from '../components/content/LogoGrid.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
@@ -12,157 +11,208 @@ import { technologies } from '../data/technologies';
 ---
 
 <BaseLayout
-  title="Nimzo Data — GCP Data Consulting for European Companies"
-  description="Boutique GCP data consulting — BigQuery, Dataform, Looker, and the full GCP analytics stack. Fixed-price projects. Based in France, serving Europe."
+  title="Nimzo Data — Modern data infrastructure for ambitious European companies"
+  description="Modern data infrastructure for ambitious European companies. We build GCP data platforms — BigQuery, Dataform, Looker — on fixed-price engagements."
 >
   <!-- Section 1: Hero -->
   <HeroLarge
-    title="Your GCP data infrastructure, done right."
-    subtitle="We build and optimize data platforms on Google Cloud for European companies — from raw ingestion to reliable dashboards. No buzzwords. Fixed-price projects. Senior expertise only."
-    primaryCta={{
-      text: "Book a free call",
-      href: "/contact/",
-      dataTrack: "hero-book-call",
-    }}
-    secondaryCta={{
-      text: "See our services",
-      href: "/services/data-analytics-platform-implementation/",
-    }}
+    title="You've outgrown spreadsheets. Everything else is too complicated."
+    subtitle="We build modern GCP data platforms for ambitious European companies. Fixed-price projects, senior engineering, clean handover so you own what we built."
+    primaryCta={{ text: "Let's talk", href: '/contact/', dataTrack: 'hero-lets-talk' }}
   />
 
-  <!-- Section 2: Service Cards -->
-  <SectionWrapper bg="card" py="lg">
-    <h2 class="section-heading">What we do</h2>
-    <div class="services-grid">
+  <!-- Section 2: Three ways we help + retainers -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">Three ways we help. Plus one way to keep things running.</h2>
+
+    <div class="svc-row">
       <ServiceCard
-        title="Build your data platform from scratch"
-        description="We design and implement end-to-end data platforms for companies starting from scratch or replacing a fragile existing setup. Fixed-price engagements. Senior engineer on every project."
+        variant="flagship"
+        accent="teal"
+        title="No data platform yet?"
+        description="You have data in a dozen places and no clear way to see it. We build a full GCP data platform from scratch — ingestion, warehouse, transformations, and dashboards your team actually uses."
         priceRange="€15,000 – €35,000"
-        timeline="6–14 weeks"
+        timeline="8–12 weeks"
         href="/services/data-analytics-platform-implementation/"
-        dataTrack="service-card-implementation"
+        dataTrack="home-card-implementation"
       />
       <ServiceCard
-        title="Fix what's broken, costly, or slow"
-        description="Your pipelines exist but something's wrong: costs are high, dashboards are slow, or nobody trusts the numbers. We find out why and fix it."
-        priceRange="Audit from €3,000"
-        timeline="2–15 weeks"
+        variant="flagship"
+        accent="plum"
+        title="Platform exists, but it's broken?"
+        description="BigQuery costs tripled. Dashboards take a minute to load. Nobody trusts the numbers. We audit what you have, tell you what's actually wrong, and implement a prioritized fix."
+        priceRange="€20,000 – €50,000 (audit + implementation)"
+        timeline="10–16 weeks"
         href="/services/data-analytics-platform-optimization/"
-        dataTrack="service-card-optimization"
+        dataTrack="home-card-optimization"
+      />
+    </div>
+
+    <div class="svc-row svc-row--subordinate">
+      <ServiceCard
+        variant="subordinate"
+        accent="teal"
+        title="Need focused help on one thing?"
+        description="You know exactly what you need — a Dataform project rebuilt, a Looker semantic layer, BigQuery costs tamed. Fixed-price engagements, scoped in days, delivered in weeks."
+        priceRange="€5,000 – €15,000 per service"
+        timeline="2–6 weeks"
+        href="/services/expert-implementation-services/"
+        dataTrack="home-card-expert"
       />
       <ServiceCard
-        title="Targeted help for a specific layer"
-        description="Need help with BigQuery performance, Dataform setup, ETL pipelines, or BI tooling? We scope and fix specific problems without a full platform engagement."
-        priceRange="€3,000 – €15,000"
-        href="/services/expert-implementation-services/"
-        dataTrack="service-card-expert"
+        variant="subordinate"
+        accent="teal"
+        title="Already have a working platform?"
+        description="Keep it healthy with a monthly retainer. Monitoring, incident response, improvements, strategic guidance. Three tiers from €1,000 to €4,000 per month."
+        priceRange="From €1,000/month"
+        timeline="Month-to-month"
+        href="/services/ongoing-support-retainers/"
+        linkText="See retainer options"
+        dataTrack="home-card-retainers"
       />
     </div>
   </SectionWrapper>
 
-  <!-- Section 3: Is for / Isn't for -->
-  <SectionWrapper bg="default" py="lg">
+  <!-- Section 3: Who we work with -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">Who we work with.</h2>
     <TwoColumnSplit
       variant="is-for"
-      leftTitle="We work best with teams that:"
+      leftTitle="This is for you if:"
       leftItems={[
-        "Are on GCP or planning to move there",
-        "Have 10–500 employees and growing data complexity",
-        "Are spending more than €5,000/month on BigQuery without a clear picture of why",
-        "Want a senior technical partner who can explain decisions, not just execute them",
+        "You're on Google Cloud, or planning to be.",
+        "You don't have a data team — or the person doing it is you.",
+        "You want the results a senior data hire would deliver, without the 18-month payback.",
+        "You can make a decision. Our best engagements start in two-week sales cycles, not four-month ones.",
       ]}
-      rightTitle="We're probably not the right fit if you:"
+      rightTitle="This isn't for you if:"
       rightItems={[
-        "Need AWS or Azure expertise",
-        "Are looking for the lowest hourly rate available",
-        "Need a team of data analysts or data scientists (we're data engineers)",
-        "Need a fully outsourced, indefinite data team",
+        "You need AWS or Azure. We don't do multi-cloud.",
+        "You need analysts or data scientists. We're data engineers.",
+        "You want the cheapest hourly rate available. We compete on seniority, not price.",
+        "You need real-time streaming at scale — Kafka, Flink, sub-second latency. Different specialism.",
       ]}
     />
   </SectionWrapper>
 
-  <!-- Section 4: Process Steps -->
+  <!-- Section 4: How we work -->
   <SectionWrapper bg="white" py="lg">
-    <h2 class="section-heading">How it works</h2>
+    <h2 class="section-heading">How we work.</h2>
     <ProcessSteps
       steps={[
-        {
-          number: 1,
-          title: "Discovery call (free)",
-          description: "We spend 30 minutes understanding your stack, your problems, and your goals. If we're not a good fit, we'll say so.",
-        },
-        {
-          number: 2,
-          title: "Scoping & proposal",
-          description: "We document the engagement scope, deliverables, timeline, and fixed price. No hidden fees or change orders without your approval.",
-        },
-        {
-          number: 3,
-          title: "Implementation",
-          description: "We build. You're involved in reviews and decisions, but we handle the technical execution. Weekly updates, async communication.",
-        },
-        {
-          number: 4,
-          title: "Handover & documentation",
-          description: "Every engagement ends with documentation, a walkthrough session, and a 30-day support window for questions.",
-        },
+        { number: 1, title: "The scoping call", description: "Free 30-minute conversation. We listen, you talk, we tell you honestly whether we're a fit." },
+        { number: 2, title: "The proposal", description: "Within 5 business days: fixed-price proposal with scope, deliverables, timeline, price. No hourly billing surprises." },
+        { number: 3, title: "The build", description: "We lead. Your team joins when their input matters. Weekly updates, bi-weekly demos, async by default." },
+        { number: 4, title: "The handover", description: "Full documentation, walkthrough session, 30-day support window so your team actually owns what we built." },
       ]}
     />
   </SectionWrapper>
 
-  <!-- Section 5: Why GCP Only -->
-  <TextSection
-    title="Why we only work on GCP"
-    bg="default"
-    py="lg"
-  >
-    <p>
-      We don't offer multi-cloud consulting. This isn't a limitation — it's a deliberate choice.
-      Google Cloud's analytics stack — BigQuery, Dataform, Looker, Cloud Storage — is the most
-      cohesive data platform available today. The services are designed to work together, billed
-      together, and managed together. When you specialize in one stack, you develop the kind of
-      depth that only comes from running it in production across dozens of engagements: you know
-      the failure modes, the hidden costs, the features that sound good in the docs but don't work
-      as advertised, and the patterns that scale. Multi-cloud expertise is largely a myth.
-      Consultants who claim to be equally expert in AWS, Azure, and GCP are usually mediocre at
-      all three. We'd rather be genuinely excellent at one thing.
-    </p>
-  </TextSection>
-
-  <!-- Section 6: Logo Grid -->
+  <!-- Section 5: Why GCP only — LIGHT GREY-TEAL SECTION (page's one accent section) -->
   <SectionWrapper bg="card" py="lg">
-    <h2 class="section-heading">The tools we work with</h2>
-    <LogoGrid technologies={technologies} />
+    <div class="text-center-wrap">
+      <h2 class="section-heading section-heading--center">Why only Google Cloud?</h2>
+      <div class="prose">
+        <p>Most consultancies are multi-cloud because most clients are multi-cloud. We went the other way.</p>
+        <p>Google's data stack — BigQuery, Dataform, Looker, Cloud Storage — is the most cohesive analytics platform available. The services are designed to work together, billed together, monitored together. When you specialize in one stack, you develop the kind of depth that only comes from running it in production every day for years.</p>
+        <p>The payoff for you: tighter architectures, lower cloud costs, fewer surprises, and no time wasted debugging integrations between five vendors who blame each other.</p>
+      </div>
+    </div>
   </SectionWrapper>
 
-  <!-- Section 7: CTA Banner -->
-  <CTABanner
-    heading="Ready to talk about your data stack?"
-    buttonText="Book a free 30-minute call"
-    buttonHref="/contact/"
-    dataTrack="homepage-cta-banner"
-  />
+  <!-- Section 6: Technology grid -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="tech-header">
+      <h2 class="section-heading">The tools we build with.</h2>
+      <p class="section-sub">Ten tools, used selectively — not a buzzword list.</p>
+    </div>
+    <LogoGrid technologies={technologies} showTaglines={true} />
+    <p class="see-all-link">
+      <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
+    </p>
+  </SectionWrapper>
+
+  <!-- Section 7: Final CTA -->
+  <CTABanner dataTrack="homepage-cta-banner" />
 </BaseLayout>
 
 <style>
   .section-heading {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--color-primary);
     margin: 0 0 40px 0;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
-  .services-grid {
+  .section-heading--center {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .text-center-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .prose p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  .tech-header {
+    margin-bottom: 32px;
+  }
+
+  .tech-header .section-heading {
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .svc-row {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
+  .svc-row--subordinate {
+    margin-top: 24px;
+  }
+
   @media (min-width: 768px) {
-    .services-grid {
-      grid-template-columns: repeat(3, 1fr);
+    .svc-row {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
   }
 </style>

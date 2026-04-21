@@ -13,7 +13,7 @@ interface PriceScenario {
 }
 
 interface Props {
-  priceRange: string;
+  priceRange?: string;
   factors: PriceFactor[];
   scenarios: PriceScenario[];
 }
@@ -22,9 +22,11 @@ const { priceRange, factors, scenarios } = Astro.props;
 ---
 
 <div class="pricing-range">
-  <div class="price-heading">
-    <span class="price-range-text">{priceRange}</span>
-  </div>
+  {priceRange && (
+    <div class="price-heading">
+      <span class="price-range-text">{priceRange}</span>
+    </div>
+  )}
 
   {factors.length > 0 && (
     <div class="factors-section">

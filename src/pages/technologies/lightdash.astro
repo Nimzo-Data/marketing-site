@@ -2,6 +2,7 @@
 import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
 ---
 
 <TechnologyLayout
@@ -11,16 +12,16 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
   toolCategory="Business Intelligence"
   heroPositioning="Lightdash turns your dbt project into a BI tool — if you're already writing dbt models, your metrics are already defined. We make them explorable."
 >
-  <TextSection title="What It Is">
+  <TextSection title="What It Is" bg="white">
     <p>Lightdash is an open-source BI tool built on top of dbt. Metrics and dimensions are defined in your dbt YAML files — the same place where you define tests and documentation. Lightdash reads those definitions and generates an explorable interface without any additional modeling layer.</p>
   </TextSection>
 
-  <TextSection title="Why We Chose It" bg="card">
+  <TextSection title="Why We Chose It" bg="white">
     <p>For dbt-native teams, Lightdash is the most coherent choice. Metrics live in version control alongside transformations. There's no semantic layer to maintain separately. And for teams with 5–20 users, Lightdash Cloud pricing is a fraction of Looker while delivering the key capabilities most teams actually need.</p>
   </TextSection>
 
-  <TextSection title="How We Use It">
-    <ul>
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
       <li>Configure Lightdash to connect to BigQuery and read dbt project YAML</li>
       <li>Define explores, metrics, and custom dimensions in dbt models for Lightdash</li>
       <li>Build dashboards for operational and executive reporting</li>
@@ -29,46 +30,49 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     </ul>
   </TextSection>
 
-  <SectionWrapper bg="card">
-    <div class="comparison-section">
-      <h2 class="comparison-title">When to choose Lightdash vs. alternatives</h2>
-      <ul class="comparison-list">
-        <li><strong>Choose Lightdash when:</strong> already using dbt, want version-controlled metrics, 5–20 users, budget €500–€2,000/month.</li>
-        <li><strong>Choose Looker instead when:</strong> need enterprise governance, 20+ users, or LookML's semantic layer capabilities.</li>
-        <li><strong>Choose Steep instead when:</strong> primary audience is non-technical users who need a no-code interface.</li>
-      </ul>
-    </div>
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="When Lightdash is the right BI tool — and when it isn't"
+      blocks={[
+        {
+          heading: 'Choose Lightdash when:',
+          bullets: [
+            'You are already using dbt',
+            'You want version-controlled metrics',
+            'Team is 5–20 users',
+            'Budget is €500–€2,000/month',
+          ],
+        },
+        {
+          heading: 'Choose Looker instead when:',
+          bullets: [
+            'You need enterprise governance',
+            'You have 20+ users',
+            "You need LookML's semantic layer capabilities",
+          ],
+        },
+        {
+          heading: 'Choose Steep instead when:',
+          bullets: [
+            'Primary audience is non-technical users',
+            'A no-code interface matters more than version control',
+          ],
+        },
+      ]}
+    />
   </SectionWrapper>
 </TechnologyLayout>
 
 <style>
-  .comparison-section {
-    max-width: 720px;
-  }
-
-  .comparison-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--color-primary);
-    margin: 0 0 20px 0;
-    line-height: 1.2;
-  }
-
-  .comparison-list {
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--color-text);
     line-height: 1.7;
-    padding-left: 24px;
-    margin: 0;
   }
-
-  .comparison-list li {
-    margin-bottom: 12px;
-  }
-
-  .comparison-list li:last-child {
-    margin-bottom: 0;
-  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
 </style>

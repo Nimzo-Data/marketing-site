@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroStandard from '../components/heroes/HeroStandard.astro';
 import TextSection from '../components/content/TextSection.astro';
+import ProcessSteps from '../components/content/ProcessSteps.astro';
 import CalendlyEmbed from '../components/integrations/CalendlyEmbed.astro';
 import CTACard from '../components/cards/CTACard.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
@@ -9,49 +10,59 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 
 <BaseLayout
   title="Contact | Nimzo Data"
-  description="Book a free 30-minute call with Nimzo Data. We'll discuss your data stack, current challenges, and whether we're a good fit."
+  description="30-minute call about your data stack. No sales pitch. We tell you honestly whether we're a fit. hello@nimzodata.com."
 >
   <link
     slot="head"
     rel="stylesheet"
     href="https://assets.calendly.com/assets/external/widget.css"
   />
+
   <HeroStandard
-    title="Work with us"
-    subtitle="The best way to start is a 30-minute call. We'll ask about your current setup, what's not working, and what you're trying to achieve. No sales pitch — just an honest conversation about whether we're a good fit."
+    title="Let's talk about your data stack."
+    subtitle="30-minute call. We ask about your current setup, what isn't working, and what you want to achieve. No sales pitch — just an honest conversation about whether we're a good fit."
   />
 
-  <SectionWrapper py="lg">
-    <CalendlyEmbed url="https://calendly.com/nimzodata/free-call" minHeight="630px" />
-    <p class="email-fallback">
-      Prefer email? Write us directly at <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a> — we respond within one business day.
-    </p>
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Pick a time that works.</h2>
+    <p class="section-sub">All times shown in your local timezone. 30 minutes is usually enough to know if there's a fit.</p>
+    <CalendlyEmbed url="https://calendly.com/nimzodata/free-call" minHeight="700px" />
   </SectionWrapper>
 
-  <TextSection title="What happens next">
-    <ol class="next-steps">
-      <li>We'll ask for a brief overview of your data stack and main challenge</li>
-      <li>We'll schedule a 30-minute discovery call</li>
-      <li>If there's a fit, we'll send a scoping questionnaire and proposal within 5 business days</li>
-    </ol>
+  <TextSection title="Prefer email?" bg="white">
+    <p>Write to <a href="mailto:hello@nimzodata.com" class="email-link">hello@nimzodata.com</a>. We reply within one business day, usually the same day. Tell us about your current stack and what's not working — the more concrete, the faster the first call will be.</p>
   </TextSection>
 
-  <TextSection title="Where we are" bg="card">
-    <p>Based in France. We work remotely across Europe, with occasional on-site visits for larger engagements.</p>
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What happens after you reach out.</h2>
+    <ProcessSteps
+      steps={[
+        { number: 1, title: "Brief overview", description: "We ask for a quick summary of your data stack and main challenge — one email, five minutes to write." },
+        { number: 2, title: "Discovery call", description: "We schedule a 30-minute conversation within the week." },
+        { number: 3, title: "Fixed-price proposal", description: "If there's a fit, we send a scoping questionnaire and a fixed-price proposal within 5 business days." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <TextSection title="Where we are." bg="white">
+    <p>Based in France. Working remotely across Europe, with occasional on-site visits for kickoffs or hands-on workshops on larger engagements.</p>
   </TextSection>
 
-  <SectionWrapper py="lg">
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Not ready to talk?</h2>
     <div class="cta-cards-grid">
       <CTACard
-        title="Not ready to book?"
-        description="Browse our service pages to see what a typical engagement looks like, including scope and pricing."
-        href="/services/data-analytics-platform-implementation/"
+        title="See our services"
+        description="Browse service pages for scope, timeline, and pricing on each engagement type."
+        href="/"
+        buttonText="Browse services"
         dataTrack="contact-cta-services"
       />
       <CTACard
-        title="Explore our stack"
-        description="See all the tools we work with and how we approach each one."
-        href="/technologies/google-cloud-platform/"
+        title="Browse the stack"
+        description="Every tool we work with and our honest opinion on when to use it."
+        href="/technologies/"
+        buttonText="See technologies"
         dataTrack="contact-cta-tech"
       />
     </div>
@@ -59,34 +70,29 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 </BaseLayout>
 
 <style>
-  .email-fallback {
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+  }
+
+  .section-sub {
     font-family: var(--font-body);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: var(--color-text-secondary);
-    margin-top: 24px;
+    margin: 0 0 32px 0;
     line-height: 1.6;
   }
 
-  .email-fallback a {
+  .email-link {
     color: var(--color-primary);
     text-decoration: underline;
   }
 
-  .email-fallback a:hover {
-    opacity: 0.75;
-  }
-
-  .next-steps {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .email-link:hover { opacity: 0.75; }
 
   .cta-cards-grid {
     display: grid;

@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStandard from '../../components/heroes/HeroStandard.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { technologies, type Technology } from '../../data/technologies';
+
+interface Section {
+  heading: string;
+  categories: Technology['category'][];
+  perRow: 2 | 3;
+}
+
+const sections: Section[] = [
+  { heading: 'Cloud & Warehouse', categories: ['cloud', 'warehouse'], perRow: 2 },
+  { heading: 'Transformation', categories: ['transformation'], perRow: 2 },
+  { heading: 'ETL / ELT', categories: ['etl'], perRow: 2 },
+  { heading: 'Business Intelligence', categories: ['bi'], perRow: 3 },
+  { heading: 'Orchestration', categories: ['orchestration'], perRow: 2 },
+];
+
+const grouped = sections.map((section) => ({
+  heading: section.heading,
+  perRow: section.perRow,
+  items: technologies.filter((t) => section.categories.includes(t.category)),
+}));
+---
+
+<BaseLayout
+  title="Technologies | Nimzo Data"
+  description="The ten tools we build with — GCP, BigQuery, Dataform, dbt, Airbyte, Fivetran, Looker, Lightdash, Steep, and Dagster. Used selectively, not as a buzzword list."
+>
+  <HeroStandard
+    title="The tools we build with."
+    subtitle="Ten tools, used selectively. Each one chosen because it's the best at what it does — not because of a partner commission."
+    cta={{ text: "Let's talk", href: '/contact/' }}
+  />
+
+  {grouped.map((group) => (
+    <SectionWrapper py="lg" bg="white">
+      <h2 class="group-heading">{group.heading}</h2>
+      <div class={`tech-grid tech-grid--${group.perRow}`}>
+        {group.items.map((tech) => (
+          <a href={`/technologies/${tech.slug}/`} class="tech-card">
+            <div class="tech-card__head">
+              {tech.logoPath ? (
+                <img src={tech.logoPath} alt={`${tech.name} logo`} class="tech-card__logo" width="40" height="40" loading="lazy" />
+              ) : (
+                <div class="tech-card__logo-placeholder" aria-hidden="true">{tech.name.slice(0, 2).toUpperCase()}</div>
+              )}
+              <h3 class="tech-card__name">{tech.name}</h3>
+            </div>
+            <p class="tech-card__tagline">{tech.tagline}</p>
+            <span class="tech-card__link">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </SectionWrapper>
+  ))}
+
+  <CTABanner dataTrack="technologies-index-cta" />
+</BaseLayout>
+
+<style>
+  .group-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.2;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .tech-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .tech-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .tech-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .tech-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+  }
+
+  .tech-card__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .tech-card__logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .tech-card__logo-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .tech-card__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .tech-card__tagline {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .tech-card__link {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+</style>
