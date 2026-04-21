@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy | Nimzo Data"
+  description="Nimzo Data privacy policy — how we collect, use, and protect your data."
+>
+  <SectionWrapper py="xl">
+    <div class="legal-content">
+      <h1>Privacy Policy</h1>
+      <p><em>Draft — pending legal review. Last updated: April 2026.</em></p>
+
+      <h2>1. Who we are</h2>
+      <p>Nimzo Data is a data consulting agency based in France. Our website is nimzodata.com.</p>
+
+      <h2>2. What data we collect</h2>
+      <p>We collect data you provide directly (e.g., name and email if you book a call via Calendly or contact us by email), and anonymized analytics data via Google Analytics 4 (only if you consent via our cookie banner).</p>
+
+      <h2>3. How we use your data</h2>
+      <p>We use your contact information solely to respond to your inquiry and manage the consulting relationship. We do not sell or share your data with third parties for marketing purposes.</p>
+
+      <h2>4. Cookies</h2>
+      <p>We use Google Analytics 4 for anonymous traffic analysis. This is only activated after you explicitly accept cookies via our consent banner. You can decline or withdraw consent at any time by refreshing the page and clicking "Decline".</p>
+
+      <h2>5. Your rights (GDPR)</h2>
+      <p>If you are based in the EU/EEA, you have rights under GDPR including: right of access, right to erasure, right to rectification, and right to object to processing. To exercise these rights, contact us at hello@nimzodata.com.</p>
+
+      <h2>6. Contact</h2>
+      <p>For privacy-related questions: hello@nimzodata.com</p>
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .legal-content {
+    max-width: 720px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .legal-content h1 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 24px 0;
+    line-height: 1.2;
+  }
+
+  .legal-content h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 40px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .legal-content p {
+    margin: 0 0 16px 0;
+  }
+
+  .legal-content p:last-child {
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,237 @@
+---
+import { serviceLinks } from '../../data/navigation';
+
+const currentYear = new Date().getFullYear();
+
+const footerTechnologies: { label: string; href: string }[] = [
+  { label: 'Google Cloud Platform', href: '/technologies/google-cloud-platform/' },
+  { label: 'BigQuery', href: '/technologies/bigquery/' },
+  { label: 'Dataform', href: '/technologies/dataform/' },
+  { label: 'Airbyte', href: '/technologies/airbyte/' },
+  { label: 'Looker', href: '/technologies/looker/' },
+];
+
+const companyLinks: { label: string; href: string }[] = [
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <!-- Column 1: Brand -->
+      <div class="footer-col footer-col--brand">
+        <p class="footer-logo">Nimzo Data</p>
+        <p class="footer-tagline">
+          Modern data infrastructure for ambitious European companies.
+        </p>
+        <p class="footer-location">Based in France. Serving Europe.</p>
+      </div>
+
+      <!-- Column 2: Services -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links" role="list">
+          {serviceLinks.map((link) => (
+            <li>
+              <a href={link.href} class="footer-link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Technologies -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Technologies</h4>
+        <ul class="footer-links" role="list">
+          {footerTechnologies.map((link) => (
+            <li>
+              <a href={link.href} class="footer-link">{link.label}</a>
+            </li>
+          ))}
+          <li>
+            <a href="/technologies/" class="footer-link footer-link--view-all">View all &rarr;</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Company -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Company</h4>
+        <ul class="footer-links" role="list">
+          {companyLinks.map((link) => (
+            <li>
+              <a href={link.href} class="footer-link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 5: Get in touch -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Get in touch</h4>
+        <ul class="footer-links" role="list">
+          <li>
+            <a href="mailto:hello@nimzodata.com" class="footer-link">hello@nimzodata.com</a>
+          </li>
+          <li>
+            <a href="/contact/" class="footer-link footer-link--view-all">Let's talk &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; {currentYear} Nimzo Data
+      </p>
+      <ul class="footer-bottom-links" role="list">
+        <li><a href="/privacy-policy/" class="footer-bottom-link">Privacy Policy</a></li>
+        <li><a href="/terms-of-service/" class="footer-bottom-link">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-white);
+    color: var(--color-text);
+    border-top: 1px solid var(--color-card);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 24px 32px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      padding: 64px 48px 32px;
+    }
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 32px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 1fr 1fr 0.8fr 1.1fr;
+      gap: 40px;
+    }
+  }
+
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--color-primary);
+    margin: 0 0 12px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-tagline {
+    font-size: 14px;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+  }
+
+  .footer-location {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .footer-heading {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-link {
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 150ms ease;
+    line-height: 1.4;
+  }
+
+  .footer-link:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-link--view-all {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-card);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .footer-bottom-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-bottom-link {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .footer-bottom-link:hover {
+    color: var(--color-primary);
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+interface CTA {
+  text: string;
+  href: string;
+  dataTrack?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  cta?: CTA | null;
+}
+
+const { title, subtitle, cta } = Astro.props;
+---
+
+<section class="hero-standard">
+  <div class="hero-inner">
+    <h1 class="hero-title">{title}</h1>
+    <p class="hero-subtitle">{subtitle}</p>
+    {cta && (
+      <div class="hero-actions">
+        <a
+          href={cta.href}
+          class="btn btn-primary btn-lg"
+          data-track={cta.dataTrack || undefined}
+        >
+          {cta.text}
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero-standard {
+    width: 100%;
+    background-color: var(--color-background);
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-inner {
+      padding: 0 48px;
+    }
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+    border: 1px solid transparent;
+    line-height: 1.2;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: #3a2934;
+    opacity: 1;
+  }
+</style>

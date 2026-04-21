@@ -1,0 +1,69 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  buttonText?: string;
+  dataTrack?: string;
+}
+
+const { title, description, href, buttonText = 'Learn more', dataTrack } = Astro.props;
+---
+
+<div class="cta-card">
+  <h3 class="cta-title">{title}</h3>
+  <p class="cta-description">{description}</p>
+  <a href={href} class="cta-button" data-track={dataTrack || undefined}>
+    {buttonText}
+  </a>
+</div>
+
+<style>
+  .cta-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    height: 100%;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cta-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0 0 8px 0;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .cta-button {
+    align-self: flex-start;
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-btn);
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .cta-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+</style>

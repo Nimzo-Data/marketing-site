@@ -1,0 +1,80 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
+---
+
+<TechnologyLayout
+  title="Google Cloud Platform | Nimzo Data"
+  description="We build exclusively on GCP — BigQuery, Dataform, Looker, Cloud Storage. Expert GCP data consulting for European companies."
+  toolName="Google Cloud Platform"
+  toolCategory="Cloud Platform"
+  heroPositioning="We build exclusively on GCP — not because it's what we know, but because it's the right choice for European data teams that need compliance, global reach, and a best-in-class analytics stack."
+>
+  <TextSection title="What It Is" bg="white">
+    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack — from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) — all designed to work together without custom glue code.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="white">
+    <p>GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data — serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure and more time building value.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
+      <li>Design and provision GCP project architecture with proper IAM, VPC, and billing structure</li>
+      <li>Configure BigQuery datasets, access controls, and cost governance (slot reservations, column-level security)</li>
+      <li>Set up Cloud Composer (managed Airflow) or Cloud Workflows for orchestration</li>
+      <li>Implement Cloud Storage lifecycle policies and data landing zones for ingestion pipelines</li>
+      <li>Advise on GCP region selection for EU data residency requirements (GDPR compliance)</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="When GCP is the right choice — and when it isn't"
+      intro="We're GCP-only, but that doesn't mean GCP is right for everyone."
+      blocks={[
+        {
+          heading: 'Choose GCP when:',
+          bullets: [
+            'Your workload is analytics-heavy (BigQuery is the best value warehouse in the market)',
+            'You need European data residency',
+            "You're already in the Google ecosystem (Google Ads, GA4, Workspace)",
+            'You want a cohesive stack with fewer moving parts',
+          ],
+        },
+        {
+          heading: 'Choose AWS when:',
+          bullets: [
+            "You're running complex multi-service applications with Lambda, SQS, DynamoDB, and the rest of the AWS-native stack",
+            'You need deeper enterprise features',
+          ],
+        },
+        {
+          heading: 'Choose Azure when:',
+          bullets: [
+            'Your organization is heavily Microsoft-invested (M365, Power BI, AD)',
+            'Data gravity is already on Azure',
+          ],
+        },
+      ]}
+      footer="Azure's data services work, but BigQuery is still the better warehouse."
+    />
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
+</style>

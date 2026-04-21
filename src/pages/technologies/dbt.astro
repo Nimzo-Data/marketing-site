@@ -1,0 +1,86 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
+---
+
+<TechnologyLayout
+  title="dbt | Nimzo Data"
+  description="dbt implementation on BigQuery — project architecture, staging and mart layers, data tests, CI/CD, and team training."
+  toolName="dbt"
+  toolCategory="SQL Transformation"
+  heroPositioning="When clients need open-source portability or are already on a dbt workflow, we bring the same rigor — tested models, version control, and documentation as code."
+>
+  <TextSection title="What It Is" bg="white">
+    <p>dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. It works with BigQuery as well as Snowflake, Redshift, and others.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="white">
+    <p>dbt is the most widely adopted transformation tool in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
+      <li>Build and restructure dbt projects following the staging &rarr; intermediate &rarr; marts layer convention</li>
+      <li>Write Jinja-templated SQL macros for reusable transformation logic</li>
+      <li>Implement dbt tests (not null, unique, referential integrity, custom) across critical models</li>
+      <li>Configure dbt documentation and lineage graphs so new team members understand data flow</li>
+      <li>Set up dbt Cloud jobs with CI/CD integration — run tests on PRs before merging</li>
+      <li>Advise on Dataform vs. dbt tradeoffs for greenfield GCP projects</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="dbt or Dataform?"
+      blocks={[
+        {
+          heading: 'Choose dbt when:',
+          bullets: [
+            'You have existing dbt investment',
+            'You need multi-cloud portability (BigQuery + Snowflake, or moving later)',
+            'Your team has strong dbt expertise',
+          ],
+        },
+        {
+          heading: 'Choose dbt Cloud when:',
+          bullets: [
+            'You want managed CI/CD, documentation hosting, and Metrics Layer without DIY',
+            "You're comfortable with the price (starts around $100/developer/month)",
+          ],
+        },
+        {
+          heading: 'Choose dbt Core when:',
+          bullets: [
+            "You're budget-conscious",
+            "You're willing to run orchestration yourself (usually Dagster or GitHub Actions)",
+          ],
+        },
+        {
+          heading: 'Choose Dataform instead when:',
+          bullets: [
+            "You're on GCP only",
+            'Your team is new to analytics engineering',
+            'You want to skip the orchestration layer entirely',
+          ],
+          note: 'Dataform is free, native, and simpler to run.',
+        },
+      ]}
+    />
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
+</style>

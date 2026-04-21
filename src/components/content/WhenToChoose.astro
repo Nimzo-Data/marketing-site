@@ -1,0 +1,103 @@
+---
+interface Block {
+  heading: string;
+  bullets: string[];
+  note?: string;
+}
+
+interface Props {
+  title: string;
+  intro?: string;
+  blocks: Block[];
+  footer?: string;
+}
+
+const { title, intro, blocks, footer } = Astro.props;
+---
+
+<div class="wtc">
+  <h2 class="wtc-title">{title}</h2>
+  {intro && <p class="wtc-intro">{intro}</p>}
+
+  {blocks.map((b) => (
+    <div class="wtc-block">
+      <h3 class="wtc-sub">{b.heading}</h3>
+      <ul class="wtc-list">
+        {b.bullets.map((item) => (<li>{item}</li>))}
+      </ul>
+      {b.note && <p class="wtc-note">{b.note}</p>}
+    </div>
+  ))}
+
+  {footer && <p class="wtc-footer">{footer}</p>}
+</div>
+
+<style>
+  .wtc {
+    max-width: 720px;
+  }
+
+  .wtc-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+  }
+
+  .wtc-intro {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 20px 0;
+  }
+
+  .wtc-block {
+    margin-bottom: 16px;
+  }
+
+  .wtc-sub {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .wtc-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .wtc-list li {
+    margin-bottom: 6px;
+  }
+
+  .wtc-list li::marker {
+    color: var(--color-primary);
+  }
+
+  .wtc-note {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin: 8px 0 0 0;
+    line-height: 1.6;
+  }
+
+  .wtc-footer {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 12px 0 0 0;
+  }
+</style>

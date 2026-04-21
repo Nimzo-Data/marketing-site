@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroStandard from '../components/heroes/HeroStandard.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, heroTitle, heroSubtitle, ogImage, canonicalUrl } = Astro.props;
+
+const serviceName = title.replace(/ \| Nimzo Data$/, '');
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  provider: {
+    '@type': 'Organization',
+    name: 'Nimzo Data',
+  },
+  name: serviceName,
+  description,
+  areaServed: 'Europe',
+  serviceType: 'Data Consulting',
+};
+---
+
+<BaseLayout {title} {description} {ogImage} {canonicalUrl} structuredData={serviceSchema}>
+  <HeroStandard
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    cta={{ text: "Let's talk", href: '/contact/', dataTrack: 'service-hero-cta' }}
+  />
+  <slot />
+  <CTABanner dataTrack="service-layout-cta" />
+</BaseLayout>

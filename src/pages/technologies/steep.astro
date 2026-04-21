@@ -1,0 +1,76 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
+---
+
+<TechnologyLayout
+  title="Steep | Nimzo Data"
+  description="Steep implementation for self-service business intelligence on BigQuery — no-code dashboards and reporting for non-technical teams."
+  toolName="Steep"
+  toolCategory="Business Intelligence"
+  heroPositioning="Steep puts self-service analytics in the hands of business users who shouldn't need to know SQL — we implement it when the goal is broad data access, not deep technical analysis."
+>
+  <TextSection title="What It Is" bg="white">
+    <p>Steep is a no-code BI tool designed for business users. It connects to BigQuery and provides a drag-and-drop interface for exploring data, building charts, and sharing reports — without writing a single line of SQL. It's particularly strong for companies where the primary data consumers are in marketing, sales, or operations rather than engineering.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="white">
+    <p>Not every company needs a LookML semantic layer or dbt-driven metrics. When the audience is non-technical and the primary need is 'let me explore this data and share a chart,' Steep delivers at a fraction of the cost of Looker. It's honest about what it is: an accessible, affordable BI tool.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
+      <li>Connect Steep to BigQuery and configure dataset access</li>
+      <li>Design simplified table structures in BigQuery that work well for Steep's no-code interface</li>
+      <li>Train business users on Steep's exploration and charting features</li>
+      <li>Set up scheduled report delivery for regular stakeholder updates</li>
+      <li>Implement Steep alongside Lightdash or Looker in organizations with mixed technical audiences</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="When Steep is the right BI tool — and when it isn't"
+      blocks={[
+        {
+          heading: 'Choose Steep when:',
+          bullets: [
+            'Primary users are non-technical',
+            'Budget is under €500/month',
+            'Self-service exploration is the goal',
+            'No SQL access is needed',
+          ],
+        },
+        {
+          heading: 'Choose Lightdash instead when:',
+          bullets: [
+            'Users need metric version control or SQL access',
+            'Team is on dbt',
+          ],
+        },
+        {
+          heading: 'Choose Looker instead when:',
+          bullets: [
+            'Enterprise governance and a centralized semantic layer are required',
+          ],
+        },
+      ]}
+    />
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
+</style>

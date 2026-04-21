@@ -1,0 +1,146 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  priceRange?: string;
+  timeline?: string;
+  href: string;
+  dataTrack?: string;
+  variant?: 'flagship' | 'subordinate';
+  accent?: 'teal' | 'plum';
+  linkText?: string;
+}
+
+const {
+  title,
+  description,
+  priceRange,
+  timeline,
+  href,
+  dataTrack,
+  variant = 'flagship',
+  accent = 'teal',
+  linkText = 'Learn more',
+} = Astro.props;
+---
+
+<article class={`service-card service-card--${variant} service-card--accent-${accent}`}>
+  <div class="card-icon" aria-hidden="true"></div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-description">{description}</p>
+  {(priceRange || timeline) && (
+    <div class="card-badges">
+      {priceRange && <span class="badge badge-price">{priceRange}</span>}
+      {timeline && <span class="badge badge-timeline">{timeline}</span>}
+    </div>
+  )}
+  <a href={href} class="card-link" data-track={dataTrack}>
+    {linkText} &rarr;
+  </a>
+</article>
+
+<style>
+  .service-card {
+    border-radius: var(--radius-card);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+  }
+
+  /* Flagship (Style A): white bg, 1px colored border */
+  .service-card--flagship {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .service-card--flagship.service-card--accent-teal {
+    border-top: 3px solid var(--color-primary);
+  }
+
+  .service-card--flagship.service-card--accent-plum {
+    border-top: 3px solid var(--color-accent);
+  }
+
+  /* Subordinate (Style B): light grey-teal bg, no shadow */
+  .service-card--subordinate {
+    background-color: var(--color-card);
+    border: 1px solid transparent;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .service-card--accent-teal .card-icon {
+    background-color: var(--color-primary);
+  }
+
+  .service-card--accent-plum .card-icon {
+    background-color: var(--color-accent);
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    line-height: 1.4;
+  }
+
+  .badge-price {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  .badge-timeline {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .card-link {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: auto;
+  }
+
+  .card-link:hover {
+    text-decoration: underline;
+  }
+</style>

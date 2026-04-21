@@ -1,0 +1,79 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
+---
+
+<TechnologyLayout
+  title="Fivetran | Nimzo Data"
+  description="Fivetran setup and optimization on BigQuery — connector configuration, MAR cost control, and reliability monitoring."
+  toolName="Fivetran"
+  toolCategory="ELT / Data Ingestion"
+  heroPositioning="When setup speed and managed reliability matter more than cost control, Fivetran gets pipelines running in hours — not weeks."
+>
+  <TextSection title="What It Is" bg="white">
+    <p>Fivetran is a fully managed ELT platform with 500+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced.</p>
+  </TextSection>
+
+  <TextSection title="Why We Chose It" bg="white">
+    <p>Fivetran's managed reliability is its main selling point. For companies that want pipelines that simply work — without a data engineer babysitting connector updates — Fivetran is hard to beat. The MAR pricing model is predictable for stable data volumes, and the connector quality for major SaaS tools (Salesforce, HubSpot, Stripe) is best-in-class.</p>
+  </TextSection>
+
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
+      <li>Evaluate whether Fivetran or Airbyte is the right fit based on data volume, team capacity, and connector needs</li>
+      <li>Provision and configure Fivetran connectors for CRM, marketing, finance, and product analytics sources</li>
+      <li>Optimize Fivetran sync frequency and filtering to control MAR costs</li>
+      <li>Integrate Fivetran-normalized schemas with downstream dbt or Dataform transformation layers</li>
+      <li>Set up dbt source freshness tests to detect Fivetran sync failures before they affect dashboards</li>
+    </ul>
+  </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="Fivetran or Airbyte?"
+      blocks={[
+        {
+          heading: 'Choose Fivetran when:',
+          bullets: [
+            'You need the most polished managed ELT available',
+            'Your data sources are major SaaS tools (Salesforce, HubSpot, Stripe, Shopify)',
+            'You value zero-maintenance over cost optimization',
+          ],
+        },
+        {
+          heading: 'Choose Airbyte when:',
+          bullets: [
+            'You have many sources and MAR would push Fivetran above €20,000/year',
+            'You need custom connectors for internal APIs',
+            'Open-source self-hosting is appealing',
+          ],
+        },
+        {
+          heading: 'Choose direct API integration when:',
+          bullets: [
+            'You only need one or two simple sources',
+            'You want full control',
+            'Ongoing cost matters more than upfront work',
+          ],
+        },
+      ]}
+      footer="Our rule of thumb: if you'd pay Fivetran more than €15,000/year at current volume, Airbyte usually wins on total cost of ownership."
+    />
+  </SectionWrapper>
+</TechnologyLayout>
+
+<style>
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
+</style>

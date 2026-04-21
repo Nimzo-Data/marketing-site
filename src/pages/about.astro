@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroStandard from '../components/heroes/HeroStandard.astro';
+import TextSection from '../components/content/TextSection.astro';
+import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+
+const leftItems = [
+  "You're on Google Cloud, or planning to be.",
+  "You don't have a data team — or the person doing it is you.",
+  "You want the results a senior data hire would deliver, without the 18-month payback.",
+  "You can make a decision. Our best engagements start in two-week sales cycles, not four-month ones.",
+];
+
+const rightItems = [
+  "You need AWS or Azure. We don't do multi-cloud.",
+  "You need analysts or data scientists. We're data engineers.",
+  "You want the cheapest hourly rate available. We compete on seniority, not price.",
+  "You need real-time streaming at scale — Kafka, Flink, sub-second latency. Different specialism.",
+];
+
+const principles = [
+  {
+    title: 'Execution-led, not embedded',
+    body: "We lead the technical work. Your team joins reviews and decisions but isn't on the hook for building. Different model from staff augmentation or intensive enablement — both are valid, we just don't do them.",
+  },
+  {
+    title: 'Infrastructure first, insights second',
+    body: "The most impressive dashboard is worthless if the data feeding it isn't reliable. We build the plumbing before anyone talks about taps.",
+  },
+  {
+    title: 'One cloud, by design',
+    body: "GCP-only isn't a limitation. It's a commitment to depth over breadth. Multi-cloud consultancies are necessarily shallow on each cloud.",
+  },
+  {
+    title: 'Transparent pricing, defined scope',
+    body: "Data consulting has a reputation for ballooning engagements. We quote fixed prices, show ranges publicly on our service pages, and don't upsell work you don't need.",
+  },
+  {
+    title: 'European sensibility, direct communication',
+    body: "Based in France, working across Europe. No Silicon Valley vocabulary. We say what we mean and we say it short.",
+  },
+  {
+    title: 'Capable teams over dependent clients',
+    body: "Every engagement ends with documentation, training, and a clean handover. The goal is that your team understands what we built and why. If you outgrow us, that's a success.",
+  },
+];
+---
+
+<BaseLayout
+  title="About | Nimzo Data"
+  description="Nimzo Data is a boutique GCP data consultancy based in France. Modern data infrastructure for ambitious European companies. Fixed-price projects, senior engineering only."
+>
+  <HeroStandard
+    title="A boutique GCP data consultancy, by design."
+    subtitle="Small team. One cloud. Fixed-price projects. We work with a handful of clients at a time and go deep, not wide."
+    cta={{ text: "Let's talk", href: '/contact/', dataTrack: 'about-hero-cta' }}
+  />
+
+  <TextSection title="Why Nimzo Data exists." bg="white">
+    <p>Most data consultancies pitch themselves as trusted advisors and deliver what looks like transformation theater. Beautiful slide decks, expensive audits, and not much working software at the end. The mid-market in Europe deserves better: serious technical work, delivered honestly, at prices that aren't calibrated for Fortune 500 budgets.</p>
+    <p>We built Nimzo Data to do that one thing well. GCP, because it's the best analytics stack available. Fixed-price, because hourly billing rewards the wrong behavior. Senior engineering only, because the problems clients bring us can't be fixed by juniors learning on the job.</p>
+    <p>We're deliberately small. Taking on fewer clients means we can actually care about each one.</p>
+  </TextSection>
+
+  <TextSection title="Why Nimzo?" bg="white">
+    <p>Nimzo Data takes its name from the Nimzo-Indian Defense — a chess opening known for controlling the center through indirect pressure rather than direct occupation. The Nimzo-Indian doesn't charge forward. It creates the conditions for a structural advantage that compounds over time.</p>
+    <p>We build data infrastructure the same way. We're not interested in impressive-looking dashboards that don't connect to decisions. We're interested in creating the conditions for insight: clean pipelines, reliable models, clear metrics, and systems that compound in value as your data grows.</p>
+  </TextSection>
+
+  <!-- How we work — LIGHT GREY-TEAL SECTION with white cards -->
+  <SectionWrapper bg="card" py="lg">
+    <h2 class="section-heading">How we work.</h2>
+    <div class="principles-grid">
+      {principles.map((p) => (
+        <div class="principle-card">
+          <div class="principle-icon" aria-hidden="true"></div>
+          <h3 class="principle-title">{p.title}</h3>
+          <p class="principle-body">{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">Who we work with.</h2>
+    <TwoColumnSplit
+      variant="is-for"
+      leftTitle="This is for you if:"
+      leftItems={leftItems}
+      rightTitle="This isn't for you if:"
+      rightItems={rightItems}
+    />
+  </SectionWrapper>
+
+  <CTABanner dataTrack="about-cta" />
+</BaseLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 40px 0;
+    line-height: 1.25;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .principle-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-card);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .principle-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+  }
+
+  .principle-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .principle-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.65;
+  }
+</style>

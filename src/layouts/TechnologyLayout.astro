@@ -1,0 +1,78 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroTech from '../components/heroes/HeroTech.astro';
+import CTACard from '../components/cards/CTACard.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+import { technologies } from '../data/technologies';
+
+interface Props {
+  title: string;
+  description: string;
+  toolName: string;
+  toolLogo?: string;
+  toolCategory: string;
+  heroPositioning: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  toolName,
+  toolLogo,
+  toolCategory,
+  heroPositioning,
+  ogImage,
+} = Astro.props;
+
+const resolvedLogo =
+  toolLogo ?? technologies.find((t) => t.name === toolName)?.logoPath;
+---
+
+<BaseLayout {title} {description} {ogImage}>
+  <HeroTech
+    toolName={toolName}
+    toolLogo={resolvedLogo}
+    toolCategory={toolCategory}
+    positioning={heroPositioning}
+  />
+  <slot />
+  <SectionWrapper py="lg">
+    <div class="cta-cards-grid">
+      <CTACard
+        title="No data platform yet?"
+        description="Build from scratch on GCP — end-to-end."
+        href="/services/data-platform-implementation/"
+        buttonText="See Implementation"
+      />
+      <CTACard
+        title="Platform not working well?"
+        description="Audit and fix what's broken or expensive."
+        href="/services/data-platform-optimization/"
+        buttonText="See Optimization"
+      />
+      <CTACard
+        title={`Need help with ${toolName}?`}
+        description="Targeted expert work on this specific layer."
+        href="/services/expert-implementation-services/"
+        buttonText="See Expert Services"
+      />
+    </div>
+  </SectionWrapper>
+  <CTABanner dataTrack="tech-layout-cta" />
+</BaseLayout>
+
+<style>
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

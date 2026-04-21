@@ -1,0 +1,408 @@
+---
+import Button from '../ui/Button.astro';
+import MobileMenu from './MobileMenu.astro';
+import { navItems, ctaLink } from '../../data/navigation';
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="logo" aria-label="Nimzo Data — Home">
+      <span class="logo-text">Nimzo Data</span>
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <ul class="nav-list" role="list">
+        {navItems.map((item) => (
+          <li class={`nav-item ${item.type === 'dropdown' ? 'nav-item--dropdown' : ''}`}>
+            {item.type === 'link' ? (
+              <a href={item.href} class="nav-link">{item.label}</a>
+            ) : (
+              <>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="nav-link nav-trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {item.label}
+                    <svg class="nav-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    class="nav-link nav-trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    type="button"
+                  >
+                    {item.label}
+                    <svg class="nav-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                )}
+                <div class="dropdown" role="region" aria-label={item.label}>
+                  {item.groups.length === 1 ? (
+                    /* Single-group dropdown (Services) */
+                    <ul class="dropdown-list" role="list">
+                      {item.groups[0].links.map((link) => (
+                        <li>
+                          <a href={link.href} class="dropdown-link">{link.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    /* Multi-group dropdown (Technology) */
+                    <div class="dropdown-grid">
+                      {item.groups.map((group) => (
+                        <div class="dropdown-group">
+                          {group.groupLabel && (
+                            <p class="dropdown-group-label">{group.groupLabel}</p>
+                          )}
+                          <ul role="list">
+                            {group.links.map((link) => (
+                              <li>
+                                <a href={link.href} class="dropdown-link">{link.label}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <div class="header-cta">
+      <Button href={ctaLink.href} variant="primary" size="sm">
+        {ctaLink.label}
+      </Button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="hamburger-btn"
+      class="hamburger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      type="button"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu rendered outside header to avoid stacking context issues -->
+<MobileMenu />
+
+<script>
+  // Desktop dropdown: aria-expanded toggle
+  const dropdownItems = document.querySelectorAll<HTMLLIElement>('.nav-item--dropdown');
+  const closers: Array<() => void> = [];
+
+  dropdownItems.forEach((item) => {
+    const trigger = item.querySelector<HTMLElement>('.nav-trigger');
+    if (!trigger) return;
+
+    let isOpen = false;
+
+    const setOpen = (val: boolean) => {
+      isOpen = val;
+      trigger.setAttribute('aria-expanded', String(val));
+    };
+
+    closers.push(() => setOpen(false));
+
+    const handleExpand = () => {
+      // Capture intended next state before closers reset isOpen
+      const nextState = !isOpen;
+      // Close all via their own setOpen to keep closures in sync
+      closers.forEach((close) => close());
+      if (nextState) setOpen(true);
+    };
+
+    // Focus-within toggling for keyboard users
+    item.addEventListener('focusin', () => {
+      if (!isOpen) setOpen(true);
+    });
+
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains((e as FocusEvent).relatedTarget as Node)) {
+        setOpen(false);
+      }
+    });
+
+    trigger.addEventListener('click', handleExpand);
+  });
+
+  // Scroll shadow: add .is-scrolled when past a few pixels
+  const header = document.querySelector<HTMLElement>('.site-header');
+  if (header) {
+    const setScrolled = () => {
+      if (window.scrollY > 4) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    };
+    setScrolled();
+    window.addEventListener('scroll', setScrolled, { passive: true });
+  }
+
+  // Close dropdowns when pressing Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach((item) => {
+        const trigger = item.querySelector<HTMLElement>('.nav-trigger');
+        if (trigger) {
+          // Dispatch a synthetic focusout so each closure's isOpen resets cleanly
+          trigger.setAttribute('aria-expanded', 'false');
+          trigger.blur();
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-card);
+    height: 64px;
+    transition: box-shadow 200ms ease;
+  }
+
+  .site-header.is-scrolled {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* Logo */
+  .logo {
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+  }
+
+  /* Desktop nav */
+  .desktop-nav {
+    flex: 1;
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-nav {
+      display: flex;
+    }
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 150ms ease, background-color 150ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+    background-color: var(--color-surface-hover);
+  }
+
+  .nav-chevron {
+    transition: transform 200ms ease;
+    flex-shrink: 0;
+  }
+
+  .nav-trigger[aria-expanded="true"] .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown panel */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-dropdown);
+    border: 1px solid var(--color-border);
+    padding: 8px;
+    min-width: 260px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 200ms ease, transform 200ms ease, visibility 200ms ease;
+    z-index: 200;
+  }
+
+  /* Show dropdown on hover */
+  .nav-item--dropdown:hover .dropdown,
+  .nav-item--dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Also show when aria-expanded is true (for keyboard users via JS) */
+  .nav-trigger[aria-expanded="true"] ~ .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 8px;
+    min-width: 480px;
+  }
+
+  .dropdown-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-group-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 4px 8px;
+  }
+
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: color 150ms ease, background-color 150ms ease;
+    white-space: nowrap;
+  }
+
+  .dropdown-link:hover {
+    color: var(--color-primary);
+    background-color: var(--color-surface-hover);
+  }
+
+  /* Header CTA */
+  .header-cta {
+    display: none;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .header-cta {
+      display: block;
+    }
+  }
+
+  /* Hamburger button */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .hamburger {
+      display: none;
+    }
+  }
+
+  .hamburger:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  @media (min-width: 1024px) {
+    .header-inner {
+      padding: 0 48px;
+    }
+  }
+</style>

@@ -1,0 +1,319 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.astro';
+import PricingRange from '../../components/content/PricingRange.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import CTACard from '../../components/cards/CTACard.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { technologies } from '../../data/technologies';
+---
+
+<ServiceLayout
+  title="Data Platform Optimization | Nimzo Data"
+  description="We audit and fix GCP data platforms — BigQuery costs, slow dashboards, broken pipelines. Two phases: audit, then fix. Fixed price."
+  heroTitle="Your data platform exists. It isn't working."
+  heroSubtitle="We audit what you have, tell you what's actually wrong, and fix the things that matter. Two phases: understand first, then fix."
+>
+  <!-- Challenges & Outcomes -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What brings most clients here.</h2>
+    <TwoColumnSplit
+      variant="challenges-solution"
+      leftTitle="The problem:"
+      leftItems={[
+        "BigQuery costs went up 3x in six months and nobody can explain it.",
+        "Dashboards take 45 seconds to load and people have stopped opening them.",
+        "Pipelines break every few weeks. You find out when someone files a ticket.",
+        "You inherited a platform from a team that left. You don't know what half of it does.",
+        "Metrics disagree between teams. Finance says revenue is X. Product says Y. Leadership believes neither.",
+        "The BI tool you pay for mostly sits unused because nobody trusts the data in it.",
+      ]}
+      rightTitle="What you get:"
+      rightItems={[
+        "A written audit report you can actually act on — not a slideware deliverable.",
+        "A prioritized fix list, ranked by cost-of-cheap-fix vs pain-of-expensive-fix.",
+        "Pipelines that run reliably, with alerts that surface before a user notices.",
+        "Queries and dashboards that load in seconds, not minutes.",
+        "One consistent definition of every metric your business runs on.",
+        "A BI tool that gets used — because the data behind it is trustworthy.",
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Diagram -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">The target. What your platform should look like.</h2>
+    <DataPlatformDiagram />
+    <p class="caption">You probably have some of these layers. Some are missing. Some exist but need replacing. The audit tells us which.</p>
+  </SectionWrapper>
+
+  <!-- Three layers we fix -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Three layers. Same three we fix.</h2>
+    <div class="layers-grid">
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Data Pipelines</h3>
+        <p class="layer-body">Replace legacy Python scripts with Airbyte. Add monitoring and alerting that actually fire. Fix the three pipelines nobody touches because they scare everyone.</p>
+      </div>
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Data Architecture &amp; Modeling</h3>
+        <p class="layer-body">Refactor the models nobody understands. Cut BigQuery costs with partitioning, clustering, and query rewrites. Add tests so data quality issues stop reaching your dashboards.</p>
+      </div>
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Dashboards, Reports &amp; AI-ready</h3>
+        <p class="layer-body">Migrate off BI tools your team has given up on. Rebuild trust in the numbers by rebuilding the numbers. Set up the semantic layer so when you're ready for AI features, the foundation holds up.</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Technologies used -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">The tools we work with — yours and ours.</h2>
+    <p class="intro-body">We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.</p>
+    <LogoGrid technologies={technologies} />
+  </SectionWrapper>
+
+  <!-- How it runs — LIGHT GREY-TEAL SECTION -->
+  <SectionWrapper py="lg" bg="card">
+    <h2 class="section-heading">How an optimization runs.</h2>
+    <ProcessSteps
+      steps={[
+        { number: 1, title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "We review your GCP architecture, query costs, pipeline reliability, and data quality. We interview your team. You get a written report and a prioritized fix list." },
+        { number: 2, title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the implementation, do it yourselves, or stop here. The audit is valuable on its own — plenty of clients take the report and execute internally." },
+        { number: 3, title: "Implementation (6–10 weeks)", description: "We implement the fixes from the audit — in the priority order you approved. Fixed price, agreed before we start." },
+        { number: 4, title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Same as a greenfield build, just on the platform we improved." },
+        { number: 5, title: "Post-launch support (2 weeks, included)", description: "14 days of reachability for questions, tweaks, edge cases." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Pricing.</h2>
+    <div class="two-phase-grid">
+      <div class="phase-card">
+        <div class="phase-label">Phase 1 — Audit</div>
+        <div class="phase-price">€3,000 – €5,000</div>
+        <p class="phase-sub">1–2 weeks, fixed price. You get a written audit report and a prioritized fix list. You can stop here and execute internally — the audit fee is yours either way.</p>
+      </div>
+      <div class="phase-card phase-card--highlighted">
+        <div class="phase-label">Phase 2 — Implementation (optional)</div>
+        <div class="phase-price">€17,000 – €45,000</div>
+        <p class="phase-sub">6–10 weeks, priced after the audit based on scope. If you proceed, the audit fee is credited toward the implementation.</p>
+      </div>
+    </div>
+    <p class="total-callout">Total range when clients do both phases: €20,000 – €50,000.</p>
+
+    <PricingRange
+      factors={[
+        { name: "Current state", low: "Mostly working", high: "Fundamentally broken" },
+        { name: "Technical debt", low: "Isolated issues", high: "Systemic across layers" },
+        { name: "Migration scope", low: "Keep most tools", high: "Replace legacy stack" },
+        { name: "BI tool migration", low: "Stay on current tool", high: "Migrate to new tool" },
+      ]}
+      scenarios={[
+        { label: "Performance & cost", price: "€20,000 – €25,000", duration: "8–10 weeks", description: "Performance and cost optimization — schema redesign, query tuning." },
+        { label: "Tool modernization", price: "€25,000 – €35,000", duration: "10–12 weeks", description: "Tool modernization — move legacy Python to Airbyte, add Dataform." },
+        { label: "Major overhaul", price: "€40,000 – €50,000", duration: "12–16 weeks", description: "Major overhaul — multiple migrations, complex data quality issues." },
+      ]}
+    />
+
+    <div class="why-more">
+      <h3 class="why-more-title">Why is this more expensive than building from scratch?</h3>
+      <p>Two reasons. First, investigation. We spend the first week of every optimization understanding what previous engineers built — decisions made by people who may no longer be at the company, working around constraints we didn't create.</p>
+      <p>Second, interconnection. Most broken platforms have connected problems. Fixing the slow dashboard means fixing the transformation model, which means fixing the pipeline that feeds it. We price to cover that investigation, not just the final fix.</p>
+    </div>
+
+    <div class="payment-terms">
+      <strong>Payment:</strong> Audit 100% at audit kickoff. Implementation 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.
+    </div>
+  </SectionWrapper>
+
+  <!-- After launch -->
+  <SectionWrapper py="lg" bg="white">
+    <CTACard
+      title="Keeping it fixed."
+      description="An optimized platform needs less maintenance than a broken one, but it still needs some. Monthly retainers cover monitoring, small improvements, and a senior on call."
+      href="/services/ongoing-support-retainers/"
+      buttonText="See retainer options"
+      dataTrack="opt-cta-retainers"
+    />
+  </SectionWrapper>
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .caption {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 24px 0 0 0;
+    max-width: 720px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .layers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .layers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .layer-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .layer-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+  }
+
+  .layer-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .layer-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .two-phase-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .two-phase-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .phase-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-card--highlighted {
+    border: 2px solid var(--color-primary);
+  }
+
+  .phase-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .phase-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    line-height: 1.1;
+  }
+
+  .phase-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 4px 0 0 0;
+  }
+
+  .total-callout {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
+
+  .why-more {
+    margin-top: 40px;
+    max-width: 720px;
+  }
+
+  .why-more-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .why-more p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+  }
+
+  .why-more p:last-child { margin-bottom: 0; }
+
+  .payment-terms {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    background-color: var(--color-card);
+    border-left: 3px solid var(--color-primary);
+    padding: 16px 20px;
+    margin-top: 32px;
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  }
+</style>
