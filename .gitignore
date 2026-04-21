@@ -7,3 +7,4 @@ dist/
 *.log
 .gstack/
 .worktrees/
+.claude/settings.local.json
