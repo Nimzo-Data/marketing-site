@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Bash(npm install*)",
+      "Bash(npm run dev*)",
+      "Bash(npm run build*)",
+      "Bash(npm run check*)",
+      "Bash(npm run preview*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git worktree add *)",
+      "Bash(git worktree remove *)",
+      "Bash(git check-ignore *)",
+      "Bash(cp *)",
+      "Bash(mkdir -p *)",
+      "Bash(pkill *)",
+      "Bash(curl *)"
+    ]
+  }
+}
