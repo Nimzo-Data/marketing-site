@@ -1,126 +1,286 @@
 ---
+const sources = [
+  { name: 'Shopify', logo: '/logos/shopify.svg' },
+  { name: 'Google Ads', logo: '/logos/googleads.svg' },
+  { name: 'Salesforce', logo: '/logos/salesforce.svg' },
+  { name: 'Meta Ads', logo: '/logos/meta.svg' },
+  { name: 'Stripe', logo: '/logos/stripe.svg' },
+  { name: 'HubSpot', logo: '/logos/hubspot.svg' },
+  { name: 'Postgres', logo: '/logos/postgresql.svg' },
+];
+
 const stages = [
   {
-    label: 'Ingest',
-    tools: ['Airbyte', 'Fivetran'],
+    label: 'Ingestion',
+    tools: [
+      { name: 'Airbyte', logo: '/logos/airbyte.svg' },
+      { name: 'Fivetran', logo: '/logos/fivetran.svg' },
+    ],
   },
   {
-    label: 'Store',
-    tools: ['BigQuery'],
+    label: 'Warehouse',
+    tools: [{ name: 'BigQuery', logo: '/logos/bigquery.svg' }],
   },
   {
-    label: 'Transform',
-    tools: ['Dataform', 'dbt'],
+    label: 'Transformation',
+    tools: [
+      { name: 'Dataform', logo: '/logos/dataform.svg' },
+      { name: 'dbt', logo: '/logos/dbt.svg' },
+    ],
   },
   {
-    label: 'Visualize',
-    tools: ['Looker', 'Lightdash', 'Steep'],
-  },
-  {
-    label: 'Monitor',
-    tools: ['Cloud Monitoring'],
+    label: 'BI & Dashboards',
+    tools: [
+      { name: 'Lightdash', logo: '/logos/lightdash.svg' },
+      { name: 'Steep', logo: '/logos/steep.svg' },
+      { name: 'Looker', logo: '/logos/looker.svg' },
+    ],
   },
 ];
 ---
 
-<div class="diagram-outer">
-  <div class="diagram-scroll">
-    <div class="pipeline">
-      {stages.map((stage, index) => (
-        <>
-          <div class="stage">
-            <div class="stage-label">{stage.label}</div>
-            <div class="stage-tools">
-              {stage.tools.map((tool) => (
-                <span class="stage-tool">{tool}</span>
-              ))}
-            </div>
+<div class="dpd">
+  <!-- Desktop diagram -->
+  <div class="dpd__desktop">
+    <div class="dpd__container">
+      <div class="dpd__gcp-label">
+        <img src="/logos/googlecloud.svg" alt="" width="20" height="20" class="dpd__gcp-icon" />
+        <span>Google Cloud Platform</span>
+      </div>
+
+      <div class="dpd__content">
+        <!-- Sources column -->
+        <div class="dpd__stage dpd__stage--sources">
+          <div class="dpd__stage-label">Data Sources</div>
+          <div class="dpd__sources-grid">
+            {sources.map((s) => (
+              <div class="dpd__source">
+                <img src={s.logo} alt={`${s.name} logo`} class="dpd__source-logo" width="20" height="20" loading="lazy" />
+                <span class="dpd__source-name">{s.name}</span>
+              </div>
+            ))}
           </div>
-          {index < stages.length - 1 && (
-            <div class="arrow" aria-hidden="true">&#8594;</div>
-          )}
-        </>
-      ))}
+        </div>
+
+        <div class="dpd__arrow" aria-hidden="true">&rarr;</div>
+
+        <!-- Pipeline stages -->
+        {stages.map((stage, idx) => (
+          <>
+            <div class="dpd__stage">
+              <div class="dpd__stage-label">{stage.label}</div>
+              <div class="dpd__tools">
+                {stage.tools.map((tool) => (
+                  <div class="dpd__tool">
+                    <img src={tool.logo} alt={`${tool.name} logo`} class="dpd__tool-logo" width="22" height="22" loading="lazy" />
+                    <span class="dpd__tool-name">{tool.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {idx < stages.length - 1 && <div class="dpd__arrow" aria-hidden="true">&rarr;</div>}
+          </>
+        ))}
+      </div>
+
+      <!-- Dagster orchestration band -->
+      <div class="dpd__dagster-band">
+        <img src="/logos/dagster.svg" alt="" width="18" height="18" class="dpd__dagster-icon" />
+        <span>Dagster — orchestration across all stages (when needed)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile simplified note -->
+  <div class="dpd__mobile">
+    <div class="dpd__mobile-list">
+      <div class="dpd__mobile-gcp">On Google Cloud Platform</div>
+      <ol class="dpd__mobile-steps">
+        <li><strong>Data Sources</strong> — Shopify, Google Ads, Salesforce, Meta, Stripe, HubSpot, Postgres</li>
+        <li><strong>Ingestion</strong> — Airbyte or Fivetran</li>
+        <li><strong>Warehouse</strong> — BigQuery</li>
+        <li><strong>Transformation</strong> — Dataform or dbt</li>
+        <li><strong>BI &amp; Dashboards</strong> — Lightdash, Steep, or Looker</li>
+      </ol>
+      <div class="dpd__mobile-dagster">Dagster orchestrates across stages when the pipeline gets complex.</div>
     </div>
   </div>
 </div>
 
 <style>
-  .diagram-outer {
+  .dpd {
     width: 100%;
   }
 
-  .diagram-scroll {
+  /* Desktop: show from md+ */
+  .dpd__desktop { display: none; }
+  @media (min-width: 900px) {
+    .dpd__desktop { display: block; }
+    .dpd__mobile { display: none; }
+  }
+
+  .dpd__container {
+    position: relative;
+    border: 2px solid var(--color-primary);
+    border-radius: 16px;
+    padding: 48px 24px 60px;
+    background-color: var(--color-white);
+  }
+
+  .dpd__gcp-label {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background-color: var(--color-white);
+    padding: 2px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .dpd__gcp-icon { display: block; }
+
+  .dpd__content {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-card) transparent;
     padding-bottom: 8px;
   }
 
-  .diagram-scroll::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .diagram-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .diagram-scroll::-webkit-scrollbar-thumb {
-    background-color: var(--color-card);
-    border-radius: 3px;
-  }
-
-  .pipeline {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    min-width: 600px;
-    width: 100%;
-  }
-
-  .stage {
+  .dpd__stage {
     flex: 1;
-    background-color: var(--color-white);
-    border: 2px solid var(--color-primary);
-    border-radius: 8px;
-    padding: 16px 12px;
+    min-width: 140px;
+    background-color: var(--color-card);
+    border-radius: 10px;
+    padding: 14px 12px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    min-width: 100px;
+    gap: 10px;
   }
 
-  .stage-label {
+  .dpd__stage--sources {
+    min-width: 180px;
+  }
+
+  .dpd__stage-label {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     text-align: center;
   }
 
-  .stage-tools {
+  .dpd__tools,
+  .dpd__sources-grid {
     display: flex;
     flex-direction: column;
+    gap: 6px;
+  }
+
+  .dpd__sources-grid {
+    flex-direction: column;
+  }
+
+  .dpd__tool,
+  .dpd__source {
+    display: flex;
     align-items: center;
-    gap: 3px;
-  }
-
-  .stage-tool {
+    gap: 8px;
+    background-color: var(--color-white);
+    border-radius: 6px;
+    padding: 6px 8px;
     font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--color-text-secondary);
-    text-align: center;
-    line-height: 1.3;
+    font-size: 0.8125rem;
+    color: var(--color-text);
   }
 
-  .arrow {
+  .dpd__tool-logo,
+  .dpd__source-logo {
     flex-shrink: 0;
-    font-size: 1.25rem;
+    object-fit: contain;
+  }
+
+  .dpd__arrow {
+    display: flex;
+    align-items: center;
     color: var(--color-primary);
-    padding: 0 8px;
-    line-height: 1;
+    font-size: 1.25rem;
     opacity: 0.5;
+    padding: 0 2px;
+  }
+
+  .dpd__dagster-band {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 6px 16px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .dpd__dagster-icon { filter: brightness(0) invert(1); }
+
+  /* Mobile */
+  .dpd__mobile {
+    display: block;
+  }
+
+  .dpd__mobile-list {
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 20px;
+    background-color: var(--color-white);
+  }
+
+  .dpd__mobile-gcp {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .dpd__mobile-steps {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .dpd__mobile-steps strong {
+    color: var(--color-primary);
+  }
+
+  .dpd__mobile-dagster {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    font-style: italic;
+    border-top: 1px solid var(--color-card);
+    padding-top: 12px;
   }
 </style>

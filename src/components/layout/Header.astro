@@ -20,17 +20,31 @@ import { navItems, ctaLink } from '../../data/navigation';
               <a href={item.href} class="nav-link">{item.label}</a>
             ) : (
               <>
-                <button
-                  class="nav-link nav-trigger"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  type="button"
-                >
-                  {item.label}
-                  <svg class="nav-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </button>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="nav-link nav-trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {item.label}
+                    <svg class="nav-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    class="nav-link nav-trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    type="button"
+                  >
+                    {item.label}
+                    <svg class="nav-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                )}
                 <div class="dropdown" role="region" aria-label={item.label}>
                   {item.groups.length === 1 ? (
                     /* Single-group dropdown (Services) */
@@ -100,7 +114,7 @@ import { navItems, ctaLink } from '../../data/navigation';
   const closers: Array<() => void> = [];
 
   dropdownItems.forEach((item) => {
-    const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
+    const trigger = item.querySelector<HTMLElement>('.nav-trigger');
     if (!trigger) return;
 
     let isOpen = false;
@@ -134,11 +148,22 @@ import { navItems, ctaLink } from '../../data/navigation';
     trigger.addEventListener('click', handleExpand);
   });
 
+  // Scroll shadow: add .is-scrolled when past a few pixels
+  const header = document.querySelector<HTMLElement>('.site-header');
+  if (header) {
+    const setScrolled = () => {
+      if (window.scrollY > 4) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    };
+    setScrolled();
+    window.addEventListener('scroll', setScrolled, { passive: true });
+  }
+
   // Close dropdowns when pressing Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       dropdownItems.forEach((item) => {
-        const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
+        const trigger = item.querySelector<HTMLElement>('.nav-trigger');
         if (trigger) {
           // Dispatch a synthetic focusout so each closure's isOpen resets cleanly
           trigger.setAttribute('aria-expanded', 'false');
@@ -155,8 +180,13 @@ import { navItems, ctaLink } from '../../data/navigation';
     top: 0;
     z-index: 100;
     background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-card);
     height: 64px;
+    transition: box-shadow 200ms ease;
+  }
+
+  .site-header.is-scrolled {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
 
   .header-inner {

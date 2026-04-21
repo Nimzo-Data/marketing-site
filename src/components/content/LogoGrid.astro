@@ -3,16 +3,17 @@ import type { Technology } from '../../data/technologies';
 
 interface Props {
   technologies: Technology[];
+  showTaglines?: boolean;
 }
 
-const { technologies } = Astro.props;
+const { technologies, showTaglines = false } = Astro.props;
 ---
 
-<div class="logo-grid">
+<div class={`logo-grid${showTaglines ? ' logo-grid--with-taglines' : ''}`}>
   {technologies.map((tech) => (
     <a
-      href={`/technologies/${tech.slug}`}
-      class="logo-item"
+      href={`/technologies/${tech.slug}/`}
+      class={`logo-item${showTaglines ? ' logo-item--with-tagline' : ''}`}
       aria-label={tech.name}
     >
       <div class="logo-img-wrapper">
@@ -36,6 +37,9 @@ const { technologies } = Astro.props;
         </div>
       </div>
       <span class="logo-name">{tech.name}</span>
+      {showTaglines && tech.tagline && (
+        <span class="logo-tagline">{tech.tagline}</span>
+      )}
     </a>
   ))}
 </div>
@@ -84,6 +88,11 @@ const { technologies } = Astro.props;
     transform: translateY(-2px);
   }
 
+  .logo-item--with-tagline {
+    padding: 24px 16px;
+    text-align: center;
+  }
+
   .logo-img-wrapper {
     width: 48px;
     height: 48px;
@@ -120,5 +129,20 @@ const { technologies } = Astro.props;
     color: var(--color-text);
     text-align: center;
     line-height: 1.3;
+  }
+
+  .logo-item--with-tagline .logo-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .logo-tagline {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.4;
+    margin-top: 2px;
   }
 </style>

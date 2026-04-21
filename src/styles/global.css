@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-primary: #004f4c;
-  --color-background: #f4faff;
-  --color-card: #dee7e7;
-  --color-accent: #493441;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #6b7280;
+  /* Brand palette */
+  --color-primary: #004f4c;       /* Deep teal */
+  --color-accent: #493441;        /* Plum */
+  --color-card: #dee7e7;          /* Light grey-teal */
+  --color-off-white: #f4faff;     /* Off-white — rarely used */
   --color-white: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #5a5a5a;
+
+  /* Backgrounds */
+  --color-background: #ffffff;    /* Default section background */
 
   /* Surfaces & borders */
-  --color-border: #e5e7eb;
+  --color-border: #dee7e7;        /* Header border — light grey-teal */
   --color-surface-hover: #f0f4f4;
   --color-surface-subtle: #f9fbfb;
 

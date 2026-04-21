@@ -3,89 +3,261 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
 import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.astro';
 import PricingRange from '../../components/content/PricingRange.astro';
-import FAQSchema from '../../components/content/FAQSchema.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import CTACard from '../../components/cards/CTACard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { technologies } from '../../data/technologies';
 ---
 
 <ServiceLayout
   title="Data Analytics Platform Implementation | Nimzo Data"
   description="We build end-to-end GCP data platforms — ingestion, BigQuery, Dataform, and BI — on a fixed-price basis. For European companies ready to do data properly."
-  heroTitle="Build your data platform on GCP — from raw data to reliable dashboards."
-  heroSubtitle="We design and implement end-to-end data platforms for companies starting from scratch or replacing a fragile existing setup. Fixed-price engagements. Senior engineer on every project."
+  heroTitle="You have data everywhere. Nowhere useful."
+  heroSubtitle="A proper data platform, without hiring a data team. We design and build end-to-end on GCP — from raw ingestion to the dashboards your team opens every morning. Fixed price. Senior engineer on every project. Documented handover so you own it when we leave."
 >
-  <SectionWrapper py="md">
+  <!-- Challenges & Outcomes -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What brings most clients here.</h2>
     <TwoColumnSplit
       variant="challenges-solution"
-      leftTitle="What brings clients here"
+      leftTitle="The problem:"
       leftItems={[
-        "Pulling data manually from multiple sources into spreadsheets, losing hours every week",
-        "Data lives in silos — CRM, product database, marketing tools — no single place to see it",
-        "Tried to build something internally but it's unreliable, undocumented, only one person understands it",
-        "About to hire a data analyst but have no clean data to give them",
-        "Leadership making decisions on gut feel because data isn't trustworthy or accessible",
+        "Spreadsheets are your reporting layer — they crash, they diverge, they disagree.",
+        "Manual reporting takes hours every week, sometimes days before a board meeting.",
+        "Different teams report different numbers for the same metric.",
+        "One person has become the bottleneck — every data question routes through them.",
+        "Basic business questions take an afternoon of file-digging to answer.",
+        "Decisions get made on gut feel because the numbers aren't trusted.",
       ]}
-      rightTitle="What you get"
+      rightTitle="What you get:"
       rightItems={[
-        "A fully functional GCP data platform: ingestion → storage → transformation → reporting",
-        "Documented architecture your team can operate and extend",
-        "Reliable pipelines with monitoring and alerting configured",
-        "Transformation models with data quality tests built in",
-        "Final walkthrough session and 30-day support window",
+        "Dashboards your team actually trusts and opens every morning.",
+        "Reports that run automatically and email themselves.",
+        "One definition of every metric that matters — revenue, churn, LTV, whatever yours are.",
+        "Self-service analytics so marketing and ops don't need a ticket to get a number.",
+        "Documentation complete enough that your next data hire takes over in a week.",
       ]}
     />
+    <p class="below-columns">We build the platform, we hand you the keys, and we leave — with a 30-day support window so your team lands cleanly.</p>
   </SectionWrapper>
 
-  <SectionWrapper py="md" bg="white">
-    <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-primary); margin: 0 0 32px 0; line-height: 1.2;">What we build</h2>
+  <!-- Data Platform Diagram -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What we build, end to end.</h2>
     <DataPlatformDiagram />
+    <p class="caption">Each layer chosen based on your data volume, team skill, and budget — not on which vendor pays partner commissions.</p>
   </SectionWrapper>
 
-  <SectionWrapper py="md">
-    <div class="layers-grid" style="display: grid; grid-template-columns: 1fr; gap: 32px;">
-      <div>
-        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Ingestion layer</h3>
-        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran. Data lands in BigQuery on a reliable schedule with failure alerting.</p>
+  <!-- Three layers — white cards -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Three layers. All three done right.</h2>
+    <div class="layers-grid">
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Automated Data Pipelines</h3>
+        <p class="layer-body">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran depending on cost and reliability needs. Data lands in BigQuery on a reliable schedule, with monitoring and alerts when something breaks.</p>
       </div>
-      <div>
-        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Transformation layer</h3>
-        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">Raw data is cleaned, modeled, and documented using Dataform or dbt. We build the staging, intermediate, and reporting models your team needs.</p>
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Data Architecture &amp; Modeling</h3>
+        <p class="layer-body">Raw data is cleaned, modeled, and documented in Dataform or dbt. Staging, intermediate, and reporting layers. Data quality tests built in from the start so issues surface before they hit dashboards.</p>
       </div>
-      <div>
-        <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 1.125rem; color: var(--color-primary); margin: 0 0 12px 0;">Reporting layer</h3>
-        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.7; margin: 0;">We connect a BI tool (Looker, Lightdash, or Steep depending on your needs) and build the initial dashboards your team will actually use.</p>
+      <div class="layer-card">
+        <div class="layer-icon" aria-hidden="true"></div>
+        <h3 class="layer-title">Dashboards, Reports &amp; AI-ready</h3>
+        <p class="layer-body">We connect the BI tool that fits your team — Looker, Lightdash, or Steep — and build the dashboards that matter. The platform underneath is designed so that when you're ready to add AI features, the foundation is already there.</p>
       </div>
     </div>
-    <style>
-      @media (min-width: 768px) {
-        .layers-grid {
-          grid-template-columns: repeat(3, 1fr) !important;
-        }
-      }
-    </style>
   </SectionWrapper>
 
-  <SectionWrapper py="md" bg="white">
-    <PricingRange
-      priceRange="€15,000 – €35,000"
-      factors={[
-        { name: "Number of data sources", low: "2–3 sources", high: "6–10 sources" },
-        { name: "Transformation complexity", low: "Simple pass-through", high: "Complex multi-join business logic" },
-        { name: "BI tool choice", low: "Lightdash or Steep", high: "Looker with LookML" },
-      ]}
-      scenarios={[
-        { label: "Small team, 3 sources, Lightdash", price: "€15,000 – €18,000", duration: "6–8 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Lightdash for dashboards." },
-        { label: "Mid-size, 6–8 sources, Looker", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Scale-up with product databases, marketing APIs, finance tools. Looker with LookML." },
-        { label: "Data migration + rebuild", price: "€20,000 – €30,000", duration: "8–12 weeks", description: "Company with existing fragile pipelines that need replacing without downtime." },
+  <!-- Technologies used -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">The tools we reach for.</h2>
+    <p class="intro-body">Every implementation uses some combination of these. The mix depends on your data sources, team, and budget — we explain the tradeoffs before we pick.</p>
+    <LogoGrid technologies={technologies} />
+  </SectionWrapper>
+
+  <!-- How it runs — LIGHT GREY-TEAL SECTION -->
+  <SectionWrapper py="lg" bg="card">
+    <h2 class="section-heading">How an implementation runs.</h2>
+    <ProcessSteps
+      steps={[
+        { number: 1, title: "Discovery & scoping (1–2 sessions, free)", description: "We understand your sources, your team, your constraints, and what “done” looks like. Then we write the proposal." },
+        { number: 2, title: "Build (6–10 weeks, bi-weekly demos)", description: "We lead the technical work. Your team joins reviews and decisions but isn't on the hook for execution. Weekly updates, demos every two weeks, no surprises." },
+        { number: 3, title: "Handover (1–2 weeks)", description: "Training sessions, full documentation, recorded walkthroughs. Your team owns it when we leave — not in theory, in practice." },
+        { number: 4, title: "Post-launch support (2 weeks, included)", description: "You have questions, small tweaks, an unexpected edge case. We're reachable for 14 days after handover at no extra cost." },
       ]}
     />
   </SectionWrapper>
 
-  <FAQSchema
-    faqs={[
-      { question: "Do we need to be on GCP already?", answer: "No. We can help you migrate to GCP from AWS or Azure as part of the engagement, or start from scratch if you have no existing cloud data infrastructure." },
-      { question: "How involved do we need to be?", answer: "We ask for a dedicated point of contact for weekly check-ins and key decisions. Day-to-day implementation is handled by us." },
-      { question: "What happens after the engagement ends?", answer: "Every project ends with full documentation and a handover session. After the 30-day support window, you can extend with a retainer, book ad-hoc work, or operate independently." },
-      { question: "Do you offer ongoing support after implementation?", answer: "Yes. We offer monthly retainers starting at €1,000/month for monitoring and incident response." },
-    ]}
-  />
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Pricing.</h2>
+    <div class="pricing-lead">
+      <span class="pricing-label">Typical range</span>
+      <span class="pricing-amount">€15,000 – €35,000</span>
+      <p class="pricing-sub">Most projects land in this range. We quote a fixed price after the scoping call — no hourly billing, no change orders without your approval.</p>
+    </div>
+    <PricingRange
+      factors={[
+        { name: "Number of data sources", low: "2–3 simple sources", high: "6–10 mixed sources" },
+        { name: "Transformation complexity", low: "Standard model", high: "Complex business logic" },
+        { name: "BI tool", low: "Steep / Lightdash", high: "Looker with LookML" },
+        { name: "Orchestration needs", low: "None needed", high: "Dagster-based workflow" },
+      ]}
+      scenarios={[
+        { label: "Startup stack", price: "€15,000 – €18,000", duration: "6–8 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Lightdash for dashboards." },
+        { label: "Scale-up stack", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Scale-up with product databases, marketing APIs, and finance tools. Looker with LookML." },
+        { label: "E-commerce stack", price: "€18,000 – €22,000", duration: "6–8 weeks", description: "E-commerce business with Shopify, advertising platforms (Meta, Google), and finance tools. Dataform + Steep for the ops team." },
+      ]}
+    />
+    <div class="payment-terms">
+      <strong>Payment:</strong> 50% at project start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.
+    </div>
+  </SectionWrapper>
+
+  <!-- After launch cross-link -->
+  <SectionWrapper py="lg" bg="white">
+    <CTACard
+      title="After we're gone."
+      description="Most clients take the platform and run it themselves — that's the goal. Some prefer a safety net: monthly retainers for monitoring, improvements, and a senior on call."
+      href="/services/ongoing-support-retainers/"
+      buttonText="See retainer options"
+      dataTrack="impl-cta-retainers"
+    />
+  </SectionWrapper>
 </ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .below-columns {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 32px 0 0 0;
+    max-width: 720px;
+  }
+
+  .caption {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 24px 0 0 0;
+    max-width: 720px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .layers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .layers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .layer-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .layer-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+  }
+
+  .layer-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .layer-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .pricing-lead {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .pricing-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .pricing-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .payment-terms {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    background-color: var(--color-card);
+    border-left: 3px solid var(--color-primary);
+    padding: 16px 20px;
+    margin-top: 32px;
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  }
+</style>

@@ -1,20 +1,32 @@
 ---
-import { serviceLinks, technologyGroups, companyLinks } from '../../data/navigation';
+import { serviceLinks } from '../../data/navigation';
 
 const currentYear = new Date().getFullYear();
+
+const footerTechnologies: { label: string; href: string }[] = [
+  { label: 'Google Cloud Platform', href: '/technologies/google-cloud-platform/' },
+  { label: 'BigQuery', href: '/technologies/bigquery/' },
+  { label: 'Dataform', href: '/technologies/dataform/' },
+  { label: 'Airbyte', href: '/technologies/airbyte/' },
+  { label: 'Looker', href: '/technologies/looker/' },
+];
+
+const companyLinks: { label: string; href: string }[] = [
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
 ---
 
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
-    <!-- Main columns -->
     <div class="footer-grid">
       <!-- Column 1: Brand -->
       <div class="footer-col footer-col--brand">
         <p class="footer-logo">Nimzo Data</p>
         <p class="footer-tagline">
-          Boutique GCP data consulting for European companies.
+          Modern data infrastructure for ambitious European companies.
         </p>
-        <p class="footer-location">Based in France · Serving Europe</p>
+        <p class="footer-location">Based in France. Serving Europe.</p>
       </div>
 
       <!-- Column 2: Services -->
@@ -29,23 +41,19 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Column 3: Technology -->
+      <!-- Column 3: Technologies -->
       <div class="footer-col">
-        <h4 class="footer-heading">Technology</h4>
-        <div class="footer-tech-groups">
-          {technologyGroups.map((group) => (
-            <div class="footer-tech-group">
-              <p class="footer-tech-category">{group.category}</p>
-              <ul class="footer-links" role="list">
-                {group.links.map((link) => (
-                  <li>
-                    <a href={link.href} class="footer-link">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <h4 class="footer-heading">Technologies</h4>
+        <ul class="footer-links" role="list">
+          {footerTechnologies.map((link) => (
+            <li>
+              <a href={link.href} class="footer-link">{link.label}</a>
+            </li>
           ))}
-        </div>
+          <li>
+            <a href="/technologies/" class="footer-link footer-link--view-all">View all &rarr;</a>
+          </li>
+        </ul>
       </div>
 
       <!-- Column 4: Company -->
@@ -59,12 +67,25 @@ const currentYear = new Date().getFullYear();
           ))}
         </ul>
       </div>
+
+      <!-- Column 5: Get in touch -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Get in touch</h4>
+        <ul class="footer-links" role="list">
+          <li>
+            <a href="mailto:hello@nimzodata.com" class="footer-link">hello@nimzodata.com</a>
+          </li>
+          <li>
+            <a href="/contact/" class="footer-link footer-link--view-all">Let's talk &rarr;</a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- Bottom bar -->
     <div class="footer-bottom">
       <p class="footer-copy">
-        &copy; {currentYear} Nimzo Data. All rights reserved.
+        &copy; {currentYear} Nimzo Data
       </p>
       <ul class="footer-bottom-links" role="list">
         <li><a href="/privacy-policy/" class="footer-bottom-link">Privacy Policy</a></li>
@@ -76,8 +97,9 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    border-top: 1px solid var(--color-card);
   }
 
   .footer-inner {
@@ -92,7 +114,6 @@ const currentYear = new Date().getFullYear();
     }
   }
 
-  /* 4-column grid on desktop */
   .footer-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -100,7 +121,6 @@ const currentYear = new Date().getFullYear();
     margin-bottom: 48px;
   }
 
-  /* 2-col on tablet */
   @media (min-width: 640px) {
     .footer-grid {
       grid-template-columns: 1fr 1fr;
@@ -108,49 +128,45 @@ const currentYear = new Date().getFullYear();
     }
   }
 
-  /* 4-col on desktop */
   @media (min-width: 1024px) {
     .footer-grid {
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: 1.4fr 1fr 1fr 0.8fr 1.1fr;
+      gap: 40px;
     }
   }
 
-  /* Brand column */
   .footer-logo {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 22px;
-    color: var(--color-white);
+    color: var(--color-primary);
     margin: 0 0 12px 0;
     letter-spacing: -0.01em;
   }
 
   .footer-tagline {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-text);
     line-height: 1.6;
     margin: 0 0 8px 0;
   }
 
   .footer-location {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-text-secondary);
     margin: 0;
   }
 
-  /* Column headings */
   .footer-heading {
     font-family: var(--font-heading);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-primary);
     margin: 0 0 16px 0;
   }
 
-  /* Links */
   .footer-links {
     list-style: none;
     margin: 0;
@@ -162,41 +178,23 @@ const currentYear = new Date().getFullYear();
 
   .footer-link {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--color-text);
     text-decoration: none;
     transition: color 150ms ease;
     line-height: 1.4;
   }
 
   .footer-link:hover {
-    color: var(--color-white);
+    color: var(--color-primary);
   }
 
-  /* Technology grouped column */
-  .footer-tech-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .footer-link--view-all {
+    color: var(--color-primary);
+    font-weight: 500;
   }
 
-  .footer-tech-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .footer-tech-category {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
-    margin: 0;
-  }
-
-  /* Bottom bar */
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid var(--color-card);
     padding-top: 24px;
     display: flex;
     flex-direction: column;
@@ -214,7 +212,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-copy {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-text-secondary);
     margin: 0;
   }
 
@@ -228,12 +226,12 @@ const currentYear = new Date().getFullYear();
 
   .footer-bottom-link {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 150ms ease;
   }
 
   .footer-bottom-link:hover {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--color-primary);
   }
 </style>

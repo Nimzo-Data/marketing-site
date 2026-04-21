@@ -1,6 +1,8 @@
 ---
 import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
 ---
 
 <TechnologyLayout
@@ -10,16 +12,16 @@ import TextSection from '../../components/content/TextSection.astro';
   toolCategory="Data Warehouse"
   heroPositioning="BigQuery is where your data actually lives — we build the schemas, optimize the queries, and control the costs so it stays that way."
 >
-  <TextSection title="What It Is">
+  <TextSection title="What It Is" bg="white">
     <p>BigQuery is Google's serverless, fully managed data warehouse. It can query terabytes in seconds without any infrastructure to manage. Its columnar storage format and distributed query engine make it fast for analytics workloads by default — but you still need to model your data well to get the most out of it.</p>
   </TextSection>
 
-  <TextSection title="Why We Chose It" bg="card">
+  <TextSection title="Why We Chose It" bg="white">
     <p>Every major cloud has a data warehouse. BigQuery is the one where cost at scale is predictable, partitioning and clustering work without ceremony, and the ecosystem of tools (Dataform, Looker, dbt) is purpose-built around it. For European companies, BigQuery also supports EU multi-region storage natively.</p>
   </TextSection>
 
-  <TextSection title="How We Use It">
-    <ul>
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
       <li>Design partitioned and clustered table schemas that keep query costs predictable</li>
       <li>Write and optimize complex SQL — window functions, nested structs, JSON parsing, incremental logic</li>
       <li>Implement column-level security and row-level access policies for multi-tenant datasets</li>
@@ -28,4 +30,59 @@ import TextSection from '../../components/content/TextSection.astro';
       <li>Configure BigQuery scheduled queries and materialized views for performance-critical reporting tables</li>
     </ul>
   </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="When BigQuery is the right warehouse — and when it isn't"
+      blocks={[
+        {
+          heading: 'Choose BigQuery when:',
+          bullets: [
+            'Analytics is the primary workload',
+            'You want serverless pricing that scales from zero',
+            "You're already on GCP",
+            "You need EU data residency (BigQuery's multi-region storage is clean)",
+          ],
+        },
+        {
+          heading: 'Choose Snowflake when:',
+          bullets: [
+            'You need fine-grained warehouse sizing',
+            'Your team is multi-cloud',
+            'Specific Snowflake features matter (Snowpark, zero-copy cloning)',
+          ],
+        },
+        {
+          heading: 'Choose Databricks when:',
+          bullets: [
+            'You need heavy ML workloads',
+            "You're running Spark-based pipelines",
+            'A lakehouse architecture with Delta is required',
+          ],
+        },
+        {
+          heading: 'Choose Redshift when:',
+          bullets: [
+            "You're deeply on AWS",
+            'The cost of migrating data out of AWS outweighs the benefit of a better warehouse',
+          ],
+        },
+      ]}
+      footer="Our default: BigQuery. Unless one of the above constraints genuinely applies, it's the cleanest option."
+    />
+  </SectionWrapper>
 </TechnologyLayout>
+
+<style>
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
+</style>

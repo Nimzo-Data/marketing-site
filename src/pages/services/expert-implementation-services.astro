@@ -1,153 +1,218 @@
 ---
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
-import TextSection from '../../components/content/TextSection.astro';
 import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import CTACard from '../../components/cards/CTACard.astro';
-import FAQSchema from '../../components/content/FAQSchema.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 ---
 
 <ServiceLayout
   title="Expert Implementation Services | Nimzo Data"
   description="Targeted GCP data engineering help — BigQuery optimization, Dataform setup, ETL pipelines, or BI implementation. Fixed-price. Defined scope."
-  heroTitle="Targeted help with a specific layer of your data stack."
-  heroSubtitle="Not every engagement needs a full platform build. Sometimes you need senior expertise on a specific technical problem — BigQuery performance, a new Dataform project, or a BI tool implementation."
+  heroTitle="Expert help on one layer of your stack."
+  heroSubtitle="You know what you need. Senior GCP expertise for focused work — a Dataform rebuild, a Looker semantic layer, BigQuery costs tamed. Fixed-price, 2–6 weeks, no long engagement."
 >
-  <TextSection title="Who this is for">
-    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
-        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
-        Companies with an existing GCP data stack that has a specific technical gap
-      </li>
-      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
-        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
-        Engineering teams that need specialist expertise for a defined problem
-      </li>
-      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
-        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
-        Organizations that have done a platform audit and want to implement specific improvements
-      </li>
-      <li style="padding-left: 20px; position: relative; font-size: 1rem; line-height: 1.7;">
-        <span style="position: absolute; left: 0; color: var(--color-primary); font-weight: 600;">•</span>
-        Startups that need a specific capability built fast, without a long-term engagement
-      </li>
-    </ul>
-  </TextSection>
+  <!-- Who this is for — Style C card -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Who this is for.</h2>
+    <div class="who-card">
+      <ul class="tick-list">
+        <li>You have an existing GCP data stack with a specific technical gap.</li>
+        <li>Your engineering team needs specialist expertise for a defined problem.</li>
+        <li>You completed a platform audit and want to implement specific improvements internally — with help on the hard parts.</li>
+        <li>You're a startup that needs one capability built fast, no long-term engagement.</li>
+      </ul>
+    </div>
+    <p class="list-footer">If you need multiple services at once, or aren't sure which service you need, a full implementation or optimization engagement is usually a better fit. We tell you which on the scoping call.</p>
+  </SectionWrapper>
 
-  <SectionWrapper py="md" bg="white">
-    <div class="services-grid">
+  <!-- 5 expert services — 3 + 2 layout -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Our expert services.</h2>
+    <div class="expert-grid">
       <ServiceCardSmall
-        title="BigQuery Performance Optimization"
+        title="Dataform / dbt Implementation"
         priceRange="€5,000 – €12,000"
         timeline="2–4 weeks"
         details={[
-          "Query cost audit and optimization",
-          "Partitioning and clustering improvements",
-          "Materialized views setup",
-          "Slot governance configuration",
+          "Project setup, staging and mart layer models",
+          "Data quality tests, CI/CD, team training",
+          "Migrate spaghetti SQL scripts into something your team can maintain",
         ]}
-        href="/services/data-analytics-platform-optimization/"
+        href="/contact/"
       />
       <ServiceCardSmall
-        title="Dataform / dbt Implementation"
-        priceRange="€7,000 – €15,000"
+        title="BI & Analytics Development"
+        priceRange="€6,000 – €15,000"
         timeline="3–6 weeks"
         details={[
-          "Project architecture setup",
-          "Staging and mart layer models",
-          "Data quality tests and CI/CD",
-          "Team training and documentation",
+          "Looker LookML modeling",
+          "Lightdash or Steep setup, semantic layer design",
+          "Initial dashboards, user training — right tool for your team",
         ]}
-        href="/services/data-analytics-platform-implementation/"
+        href="/contact/"
       />
       <ServiceCardSmall
-        title="ETL/ELT Pipeline Setup"
-        priceRange="€6,000 – €12,000"
-        timeline="3–5 weeks"
+        title="ETL / ELT Pipeline Implementation"
+        priceRange="€5,000 – €15,000"
+        timeline="2–5 weeks"
         details={[
-          "Airbyte or Fivetran configuration",
-          "Source-to-BigQuery pipelines",
-          "Monitoring and alerting setup",
-          "Custom connectors for unusual sources",
+          "Airbyte or Fivetran setup",
+          "Datastream CDC for large databases",
+          "Custom Cloud Functions, monitoring and alerts",
         ]}
-        href="/services/data-analytics-platform-implementation/"
+        href="/contact/"
       />
       <ServiceCardSmall
-        title="BI Tool Implementation"
-        priceRange="€5,000 – €10,000"
+        title="BigQuery Optimization"
+        priceRange="€4,000 – €10,000"
+        timeline="2–3 weeks"
+        details={[
+          "Query performance audit",
+          "Partitioning, clustering, materialized views, slot governance",
+          "Typical outcome: 60–90% cost reduction on rewritten queries",
+        ]}
+        href="/contact/"
+      />
+      <ServiceCardSmall
+        title="Custom Data Integrations"
+        priceRange="€5,000 – €12,000"
         timeline="2–4 weeks"
         details={[
-          "Looker, Lightdash, or Steep setup",
-          "Semantic layer design",
-          "Initial dashboard build",
-          "User training and access control",
+          "API integrations via Cloud Functions",
+          "Complex transformation logic",
+          "Custom connectors where Airbyte and Fivetran don't fit",
         ]}
-        href="/services/data-analytics-platform-implementation/"
-      />
-      <ServiceCardSmall
-        title="Data Platform Audit"
-        priceRange="€3,000 – €5,000"
-        timeline="1–2 weeks"
-        details={[
-          "GCP architecture review",
-          "Cost and pipeline reliability analysis",
-          "Data quality assessment",
-          "Written report with prioritized roadmap",
-        ]}
-        href="/services/data-analytics-platform-optimization/"
+        href="/contact/"
       />
     </div>
   </SectionWrapper>
 
-  <SectionWrapper py="md">
-    <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-primary); margin: 0 0 40px 0; line-height: 1.2;">How it works</h2>
+  <!-- How it works — LIGHT GREY-TEAL SECTION -->
+  <SectionWrapper py="lg" bg="card">
+    <h2 class="section-heading">How an expert engagement runs.</h2>
     <ProcessSteps
       steps={[
-        { number: 1, title: "Scoping call", description: "We spend 30 minutes understanding the specific problem and what success looks like." },
-        { number: 2, title: "Technical assessment", description: "For most expert services, we need read access to your GCP environment and a 1–2 hour technical interview with your data lead." },
-        { number: 3, title: "Fixed-price proposal", description: "We send a proposal with defined scope, deliverables, timeline, and fixed price within 3 business days." },
-        { number: 4, title: "Implementation & handover", description: "We do the work, check in weekly, and end with documentation and a walkthrough session." },
+        { number: 1, title: "Scoping call (30 min, free)", description: "We understand the specific problem and what “done” looks like." },
+        { number: 2, title: "Technical assessment", description: "For most expert services we need read access to your GCP environment and a 1–2 hour technical interview with your data lead." },
+        { number: 3, title: "Fixed-price proposal (within 3 business days)", description: "Defined scope, deliverables, timeline, price. You approve, we start." },
+        { number: 4, title: "Build and handover", description: "We do the work, check in weekly, end with documentation and a walkthrough session. No trailing retainer expected." },
       ]}
     />
   </SectionWrapper>
 
-  <SectionWrapper py="md" bg="white">
+  <!-- Not the right scope? -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Not the right scope for you?</h2>
     <div class="cta-cards-grid">
       <CTACard
-        title="Need a full platform build?"
-        description="Build your data platform from scratch — ingestion, transformation, and dashboards."
+        title="No data platform yet?"
+        description="Build end-to-end from scratch — ingestion, transformations, dashboards."
         href="/services/data-analytics-platform-implementation/"
-        dataTrack="expert-cta-implementation"
+        buttonText="See Implementation"
       />
       <CTACard
-        title="Platform needs fixing?"
-        description="Audit and fix what's broken, expensive, or unreliable in your current setup."
+        title="Platform exists but broken?"
+        description="Audit what you have, then fix what matters."
         href="/services/data-analytics-platform-optimization/"
-        dataTrack="expert-cta-optimization"
+        buttonText="See Optimization"
+      />
+      <CTACard
+        title="Platform works, need ongoing support?"
+        description="Monthly retainers for maintenance and improvements."
+        href="/services/ongoing-support-retainers/"
+        buttonText="See Retainers"
       />
     </div>
   </SectionWrapper>
 
-  <FAQSchema
-    faqs={[
-      { question: "Can we combine multiple expert services?", answer: "Yes. Common combinations include BigQuery optimization + Dataform implementation, or Pipeline setup + BI implementation. Combined engagements are scoped holistically and priced accordingly." },
-      { question: "Do you work alongside our internal team?", answer: "Yes. We're happy to run knowledge transfer sessions so your team can maintain what we build." },
-      { question: "How quickly can you start?", answer: "We typically have capacity to start within 2–3 weeks of a signed proposal." },
-    ]}
-  />
+  <!-- Payment terms -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="section-heading section-heading--small">Payment.</h2>
+    <p class="small-body">50% at engagement start, 50% on delivery. Fixed price, agreed in writing before work begins.</p>
+  </SectionWrapper>
 </ServiceLayout>
 
 <style>
-  .services-grid {
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--small {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+
+  .small-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  .who-card {
+    background-color: var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    max-width: 820px;
+  }
+
+  .tick-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .tick-list li {
+    position: relative;
+    padding-left: 28px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .tick-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><circle cx='9' cy='9' r='9' fill='%23004f4c' fill-opacity='0.12'/><path d='M5 9.5L7.5 12L13 7' stroke='%23004f4c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .list-footer {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 24px 0 0 0;
+    max-width: 720px;
+  }
+
+  .expert-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
+  /* 3 + 2 layout (bottom row left-aligned, right third intentionally empty) */
   @media (min-width: 768px) {
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .expert-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -159,7 +224,7 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 
   @media (min-width: 768px) {
     .cta-cards-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>

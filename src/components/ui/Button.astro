@@ -68,25 +68,36 @@ const {
     outline-offset: 2px;
   }
 
-  /* Variant: primary */
+  /* Variant: primary — plum background, white text (main CTA) */
   .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border-color: transparent;
-  }
-
-  /* Variant: accent */
-  .btn-accent {
     background-color: var(--color-accent);
     color: var(--color-white);
     border-color: transparent;
   }
 
-  /* Variant: secondary */
+  .btn-primary:hover {
+    background-color: #3a2934;
+    opacity: 1;
+  }
+
+  /* Variant: accent — teal background, white text (reserved for dark contexts) */
+  .btn-accent {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: transparent;
+  }
+
+  /* Variant: secondary — white background, plum border, plum text */
   .btn-secondary {
-    background-color: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    background-color: var(--color-white);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    opacity: 1;
   }
 
   /* Variant: ghost */

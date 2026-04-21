@@ -2,6 +2,7 @@
 import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
 ---
 
 <TechnologyLayout
@@ -11,16 +12,16 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
   toolCategory="Business Intelligence"
   heroPositioning="Looker is the most powerful BI tool in the GCP ecosystem — we implement it for companies that need a centralized semantic layer and are ready to invest accordingly."
 >
-  <TextSection title="What It Is">
+  <TextSection title="What It Is" bg="white">
     <p>Looker is Google's enterprise BI platform, built around LookML — a modeling language that defines a governed semantic layer sitting between your data warehouse and your end users. Every metric, dimension, and relationship is defined once in LookML and reused consistently across all reports and dashboards.</p>
   </TextSection>
 
-  <TextSection title="Why We Chose It" bg="card">
+  <TextSection title="Why We Chose It" bg="white">
     <p>For organizations where data governance and metric consistency matter — where finance and product can't have different definitions of 'revenue' — Looker is the right tool. The LookML semantic layer also makes Looker uniquely powerful for embedded analytics and multi-tenant reporting. The GCP native integration (Looker is now part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration.</p>
   </TextSection>
 
-  <TextSection title="How We Use It">
-    <ul>
+  <TextSection title="How We Use It" bg="white">
+    <ul class="how-list">
       <li>Design and implement LookML models: views, explores, derived tables, and measures</li>
       <li>Build executive and operational dashboards with governed metrics</li>
       <li>Implement user access controls and group-level permissions</li>
@@ -30,46 +31,52 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     </ul>
   </TextSection>
 
-  <SectionWrapper bg="card">
-    <div class="comparison-section">
-      <h2 class="comparison-title">When to choose Looker vs. alternatives</h2>
-      <ul class="comparison-list">
-        <li><strong>Choose Looker when:</strong> you need enterprise governance (consistent metrics across teams), 20+ users, embedded analytics, or LookML's full semantic layer capabilities. Budget: €3,000–€6,000+/month for Looker Core.</li>
-        <li><strong>Choose Lightdash instead when:</strong> you're already on dbt (metrics live in dbt YAML), team is 5–20 users, budget is €500–€2,000/month, and you don't need the full LookML semantic layer.</li>
-        <li><strong>Choose Steep instead when:</strong> primary users are non-technical, the goal is broad self-service access for business users, and budget is under €500/month.</li>
-      </ul>
-    </div>
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title="When Looker is the right BI tool — and when it isn't"
+      blocks={[
+        {
+          heading: 'Choose Looker when:',
+          bullets: [
+            'You need enterprise governance and consistent metrics across teams',
+            'You have 20+ BI users',
+            'You want embedded analytics or multi-tenant reporting',
+            "You need LookML's full semantic layer capabilities",
+          ],
+          note: 'Budget: €3,000–€6,000+/month for Looker Core.',
+        },
+        {
+          heading: 'Choose Lightdash instead when:',
+          bullets: [
+            "You're already on dbt (metrics live in dbt YAML)",
+            'Team is 5–20 users',
+            'Budget is €500–€2,000/month',
+            "You don't need the full LookML semantic layer",
+          ],
+        },
+        {
+          heading: 'Choose Steep instead when:',
+          bullets: [
+            'Primary users are non-technical',
+            'The goal is broad self-service access for business users',
+            'Budget is under €500/month',
+          ],
+        },
+      ]}
+    />
   </SectionWrapper>
 </TechnologyLayout>
 
 <style>
-  .comparison-section {
-    max-width: 720px;
-  }
-
-  .comparison-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--color-primary);
-    margin: 0 0 20px 0;
-    line-height: 1.2;
-  }
-
-  .comparison-list {
+  .how-list {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--color-text);
     line-height: 1.7;
-    padding-left: 24px;
-    margin: 0;
   }
-
-  .comparison-list li {
-    margin-bottom: 12px;
-  }
-
-  .comparison-list li:last-child {
-    margin-bottom: 0;
-  }
+  .how-list li { margin-bottom: 6px; }
+  .how-list li::marker { color: var(--color-primary); }
 </style>

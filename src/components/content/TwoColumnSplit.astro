@@ -15,32 +15,36 @@ const {
   variant = 'challenges-solution',
 } = Astro.props;
 
-// challenges-solution: left = X (red), right = checkmark (green)
-// is-for: left = checkmark (green), right = X (red)
-const leftIsCheck = variant === 'is-for';
-const rightIsCheck = variant === 'challenges-solution';
+// challenges-solution: LEFT no icon (plain bullet), RIGHT teal tick
+// is-for: LEFT teal tick, RIGHT plum cross
+const leftIcon: 'tick' | 'cross' | 'none' = variant === 'is-for' ? 'tick' : 'none';
+const rightIcon: 'tick' | 'cross' = variant === 'is-for' ? 'cross' : 'tick';
 ---
 
 <div class="two-col-split">
-  <div class="col col-left">
+  <div class={`col col-left col--${variant}-left`}>
     <h3 class="col-title">{leftTitle}</h3>
     <ul class="item-list">
       {leftItems.map((item) => (
         <li class="item-row">
-          {leftIsCheck ? (
-            <span class="icon icon-check" aria-hidden="true">
+          {leftIcon === 'tick' && (
+            <span class="icon icon-tick" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="9" cy="9" r="9" fill="var(--color-success)" fill-opacity="0.12"/>
-                <path d="M5 9.5L7.5 12L13 7" stroke="var(--color-success)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="9" r="9" fill="#004f4c" fill-opacity="0.12"/>
+                <path d="M5 9.5L7.5 12L13 7" stroke="#004f4c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
-          ) : (
-            <span class="icon icon-x" aria-hidden="true">
+          )}
+          {leftIcon === 'cross' && (
+            <span class="icon icon-cross" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="9" cy="9" r="9" fill="var(--color-error)" fill-opacity="0.12"/>
-                <path d="M6 6L12 12M12 6L6 12" stroke="var(--color-error)" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="9" cy="9" r="9" fill="#493441" fill-opacity="0.14"/>
+                <path d="M6 6L12 12M12 6L6 12" stroke="#493441" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
             </span>
+          )}
+          {leftIcon === 'none' && (
+            <span class="icon icon-bullet" aria-hidden="true"></span>
           )}
           <span class="item-text">{item}</span>
         </li>
@@ -48,23 +52,23 @@ const rightIsCheck = variant === 'challenges-solution';
     </ul>
   </div>
 
-  <div class="col col-right">
+  <div class={`col col-right col--${variant}-right`}>
     <h3 class="col-title">{rightTitle}</h3>
     <ul class="item-list">
       {rightItems.map((item) => (
         <li class="item-row">
-          {rightIsCheck ? (
-            <span class="icon icon-check" aria-hidden="true">
+          {rightIcon === 'tick' ? (
+            <span class="icon icon-tick" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="9" cy="9" r="9" fill="var(--color-success)" fill-opacity="0.12"/>
-                <path d="M5 9.5L7.5 12L13 7" stroke="var(--color-success)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="9" r="9" fill="#004f4c" fill-opacity="0.12"/>
+                <path d="M5 9.5L7.5 12L13 7" stroke="#004f4c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
           ) : (
-            <span class="icon icon-x" aria-hidden="true">
+            <span class="icon icon-cross" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="9" cy="9" r="9" fill="var(--color-error)" fill-opacity="0.12"/>
-                <path d="M6 6L12 12M12 6L6 12" stroke="var(--color-error)" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="9" cy="9" r="9" fill="#493441" fill-opacity="0.14"/>
+                <path d="M6 6L12 12M12 6L6 12" stroke="#493441" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
             </span>
           )}
@@ -94,6 +98,7 @@ const rightIsCheck = variant === 'challenges-solution';
     border-radius: var(--radius-card);
     padding: 28px 24px;
     box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-card);
   }
 
   .col-title {
@@ -102,6 +107,10 @@ const rightIsCheck = variant === 'challenges-solution';
     font-size: 1.125rem;
     color: var(--color-primary);
     margin: 0 0 20px 0;
+  }
+
+  .col--challenges-solution-right .col-title {
+    color: var(--color-primary);
   }
 
   .item-list {
@@ -125,6 +134,23 @@ const rightIsCheck = variant === 'challenges-solution';
     display: flex;
     align-items: center;
     margin-top: 2px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-bullet {
+    position: relative;
+  }
+
+  .icon-bullet::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-text-secondary);
   }
 
   .item-text {

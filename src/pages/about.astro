@@ -7,71 +7,75 @@ import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 
 const leftItems = [
-  'Are building on GCP or seriously considering it',
-  'Have 6–500 employees and growing data needs',
-  'Are frustrated by unreliable pipelines, confusing metrics, or runaway BigQuery costs',
-  'Want a senior technical partner, not just hands on keyboards',
-  'Are based in Europe or operate under GDPR',
+  "You're on Google Cloud, or planning to be.",
+  "You don't have a data team — or the person doing it is you.",
+  "You want the results a senior data hire would deliver, without the 18-month payback.",
+  "You can make a decision. Our best engagements start in two-week sales cycles, not four-month ones.",
 ];
 
 const rightItems = [
-  'Need AWS or Azure expertise',
-  'Are looking for the cheapest option',
-  'Need a large team of analysts or data scientists (we\'re data engineers)',
-  'Want a fully outsourced data function indefinitely',
-  'Need real-time streaming infrastructure at high scale (Kafka, Flink)',
+  "You need AWS or Azure. We don't do multi-cloud.",
+  "You need analysts or data scientists. We're data engineers.",
+  "You want the cheapest hourly rate available. We compete on seniority, not price.",
+  "You need real-time streaming at scale — Kafka, Flink, sub-second latency. Different specialism.",
 ];
 
 const principles = [
   {
-    title: 'Infrastructure first, insights second',
-    body: 'The most beautiful dashboard is worthless if the data feeding it is unreliable. We build the plumbing before we talk about the taps.',
+    title: 'Execution-led, not embedded',
+    body: "We lead the technical work. Your team joins reviews and decisions but isn't on the hook for building. Different model from staff augmentation or intensive enablement — both are valid, we just don't do them.",
   },
   {
-    title: 'GCP-only, by design',
-    body: 'We don\'t offer multi-cloud flexibility because we don\'t think it\'s a virtue. Depth of expertise in one stack is more valuable than surface familiarity with five.',
+    title: 'Infrastructure first, insights second',
+    body: "The most impressive dashboard is worthless if the data feeding it isn't reliable. We build the plumbing before anyone talks about taps.",
+  },
+  {
+    title: 'One cloud, by design',
+    body: "GCP-only isn't a limitation. It's a commitment to depth over breadth. Multi-cloud consultancies are necessarily shallow on each cloud.",
   },
   {
     title: 'Transparent pricing, defined scope',
-    body: 'Data consulting has a reputation for ballooning engagements. We quote fixed-price projects where possible and don\'t upsell services you don\'t need.',
+    body: "Data consulting has a reputation for ballooning engagements. We quote fixed prices, show ranges publicly on our service pages, and don't upsell work you don't need.",
   },
   {
-    title: 'We leave teams more capable, not more dependent',
-    body: 'Every engagement includes documentation, knowledge transfer, and training. The goal is that your team understands what we built and why.',
+    title: 'European sensibility, direct communication',
+    body: "Based in France, working across Europe. No Silicon Valley vocabulary. We say what we mean and we say it short.",
   },
   {
-    title: 'We say no to bad fits',
-    body: 'We don\'t take every project. If you need multi-cloud or tools we don\'t specialize in, we\'ll tell you upfront and recommend someone better suited.',
-  },
-  {
-    title: 'Long-term architecture over short-term speed',
-    body: 'We design for the company you\'re becoming, not just the one you are today — while being honest about when simplicity is the right answer.',
+    title: 'Capable teams over dependent clients',
+    body: "Every engagement ends with documentation, training, and a clean handover. The goal is that your team understands what we built and why. If you outgrow us, that's a success.",
   },
 ];
 ---
 
 <BaseLayout
   title="About | Nimzo Data"
-  description="Nimzo Data is a boutique GCP data consulting agency based in France. We specialize in BigQuery, Dataform, and the full GCP analytics stack."
+  description="Nimzo Data is a boutique GCP data consultancy based in France. Modern data infrastructure for ambitious European companies. Fixed-price projects, senior engineering only."
 >
   <HeroStandard
-    title="A boutique GCP data consulting agency."
-    subtitle="We're not a large firm trying to be everything to everyone. We specialize in one stack, work with a small number of clients at a time, and prioritize depth over breadth."
+    title="A boutique GCP data consultancy, by design."
+    subtitle="Small team. One cloud. Fixed-price projects. We work with a handful of clients at a time and go deep, not wide."
+    cta={{ text: "Let's talk", href: '/contact/', dataTrack: 'about-hero-cta' }}
   />
 
-  <TextSection title="How Nimzo Data started">
-    <p class="placeholder-text">[Company story — to be completed with Antoine's personal background and the specific moment he decided to launch Nimzo Data.]</p>
+  <TextSection title="Why Nimzo Data exists." bg="white">
+    <p>Most data consultancies pitch themselves as trusted advisors and deliver what looks like transformation theater. Beautiful slide decks, expensive audits, and not much working software at the end. The mid-market in Europe deserves better: serious technical work, delivered honestly, at prices that aren't calibrated for Fortune 500 budgets.</p>
+    <p>We built Nimzo Data to do that one thing well. GCP, because it's the best analytics stack available. Fixed-price, because hourly billing rewards the wrong behavior. Senior engineering only, because the problems clients bring us can't be fixed by juniors learning on the job.</p>
+    <p>We're deliberately small. Taking on fewer clients means we can actually care about each one.</p>
   </TextSection>
 
-  <TextSection title="Why Nimzo?">
-    <p>Nimzo Data takes its name from the Nimzo-Indian Defense — a chess opening known for controlling the center through indirect pressure rather than direct occupation. The Nimzo-Indian doesn't charge forward. It creates the conditions for a structural advantage that compounds over time. We build data infrastructure the same way. We're not interested in impressive-looking dashboards that don't connect to decisions. We're interested in creating the conditions for insight: clean pipelines, reliable models, clear metrics, and systems that compound in value as your data grows.</p>
+  <TextSection title="Why Nimzo?" bg="white">
+    <p>Nimzo Data takes its name from the Nimzo-Indian Defense — a chess opening known for controlling the center through indirect pressure rather than direct occupation. The Nimzo-Indian doesn't charge forward. It creates the conditions for a structural advantage that compounds over time.</p>
+    <p>We build data infrastructure the same way. We're not interested in impressive-looking dashboards that don't connect to decisions. We're interested in creating the conditions for insight: clean pipelines, reliable models, clear metrics, and systems that compound in value as your data grows.</p>
   </TextSection>
 
+  <!-- How we work — LIGHT GREY-TEAL SECTION with white cards -->
   <SectionWrapper bg="card" py="lg">
-    <h2 class="principles-heading">How we work</h2>
+    <h2 class="section-heading">How we work.</h2>
     <div class="principles-grid">
       {principles.map((p) => (
-        <div class="principle-item">
+        <div class="principle-card">
+          <div class="principle-icon" aria-hidden="true"></div>
           <h3 class="principle-title">{p.title}</h3>
           <p class="principle-body">{p.body}</p>
         </div>
@@ -79,59 +83,64 @@ const principles = [
     </div>
   </SectionWrapper>
 
-  <SectionWrapper py="lg">
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">Who we work with.</h2>
     <TwoColumnSplit
       variant="is-for"
-      leftTitle="Nimzo Data is for companies that:"
+      leftTitle="This is for you if:"
       leftItems={leftItems}
-      rightTitle="We're not the right fit if you:"
+      rightTitle="This isn't for you if:"
       rightItems={rightItems}
     />
   </SectionWrapper>
 
-  <CTABanner
-    heading="Ready to talk?"
-    buttonText="Book a free call"
-    buttonHref="/contact/"
-    dataTrack="about-cta"
-  />
+  <CTABanner dataTrack="about-cta" />
 </BaseLayout>
 
 <style>
-  .placeholder-text {
-    font-style: italic;
-    color: var(--color-text-secondary);
-    opacity: 0.6;
-    border-left: 3px solid var(--color-border);
-    padding-left: 16px;
-  }
-
-  .principles-heading {
+  .section-heading {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--color-primary);
     margin: 0 0 40px 0;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   .principles-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
   }
 
   @media (min-width: 768px) {
     .principles-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .principle-item {
+  @media (min-width: 1024px) {
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .principle-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-card);
+    padding: 28px 24px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+  }
+
+  .principle-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
   }
 
   .principle-title {

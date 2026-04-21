@@ -45,7 +45,11 @@ import { navItems, ctaLink } from '../../data/navigation';
             </a>
           ) : (
             <>
-              <p class="mobile-section-label">{item.label}</p>
+              {item.href ? (
+                <a href={item.href} class="mobile-nav-link mobile-nav-link--top">{item.label}</a>
+              ) : (
+                <p class="mobile-section-label">{item.label}</p>
+              )}
               {item.groups.map((group) => (
                 <div class="mobile-group">
                   {group.groupLabel && (
