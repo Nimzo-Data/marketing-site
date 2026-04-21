@@ -8,15 +8,15 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    name: 'Data Analytics Platform Implementation',
-    slug: 'data-analytics-platform-implementation',
+    name: 'Data Platform Implementation',
+    slug: 'data-platform-implementation',
     shortDescription: 'Build your data platform from scratch — ingestion, transformation, and reporting — on a modern GCP stack.',
     priceRange: '€15,000 – €35,000',
     timeline: '6–14 weeks',
   },
   {
-    name: 'Data Analytics Platform Optimization',
-    slug: 'data-analytics-platform-optimization',
+    name: 'Data Platform Optimization',
+    slug: 'data-platform-optimization',
     shortDescription: 'Your pipelines exist but something\'s wrong. We find out why and fix it.',
     priceRange: 'Audit from €3,000 · Full from €15,000',
     timeline: '2–15 weeks',

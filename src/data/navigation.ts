@@ -31,12 +31,12 @@ export const navItems: NavItem[] = [
       {
         links: [
           {
-            label: 'Data Analytics Platform Implementation',
-            href: '/services/data-analytics-platform-implementation/',
+            label: 'Data Platform Implementation',
+            href: '/services/data-platform-implementation/',
           },
           {
-            label: 'Data Analytics Platform Optimization',
-            href: '/services/data-analytics-platform-optimization/',
+            label: 'Data Platform Optimization',
+            href: '/services/data-platform-optimization/',
           },
           {
             label: 'Expert Implementation Services',
@@ -56,11 +56,6 @@ export const navItems: NavItem[] = [
     href: '/technologies/',
     groups: [
       {
-        links: [
-          { label: 'All technologies', href: '/technologies/' },
-        ],
-      },
-      {
         groupLabel: 'Cloud & Warehouse',
         links: [
           { label: 'Google Cloud Platform', href: '/technologies/google-cloud-platform/' },
@@ -68,17 +63,17 @@ export const navItems: NavItem[] = [
         ],
       },
       {
+        groupLabel: 'ETL / ELT',
+        links: [
+          { label: 'Airbyte', href: '/technologies/airbyte/' },
+          { label: 'Fivetran', href: '/technologies/fivetran/' },
+        ],
+      },
+      {
         groupLabel: 'Transformation',
         links: [
           { label: 'Dataform', href: '/technologies/dataform/' },
           { label: 'dbt', href: '/technologies/dbt/' },
-        ],
-      },
-      {
-        groupLabel: 'ETL/ELT',
-        links: [
-          { label: 'Airbyte', href: '/technologies/airbyte/' },
-          { label: 'Fivetran', href: '/technologies/fivetran/' },
         ],
       },
       {
@@ -93,6 +88,11 @@ export const navItems: NavItem[] = [
         groupLabel: 'Orchestration',
         links: [
           { label: 'Dagster', href: '/technologies/dagster/' },
+        ],
+      },
+      {
+        links: [
+          { label: 'All technologies', href: '/technologies/' },
         ],
       },
     ],
