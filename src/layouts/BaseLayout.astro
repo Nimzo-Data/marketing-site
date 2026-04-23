@@ -109,16 +109,16 @@ const extraSchemas: object[] = structuredData
     <link rel="alternate icon" href="/favicon.ico" />
 
     <!-- Structured Data: Organization (every page) -->
-    <script type="application/ld+json" set:html={toJsonLd(organizationSchema)} />
+    <script is:inline type="application/ld+json" set:html={toJsonLd(organizationSchema)} />
 
     <!-- Structured Data: BreadcrumbList (all pages except homepage) -->
     {breadcrumbSchema && (
-      <script type="application/ld+json" set:html={toJsonLd(breadcrumbSchema)} />
+      <script is:inline type="application/ld+json" set:html={toJsonLd(breadcrumbSchema)} />
     )}
 
     <!-- Structured Data: extra schemas from page/layout props -->
     {extraSchemas.map((schema) => (
-      <script type="application/ld+json" set:html={toJsonLd(schema)} />
+      <script is:inline type="application/ld+json" set:html={toJsonLd(schema)} />
     ))}
 
     <slot name="head" />
