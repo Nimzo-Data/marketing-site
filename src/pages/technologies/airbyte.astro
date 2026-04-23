@@ -3,32 +3,37 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
   title="Airbyte | Nimzo Data"
-  description="Airbyte implementation on GCP — connector setup, custom Python connectors, Kubernetes deployment, and pipeline monitoring."
+  description="Airbyte implementation on GCP — Airbyte Cloud setup, Connector Builder for custom APIs, Python CDK for complex sources, and pipeline monitoring."
   toolName="Airbyte"
   toolCategory="ELT / Data Ingestion"
-  heroPositioning="Airbyte is our preferred open-source ELT tool — hundreds of connectors, full control over your infrastructure, and no per-connector pricing surprises."
+  heroPositioning="Airbyte is our preferred ELT tool — 600+ connectors on a managed cloud, a no-code builder for custom APIs, and an open-source option when you need full control."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Airbyte is an open-source data integration platform with 300+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. You can run it self-hosted on GCP or use Airbyte Cloud for a managed experience.</p>
+    <p>Airbyte is a data integration platform with 600+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. Our default deployment is Airbyte Cloud — managed, quick to stand up, and easy to maintain. For clients who need full control or have specific compliance requirements, Airbyte also offers a mature open-source self-hosted option.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>Airbyte's open-source model means no vendor lock-in and no connector-based pricing tiers. For companies with many data sources, the cost difference versus Fivetran at scale is significant. The custom connector framework (Python CDK) also lets us build connectors for internal APIs or unusual sources when needed.</p>
+    <p>Airbyte's pricing is more predictable at scale than Fivetran's per-connection MAR model, and when sources don't exist out of the box, we can build them — either with the no-code Connector Builder (good for most custom APIs) or the Python CDK for truly complex cases. That flexibility is the main reason we default to Airbyte on new implementations.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Deploy and maintain Airbyte on GCP using Kubernetes (GKE) or Cloud Run for cost-efficient self-hosting</li>
-      <li>Configure and monitor sync jobs from CRMs, marketing platforms, databases, and internal APIs</li>
-      <li>Build custom Python connectors for sources without official Airbyte support</li>
-      <li>Implement normalized schema conventions that work cleanly with downstream Dataform or dbt models</li>
-      <li>Set up alerting on sync failures using Airbyte's webhook notifications and Cloud Monitoring</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Set up Airbyte Cloud as the default deployment — managed, fast to start, easy for clients to maintain",
+        "Configure and monitor sync jobs from CRMs, marketing platforms, databases, and internal APIs",
+        "Build custom connectors with the no-code Connector Builder for APIs Airbyte doesn't ship by default",
+        "Fall back to the Python CDK for truly complex sources (auth flows, pagination quirks, unusual schemas)",
+        "Deploy self-hosted Airbyte on GKE for clients who need full infrastructure control",
+        "Implement normalized schema conventions that work cleanly with downstream Dataform or dbt models",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -37,41 +42,28 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
         {
           heading: 'Choose Airbyte when:',
           bullets: [
-            'You have many data sources and want to avoid per-connector pricing blowups',
-            'You need custom connectors for internal APIs',
-            'Your team has capacity to maintain self-hosted infrastructure (Airbyte Cloud is a middle ground)',
+            "You want managed ELT but more predictable pricing than Fivetran at scale",
+            'You need custom connectors — the Connector Builder covers most APIs without code',
+            'You want the option to self-host for compliance or cost reasons',
+            'You prefer a stack where ingestion and transformation come from separate vendors',
           ],
         },
         {
           heading: 'Choose Fivetran when:',
           bullets: [
-            'Reliability matters more than cost',
-            "You're syncing major SaaS connectors (Salesforce, HubSpot, Stripe)",
-            'Your MAR volume is predictable',
+            'You need the most polished managed ELT available and cost is secondary',
+            'Your sources are all mainstream SaaS (Salesforce, HubSpot, Stripe, Shopify)',
+            "You're standardizing on the Fivetran + dbt stack and want the vendor consolidation",
           ],
         },
         {
-          heading: 'Choose custom Cloud Functions when:',
+          heading: 'Choose custom Cloud Run Functions when:',
           bullets: [
-            'The source is weird, the volume is small, neither Airbyte nor Fivetran has a decent connector',
+            'The source is unusual, volume is small, and neither Airbyte nor Fivetran has a connector',
+            'You already use Cloud Functions heavily and a full ELT tool is overkill for one pipeline',
           ],
         },
       ]}
-      footer="Our default: Airbyte Cloud for most implementations. Fivetran when the client's budget allows and they explicitly value managed reliability."
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

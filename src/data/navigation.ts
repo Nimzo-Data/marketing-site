@@ -81,6 +81,7 @@ export const navItems: NavItem[] = [
         links: [
           { label: 'Looker', href: '/technologies/looker/' },
           { label: 'Lightdash', href: '/technologies/lightdash/' },
+          { label: 'Metabase', href: '/technologies/metabase/' },
           { label: 'Steep', href: '/technologies/steep/' },
         ],
       },

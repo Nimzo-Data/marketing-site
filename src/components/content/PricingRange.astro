@@ -106,6 +106,16 @@ const { priceRange, factors, scenarios } = Astro.props;
     -webkit-overflow-scrolling: touch;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
+    /* Right-edge fade signals there is more content to scroll */
+    background:
+      linear-gradient(to right, var(--color-white), var(--color-white)),
+      linear-gradient(to right, var(--color-white), var(--color-white)),
+      linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent),
+      linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-size: 24px 100%, 24px 100%, 12px 100%, 12px 100%;
+    background-attachment: local, local, scroll, scroll;
   }
 
   .factors-table {
@@ -118,8 +128,8 @@ const { priceRange, factors, scenarios } = Astro.props;
   }
 
   .factors-table th {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background-color: var(--color-brand-plum);
+    color: var(--color-text-on-dark);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.875rem;
@@ -144,7 +154,6 @@ const { priceRange, factors, scenarios } = Astro.props;
 
   .td-factor {
     font-weight: 500;
-    color: var(--color-primary) !important;
     width: 35%;
   }
 
@@ -182,8 +191,8 @@ const { priceRange, factors, scenarios } = Astro.props;
   .scenario-price {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: 1.5rem;
-    color: var(--color-primary);
+    font-size: 18px;
+    color: var(--color-brand-plum);
     margin-bottom: 4px;
   }
 

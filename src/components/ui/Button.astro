@@ -68,15 +68,18 @@ const {
     outline-offset: 2px;
   }
 
-  /* Variant: primary — plum background, white text (main CTA) */
+  /* Variant: primary — teal background, white text.
+     Inverts to white bg + teal text when placed inside .cta-banner--primary
+     (override lives in CTABanner.astro). */
   .btn-primary {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+    background-color: var(--color-bg-cta);
+    color: var(--color-text-on-dark);
     border-color: transparent;
+    transition: background-color 150ms ease, opacity 150ms ease, transform 100ms ease;
   }
 
   .btn-primary:hover {
-    background-color: #3a2934;
+    background-color: #003d3b;
     opacity: 1;
   }
 

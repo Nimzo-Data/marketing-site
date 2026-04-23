@@ -12,17 +12,15 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
   heroTitle="Expert help on one layer of your stack."
   heroSubtitle="You know what you need. Senior GCP expertise for focused work — a Dataform rebuild, a Looker semantic layer, BigQuery costs tamed. Fixed-price, 2–6 weeks, no long engagement."
 >
-  <!-- Who this is for — Style C card -->
+  <!-- Who this is for — bare list -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Who this is for.</h2>
-    <div class="who-card">
-      <ul class="tick-list">
-        <li>You have an existing GCP data stack with a specific technical gap.</li>
-        <li>Your engineering team needs specialist expertise for a defined problem.</li>
-        <li>You completed a platform audit and want to implement specific improvements internally — with help on the hard parts.</li>
-        <li>You're a startup that needs one capability built fast, no long-term engagement.</li>
-      </ul>
-    </div>
+    <ul class="tick-list">
+      <li>You know exactly what you need — one specific problem solved.</li>
+      <li>You have a GCP data stack, and one layer is broken or missing.</li>
+      <li>Your team can handle most of the platform, just not this thing.</li>
+      <li>You completed a platform audit and want help on the hardest fixes.</li>
+    </ul>
     <p class="list-footer">If you need multiple services at once, or aren't sure which service you need, a full implementation or optimization engagement is usually a better fit. We tell you which on the scoping call.</p>
   </SectionWrapper>
 
@@ -35,22 +33,20 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         priceRange="€5,000 – €12,000"
         timeline="2–4 weeks"
         details={[
-          "Project setup, staging and mart layer models",
+          "Project setup, staging and mart models",
           "Data quality tests, CI/CD, team training",
-          "Migrate spaghetti SQL scripts into something your team can maintain",
+          "Migrate spaghetti SQL into maintainable transformations",
         ]}
-        href="/contact/"
       />
       <ServiceCardSmall
         title="BI & Analytics Development"
         priceRange="€6,000 – €15,000"
         timeline="3–6 weeks"
         details={[
-          "Looker LookML modeling",
-          "Lightdash or Steep setup, semantic layer design",
-          "Initial dashboards, user training — right tool for your team",
+          "Looker LookML modeling for enterprise governance",
+          "Lightdash / Metabase / Steep setup — semantic layer, dashboards, AI assistant config",
+          "Initial dashboards and user training",
         ]}
-        href="/contact/"
       />
       <ServiceCardSmall
         title="ETL / ELT Pipeline Implementation"
@@ -61,7 +57,6 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
           "Datastream CDC for large databases",
           "Custom Cloud Functions, monitoring and alerts",
         ]}
-        href="/contact/"
       />
       <ServiceCardSmall
         title="BigQuery Optimization"
@@ -69,10 +64,9 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         timeline="2–3 weeks"
         details={[
           "Query performance audit",
-          "Partitioning, clustering, materialized views, slot governance",
-          "Typical outcome: 60–90% cost reduction on rewritten queries",
+          "Partitioning, clustering, materialized views",
+          "Typical: 60–90% cost reduction on rewritten queries",
         ]}
-        href="/contact/"
       />
       <ServiceCardSmall
         title="Custom Data Integrations"
@@ -80,25 +74,31 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         timeline="2–4 weeks"
         details={[
           "API integrations via Cloud Functions",
-          "Complex transformation logic",
+          "Bespoke transformation logic nobody else will touch",
           "Custom connectors where Airbyte and Fivetran don't fit",
         ]}
-        href="/contact/"
       />
     </div>
   </SectionWrapper>
 
-  <!-- How it works — LIGHT GREY-TEAL SECTION -->
-  <SectionWrapper py="lg" bg="card">
+  <!-- How it works -->
+  <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">How an expert engagement runs.</h2>
     <ProcessSteps
       steps={[
-        { number: 1, title: "Scoping call (30 min, free)", description: "We understand the specific problem and what “done” looks like." },
-        { number: 2, title: "Technical assessment", description: "For most expert services we need read access to your GCP environment and a 1–2 hour technical interview with your data lead." },
-        { number: 3, title: "Fixed-price proposal (within 3 business days)", description: "Defined scope, deliverables, timeline, price. You approve, we start." },
-        { number: 4, title: "Build and handover", description: "We do the work, check in weekly, end with documentation and a walkthrough session. No trailing retainer expected." },
+        { icon: 'search', title: "Technical assessment", description: "Once the proposal is signed: read access to your GCP environment and a 1–2 hour technical interview with your data lead. We confirm the plan." },
+        { icon: 'code-2', title: "Build (2–6 weeks, weekly check-ins)", description: "We do the work. Weekly updates. Your team joins reviews and can take on small parts when it makes sense. No daily standups." },
+        { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough session. Your team owns what we built. No trailing retainer expected." },
       ]}
     />
+  </SectionWrapper>
+
+  <!-- Payment -->
+  <SectionWrapper py="md" bg="white">
+    <div class="payment-section">
+      <h3 class="payment-heading">Payment</h3>
+      <p class="payment-body">50% at engagement start, 50% on delivery. Fixed price, agreed in writing before work begins.</p>
+    </div>
   </SectionWrapper>
 
   <!-- Not the right scope? -->
@@ -110,26 +110,23 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         description="Build end-to-end from scratch — ingestion, transformations, dashboards."
         href="/services/data-platform-implementation/"
         buttonText="See Implementation"
+        variant="link"
       />
       <CTACard
         title="Platform exists but broken?"
         description="Audit what you have, then fix what matters."
         href="/services/data-platform-optimization/"
         buttonText="See Optimization"
+        variant="link"
       />
       <CTACard
-        title="Platform works, need ongoing support?"
+        title="Need ongoing support, not one-time work?"
         description="Monthly retainers for maintenance and improvements."
         href="/services/ongoing-support-retainers/"
         buttonText="See Retainers"
+        variant="link"
       />
     </div>
-  </SectionWrapper>
-
-  <!-- Payment terms -->
-  <SectionWrapper py="md" bg="white">
-    <h2 class="section-heading section-heading--small">Payment.</h2>
-    <p class="small-body">50% at engagement start, 50% on delivery. Fixed price, agreed in writing before work begins.</p>
   </SectionWrapper>
 </ServiceLayout>
 
@@ -143,27 +140,6 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     line-height: 1.25;
   }
 
-  .section-heading--small {
-    font-size: 1.25rem;
-    margin-bottom: 12px;
-  }
-
-  .small-body {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    color: var(--color-text);
-    line-height: 1.65;
-    margin: 0;
-    max-width: 640px;
-  }
-
-  .who-card {
-    background-color: var(--color-card);
-    border-radius: var(--radius-card);
-    padding: 32px;
-    max-width: 820px;
-  }
-
   .tick-list {
     list-style: none;
     padding: 0;
@@ -171,6 +147,7 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     display: flex;
     flex-direction: column;
     gap: 14px;
+    max-width: 820px;
   }
 
   .tick-list li {
@@ -209,11 +186,36 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     gap: 20px;
   }
 
-  /* 3 + 2 layout (bottom row left-aligned, right third intentionally empty) */
   @media (min-width: 768px) {
+    .expert-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
     .expert-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .payment-section {
+    max-width: 720px;
+  }
+
+  .payment-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .payment-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
   }
 
   .cta-cards-grid {

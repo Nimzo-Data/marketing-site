@@ -18,13 +18,17 @@
 <style>
   #cookie-banner {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: 640px;
+    margin: 0 auto;
     background-color: var(--color-primary);
     color: white;
-    padding: 16px 24px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -33,6 +37,16 @@
     flex-wrap: wrap;
     font-family: var(--font-body, 'Roboto', sans-serif);
     font-size: 14px;
+  }
+
+  @media (min-width: 768px) {
+    #cookie-banner {
+      bottom: 20px;
+      left: 20px;
+      right: auto;
+      margin: 0;
+      max-width: 520px;
+    }
   }
 
   #cookie-banner p {
@@ -52,7 +66,8 @@
     color: var(--color-accent);
     border: none;
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 12px 18px;
+    min-height: 44px;
     font-family: var(--font-heading, 'Archivo', sans-serif);
     font-weight: 600;
     font-size: 14px;
@@ -74,7 +89,8 @@
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 12px 18px;
+    min-height: 44px;
     font-family: var(--font-heading, 'Archivo', sans-serif);
     font-weight: 600;
     font-size: 14px;
@@ -108,7 +124,7 @@
     }
 
     function injectGA4() {
-      const measurementId = 'GA4_MEASUREMENT_ID_PLACEHOLDER';
+      const measurementId = 'G-F9NHXY9R8E';
       const script = document.createElement('script');
       script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
       script.async = true;
@@ -137,6 +153,15 @@
     document.getElementById('cookie-decline')?.addEventListener('click', () => {
       saveConsent('declined');
       if (banner) banner.style.display = 'none';
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('[data-cookie-reopen]')) {
+        e.preventDefault();
+        try { localStorage.removeItem(CONSENT_KEY); } catch(err) { /* noop */ }
+        if (banner) banner.style.display = 'flex';
+      }
     });
   })();
 </script>

@@ -3,32 +3,39 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
   title="Lightdash | Nimzo Data"
-  description="Lightdash implementation on dbt and BigQuery — metric definition, explores, dashboards, and Lightdash Cloud or self-hosted deployment."
+  description="Lightdash implementation on dbt and BigQuery — semantic layer in code, AI Analyst, dashboards-as-code, and Lightdash Cloud or self-hosted deployment."
   toolName="Lightdash"
   toolCategory="Business Intelligence"
-  heroPositioning="Lightdash turns your dbt project into a BI tool — if you're already writing dbt models, your metrics are already defined. We make them explorable."
+  heroPositioning="Lightdash is BI with metrics in code — in your dbt project or in Lightdash's own YAML. AI-native, flat-rate, and way cheaper than Looker at scale."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Lightdash is an open-source BI tool built on top of dbt. Metrics and dimensions are defined in your dbt YAML files — the same place where you define tests and documentation. Lightdash reads those definitions and generates an explorable interface without any additional modeling layer.</p>
+    <p>Lightdash is an open-source BI tool where metrics and dimensions live in YAML. You can define them in your dbt project (Lightdash's original design) or in Lightdash's own native semantic layer (added for teams without dbt). Either way, your metric definitions stay in version control — not locked inside a dashboarding UI.</p>
+    <p>Lightdash Cloud now adds AI Analyst, which answers natural-language questions over the governed semantic layer. It operates largely on metadata rather than raw warehouse data and lets you bring your own LLM provider (OpenAI, Anthropic, or self-hosted). Cloud also ships dashboards-as-code — dashboard definitions in Git — which pairs well with AI coding agents writing dashboards directly from the repo.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>For dbt-native teams, Lightdash is the most coherent choice. Metrics live in version control alongside transformations. There's no semantic layer to maintain separately. And for teams with 5–20 users, Lightdash Cloud pricing is a fraction of Looker while delivering the key capabilities most teams actually need.</p>
+    <p>For teams that want version-controlled metrics plus AI-native BI without Looker-tier spend, Lightdash Cloud is the right middle ground. Pricing is flat-rate for unlimited users — a fundamentally different shape from per-seat tools — which makes the economics flip in your favor once you're past ~10–15 users. A self-hosted Core edition is also available for teams that want full control.</p>
+    <p>Worth knowing: most of Lightdash's AI features (AI Analyst, dashboards-as-code, Slack assistant) are in the paid Cloud product rather than the open-source Core.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Configure Lightdash to connect to BigQuery and read dbt project YAML</li>
-      <li>Define explores, metrics, and custom dimensions in dbt models for Lightdash</li>
-      <li>Build dashboards for operational and executive reporting</li>
-      <li>Set up Lightdash Cloud or self-hosted deployment on GCP</li>
-      <li>Implement row-level security via dbt's access controls</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Connect Lightdash to BigQuery — with dbt YAML integration or Lightdash's native semantic layer",
+        "Define explores, metrics, and dimensions in dbt models or Lightdash's own YAML",
+        "Build dashboards for operational and executive reporting",
+        "Configure AI Analyst with the client's LLM provider (OpenAI, Anthropic, or self-hosted) for natural-language queries",
+        "Use Lightdash's dashboards-as-code workflow so coding agents can build and iterate on dashboards directly in Git",
+        "Set up Lightdash Cloud or self-hosted Core deployment on GCP",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -37,42 +44,37 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
         {
           heading: 'Choose Lightdash when:',
           bullets: [
-            'You are already using dbt',
-            'You want version-controlled metrics',
-            'Team is 5–20 users',
-            'Budget is €500–€2,000/month',
+            "You want metrics defined in code — in dbt YAML or Lightdash's native semantic layer",
+            "You want flat-rate pricing that doesn't scale with headcount (cheaper than Looker past ~10–15 users)",
+            'You want to choose your own LLM provider for governed AI analytics',
+            'Dashboards-as-code fits your team — AI coding agents can work the dashboard layer directly',
           ],
         },
         {
           heading: 'Choose Looker instead when:',
           bullets: [
-            'You need enterprise governance',
-            'You have 20+ users',
-            "You need LookML's semantic layer capabilities",
+            'You need enterprise governance and 20+ users across departments',
+            "You need LookML's full semantic layer capabilities or deep BI Engine tie-in",
+            'Embedded analytics or multi-tenant reporting at scale is on your roadmap',
+          ],
+        },
+        {
+          heading: 'Choose Metabase instead when:',
+          bullets: [
+            'You need broader BI (dashboards, embedding, SDK) beyond metric-first',
+            "Your team isn't committed to dbt-native workflows",
+            'You want self-host optionality with AI features included — Metabot is now open-source',
           ],
         },
         {
           heading: 'Choose Steep instead when:',
           bullets: [
             'Primary audience is non-technical users',
-            'A no-code interface matters more than version control',
+            'A metric-first UX matters more than version control',
+            'Budget is under €500/month for a small team',
           ],
         },
       ]}
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

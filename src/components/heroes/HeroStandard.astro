@@ -16,8 +16,8 @@ const { title, subtitle, cta } = Astro.props;
 
 <section class="hero-standard">
   <div class="hero-inner">
-    <h1 class="hero-title">{title}</h1>
-    <p class="hero-subtitle">{subtitle}</p>
+    <h1 class="hero-title" set:html={title}></h1>
+    <p class="hero-subtitle" set:html={subtitle}></p>
     {cta && (
       <div class="hero-actions">
         <a
@@ -36,8 +36,8 @@ const { title, subtitle, cta } = Astro.props;
   .hero-standard {
     width: 100%;
     background-color: var(--color-background);
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: clamp(80px, 10vw, 128px);
+    padding-bottom: clamp(80px, 10vw, 128px);
   }
 
   .hero-inner {
@@ -57,14 +57,14 @@ const { title, subtitle, cta } = Astro.props;
     font-family: var(--font-heading);
     font-weight: 600;
     color: var(--color-primary);
-    font-size: 1.75rem;
+    font-size: 2rem;
     line-height: 1.2;
     margin: 0 0 16px 0;
   }
 
   @media (min-width: 768px) {
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   }
 
@@ -72,9 +72,10 @@ const { title, subtitle, cta } = Astro.props;
     font-family: var(--font-body);
     font-size: 1.125rem;
     color: var(--color-text-secondary);
-    max-width: 640px;
+    max-width: 720px;
     margin: 0 auto;
     line-height: 1.6;
+    text-wrap: balance;
   }
 
   .hero-actions {
@@ -105,13 +106,14 @@ const { title, subtitle, cta } = Astro.props;
   }
 
   .btn-primary {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+    background-color: var(--color-bg-cta);
+    color: var(--color-text-on-dark);
     border-color: transparent;
+    transition: background-color 150ms ease, opacity 150ms ease, transform 100ms ease;
   }
 
   .btn-primary:hover {
-    background-color: #3a2934;
+    background-color: #003d3b;
     opacity: 1;
   }
 </style>

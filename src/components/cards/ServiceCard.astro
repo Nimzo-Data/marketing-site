@@ -1,31 +1,29 @@
 ---
 interface Props {
+  eyebrow: string;
   title: string;
   description: string;
   priceRange?: string;
   timeline?: string;
   href: string;
   dataTrack?: string;
-  variant?: 'flagship' | 'subordinate';
-  accent?: 'teal' | 'plum';
   linkText?: string;
 }
 
 const {
+  eyebrow,
   title,
   description,
   priceRange,
   timeline,
   href,
   dataTrack,
-  variant = 'flagship',
-  accent = 'teal',
   linkText = 'Learn more',
 } = Astro.props;
 ---
 
-<article class={`service-card service-card--${variant} service-card--accent-${accent}`}>
-  <div class="card-icon" aria-hidden="true"></div>
+<a href={href} class="service-card" data-track={dataTrack}>
+  <p class="card-eyebrow">{eyebrow}</p>
   <h3 class="card-title">{title}</h3>
   <p class="card-description">{description}</p>
   {(priceRange || timeline) && (
@@ -34,55 +32,39 @@ const {
       {timeline && <span class="badge badge-timeline">{timeline}</span>}
     </div>
   )}
-  <a href={href} class="card-link" data-track={dataTrack}>
-    {linkText} &rarr;
-  </a>
-</article>
+  <span class="card-link">{linkText} <span class="card-arrow" aria-hidden="true">&rarr;</span></span>
+</a>
 
 <style>
   .service-card {
-    border-radius: var(--radius-card);
-    padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     height: 100%;
+    padding: 32px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
   }
 
-  /* Flagship (Style A): white bg, 1px colored border */
-  .service-card--flagship {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-card);
-    box-shadow: var(--shadow-card);
+  .service-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
   }
 
-  .service-card--flagship.service-card--accent-teal {
-    border-top: 3px solid var(--color-primary);
-  }
-
-  .service-card--flagship.service-card--accent-plum {
-    border-top: 3px solid var(--color-accent);
-  }
-
-  /* Subordinate (Style B): light grey-teal bg, no shadow */
-  .service-card--subordinate {
-    background-color: var(--color-card);
-    border: 1px solid transparent;
-  }
-
-  .card-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
-
-  .service-card--accent-teal .card-icon {
-    background-color: var(--color-primary);
-  }
-
-  .service-card--accent-plum .card-icon {
-    background-color: var(--color-accent);
+  .card-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0;
+    line-height: 1.2;
   }
 
   .card-title {
@@ -91,6 +73,7 @@ const {
     color: var(--color-primary);
     font-size: 1.25rem;
     margin: 0;
+    margin-top: -4px;
     line-height: 1.3;
   }
 
@@ -117,17 +100,23 @@ const {
     padding: 4px 10px;
     border-radius: 100px;
     line-height: 1.4;
+    background-color: transparent;
+    transition: background-color 150ms ease, color 150ms ease;
   }
 
   .badge-price {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+    color: var(--color-brand-plum);
+    border: 1px solid var(--color-brand-plum);
   }
 
   .badge-timeline {
-    background-color: transparent;
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-border);
+    color: var(--color-brand-plum);
+    border: 1px solid var(--color-brand-plum);
+  }
+
+  .service-card:hover .badge {
+    background-color: var(--color-brand-plum);
+    color: var(--color-text-on-dark);
   }
 
   .card-link {
@@ -135,12 +124,19 @@ const {
     font-size: 0.9375rem;
     font-weight: 500;
     color: var(--color-primary);
-    text-decoration: none;
-    display: inline-block;
     margin-top: auto;
   }
 
-  .card-link:hover {
+  .card-arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .service-card:hover .card-link {
     text-decoration: underline;
+  }
+
+  .service-card:hover .card-arrow {
+    transform: translateX(4px);
   }
 </style>

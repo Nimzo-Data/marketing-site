@@ -5,37 +5,191 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 
 <BaseLayout
   title="Privacy Policy | Nimzo Data"
-  description="Nimzo Data privacy policy — how we collect, use, and protect your data."
+  description="How Nimzo Data collects, uses, and protects personal data in compliance with GDPR."
 >
   <SectionWrapper py="xl">
     <div class="legal-content">
       <h1>Privacy Policy</h1>
-      <p><em>Draft — pending legal review. Last updated: April 2026.</em></p>
+      <p class="meta">Last updated: 23 April 2026</p>
 
-      <h2>1. Who we are</h2>
-      <p>Nimzo Data is a data consulting agency based in France. Our website is nimzodata.com.</p>
+      <p>
+        This Privacy Policy explains how Nimzo Data SARL ("Nimzo Data", "we", "us", or "our") collects,
+        uses, and protects personal data in connection with our website
+        <a href="https://nimzodata.com">nimzodata.com</a> and our consulting services.
+        It is written to comply with the EU General Data Protection Regulation (GDPR) and the French
+        Data Protection Act (Loi Informatique et Libertés).
+      </p>
 
-      <h2>2. What data we collect</h2>
-      <p>We collect data you provide directly (e.g., name and email if you book a call via Calendly or contact us by email), and anonymized analytics data via Google Analytics 4 (only if you consent via our cookie banner).</p>
+      <h2>1. Data controller</h2>
+      <p>
+        The data controller responsible for your personal data is:
+      </p>
+      <p>
+        Nimzo Data SARL<br />
+        36 Rue de la Convention, 93230 Romainville, France<br />
+        SIRET: 994 080 497 00013<br />
+        Email: <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>
+      </p>
 
-      <h2>3. How we use your data</h2>
-      <p>We use your contact information solely to respond to your inquiry and manage the consulting relationship. We do not sell or share your data with third parties for marketing purposes.</p>
+      <h2>2. Personal data we collect</h2>
+      <p>We collect personal data in three ways:</p>
+      <h3>2.1 Data you provide directly</h3>
+      <ul>
+        <li><strong>Contact form / email:</strong> name, email address, company, and any information you share in the message.</li>
+        <li><strong>Calendar booking:</strong> when you book a call via the embedded Google Calendar Appointment Scheduling widget, Google collects your name, email address, and the booking details on our behalf.</li>
+      </ul>
+      <h3>2.2 Data collected automatically</h3>
+      <ul>
+        <li><strong>Analytics (only with your consent):</strong> when you accept cookies, Google Analytics 4 sets cookies and collects data about your visit (pages viewed, referrer, approximate location derived from IP, device type, browser). Google Analytics 4 does not store raw IP addresses; IPs are used only transiently for geo lookup.</li>
+        <li><strong>Server logs:</strong> our hosting provider Vercel logs standard technical data (timestamp, request URL, response status, user-agent) for security and reliability purposes.</li>
+      </ul>
+      <h3>2.3 Data from our consulting engagements</h3>
+      <p>
+        If we work together on a consulting project, we will process additional personal data as part of
+        the engagement (e.g., your employees' names and work emails, business data you share with us).
+        That processing is governed by our signed services agreement, not this Privacy Policy.
+      </p>
 
-      <h2>4. Cookies</h2>
-      <p>We use Google Analytics 4 for anonymous traffic analysis. This is only activated after you explicitly accept cookies via our consent banner. You can decline or withdraw consent at any time by refreshing the page and clicking "Decline".</p>
+      <h2>3. Purposes and legal bases</h2>
+      <table class="data-table">
+        <thead>
+          <tr><th>Purpose</th><th>Legal basis (GDPR Art. 6)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Responding to your inquiries and booking calls</td>
+            <td>Legitimate interest (Art. 6(1)(f)) — answering prospects</td>
+          </tr>
+          <tr>
+            <td>Analytics (Google Analytics 4)</td>
+            <td>Your explicit consent (Art. 6(1)(a))</td>
+          </tr>
+          <tr>
+            <td>Server logs and site security</td>
+            <td>Legitimate interest (Art. 6(1)(f)) — securing the site</td>
+          </tr>
+          <tr>
+            <td>Complying with legal obligations (e.g., tax records)</td>
+            <td>Legal obligation (Art. 6(1)(c))</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <h2>5. Your rights (GDPR)</h2>
-      <p>If you are based in the EU/EEA, you have rights under GDPR including: right of access, right to erasure, right to rectification, and right to object to processing. To exercise these rights, contact us at hello@nimzodata.com.</p>
+      <h2>4. Cookies and similar technologies</h2>
+      <p>
+        We do not set any cookies before you accept. When you click "Accept" on the cookie banner, we load
+        Google Analytics 4, which sets the following cookies:
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr><th>Name</th><th>Purpose</th><th>Provider</th><th>Duration</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>_ga</code></td>
+            <td>Distinguishes unique visitors</td>
+            <td>Google Analytics</td>
+            <td>2 years</td>
+          </tr>
+          <tr>
+            <td><code>_ga_&lt;container-id&gt;</code></td>
+            <td>Persists session state</td>
+            <td>Google Analytics</td>
+            <td>2 years</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        We also use a <code>localStorage</code> entry called <code>nimzo-consent</code> to remember your
+        cookie choice (not a cookie, not shared with any server).
+      </p>
+      <p>
+        You can withdraw consent at any time by clicking "Cookie preferences" in the footer of any page,
+        or by clearing site data in your browser.
+      </p>
 
-      <h2>6. Contact</h2>
-      <p>For privacy-related questions: hello@nimzodata.com</p>
+      <h2>5. How long we keep data</h2>
+      <ul>
+        <li><strong>Email correspondence:</strong> up to 3 years from the last exchange, unless a consulting engagement starts — then retained for the duration of the engagement plus 10 years (legal accounting retention).</li>
+        <li><strong>Calendar bookings:</strong> retained in Google Calendar until manually deleted or until the booking is more than 12 months old.</li>
+        <li><strong>Analytics data:</strong> up to 14 months in Google Analytics 4.</li>
+        <li><strong>Server logs:</strong> 30 days at Vercel.</li>
+      </ul>
+
+      <h2>6. Recipients and subprocessors</h2>
+      <p>We share personal data only with service providers acting as subprocessors under our instructions:</p>
+      <ul>
+        <li><strong>Vercel Inc.</strong> — website hosting and edge delivery. Vercel operates globally; static content is served from Vercel's edge network (including EU regions).</li>
+        <li><strong>Google LLC / Google Ireland Ltd.</strong> — Google Analytics 4 (analytics), Google Calendar Appointment Scheduling (booking).</li>
+      </ul>
+      <p>
+        We do not sell personal data. We do not share data with third parties for advertising purposes.
+      </p>
+
+      <h2>7. International transfers</h2>
+      <p>
+        Google and Vercel may process data outside the European Economic Area (EEA), including in the
+        United States. These transfers are covered by Standard Contractual Clauses (SCCs) and the
+        EU-US Data Privacy Framework where applicable.
+      </p>
+
+      <h2>8. Your rights</h2>
+      <p>
+        Under the GDPR and French law, you have the following rights regarding your personal data:
+      </p>
+      <ul>
+        <li><strong>Right of access</strong> — to know what personal data we hold about you.</li>
+        <li><strong>Right of rectification</strong> — to correct inaccurate data.</li>
+        <li><strong>Right of erasure</strong> — to have your data deleted, subject to legal retention obligations.</li>
+        <li><strong>Right to restrict processing</strong> — to limit how we use your data.</li>
+        <li><strong>Right to data portability</strong> — to receive your data in a portable format.</li>
+        <li><strong>Right to object</strong> — to object to processing based on legitimate interest.</li>
+        <li><strong>Right to withdraw consent</strong> — at any time, without affecting past lawful processing.</li>
+      </ul>
+      <p>
+        To exercise any of these rights, email us at <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>.
+        We respond within one month.
+      </p>
+      <p>
+        If you believe we have mishandled your data, you have the right to lodge a complaint with the
+        French Data Protection Authority:
+        <br />
+        <strong>CNIL</strong> — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, France —
+        <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>
+      </p>
+
+      <h2>9. Security</h2>
+      <p>
+        We apply reasonable technical and organisational measures to protect personal data, including
+        encrypted transport (HTTPS), access controls on internal tools, and vendor selection based on
+        GDPR compliance.
+      </p>
+
+      <h2>10. Children</h2>
+      <p>
+        Our services are not intended for children under 16, and we do not knowingly collect personal
+        data from children.
+      </p>
+
+      <h2>11. Changes to this policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect changes in our practices or legal
+        obligations. Material changes will be flagged at the top of this page with a new "Last updated"
+        date.
+      </p>
+
+      <h2>12. Contact</h2>
+      <p>
+        For any privacy-related question, contact us at
+        <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>.
+      </p>
     </div>
   </SectionWrapper>
 </BaseLayout>
 
 <style>
   .legal-content {
-    max-width: 720px;
+    max-width: 760px;
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.7;
@@ -47,7 +201,7 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
     font-weight: 600;
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--color-primary);
-    margin: 0 0 24px 0;
+    margin: 0 0 8px 0;
     line-height: 1.2;
   }
 
@@ -60,11 +214,81 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
     line-height: 1.3;
   }
 
+  .legal-content h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+    margin: 24px 0 8px 0;
+    line-height: 1.3;
+  }
+
   .legal-content p {
     margin: 0 0 16px 0;
   }
 
-  .legal-content p:last-child {
-    margin-bottom: 0;
+  .legal-content ul {
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+  }
+
+  .legal-content li {
+    margin: 0 0 8px 0;
+  }
+
+  .legal-content .meta {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin: 0 0 32px 0;
+  }
+
+  .legal-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .legal-content a:hover {
+    opacity: 0.75;
+  }
+
+  .legal-content code {
+    font-family: var(--font-mono, 'Menlo', 'Consolas', monospace);
+    font-size: 0.875rem;
+    background-color: var(--color-surface-subtle, #f3f4f6);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 24px 0;
+    font-size: 0.9375rem;
+  }
+
+  .data-table th {
+    background-color: var(--color-surface-subtle, #f3f4f6);
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  @media (max-width: 640px) {
+    .data-table {
+      display: block;
+      overflow-x: auto;
+    }
   }
 </style>

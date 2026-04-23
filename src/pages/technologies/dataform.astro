@@ -3,6 +3,7 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
@@ -13,22 +14,25 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
   heroPositioning="Dataform is our first choice for SQL transformation on GCP — it turns raw BigQuery data into production-grade, version-controlled analytics models."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Dataform is Google's managed SQL transformation tool, natively integrated into the GCP console. It lets you write modular SQL workflows (SQLX files), define dependencies between tables, run tests on your data, and deploy changes through a Git-based workflow — all without leaving BigQuery.</p>
+    <p>Dataform is Google's managed SQL transformation tool, natively integrated into the GCP console. It lets you write modular SQL workflows (SQLX files), define dependencies between tables, run tests on your data, and deploy changes through a Git-based workflow — all without leaving BigQuery. Gemini assistance is built in for SQLX generation and error fixing.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
     <p>For GCP-native teams, Dataform is the lowest-friction path to well-structured SQL. No external orchestrator needed — Dataform handles scheduling, dependencies, and retries. The GCP integration means no credentials to manage and billing tied directly to your existing BigQuery setup.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Migrate spaghetti SQL scripts into structured Dataform projects with clear staging, intermediate, and output layers</li>
-      <li>Implement incremental models that only process new data, reducing BigQuery costs significantly</li>
-      <li>Write SQLX assertions and data tests to catch data quality issues before they reach dashboards</li>
-      <li>Set up scheduled releases tied to Git tags for controlled production deployments</li>
-      <li>Configure Dataform compilation variables for environment-specific logic (dev/staging/prod)</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Migrate spaghetti SQL scripts into structured Dataform projects with clear staging, intermediate, and output layers",
+        "Implement incremental models that only process new data, reducing BigQuery costs significantly",
+        "Write SQLX assertions and data tests to catch data quality issues before they reach dashboards",
+        "Set up scheduled releases tied to Git tags for controlled production deployments",
+        "Configure Dataform compilation variables for environment-specific logic (dev/staging/prod)",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -37,45 +41,28 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
         {
           heading: 'Choose Dataform when:',
           bullets: [
-            "You're on GCP",
-            "Your team doesn't already have dbt expertise",
+            "You're on GCP and don't need cross-cloud portability",
+            "Your team doesn't already have dbt investment",
             'You want the simplest path from raw data to reporting layer',
             'You value native BigQuery integration over portability',
           ],
-          note: 'No orchestrator needed — Dataform schedules itself.',
         },
         {
           heading: 'Choose dbt Cloud when:',
           bullets: [
             'You want best-in-class developer experience',
-            'Your team has dbt expertise',
-            'You want portability to Snowflake or other warehouses',
+            'Your team already works in dbt every day',
+            'You need portability to Snowflake or other warehouses down the line',
           ],
-          note: 'Costs more, adds an external scheduler dependency.',
         },
         {
           heading: 'Choose dbt Core when:',
           bullets: [
-            'You want open-source dbt without Cloud pricing',
-            "You're comfortable wiring up your own orchestration (usually Dagster)",
+            'You want open-source dbt without dbt Cloud pricing',
+            "You're comfortable wiring up your own orchestration (usually Dagster or GitHub Actions)",
           ],
         },
       ]}
-      footer="Our default for new GCP projects: Dataform. We switch to dbt when the team already has it or multi-cloud is genuinely in scope."
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

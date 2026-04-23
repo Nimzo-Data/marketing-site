@@ -3,30 +3,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroStandard from '../components/heroes/HeroStandard.astro';
 import TextSection from '../components/content/TextSection.astro';
 import ProcessSteps from '../components/content/ProcessSteps.astro';
-import CalendlyEmbed from '../components/integrations/CalendlyEmbed.astro';
 import CTACard from '../components/cards/CTACard.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 ---
 
 <BaseLayout
   title="Contact | Nimzo Data"
-  description="30-minute call about your data stack. No sales pitch. We tell you honestly whether we're a fit. hello@nimzodata.com."
+  description="45-minute call about your data stack. No sales pitch. We tell you honestly whether we're a fit. hello@nimzodata.com."
 >
-  <link
-    slot="head"
-    rel="stylesheet"
-    href="https://assets.calendly.com/assets/external/widget.css"
-  />
-
   <HeroStandard
     title="Let's talk about your data stack."
-    subtitle="30-minute call. We ask about your current setup, what isn't working, and what you want to achieve. No sales pitch — just an honest conversation about whether we're a good fit."
+    subtitle="45-minute call. We ask about your current setup, what isn't working, and what you want to achieve. No sales pitch — just an honest conversation about whether we're a good fit."
   />
 
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Pick a time that works.</h2>
-    <p class="section-sub">All times shown in your local timezone. 30 minutes is usually enough to know if there's a fit.</p>
-    <CalendlyEmbed url="https://calendly.com/nimzodata/free-call" minHeight="700px" />
+    <h2 class="section-heading section-heading--with-sub">Pick a time that works.</h2>
+    <p class="section-sub">All times shown in your local timezone. 45 minutes is usually enough to know if there's a fit.</p>
+    <!-- Google Calendar Appointment Scheduling begin -->
+    <div class="calendar-wrap">
+      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1WUIRsRks4hxf6-nWhuq942Xpp7WNKM1rKJHUqthdkdPUKyq7QICNNAZ-F72XLef1Pj_h3FSVu?gv=true" class="calendar-iframe" loading="lazy"></iframe>
+    </div>
+    <!-- end Google Calendar Appointment Scheduling -->
   </SectionWrapper>
 
   <TextSection title="Prefer email?" bg="white">
@@ -37,9 +34,10 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
     <h2 class="section-heading">What happens after you reach out.</h2>
     <ProcessSteps
       steps={[
-        { number: 1, title: "Brief overview", description: "We ask for a quick summary of your data stack and main challenge — one email, five minutes to write." },
-        { number: 2, title: "Discovery call", description: "We schedule a 30-minute conversation within the week." },
-        { number: 3, title: "Fixed-price proposal", description: "If there's a fit, we send a scoping questionnaire and a fixed-price proposal within 5 business days." },
+        { icon: 'mail', title: "Book a call or email us", description: "Use the calendar above. Or email us if you'd rather write first." },
+        { icon: 'clipboard-list', title: "Quick questionnaire", description: "We send a short form (5 min to fill) — your stack, the main problem, your timeline. Makes the call count." },
+        { icon: 'video', title: "The scoping call", description: "45-minute conversation. We listen, ask questions, tell you honestly whether we're a fit." },
+        { icon: 'file-text', title: "Fixed-price proposal", description: "Within 5 business days if there's a fit. Defined scope, no hourly billing, no surprises." },
       ]}
     />
   </SectionWrapper>
@@ -57,6 +55,7 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
         href="/"
         buttonText="Browse services"
         dataTrack="contact-cta-services"
+        variant="link"
       />
       <CTACard
         title="Browse the stack"
@@ -64,6 +63,7 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
         href="/technologies/"
         buttonText="See technologies"
         dataTrack="contact-cta-tech"
+        variant="link"
       />
     </div>
   </SectionWrapper>
@@ -75,8 +75,12 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
     font-weight: 600;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--color-primary);
-    margin: 0 0 8px 0;
+    margin: 0 0 32px 0;
     line-height: 1.25;
+  }
+
+  .section-heading--with-sub {
+    margin-bottom: 12px;
   }
 
   .section-sub {
@@ -93,6 +97,25 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
   }
 
   .email-link:hover { opacity: 0.75; }
+
+  .calendar-wrap {
+    width: 100%;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .calendar-iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+    height: 900px;
+  }
+
+  @media (max-width: 767px) {
+    .calendar-iframe {
+      height: 1600px;
+    }
+  }
 
   .cta-cards-grid {
     display: grid;

@@ -58,24 +58,43 @@ const {
     background-color: var(--color-white);
   }
 
-  /* Padding variants */
+  /* Padding variants — smaller on mobile, larger on desktop */
   .section-py-sm {
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
   .section-py-md {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .section-py-lg {
     padding-top: 64px;
     padding-bottom: 64px;
   }
 
-  .section-py-lg {
-    padding-top: 96px;
-    padding-bottom: 96px;
+  .section-py-xl {
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 
-  .section-py-xl {
-    padding-top: 128px;
-    padding-bottom: 128px;
+  @media (min-width: 768px) {
+    .section-py-sm {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+    .section-py-md {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+    .section-py-lg {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+    .section-py-xl {
+      padding-top: 128px;
+      padding-bottom: 128px;
+    }
   }
 </style>

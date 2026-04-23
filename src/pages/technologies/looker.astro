@@ -3,33 +3,38 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
   title="Looker | Nimzo Data"
-  description="Looker and LookML implementation on BigQuery — semantic layer design, governed metrics, dashboards, and access control."
+  description="Looker and LookML implementation on BigQuery — semantic layer design, governed metrics, Gemini-powered conversational analytics, and access control."
   toolName="Looker"
   toolCategory="Business Intelligence"
-  heroPositioning="Looker is the most powerful BI tool in the GCP ecosystem — we implement it for companies that need a centralized semantic layer and are ready to invest accordingly."
+  heroPositioning="Looker is the most powerful BI tool in the GCP ecosystem — LookML governance plus Gemini-powered AI. We implement it for companies that need a centralized semantic layer and are ready to invest accordingly."
 >
   <TextSection title="What It Is" bg="white">
     <p>Looker is Google's enterprise BI platform, built around LookML — a modeling language that defines a governed semantic layer sitting between your data warehouse and your end users. Every metric, dimension, and relationship is defined once in LookML and reused consistently across all reports and dashboards.</p>
+    <p>Looker's AI story is now central. Conversational Analytics lets business users ask natural-language questions against the governed LookML model; Dashboard Agents generate AI summaries and deep-dives inside dashboards; LookML-aware assistants help developers write expressions and build visualizations. The Conversational Analytics APIs also expose the same capability to embedded apps.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>For organizations where data governance and metric consistency matter — where finance and product can't have different definitions of 'revenue' — Looker is the right tool. The LookML semantic layer also makes Looker uniquely powerful for embedded analytics and multi-tenant reporting. The GCP native integration (Looker is now part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration.</p>
+    <p>For organizations where data governance and metric consistency matter — where finance and product can't have different definitions of "revenue" — Looker is the right tool. The LookML semantic layer also makes Looker uniquely powerful for embedded analytics and multi-tenant reporting. The GCP native integration (Looker is now part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration and Gemini on top.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Design and implement LookML models: views, explores, derived tables, and measures</li>
-      <li>Build executive and operational dashboards with governed metrics</li>
-      <li>Implement user access controls and group-level permissions</li>
-      <li>Configure Looker's BigQuery connection with persistent derived tables (PDTs) for performance</li>
-      <li>Set up scheduled Looks and dashboard delivery for regular stakeholder reporting</li>
-      <li>Advise on Looker vs. Lightdash vs. Steep for greenfield BI decisions</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Design and implement LookML models: views, explores, derived tables, and measures",
+        "Build executive and operational dashboards with governed metrics",
+        "Configure Conversational Analytics and Dashboard Agents so business users can ask questions in natural language against governed LookML",
+        "Set up Conversational Analytics APIs for embedded AI analytics in client-facing apps",
+        "Implement user access controls and group-level permissions",
+        "Configure Looker's BigQuery connection with persistent derived tables (PDTs) and BI Engine for performance",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -39,19 +44,26 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
           heading: 'Choose Looker when:',
           bullets: [
             'You need enterprise governance and consistent metrics across teams',
-            'You have 20+ BI users',
-            'You want embedded analytics or multi-tenant reporting',
-            "You need LookML's full semantic layer capabilities",
+            'You have 20+ BI users across multiple departments',
+            'You want embedded analytics or multi-tenant reporting at scale',
+            'You need Gemini-powered conversational analytics on top of a governed semantic layer',
+            'Budget is 5k+/month (Looker pricing is sales-quoted)',
           ],
-          note: 'Budget: €3,000–€6,000+/month for Looker Core.',
         },
         {
           heading: 'Choose Lightdash instead when:',
           bullets: [
-            "You're already on dbt (metrics live in dbt YAML)",
-            'Team is 5–20 users',
-            'Budget is €500–€2,000/month',
+            "You want version-controlled metrics (dbt YAML or Lightdash's native semantic layer)",
+            'You prefer flat-rate pricing that does not scale with headcount',
             "You don't need the full LookML semantic layer",
+          ],
+        },
+        {
+          heading: 'Choose Metabase instead when:',
+          bullets: [
+            'Budget is below Looker tier but you still need broad BI (dashboards, embedding, SQL access)',
+            'You want the option to self-host the BI layer',
+            'You want a real AI assistant without Looker-tier commitment',
           ],
         },
         {
@@ -66,17 +78,3 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

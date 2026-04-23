@@ -15,7 +15,7 @@ const sections: Section[] = [
   { heading: 'Cloud & Warehouse', categories: ['cloud', 'warehouse'], perRow: 2 },
   { heading: 'Transformation', categories: ['transformation'], perRow: 2 },
   { heading: 'ETL / ELT', categories: ['etl'], perRow: 2 },
-  { heading: 'Business Intelligence', categories: ['bi'], perRow: 3 },
+  { heading: 'Business Intelligence', categories: ['bi'], perRow: 2 },
   { heading: 'Orchestration', categories: ['orchestration'], perRow: 2 },
 ];
 
@@ -28,16 +28,16 @@ const grouped = sections.map((section) => ({
 
 <BaseLayout
   title="Technologies | Nimzo Data"
-  description="The ten tools we build with — GCP, BigQuery, Dataform, dbt, Airbyte, Fivetran, Looker, Lightdash, Steep, and Dagster. Used selectively, not as a buzzword list."
+  description="The tools we build with — GCP, BigQuery, Dataform, dbt, Airbyte, Fivetran, Looker, Lightdash, Metabase, Steep, Dagster. Used selectively, not as a buzzword list."
 >
   <HeroStandard
     title="The tools we build with."
-    subtitle="Ten tools, used selectively. Each one chosen because it's the best at what it does — not because of a partner commission."
+    subtitle="A focused set of tools, used selectively. Each one chosen because it's the best at what it does — not because of a partner commission."
     cta={{ text: "Let's talk", href: '/contact/' }}
   />
 
   {grouped.map((group) => (
-    <SectionWrapper py="lg" bg="white">
+    <SectionWrapper py="md" bg="white">
       <h2 class="group-heading">{group.heading}</h2>
       <div class={`tech-grid tech-grid--${group.perRow}`}>
         {group.items.map((tech) => (
@@ -51,13 +51,14 @@ const grouped = sections.map((section) => ({
               <h3 class="tech-card__name">{tech.name}</h3>
             </div>
             <p class="tech-card__tagline">{tech.tagline}</p>
-            <span class="tech-card__link">Learn more &rarr;</span>
+            <span class="tech-card__link">Learn more <span class="tech-card__arrow" aria-hidden="true">&rarr;</span></span>
           </a>
         ))}
       </div>
     </SectionWrapper>
   ))}
 
+  <div class="tech-to-cta-spacer" aria-hidden="true"></div>
   <CTABanner dataTrack="technologies-index-cta" />
 </BaseLayout>
 
@@ -80,6 +81,11 @@ const grouped = sections.map((section) => ({
   @media (min-width: 768px) {
     .tech-grid--2 { grid-template-columns: repeat(2, 1fr); }
     .tech-grid--3 { grid-template-columns: repeat(3, 1fr); }
+    /* When a perRow=2 grid has only 1 child (e.g. Orchestration), center it at half-width */
+    .tech-grid--2:has(> .tech-card:only-child) {
+      grid-template-columns: 1fr;
+      max-width: calc((100% - 24px) / 2);
+    }
   }
 
   .tech-card {
@@ -87,18 +93,28 @@ const grouped = sections.map((section) => ({
     flex-direction: column;
     gap: 12px;
     padding: 28px 24px;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-card);
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 150ms ease, transform 150ms ease;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
   }
 
   .tech-card:hover {
     box-shadow: var(--shadow-dropdown);
     transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .tech-card__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .tech-card:hover .tech-card__arrow {
+    transform: translateX(4px);
   }
 
   .tech-card__head {
@@ -151,5 +167,9 @@ const grouped = sections.map((section) => ({
     font-size: 0.9375rem;
     font-weight: 500;
     color: var(--color-primary);
+  }
+
+  .tech-to-cta-spacer {
+    height: 32px;
   }
 </style>
