@@ -7,7 +7,7 @@ import ProcessSteps from '../components/content/ProcessSteps.astro';
 import LogoGrid from '../components/content/LogoGrid.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
-import { technologies } from '../data/technologies';
+import { technologiesForGrid } from '../data/technologies';
 ---
 
 <BaseLayout
@@ -17,7 +17,7 @@ import { technologies } from '../data/technologies';
   <!-- Section 1: Hero -->
   <HeroLarge
     title="You've outgrown spreadsheets. Everything else is too complicated."
-    subtitle="We build modern GCP data platforms for ambitious European companies. Fixed-price projects, senior engineering, clean handover so you own what we built."
+    subtitle="We build modern GCP data platforms for ambitious European companies.<br>Fixed-price projects, senior engineering, clean handover so you own what we built."
     primaryCta={{ text: "Let's talk", href: '/contact/', dataTrack: 'hero-lets-talk' }}
   />
 
@@ -27,8 +27,7 @@ import { technologies } from '../data/technologies';
 
     <div class="svc-row">
       <ServiceCard
-        variant="flagship"
-        accent="teal"
+        eyebrow="Implementation"
         title="No data platform yet?"
         description="You have data in a dozen places and no clear way to see it. We build a full GCP data platform from scratch — ingestion, warehouse, transformations, and dashboards your team actually uses."
         priceRange="€15,000 – €35,000"
@@ -37,31 +36,28 @@ import { technologies } from '../data/technologies';
         dataTrack="home-card-implementation"
       />
       <ServiceCard
-        variant="flagship"
-        accent="plum"
+        eyebrow="Optimization"
         title="Platform exists, but it's broken?"
         description="BigQuery costs tripled. Dashboards take a minute to load. Nobody trusts the numbers. We audit what you have, tell you what's actually wrong, and implement a prioritized fix."
-        priceRange="€20,000 – €50,000 (audit + implementation)"
+        priceRange="€20,000 – €50,000"
         timeline="10–16 weeks"
         href="/services/data-platform-optimization/"
         dataTrack="home-card-optimization"
       />
     </div>
 
-    <div class="svc-row svc-row--subordinate">
+    <div class="svc-row">
       <ServiceCard
-        variant="subordinate"
-        accent="teal"
+        eyebrow="Expert Services"
         title="Need focused help on one thing?"
         description="You know exactly what you need — a Dataform project rebuilt, a Looker semantic layer, BigQuery costs tamed. Fixed-price engagements, scoped in days, delivered in weeks."
-        priceRange="€5,000 – €15,000 per service"
+        priceRange="€5,000 – €15,000"
         timeline="2–6 weeks"
         href="/services/expert-implementation-services/"
         dataTrack="home-card-expert"
       />
       <ServiceCard
-        variant="subordinate"
-        accent="teal"
+        eyebrow="Ongoing Support"
         title="Already have a working platform?"
         description="Keep it healthy with a monthly retainer. Monitoring, incident response, improvements, strategic guidance. Three tiers from €1,000 to €4,000 per month."
         priceRange="From €1,000/month"
@@ -78,16 +74,19 @@ import { technologies } from '../data/technologies';
     <h2 class="section-heading">Who we work with.</h2>
     <TwoColumnSplit
       variant="is-for"
+      bare
       leftTitle="This is for you if:"
       leftItems={[
         "You're on Google Cloud, or planning to be.",
-        "You don't have a data team — or the person doing it is you.",
-        "You want the results a senior data hire would deliver, without the 18-month payback.",
+        "You're past the \"spreadsheet era\" and need a real platform.",
+        "You have analysts, not data engineers — or no team at all.",
+        "You need senior data engineering — and don't want to hire for it.",
         "You can make a decision. Our best engagements start in two-week sales cycles, not four-month ones.",
       ]}
       rightTitle="This isn't for you if:"
       rightItems={[
         "You need AWS or Azure. We don't do multi-cloud.",
+        "You're pre-product-market-fit. Data isn't your bottleneck yet.",
         "You need analysts or data scientists. We're data engineers.",
         "You want the cheapest hourly rate available. We compete on seniority, not price.",
         "You need real-time streaming at scale — Kafka, Flink, sub-second latency. Different specialism.",
@@ -100,22 +99,34 @@ import { technologies } from '../data/technologies';
     <h2 class="section-heading">How we work.</h2>
     <ProcessSteps
       steps={[
-        { number: 1, title: "The scoping call", description: "Free 30-minute conversation. We listen, you talk, we tell you honestly whether we're a fit." },
-        { number: 2, title: "The proposal", description: "Within 5 business days: fixed-price proposal with scope, deliverables, timeline, price. No hourly billing surprises." },
-        { number: 3, title: "The build", description: "We lead. Your team joins when their input matters. Weekly updates, bi-weekly demos, async by default." },
-        { number: 4, title: "The handover", description: "Full documentation, walkthrough session, 30-day support window so your team actually owns what we built." },
+        { icon: 'video', title: "The scoping call", description: "Free 45-minute conversation. We listen, you talk, we tell you honestly whether we're a fit." },
+        { icon: 'file-text', title: "The proposal", description: "Within 5 business days: fixed-price proposal with scope, deliverables, timeline, price. No hourly billing surprises." },
+        { icon: 'code-2', title: "The build", description: "We lead. Your team joins when their input matters. Weekly updates, bi-weekly demos, async by default." },
+        { icon: 'key-round', title: "The handover", description: "Full documentation, walkthrough session, 30-day support window so your team actually owns what we built." },
       ]}
     />
   </SectionWrapper>
 
-  <!-- Section 5: Why GCP only — LIGHT GREY-TEAL SECTION (page's one accent section) -->
-  <SectionWrapper bg="card" py="lg">
-    <div class="text-center-wrap">
-      <h2 class="section-heading section-heading--center">Why only Google Cloud?</h2>
-      <div class="prose">
-        <p>Most consultancies are multi-cloud because most clients are multi-cloud. We went the other way.</p>
-        <p>Google's data stack — BigQuery, Dataform, Looker, Cloud Storage — is the most cohesive analytics platform available. The services are designed to work together, billed together, monitored together. When you specialize in one stack, you develop the kind of depth that only comes from running it in production every day for years.</p>
-        <p>The payoff for you: tighter architectures, lower cloud costs, fewer surprises, and no time wasted debugging integrations between five vendors who blame each other.</p>
+  <!-- Section 5: Why GCP only -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="gcp-section">
+      <div class="gcp-intro">
+        <img src="/logos/googlecloud.svg" alt="" aria-hidden="true" class="gcp-logo" width="48" height="48" />
+        <h2 class="section-heading gcp-heading">Why only<br />Google Cloud?</h2>
+      </div>
+      <div class="reasons">
+        <div class="reason">
+          <h3 class="reason-title">Focus over breadth</h3>
+          <p>Most consultancies are multi-cloud because most clients are multi-cloud. We went the other way.</p>
+        </div>
+        <div class="reason">
+          <h3 class="reason-title">Built to work together</h3>
+          <p>Google's data stack — BigQuery, Dataform, Looker, Cloud Storage — is the most cohesive analytics platform available. The services are designed to work together, billed together, monitored together. When you specialize in one stack, you develop the kind of depth that only comes from running it in production every day for years.</p>
+        </div>
+        <div class="reason">
+          <h3 class="reason-title">What you get</h3>
+          <p>Tighter architectures, lower cloud costs, fewer surprises, and no time wasted debugging integrations between five vendors who blame each other.</p>
+        </div>
       </div>
     </div>
   </SectionWrapper>
@@ -124,9 +135,9 @@ import { technologies } from '../data/technologies';
   <SectionWrapper bg="white" py="lg">
     <div class="tech-header">
       <h2 class="section-heading">The tools we build with.</h2>
-      <p class="section-sub">Ten tools, used selectively — not a buzzword list.</p>
+      <p class="section-sub">A focused set of tools, used selectively — not a buzzword list.</p>
     </div>
-    <LogoGrid technologies={technologies} showTaglines={true} />
+    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
     </p>
@@ -146,11 +157,6 @@ import { technologies } from '../data/technologies';
     line-height: 1.25;
   }
 
-  .section-heading--center {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
   .text-center-wrap {
     max-width: 720px;
     margin: 0 auto;
@@ -163,6 +169,54 @@ import { technologies } from '../data/technologies';
     color: var(--color-text);
     line-height: 1.7;
     margin: 0 0 16px 0;
+  }
+
+  .gcp-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .gcp-section {
+      grid-template-columns: minmax(220px, 1fr) 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+  }
+
+  .gcp-logo {
+    display: block;
+    margin: 0 0 16px 0;
+    width: 48px;
+    height: 48px;
+  }
+
+  .gcp-heading {
+    margin: 0;
+  }
+
+  .reasons {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .reason-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .reason p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
   }
 
   .prose p:last-child { margin-bottom: 0; }
@@ -189,7 +243,7 @@ import { technologies } from '../data/technologies';
     gap: 24px;
   }
 
-  .svc-row--subordinate {
+  .svc-row + .svc-row {
     margin-top: 24px;
   }
 

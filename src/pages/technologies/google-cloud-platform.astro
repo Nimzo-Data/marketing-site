@@ -3,6 +3,7 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
@@ -13,22 +14,26 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
   heroPositioning="We build exclusively on GCP — not because it's what we know, but because it's the right choice for European data teams that need compliance, global reach, and a best-in-class analytics stack."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack — from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) — all designed to work together without custom glue code.</p>
+    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack — from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) to AI (Vertex AI, Gemini) — all designed to work together without custom glue code.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
     <p>GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data — serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure and more time building value.</p>
+    <p>For European clients specifically, GCP now offers three levels of data sovereignty — standard regional residency, Assured Workloads for EU (EU-only storage, processing, and support), and sovereign partnerships like S3NS (Thales + Google, SecNumCloud-aligned in France) — which matter when GDPR, regulated sectors, or procurement requirements enter the picture.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Design and provision GCP project architecture with proper IAM, VPC, and billing structure</li>
-      <li>Configure BigQuery datasets, access controls, and cost governance (slot reservations, column-level security)</li>
-      <li>Set up Cloud Composer (managed Airflow) or Cloud Workflows for orchestration</li>
-      <li>Implement Cloud Storage lifecycle policies and data landing zones for ingestion pipelines</li>
-      <li>Advise on GCP region selection for EU data residency requirements (GDPR compliance)</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Design and provision GCP project architecture with proper IAM, VPC, and billing structure",
+        "Configure BigQuery datasets, access controls, and cost governance (slot reservations, column-level security)",
+        "Set up Cloud Run Functions and Cloud Scheduler for lightweight scheduled jobs and custom API integrations",
+        "Implement Cloud Storage lifecycle policies and data landing zones for ingestion pipelines",
+        "Advise on GCP region selection and sovereignty options for EU data residency (GDPR, Assured Workloads, S3NS)",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -38,43 +43,29 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
         {
           heading: 'Choose GCP when:',
           bullets: [
-            'Your workload is analytics-heavy (BigQuery is the best value warehouse in the market)',
-            'You need European data residency',
+            'Your primary workload is analytics (BigQuery is the best-value warehouse in the market)',
+            'You need European data residency with clean EU multi-region support',
             "You're already in the Google ecosystem (Google Ads, GA4, Workspace)",
-            'You want a cohesive stack with fewer moving parts',
+            'AI workloads (Gemini, Vertex AI) are part of your data roadmap',
+            'You want a cohesive stack with fewer integration points',
           ],
         },
         {
           heading: 'Choose AWS when:',
           bullets: [
-            "You're running complex multi-service applications with Lambda, SQS, DynamoDB, and the rest of the AWS-native stack",
-            'You need deeper enterprise features',
+            "You're running complex multi-service applications on Lambda, SQS, DynamoDB, and the AWS-native stack",
+            'Your data team is already deep in AWS infrastructure',
+            'You need the broadest enterprise feature set available',
           ],
         },
         {
           heading: 'Choose Azure when:',
           bullets: [
-            'Your organization is heavily Microsoft-invested (M365, Power BI, AD)',
-            'Data gravity is already on Azure',
+            'Your organization is heavily Microsoft-invested (M365, Power BI, Active Directory)',
+            'Data gravity is already on Azure and moving it would cost more than it saves',
           ],
         },
       ]}
-      footer="Azure's data services work, but BigQuery is still the better warehouse."
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

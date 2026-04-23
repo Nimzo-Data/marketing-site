@@ -1,22 +1,78 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette */
-  --color-primary: #004f4c;       /* Deep teal */
-  --color-accent: #493441;        /* Plum */
-  --color-card: #dee7e7;          /* Light grey-teal */
-  --color-off-white: #f4faff;     /* Off-white — rarely used */
-  --color-white: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #5a5a5a;
+  /* ============================================================
+     CANONICAL DESIGN TOKENS (semantic names).
+     Use these in new code. Subsequent prompts will migrate
+     existing uses of the legacy tokens below to these names.
+
+     Backgrounds:
+       --color-bg-default      #FFFFFF   standard section bg
+       --color-bg-accent       #dee7e7   selected sections only
+       --color-bg-cta          #004f4c   final CTA banner only
+
+     Text:
+       --color-text-primary    #1a1a1a   body copy, headings on light
+       --color-text-muted      #5a5a5a   secondary copy
+       --color-text-on-dark    #FFFFFF   on dark-teal bg
+
+     Brand:
+       --color-brand-teal      #004f4c   primary brand
+       --color-brand-plum      #493441   accent (non-clickable)
+
+     Borders:
+       --color-border-subtle   #dee7e7   cards, header/footer, dividers
+       --color-border-flagship #493441   flagship card borders (plum)
+
+     BUTTONS
+       Primary on light bg:  bg=brand-teal, text=on-dark
+       Primary on dark bg:   bg=bg-default, text=brand-teal (inverted)
+       Secondary (text+→):   color=brand-teal, no bg, no border
+       No outline buttons. No plum buttons. Nothing clickable is plum.
+
+     CARDS (all white bg; differentiation by border only)
+       Flagship:    2px border-flagship (plum), generous padding
+       Standard:    1px border-subtle, standard padding
+       Cross-link:  1px border-subtle + explicit "→" CTA at bottom
+
+     PLUM USAGE (accent only — never bg, never clickable)
+       Flagship card borders, price pills, ✕ cross icons,
+       numbered step markers, table header bg, small pill labels.
+     ============================================================ */
+  --color-bg-default: #FFFFFF;
+  --color-bg-accent: #dee7e7;
+  --color-bg-cta: #004f4c;
+
+  --color-text-primary: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-text-on-dark: #FFFFFF;
+
+  --color-brand-teal: #004f4c;
+  --color-brand-plum: #493441;
+
+  --color-border-subtle: #dee7e7;
+  --color-border-flagship: #493441;
+
+  /* ============================================================
+     LEGACY TOKENS (pre-migration aliases).
+     Kept for backward compatibility while ~45 files still use them.
+     Will be removed after the migration prompts land.
+     ============================================================ */
+  --color-primary: #004f4c;       /* -> --color-brand-teal / --color-bg-cta */
+  --color-accent: #493441;        /* -> --color-brand-plum / --color-border-flagship */
+  --color-card: #dee7e7;          /* -> --color-bg-accent / --color-border-subtle */
+  --color-off-white: #f4faff;     /* -> slated for removal (unused in new spec) */
+  --color-white: #ffffff;         /* -> --color-bg-default / --color-text-on-dark */
+  --color-text: #1a1a1a;          /* -> --color-text-primary */
+  --color-text-secondary: #5a5a5a; /* -> --color-text-muted */
 
   /* Backgrounds */
-  --color-background: #ffffff;    /* Default section background */
+  --color-background: #ffffff;    /* -> --color-bg-default */
 
   /* Surfaces & borders */
-  --color-border: #dee7e7;        /* Header border — light grey-teal */
-  --color-surface-hover: #f0f4f4;
-  --color-surface-subtle: #f9fbfb;
+  --color-border: #dee7e7;        /* -> --color-border-subtle */
+  --color-surface-hover: #f0f4f4; /* not in new spec — kept for hover states */
+  --color-surface-subtle: #f9fbfb; /* not in new spec — kept for subtle surfaces */
 
   /* Semantic (success/error) */
   --color-success: #16a34a;

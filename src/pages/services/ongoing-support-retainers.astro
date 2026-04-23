@@ -12,17 +12,15 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
   heroTitle="Your platform is live. Someone still has to keep it running."
   heroSubtitle="Monthly retainers for monitoring, incident response, and continuous improvement — so you don't need to hire a full-time data engineer to keep things healthy."
 >
-  <!-- Who this is for -->
+  <!-- Who this is for — bare list -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Who this is for.</h2>
-    <div class="who-card">
-      <ul class="tick-list">
-        <li>You have a working data platform (built by us or someone else) and you want it to stay working.</li>
-        <li>Your data lead wears three hats and can't dedicate time to platform maintenance.</li>
-        <li>You want a senior technical resource on call without full-time hiring cost.</li>
-        <li>You're growing fast and want architecture guidance as your data needs scale.</li>
-      </ul>
-    </div>
+    <ul class="tick-list">
+      <li>You have a working data platform and want it to stay working.</li>
+      <li>You don't want to hire full-time — want senior support on call.</li>
+      <li>Your team can handle most things, needs backup on the hard stuff.</li>
+      <li>You're growing fast and need architecture guidance as data scales.</li>
+    </ul>
     <p class="list-footer">Not the right fit if you don't have a platform yet — retainers work best on top of a solid foundation. If you're earlier than that, start with an implementation or optimization engagement.</p>
   </SectionWrapper>
 
@@ -32,23 +30,23 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     <RetainerGrid tiers={retainerTiers} rows={retainerRows} />
   </SectionWrapper>
 
-  <!-- Highlighted "What fits in those hours" -->
+  <!-- What fits in those hours — plain subsection -->
   <SectionWrapper py="md" bg="white">
-    <div class="fits-card">
+    <div class="fits-section">
       <h3 class="fits-heading">What fits in those hours?</h3>
       <p>Growth (16 hours) typically covers one new data source or two to three new dashboards a month, on top of ongoing support. Partnership (32 hours) is roughly one day a week of dedicated capacity.</p>
     </div>
   </SectionWrapper>
 
-  <!-- How the retainer works — LIGHT GREY-TEAL SECTION -->
-  <SectionWrapper py="lg" bg="card">
+  <!-- How the retainer works -->
+  <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">How the retainer works.</h2>
-    <ul class="plain-list">
+    <ul class="lead-list">
       <li><strong>Month-to-month.</strong> 30-day written notice to end or change tier. No minimum commitment.</li>
-      <li>Hours are tracked monthly and don't roll over.</li>
-      <li>Work beyond included hours: €150/hour.</li>
-      <li>Large requests that would use most of your monthly hours at once may be quoted as a separate mini-project, keeping your retainer hours free for smaller work.</li>
-      <li>Response times above refer to business hours, Monday to Friday (Central European Time).</li>
+      <li><strong>No rollover.</strong> Hours are tracked monthly and don't roll over.</li>
+      <li><strong>Beyond included hours.</strong> €150/hour for work above your tier.</li>
+      <li><strong>Big requests.</strong> Large requests that would use most of your monthly hours at once may be quoted as a separate mini-project, keeping your retainer hours free for smaller work.</li>
+      <li><strong>Business hours.</strong> Response times above refer to business hours, Monday to Friday (Central European Time).</li>
     </ul>
 
     <div class="example-card">
@@ -67,18 +65,21 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
         description="Build end-to-end from scratch."
         href="/services/data-platform-implementation/"
         buttonText="See Implementation"
+        variant="link"
       />
       <CTACard
         title="Platform exists but broken?"
         description="Audit what you have, then fix what matters."
         href="/services/data-platform-optimization/"
         buttonText="See Optimization"
+        variant="link"
       />
       <CTACard
-        title="Need focused expert help on one thing?"
+        title="Need help on one specific layer?"
         description="Fixed-price engagements, 2–6 weeks."
         href="/services/expert-implementation-services/"
         buttonText="See Expert Services"
+        variant="link"
       />
     </div>
   </SectionWrapper>
@@ -94,13 +95,6 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     line-height: 1.25;
   }
 
-  .who-card {
-    background-color: var(--color-card);
-    border-radius: var(--radius-card);
-    padding: 32px;
-    max-width: 820px;
-  }
-
   .tick-list {
     list-style: none;
     padding: 0;
@@ -108,6 +102,7 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     display: flex;
     flex-direction: column;
     gap: 14px;
+    max-width: 820px;
   }
 
   .tick-list li {
@@ -140,10 +135,7 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     max-width: 820px;
   }
 
-  .fits-card {
-    background-color: var(--color-card);
-    border-radius: var(--radius-card);
-    padding: 24px;
+  .fits-section {
     max-width: 820px;
   }
 
@@ -155,25 +147,25 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     margin: 0 0 8px 0;
   }
 
-  .fits-card p {
+  .fits-section p {
     font-family: var(--font-body);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: var(--color-text);
     line-height: 1.7;
     margin: 0;
   }
 
-  .plain-list {
+  .lead-list {
     list-style: none;
     padding: 0;
     margin: 0 0 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     max-width: 820px;
   }
 
-  .plain-list li {
+  .lead-list li {
     position: relative;
     padding-left: 20px;
     font-family: var(--font-body);
@@ -182,7 +174,7 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     line-height: 1.7;
   }
 
-  .plain-list li::before {
+  .lead-list li::before {
     content: '';
     position: absolute;
     left: 4px;
@@ -190,12 +182,17 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: var(--color-primary);
+    background-color: var(--color-brand-plum);
+  }
+
+  .lead-list strong {
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .example-card {
     background-color: var(--color-white);
-    border: 1px solid var(--color-card);
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
     padding: 24px;
     max-width: 820px;
@@ -204,11 +201,11 @@ import { retainerTiers, retainerRows } from '../../data/retainers';
 
   .example-heading {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.875rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-secondary);
+    color: var(--color-brand-plum);
     margin: 0 0 8px 0;
   }
 

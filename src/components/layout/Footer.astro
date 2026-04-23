@@ -4,11 +4,11 @@ import { serviceLinks } from '../../data/navigation';
 const currentYear = new Date().getFullYear();
 
 const footerTechnologies: { label: string; href: string }[] = [
-  { label: 'Google Cloud Platform', href: '/technologies/google-cloud-platform/' },
   { label: 'BigQuery', href: '/technologies/bigquery/' },
   { label: 'Dataform', href: '/technologies/dataform/' },
   { label: 'Airbyte', href: '/technologies/airbyte/' },
-  { label: 'Looker', href: '/technologies/looker/' },
+  { label: 'Lightdash', href: '/technologies/lightdash/' },
+  { label: 'Metabase', href: '/technologies/metabase/' },
 ];
 
 const companyLinks: { label: string; href: string }[] = [
@@ -22,7 +22,7 @@ const companyLinks: { label: string; href: string }[] = [
     <div class="footer-grid">
       <!-- Column 1: Brand -->
       <div class="footer-col footer-col--brand">
-        <p class="footer-logo">Nimzo Data</p>
+        <img src="/brand/logo-transparent.svg" alt="Nimzo Data" class="footer-logo-img" width="200" height="30" />
         <p class="footer-tagline">
           Modern data infrastructure for ambitious European companies.
         </p>
@@ -90,6 +90,8 @@ const companyLinks: { label: string; href: string }[] = [
       <ul class="footer-bottom-links" role="list">
         <li><a href="/privacy-policy/" class="footer-bottom-link">Privacy Policy</a></li>
         <li><a href="/terms-of-service/" class="footer-bottom-link">Terms of Service</a></li>
+        <li><a href="/mentions-legales/" class="footer-bottom-link">Mentions légales</a></li>
+        <li><button type="button" class="footer-bottom-link footer-bottom-link--button" data-cookie-reopen>Cookie preferences</button></li>
       </ul>
     </div>
   </div>
@@ -128,20 +130,32 @@ const companyLinks: { label: string; href: string }[] = [
     }
   }
 
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .footer-col--brand {
+      grid-column: span 3;
+      max-width: 480px;
+    }
+  }
+
   @media (min-width: 1024px) {
     .footer-grid {
       grid-template-columns: 1.4fr 1fr 1fr 0.8fr 1.1fr;
       gap: 40px;
     }
+    .footer-col--brand {
+      grid-column: auto;
+      max-width: none;
+    }
   }
 
-  .footer-logo {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 22px;
-    color: var(--color-primary);
-    margin: 0 0 12px 0;
-    letter-spacing: -0.01em;
+  .footer-logo-img {
+    display: block;
+    height: 28px;
+    width: auto;
+    margin: 0 0 16px 0;
   }
 
   .footer-tagline {
@@ -233,5 +247,15 @@ const companyLinks: { label: string; href: string }[] = [
 
   .footer-bottom-link:hover {
     color: var(--color-primary);
+  }
+
+  .footer-bottom-link--button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: inherit;
   }
 </style>

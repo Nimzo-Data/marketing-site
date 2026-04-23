@@ -5,39 +5,39 @@ import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.as
 import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
-import CTACard from '../../components/cards/CTACard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { technologies } from '../../data/technologies';
+import { technologiesForGrid } from '../../data/technologies';
 ---
 
 <ServiceLayout
   title="Data Platform Optimization | Nimzo Data"
   description="We audit and fix GCP data platforms — BigQuery costs, slow dashboards, broken pipelines. Two phases: audit, then fix. Fixed price."
-  heroTitle="Your data platform exists. It isn't working."
-  heroSubtitle="We audit what you have, tell you what's actually wrong, and fix the things that matter. Two phases: understand first, then fix."
+  heroTitle="Your data platform exists.<br>It isn't working."
+  heroSubtitle="We audit what you have, tell you what's actually wrong, and implement a prioritized fix. Two phases — audit first, implementation second. Senior engineer on every project."
 >
   <!-- Challenges & Outcomes -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">What brings most clients here.</h2>
     <TwoColumnSplit
       variant="challenges-solution"
+      bare
       leftTitle="The problem:"
       leftItems={[
-        "BigQuery costs went up 3x in six months and nobody can explain it.",
-        "Dashboards take 45 seconds to load and people have stopped opening them.",
-        "Pipelines break every few weeks. You find out when someone files a ticket.",
-        "You inherited a platform from a team that left. You don't know what half of it does.",
-        "Metrics disagree between teams. Finance says revenue is X. Product says Y. Leadership believes neither.",
-        "The BI tool you pay for mostly sits unused because nobody trusts the data in it.",
+        "BigQuery costs tripled in six months. No one knows why.",
+        "Dashboards take 45 seconds. People stopped opening them.",
+        "Pipelines break weekly. You hear about it from tickets.",
+        "You inherited a platform. Nobody knows what half of it does.",
+        "Finance says revenue is X. Product says Y. Leadership believes neither.",
+        "Nobody uses the BI tool — the data isn't trusted.",
       ]}
       rightTitle="What you get:"
       rightItems={[
-        "A written audit report you can actually act on — not a slideware deliverable.",
-        "A prioritized fix list, ranked by cost-of-cheap-fix vs pain-of-expensive-fix.",
-        "Pipelines that run reliably, with alerts that surface before a user notices.",
+        "A written audit you can act on — not slideware.",
+        "A prioritized fix list, ranked by cost vs impact.",
+        "Reliable pipelines with alerts before users notice.",
         "Queries and dashboards that load in seconds, not minutes.",
-        "One consistent definition of every metric your business runs on.",
-        "A BI tool that gets used — because the data behind it is trustworthy.",
+        "One definition per metric your business runs on.",
+        "A BI tool people actually use, with trustworthy data.",
       ]}
     />
   </SectionWrapper>
@@ -54,17 +54,38 @@ import { technologies } from '../../data/technologies';
     <h2 class="section-heading">Three layers. Same three we fix.</h2>
     <div class="layers-grid">
       <div class="layer-card">
-        <div class="layer-icon" aria-hidden="true"></div>
+        <div class="layer-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 2v6"/>
+            <path d="M15 2v6"/>
+            <path d="M12 17v5"/>
+            <path d="M5 8h14"/>
+            <path d="M6 11V8h12v3a6 6 0 1 1-12 0Z"/>
+          </svg>
+        </div>
         <h3 class="layer-title">Data Pipelines</h3>
         <p class="layer-body">Replace legacy Python scripts with Airbyte. Add monitoring and alerting that actually fire. Fix the three pipelines nobody touches because they scare everyone.</p>
       </div>
       <div class="layer-card">
-        <div class="layer-icon" aria-hidden="true"></div>
+        <div class="layer-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+            <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/>
+            <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+          </svg>
+        </div>
         <h3 class="layer-title">Data Architecture &amp; Modeling</h3>
         <p class="layer-body">Refactor the models nobody understands. Cut BigQuery costs with partitioning, clustering, and query rewrites. Add tests so data quality issues stop reaching your dashboards.</p>
       </div>
       <div class="layer-card">
-        <div class="layer-icon" aria-hidden="true"></div>
+        <div class="layer-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="M18 17V9"/>
+            <path d="M13 17V5"/>
+            <path d="M8 17v-3"/>
+          </svg>
+        </div>
         <h3 class="layer-title">Dashboards, Reports &amp; AI-ready</h3>
         <p class="layer-body">Migrate off BI tools your team has given up on. Rebuild trust in the numbers by rebuilding the numbers. Set up the semantic layer so when you're ready for AI features, the foundation holds up.</p>
       </div>
@@ -75,19 +96,22 @@ import { technologies } from '../../data/technologies';
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">The tools we work with — yours and ours.</h2>
     <p class="intro-body">We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.</p>
-    <LogoGrid technologies={technologies} />
+    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <p class="see-all-link">
+      <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
+    </p>
   </SectionWrapper>
 
-  <!-- How it runs — LIGHT GREY-TEAL SECTION -->
-  <SectionWrapper py="lg" bg="card">
+  <!-- How it runs -->
+  <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">How an optimization runs.</h2>
     <ProcessSteps
       steps={[
-        { number: 1, title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "We review your GCP architecture, query costs, pipeline reliability, and data quality. We interview your team. You get a written report and a prioritized fix list." },
-        { number: 2, title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the implementation, do it yourselves, or stop here. The audit is valuable on its own — plenty of clients take the report and execute internally." },
-        { number: 3, title: "Implementation (6–10 weeks)", description: "We implement the fixes from the audit — in the priority order you approved. Fixed price, agreed before we start." },
-        { number: 4, title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Same as a greenfield build, just on the platform we improved." },
-        { number: 5, title: "Post-launch support (2 weeks, included)", description: "14 days of reachability for questions, tweaks, edge cases." },
+        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "We review your GCP architecture, query costs, pipeline reliability, and data quality. We interview your team. You get a written report and a prioritized fix list." },
+        { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the implementation, do it yourselves, or stop here. The audit is valuable on its own — plenty of clients take the report and execute internally." },
+        { icon: 'code-2', title: "Implementation (6–10 weeks)", description: "We implement the fixes from the audit — in the priority order you approved. Fixed price, agreed before we start." },
+        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Same as a greenfield build, just on the platform we improved." },
+        { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "30 days of reachability for questions, tweaks, edge cases." },
       ]}
     />
   </SectionWrapper>
@@ -125,24 +149,34 @@ import { technologies } from '../../data/technologies';
 
     <div class="why-more">
       <h3 class="why-more-title">Why is this more expensive than building from scratch?</h3>
-      <p>Two reasons. First, investigation. We spend the first week of every optimization understanding what previous engineers built — decisions made by people who may no longer be at the company, working around constraints we didn't create.</p>
-      <p>Second, interconnection. Most broken platforms have connected problems. Fixing the slow dashboard means fixing the transformation model, which means fixing the pipeline that feeds it. We price to cover that investigation, not just the final fix.</p>
+      <p class="why-more-intro">Two reasons.</p>
+      <div class="why-more__grid">
+        <div class="why-more__reason">
+          <h4 class="why-more__sub">Investigation</h4>
+          <p>We spend the first week of every optimization understanding what previous engineers built — decisions made by people who may no longer be at the company, working around constraints we didn't create.</p>
+        </div>
+        <div class="why-more__reason">
+          <h4 class="why-more__sub">Interconnection</h4>
+          <p>Most broken platforms have connected problems. Fixing the slow dashboard means fixing the transformation model, which means fixing the pipeline that feeds it. We price to cover that investigation, not just the final fix.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="payment-terms">
-      <strong>Payment:</strong> Audit 100% at audit kickoff. Implementation 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.
+    <div class="payment-section">
+      <h3 class="payment-heading">Payment</h3>
+      <p class="payment-body">Audit 100% at audit kickoff. Implementation 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
     </div>
   </SectionWrapper>
 
   <!-- After launch -->
   <SectionWrapper py="lg" bg="white">
-    <CTACard
-      title="Keeping it fixed."
-      description="An optimized platform needs less maintenance than a broken one, but it still needs some. Monthly retainers cover monitoring, small improvements, and a senior on call."
-      href="/services/ongoing-support-retainers/"
-      buttonText="See retainer options"
-      dataTrack="opt-cta-retainers"
-    />
+    <div class="retainer-cta">
+      <h2 class="section-heading retainer-cta__heading">Keeping it fixed.</h2>
+      <p class="retainer-cta__body">An optimized platform needs less maintenance than a broken one, but it still needs some. Monthly retainers cover monitoring, small improvements, and a senior on call.</p>
+      <a href="/services/ongoing-support-retainers/" class="retainer-cta__link" data-track="opt-cta-retainers">
+        See retainer options &rarr;
+      </a>
+    </div>
   </SectionWrapper>
 </ServiceLayout>
 
@@ -163,6 +197,23 @@ import { technologies } from '../../data/technologies';
     line-height: 1.6;
     margin: 24px 0 0 0;
     max-width: 720px;
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
   }
 
   .intro-body {
@@ -201,8 +252,15 @@ import { technologies } from '../../data/technologies';
   .layer-icon {
     width: 36px;
     height: 36px;
-    border-radius: 8px;
-    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand-teal);
+  }
+
+  .layer-icon svg {
+    width: 32px;
+    height: 32px;
   }
 
   .layer-title {
@@ -246,7 +304,7 @@ import { technologies } from '../../data/technologies';
   }
 
   .phase-card--highlighted {
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-brand-plum);
   }
 
   .phase-label {
@@ -261,8 +319,8 @@ import { technologies } from '../../data/technologies';
   .phase-price {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: 1.75rem;
-    color: var(--color-primary);
+    font-size: 1.5rem;
+    color: var(--color-brand-plum);
     line-height: 1.1;
   }
 
@@ -284,7 +342,6 @@ import { technologies } from '../../data/technologies';
 
   .why-more {
     margin-top: 40px;
-    max-width: 720px;
   }
 
   .why-more-title {
@@ -305,15 +362,85 @@ import { technologies } from '../../data/technologies';
 
   .why-more p:last-child { margin-bottom: 0; }
 
-  .payment-terms {
+  .why-more__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .why-more__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .why-more__sub {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+
+  .why-more__reason p {
+    margin: 0;
+  }
+
+  .retainer-cta {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .retainer-cta__heading {
+    margin: 0;
+  }
+
+  .retainer-cta__body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .retainer-cta__link {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .retainer-cta__link:hover {
+    text-decoration: underline;
+  }
+
+  .payment-section {
+    margin-top: 40px;
+    max-width: 720px;
+  }
+
+  .payment-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .payment-body {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text);
     line-height: 1.6;
-    background-color: var(--color-card);
-    border-left: 3px solid var(--color-primary);
-    padding: 16px 20px;
-    margin-top: 32px;
-    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    margin: 0;
   }
 </style>

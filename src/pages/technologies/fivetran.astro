@@ -3,6 +3,7 @@ import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
 import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 ---
 
 <TechnologyLayout
@@ -13,22 +14,26 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
   heroPositioning="When setup speed and managed reliability matter more than cost control, Fivetran gets pipelines running in hours — not weeks."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Fivetran is a fully managed ELT platform with 500+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced.</p>
+    <p>Fivetran is a fully managed ELT platform with 700+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced, with a Free tier and paid Standard / Enterprise / Business Critical plans.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>Fivetran's managed reliability is its main selling point. For companies that want pipelines that simply work — without a data engineer babysitting connector updates — Fivetran is hard to beat. The MAR pricing model is predictable for stable data volumes, and the connector quality for major SaaS tools (Salesforce, HubSpot, Stripe) is best-in-class.</p>
+    <p>Fivetran's managed reliability is its main selling point. For companies that want pipelines that simply work — without a data engineer babysitting connector updates — Fivetran is hard to beat. The connector quality for major SaaS tools (Salesforce, HubSpot, Stripe, Shopify) is best-in-class.</p>
+    <p>One thing to watch: Fivetran and dbt Labs merged in October 2025, so choosing Fivetran increasingly means committing to the same vendor across ingestion and transformation. That's convenient for some teams and a lock-in concern for others — worth a conscious decision either way.</p>
   </TextSection>
 
-  <TextSection title="How We Use It" bg="white">
-    <ul class="how-list">
-      <li>Evaluate whether Fivetran or Airbyte is the right fit based on data volume, team capacity, and connector needs</li>
-      <li>Provision and configure Fivetran connectors for CRM, marketing, finance, and product analytics sources</li>
-      <li>Optimize Fivetran sync frequency and filtering to control MAR costs</li>
-      <li>Integrate Fivetran-normalized schemas with downstream dbt or Dataform transformation layers</li>
-      <li>Set up dbt source freshness tests to detect Fivetran sync failures before they affect dashboards</li>
-    </ul>
-  </TextSection>
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title="How We Use It"
+      items={[
+        "Evaluate whether Fivetran or Airbyte is the right fit based on data volume, team capacity, and connector needs",
+        "Provision and configure Fivetran connectors for CRM, marketing, finance, and product analytics sources",
+        "Optimize Fivetran sync frequency and filtering to control MAR costs",
+        "Integrate Fivetran-normalized schemas with downstream dbt or Dataform transformation layers",
+        "Set up dbt source freshness tests to detect Fivetran sync failures before they affect dashboards",
+      ]}
+    />
+  </SectionWrapper>
 
   <SectionWrapper bg="white" py="lg">
     <WhenToChoose
@@ -37,43 +42,28 @@ import WhenToChoose from '../../components/content/WhenToChoose.astro';
         {
           heading: 'Choose Fivetran when:',
           bullets: [
-            'You need the most polished managed ELT available',
-            'Your data sources are major SaaS tools (Salesforce, HubSpot, Stripe, Shopify)',
-            'You value zero-maintenance over cost optimization',
+            'You need the most polished managed ELT available — zero maintenance',
+            'Your sources are mainstream SaaS (Salesforce, HubSpot, Stripe, Shopify)',
+            "You value zero-maintenance pipelines over cost optimization",
           ],
         },
         {
           heading: 'Choose Airbyte when:',
           bullets: [
-            'You have many sources and MAR would push Fivetran above €20,000/year',
-            'You need custom connectors for internal APIs',
-            'Open-source self-hosting is appealing',
+            'Overall cost matters more than maximum polish — Airbyte is cheaper at most scales',
+            'You need custom connectors for internal APIs or unusual sources',
+            'You want vendor independence across ingestion and transformation (post Fivetran + dbt merger)',
           ],
         },
         {
           heading: 'Choose direct API integration when:',
           bullets: [
-            'You only need one or two simple sources',
-            'You want full control',
-            'Ongoing cost matters more than upfront work',
+            'You only need one or two simple sources, no schema evolution needed',
+            'You want full control over the integration logic',
+            'Ongoing cost matters more than upfront engineering work',
           ],
         },
       ]}
-      footer="Our rule of thumb: if you'd pay Fivetran more than €15,000/year at current volume, Airbyte usually wins on total cost of ownership."
     />
   </SectionWrapper>
 </TechnologyLayout>
-
-<style>
-  .how-list {
-    list-style: disc;
-    padding-left: 22px;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-  .how-list li { margin-bottom: 6px; }
-  .how-list li::marker { color: var(--color-primary); }
-</style>

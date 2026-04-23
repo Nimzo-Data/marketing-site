@@ -30,8 +30,8 @@ const { toolName, toolLogo, toolCategory, positioning } = Astro.props;
   .hero-tech {
     width: 100%;
     background-color: var(--color-white);
-    padding-top: 96px;
-    padding-bottom: 64px;
+    padding-top: clamp(80px, 10vw, 128px);
+    padding-bottom: clamp(64px, 8vw, 96px);
   }
 
   .hero-inner {
@@ -48,7 +48,7 @@ const { toolName, toolLogo, toolCategory, positioning } = Astro.props;
   }
 
   .hero-logo-area {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .tool-logo {
@@ -75,14 +75,17 @@ const { toolName, toolLogo, toolCategory, positioning } = Astro.props;
 
   .category-badge {
     display: inline-block;
-    background-color: var(--color-card);
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
+    background-color: transparent;
+    color: var(--color-brand-plum);
+    border: 1px solid var(--color-brand-plum);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .hero-title {
@@ -106,6 +109,7 @@ const { toolName, toolLogo, toolCategory, positioning } = Astro.props;
     color: var(--color-text-secondary);
     margin: 0;
     line-height: 1.55;
-    max-width: 640px;
+    max-width: 720px;
+    text-wrap: balance;
   }
 </style>

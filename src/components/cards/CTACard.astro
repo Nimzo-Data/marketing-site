@@ -5,28 +5,54 @@ interface Props {
   href: string;
   buttonText?: string;
   dataTrack?: string;
+  variant?: 'button' | 'link';
 }
 
-const { title, description, href, buttonText = 'Learn more', dataTrack } = Astro.props;
+const { title, description, href, buttonText = 'Learn more', dataTrack, variant = 'button' } = Astro.props;
 ---
 
-<div class="cta-card">
-  <h3 class="cta-title">{title}</h3>
-  <p class="cta-description">{description}</p>
-  <a href={href} class="cta-button" data-track={dataTrack || undefined}>
-    {buttonText}
+{variant === 'link' ? (
+  <a href={href} class="cta-card cta-card--link" data-track={dataTrack || undefined}>
+    <h3 class="cta-title">{title}</h3>
+    <p class="cta-description">{description}</p>
+    <span class="cta-link-text">
+      {buttonText} <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+    </span>
   </a>
-</div>
+) : (
+  <div class="cta-card">
+    <h3 class="cta-title">{title}</h3>
+    <p class="cta-description">{description}</p>
+    <a href={href} class="cta-button" data-track={dataTrack || undefined}>
+      {buttonText}
+    </a>
+  </div>
+)}
 
 <style>
   .cta-card {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background-color: var(--color-card);
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
     padding: 32px;
     height: 100%;
+  }
+
+  /* Link variant: whole card is an <a>; hover lift + plum border, like homepage service + tool cards */
+  .cta-card--link {
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .cta-card--link:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
   }
 
   .cta-title {
@@ -65,5 +91,22 @@ const { title, description, href, buttonText = 'Learn more', dataTrack } = Astro
   .cta-button:hover {
     background-color: var(--color-accent);
     color: var(--color-white);
+  }
+
+  .cta-link-text {
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .cta-arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .cta-card--link:hover .cta-arrow {
+    transform: translateX(4px);
   }
 </style>

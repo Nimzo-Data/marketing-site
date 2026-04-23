@@ -1,0 +1,71 @@
+---
+interface Props {
+  title?: string;
+  items: string[];
+}
+
+const { title, items } = Astro.props;
+---
+
+{title && <h2 class="hwu-title">{title}</h2>}
+<div class="hwu-grid">
+  {items.map((item, i) => (
+    <div class="hwu-card">
+      <span class="hwu-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <p class="hwu-text">{item}</p>
+    </div>
+  ))}
+</div>
+
+<style>
+  .hwu-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .hwu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .hwu-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  .hwu-card {
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 20px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .hwu-num {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-plum);
+    line-height: 1.2;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .hwu-text {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

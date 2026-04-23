@@ -8,7 +8,7 @@ import { navItems, ctaLink } from '../../data/navigation';
   <div class="header-inner">
     <!-- Logo -->
     <a href="/" class="logo" aria-label="Nimzo Data — Home">
-      <span class="logo-text">Nimzo Data</span>
+      <img src="/brand/logo-transparent.svg" alt="Nimzo Data" class="logo-img" width="180" height="26" />
     </a>
 
     <!-- Desktop navigation -->
@@ -46,7 +46,53 @@ import { navItems, ctaLink } from '../../data/navigation';
                   </button>
                 )}
                 <div class="dropdown" role="region" aria-label={item.label}>
-                  {item.groups.length === 1 ? (
+                  {item.label === 'Technology' ? (
+                    /* Technology: two explicit columns, arranged for data-flow reading order.
+                       Position-indexed against navigation.ts groups:
+                         [0] Cloud & Warehouse, [1] ETL / ELT, [2] Transformation,
+                         [3] Business Intelligence, [4] Orchestration,
+                         [5] All technologies (no groupLabel, single link).
+                       Left column:  Cloud & Warehouse, Transformation, Orchestration, All technologies link.
+                       Right column: ETL / ELT, Business Intelligence. */
+                    <div class="dropdown-tech">
+                      <div class="dropdown-tech-col">
+                        {[item.groups[0], item.groups[2], item.groups[4]].map((group) => (
+                          <div class="dropdown-group">
+                            {group.groupLabel && (
+                              <p class="dropdown-group-label">{group.groupLabel}</p>
+                            )}
+                            <ul role="list">
+                              {group.links.map((link) => (
+                                <li>
+                                  <a href={link.href} class="dropdown-link">{link.label}</a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                        <a href={item.groups[5].links[0].href} class="dropdown-all-link">
+                          {item.groups[5].links[0].label}
+                          <span aria-hidden="true" class="dropdown-all-arrow">→</span>
+                        </a>
+                      </div>
+                      <div class="dropdown-tech-col">
+                        {[item.groups[1], item.groups[3]].map((group) => (
+                          <div class="dropdown-group">
+                            {group.groupLabel && (
+                              <p class="dropdown-group-label">{group.groupLabel}</p>
+                            )}
+                            <ul role="list">
+                              {group.links.map((link) => (
+                                <li>
+                                  <a href={link.href} class="dropdown-link">{link.label}</a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : item.groups.length === 1 ? (
                     /* Single-group dropdown (Services) */
                     <ul class="dropdown-list" role="list">
                       {item.groups[0].links.map((link) => (
@@ -56,7 +102,7 @@ import { navItems, ctaLink } from '../../data/navigation';
                       ))}
                     </ul>
                   ) : (
-                    /* Multi-group dropdown (Technology) */
+                    /* Fallback multi-group dropdown */
                     <div class="dropdown-grid">
                       {item.groups.map((group) => (
                         <div class="dropdown-group">
@@ -205,12 +251,10 @@ import { navItems, ctaLink } from '../../data/navigation';
     text-decoration: none;
   }
 
-  .logo-text {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--color-primary);
-    letter-spacing: -0.02em;
+  .logo-img {
+    display: block;
+    height: 26px;
+    width: auto;
   }
 
   /* Desktop nav */
@@ -244,7 +288,7 @@ import { navItems, ctaLink } from '../../data/navigation';
     gap: 4px;
     padding: 8px 12px;
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--color-text);
     text-decoration: none;
@@ -317,6 +361,58 @@ import { navItems, ctaLink } from '../../data/navigation';
     min-width: 480px;
   }
 
+  /* Technology dropdown: two flex columns with uniform spacing. */
+  .dropdown-tech {
+    display: flex;
+    gap: 16px;
+    padding: 8px;
+    min-width: 480px;
+  }
+
+  .dropdown-tech-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dropdown-tech .dropdown-group {
+    border-left: 2px solid var(--color-brand-plum);
+    padding-left: 12px;
+  }
+
+  .dropdown-tech .dropdown-group-label {
+    margin-left: 0;
+  }
+
+  .dropdown-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 150ms ease, gap 150ms ease;
+  }
+
+  .dropdown-all-link:hover,
+  .dropdown-all-link:focus-visible {
+    background-color: var(--color-surface-hover);
+    gap: 10px;
+  }
+
+  .dropdown-all-arrow {
+    font-weight: 600;
+    line-height: 1;
+  }
+
   .dropdown-group ul {
     list-style: none;
     margin: 0;
@@ -326,7 +422,7 @@ import { navItems, ctaLink } from '../../data/navigation';
   .dropdown-group-label {
     font-family: var(--font-heading);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
@@ -370,8 +466,8 @@ import { navItems, ctaLink } from '../../data/navigation';
     justify-content: center;
     align-items: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: none;
     border: none;
     cursor: pointer;
