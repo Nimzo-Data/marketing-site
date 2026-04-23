@@ -42,6 +42,25 @@ Saved 23 April 2026, right after shipping `nimzodata.com`. Updated with leftover
   - Cal.com is free, open-source, supports full brand theming
   - Drop-in iframe replacement; ~30 min migration
 
+### Code / design-system hygiene (from gstack design audit 2026-04-17)
+
+- **F-018 — Unused `--spacing-*` tokens**
+  - `src/styles/global.css` declares `--spacing-1` through `--spacing-32` (10 tokens), used **0 times** in any `.astro` file.
+  - Fix: either delete the declarations or start using them consistently for padding/gap/margin. Pick one.
+  - Priority: low (code hygiene).
+
+- **F-019 — Inconsistent H2 heading scale**
+  - H2s render at different font-sizes depending on which component owns them (e.g. `.section-heading` is `clamp(1.5rem, 3vw, 2rem)`, other `h2` blocks are `1.25rem`).
+  - Fix: define one shared token in `global.css` (e.g. `--font-size-h2`), use everywhere.
+  - Priority: medium (visual consistency).
+
+- **F-020 — HeroLarge duplicates Button CSS**
+  - `src/components/heroes/HeroLarge.astro` has ~5 lines of button-related CSS that repeat what `src/components/ui/Button.astro` already provides.
+  - Fix: use the `<Button>` component instead of inline CSS.
+  - Priority: low (code hygiene).
+
+- Resolved since audit: F-001 (hero copy), F-003 (service card empty icons).
+
 ### Security / compliance
 - **Bump CSP to A+ grade**: remove `'unsafe-inline'` by switching inline scripts to external files OR using nonce-based CSP. ~30 min. Current A grade is already above average.
 - **Iubenda subscription or lawyer review** before first enterprise client — they'll want to DPA-review your legal pages. €36/yr (Iubenda) or €400-800 one-time (French avocat en droit du numérique).
