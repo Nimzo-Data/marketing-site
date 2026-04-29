@@ -109,9 +109,15 @@
 </style>
 
 <script>
+  // Cookie banner UI + Google Consent Mode v2 updates.
+  // The gtag.js bootstrap (with default-denied consent) lives in BaseLayout
+  // <head> so it's already loaded on every page. This script only handles
+  // the banner show/hide and calls gtag('consent', 'update', ...) when the
+  // user accepts or declines.
   (function() {
     const CONSENT_KEY = 'nimzo-consent';
     const banner = document.getElementById('cookie-banner');
+    const win = window as any;
 
     function getConsent() {
       try { return localStorage.getItem(CONSENT_KEY); }
@@ -123,45 +129,30 @@
       catch(e) { /* localStorage unavailable */ }
     }
 
-    function injectGA4() {
-      const measurementId = 'G-F9NHXY9R8E';
-      const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-      script.async = true;
-      document.head.appendChild(script);
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
-      (window as any).gtag = gtag;
-      // Google Consent Mode v2 — gtag.js defaults to denied since mid-2024.
-      // Granting explicitly is required for the user's Accept click to actually
-      // unlock analytics storage; without this, /g/collect requests are silently
-      // dropped even though gtag.js loads and dataLayer fills correctly.
-      gtag('consent', 'default', {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        analytics_storage: 'granted',
-      });
-      gtag('js', new Date());
-      gtag('config', measurementId);
+    function updateConsent(state: 'granted' | 'denied') {
+      if (typeof win.gtag === 'function') {
+        win.gtag('consent', 'update', {
+          ad_storage: state,
+          ad_user_data: state,
+          ad_personalization: state,
+          analytics_storage: state,
+        });
+      }
     }
 
-    const consent = getConsent();
-
-    if (consent === 'accepted') {
-      injectGA4();
-    } else if (consent === null && banner) {
+    if (getConsent() === null && banner) {
       banner.style.display = 'flex';
     }
 
     document.getElementById('cookie-accept')?.addEventListener('click', () => {
       saveConsent('accepted');
-      injectGA4();
+      updateConsent('granted');
       if (banner) banner.style.display = 'none';
     });
 
     document.getElementById('cookie-decline')?.addEventListener('click', () => {
       saveConsent('declined');
+      updateConsent('denied');
       if (banner) banner.style.display = 'none';
     });
 

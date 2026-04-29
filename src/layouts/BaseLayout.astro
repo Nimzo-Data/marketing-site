@@ -108,6 +108,39 @@ const extraSchemas: object[] = structuredData
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="alternate icon" href="/favicon.ico" />
 
+    <!--
+      Google tag (gtag.js) + Google Consent Mode v2.
+      gtag.js loads on every page, but consent defaults to denied so no
+      analytics/ad events fire until the user clicks Accept on the cookie
+      banner. The banner script then calls `gtag('consent', 'update', ...)`
+      to grant. If the user already accepted in a previous visit, we grant
+      immediately on page load.
+    -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-F9NHXY9R8E"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      try {
+        if (localStorage.getItem('nimzo-consent') === 'accepted') {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted',
+          });
+        }
+      } catch (e) { /* localStorage unavailable */ }
+      gtag('js', new Date());
+      gtag('config', 'G-F9NHXY9R8E');
+    </script>
+
     <!-- Structured Data: Organization (every page) -->
     <script is:inline type="application/ld+json" set:html={toJsonLd(organizationSchema)} />
 
