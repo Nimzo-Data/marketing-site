@@ -48,10 +48,29 @@ const buttonVariant = 'primary';
     width: 100%;
     padding-top: 96px;
     padding-bottom: 96px;
+    position: relative;
+    overflow: hidden;
   }
 
   .cta-banner--primary {
     background-color: var(--color-primary);
+  }
+
+  .cta-banner--primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/brand/pattern.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .banner-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .cta-banner--accent {
