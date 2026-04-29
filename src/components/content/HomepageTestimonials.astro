@@ -1,0 +1,152 @@
+---
+import { caseStudies } from '../../data/caseStudies';
+---
+
+<div class="homepage-testimonials">
+  {caseStudies.map((cs) => (
+    <a href={`/case-studies/${cs.slug}/`} class="ht-card">
+      <img
+        src={cs.logo}
+        alt={`${cs.client} logo`}
+        class="ht-card__logo"
+        data-cs-slug={cs.slug}
+        loading="lazy"
+      />
+      <blockquote class="ht-card__text">&ldquo;{cs.shortQuote.text}&rdquo;</blockquote>
+      <div class="ht-card__attribution">
+        <img
+          src={cs.shortQuote.authorPhoto}
+          alt={`Photo of ${cs.shortQuote.authorName}`}
+          class="ht-card__photo"
+          loading="lazy"
+          width="80"
+          height="80"
+        />
+        <div class="ht-card__person">
+          <span class="ht-card__name">{cs.shortQuote.authorName}</span>
+          <span class="ht-card__title">{cs.shortQuote.authorTitle}</span>
+        </div>
+      </div>
+      <span class="ht-card__cta">
+        Read the {cs.client} case study <span class="ht-card__arrow" aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .homepage-testimonials {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .homepage-testimonials {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .ht-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+    height: 100%;
+  }
+
+  .ht-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .ht-card__logo {
+    height: 48px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .ht-card__logo[data-cs-slug="aeyde"] {
+    height: 36px;
+  }
+
+  .ht-card__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  .ht-card__attribution {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ht-card__photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--color-card);
+    transition: transform 250ms ease;
+  }
+
+  .ht-card:hover .ht-card__photo {
+    transform: scale(1.05);
+  }
+
+  .ht-card__person {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ht-card__name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .ht-card__title {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .ht-card__cta {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+  }
+
+  .ht-card:hover .ht-card__cta {
+    text-decoration: underline;
+  }
+
+  .ht-card__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .ht-card:hover .ht-card__arrow {
+    transform: translateX(4px);
+  }
+</style>

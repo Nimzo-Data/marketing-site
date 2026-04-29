@@ -5,6 +5,7 @@ import ServiceCard from '../components/cards/ServiceCard.astro';
 import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import ProcessSteps from '../components/content/ProcessSteps.astro';
 import LogoGrid from '../components/content/LogoGrid.astro';
+import HomepageTestimonials from '../components/content/HomepageTestimonials.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../data/technologies';
@@ -143,7 +144,15 @@ import { technologiesForGrid } from '../data/technologies';
     </p>
   </SectionWrapper>
 
-  <!-- Section 7: Final CTA -->
+  <!-- Section 7: Testimonials -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="tech-header">
+      <h2 class="section-heading">What clients say.</h2>
+    </div>
+    <HomepageTestimonials />
+  </SectionWrapper>
+
+  <!-- Section 8: Final CTA -->
   <CTABanner dataTrack="homepage-cta-banner" />
 </BaseLayout>
 

@@ -100,6 +100,11 @@ export const navItems: NavItem[] = [
   },
   {
     type: 'link',
+    label: 'Case Studies',
+    href: '/case-studies/',
+  },
+  {
+    type: 'link',
     label: 'About',
     href: '/about/',
   },

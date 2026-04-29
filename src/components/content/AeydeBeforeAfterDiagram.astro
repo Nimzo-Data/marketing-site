@@ -1,0 +1,427 @@
+---
+// Aeyde before/after stack diagram.
+// Two horizontal pipelines (BEFORE and AFTER), each laid out as a CSS grid:
+// 4 stage columns + 3 arrow columns = 7 cols. A second row hosts cost
+// badges that can span multiple columns to express "this cost covered ETL
+// AND warehouse" etc. Per-stage badges (split logic, one place, derived
+// tables) live inside the stage cards.
+
+interface Tool {
+  name: string;
+  logo?: string;
+  href?: string;
+}
+
+interface Stage {
+  label: string;
+  tools: Tool[];
+  badge?: string;
+  badgeKind?: 'pain' | 'win';
+}
+
+interface CostSpan {
+  text: string;
+  kind: 'pain' | 'win';
+  // 0-based stage indices, inclusive: covers stages from..to
+  from: number;
+  to: number;
+}
+
+const beforeStages: Stage[] = [
+  {
+    label: 'ETL',
+    tools: [
+      { name: 'Panoply', logo: '/logos/panoply.png' },
+      { name: 'Stitch', logo: '/logos/stitch.png' },
+      { name: 'Make', logo: '/logos/make.png' },
+    ],
+  },
+  {
+    label: 'Warehouse',
+    tools: [{ name: 'Panoply', logo: '/logos/panoply.png' }],
+  },
+  {
+    label: 'Transformation',
+    tools: [
+      { name: 'dbt', logo: '/logos/dbt.svg' },
+      { name: 'LookML', logo: '/logos/looker.svg' },
+    ],
+    badge: 'split logic',
+    badgeKind: 'pain',
+  },
+  {
+    label: 'BI',
+    tools: [{ name: 'Looker', logo: '/logos/looker.svg' }],
+    badge: '119 derived tables',
+    badgeKind: 'pain',
+  },
+];
+
+const beforeCostSpans: CostSpan[] = [
+  { text: '$1,300/mo', kind: 'pain', from: 0, to: 1 },
+];
+
+const afterStages: Stage[] = [
+  {
+    label: 'ETL',
+    tools: [
+      { name: 'Airbyte', logo: '/logos/airbyte.svg', href: '/technologies/airbyte/' },
+      { name: 'Cloud Run', logo: '/logos/googlecloudrun.png' },
+    ],
+  },
+  {
+    label: 'Warehouse',
+    tools: [{ name: 'BigQuery', logo: '/logos/bigquery.svg', href: '/technologies/bigquery/' }],
+  },
+  {
+    label: 'Transformation',
+    tools: [{ name: 'Dataform', logo: '/logos/dataform.svg', href: '/technologies/dataform/' }],
+    badge: 'one place',
+    badgeKind: 'win',
+  },
+  {
+    label: 'BI',
+    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: '/technologies/looker/' }],
+    badge: '0 derived tables',
+    badgeKind: 'win',
+  },
+];
+
+const afterCostSpans: CostSpan[] = [
+  { text: '$150/mo', kind: 'win', from: 0, to: 0 },
+  { text: '$150/mo', kind: 'win', from: 1, to: 2 },
+];
+
+// Stage idx N → grid column 1 + 2*N (1, 3, 5, 7).
+// Span ends at the right edge of the "to" stage column (NOT past the trailing arrow).
+// from=0,to=0 → 1 / 2 (just the first stage column).
+// from=0,to=1 → 1 / 4 (first stage + arrow + second stage).
+// from=1,to=2 → 3 / 6 (second stage + arrow + third stage).
+function spanCols(from: number, to: number): string {
+  return `${1 + 2 * from} / ${2 * to + 2}`;
+}
+---
+
+<div class="csd" role="img" aria-label="Aeyde stack: before vs after the engagement.">
+  <!-- BEFORE row -->
+  <div class="csd__row csd__row--before">
+    <div class="csd__row-label">
+      <span class="csd__row-tag csd__row-tag--before">Before</span>
+    </div>
+    <div class="csd__pipeline">
+      {beforeStages.map((stage, i) => (
+        <>
+          <div class="csd__stage csd__stage--muted" style={`grid-column: ${1 + 2 * i};`}>
+            <p class="csd__stage-label">{stage.label}</p>
+            <div class="csd__tools-stack">
+              {stage.tools.map((t) => (
+                <div class="csd__tool">
+                  {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
+                  <span class="csd__tool-name">{t.name}</span>
+                </div>
+              ))}
+            </div>
+            {stage.badge && (
+              <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'pain'}`}>{stage.badge}</span>
+            )}
+          </div>
+          {i < beforeStages.length - 1 && (
+            <div class="csd__arrow" style={`grid-column: ${2 + 2 * i};`} aria-hidden="true">
+              <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          )}
+        </>
+      ))}
+      {beforeCostSpans.map((span) => (
+        <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
+          {span.text}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- AFTER row -->
+  <div class="csd__row csd__row--after">
+    <div class="csd__row-label">
+      <span class="csd__row-tag csd__row-tag--after">After</span>
+    </div>
+    <div class="csd__pipeline">
+      {afterStages.map((stage, i) => (
+        <>
+          <div class="csd__stage" style={`grid-column: ${1 + 2 * i};`}>
+            <p class="csd__stage-label">{stage.label}</p>
+            <div class="csd__tools-stack">
+              {stage.tools.map((t) => (
+                t.href ? (
+                  <a href={t.href} class="csd__tool csd__tool--link">
+                    {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
+                    <span class="csd__tool-name">{t.name}</span>
+                  </a>
+                ) : (
+                  <div class="csd__tool">
+                    {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
+                    <span class="csd__tool-name">{t.name}</span>
+                  </div>
+                )
+              ))}
+            </div>
+            {stage.badge && (
+              <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'win'}`}>{stage.badge}</span>
+            )}
+          </div>
+          {i < afterStages.length - 1 && (
+            <div class="csd__arrow" style={`grid-column: ${2 + 2 * i};`} aria-hidden="true">
+              <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          )}
+        </>
+      ))}
+      {afterCostSpans.map((span) => (
+        <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
+          {span.text}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .csd {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .csd__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 900px) {
+    .csd__row {
+      grid-template-columns: 84px 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+  }
+
+  .csd__row-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .csd__row-tag {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+
+  .csd__row-tag--before {
+    color: var(--color-text-secondary);
+    background-color: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .csd__row-tag--after {
+    color: var(--color-white);
+    background-color: var(--color-brand-teal);
+  }
+
+  /* Pipeline: mobile = stacked flex; desktop ≥900px = CSS grid (4 stages + 3 arrows). */
+  .csd__pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  @media (min-width: 900px) {
+    .csd__pipeline {
+      display: grid;
+      grid-template-columns: 1fr 36px 1fr 36px 1fr 36px 1fr;
+      grid-template-rows: auto auto;
+      gap: 0;
+      column-gap: 0;
+      row-gap: 12px;
+      align-items: stretch;
+    }
+    .csd__pipeline > * {
+      grid-row: 1;
+    }
+    .csd__pipeline > .csd__costspan {
+      grid-row: 2;
+    }
+  }
+
+  .csd__stage {
+    background-color: var(--color-bg-default);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+  }
+
+  .csd__stage--muted {
+    background-color: rgba(0, 0, 0, 0.03);
+    box-shadow: none;
+    border-color: var(--color-border-subtle);
+    border-style: dashed;
+  }
+
+  .csd__stage-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-teal);
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    text-align: center;
+  }
+
+  .csd__stage--muted .csd__stage-label {
+    color: var(--color-text-secondary);
+  }
+
+  .csd__tools-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .csd__tool {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-height: 34px;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .csd__tool--link {
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .csd__tool--link:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .csd__tool-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .csd__tool-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* In-card badges: split logic, one place, derived tables */
+  .csd__badge {
+    align-self: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .csd__badge--pain {
+    color: var(--color-brand-plum);
+    background-color: rgba(73, 52, 65, 0.08);
+    border: 1px solid rgba(73, 52, 65, 0.22);
+  }
+
+  .csd__badge--win {
+    color: var(--color-brand-teal);
+    background-color: rgba(0, 79, 76, 0.08);
+    border: 1px solid rgba(0, 79, 76, 0.22);
+  }
+
+  /* Cost span: appears below the stage row, can span multiple columns */
+  .csd__costspan {
+    margin-top: 4px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 1.2;
+    align-self: start;
+    justify-self: stretch;
+  }
+
+  .csd__costspan--pain {
+    color: var(--color-brand-plum);
+    background-color: rgba(73, 52, 65, 0.08);
+    border: 1px dashed rgba(73, 52, 65, 0.4);
+  }
+
+  .csd__costspan--win {
+    color: var(--color-brand-teal);
+    background-color: rgba(0, 79, 76, 0.08);
+    border: 1px dashed rgba(0, 79, 76, 0.4);
+  }
+
+  /* Arrows */
+  .csd__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand-teal);
+    flex-shrink: 0;
+  }
+
+  .csd__arrow svg {
+    width: 28px;
+    height: 16px;
+  }
+
+  @media (max-width: 899px) {
+    .csd__arrow svg {
+      transform: rotate(90deg);
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .csd__row--before .csd__arrow {
+    color: var(--color-text-secondary);
+    opacity: 0.55;
+  }
+</style>

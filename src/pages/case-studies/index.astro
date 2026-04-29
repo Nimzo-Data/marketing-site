@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStandard from '../../components/heroes/HeroStandard.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import CaseStudyCard from '../../components/cards/CaseStudyCard.astro';
+import { caseStudies } from '../../data/caseStudies';
+---
+
+<BaseLayout
+  title="Case studies | Nimzo Data"
+  description="Real engagements where we built, optimized, or extended modern data platforms on GCP. The work, the calls we made, and what changed."
+>
+  <HeroStandard
+    title="The work, in detail."
+    subtitle="What we built, why we made the calls we made, and what changed."
+  />
+
+  <SectionWrapper py="lg" bg="white">
+    <div class="cs-grid">
+      {caseStudies.map((cs) => (
+        <CaseStudyCard caseStudy={cs} />
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <CTABanner
+    heading="Sound like your situation?"
+    subtitle="Book a 45-minute call. We'll be honest about whether we can help."
+    buttonText="Let's talk"
+    buttonHref="/contact/"
+    dataTrack="case-studies-index-cta"
+  />
+</BaseLayout>
+
+<style>
+  .cs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .cs-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+</style>
