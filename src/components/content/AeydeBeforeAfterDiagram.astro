@@ -43,7 +43,7 @@ const beforeStages: Stage[] = [
   {
     label: 'Transformation',
     tools: [
-      { name: 'dbt', logo: '/logos/dbt.svg' },
+      { name: 'dbt', logo: '/logos/dbt.svg', href: '/technologies/dbt/' },
       { name: 'LookML', logo: '/logos/looker.svg' },
     ],
     badge: 'split logic',
@@ -51,7 +51,7 @@ const beforeStages: Stage[] = [
   },
   {
     label: 'BI',
-    tools: [{ name: 'Looker', logo: '/logos/looker.svg' }],
+    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: '/technologies/looker/' }],
     badge: '119 derived tables',
     badgeKind: 'pain',
   },
@@ -115,10 +115,17 @@ function spanCols(from: number, to: number): string {
             <p class="csd__stage-label">{stage.label}</p>
             <div class="csd__tools-stack">
               {stage.tools.map((t) => (
-                <div class="csd__tool">
-                  {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
-                  <span class="csd__tool-name">{t.name}</span>
-                </div>
+                t.href ? (
+                  <a href={t.href} class="csd__tool csd__tool--link">
+                    {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
+                    <span class="csd__tool-name">{t.name}</span>
+                  </a>
+                ) : (
+                  <div class="csd__tool">
+                    {t.logo && <img src={t.logo} alt="" class="csd__tool-logo" width="20" height="20" loading="lazy" />}
+                    <span class="csd__tool-name">{t.name}</span>
+                  </div>
+                )
               ))}
             </div>
             {stage.badge && (
