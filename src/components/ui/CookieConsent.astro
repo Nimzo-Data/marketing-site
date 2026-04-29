@@ -132,6 +132,16 @@
       (window as any).dataLayer = (window as any).dataLayer || [];
       function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
       (window as any).gtag = gtag;
+      // Google Consent Mode v2 — gtag.js defaults to denied since mid-2024.
+      // Granting explicitly is required for the user's Accept click to actually
+      // unlock analytics storage; without this, /g/collect requests are silently
+      // dropped even though gtag.js loads and dataLayer fills correctly.
+      gtag('consent', 'default', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      });
       gtag('js', new Date());
       gtag('config', measurementId);
     }
