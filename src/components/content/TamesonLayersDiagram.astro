@@ -1,0 +1,367 @@
+---
+// Tameson Dataform layered architecture diagram.
+// Outer wrapper: BigQuery (everything lives in BigQuery).
+// Inside: Raw stage (with ingestion tools) -> Modeled-in-Dataform group (header + 4 layer cards: Staging, Intermediate, Mart, Reports).
+
+interface IngestionTool {
+  name: string;
+  logo?: string;
+  href?: string;
+}
+
+const ingestionTools: IngestionTool[] = [
+  { name: 'Dagster', logo: '/logos/dagster.svg', href: '/technologies/dagster/' },
+  { name: 'Datastream', logo: '/logos/datastream.svg' },
+  { name: 'Fivetran', logo: '/logos/fivetran.svg', href: '/technologies/fivetran/' },
+  { name: 'Stitch', logo: '/logos/stitch.png' },
+];
+
+interface Layer {
+  label: string;
+  blurb: string;
+}
+
+const layers: Layer[] = [
+  { label: 'Staging',      blurb: '1:1 with raw — renaming, casting, light cleaning.' },
+  { label: 'Intermediate', blurb: 'Joins and logic within a single domain.' },
+  { label: 'Mart',         blurb: 'Cross-domain business logic — facts and dimensions.' },
+  { label: 'Reports',      blurb: 'BI-ready OBT tables for Looker Studio.' },
+];
+---
+
+<div class="tld" role="img" aria-label="Tameson Dataform layered architecture: raw data ingested via Dagster, Datastream, Fivetran, Stitch into BigQuery, then modeled in Dataform across staging, intermediate, mart, and reports layers.">
+  <div class="tld__bq">
+    <div class="tld__bq-header">
+      <a href="/technologies/bigquery/" class="tld__bq-tag">
+        <img src="/logos/bigquery.svg" alt="" class="tld__bq-logo" width="22" height="22" loading="lazy" />
+        <span class="tld__bq-name">BigQuery</span>
+      </a>
+      <span class="tld__bq-note">Everything lives in BigQuery</span>
+    </div>
+
+    <div class="tld__pipeline">
+      <!-- Raw stage with ingestion tools inside -->
+      <div class="tld__stage tld__stage--raw">
+        <p class="tld__stage-label tld__stage-label--plum">Raw</p>
+        <p class="tld__stage-blurb">Ingested via:</p>
+        <div class="tld__tools-stack">
+          {ingestionTools.map((t) => (
+            t.href ? (
+              <a href={t.href} class="tld__tool tld__tool--link">
+                {t.logo && <img src={t.logo} alt="" class="tld__tool-logo" width="20" height="20" loading="lazy" />}
+                <span class="tld__tool-name">{t.name}</span>
+              </a>
+            ) : (
+              <div class="tld__tool">
+                {t.logo && <img src={t.logo} alt="" class="tld__tool-logo" width="20" height="20" loading="lazy" />}
+                <span class="tld__tool-name">{t.name}</span>
+              </div>
+            )
+          ))}
+        </div>
+      </div>
+
+      <div class="tld__arrow tld__arrow--main" aria-hidden="true">
+        <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <!-- Dataform-modeled layers -->
+      <div class="tld__layers">
+        <a href="/technologies/dataform/" class="tld__layers-tag">
+          <img src="/logos/dataform.svg" alt="" class="tld__bq-logo" width="22" height="22" loading="lazy" />
+          <span class="tld__bq-name">Modeled in Dataform</span>
+        </a>
+        <div class="tld__layers-row">
+          {layers.map((layer, i) => (
+            <>
+              <div class="tld__stage tld__stage--layer">
+                <p class="tld__stage-label">{layer.label}</p>
+                <p class="tld__stage-blurb">{layer.blurb}</p>
+              </div>
+              {i < layers.length - 1 && (
+                <div class="tld__arrow tld__arrow--inner" aria-hidden="true">
+                  <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tld {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Outer BigQuery wrapper */
+  .tld__bq {
+    border: 1px dashed rgba(0, 79, 76, 0.35);
+    border-radius: 16px;
+    background-color: rgba(0, 79, 76, 0.025);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tld__bq-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .tld__bq-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .tld__bq-tag:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .tld__bq-logo {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .tld__bq-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .tld__bq-note {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  /* Pipeline (Raw + Layers) */
+  .tld__pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .tld__pipeline {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+
+  /* Raw stage */
+  .tld__stage {
+    background-color: var(--color-bg-default);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+  }
+
+  .tld__stage--raw {
+    flex: 0 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    .tld__stage--raw {
+      width: 200px;
+    }
+  }
+
+  .tld__stage-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-teal);
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    text-align: center;
+  }
+
+  .tld__stage-label--plum {
+    color: var(--color-brand-plum);
+  }
+
+  .tld__stage-blurb {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .tld__tools-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tld__tool {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-height: 34px;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .tld__tool--link {
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .tld__tool--link:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .tld__tool-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .tld__tool-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Arrow main (Raw -> Layers) and inner (between layers) */
+  .tld__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand-teal);
+    flex-shrink: 0;
+  }
+
+  .tld__arrow svg {
+    width: 28px;
+    height: 16px;
+  }
+
+  @media (max-width: 1023px) {
+    .tld__arrow svg {
+      transform: rotate(90deg);
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .tld__arrow {
+      width: 36px;
+    }
+  }
+
+  /* Modeled-in-Dataform group */
+  .tld__layers {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 12px;
+    border: 1px dashed rgba(73, 52, 65, 0.35);
+    border-radius: 14px;
+    background-color: rgba(73, 52, 65, 0.025);
+    justify-content: center;
+  }
+
+  .tld__layers-tag {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .tld__layers-tag:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .tld__layers-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .tld__layers-row {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+
+  /* Layer cards: equal heights via row-stretch (tallest sets the height,
+     all others match — like the Mart card driving Staging / Intermediate / Reports). */
+  .tld__stage--layer {
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .tld__layers-row {
+      align-items: stretch;
+    }
+  }
+
+  .tld__arrow--inner {
+    color: var(--color-brand-teal);
+  }
+</style>

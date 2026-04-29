@@ -1,0 +1,84 @@
+---
+interface Props {
+  text: string;
+  authorName: string;
+  authorTitle: string;
+  authorPhoto: string;
+}
+
+const { text, authorName, authorTitle, authorPhoto } = Astro.props;
+---
+
+<figure class="cs-quote">
+  <figcaption class="cs-quote__attribution">
+    <img
+      src={authorPhoto}
+      alt={`Photo of ${authorName}`}
+      class="cs-quote__photo"
+      loading="lazy"
+      width="80"
+      height="80"
+    />
+    <div class="cs-quote__person">
+      <span class="cs-quote__name">{authorName}</span>
+      <span class="cs-quote__title">{authorTitle}</span>
+    </div>
+  </figcaption>
+  <blockquote class="cs-quote__text">
+    &ldquo;{text}&rdquo;
+  </blockquote>
+</figure>
+
+<style>
+  .cs-quote {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+
+  .cs-quote__attribution {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cs-quote__photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--color-card);
+  }
+
+  .cs-quote__person {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .cs-quote__name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .cs-quote__title {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .cs-quote__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+</style>

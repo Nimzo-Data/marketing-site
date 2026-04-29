@@ -3,6 +3,7 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import CTACard from '../../components/cards/CTACard.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 ---
 
@@ -127,6 +128,15 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         variant="link"
       />
     </div>
+  </SectionWrapper>
+
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From unused data to BI-ready platform."
+      body="10+ sources modeled into Dataform, GA4 unified across 6 markets, CI-governed schema and partitioning checks — and we keep extending it together."
+      caseStudySlug="tameson"
+    />
   </SectionWrapper>
 </ServiceLayout>
 

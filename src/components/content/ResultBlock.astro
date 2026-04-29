@@ -1,0 +1,194 @@
+---
+import { findCaseStudy } from '../../data/caseStudies';
+
+interface Props {
+  metric: string;
+  body: string;
+  caseStudySlug: string;
+}
+
+const { metric, body, caseStudySlug } = Astro.props;
+const cs = findCaseStudy(caseStudySlug);
+
+if (!cs) {
+  throw new Error(`ResultBlock: case study "${caseStudySlug}" not found in caseStudies data`);
+}
+---
+
+<a href={`/case-studies/${cs.slug}/`} class="result-block">
+  <img
+    src={cs.logo}
+    alt={`${cs.client} logo`}
+    class="result-block__logo"
+    data-cs-slug={cs.slug}
+    loading="lazy"
+  />
+
+  <div class="result-block__lead">
+    <p class="result-block__metric">{metric}</p>
+    <p class="result-block__body">{body}</p>
+  </div>
+
+  <div class="result-block__quote">
+    <img
+      src={cs.shortQuote.authorPhoto}
+      alt={`Photo of ${cs.shortQuote.authorName}`}
+      class="result-block__photo"
+      loading="lazy"
+      width="64"
+      height="64"
+    />
+    <div class="result-block__quote-content">
+      <blockquote class="result-block__quote-text">
+        &ldquo;{cs.shortQuote.text}&rdquo;
+      </blockquote>
+      <p class="result-block__attribution">
+        <span class="result-block__name">{cs.shortQuote.authorName}</span>
+        <span class="result-block__title">{cs.shortQuote.authorTitle}</span>
+      </p>
+    </div>
+  </div>
+
+  <span class="result-block__cta">
+    Read the {cs.client} case study <span class="result-block__arrow" aria-hidden="true">&rarr;</span>
+  </span>
+</a>
+
+<style>
+  .result-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .result-block:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .result-block__logo {
+    height: 48px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .result-block__logo[data-cs-slug="aeyde"] {
+    height: 36px;
+  }
+
+  .result-block__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-block__metric {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .result-block__body {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .result-block__quote {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .result-block__photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--color-card);
+    transition: transform 250ms ease;
+  }
+
+  .result-block:hover .result-block__photo {
+    transform: scale(1.05);
+  }
+
+  .result-block__quote-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .result-block__quote-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .result-block__attribution {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .result-block__name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+  }
+
+  .result-block__title {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .result-block__cta {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .result-block:hover .result-block__cta {
+    text-decoration: underline;
+  }
+
+  .result-block__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .result-block:hover .result-block__arrow {
+    transform: translateX(4px);
+  }
+</style>

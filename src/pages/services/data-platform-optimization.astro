@@ -5,6 +5,7 @@ import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.as
 import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
 ---
@@ -177,6 +178,15 @@ import { technologiesForGrid } from '../../data/technologies';
         See retainer options &rarr;
       </a>
     </div>
+  </SectionWrapper>
+
+  <!-- Proof: Aeyde result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From minutes to seconds."
+      body="Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer."
+      caseStudySlug="aeyde"
+    />
   </SectionWrapper>
 </ServiceLayout>
 
