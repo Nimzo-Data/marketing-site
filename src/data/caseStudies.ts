@@ -40,7 +40,7 @@ export const caseStudies: CaseStudyMeta[] = [
     headline:
       'How Aeyde made Looker dashboards load in seconds, cut data infrastructure costs by 77%, and rebuilt trust in their numbers',
     subline:
-      "Five years of organic growth had turned Aeyde's data stack into a constraint on the business.",
+      "Five years of organic growth had stretched Aeyde's data stack across multiple systems, slowing reporting and complicating decisions.",
     company: {
       flag: '🇩🇪',
       city: 'Berlin',
@@ -61,7 +61,7 @@ export const caseStudies: CaseStudyMeta[] = [
     ],
     shortQuote: {
       text: 'Dashboards that used to take minutes now load in seconds, and the whole team has real trust in the data again.',
-      authorName: 'Phoebe',
+      authorName: 'Phoebe Pham',
       authorTitle: 'BI Lead, Aeyde',
       authorPhoto: '/case-studies/photos/phoebe.svg',
     },
