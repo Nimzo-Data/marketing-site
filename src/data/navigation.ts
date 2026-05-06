@@ -31,6 +31,10 @@ export const navItems: NavItem[] = [
       {
         links: [
           {
+            label: 'Data Platform Audit',
+            href: '/services/data-platform-audit/',
+          },
+          {
             label: 'Data Platform Implementation',
             href: '/services/data-platform-implementation/',
           },

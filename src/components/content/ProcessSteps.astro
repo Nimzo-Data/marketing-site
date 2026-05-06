@@ -106,7 +106,7 @@ const { steps } = Astro.props;
         )}
         <div class="step-content">
           <h3 class="step-title">{step.title}</h3>
-          <p class="step-description">{step.description}</p>
+          <p class="step-description" set:html={step.description}></p>
         </div>
       </div>
       {index < steps.length - 1 && (
