@@ -1,0 +1,171 @@
+---
+import type { CaseStudyMeta } from '../../data/caseStudies';
+
+interface Props {
+  caseStudy: CaseStudyMeta;
+}
+
+const { caseStudy } = Astro.props;
+---
+
+<div class="cs-related">
+  <div class="cs-related__col">
+    <span class="cs-related__eyebrow">Service</span>
+    <a href={caseStudy.service.href} class="cs-related__service" data-track={`cs-related-service-${caseStudy.slug}`}>
+      <h3 class="cs-related__service-title">{caseStudy.service.label}</h3>
+      <p class="cs-related__service-desc">{caseStudy.service.shortDescription}</p>
+      <span class="cs-related__service-link">
+        Learn more <span class="cs-related__arrow" aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="cs-related__col">
+    <span class="cs-related__eyebrow">Tools</span>
+    <div class={`cs-related__tools cs-related__tools--${Math.min(caseStudy.tools.length, 4)}`}>
+      {caseStudy.tools.map((tool) => (
+        <a href={tool.href} class="cs-related__tool" data-track={`cs-related-tool-${tool.name.toLowerCase()}`}>
+          <img src={tool.logo} alt="" class="cs-related__tool-logo" width="40" height="40" loading="lazy" />
+          <span class="cs-related__tool-name">{tool.name}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .cs-related {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .cs-related {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: 24px;
+    }
+  }
+
+  .cs-related__col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cs-related__eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  /* Service card */
+  .cs-related__service {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+    flex: 1;
+  }
+
+  .cs-related__service:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .cs-related__service-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cs-related__service-desc {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .cs-related__service-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    margin-top: 8px;
+  }
+
+  .cs-related__service:hover .cs-related__service-link {
+    text-decoration: underline;
+  }
+
+  .cs-related__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .cs-related__service:hover .cs-related__arrow {
+    transform: translateX(4px);
+  }
+
+  /* Tool grid */
+  .cs-related__tools {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    flex: 1;
+  }
+
+  .cs-related__tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 16px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+    min-height: 100px;
+  }
+
+  .cs-related__tool:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .cs-related__tool-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .cs-related__tool-name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    text-align: center;
+  }
+</style>

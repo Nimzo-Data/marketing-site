@@ -1,0 +1,286 @@
+---
+import type { CaseStudyMeta } from '../../data/caseStudies';
+
+interface Props {
+  caseStudy: CaseStudyMeta;
+  eyebrow?: string;
+}
+
+const { caseStudy, eyebrow = 'Case study' } = Astro.props;
+---
+
+<section class="cs-hero-v2">
+  <div class="cs-hero-v2__inner">
+    <div class="cs-hero-v2__main">
+      <img
+        src={caseStudy.logo}
+        alt={`${caseStudy.client} logo`}
+        class="cs-hero-v2__logo"
+        data-cs-slug={caseStudy.slug}
+        loading="eager"
+      />
+      <p class="cs-hero-v2__eyebrow">{eyebrow}</p>
+      <h1 class="cs-hero-v2__title">{caseStudy.headline}</h1>
+      <p class="cs-hero-v2__subline">{caseStudy.subline}</p>
+    </div>
+
+    <aside class="cs-hero-v2__aside" aria-label="Engagement details">
+      <div class="cs-snap">
+        <p class="cs-snap__label">Company</p>
+        <div class="cs-snap__company">
+          <a href={caseStudy.clientUrl} target="_blank" rel="noopener noreferrer" class="cs-snap__company-link">
+            {caseStudy.client}
+            <svg class="cs-snap__external" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7"/>
+              <path d="M8 7h9v9"/>
+            </svg>
+          </a>
+          <span class="cs-snap__company-meta">{caseStudy.company.sector}</span>
+          <span class="cs-snap__company-meta">
+            <span class="cs-snap__flag" aria-hidden="true">{caseStudy.company.flag}</span>
+            {caseStudy.company.city} · {caseStudy.company.size}
+          </span>
+        </div>
+      </div>
+
+      <div class="cs-snap">
+        <p class="cs-snap__label">Service</p>
+        <a href={caseStudy.service.href} class="cs-snap__tile cs-snap__tile--service">
+          <span class="cs-snap__tile-name">{caseStudy.service.label}</span>
+          <span class="cs-snap__tile-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="cs-snap">
+        <p class="cs-snap__label">Tools</p>
+        <div class="cs-snap__tools">
+          {caseStudy.tools.map((tool) => (
+            <a href={tool.href} class="cs-snap__tile">
+              <img src={tool.logo} alt="" class="cs-snap__tile-logo" width="20" height="20" loading="lazy" />
+              <span class="cs-snap__tile-name">{tool.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .cs-hero-v2 {
+    width: 100%;
+    background-color: var(--color-white);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(48px, 6vw, 64px);
+  }
+
+  .cs-hero-v2__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .cs-hero-v2__inner {
+      padding: 0 48px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cs-hero-v2__inner {
+      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+      gap: 72px;
+    }
+  }
+
+  /* LEFT: logo + headline */
+  .cs-hero-v2__main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cs-hero-v2__logo {
+    height: 48px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 4px;
+  }
+
+  .cs-hero-v2__logo[data-cs-slug="aeyde"] {
+    height: 36px;
+  }
+
+  .cs-hero-v2__eyebrow {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0;
+  }
+
+  .cs-hero-v2__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    text-wrap: pretty;
+  }
+
+  .cs-hero-v2__subline {
+    font-family: var(--font-body);
+    font-size: clamp(1.1875rem, 1.6vw, 1.375rem);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 800px;
+  }
+
+  /* RIGHT: snapshot */
+  .cs-hero-v2__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .cs-hero-v2__aside {
+      padding-left: 32px;
+      border-left: 1px solid var(--color-border-subtle);
+    }
+  }
+
+  .cs-snap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .cs-snap:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .cs-snap__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .cs-snap__company {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .cs-snap__company-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .cs-snap__company-link:hover {
+    text-decoration: underline;
+  }
+
+  .cs-snap__external {
+    flex-shrink: 0;
+  }
+
+  .cs-snap__company-meta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cs-snap__flag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  /* Service + Tool tiles share the same look (tool-card style) */
+  .cs-snap__tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cs-snap__tile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-height: 40px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .cs-snap__tile:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .cs-snap__tile-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .cs-snap__tile-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+
+  /* Service tile: same look as tool tiles, with arrow at right */
+  .cs-snap__tile--service {
+    justify-content: space-between;
+  }
+
+  .cs-snap__tile-arrow {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: transform 150ms ease;
+  }
+
+  .cs-snap__tile--service:hover .cs-snap__tile-arrow {
+    transform: translateX(4px);
+  }
+</style>

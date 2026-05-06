@@ -1,0 +1,164 @@
+---
+import type { CaseStudyMeta } from '../../data/caseStudies';
+
+interface Props {
+  caseStudy: CaseStudyMeta;
+}
+
+const { caseStudy } = Astro.props;
+
+// Split service label into two lines: everything before the last word, then the last word
+const serviceLabel = caseStudy.service.label;
+const lastSpace = serviceLabel.lastIndexOf(' ');
+const serviceLine1 = lastSpace > 0 ? serviceLabel.slice(0, lastSpace) : serviceLabel;
+const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
+---
+
+<a href={`/case-studies/${caseStudy.slug}/`} class="cs-card">
+  <div class="cs-card__logo-wrap">
+    <img
+      src={caseStudy.logo}
+      alt={`${caseStudy.client} logo`}
+      class="cs-card__logo"
+      data-cs-slug={caseStudy.slug}
+      loading="lazy"
+    />
+  </div>
+  <h3 class="cs-card__headline">{caseStudy.headline}</h3>
+  <div class="cs-card__meta">
+    <div class="cs-card__meta-block">
+      <span class="cs-card__meta-label">Service</span>
+      <span class="cs-card__meta-value">
+        {serviceLine1}{serviceLine2 && <><br />{serviceLine2}</>}
+      </span>
+    </div>
+    <div class="cs-card__meta-block">
+      <span class="cs-card__meta-label">Tools</span>
+      <span class="cs-card__tools">
+        {caseStudy.tools.map((t) => (
+          <span class="cs-card__tool">{t.name}</span>
+        ))}
+      </span>
+    </div>
+  </div>
+  <span class="cs-card__cta">
+    Read case study <span class="cs-card__arrow" aria-hidden="true">&rarr;</span>
+  </span>
+</a>
+
+<style>
+  .cs-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 36px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+    height: 100%;
+  }
+
+  .cs-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  /* Fixed-height logo row keeps headline tops aligned across cards */
+  .cs-card__logo-wrap {
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .cs-card__logo {
+    height: 48px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .cs-card__logo[data-cs-slug="aeyde"] {
+    height: 36px;
+  }
+
+  .cs-card__headline {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .cs-card__meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .cs-card__meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .cs-card__meta-label {
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .cs-card__meta-value {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .cs-card__tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+  }
+
+  .cs-card__tool {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .cs-card__cta {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .cs-card:hover .cs-card__cta {
+    text-decoration: underline;
+  }
+
+  .cs-card__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .cs-card:hover .cs-card__arrow {
+    transform: translateX(4px);
+  }
+</style>

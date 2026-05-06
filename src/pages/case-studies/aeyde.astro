@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import CaseStudyHero from '../../components/content/CaseStudyHero.astro';
+import CaseStudyMetrics from '../../components/content/CaseStudyMetrics.astro';
+import CaseStudyQuote from '../../components/content/CaseStudyQuote.astro';
+import CaseStudyRelated from '../../components/content/CaseStudyRelated.astro';
+import AeydeBeforeAfterDiagram from '../../components/content/AeydeBeforeAfterDiagram.astro';
+import { findCaseStudy } from '../../data/caseStudies';
+
+const cs = findCaseStudy('aeyde')!;
+---
+
+<BaseLayout
+  title="Aeyde — Looker dashboards from minutes to seconds, 77% cost reduction | Nimzo Data"
+  description="How Aeyde made Looker dashboards load in seconds, cut data infrastructure costs by 77%, and rebuilt trust in their numbers."
+>
+  <CaseStudyHero caseStudy={cs} />
+
+  <!-- At a Glance -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-glance-h">The outcomes, at a glance.</h2>
+    <CaseStudyMetrics
+      metrics={[
+        { icon: 'zap',           value: 'Minutes → seconds', label: 'Dashboard load time' },
+        { icon: 'clock',         value: 'Hours, not days',   label: 'Time to add a source or edit a KPI' },
+        { icon: 'trending-down', value: '77% cost cut',      label: '$1,000/month saved on data stack' },
+        { icon: 'database',      value: '0 derived tables',  label: 'Down from 119 in Looker' },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Quote -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">In their words.</h2>
+    <CaseStudyQuote
+      text="Working with Nimzo Data made a real difference. Dashboards that used to take minutes now load in seconds, our reporting is reliable, and the whole team has real trust in the data again."
+      authorName="Phoebe Pham"
+      authorTitle="BI Lead, Aeyde"
+      authorPhoto={cs.shortQuote.authorPhoto}
+    />
+  </SectionWrapper>
+
+  <!-- 01 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+<h2 class="cs-section-h">The client</h2>
+      <p>Aeyde is a Berlin-based footwear and accessories brand for women, founded in 2015. Made in Italy, they sell direct-to-consumer on Shopify and B2B to retailers worldwide. Their data platform supports both sides of the business: D2C marketing and merchandising, plus B2B operations and reporting.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 02 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">The challenge</h2>
+      <p>By April 2024, Aeyde's data stack was creating growing complexity and performance bottlenecks. The platform had grown organically since 2019 — Panoply for ingestion and warehousing, dbt for some transformations, Looker for BI — and complexity had grown faster than the team could manage it.</p>
+      <p>The visible symptoms were everywhere:</p>
+      <ul>
+        <li>Heavy dashboards took minutes to load. Some failed to load more than a few months of historical data at all.</li>
+        <li>Looker schedules failed regularly because they timed out before completing.</li>
+        <li>Dashboards stalled mid-render because the query queue was saturated by other slow queries running in the background.</li>
+        <li>KPI definitions lived in dozens of LookML derived tables, often duplicated, sometimes inconsistent. Updating a metric meant tracking down every instance.</li>
+        <li>Adding a new data source could take days of work.</li>
+      </ul>
+      <p>Behind the symptoms, the underlying technical reality was a stack pushed past its design:</p>
+      <ul>
+        <li>Panoply (built on Redshift) was a black box — costly at $1,300/month, slow to query, opaque when things broke, and hitting storage limits.</li>
+        <li>dbt held about 30% of the transformation logic. The rest lived in LookML.</li>
+        <li>Looker carried 119 derived tables (64 SQL-based, 55 LookML-native). Some explores joined 50+ views. A simple business question could compile into a 500-line query.</li>
+      </ul>
+      <p>Aeyde's BI Lead, Phoebe, knew it was the right time to audit the data stack and evolve it to better support the company's continued growth. With maternity leave approaching, the team also needed someone to step in during her absence and help drive that transition forward.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 03 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">The approach</h2>
+      <p>Two principles guided the engagement.</p>
+
+      <h3 class="cs-prose__principle">Clean before migrating.</h3>
+      <p>Most consultants would have proposed jumping straight to a new stack. We didn't. The stack had real problems, but it also contained unused assets, redundant models, and outdated schedules. Migrating that complexity to a new stack would simply move the problem. We cleaned first.</p>
+
+      <blockquote class="cs-pull-quote">
+        Most consultants would have proposed jumping straight to a new stack. We didn't.
+      </blockquote>
+
+      <h3 class="cs-prose__principle">Keep transformation logic in one place.</h3>
+      <p>Logic split across LookML and dbt creates inconsistency and duplication. We consolidated everything into a single transformation layer — first dbt, then Dataform after the migration — with a layered architecture (staging → intermediate → mart → report). Looker became the consumption layer, not a transformation engine.</p>
+      <p>This meant a three-phase plan, not a single migration project.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 04 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">What we built</h2>
+
+      <h3 class="cs-prose__sub">Phase 1: Cleaning the existing stack</h3>
+      <p>Before touching anything new, we audited and pruned the existing setup. In Panoply: deleted 38 unused connections and the unused tables they fed. In dbt: removed obsolete models and renamed the rest with consistent conventions. In Looker: deleted inactive accounts, audited 1,013 looks and 340 dashboards (only 23% and 12% respectively were used in the last 30 days), disabled auto-refresh on dashboards that didn't need it, and redistributed 98 schedules across the day instead of all firing between 4–6am.</p>
+
+      <h3 class="cs-prose__sub">Phase 2: Pre-transforming data with dbt</h3>
+      <p>The performance problem in Looker wasn't really a Looker problem — it was a "data is being transformed at query time" problem. We moved the heavy lifting into dbt. We restructured dbt around a layered architecture: staging models for 1:1 source cleaning, intermediate models for joins within a domain, marts for cross-domain business logic, reports for aggregated tables.</p>
+      <p>We started with the most complex Looker explore (Sales — Commercial view at line level, joining 53 underlying views) and pre-built every derived table as a proper dbt model. Joins that Looker used to compute on the fly — Shopify customer/address/tax/discount data joined to order lines — were now pre-computed in dbt. Looker explores were rebuilt against the new pre-built tables. Then we repeated the pattern across the rest of the explores, in priority order.</p>
+      <p>By the end of Phase 2, derived tables in Looker dropped from 119 to 0. All transformation logic lived in dbt.</p>
+
+      <h3 class="cs-prose__sub">Phase 3: Migrating to BigQuery and modernizing the stack</h3>
+      <p>With logic centralized and Looker simplified, the migration was the cleanest part. We replaced Panoply with Airbyte for ingestion (transparent, far cheaper) and BigQuery as the warehouse. A few Python Cloud Run Jobs covered the few unconventional sources Airbyte didn't have a connector for. Native BigQuery integrations replaced the rest: GA4 via the native export, Google Ads via the BigQuery Data Transfer Service, and Google Sheets via external tables — all landing in BigQuery directly. dbt was migrated to Dataform to consolidate on the Google Cloud ecosystem. Looker's database connection was switched to BigQuery, and the legacy Panoply stack was decommissioned.</p>
+      <p>The new stack had four pieces — Airbyte, BigQuery, Dataform, Looker — replacing Panoply + Stitch + make.com → S3 + dbt + Looker. Less surface area, less to maintain, less to break.</p>
+    </div>
+
+    <div class="cs-diagram-wrap">
+      <AeydeBeforeAfterDiagram />
+    </div>
+  </SectionWrapper>
+
+  <!-- 05 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">Results</h2>
+      <p>Dashboards that used to take minutes load in seconds. The Looker schedules that kept failing run reliably. The query queue isn't saturated anymore because queries return fast enough to clear. KPI definitions live in one place — Dataform — instead of scattered across 119 LookML derived tables. Editing a KPI or adding a source went from a multi-day project to a half-hour exercise for routine changes, a few hours for complex ones.</p>
+      <p>The infrastructure cost dropped from $1,300/month (Panoply) to about $300/month (Airbyte + BigQuery), a 77% reduction. The team has visibility and control they never had with Panoply's black-box backend. The team trusts the numbers again — because the logic that produces them is centralized, reviewable, and consistent.</p>
+      <p>The collaboration continues on smaller items as Aeyde's data needs evolve.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Used in this engagement -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">What we used.</h2>
+    <CaseStudyRelated caseStudy={cs} />
+  </SectionWrapper>
+
+  <CTABanner
+    heading="Sound like your situation?"
+    subtitle="Book a 45-minute call. We'll be honest about whether we can help."
+    buttonText="Let's talk"
+    buttonHref="/contact/"
+    dataTrack="case-study-aeyde-cta"
+  />
+</BaseLayout>
+
+<style>
+  .cs-prose {
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .cs-section-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.25;
+  }
+
+  .cs-glance-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 28px 0;
+    line-height: 1.25;
+    max-width: 760px;
+  }
+
+  .cs-prose p {
+    margin: 0 0 16px 0;
+  }
+
+  .cs-prose ul {
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+    list-style-type: disc;
+  }
+
+  .cs-prose li {
+    margin: 0 0 8px 0;
+    line-height: 1.6;
+  }
+
+  .cs-prose strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  /* Phase subheaders inside "What we built" */
+  .cs-prose__sub {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 32px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  /* Inline principle subheaders inside "The approach" */
+  .cs-prose__principle {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-brand-plum);
+    margin: 24px 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .cs-pull-quote {
+    margin: 24px 0;
+    padding: 8px 0 8px 20px;
+    border-left: 3px solid var(--color-brand-plum);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .cs-diagram-wrap {
+    margin: 48px 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>

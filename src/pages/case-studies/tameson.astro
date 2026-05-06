@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import CaseStudyHero from '../../components/content/CaseStudyHero.astro';
+import CaseStudyMetrics from '../../components/content/CaseStudyMetrics.astro';
+import CaseStudyQuote from '../../components/content/CaseStudyQuote.astro';
+import CaseStudyRelated from '../../components/content/CaseStudyRelated.astro';
+import TamesonLayersDiagram from '../../components/content/TamesonLayersDiagram.astro';
+import { findCaseStudy } from '../../data/caseStudies';
+
+const cs = findCaseStudy('tameson')!;
+---
+
+<BaseLayout
+  title="Tameson — From unused BigQuery data to BI-ready platform across 6 markets | Nimzo Data"
+  description="How Tameson turned unused BigQuery data into a foundation for analytics across 6 markets, with a layered Dataform architecture and production-grade governance."
+>
+  <CaseStudyHero caseStudy={cs} />
+
+  <!-- At a Glance -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-glance-h">The outcomes, at a glance.</h2>
+    <CaseStudyMetrics
+      metrics={[
+        { icon: 'database',     value: '10+ sources',        label: 'Modeled into the Dataform platform' },
+        { icon: 'bar-chart',    value: '6 GA4 properties',   label: 'Unified into one events model across NL, DE, FR, UK, ES, US' },
+        { icon: 'shield-check', value: 'CI-governed',        label: 'Layer rules, schema gates, partitioning checks' },
+        { icon: 'calendar',     value: '20+ months',         label: 'Of ongoing collaboration since June 2024' },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Quote -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">In their words.</h2>
+    <CaseStudyQuote
+      text="When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build — and that we keep extending together — turned that around completely. It's the platform our analytics actually run on."
+      authorName="Paul van Oorschot"
+      authorTitle="CTO, Tameson"
+      authorPhoto={cs.shortQuote.authorPhoto}
+    />
+  </SectionWrapper>
+
+  <!-- 01 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      <h2 class="cs-section-h">The client</h2>
+      <p>Tameson is a Eindhoven-based industrial supply e-commerce company, founded in 2013. They started by selling their own valve designs and have since expanded to distribute other suppliers' products across six markets — Netherlands, Germany, France, UK, Spain, US. They run a small, technically-strong team operating on a freelance-collaborative model: a CTO, a technical PM, and specialist freelancers across Shopify, Dagster, Odoo, Pimcore, and data.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 02 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">The challenge</h2>
+      <p>When Tameson reached out in May 2024, the data situation was a paradox: pipelines were running, but most of the data wasn't being used.</p>
+      <p>A handful of sources were already landing in BigQuery — GA4 across 6 properties, Google Ads, Search Console, Google Merchant Center, plus operational systems via Fivetran and custom pipelines. Scheduled queries handled some basic transformations. But there was no modeled analytics layer — no clean tables ready for analysis, no consistent business logic across sources, no governance. GA4 raw event data, in particular, sat largely untouched: the event-based schema is notoriously hard to work with, and without proper modeling it's effectively unusable for analysis.</p>
+      <p>The team needed someone who could come in with deep BigQuery and Dataform expertise to build the modeling backbone — knowing the platform would need to expand and evolve significantly. Ingestion was already handled internally; what was missing was the architectural discipline to turn raw data into analytics-ready tables.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 03 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">The approach</h2>
+      <p>We approach data modeling in layers. Raw data should never be queried directly by reports; transformations belong in one place; each layer has rules about what it can and can't do. This isn't theoretical — it's the difference between a platform that survives expansion and one that doesn't.</p>
+
+      <blockquote class="cs-pull-quote">
+        Raw data should never be queried directly by reports.
+      </blockquote>
+
+      <p>For Tameson, this meant Dataform with a layered architecture from day one: staging for 1:1 source cleaning, intermediate for in-domain joins, marts for cross-domain business logic, reports for BI-ready tables. The goal wasn't just to make GA4 useful — it was to build a base the team could keep extending without it becoming a mess.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 04 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">What we built</h2>
+    </div>
+
+    <div class="cs-diagram-wrap">
+      <TamesonLayersDiagram />
+    </div>
+
+    <div class="cs-prose">
+      <h3 class="cs-prose__sub">1. GA4 from raw to ready</h3>
+      <p>GA4's raw export is the kind of data that looks usable until you try to use it. Events are nested, custom parameters live in arrays, sessions don't exist as a concept — and across 6 properties, the inconsistencies multiply.</p>
+      <p>We built a unified events model spanning all 6 GA4 properties, reconstructing sessions from events and adding custom-window session aggregations (1-day, 7-day, 28-day) for marketing analysis. We standardized custom parameters across markets and built joins to marketing and commerce data on multiple keys: date, domain, country, transaction ID, product, channel, campaign, even click ID where available. Report-layer tables — daily stats, ecommerce product analysis, funnel analysis, page analysis — sit on top of this foundation, all multi-market by default.</p>
+
+      <h3 class="cs-prose__sub">2. Multi-source modeled data layer</h3>
+      <p>GA4 was the starting point, not the endpoint. Over the engagement, we've modeled 10+ sources into the Dataform layered architecture — spanning marketing (Google Ads, Search Console, Google Merchant Center), commerce (Shopify, Odoo, Pimcore), and operational systems. Tameson's team handles ingestion; we handle the modeling discipline that turns raw data into analytics-ready tables.</p>
+      <p>Each source moves through the same flow: staging models do 1:1 cleaning (renaming, casting) directly from raw source tables; intermediate models join within a single domain; marts handle cross-domain business logic; reports feed BI tools. The discipline pays off as scope grows — adding a new source is a structured exercise, not a fresh greenfield problem.</p>
+
+      <h3 class="cs-prose__sub">3. Production-grade governance</h3>
+      <p>This is where Tameson's setup gets serious. Together with Paul, we put a full governance layer around the Dataform repo. Paul drove the CI/CD foundations; we contributed the Dataform-specific checks: layer rule enforcement (staging can't reference marts, reports can't skip layers, etc.), partitioning validation on large tables, schema-change classification (safe / unsafe / no-changes), pre-operations validation for incremental models.</p>
+      <p>The result is a Dataform platform with pre-push hooks that catch issues locally, a GitLab CI pipeline that blocks unsafe schema changes, and scheduled jobs that detect orphaned datasets and schema drift. Most teams stop well before this on Dataform. Tameson's team built it deliberately, and it scales with them.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 05 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">Results</h2>
+      <p>After 20+ months, what was unmodeled BigQuery data is now a layered, modeled, BI-ready analytics platform spanning the sources that matter most to Tameson's analytics. The team can ship dashboards and analyses in days rather than weeks because the underlying data is already modeled, tested, and ready. Adding a new source follows the same pattern as every previous one — staging, intermediate, mart, report. And the governance layer means the platform can keep growing without accumulating technical debt.</p>
+      <p>The collaboration is ongoing — new sources, new modeling needs, and new tooling continue to be added on the same foundation.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Used in this engagement -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">What we used.</h2>
+    <CaseStudyRelated caseStudy={cs} />
+  </SectionWrapper>
+
+  <CTABanner
+    heading="Sound like your situation?"
+    subtitle="Book a 45-minute call. We'll be honest about whether we can help."
+    buttonText="Let's talk"
+    buttonHref="/contact/"
+    dataTrack="case-study-tameson-cta"
+  />
+</BaseLayout>
+
+<style>
+  .cs-prose {
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .cs-section-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.25;
+  }
+
+  .cs-glance-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 28px 0;
+    line-height: 1.25;
+    max-width: 760px;
+  }
+
+  .cs-prose p {
+    margin: 0 0 16px 0;
+  }
+
+  .cs-prose strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .cs-prose__sub {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 32px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .cs-pull-quote {
+    margin: 24px 0;
+    padding: 8px 0 8px 20px;
+    border-left: 3px solid var(--color-brand-plum);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .cs-diagram-wrap {
+    margin: 32px 0 48px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
