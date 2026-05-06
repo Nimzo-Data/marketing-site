@@ -5,15 +5,16 @@ import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.as
 import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
+import CTACard from '../../components/cards/CTACard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
 ---
 
 <ServiceLayout
   title="Data Platform Optimization | Nimzo Data"
-  description="We audit and fix GCP data platforms — BigQuery costs, slow dashboards, broken pipelines. Two phases: audit, then fix. Fixed price."
+  description="We audit and improve Google Cloud data platforms — BigQuery costs, slow dashboards, broken pipelines. Two phases: audit, then build. Fixed price."
   heroTitle="Your data platform exists.<br>It isn't working."
-  heroSubtitle="We audit what you have, tell you what's actually wrong, and implement a prioritized fix. Two phases — audit first, implementation second. Senior engineer on every project."
+  heroSubtitle="We audit what you have, tell you what's actually wrong, and build the improvements. Two phases — audit first, then a fixed-price build. Senior engineer on every project."
 >
   <!-- Challenges & Outcomes -->
   <SectionWrapper py="lg" bg="white">
@@ -24,7 +25,7 @@ import { technologiesForGrid } from '../../data/technologies';
       leftTitle="The problem:"
       leftItems={[
         "BigQuery costs tripled in six months. No one knows why.",
-        "Dashboards take 45 seconds. People stopped opening them.",
+        "Dashboards take 45 seconds to load. People stopped opening them.",
         "Pipelines break weekly. You hear about it from tickets.",
         "You inherited a platform. Nobody knows what half of it does.",
         "Finance says revenue is X. Product says Y. Leadership believes neither.",
@@ -33,7 +34,7 @@ import { technologiesForGrid } from '../../data/technologies';
       rightTitle="What you get:"
       rightItems={[
         "A written audit you can act on — not slideware.",
-        "A prioritized fix list, ranked by cost vs impact.",
+        "A prioritized improvement list, ranked by cost vs impact.",
         "Reliable pipelines with alerts before users notice.",
         "Queries and dashboards that load in seconds, not minutes.",
         "One definition per metric your business runs on.",
@@ -49,9 +50,9 @@ import { technologiesForGrid } from '../../data/technologies';
     <p class="caption">You probably have some of these layers. Some are missing. Some exist but need replacing. The audit tells us which.</p>
   </SectionWrapper>
 
-  <!-- Three layers we fix -->
+  <!-- Three layers we improve -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Three layers. Same three we fix.</h2>
+    <h2 class="section-heading">Three layers. Same three we improve.</h2>
     <div class="layers-grid">
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -64,7 +65,7 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Data Pipelines</h3>
-        <p class="layer-body">Replace legacy Python scripts with Airbyte. Add monitoring and alerting that actually fire. Fix the three pipelines nobody touches because they scare everyone.</p>
+        <p class="layer-body">Replace legacy Python scripts with Airbyte or Fivetran. Add monitoring and alerting that actually fire. Fix the three pipelines nobody touches because they scare everyone.</p>
       </div>
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -107,10 +108,10 @@ import { technologiesForGrid } from '../../data/technologies';
     <h2 class="section-heading">How an optimization runs.</h2>
     <ProcessSteps
       steps={[
-        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "We review your GCP architecture, query costs, pipeline reliability, and data quality. We interview your team. You get a written report and a prioritized fix list." },
-        { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the implementation, do it yourselves, or stop here. The audit is valuable on its own — plenty of clients take the report and execute internally." },
-        { icon: 'code-2', title: "Implementation (6–10 weeks)", description: "We implement the fixes from the audit — in the priority order you approved. Fixed price, agreed before we start." },
-        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Same as a greenfield build, just on the platform we improved." },
+        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "Architecture, costs, pipelines, and data quality reviewed. Team interviewed. You get a written report and a prioritized improvement list. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
+        { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the build, do it yourselves, or stop here. Plenty of clients take the report and execute internally." },
+        { icon: 'code-2', title: "Build (8–12 weeks, bi-weekly demos)", description: "We build the improvements from the audit — in the priority order you approved. Fixed price, agreed before we start." },
+        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Your team owns the platform when we leave." },
         { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "30 days of reachability for questions, tweaks, edge cases." },
       ]}
     />
@@ -123,12 +124,12 @@ import { technologiesForGrid } from '../../data/technologies';
       <div class="phase-card">
         <div class="phase-label">Phase 1 — Audit</div>
         <div class="phase-price">€3,000 – €5,000</div>
-        <p class="phase-sub">1–2 weeks, fixed price. You get a written audit report and a prioritized fix list. You can stop here and execute internally — the audit fee is yours either way.</p>
+        <p class="phase-sub">1–2 weeks, fixed price, paid 100% upfront. Written audit report and prioritized improvement list. Same audit available <a href="/services/data-platform-audit/" class="inline-link">standalone</a>.</p>
       </div>
-      <div class="phase-card phase-card--highlighted">
-        <div class="phase-label">Phase 2 — Implementation (optional)</div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 2 — Build (optional)</div>
         <div class="phase-price">€17,000 – €45,000</div>
-        <p class="phase-sub">6–10 weeks, priced after the audit based on scope. If you proceed, the audit fee is credited toward the implementation.</p>
+        <p class="phase-sub">9–14 weeks (build + handover), priced after the audit based on scope. Fixed price, agreed before we start.</p>
       </div>
     </div>
     <p class="total-callout">Total range when clients do both phases: €20,000 – €50,000.</p>
@@ -141,8 +142,8 @@ import { technologiesForGrid } from '../../data/technologies';
         { name: "BI tool migration", low: "Stay on current tool", high: "Migrate to new tool" },
       ]}
       scenarios={[
-        { label: "Performance & cost", price: "€20,000 – €25,000", duration: "8–10 weeks", description: "Performance and cost optimization — schema redesign, query tuning." },
-        { label: "Tool modernization", price: "€25,000 – €35,000", duration: "10–12 weeks", description: "Tool modernization — move legacy Python to Airbyte, add Dataform." },
+        { label: "Performance & cost", price: "€20,000 – €25,000", duration: "10–12 weeks", description: "Performance and cost optimization — schema redesign, query tuning." },
+        { label: "Tool modernization", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Tool modernization — move legacy Python to Airbyte or Fivetran, add Dataform." },
         { label: "Major overhaul", price: "€40,000 – €50,000", duration: "12–16 weeks", description: "Major overhaul — multiple migrations, complex data quality issues." },
       ]}
     />
@@ -152,30 +153,50 @@ import { technologiesForGrid } from '../../data/technologies';
       <p class="why-more-intro">Two reasons.</p>
       <div class="why-more__grid">
         <div class="why-more__reason">
-          <h4 class="why-more__sub">Investigation</h4>
-          <p>We spend the first week of every optimization understanding what previous engineers built — decisions made by people who may no longer be at the company, working around constraints we didn't create.</p>
+          <h4 class="why-more__sub">Live systems</h4>
+          <p>We improve while your platform is in use. Migrations run in parallel, dashboards don't go dark, pipelines keep flowing while we replace them underneath. Building from scratch doesn't have that constraint.</p>
         </div>
         <div class="why-more__reason">
           <h4 class="why-more__sub">Interconnection</h4>
-          <p>Most broken platforms have connected problems. Fixing the slow dashboard means fixing the transformation model, which means fixing the pipeline that feeds it. We price to cover that investigation, not just the final fix.</p>
+          <p>Most platforms have connected problems. Improving the slow dashboard means improving the transformation model, which means improving the pipeline that feeds it. The scope is wider than it looks because the layers depend on each other.</p>
         </div>
       </div>
     </div>
 
     <div class="payment-section">
       <h3 class="payment-heading">Payment</h3>
-      <p class="payment-body">Audit 100% at audit kickoff. Implementation 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
+      <p class="payment-body">Audit 100% at audit kickoff. Build 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
     </div>
   </SectionWrapper>
 
-  <!-- After launch -->
+  <!-- Cross-links: not the right fit -->
   <SectionWrapper py="lg" bg="white">
-    <div class="retainer-cta">
-      <h2 class="section-heading retainer-cta__heading">Keeping it fixed.</h2>
-      <p class="retainer-cta__body">An optimized platform needs less maintenance than a broken one, but it still needs some. Monthly retainers cover monitoring, small improvements, and a senior on call.</p>
-      <a href="/services/ongoing-support-retainers/" class="retainer-cta__link" data-track="opt-cta-retainers">
-        See retainer options &rarr;
-      </a>
+    <h2 class="section-heading">Not sure this is the right fit?</h2>
+    <div class="cta-cards-grid cta-cards-grid--three">
+      <CTACard
+        title="No data platform yet? Start fresh."
+        description="Build end-to-end from scratch — ingestion, transformations, dashboards. Audit first, then a fixed-price build."
+        href="/services/data-platform-implementation/"
+        buttonText="See Implementation"
+        dataTrack="opt-cta-implementation"
+        variant="link"
+      />
+      <CTACard
+        title="Scope is narrower than a full optimization?"
+        description="Focused help on one or two layers — Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks."
+        href="/services/expert-implementation-services/"
+        buttonText="See Expert Services"
+        dataTrack="opt-cta-expert"
+        variant="link"
+      />
+      <CTACard
+        title="Already have a working platform?"
+        description="Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call."
+        href="/services/ongoing-support-retainers/"
+        buttonText="See Ongoing Support"
+        dataTrack="opt-cta-retainers"
+        variant="link"
+      />
     </div>
   </SectionWrapper>
 </ServiceLayout>
@@ -303,8 +324,10 @@ import { technologiesForGrid } from '../../data/technologies';
     gap: 8px;
   }
 
-  .phase-card--highlighted {
-    border: 2px solid var(--color-brand-plum);
+  .inline-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
   }
 
   .phase-label {
@@ -354,7 +377,7 @@ import { technologiesForGrid } from '../../data/technologies';
 
   .why-more p {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     color: var(--color-text);
     line-height: 1.7;
     margin: 0 0 16px 0;
@@ -391,36 +414,24 @@ import { technologiesForGrid } from '../../data/technologies';
     margin: 0;
   }
 
-  .retainer-cta {
-    max-width: 720px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .retainer-cta__heading {
-    margin: 0;
+  @media (min-width: 768px) {
+    .cta-cards-grid--three {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
   }
 
-  .retainer-cta__body {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .retainer-cta__link {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
+  /* Inline link inside ProcessSteps descriptions */
+  :global(.step-link) {
     color: var(--color-primary);
-    text-decoration: none;
-  }
-
-  .retainer-cta__link:hover {
     text-decoration: underline;
+    font-weight: 500;
   }
 
   .payment-section {

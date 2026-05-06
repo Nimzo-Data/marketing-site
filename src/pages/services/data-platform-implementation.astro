@@ -5,15 +5,16 @@ import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.as
 import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
+import CTACard from '../../components/cards/CTACard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
 ---
 
 <ServiceLayout
   title="Data Platform Implementation | Nimzo Data"
-  description="We build end-to-end GCP data platforms — ingestion, BigQuery, Dataform, and BI — on a fixed-price basis. For European companies ready to do data properly."
+  description="We build end-to-end Google Cloud data platforms — ingestion, BigQuery, Dataform, and BI. Two phases: a paid audit first, then a fixed-price build. For European companies ready to do data properly."
   heroTitle="You have data everywhere.<br>Nowhere useful."
-  heroSubtitle="A proper data platform, without hiring a data team. We design and build end-to-end on GCP — from raw ingestion to the dashboards your team opens every morning. Fixed price. Senior engineer on every project. Documented handover so you own it when we leave."
+  heroSubtitle="A proper data platform, without hiring a data team. End-to-end — ingestion to dashboards. Two phases — audit first, then a fixed-price build. Senior engineering, clean handover."
 >
   <!-- Challenges & Outcomes -->
   <SectionWrapper py="lg" bg="white">
@@ -65,7 +66,7 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Automated Data Pipelines</h3>
-        <p class="layer-body">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran depending on cost and reliability needs. Data lands in BigQuery on a reliable schedule, with monitoring and alerts when something breaks.</p>
+        <p class="layer-body">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran, depending on your needs. Data lands in BigQuery on a reliable schedule, with monitoring and alerts when something breaks.</p>
       </div>
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -76,7 +77,7 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Data Architecture &amp; Modeling</h3>
-        <p class="layer-body">Raw data is cleaned, modeled, and documented in Dataform or dbt. Staging, intermediate, and reporting layers. Data quality tests built in from the start so issues surface before they hit dashboards.</p>
+        <p class="layer-body">Raw data is cleaned, modeled, and documented in Dataform or dbt. Staging, transformation, and reporting layers. Data quality tests built in from the start so issues surface before they hit dashboards.</p>
       </div>
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -108,8 +109,9 @@ import { technologiesForGrid } from '../../data/technologies';
     <h2 class="section-heading">How an implementation runs.</h2>
     <ProcessSteps
       steps={[
-        { icon: 'rocket', title: "Kickoff & alignment (1 week)", description: "Once the proposal is signed: environment access, team alignment, deep-dive on sources and constraints. We finalize the build plan." },
-        { icon: 'code-2', title: "Build (6–10 weeks, bi-weekly demos)", description: "We lead the technical work. Your team joins reviews and decisions, and can take on small parts when it makes sense. Weekly updates, demos every two weeks, no daily standups." },
+        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "Sources, volumes, and tools evaluated. Written recommendation and fixed-price build proposal. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
+        { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the build, do it yourselves, or stop here. Plenty of clients take the report and execute internally." },
+        { icon: 'code-2', title: "Build (6–10 weeks, bi-weekly demos)", description: "We lead the technical work. Your team joins reviews and decisions, and can take on small parts when it makes sense. Bi-weekly demos, async by default." },
         { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training sessions, full documentation, recorded walkthroughs. Your team owns it when we leave — not in theory, in practice." },
         { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "You have questions, small tweaks, an unexpected edge case. We're reachable for 30 days after handover at no extra cost." },
       ]}
@@ -119,38 +121,67 @@ import { technologiesForGrid } from '../../data/technologies';
   <!-- Pricing -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Pricing.</h2>
-    <div class="pricing-lead">
-      <span class="pricing-label">Typical range</span>
-      <span class="pricing-amount">€15,000 – €35,000</span>
-      <p class="pricing-sub">Most projects land in this range. We quote a fixed price after the scoping call — no hourly billing, no change orders without your approval.</p>
+    <div class="two-phase-grid">
+      <div class="phase-card">
+        <div class="phase-label">Phase 1 — Audit</div>
+        <div class="phase-price">€3,000 – €5,000</div>
+        <p class="phase-sub">1–2 weeks, fixed price, paid 100% upfront. Written recommendation and fixed-price build proposal. Same audit available <a href="/services/data-platform-audit/" class="inline-link">standalone</a>.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 2 — Build (optional)</div>
+        <div class="phase-price">€12,000 – €30,000</div>
+        <p class="phase-sub">7–12 weeks (build + handover), priced after the audit based on the real scope. Fixed price, agreed before we start.</p>
+      </div>
     </div>
+    <p class="total-callout">Total range when clients do both phases: €15,000 – €35,000.</p>
+
     <PricingRange
       factors={[
         { name: "Number of data sources", low: "2–3 simple sources", high: "6–10 mixed sources" },
         { name: "Transformation complexity", low: "Standard model", high: "Complex business logic" },
-        { name: "BI tool", low: "Steep / Lightdash", high: "Looker with LookML" },
+        { name: "BI tool", low: "Steep / Metabase", high: "Lightdash / Looker with LookML" },
         { name: "Orchestration needs", low: "None needed", high: "Dagster-based workflow" },
       ]}
       scenarios={[
-        { label: "Startup stack", price: "€15,000 – €18,000", duration: "6–8 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Lightdash for dashboards." },
+        { label: "Startup stack", price: "€15,000 – €18,000", duration: "8–10 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Metabase for dashboards." },
         { label: "Scale-up stack", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Scale-up with product databases, marketing APIs, and finance tools. Looker with LookML." },
-        { label: "E-commerce stack", price: "€18,000 – €22,000", duration: "6–8 weeks", description: "E-commerce business with Shopify, advertising platforms (Meta, Google), and finance tools. Dataform + Steep for the ops team." },
+        { label: "E-commerce stack", price: "€18,000 – €22,000", duration: "8–10 weeks", description: "E-commerce business with Shopify, advertising platforms (Meta, Google), and finance tools. Lightdash for the ops team." },
       ]}
     />
     <div class="payment-section">
       <h3 class="payment-heading">Payment</h3>
-      <p class="payment-body">50% at project start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
+      <p class="payment-body">Audit 100% at audit kickoff. Build 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
     </div>
   </SectionWrapper>
 
-  <!-- After launch cross-link -->
+  <!-- Cross-links: not the right fit -->
   <SectionWrapper py="lg" bg="white">
-    <div class="retainer-cta">
-      <h2 class="section-heading retainer-cta__heading">After we're gone.</h2>
-      <p class="retainer-cta__body">Most clients take the platform and run it themselves — that's the goal. Some prefer a safety net: monthly retainers for monitoring, improvements, and a senior on call.</p>
-      <a href="/services/ongoing-support-retainers/" class="retainer-cta__link" data-track="impl-cta-retainers">
-        See retainer options &rarr;
-      </a>
+    <h2 class="section-heading">Not sure this is the right fit?</h2>
+    <div class="cta-cards-grid cta-cards-grid--three">
+      <CTACard
+        title="Platform exists but not working?"
+        description="Audit what you have, then build the improvements. Two phases — audit first, then a fixed-price build."
+        href="/services/data-platform-optimization/"
+        buttonText="See Optimization"
+        dataTrack="impl-cta-optimization"
+        variant="link"
+      />
+      <CTACard
+        title="Scope is narrower than a full build?"
+        description="Focused help on one or two layers — Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks."
+        href="/services/expert-implementation-services/"
+        buttonText="See Expert Services"
+        dataTrack="impl-cta-expert"
+        variant="link"
+      />
+      <CTACard
+        title="Already have a working platform?"
+        description="Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call."
+        href="/services/ongoing-support-retainers/"
+        buttonText="See Ongoing Support"
+        dataTrack="impl-cta-retainers"
+        variant="link"
+      />
     </div>
   </SectionWrapper>
 </ServiceLayout>
@@ -264,72 +295,86 @@ import { technologiesForGrid } from '../../data/technologies';
     margin: 0;
   }
 
-  .pricing-lead {
-    text-align: left;
-    margin-bottom: 40px;
-    max-width: 720px;
+  .two-phase-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
   }
 
-  .pricing-label {
-    display: block;
+  @media (min-width: 768px) {
+    .two-phase-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .phase-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-label {
     font-family: var(--font-heading);
-    font-size: 0.75rem;
     font-weight: 600;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-secondary);
-    margin-bottom: 8px;
   }
 
-  .pricing-amount {
-    display: block;
+  .phase-price {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--color-brand-plum);
     line-height: 1.1;
-    margin-bottom: 12px;
   }
 
-  .pricing-sub {
+  .phase-sub {
     font-family: var(--font-body);
     font-size: 0.9375rem;
-    color: var(--color-text-secondary);
-    max-width: 720px;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .retainer-cta {
-    max-width: 720px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .retainer-cta__heading {
-    margin: 0;
-  }
-
-  .retainer-cta__body {
-    font-family: var(--font-body);
-    font-size: 1rem;
     color: var(--color-text);
-    line-height: 1.7;
-    margin: 0;
+    line-height: 1.6;
+    margin: 4px 0 0 0;
   }
 
-  .retainer-cta__link {
+  .total-callout {
     font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--color-primary);
-    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: 0 0 40px 0;
   }
 
-  .retainer-cta__link:hover {
+  .inline-link {
+    color: var(--color-primary);
     text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid--three {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  /* Inline link inside ProcessSteps descriptions */
+  :global(.step-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
   }
 
   .payment-section {
