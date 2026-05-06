@@ -1,0 +1,377 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { technologiesForGrid } from '../../data/technologies';
+---
+
+<ServiceLayout
+  title="Data Platform Audit | Nimzo Data"
+  description="A 1–2 week paid engagement that produces a tool recommendation, a 12-month cost estimate, and a fixed-price Implementation or Optimization proposal you can act on."
+  heroTitle="Before you build,<br>know what you're building."
+  heroSubtitle="A 1–2 week paid engagement to evaluate tools against your real data and requirements, and produce a fixed-price proposal for what comes next. Yours to keep, or Phase 1 of a larger build with us."
+>
+  <!-- Symptoms / What the audit answers -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What brings most clients here.</h2>
+    <TwoColumnSplit
+      variant="challenges-solution"
+      bare
+      leftTitle="The questions:"
+      leftItems={[
+        "How many sources do we actually have, and how big are they?",
+        "What will our data stack cost us over 12 months — fees and infrastructure?",
+        "Which tools do we actually need — and which can we skip?",
+        "Which BI tool will our team actually use?",
+        "Can our team maintain this day-to-day?",
+        "Vendor sales calls all sound the same. Which tools actually fit our case?",
+      ]}
+      rightTitle="What the audit answers:"
+      rightItems={[
+        "Sources inventoried, volumes measured, current usage reviewed.",
+        "A 12-month total cost of ownership — fees plus infrastructure.",
+        "A tool recommendation matched to your data, team, and budget.",
+        "A target architecture, with reasoning you can challenge.",
+        "A written deliverable you own — even if you don't continue with us.",
+        "A fixed-price proposal for what comes next.",
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- What you walk away with -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What you walk away with.</h2>
+    <div class="deliverables-grid">
+      <div class="deliverable">
+        <h3 class="deliverable-title">Current state assessment</h3>
+        <p class="deliverable-body">Sources, volumes, current stack, current costs, current BI usage, and the gaps between where you are and where you need to be.</p>
+      </div>
+      <div class="deliverable">
+        <h3 class="deliverable-title">Target state recommendation</h3>
+        <p class="deliverable-body">A proposed architecture and tool selection, with the reasoning behind each pick. You can challenge any of it before we move on.</p>
+      </div>
+      <div class="deliverable">
+        <h3 class="deliverable-title">12-month cost estimate</h3>
+        <p class="deliverable-body">A total cost of ownership over a year — Nimzo fees plus ongoing infrastructure. So you can plan, not guess.</p>
+      </div>
+      <div class="deliverable">
+        <h3 class="deliverable-title">Fixed-price proposal</h3>
+        <p class="deliverable-body">A fixed-price build proposal as the final artifact, if you continue with us. Scope, timeline, and price — ready to sign.</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- How it runs -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">How an audit runs.</h2>
+    <ProcessSteps
+      steps={[
+        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, read access to relevant systems, you nominate a point of contact." },
+        { icon: 'search', title: "Technical audit", description: "Sources, volumes, pipelines, costs, and BI usage reviewed.<br>For clients starting from scratch: we audit requirements and data sources instead." },
+        { icon: 'scale', title: "Tool evaluation", description: "Tools matched to your situation — BigQuery, Dataform/dbt, Fivetran/Airbyte, Lightdash/Steep/Metabase/Looker. Demos where useful." },
+        { icon: 'clipboard-list', title: "Findings & recommendation", description: "Written deliverable: current state, target state, 12-month cost estimate, recommendation with reasoning." },
+        { icon: 'mail', title: "Recommendation call & proposal", description: "Walk through findings. Fixed-price proposal as final artifact, or just the recommendation if you don't continue with us." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Tools -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Tools we evaluate against your situation.</h2>
+    <p class="intro-body">We don't have a default stack. The audit matches tools to your data volume, team skill, and budget — with the reasoning written down so you can challenge it.</p>
+    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <p class="see-all-link">
+      <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
+    </p>
+  </SectionWrapper>
+
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Pricing.</h2>
+    <div class="pricing-lead">
+      <span class="pricing-label">Fixed price</span>
+      <span class="pricing-amount">€3,000 – €5,000</span>
+      <p class="pricing-sub">1–2 weeks, paid 100% upfront at kickoff. Where you land in this range depends on the number of data sources and the complexity of your current setup.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Where this leads -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Where this leads.</h2>
+    <p class="intro-body">An audit is a real deliverable on its own — and it's also the natural Phase 1 of a larger engagement with us.</p>
+    <div class="leads-grid">
+      <a href="/services/data-platform-implementation/" class="lead-card" data-track="audit-cta-implementation">
+        <div class="lead-eyebrow">Starting from scratch</div>
+        <h3 class="lead-title">Data Platform Implementation</h3>
+        <p class="lead-body">Full build from scratch. The audit produces the fixed-price proposal; you decide whether to proceed.</p>
+        <span class="lead-arrow">See Implementation <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a href="/services/data-platform-optimization/" class="lead-card" data-track="audit-cta-optimization">
+        <div class="lead-eyebrow">Improving what exists</div>
+        <h3 class="lead-title">Data Platform Optimization</h3>
+        <p class="lead-body">Existing platform that isn't working. The audit identifies what needs improving and produces the fixed-price build proposal. No obligation to continue.</p>
+        <span class="lead-arrow">See Optimization <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </SectionWrapper>
+
+  <!-- When this isn't the right fit -->
+  <SectionWrapper py="lg" bg="white">
+    <div class="not-fit">
+      <h2 class="section-heading not-fit__heading">When this isn't the right fit.</h2>
+      <ul class="not-fit__list">
+        <li><strong>You already know exactly what you want built and have a clear scope.</strong> <a href="/services/expert-implementation-services/" class="inline-link">Expert Services</a> is a better fit — fixed-price, scoped in days.</li>
+        <li><strong>You're not on GCP and not planning to be.</strong> We don't do multi-cloud. We're not the right partner.</li>
+        <li><strong>You're pre-product-market-fit with no real data yet.</strong> Too early. Come back when there's something to measure.</li>
+      </ul>
+    </div>
+  </SectionWrapper>
+
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .list-footer {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 24px 0 0 0;
+    max-width: 720px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
+  }
+
+  /* Deliverables grid */
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .deliverables-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .deliverable {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    padding: 24px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .deliverable-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .deliverable-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Pricing */
+  .pricing-lead {
+    text-align: left;
+    max-width: 720px;
+  }
+
+  .pricing-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-brand-plum);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .pricing-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    max-width: 720px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Where this leads */
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .lead-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .lead-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .lead-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .lead-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .lead-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .lead-arrow {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .lead-arrow-icon {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .lead-card:hover .lead-arrow-icon {
+    transform: translateX(4px);
+  }
+
+  /* When this isn't right */
+  .not-fit {
+    max-width: 760px;
+  }
+
+  .not-fit__heading {
+    margin: 0 0 20px 0;
+  }
+
+  .not-fit__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .not-fit__list li {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .not-fit__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .not-fit__list strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .inline-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+</style>
