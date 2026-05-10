@@ -69,7 +69,6 @@ export const caseStudies: CaseStudyMeta[] = [
   },
   {
     slug: 'tameson',
-    hidden: true,
     client: 'Tameson',
     clientUrl: 'https://tameson.com',
     logo: '/case-studies/logos/tameson.svg',
