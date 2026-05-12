@@ -9,7 +9,7 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 const leftItems = [
   "You're on Google Cloud, or planning to be.",
   "You're past the \"spreadsheet era\" and need a real platform.",
-  "You have analysts, not data engineers — or no team at all.",
+  "You have analysts, not data engineers. Or no team at all.",
   "You need senior data engineering — and don't want to hire for it.",
   "You can make a decision. Our best engagements start in two-week sales cycles, not four-month ones.",
 ];
@@ -19,7 +19,7 @@ const rightItems = [
   "You're pre-product-market-fit. Data isn't your bottleneck yet.",
   "You need analysts or data scientists. We're data engineers.",
   "You want the cheapest hourly rate available. We compete on seniority, not price.",
-  "You need real-time streaming at scale — Kafka, Flink, sub-second latency. Different specialism.",
+  "You need real-time streaming at scale (Kafka, Flink, sub-second latency). Different specialism.",
 ];
 
 type PrincipleIcon = 'compass' | 'database' | 'target' | 'tag' | 'message-square' | 'graduation-cap';
@@ -28,12 +28,12 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
   {
     icon: 'compass',
     title: 'Execution-led, not embedded',
-    body: "We lead the technical work. Your team joins reviews and decisions, and can take on small parts when it makes sense. No daily standups, no full embed — different from staff augmentation or intensive enablement.",
+    body: "We lead the technical work. Your team joins reviews and can take on parts when it makes sense. No daily standups, no full embed.",
   },
   {
     icon: 'database',
     title: 'Infrastructure first, insights second',
-    body: "The most impressive dashboard is worthless if the data feeding it isn't reliable. We build the plumbing before anyone talks about taps.",
+    body: "Dashboards are only as good as the data feeding them. We start with pipelines, not dashboards.",
   },
   {
     icon: 'target',
@@ -48,7 +48,7 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
   {
     icon: 'message-square',
     title: 'European sensibility, direct communication',
-    body: "Based in France, working across Europe. No Silicon Valley vocabulary. We say what we mean and we say it short.",
+    body: "Based in France, working across Europe. No jargon, short sentences.",
   },
   {
     icon: 'graduation-cap',
@@ -60,10 +60,10 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
 
 <BaseLayout
   title="About | Nimzo Data"
-  description="Nimzo Data is a boutique Google Cloud data consultancy based in France. Modern data infrastructure for ambitious European companies. Paid audits, fixed-price builds, senior engineering only."
+  description="Nimzo Data is a boutique Google Cloud data consultancy based in France. Data platforms for growing European companies. Paid audits, fixed-price builds, senior engineering only."
 >
   <HeroStandard
-    title="A boutique data consultancy.<br>By design."
+    title="A boutique data consultancy.<br>That stays that way."
     subtitle="Small team. One cloud. Paid audits, fixed-price builds.<br>We work with a handful of clients at a time and go deep, not wide."
     cta={{ text: "Let's talk", href: '/contact/', dataTrack: 'about-hero-cta' }}
   />
@@ -75,23 +75,23 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
       <div class="reasons">
         <div class="reason">
           <h3 class="reason-title">A gap in the market</h3>
-          <p>Most data consultancies pitch themselves as trusted advisors and deliver what looks like transformation theater. Beautiful slide decks, expensive audits, and not much working software at the end. The mid-market in Europe deserves better: serious technical work, delivered honestly, at prices that aren't calibrated for Big Four budgets.</p>
+          <p>Most data consultancies deliver slide decks, expensive audits, and not much working software at the end. The mid-market in Europe deserves better: serious technical work, delivered honestly, at prices that aren't calibrated for Big Four budgets.</p>
         </div>
         <div class="reason">
           <h3 class="reason-title">One thing, done well</h3>
-          <p>We built Nimzo Data to do that one thing well. GCP, because it's the best analytics stack available. Fixed-price, because hourly billing rewards the wrong behavior. Senior engineering only, because the problems clients bring us can't be fixed by juniors learning on the job.</p>
+          <p>GCP, because it's the strongest analytics stack. Fixed-price, because hourly billing rewards the wrong behavior. Senior engineers only.</p>
         </div>
         <div class="reason">
-          <h3 class="reason-title">Deliberately small</h3>
-          <p>We're deliberately small. Taking on fewer clients means we can actually care about each one.</p>
+          <h3 class="reason-title">Small by choice</h3>
+          <p>We're small. Fewer clients means we can do better work for each one.</p>
         </div>
       </div>
     </div>
   </SectionWrapper>
 
   <TextSection title="Why Nimzo?" bg="white">
-    <p>Nimzo Data takes its name from the Nimzo-Indian Defense — a chess opening known for controlling the center through indirect pressure rather than direct occupation. The Nimzo-Indian doesn't charge forward. It creates the conditions for a structural advantage that compounds over time.</p>
-    <p>We build data infrastructure the same way. We're not interested in impressive-looking dashboards that don't connect to decisions. We're interested in creating the conditions for insight: clean pipelines, reliable models, clear metrics, and systems that compound in value as your data grows.</p>
+    <p>Nimzo Data is named after the Nimzo-Indian Defense, a chess opening that controls the center indirectly. It's about positioning, not force.</p>
+    <p>We build data infrastructure the same way. We don't build impressive dashboards that nobody uses. We build the pipelines, models, and metrics underneath them.</p>
   </TextSection>
 
   <!-- How we work -->
