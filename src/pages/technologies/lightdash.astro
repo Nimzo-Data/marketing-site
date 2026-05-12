@@ -15,12 +15,12 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 >
   <TextSection title="What It Is" bg="white">
     <p>Lightdash is an open-source BI tool where metrics and dimensions live in YAML. You can define them in your dbt project (Lightdash's original design) or in Lightdash's own native semantic layer (added for teams without dbt). Either way, your metric definitions stay in version control — not locked inside a dashboarding UI.</p>
-    <p>Lightdash Cloud includes a built-in AI Analyst for natural-language questions directly in the UI, plus an MCP server that lets external AI tools (Claude, Cursor, or custom agents) query the same governed semantic layer. Both operate largely on metadata rather than raw warehouse data. Cloud also ships dashboards-as-code (dashboard definitions in Git) which pairs well with AI coding agents writing dashboards directly from the repo.</p>
+    <p>Lightdash Cloud lets you create scoped AI agents directly in the UI — a marketing agent with access to campaign metrics, a sales agent tied to pipeline data, each with its own prompt and metric scope. An MCP server also lets external AI tools (Claude, Cursor, or custom agents) query the same governed semantic layer. Cloud also ships dashboards-as-code (dashboard definitions in Git) which pairs well with AI coding agents writing dashboards directly from the repo.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
     <p>For teams that want version-controlled metrics plus AI analytics without Looker-tier spend, Lightdash Cloud is the right middle ground. Pricing is flat-rate for unlimited users — a fundamentally different shape from per-seat tools — which makes the economics flip in your favor once you're past ~10–15 users. A self-hosted Core edition is also available for teams that want full control.</p>
-    <p>Worth knowing: most of Lightdash's AI features (AI Analyst, dashboards-as-code, Slack assistant) are in the paid Cloud product rather than the open-source Core.</p>
+    <p>Worth knowing: most of Lightdash's AI features (scoped AI agents, dashboards-as-code, Slack assistant) are in the paid Cloud product rather than the open-source Core.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">
@@ -30,6 +30,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
         "Connect Lightdash to BigQuery — with dbt YAML integration or Lightdash's native semantic layer",
         "Define explores, metrics, and dimensions in dbt models or Lightdash's own YAML",
         "Build dashboards for operational and executive reporting",
+        "Set up scoped AI agents per team — marketing, sales, finance — each with its own prompt and metric access",
         "Connect Lightdash's MCP server to the client's AI tools (Claude, Cursor) for natural-language queries over governed data",
         "Use Lightdash's dashboards-as-code workflow so coding agents can build and iterate on dashboards directly in Git",
         "Set up Lightdash Cloud or self-hosted Core deployment on GCP",
