@@ -14,12 +14,12 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
   heroPositioning="When clients need open-source portability or are already on a dbt workflow, we bring the same rigor — tested models, version control, and documentation as code."
 >
   <TextSection title="What It Is" bg="white">
-    <p>dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. Works with BigQuery, Snowflake, Redshift, and others. Recent releases add dbt Copilot (AI SQL assistance, GA), the Fusion engine (Rust-based, much faster than Core, still in beta), and a GA Semantic Layer powered by MetricFlow.</p>
+    <p>dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. Works with BigQuery, Snowflake, Redshift, and others. Recent releases add dbt Copilot (AI SQL assistance, GA on paid plans), the Fusion engine (Rust-based, nearing GA, already the default for new dbt Cloud projects), and a GA Semantic Layer powered by MetricFlow.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
     <p>dbt is the most widely adopted transformation tool in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.</p>
-    <p>One caveat worth noting: Fivetran and dbt Labs merged in October 2025. That consolidation is convenient for clients on the Fivetran + dbt path, but it's worth staying aware of vendor-lock-in risk — pairing Airbyte with Dataform (or dbt Core) keeps the ingestion and transformation layers in separate hands.</p>
+    <p>One caveat worth noting: Fivetran and dbt Labs announced a merger in October 2025 (pending regulatory close, expected 2026). That consolidation is convenient for clients on the Fivetran + dbt path, but it's worth staying aware of vendor-lock-in risk — pairing Airbyte with Dataform (or dbt Core) keeps the ingestion and transformation layers in separate hands.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">

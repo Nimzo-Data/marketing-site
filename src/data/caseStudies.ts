@@ -64,7 +64,7 @@ export const caseStudies: CaseStudyMeta[] = [
       text: 'Dashboards that used to take minutes now load in seconds, and the whole team has real trust in the data again.',
       authorName: 'Phoebe Pham',
       authorTitle: 'BI Lead, Aeyde',
-      authorPhoto: '/case-studies/photos/phoebe.svg',
+      authorPhoto: '/case-studies/photos/aeyde-phoebe.png',
     },
   },
   {

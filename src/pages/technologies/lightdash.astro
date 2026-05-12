@@ -15,7 +15,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
 >
   <TextSection title="What It Is" bg="white">
     <p>Lightdash is an open-source BI tool where metrics and dimensions live in YAML. You can define them in your dbt project (Lightdash's original design) or in Lightdash's own native semantic layer (added for teams without dbt). Either way, your metric definitions stay in version control — not locked inside a dashboarding UI.</p>
-    <p>Lightdash Cloud now adds AI Analyst, which answers natural-language questions over the governed semantic layer. It operates largely on metadata rather than raw warehouse data and lets you bring your own LLM provider (OpenAI, Anthropic, or self-hosted). Cloud also ships dashboards-as-code — dashboard definitions in Git — which pairs well with AI coding agents writing dashboards directly from the repo.</p>
+    <p>Lightdash Cloud includes a built-in AI Analyst for natural-language questions directly in the UI, plus an MCP server that lets external AI tools (Claude, Cursor, or custom agents) query the same governed semantic layer. Both operate largely on metadata rather than raw warehouse data. Cloud also ships dashboards-as-code (dashboard definitions in Git) which pairs well with AI coding agents writing dashboards directly from the repo.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
@@ -30,7 +30,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
         "Connect Lightdash to BigQuery — with dbt YAML integration or Lightdash's native semantic layer",
         "Define explores, metrics, and dimensions in dbt models or Lightdash's own YAML",
         "Build dashboards for operational and executive reporting",
-        "Configure AI Analyst with the client's LLM provider (OpenAI, Anthropic, or self-hosted) for natural-language queries",
+        "Connect Lightdash's MCP server to the client's AI tools (Claude, Cursor) for natural-language queries over governed data",
         "Use Lightdash's dashboards-as-code workflow so coding agents can build and iterate on dashboards directly in Git",
         "Set up Lightdash Cloud or self-hosted Core deployment on GCP",
       ]}
@@ -46,7 +46,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
           bullets: [
             "You want metrics defined in code — in dbt YAML or Lightdash's native semantic layer",
             "You want flat-rate pricing that doesn't scale with headcount (cheaper than Looker past ~10–15 users)",
-            'You want to choose your own LLM provider for governed AI analytics',
+            'You want to connect your own AI tools (Claude, Cursor) to governed analytics via MCP',
             'Dashboards-as-code fits your team — AI coding agents can work the dashboard layer directly',
           ],
         },
