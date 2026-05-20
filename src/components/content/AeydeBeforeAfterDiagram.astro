@@ -22,9 +22,11 @@ interface Stage {
 interface CostSpan {
   text: string;
   kind: 'pain' | 'win';
-  // 0-based stage indices, inclusive: covers stages from..to
+  // 0-based stage indices, inclusive: covers stages from..to (desktop grid span)
   from: number;
   to: number;
+  // DOM placement for mobile ordering (defaults to `to`)
+  renderAfter?: number;
 }
 
 const beforeStages: Stage[] = [
@@ -89,7 +91,7 @@ const afterStages: Stage[] = [
 
 const afterCostSpans: CostSpan[] = [
   { text: '$150/mo', kind: 'win', from: 0, to: 0 },
-  { text: '$150/mo', kind: 'win', from: 1, to: 1 },
+  { text: '$150/mo', kind: 'win', from: 1, to: 2, renderAfter: 1 },
 ];
 
 // Stage idx N → grid column 1 + 2*N (1, 3, 5, 7).
@@ -132,7 +134,7 @@ function spanCols(from: number, to: number): string {
               <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'pain'}`}>{stage.badge}</span>
             )}
           </div>
-          {beforeCostSpans.filter((s) => s.to === i).map((span) => (
+          {beforeCostSpans.filter((s) => (s.renderAfter ?? s.to) === i).map((span) => (
             <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
               {span.text}
             </div>
@@ -176,7 +178,7 @@ function spanCols(from: number, to: number): string {
               <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'win'}`}>{stage.badge}</span>
             )}
           </div>
-          {afterCostSpans.filter((s) => s.to === i).map((span) => (
+          {afterCostSpans.filter((s) => (s.renderAfter ?? s.to) === i).map((span) => (
             <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
               {span.text}
             </div>
