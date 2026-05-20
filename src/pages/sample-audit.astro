@@ -231,7 +231,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
     </div>
 
     <h4 class="doc-h3">Cross-source dependencies and conflicts</h4>
-    <p>Several critical problems exist at the intersection of sources rather than within individual systems:</p>
+    <p>Several critical problems exist at the intersection of sources:</p>
     <ul class="doc-bullets">
       <li><strong>Shopify vs Stripe revenue:</strong> Shopify reports gross order value (€2.08M in February). Stripe reports net payouts after fees and refunds (€174,200 in February for B2B orders). These numbers cannot be reconciled without joining both datasets and accounting for: refund timing, Stripe processing fees (2.9% + €0.25), and GBP/EUR conversion rates applied at payout time.</li>
       <li><strong>GA4 vs Google Ads conversions:</strong> GA4 reports 1,840 purchase events in February. Google Ads reports 2,150 for the same period. The discrepancy is due to different attribution windows and Google Ads counting view-through conversions that GA4 does not.</li>
@@ -252,7 +252,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
           <tr><td>Testing</td><td>None</td></tr>
           <tr><td>Documentation</td><td>None. Emma maintains a personal Google Sheet with metric definitions that is not shared with the broader team.</td></tr>
           <tr><td>Metric definitions</td><td>Revenue defined differently in 4 places: Shopify admin (gross), Stripe dashboard (net B2B), Data Studio dashboard #3 (GA4 e-commerce), and the weekly summary spreadsheet.</td></tr>
-          <tr><td>Known issues</td><td>The absence of a transformation layer is the root cause of most findings in this audit. Without a shared layer that defines business logic once, every dashboard and spreadsheet recalculates metrics independently.</td></tr>
+          <tr><td>Known issues</td><td>The absence of a transformation layer is the root cause of most findings in this audit. Without a shared layer that defines business logic once, every dashboard and spreadsheet calculates metrics independently.</td></tr>
         </tbody>
       </table>
     </div>
@@ -525,7 +525,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
     <p>We found approximately 8% duplicate customer records in Shopify (from guest checkout) and 12% of products that cannot be matched between Shopify and the supplier cost spreadsheet due to naming inconsistencies. The transformation layer will handle deduplication and best-effort matching, but the root cause should be addressed at the source: enforcing account creation at checkout and aligning product SKUs between Shopify and supplier catalogs. Without this, data quality issues will persist in the mart layer.</p>
 
     <h4 class="doc-h3">UTM discipline</h4>
-    <p>The attribution model uses GA4 session data to link ad clicks to purchases. In the Netherlands, GA4 tracking coverage is estimated at 60-70% of purchases after accounting for consent rejection, ad blockers, and iOS privacy restrictions. This is a structural limitation across the industry, not a fixable implementation problem. The three-layer model is designed to work within this constraint: order-level attribution covers the tracked portion, while channel-level spend-vs-revenue comparison covers the full picture directionally. UTM parameters on campaign URLs remain essential for campaign-level granularity, especially for Meta Ads where platform-level click tracking is less reliable than Google Ads. We recommend adding UTM validation to the team's campaign launch checklist and periodically auditing UTM coverage in GA4 (the transformation layer can flag sessions with missing or malformed UTMs).</p>
+    <p>The attribution model uses GA4 session data to link ad clicks to purchases. In the Netherlands, GA4 tracking coverage is estimated at 60-70% of purchases after accounting for consent rejection, ad blockers, and iOS privacy restrictions. This is a structural industry limitation, not a fixable implementation problem. The model is designed to work within this constraint: order-level attribution covers the tracked portion, while channel-level spend-vs-revenue comparison covers the full picture. UTM parameters on campaign URLs remain essential for campaign-level granularity, especially for Meta Ads where platform-level click tracking is less reliable than Google Ads. We recommend adding UTM validation to the team's campaign launch checklist and periodically auditing UTM coverage in GA4 (the transformation layer can flag sessions with missing or malformed UTMs).</p>
 
     <h4 class="doc-h3">Dutch payment flows</h4>
     <p>iDEAL, the dominant payment method in the Netherlands, redirects users away from Shopify during checkout and back after payment. This redirect can break GA4 session continuity, reducing attribution coverage for orders paid via iDEAL. This should be tested explicitly during implementation.</p>
@@ -550,7 +550,6 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <p>Founder, Nimzo Data</p>
       <p>antoine@nimzodata.com | nimzodata.com</p>
     </div>
-    <p class="doc-legal">Nimzo Data SARL | SIRET: 994 080 497 00013 | VAT: FR74994080497 | Insured: professional liability and cyber risk (Beazley Insurance Dac, €500K coverage)</p>
 
   </div>
   <!-- ==================== END DOCUMENT CONTAINER ==================== -->
