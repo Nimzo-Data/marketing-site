@@ -63,6 +63,13 @@ import { technologiesForGrid } from '../../data/technologies';
     </div>
   </SectionWrapper>
 
+  <!-- Sample deliverable callout -->
+  <SectionWrapper py="sm" bg="white">
+    <div class="sample-callout">
+      <p>Want to see what this actually looks like? <a href="/sample-audit/" data-track="audit-sample-link">View a sample audit deliverable for a fictional €25M e-commerce company &rarr;</a></p>
+    </div>
+  </SectionWrapper>
+
   <!-- How it runs -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">How an audit runs.</h2>
@@ -372,6 +379,31 @@ import { technologiesForGrid } from '../../data/technologies';
     color: var(--color-primary);
     text-decoration: underline;
     font-weight: 500;
+  }
+
+  /* Sample deliverable callout */
+  .sample-callout {
+    max-width: 720px;
+    border-left: 3px solid var(--color-border-subtle);
+    padding: 12px 0 12px 20px;
+  }
+
+  .sample-callout p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .sample-callout a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .sample-callout a:hover {
+    text-decoration: underline;
   }
 
 </style>

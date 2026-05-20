@@ -1,0 +1,1208 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionWrapper from '../components/ui/SectionWrapper.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+---
+
+<BaseLayout
+  title="Sample Audit Deliverable | Nimzo Data"
+  description="See what a Nimzo Data audit produces. A complete sample deliverable for a fictional €25M e-commerce company -- findings, recommendations, tool comparison, and cost estimate."
+  canonicalUrl="https://nimzodata.com/sample-audit/"
+>
+  <section class="sa-hero">
+    <div class="sa-hero__inner">
+      <div class="sa-hero__main">
+        <p class="sa-hero__eyebrow">Sample deliverable</p>
+        <h1 class="sa-hero__title">The deliverable, in full.</h1>
+        <p class="sa-hero__subline">A complete audit for a fictional company. Same structure every client gets — tools, costs, and recommendations tailored to your situation. If your company is smaller, the audit would be simpler and the build cost lower.</p>
+      </div>
+      <aside class="sa-hero__aside" aria-label="Engagement details">
+        <div class="sa-snap">
+          <p class="sa-snap__label">Fictional company</p>
+          <div class="sa-snap__detail">
+            <span class="sa-snap__name">Verdure B.V.</span>
+            <span class="sa-snap__meta">E-commerce · €25M revenue</span>
+            <span class="sa-snap__meta">Amsterdam (fictional)</span>
+          </div>
+        </div>
+        <div class="sa-snap-row">
+          <div class="sa-snap sa-snap--inline">
+            <p class="sa-snap__label">Service</p>
+            <a href="/services/data-platform-audit/" class="sa-snap__tile">
+              <span class="sa-snap__tile-name">Data Platform Audit</span>
+              <span class="sa-snap__tile-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+          <div class="sa-snap-divider" aria-hidden="true"></div>
+          <div class="sa-snap sa-snap--inline">
+            <p class="sa-snap__label">Tools evaluated</p>
+            <div class="sa-snap__tools">
+              <a href="/technologies/airbyte/" class="sa-snap__tile">
+                <img src="/logos/airbyte.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
+                <span class="sa-snap__tile-name">Airbyte</span>
+              </a>
+              <a href="/technologies/bigquery/" class="sa-snap__tile">
+                <img src="/logos/bigquery.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
+                <span class="sa-snap__tile-name">BigQuery</span>
+              </a>
+              <a href="/technologies/dataform/" class="sa-snap__tile">
+                <img src="/logos/dataform.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
+                <span class="sa-snap__tile-name">Dataform</span>
+              </a>
+              <a href="/technologies/steep/" class="sa-snap__tile">
+                <img src="/logos/steep.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
+                <span class="sa-snap__tile-name">Steep</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== DOCUMENT CONTAINER ==================== -->
+  <div class="audit-document">
+
+    <!-- Cover -->
+    <div class="doc-cover">
+      <h1 class="cover-title">DATA PLATFORM AUDIT</h1>
+      <p class="cover-subtitle">FINDINGS &amp; RECOMMENDATION</p>
+      <div class="cover-meta">
+        <p>Verdure</p>
+        <p>March 2026</p>
+        <p>Prepared by Antoine Anicotte, Nimzo Data</p>
+      </div>
+      <p class="cover-confidential">Confidential<br>This document is the property of Verdure and is intended for internal use only.</p>
+    </div>
+
+    <!-- Executive Summary -->
+    <h2 class="doc-h1">Executive Summary</h2>
+    <p>Nimzo Data conducted a two-week audit of Verdure's data environment, reviewing seven data sources, eight dashboards, and the workflows of three team members involved in data-related tasks.</p>
+    <p>The audit identified eight findings:</p>
+    <ol class="findings-list">
+      <li><strong>Revenue figures are unreliable.</strong> No single system contains total reconciled revenue. Shopify, Stripe, GA4, and a manual spreadsheet each show different numbers, and the CFO and Head of Sales disagree on monthly revenue by tens of thousands of euros.</li>
+      <li><strong>Ad spend has no reliable attribution.</strong> Verdure spends approximately €200,000 per month on Google Ads and Meta Ads but cannot attribute revenue to specific channels because UTM tagging is inconsistent and GA4 session data is not connected to order data.</li>
+      <li><strong>Cross-market web analytics are fragile and incomplete.</strong> Five GA4 properties (one per market domain) are consolidated via a Google Sheets add-on with manual union tabs. This setup is unstable and time-consuming to maintain.</li>
+      <li><strong>Dashboards are not trusted.</strong> Eight Data Studio reports exist, but leadership does not trust them because each calculates metrics differently from different Google Sheets sources.</li>
+      <li><strong>The data analyst is a bottleneck.</strong> Emma spends roughly 35% of her time maintaining Google Sheets connectors, debugging GA4 exports, reconciling numbers, and building reports. She is the single point of failure for all data requests.</li>
+      <li><strong>Product margin analysis is manual and slow.</strong> Calculating margins requires a 3-hour Excel exercise joining Shopify orders to a supplier cost spreadsheet. A pricing decision on the spring collection was delayed two weeks.</li>
+      <li><strong>Email performance is unmeasured.</strong> Klaviyo claims ~18% of revenue comes from email, but this cannot be validated because email engagement data is not connected to order data.</li>
+      <li><strong>Customer LTV by acquisition channel is unknown.</strong> Budget allocation is based on short-term ROAS rather than long-term customer value because no system connects attribution data to purchase history.</li>
+    </ol>
+    <p>We recommend a modern data platform built on Google Cloud: Airbyte Cloud for automated data ingestion, BigQuery as the central warehouse, Dataform for governed data transformations (a layer that cleans, standardizes, and applies consistent business logic to raw data), and Steep as the BI tool for self-service analytics. This architecture gives Verdure a single source of truth for revenue, marketing attribution, product margins, and customer lifetime value.</p>
+    <p>The estimated total cost for Year 1 is approximately €28,000, including the implementation fee and infrastructure (excluding the audit fee). From Year 2 onward, ongoing costs are approximately €8,400 per year, which is lower than what Verdure currently spends on manual labor alone. The platform is expected to pay for itself within the first year through recovered analyst time and improved marketing spend allocation.</p>
+    <p>If Verdure does nothing, the revenue discrepancy will persist, marketing budget allocation will continue without reliable attribution data, and the analyst will remain a bottleneck for any data request that goes beyond what the current Data Studio dashboards can answer.</p>
+
+    <!-- Audit Scope -->
+    <h2 class="doc-h1">Audit Scope</h2>
+    <p>This audit was conducted in accordance with the scope defined in the Audit Proposal signed on February 18, 2026. The objective was to assess Verdure's current data environment and produce a recommendation for a target architecture, tool selection, and implementation plan.</p>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <tbody>
+          <tr><td><strong>Client</strong></td><td>Verdure B.V., Amsterdam</td></tr>
+          <tr><td><strong>Audit period</strong></td><td>March 3-14, 2026</td></tr>
+          <tr><td><strong>Conducted by</strong></td><td>Antoine Anicotte, Nimzo Data</td></tr>
+          <tr><td><strong>Systems reviewed</strong></td><td>Shopify, Stripe, GA4, Google Ads, Meta Ads, Klaviyo, Google Sheets, Data Studio</td></tr>
+          <tr><td><strong>People interviewed</strong></td><td>Emma de Vries (Data Analyst), Joris ten Berg (Head of Operations), Lisa Bakker (Head of Marketing)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Current State -->
+    <h2 class="doc-h1">Current State</h2>
+
+    <h3 class="doc-h2">Current architecture</h3>
+    <p>Data flows from seven sources into eight Data Studio reports through a patchwork of Google Sheets connectors, a Google Sheets add-on, one native Data Studio connector, and manual processes. There is no central data warehouse. The diagram below shows how each source reaches Data Studio today.</p>
+    <img src="/images/data-flow-audit-diagram-3x.png" alt="Current state architecture diagram showing data flowing from seven sources through Google Sheets connectors to Data Studio reports" class="doc-diagram" loading="lazy" />
+
+    <h3 class="doc-h2">Data sources</h3>
+
+    <h4 class="doc-h3">Shopify</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>E-commerce platform (primary online store)</td></tr>
+          <tr><td>Data categories</td><td>Orders, products, customers, inventory, refunds, discounts, collections</td></tr>
+          <tr><td>Volume</td><td>~12,000 orders/month, ~4,200 products, ~85,000 customer records</td></tr>
+          <tr><td>Current ingestion method</td><td>A third-party Google Sheets connector pulls Shopify data into Google Sheets daily. Emma adds calculated columns and summary tabs on top of the raw data tabs. Data Studio reads from these Google Sheets. Additional manual CSV exports for detailed data the connector does not cover (refund breakdowns, customer-level data).</td></tr>
+          <tr><td>Refresh frequency</td><td>Daily (automated via the Sheets connector). Manual CSV exports as needed.</td></tr>
+          <tr><td>Known issues</td><td>Refund data exported separately from order data; customer records contain ~8% duplicates from guest checkout; no connection between Shopify orders and Stripe payouts</td></tr>
+          <tr><td>API access</td><td>Shopify Admin API available (read access confirmed during audit)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Stripe</h4>
+    <p class="doc-note"><em>Verdure uses Stripe alongside Shopify Payments for B2B wholesale invoicing and a small number of subscription-based orders. This dual payment setup is the root cause of Finding 1 (revenue discrepancy).</em></p>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Payment processing (B2B wholesale invoicing and subscription orders processed outside the Shopify checkout). Most B2C and some B2B orders go through Shopify Payments. Stripe handles the remainder.</td></tr>
+          <tr><td>Data categories</td><td>Charges, payouts, refunds, fees, balance transactions, customers</td></tr>
+          <tr><td>Volume</td><td>~800 transactions/month (B2B wholesale), ~€180,000/month in Stripe volume</td></tr>
+          <tr><td>Current ingestion method</td><td>Manual: Emma downloads payout reports from the Stripe dashboard weekly and imports them into a Google Sheet with reconciliation tabs</td></tr>
+          <tr><td>Refresh frequency</td><td>Weekly (Monday mornings, as part of Emma's weekly reporting routine)</td></tr>
+          <tr><td>Known issues</td><td>Stripe payout amounts don't match Shopify order totals due to: (1) timing differences between order placement and payout, (2) Stripe fees deducted from payouts, (3) refunds processed at different times, (4) GBP transactions converted at varying rates. This is the primary source of the revenue discrepancy between CFO and Head of Sales.</td></tr>
+          <tr><td>API access</td><td>Stripe API available (read access confirmed during audit)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Google Analytics 4 (GA4)</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Web analytics</td></tr>
+          <tr><td>Data categories</td><td>Sessions, events, conversions, traffic sources, user properties</td></tr>
+          <tr><td>Volume</td><td>~350,000 sessions/month across 5 markets</td></tr>
+          <tr><td>Current ingestion method</td><td>GA4 Reports Builder add-on for Google Sheets. Each export is run 5 times (once per GA4 property: verdure.nl, verdure.de, verdure.fr, verdure.be, verdure.co.uk). Emma then maintains manual union tabs that consolidate the 5 property exports into one combined dataset. She adds calculated tabs on top for Data Studio to read from. This setup is repeated for each type of export (sessions, conversions, e-commerce, etc.).</td></tr>
+          <tr><td>Refresh frequency</td><td>Daily via the add-on, but exports frequently fail or return incomplete data. Emma debugs these regularly.</td></tr>
+          <tr><td>Known issues</td><td>The GA4 Reports Builder add-on is unstable and time-consuming to work with. With 5 properties, every export is 5× the configuration and 5× the potential failure points. The union tabs require manual maintenance whenever the add-on output changes. This approach was chosen because the native Data Studio GA4 connector cannot consolidate multiple properties. UTM parameters are not enforced across all campaigns, so ~40% of paid traffic appears as 'unattributed.' Enhanced e-commerce tracking is partially configured: purchase events fire but product-level data is inconsistent.</td></tr>
+          <tr><td>API access</td><td>BigQuery export available but not enabled</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Google Ads</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Paid search and shopping campaigns</td></tr>
+          <tr><td>Data categories</td><td>Campaigns, ad groups, keywords, spend, clicks, impressions, conversions</td></tr>
+          <tr><td>Volume</td><td>~€120,000/month spend across Search and Shopping campaigns</td></tr>
+          <tr><td>Current ingestion method</td><td>Native Data Studio connector for campaign dashboards. Lisa also checks the Google Ads interface directly for campaign management.</td></tr>
+          <tr><td>Refresh frequency</td><td>Near real-time via Data Studio connector. Monthly summaries copied into a Google Sheet for budget tracking.</td></tr>
+          <tr><td>Known issues</td><td>Google Ads conversion tracking reports different conversion counts than GA4 (attribution window differences). No connection between ad spend and actual Shopify orders.</td></tr>
+          <tr><td>API access</td><td>Google Ads API available</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Meta Ads (Facebook + Instagram)</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Paid social advertising</td></tr>
+          <tr><td>Data categories</td><td>Campaigns, ad sets, ads, spend, impressions, clicks, conversions</td></tr>
+          <tr><td>Volume</td><td>~€80,000/month spend across Facebook and Instagram</td></tr>
+          <tr><td>Current ingestion method</td><td>Third-party Google Sheets connector pulls spend and performance data into raw tabs daily. Emma adds calculated tabs on top. Data Studio reads from Emma's tabs.</td></tr>
+          <tr><td>Refresh frequency</td><td>Daily via the Sheets connector.</td></tr>
+          <tr><td>Known issues</td><td>Meta's reported ROAS is significantly higher than what Shopify order data suggests, due to Meta's self-attributed conversion model. The team cannot independently verify Meta's claims.</td></tr>
+          <tr><td>API access</td><td>Meta Marketing API available</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Klaviyo</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Email marketing platform</td></tr>
+          <tr><td>Data categories</td><td>Campaigns, flows (automated sequences), subscriber profiles, email events (sends, opens, clicks)</td></tr>
+          <tr><td>Volume</td><td>~65,000 subscribers, 12 active flows, 8-10 campaigns/month</td></tr>
+          <tr><td>Current ingestion method</td><td>None. Klaviyo data stays in Klaviyo.</td></tr>
+          <tr><td>Refresh frequency</td><td>N/A</td></tr>
+          <tr><td>Known issues</td><td>Klaviyo claims ~18% of revenue from email, but this cannot be validated because engagement data is not connected to Shopify order data. The team cannot measure email-driven LTV or identify which flows drive repeat purchases.</td></tr>
+          <tr><td>API access</td><td>Klaviyo API v2 available</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Google Sheets</h4>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Type</td><td>Manual tracking and supplier cost data</td></tr>
+          <tr><td>Data categories</td><td>Supplier costs per product (COGS), weekly revenue summaries, ad spend summaries, metric definitions</td></tr>
+          <tr><td>Volume</td><td>6 active spreadsheets, ~2,000 rows of product cost data</td></tr>
+          <tr><td>Current ingestion method</td><td>Manual data entry by Emma and the operations team</td></tr>
+          <tr><td>Refresh frequency</td><td>Weekly to monthly, depending on the sheet</td></tr>
+          <tr><td>Known issues</td><td>Supplier cost data is updated quarterly and often lags actual costs by 1-2 months. The product cost spreadsheet uses different product identifiers than Shopify (supplier SKU vs Shopify SKU), requiring manual matching.</td></tr>
+          <tr><td>API access</td><td>Google Sheets API available</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="doc-h3">Cross-source dependencies and conflicts</h4>
+    <p>Several critical problems exist at the intersection of sources rather than within individual systems:</p>
+    <ul class="doc-bullets">
+      <li><strong>Shopify vs Stripe revenue:</strong> Shopify reports gross order value (€2.08M in February). Stripe reports net payouts after fees and refunds (€174,200 in February for B2B orders). These numbers cannot be reconciled without joining both datasets and accounting for: refund timing, Stripe processing fees (2.9% + €0.25), and GBP/EUR conversion rates applied at payout time.</li>
+      <li><strong>GA4 vs Google Ads conversions:</strong> GA4 reports 1,840 purchase events in February. Google Ads reports 2,150 for the same period. The discrepancy is due to different attribution windows and Google Ads counting view-through conversions that GA4 does not.</li>
+      <li><strong>Shopify product IDs vs supplier SKUs:</strong> The supplier cost spreadsheet uses supplier-assigned SKUs. Shopify uses its own internal product IDs. Matching costs to products requires a manual lookup table maintained by Emma (~2,000 rows, updated quarterly). Approximately 12% of products cannot be matched due to naming inconsistencies.</li>
+      <li><strong>Klaviyo vs Shopify attribution:</strong> Klaviyo claims email-attributed revenue based on opens/clicks within 5 days of purchase. Without joining these datasets, the team cannot distinguish between email-driven and organic purchases.</li>
+    </ul>
+
+    <h3 class="doc-h2">Data warehouse</h3>
+    <p>Verdure does not currently have a data warehouse. All reporting is done via Google Sheets (which aggregate data from connectors, add-ons, and manual exports) connected to Data Studio. There is no central location where data from multiple sources can be joined, transformed, or governed.</p>
+
+    <h3 class="doc-h2">Transformation layer</h3>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Current approach</td><td>None. Business logic (revenue calculations, attribution rules) is embedded in individual Data Studio dashboards and Google Sheets formulas.</td></tr>
+          <tr><td>Version control</td><td>None</td></tr>
+          <tr><td>Testing</td><td>None</td></tr>
+          <tr><td>Documentation</td><td>None. Emma maintains a personal Google Sheet with metric definitions that is not shared with the broader team.</td></tr>
+          <tr><td>Metric definitions</td><td>Revenue defined differently in 4 places: Shopify admin (gross), Stripe dashboard (net B2B), Data Studio dashboard #3 (GA4 e-commerce), and the weekly summary spreadsheet.</td></tr>
+          <tr><td>Known issues</td><td>The absence of a transformation layer is the root cause of most findings in this audit. Without a shared layer that defines business logic once, every dashboard and spreadsheet recalculates metrics independently.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="doc-h2">BI and reporting</h3>
+    <div class="table-scroll">
+      <table class="doc-table">
+        <thead><tr><th>Attribute</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Current tool</td><td>Data Studio (formerly Looker Studio)</td></tr>
+          <tr><td>Number of dashboards</td><td>8 active, 3 appear abandoned (not updated in 60+ days)</td></tr>
+          <tr><td>Users</td><td>~15 people access dashboards regularly: CEO, CFO, Head of Ops, Head of Marketing, Head of Sales, 4 marketing team members, 2 sales team members, 2 product managers, Emma</td></tr>
+          <tr><td>Self-service capability</td><td>None. All dashboards were built by Emma. Ad-hoc requests go to Emma, who either builds a new dashboard or exports data to a Google Sheet.</td></tr>
+          <tr><td>Mobile access</td><td>Data Studio reports can be viewed in a mobile browser but are not optimized for mobile. No native mobile app available on the free tier.</td></tr>
+          <tr><td>Known issues</td><td>Dashboard #3 (marketing performance) is powered by Emma's GA4 consolidation Google Sheet, which aggregates data from all 5 market properties. When the GA4 add-on exports fail or return incomplete data, Dashboard #3 shows stale or partial numbers until Emma debugs the issue. Dashboard #5 (weekly revenue) shows different totals than the CFO's weekly summary spreadsheet. CEO has stopped checking dashboards and asks Emma for numbers directly.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="doc-h2">Team and process</h3>
+    <div class="table-scroll">
+      <table class="doc-table doc-table--3col">
+        <thead><tr><th>Person / Role</th><th>Data responsibilities</th><th>Time spent on data</th></tr></thead>
+        <tbody>
+          <tr><td>Emma de Vries, Data Analyst</td><td>Maintains all Google Sheets connectors and calculated tabs (Shopify, Meta Ads, GA4 consolidation). Downloads Stripe data weekly. Debugs GA4 add-on failures. Builds and maintains all Data Studio reports. Creates weekly revenue summary. Answers ad-hoc data requests.</td><td>~14 hrs/week (~35% of time)</td></tr>
+          <tr><td>Lisa Bakker, Head of Marketing</td><td>Downloads ad spend reports from Google Ads and Meta Ads, maintains campaign tracking spreadsheet, reviews Klaviyo reports</td><td>~4 hrs/week</td></tr>
+          <tr><td>Joris ten Berg, Head of Operations</td><td>Reviews weekly revenue summary, requests margin and inventory reports from Emma</td><td>~2 hrs/week</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Total: approximately 20 hours per week spent on data-related tasks across three people. Of these, roughly 14 hours (Emma's contribution) are manual collection, export, and report-building work that would be automated by the recommended platform.</p>
+
+    <h3 class="doc-h2">Current costs</h3>
+    <div class="table-scroll">
+      <table class="doc-table doc-table--4col">
+        <thead><tr><th>Component</th><th>Monthly cost</th><th>Annual cost</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Shopify</td><td>€2,100</td><td>€25,200</td><td>Shopify Plus plan</td></tr>
+          <tr><td>Stripe</td><td>~€5,050</td><td>~€60,600</td><td>2.9% + €0.25 on ~€174K/month B2B volume</td></tr>
+          <tr><td>GA4</td><td>Free</td><td>Free</td><td>Standard GA4 property</td></tr>
+          <tr><td>Google Ads</td><td>Free</td><td>Free</td><td>Ad spend (€120K/mo) is not an infrastructure cost</td></tr>
+          <tr><td>Meta Ads</td><td>Free</td><td>Free</td><td>Ad spend (€80K/mo) is not an infrastructure cost</td></tr>
+          <tr><td>Klaviyo</td><td>~€700</td><td>~€8,400</td><td>65K subscribers, email plan</td></tr>
+          <tr><td>Data Studio</td><td>Free</td><td>Free</td><td>Google Workspace included</td></tr>
+          <tr><td>Google Sheets</td><td>Free</td><td>Free</td><td>Google Workspace included</td></tr>
+          <tr><td>Manual labor (data tasks)</td><td>~€3,100</td><td>~€37,200</td><td>~14 hrs/week at blended cost of ~€55/hr (Emma's time on manual data work)</td></tr>
+          <tr class="doc-table-total"><td>Total</td><td>~€11,000</td><td>~€131,400</td><td>Excludes ad spend; includes Stripe processing fees</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="doc-note"><em>Note: Shopify, Stripe, Klaviyo, and ad platform costs are operational costs that will not change as a result of this engagement. The relevant comparison for ROI is the manual labor line (€37,200/year) plus any new infrastructure costs introduced by the recommended platform.</em></p>
+
+    <!-- Key Findings -->
+    <h2 class="doc-h1">Key Findings</h2>
+    <p>The following findings emerged from the audit. Each finding connects to a specific recommendation in the next section.</p>
+
+    <h4 class="doc-h3">Finding 1: Revenue figures are unreliable</h4>
+    <p>Verdure has no single, reconciled revenue figure. Four systems report revenue, but each measures something different: Shopify reports gross order value for all channels (B2C and B2B). Stripe reports net B2B payouts after fees and refunds. GA4 reports browser-tracked e-commerce value (which undercounts by approximately 30-40% in the Netherlands due to ad blockers and consent management). And Emma's weekly summary spreadsheet attempts to combine these into a single number but cannot fully reconcile them because the underlying data is in separate, unconnected systems.</p>
+    <p>The core problem is not that these systems disagree — they measure different things and should show different numbers. The problem is that nobody has a single place where gross revenue, net revenue, and revenue by channel are calculated from the same source data using agreed definitions.</p>
+    <p><strong>Impact:</strong> The CFO and Head of Sales disagreed on February revenue by €23,000. This discrepancy took Emma two days to investigate and partially reconcile. The CFO has requested that Emma produce a manual reconciliation every month, adding approximately 6 hours of work per month to an already full workload.</p>
+
+    <h4 class="doc-h3">Finding 2: €200K/month in ad spend has no reliable attribution</h4>
+    <p>Verdure spends approximately €200,000 per month on Google Ads (€120K) and Meta Ads (€80K). The marketing team uses platform-reported ROAS to allocate budget between channels. However, each platform self-attributes conversions using different models: Google Ads uses a 30-day click-through window with view-through conversions, Meta uses a 7-day click/1-day view window, and GA4 uses last-click attribution.</p>
+    <p>The result is that the sum of conversions reported by Google Ads + Meta Ads + Klaviyo exceeds actual Shopify orders by approximately 40%. The team cannot determine which channel genuinely drives profitable revenue because there is no independent attribution layer.</p>
+    <p>Additionally, UTM parameter enforcement is inconsistent: approximately 40% of paid sessions in GA4 appear as 'direct' or 'unattributed' traffic because campaign URLs were not tagged, or tagged inconsistently (e.g., 'google_ads' vs 'google-ads' vs 'Google Ads').</p>
+    <p><strong>Impact:</strong> The marketing team cannot confidently answer whether shifting €20,000 from Meta to Google (or vice versa) would improve or harm revenue. Budget allocation decisions are based on platform-reported metrics that are known to overcount. At €2.4M annual ad spend, even a 5% improvement in allocation efficiency would recover €120,000 per year.</p>
+
+    <h4 class="doc-h3">Finding 3: Cross-market web analytics are fragile and incomplete</h4>
+    <p>Verdure operates five market-specific domains (verdure.nl, verdure.de, verdure.fr, verdure.be, verdure.co.uk), each with its own GA4 property. Emma has built a consolidation layer using the GA4 Reports Builder add-on for Google Sheets: each export runs 5 times (once per property), and manual union tabs combine the results into a single dataset. This is the only way to get cross-market data into Data Studio, because the native Data Studio GA4 connector does not support merging multiple properties.</p>
+    <p>This approach is unstable and time-consuming. The GA4 add-on is known in the industry to be unreliable, and with 5 properties, every export is five times the configuration and five times the potential failure points. Emma spends several hours per week maintaining and debugging this consolidation layer. When an export fails or returns incomplete data, the downstream Data Studio reports show stale or partial numbers until Emma fixes it.</p>
+    <p><strong>Impact:</strong> Cross-market analytics exist but are fragile. Any question that compares markets (conversion rate by country, campaign performance across regions) depends on the Google Sheets consolidation working correctly. In BigQuery, this consolidation would be a single UNION ALL query that runs automatically every day.</p>
+
+    <h4 class="doc-h3">Finding 4: Dashboards are not trusted</h4>
+    <p>Verdure has eight active Data Studio reports, built at different times by Emma to serve different stakeholders. Each report pulls from different Google Sheets sources, each with its own calculated tabs and metric logic. Dashboard #3 (marketing performance) reads from Emma's GA4 consolidation Sheet. Dashboard #5 (weekly revenue) reads from a different Google Sheet with Shopify connector data plus manual Stripe imports. Dashboard #7 (sales overview) pulls from yet another Google Sheet maintained by the Head of Sales.</p>
+    <p><strong>Impact:</strong> Leadership does not trust the dashboards because they regularly show conflicting numbers for the same metric. In the March board meeting, Dashboard #5 showed February revenue at €2.01M while the CFO's manual spreadsheet showed €2.03M. The board spent 20 minutes debating which number was correct instead of discussing growth strategy. The CEO has stopped checking dashboards entirely and asks Emma for numbers directly, which adds to her workload (Finding 5). Verdure invested time in building eight reports that leadership now bypasses.</p>
+
+    <h4 class="doc-h3">Finding 5: The analyst is a bottleneck</h4>
+    <p>Emma spends approximately 14 hours per week (35% of her time) on data infrastructure maintenance and manual reporting. The largest single block is Monday morning: checking that the Shopify and Meta Ads connectors ran correctly, verifying that the GA4 add-on exports completed for all 5 properties (and debugging when they didn't), downloading the Stripe payout report, cross-referencing Shopify and Stripe numbers to build the weekly revenue summary, and reviewing the Data Studio reports for anomalies. This process takes 5-6 hours.</p>
+    <p>Ad-hoc requests compound the problem. When the CEO asks 'what was our margin on the lighting category last quarter?', Emma must: export Shopify order data filtered by collection, match product IDs to the supplier cost spreadsheet (a manual lookup), calculate margin in Excel, and deliver the answer. This takes 2-3 hours for a single question.</p>
+    <p><strong>Impact:</strong> Emma is the single point of failure for all data-related work. When she was on holiday for two weeks in January, no weekly reports were produced and three ad-hoc requests from the CEO went unanswered. The team's ability to make data-informed decisions depends entirely on one person's availability and manual labor.</p>
+
+    <h4 class="doc-h3">Finding 6: Product margin analysis is manual and slow</h4>
+    <p>Calculating product margin requires joining Shopify order data with supplier cost data from a Google Sheet. The supplier cost spreadsheet uses different product identifiers than Shopify (supplier SKU vs Shopify product ID), and approximately 12% of products cannot be matched without manual investigation.</p>
+    <p>The most recent margin analysis was requested for the spring collection pricing review. It took Emma three hours to produce and was delivered two weeks after the initial request because other reporting work took priority. By the time the analysis was ready, the Head of Product had already set prices based on estimates.</p>
+    <p><strong>Impact:</strong> A pricing decision affecting approximately €800,000 in seasonal revenue was made without accurate margin data. The Head of Product estimated that better cost visibility could have improved margins by 2-3 percentage points on select items.</p>
+
+    <h4 class="doc-h3">Finding 7: Email performance is unmeasured</h4>
+    <p>Klaviyo reports that approximately 18% of Verdure's revenue is attributable to email marketing through flows (abandoned cart, post-purchase, win-back) and campaigns. This figure is based on Klaviyo's internal attribution model, which credits a sale to email if the customer opened or clicked an email within 5 days of purchase.</p>
+    <p>This attribution cannot be independently validated because Klaviyo engagement data (opens, clicks, flow triggers) is not connected to Shopify order data outside of Klaviyo. The team cannot answer: which email flows drive repeat purchases versus one-time conversions, whether the 18% figure overcounts (customers who would have bought anyway), or what the actual LTV of email-acquired customers is compared to paid or organic acquisition.</p>
+    <p><strong>Impact:</strong> Verdure invests in 12 active email flows and 8-10 campaigns per month without reliable data on which flows generate the highest return. Optimizing email strategy requires connecting engagement data to actual purchase behavior, which is not currently possible.</p>
+
+    <h4 class="doc-h3">Finding 8: Customer lifetime value by acquisition channel is unknown</h4>
+    <p>Verdure cannot answer the question 'which acquisition channel produces the most valuable customers over time?' Answering it requires joining three datasets that currently live in separate systems: first-touch attribution data (from GA4), customer identity and order history (from Shopify), and email engagement (from Klaviyo). Without a central warehouse connecting these sources, each question about customer value requires weeks of manual work.</p>
+    <p>During the audit, we examined a sample of Shopify customer data and found early indicators that repeat purchase rates differ significantly by likely acquisition channel. Customers acquired through branded search appear to have a 2.3x higher repeat rate than those acquired through Meta prospecting campaigns. If confirmed at scale, this would mean Verdure's current budget allocation (which weights Meta heavily based on first-purchase CPA) may be systematically underinvesting in the channels that produce the most valuable customers.</p>
+    <p><strong>Impact:</strong> At €2.4M annual ad spend, even a modest reallocation based on LTV data (shifting 10% of budget from low-LTV to high-LTV channels) could improve long-term revenue per customer acquired. Without LTV by channel, Verdure is optimizing for the cheapest first purchase rather than the most profitable customer relationship.</p>
+
+    <!-- Quick Wins -->
+    <h2 class="doc-h1">Quick Wins</h2>
+    <p>The following improvements can be made immediately, independent of the larger implementation. They require minimal effort and deliver measurable results.</p>
+
+    <h4 class="doc-h3">Standardize UTM tagging across all paid campaigns</h4>
+    <p>Create a UTM naming convention document and update all active Google Ads and Meta Ads campaigns to follow it. Use lowercase, hyphens instead of underscores, and consistent source/medium values (e.g., utm_source=google, utm_medium=cpc for all Google Ads; utm_source=facebook, utm_medium=paid-social for all Meta). Google Ads supports an account-level tracking template, so UTM parameters can be set once and applied to all campaigns automatically. Meta Ads requires URL parameters to be added per campaign (using dynamic parameters like &#123;&#123;campaign.name&#125;&#125;), so enforcing consistency requires a campaign launch checklist.</p>
+    <p><strong>Effort:</strong> 2-3 hours of Lisa's time to update active campaigns. Ongoing: enforce the convention for all new campaigns.</p>
+    <p><strong>Impact:</strong> GA4 attribution coverage should improve from approximately 60% to 90%+ within one month. This data feeds directly into the attribution model in the recommended architecture.</p>
+
+    <h4 class="doc-h3">Enable GA4 BigQuery export</h4>
+    <p>GA4 offers a free daily export of raw event data to BigQuery. This can be enabled in the GA4 admin settings by linking each GA4 property to a Google Cloud project and configuring the BigQuery export. The export is not retroactive: data collection begins from the day it is enabled, so the sooner this is done, the more data will be available when the platform is built. All five market properties should be enabled.</p>
+    <p><strong>Effort:</strong> 30-60 minutes. Requires a Google Cloud project (Verdure may need to create one if they do not have one already).</p>
+    <p><strong>Impact:</strong> Once enabled, data begins accumulating in BigQuery immediately. This removes a dependency from Phase 1 of the implementation and means Verdure starts building a data asset today.</p>
+
+    <h4 class="doc-h3">Create a shared metric definitions document</h4>
+    <p>Convene a 90-minute meeting with the CFO, Head of Sales, Head of Marketing, and Emma. Agree on a single definition for the top 5 metrics: total revenue, net revenue, cost per acquisition, return on ad spend, and customer lifetime value. Document these in a shared Google Doc accessible to the entire leadership team.</p>
+    <p><strong>Effort:</strong> 90 minutes of meeting time plus 1 hour for Emma to document.</p>
+    <p><strong>Impact:</strong> Stops the conflicting-numbers problem immediately. These definitions will be encoded into the Dataform transformation layer during implementation, making them the permanent, governed source of truth.</p>
+
+    <h4 class="doc-h3">Clean up the Shopify-supplier SKU mapping table</h4>
+    <p>The supplier cost spreadsheet uses supplier-assigned SKUs that don't match Shopify's product IDs. Approximately 12% of products cannot be matched, which means margin analysis is incomplete for those items. Emma and the operations team should spend a session resolving the naming inconsistencies and establishing a naming convention for new products going forward.</p>
+    <p><strong>Effort:</strong> 2-3 hours for Emma and one operations team member to resolve existing mismatches and document a naming convention.</p>
+    <p><strong>Impact:</strong> Product margin coverage improves from ~88% to ~95%+. The Dataform product-cost model will have cleaner input data from day one of the implementation, reducing the amount of manual matching needed during the build.</p>
+
+    <!-- Recommendation -->
+    <h2 class="doc-h1">Recommendation</h2>
+
+    <h3 class="doc-h2">Target architecture</h3>
+    <img src="/images/data-flow-target-diagram-3x.png" alt="Target state architecture diagram showing a four-layer data platform: ingestion, warehouse, transformation, and BI" class="doc-diagram" loading="lazy" />
+    <p>The recommended architecture has four layers:</p>
+    <ul class="doc-bullets">
+      <li><strong>Ingestion:</strong> Data flows into BigQuery through three paths:
+        <ul class="doc-bullets-nested">
+          <li>GA4 raw event data exported directly via GA4's native BigQuery export (free, all five market properties)</li>
+          <li>Google Ads data via BigQuery Data Transfer Service (free, native)</li>
+          <li>Shopify, Stripe, Meta Ads, and Klaviyo via Airbyte Cloud</li>
+          <li>Supplier cost spreadsheet connected as a BigQuery external table (always reads the latest version, no sync needed)</li>
+        </ul>
+      </li>
+      <li><strong>Warehouse:</strong> BigQuery serves as the central data warehouse. All data from all sources lands here, making cross-source analysis possible for the first time.</li>
+      <li><strong>Transformation:</strong> Dataform applies business logic in three layers:
+        <ul class="doc-bullets-nested">
+          <li>Staging: clean and standardize each source's raw data</li>
+          <li>Intermediate: cross-source joins (Shopify orders matched to Stripe payments, GA4 sessions matched to Shopify orders, Klaviyo events matched to customer purchase history, all five GA4 properties unified into a single dataset)</li>
+          <li>Marts: the governed metrics that the business sees (revenue, attribution, margins, customer LTV), using the definitions agreed upon with leadership</li>
+        </ul>
+      </li>
+      <li><strong>BI:</strong> Steep reads exclusively from the mart layer, so every metric every user sees is governed by a single set of definitions. Self-service exploration replaces ad-hoc requests to Emma.</li>
+    </ul>
+    <p>This architecture addresses all eight findings:</p>
+    <ul class="doc-bullets">
+      <li><strong>Finding 1 (revenue discrepancy):</strong> Dataform reconciliation model joins Shopify orders and Stripe payouts, accounting for refunds, fees, and currency conversion. One revenue number across the company.</li>
+      <li><strong>Finding 2 (ad spend attribution):</strong> Dataform attribution model matches GA4 sessions to Shopify orders and compares against ad spend from Google Ads and Meta Ads. Campaign-level ROAS for ~60-70% of orders, channel-level ROAS for 100% of spend.</li>
+      <li><strong>Finding 3 (cross-market analytics):</strong> All five GA4 properties exported to BigQuery and unified via UNION ALL in Dataform, replacing the fragile Google Sheets consolidation.</li>
+      <li><strong>Finding 4 (dashboard trust):</strong> All Data Studio reports replaced by governed Steep views reading from a single set of metric definitions.</li>
+      <li><strong>Finding 5 (analyst bottleneck):</strong> Airbyte automates data collection. Dataform automates transformations. Steep enables self-service exploration for the entire team.</li>
+      <li><strong>Finding 6 (margin analysis):</strong> Dataform product-cost model joins Shopify orders to supplier costs via a maintained SKU mapping table. Real-time margin by product, category, and collection.</li>
+      <li><strong>Finding 7 (email attribution):</strong> Dataform joins Klaviyo engagement events to Shopify orders by customer ID. Validated email revenue attribution and LTV by email flow.</li>
+      <li><strong>Finding 8 (LTV by channel):</strong> Customer-level mart combines attribution data with Shopify order history, with a new-vs-returning flag. LTV by acquisition channel available as a self-service metric.</li>
+    </ul>
+
+    <h3 class="doc-h2">Tool recommendations</h3>
+
+    <h4 class="doc-h3">Ingestion: Airbyte Cloud</h4>
+    <p>Verdure has four data sources that need a managed ingestion tool: Shopify, Stripe, Meta Ads, and Klaviyo. All four have native Airbyte connectors. GA4 and Google Ads flow into BigQuery through free, native Google Cloud integrations (BigQuery Export and Data Transfer Service respectively). The supplier cost spreadsheet in Google Sheets is set up as a BigQuery external table, which reads the latest data directly without requiring a sync tool. Airbyte Cloud handles scheduling, monitoring, and schema change detection automatically.</p>
+    <p>At Verdure's data volumes (~12,000 Shopify orders/month, ~800 Stripe transactions/month), estimated Airbyte Cloud cost is approximately €150-200 per month. We considered Fivetran, which offers higher reliability guarantees but costs approximately €400-600 per month at this source count and volume. For Verdure's needs, Airbyte's reliability is sufficient and the cost savings are meaningful. This addresses Findings 5, 6, and 7 by automating the data collection that Emma currently does manually.</p>
+
+    <h4 class="doc-h3">Warehouse: BigQuery</h4>
+    <p>BigQuery is the natural choice for Verdure's GCP environment. GA4's native BigQuery export provides raw event data at no additional cost beyond storage. BigQuery's on-demand pricing model means Verdure pays only for queries executed, which at current anticipated volumes is estimated at €100-200 per month. There is no infrastructure to manage, and BigQuery scales automatically as data volumes grow. BigQuery is the foundation that addresses all eight findings by providing a single location where data from every source can be joined, transformed, and governed.</p>
+
+    <h4 class="doc-h3">Transformation: Dataform</h4>
+    <p>Dataform is GCP's native transformation tool, fully managed within BigQuery. It requires no additional infrastructure, no separate scheduling tool, and no additional licensing cost: Dataform is included in BigQuery, so the only cost is the BigQuery compute already estimated above. Dataform uses SQL with lightweight orchestration, which means Emma can read and understand the transformation logic without learning a new framework. Dataform is where the reconciliation, attribution, margin, and LTV models live, directly addressing Findings 1, 2, 3, 6, 7, and 8.</p>
+    <p>We considered dbt (an alternative transformation tool widely used in the industry). dbt offers more flexibility and a larger ecosystem, but introduces additional complexity: it requires either dbt Cloud (additional licensing cost) or dbt Core with a separate orchestrator. For a team without a data engineer, Dataform's zero-maintenance, GCP-native approach is the better fit. If Verdure later hires a data engineer who prefers dbt, the migration path from Dataform is straightforward.</p>
+
+    <h4 class="doc-h3">BI: Steep</h4>
+    <p>Steep is a metrics-first BI platform built around a semantic layer (a shared set of metric definitions that ensures every user sees the same numbers, regardless of which view or question they're exploring). Rather than building traditional dashboards, Verdure's data team defines governed metrics once (revenue, CPA, ROAS, LTV, margin), and every user in the organization explores those metrics through an intuitive interface without needing SQL knowledge. Steep includes AI-powered analysis on all paid plans and has a native mobile app, which addresses the CEO's and CFO's preference for checking numbers on their phones.</p>
+    <p>At 15 users on the Business plan ($25/user/month), Steep costs approximately $375/month (€345/month). Steep directly addresses Findings 4 and 5: it replaces the untrusted Data Studio dashboards with governed, self-service analytics, and frees Emma from being the bottleneck for every data request. We evaluated three BI tools during the audit; the comparison follows below.</p>
+
+    <h3 class="doc-h2">Tool comparison</h3>
+    <p>The criteria below were selected based on Verdure's specific needs: a non-technical team that needs self-service analytics, a CFO who wants to check numbers on mobile, and no data engineer to maintain a complex BI setup.</p>
+
+    <div class="table-scroll">
+      <table class="doc-table doc-table--comparison">
+        <thead><tr><th>Criteria</th><th>Steep</th><th>Metabase Pro</th><th>Lightdash Cloud</th></tr></thead>
+        <tbody>
+          <tr class="score-row"><td>Self-service for non-technical users</td><td class="score">●●●●●</td><td class="score">●●●○○</td><td class="score">●●●●○</td></tr>
+          <tr class="explanation-row"><td></td><td><em>Metric-first: users explore governed metrics, no SQL needed</em></td><td><em>Visual query builder works but ad-hoc exploration often requires SQL</em></td><td><em>Strong exploration interface, but better suited to teams with some technical comfort</em></td></tr>
+          <tr class="score-row"><td>Mobile experience</td><td class="score">●●●●●</td><td class="score">●●○○○</td><td class="score">●●○○○</td></tr>
+          <tr class="explanation-row"><td></td><td><em>Native iOS/Android app with full functionality</em></td><td><em>Web responsive only, no native app</em></td><td><em>Web responsive only, no native app</em></td></tr>
+          <tr class="score-row"><td>AI-powered analysis</td><td class="score">●●●●○</td><td class="score">●●●○○</td><td class="score">●●●●○</td></tr>
+          <tr class="explanation-row"><td></td><td><em>Steep AI included on all paid plans, no additional cost</em></td><td><em>Metabot available via bring-your-own API key, adds friction and per-query cost</em></td><td><em>Built-in AI on Cloud plan, included in price</em></td></tr>
+          <tr class="score-row"><td>Semantic layer (governed metrics)</td><td class="score">●●●●○</td><td class="score">●●●○○</td><td class="score">●●●●●</td></tr>
+          <tr class="explanation-row"><td></td><td><em>Native semantic layer, define metrics in UI or code</em></td><td><em>Models + Metrics layer exists but less mature</em></td><td><em>YAML-defined semantic layer, best-in-class for code-first teams</em></td></tr>
+          <tr class="score-row"><td>Annual cost (15 users)</td><td class="score">●●●●●</td><td class="score">●●●●○</td><td class="score">●●○○○</td></tr>
+          <tr class="explanation-row"><td></td><td><em>~$4,500/year ($25/user/month)</em></td><td><em>~$9,060/year ($575/mo + $12/user/month)</em></td><td><em>~$36,000/year ($3,000/month flat)</em></td></tr>
+          <tr class="score-row"><td>Maintenance burden</td><td class="score">●●●●●</td><td class="score">●●●●○</td><td class="score">●●●●●</td></tr>
+          <tr class="explanation-row"><td></td><td><em>Fully managed cloud, no DevOps needed</em></td><td><em>Cloud is managed but updates and configuration require some attention</em></td><td><em>Fully managed cloud, no DevOps needed</em></td></tr>
+          <tr class="recommendation-row"><td>Recommendation</td><td><strong>Best fit for Verdure</strong></td><td>Good alternative</td><td>Best for larger or more technical teams</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="doc-note"><em>Lightdash Cloud is the strongest tool for teams with dedicated data engineers and code-first workflows, but at $3,000/month flat rate it is significantly overpriced for Verdure's 15-user team. Steep provides the right balance of simplicity, governed metrics, and cost for Verdure's current stage. If Verdure grows to 50+ BI users or hires a data engineering team, Lightdash Cloud becomes worth re-evaluating.</em></p>
+
+    <!-- 12-Month Cost Estimate -->
+    <h2 class="doc-h1">12-Month Cost Estimate</h2>
+    <p>The table below estimates the total cost of ownership for the recommended architecture over the first 12 months, including the Nimzo Data implementation fee and ongoing infrastructure costs.</p>
+
+    <div class="table-scroll">
+      <table class="doc-table doc-table--4col">
+        <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Airbyte Cloud</td><td>~€175</td><td>~€2,100</td><td>4 connectors (Shopify, Stripe, Meta Ads, Klaviyo)</td></tr>
+          <tr><td>BigQuery</td><td>~€150</td><td>~€1,800</td><td>On-demand pricing, based on anticipated query volume + storage</td></tr>
+          <tr><td>GA4 BigQuery export</td><td>Free</td><td>Free</td><td>Native GA4 feature, all 5 properties</td></tr>
+          <tr><td>Google Ads Data Transfer</td><td>Free</td><td>Free</td><td>Native GCP feature</td></tr>
+          <tr><td>Google Sheets external tables</td><td>Free</td><td>Free</td><td>Direct BigQuery connection to Google Sheets</td></tr>
+          <tr><td>Dataform</td><td>Free</td><td>Free</td><td>Included in BigQuery</td></tr>
+          <tr><td>Steep (15 users)</td><td>~€345</td><td>~€4,140</td><td>Business plan, $25/user/month</td></tr>
+          <tr><td>Google Cloud (misc)</td><td>~€30</td><td>~€360</td><td>Cloud Scheduler, logging, monitoring</td></tr>
+          <tr><td>Nimzo Data implementation</td><td>—</td><td>~€20,000</td><td>One-time fixed-price build (see proposal), excluding audit fee</td></tr>
+          <tr class="doc-table-total"><td>Total Year 1</td><td>—</td><td>~€28,400</td><td>Implementation + infrastructure</td></tr>
+          <tr class="doc-table-total"><td>Ongoing (Year 2+)</td><td>~€700</td><td>~€8,400</td><td>Infrastructure only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Estimates are based on anticipated usage and current pricing from each tool provider. Actual costs may vary based on data volume growth and usage patterns.</p>
+
+    <h3 class="doc-h2">Comparison with current costs</h3>
+    <div class="table-scroll">
+      <table class="doc-table doc-table--4col">
+        <thead><tr><th></th><th>Current (annual)</th><th>Year 1 (recommended)</th><th>Year 2+ (recommended)</th></tr></thead>
+        <tbody>
+          <tr><td>Tools and infrastructure</td><td>€0 (free tools only)</td><td>~€8,400</td><td>~€8,400</td></tr>
+          <tr><td>Manual labor (data tasks)</td><td>~€37,200</td><td>~€5,700</td><td>~€5,700</td></tr>
+          <tr><td>Nimzo Data implementation</td><td>—</td><td>~€20,000</td><td>—</td></tr>
+          <tr><td>Nimzo Data audit</td><td>—</td><td>~€4,000</td><td>—</td></tr>
+          <tr class="doc-table-total"><td>Total</td><td>~€37,200</td><td>~€38,100</td><td>~€14,100</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Year 1 total (~€38,100, including the audit fee) is close to the current annual cost of manual labor alone (€37,200). From Year 2 onward, the total annual cost drops to approximately €14,100, a savings of ~€23,000 per year compared to today. This savings comes primarily from automating Emma's 14 hours/week of manual work down to an estimated 2-3 hours/week of dashboard review and maintenance.</p>
+    <p>This calculation does not include the value of better marketing attribution. At €2.4M annual ad spend, even a 5% improvement in channel allocation efficiency would recover €120,000 per year, which far exceeds the infrastructure investment.</p>
+
+    <!-- Implementation Plan -->
+    <h2 class="doc-h1">Implementation Plan</h2>
+    <p>The following is a high-level implementation plan for the recommended architecture. A detailed scope, timeline, and fixed-price proposal accompanies this deliverable.</p>
+
+    <div class="table-scroll">
+      <table class="doc-table doc-table--4col">
+        <thead><tr><th>Phase</th><th>Duration</th><th>What gets built</th><th>Depends on</th></tr></thead>
+        <tbody>
+          <tr><td>Phase 1: Ingestion</td><td>2 weeks</td><td>Airbyte Cloud setup for 4 sources (Shopify, Stripe, Meta Ads, Klaviyo). GA4 BigQuery export enabled on all 5 market properties. Google Ads Data Transfer Service configured. Supplier cost Google Sheet connected as BigQuery external table.</td><td>Access to Shopify, Stripe, GA4, Google Ads, Meta Ads, Klaviyo, a Google Cloud project, and an Airbyte Cloud account</td></tr>
+          <tr><td>Phase 2: Transformation</td><td>3 weeks</td><td>Dataform project: staging models for all sources, intermediate models (Shopify-Stripe reconciliation, GA4 session-based attribution, product-cost matching, Klaviyo-Shopify email attribution), mart models (revenue, attribution, margins, LTV)</td><td>Phase 1 complete</td></tr>
+          <tr><td>Phase 3: BI and analytics</td><td>2 weeks</td><td>Steep setup, metric definitions, initial views for leadership/marketing/product, training session for Emma and Lisa</td><td>Phase 2 complete</td></tr>
+          <tr><td>Handover</td><td>1 week</td><td>Documentation, architecture walkthrough, Dataform codebase review with Emma</td><td>Phase 3 complete</td></tr>
+          <tr><td>Support window</td><td>30 days</td><td>Support for questions, minor adjustments, and bug fixes</td><td>Handover complete</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Estimated total duration: 8-9 weeks from kickoff to handover.</p>
+
+    <h3 class="doc-h2">What partial implementation delivers</h3>
+    <p>Each phase is self-contained and delivers value on its own:</p>
+    <ul class="doc-bullets">
+      <li><strong>Phase 1 alone (ingestion):</strong> Automates all data collection into BigQuery. Emma no longer needs to export CSVs from Shopify or download Stripe reports. Data refreshes daily, automatically. However, without Phase 2, the data is raw and unreconciled.</li>
+      <li><strong>Phase 1 + 2 (ingestion + transformation):</strong> Gives Verdure a governed data warehouse with a single source of truth for revenue, attribution, margins, and customer LTV. Queryable directly in BigQuery. However, self-service exploration for non-technical users still requires Emma to write SQL queries on their behalf.</li>
+      <li><strong>All three phases:</strong> The full platform as recommended. Self-service analytics for the entire leadership team, governed metrics, and an analyst freed up to do analysis rather than data collection.</li>
+    </ul>
+
+    <!-- Risks and Considerations -->
+    <h2 class="doc-h1">Risks and Considerations</h2>
+
+    <h4 class="doc-h3">Data quality at source</h4>
+    <p>We found approximately 8% duplicate customer records in Shopify (from guest checkout) and 12% of products that cannot be matched between Shopify and the supplier cost spreadsheet due to naming inconsistencies. The transformation layer will handle deduplication and best-effort matching, but the root cause should be addressed at the source: enforcing account creation at checkout and aligning product SKUs between Shopify and supplier catalogs. Without this, data quality issues will persist in the mart layer.</p>
+
+    <h4 class="doc-h3">UTM discipline</h4>
+    <p>The attribution model uses GA4 session data to link ad clicks to purchases. In the Netherlands, GA4 tracking coverage is estimated at 60-70% of purchases after accounting for consent rejection, ad blockers, and iOS privacy restrictions. This is a structural limitation across the industry, not a fixable implementation problem. The three-layer model is designed to work within this constraint: order-level attribution covers the tracked portion, while channel-level spend-vs-revenue comparison covers the full picture directionally. UTM parameters on campaign URLs remain essential for campaign-level granularity, especially for Meta Ads where platform-level click tracking is less reliable than Google Ads. We recommend adding UTM validation to the team's campaign launch checklist and periodically auditing UTM coverage in GA4 (the transformation layer can flag sessions with missing or malformed UTMs).</p>
+
+    <h4 class="doc-h3">Dutch payment flows</h4>
+    <p>iDEAL, the dominant payment method in the Netherlands, redirects users away from Shopify during checkout and back after payment. This redirect can break GA4 session continuity, reducing attribution coverage for orders paid via iDEAL. This should be tested explicitly during implementation.</p>
+
+    <h4 class="doc-h3">Team capacity and role change</h4>
+    <p>After implementation, Emma's role shifts from data collection and report building to data platform stewardship: monitoring pipelines, maintaining metric definitions, answering strategic analytical questions, and training colleagues on self-service exploration. This is a more valuable role, but it is a change, and Emma should be involved in the transition planning. The training session in Phase 3 and the 30-day support window are designed to support this.</p>
+
+    <h4 class="doc-h3">Post-implementation maintenance</h4>
+    <p>The recommended stack (Airbyte Cloud, BigQuery, Dataform, Steep) is designed for minimal maintenance. All components are fully managed cloud services. However, maintenance is not zero: Airbyte connectors occasionally require attention when source APIs change, Dataform models need updating when business logic evolves, and Steep metric definitions should be reviewed as new data needs emerge. At Verdure's current scale, this is approximately 2-3 hours per week of Emma's time. If Verdure needs ongoing support beyond what Emma can handle, Nimzo Data offers monthly retainer arrangements.</p>
+
+    <!-- Next Steps -->
+    <h2 class="doc-h1">Next Steps</h2>
+    <p>This deliverable was discussed on the recommendation call on March 18, 2026. A fixed-price implementation proposal accompanies this deliverable.</p>
+    <ul class="doc-bullets">
+      <li><strong>If you choose to proceed:</strong> The proposal is ready to sign. We can begin as soon as access to Shopify, Stripe, GA4, Google Ads, Meta Ads, and Klaviyo is confirmed, along with a Google Cloud project for BigQuery and an Airbyte Cloud account. Steep can be set up during Phase 3.</li>
+      <li><strong>If you choose not to proceed:</strong> This deliverable is yours to keep. You can use it as a brief for another provider or as a reference for internal planning. The quick wins are actionable regardless.</li>
+      <li><strong>If you have questions:</strong> You can reach out for 14 days after the recommendation call with follow-up questions, clarifications, or challenges to any recommendation. This is included in the audit fee.</li>
+    </ul>
+
+    <div class="doc-signoff">
+      <p><strong>Antoine Anicotte</strong></p>
+      <p>Founder, Nimzo Data</p>
+      <p>antoine@nimzodata.com | nimzodata.com</p>
+    </div>
+    <p class="doc-legal">Nimzo Data SARL | SIRET: 994 080 497 00013 | VAT: FR74994080497 | Insured: professional liability and cyber risk (Beazley Insurance Dac, €500K coverage)</p>
+
+  </div>
+  <!-- ==================== END DOCUMENT CONTAINER ==================== -->
+
+  <!-- Download -->
+  <SectionWrapper py="md" bg="white">
+    <div class="download-bar">
+      <p class="download-bar__text">Want to share this with your team or read it offline?</p>
+      <a href="/Nimzo Data — Sample Audit Deliverable.pdf" class="download-bar__btn" download data-track="sample-audit-pdf-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download as PDF
+      </a>
+    </div>
+  </SectionWrapper>
+
+  <!-- Where to go from here -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Where to go from here.</h2>
+    <div class="leads-grid">
+      <a href="/services/data-platform-audit/" class="lead-card" data-track="sample-audit-cta-audit">
+        <div class="lead-eyebrow">Ready to start</div>
+        <h3 class="lead-title">Book a data platform audit</h3>
+        <p class="lead-body">1-2 weeks, €3,000-€5,000. You keep the deliverable regardless.</p>
+        <span class="lead-arrow">See how it works <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a href="/case-studies/" class="lead-card" data-track="sample-audit-cta-cases">
+        <div class="lead-eyebrow">See real results</div>
+        <h3 class="lead-title">Case studies</h3>
+        <p class="lead-body">What we built, why we made the calls we made, and what changed.</p>
+        <span class="lead-arrow">Read case studies <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </SectionWrapper>
+
+  <CTABanner
+    heading="If any of this looks familiar, let's talk."
+    subtitle="45-minute call. No sales pitch. We tell you honestly whether we're a fit."
+    buttonText="Let's talk"
+    buttonHref="/contact/"
+    dataTrack="sample-audit-cta"
+  />
+</BaseLayout>
+
+<style>
+  /* ===== Hero (case-study pattern) ===== */
+  .sa-hero {
+    width: 100%;
+    background-color: var(--color-white);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(48px, 6vw, 64px);
+  }
+
+  .sa-hero__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .sa-hero__inner {
+      padding: 0 48px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sa-hero__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .sa-hero__main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .sa-hero__eyebrow {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0;
+  }
+
+  .sa-hero__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+  }
+
+  .sa-hero__subline {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.4vw, 1.1875rem);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+
+  .sa-hero__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .sa-hero__aside {
+      padding-left: 32px;
+      border-left: 1px solid var(--color-border-subtle);
+    }
+  }
+
+  .sa-snap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .sa-snap:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .sa-snap-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 600px) {
+    .sa-snap-row {
+      grid-template-columns: minmax(140px, auto) 1px 1fr;
+      gap: 20px;
+    }
+  }
+
+  .sa-snap-divider {
+    display: none;
+  }
+
+  @media (min-width: 600px) {
+    .sa-snap-divider {
+      display: block;
+      background-color: var(--color-border-subtle);
+      width: 1px;
+      align-self: stretch;
+    }
+  }
+
+  .sa-snap--inline {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .sa-snap__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .sa-snap__detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sa-snap__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .sa-snap__meta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .sa-snap__tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sa-snap__tile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-height: 40px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .sa-snap__tile:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-1px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .sa-snap__tile-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .sa-snap__tile-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+
+  .sa-snap__tile-arrow {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: transform 150ms ease;
+  }
+
+  .sa-snap__tile:hover .sa-snap__tile-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===== Section heading + intro (matches service pages) ===== */
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  /* ===== Document container ===== */
+  .audit-document {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 60px 80px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eeeeee;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1A1A1A;
+    font-size: 15px;
+    line-height: 1.15;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 767px) {
+    .audit-document {
+      margin: 20px 16px;
+      padding: 30px 20px;
+    }
+  }
+
+  /* ===== Cover ===== */
+  .doc-cover {
+    text-align: center;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #004F4C;
+  }
+
+  .cover-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #1A1A1A;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+  }
+
+  .cover-subtitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #666666;
+    margin: 0 0 32px 0;
+  }
+
+  .cover-meta {
+    margin-bottom: 24px;
+  }
+
+  .cover-meta p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #1A1A1A;
+    margin: 4px 0;
+  }
+
+  .cover-confidential {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    color: #666666;
+    margin: 0;
+  }
+
+  /* ===== Document headings ===== */
+  .doc-h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    font-weight: bold;
+    color: #004F4C;
+    border-bottom: 1.5px solid #004F4C;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .doc-h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1A1A1A;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .doc-h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #004F4C;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  /* ===== Body text ===== */
+  .audit-document p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+  }
+
+  .audit-document strong {
+    font-weight: bold;
+    color: #1A1A1A;
+  }
+
+  .doc-note {
+    font-size: 13px;
+    color: #666666;
+    margin-bottom: 12px;
+  }
+
+  .doc-note em {
+    font-style: italic;
+  }
+
+  /* ===== Lists ===== */
+  .findings-list {
+    padding-left: 24px;
+    margin: 10px 0;
+  }
+
+  .findings-list li {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .doc-bullets {
+    list-style: disc;
+    padding-left: 24px;
+    margin: 10px 0;
+  }
+
+  .doc-bullets li {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .doc-bullets-nested {
+    list-style: circle;
+    padding-left: 20px;
+    margin: 6px 0;
+  }
+
+  .doc-bullets-nested li {
+    margin-bottom: 4px;
+  }
+
+  /* ===== Tables ===== */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 12px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #1A1A1A;
+  }
+
+  .doc-table thead th {
+    background-color: #004F4C;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid #004F4C;
+  }
+
+  .doc-table tbody td {
+    padding: 8px 12px;
+    border: 1px solid #DDDDDD;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  .doc-table tbody tr:first-child td {
+    border-top: none;
+  }
+
+  .doc-table-total td {
+    background-color: #F0F7F7;
+    font-weight: bold;
+  }
+
+  /* ===== Tool comparison table ===== */
+  .doc-table--comparison .score-row td {
+    padding-top: 10px;
+    padding-bottom: 4px;
+    font-weight: bold;
+  }
+
+  .doc-table--comparison .score {
+    font-size: 15px;
+    color: #004F4C;
+    letter-spacing: 2px;
+  }
+
+  .doc-table--comparison .explanation-row td {
+    border-top: none;
+    padding-top: 0;
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #666666;
+    font-style: italic;
+  }
+
+  .doc-table--comparison .explanation-row em {
+    font-style: italic;
+  }
+
+  .doc-table--comparison .recommendation-row td {
+    background-color: #F0F7F7;
+    font-size: 13px;
+    font-weight: bold;
+    color: #004F4C;
+  }
+
+  /* ===== Diagrams ===== */
+  .doc-diagram {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px 0;
+  }
+
+  /* ===== Sign-off ===== */
+  .doc-signoff {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #DDDDDD;
+  }
+
+  .doc-signoff p {
+    margin: 2px 0;
+  }
+
+  .doc-legal {
+    font-size: 12px;
+    color: #666666;
+    font-style: italic;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #eeeeee;
+  }
+
+  /* ===== Download bar ===== */
+  .download-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .download-bar__text {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .download-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 8px;
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .download-bar__btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 600px) {
+    .download-bar {
+      flex-direction: column;
+      text-align: center;
+      gap: 12px;
+    }
+  }
+
+  /* ===== Leads grid (matches audit service page) ===== */
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .lead-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .lead-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .lead-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .lead-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .lead-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .lead-arrow {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .lead-arrow-icon {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .lead-card:hover .lead-arrow-icon {
+    transform: translateX(4px);
+  }
+</style>
