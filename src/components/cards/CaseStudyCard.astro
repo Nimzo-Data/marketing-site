@@ -129,9 +129,17 @@ const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
   }
 
   .cs-card__tools {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .cs-card__tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+    }
   }
 
   .cs-card__tool {

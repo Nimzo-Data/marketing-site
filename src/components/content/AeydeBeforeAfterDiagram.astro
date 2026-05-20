@@ -132,17 +132,17 @@ function spanCols(from: number, to: number): string {
               <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'pain'}`}>{stage.badge}</span>
             )}
           </div>
+          {beforeCostSpans.filter((s) => s.to === i).map((span) => (
+            <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
+              {span.text}
+            </div>
+          ))}
           {i < beforeStages.length - 1 && (
             <div class="csd__arrow" style={`grid-column: ${2 + 2 * i};`} aria-hidden="true">
               <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           )}
         </>
-      ))}
-      {beforeCostSpans.map((span) => (
-        <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
-          {span.text}
-        </div>
       ))}
     </div>
   </div>
@@ -176,17 +176,17 @@ function spanCols(from: number, to: number): string {
               <span class={`csd__badge csd__badge--${stage.badgeKind ?? 'win'}`}>{stage.badge}</span>
             )}
           </div>
+          {afterCostSpans.filter((s) => s.to === i).map((span) => (
+            <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
+              {span.text}
+            </div>
+          ))}
           {i < afterStages.length - 1 && (
             <div class="csd__arrow" style={`grid-column: ${2 + 2 * i};`} aria-hidden="true">
               <svg viewBox="0 0 40 20"><path d="M2 10 L34 10 M28 4 L34 10 L28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           )}
         </>
-      ))}
-      {afterCostSpans.map((span) => (
-        <div class={`csd__costspan csd__costspan--${span.kind}`} style={`grid-column: ${spanCols(span.from, span.to)};`}>
-          {span.text}
-        </div>
       ))}
     </div>
   </div>
@@ -380,7 +380,6 @@ function spanCols(from: number, to: number): string {
 
   /* Cost span: appears below the stage row, can span multiple columns */
   .csd__costspan {
-    margin-top: 4px;
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.75rem;
@@ -391,6 +390,12 @@ function spanCols(from: number, to: number): string {
     line-height: 1.2;
     align-self: start;
     justify-self: stretch;
+  }
+
+  @media (min-width: 900px) {
+    .csd__costspan {
+      margin-top: 4px;
+    }
   }
 
   .csd__costspan--pain {
