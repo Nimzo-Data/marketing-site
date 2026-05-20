@@ -3,6 +3,7 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import CTACard from '../../components/cards/CTACard.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 ---
 
@@ -128,6 +129,15 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         variant="link"
       />
     </div>
+  </SectionWrapper>
+
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From unused data to a platform across 6 markets."
+      body="10+ sources modeled in Dataform, 6 GA4 properties unified into one events model, and CI-governed data quality from day one."
+      caseStudySlug="tameson"
+    />
   </SectionWrapper>
 
 </ServiceLayout>
