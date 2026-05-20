@@ -103,9 +103,16 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    type: 'link',
-    label: 'Case Studies',
-    href: '/case-studies/',
+    type: 'dropdown',
+    label: 'Resources',
+    groups: [
+      {
+        links: [
+          { label: 'Case Studies', href: '/case-studies/' },
+          { label: 'Sample Audit Deliverable', href: '/sample-audit/' },
+        ],
+      },
+    ],
   },
   {
     type: 'link',

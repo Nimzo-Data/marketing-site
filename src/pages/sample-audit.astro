@@ -14,7 +14,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <div class="sa-hero__main">
         <p class="sa-hero__eyebrow">Sample deliverable</p>
         <h1 class="sa-hero__title">The deliverable, in full.</h1>
-        <p class="sa-hero__subline">A complete audit for a fictional company. Same structure every client gets — tools, costs, and recommendations tailored to your situation. If your company is smaller, the audit would be simpler and the build cost lower.</p>
+        <p class="sa-hero__subline">A complete audit for a fictional company. Same structure every client gets, with tools, costs, and recommendations tailored to your situation. If your company is smaller, the audit would be simpler and the build cost lower.</p>
       </div>
       <aside class="sa-hero__aside" aria-label="Engagement details">
         <div class="sa-snap">
@@ -561,7 +561,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <p class="download-bar__text">Want to share this with your team or read it offline?</p>
       <a href="/Nimzo Data — Sample Audit Deliverable.pdf" class="download-bar__btn" download data-track="sample-audit-pdf-download">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download as PDF
+        Download PDF
       </a>
     </div>
   </SectionWrapper>
@@ -695,7 +695,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
 
   @media (min-width: 600px) {
     .sa-snap-row {
-      grid-template-columns: minmax(140px, auto) 1px 1fr;
+      grid-template-columns: minmax(180px, auto) 1px 1fr;
       gap: 20px;
     }
   }
@@ -1013,7 +1013,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
     line-height: 1.4;
   }
 
-  .doc-table tbody tr:first-child td {
+  .doc-table thead + tbody tr:first-child td {
     border-top: none;
   }
 
@@ -1086,11 +1086,12 @@ import CTABanner from '../components/cards/CTABanner.astro';
   /* ===== Download bar ===== */
   .download-bar {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 24px;
+    gap: 12px;
     max-width: 800px;
     margin: 0 auto;
+    text-align: center;
   }
 
   .download-bar__text {
@@ -1120,14 +1121,6 @@ import CTABanner from '../components/cards/CTABanner.astro';
   .download-bar__btn:hover {
     background-color: var(--color-primary);
     color: var(--color-white);
-  }
-
-  @media (max-width: 600px) {
-    .download-bar {
-      flex-direction: column;
-      text-align: center;
-      gap: 12px;
-    }
   }
 
   /* ===== Leads grid (matches audit service page) ===== */

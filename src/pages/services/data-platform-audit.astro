@@ -61,12 +61,11 @@ import { technologiesForGrid } from '../../data/technologies';
         <p class="deliverable-body">A fixed-price build proposal as the final artifact, if you continue with us. Scope, timeline, and price — ready to sign.</p>
       </div>
     </div>
-  </SectionWrapper>
-
-  <!-- Sample deliverable callout -->
-  <SectionWrapper py="sm" bg="white">
     <div class="sample-callout">
-      <p>Want to see what this actually looks like? <a href="/sample-audit/" data-track="audit-sample-link">View a sample audit deliverable for a fictional €25M e-commerce company &rarr;</a></p>
+      <p class="sample-callout__text">Want to see what the deliverable actually looks like?</p>
+      <a href="/sample-audit/" class="sample-callout__btn" data-track="audit-sample-link">
+        See a sample audit
+      </a>
     </div>
   </SectionWrapper>
 
@@ -383,27 +382,42 @@ import { technologiesForGrid } from '../../data/technologies';
 
   /* Sample deliverable callout */
   .sample-callout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     max-width: 720px;
-    border-left: 3px solid var(--color-border-subtle);
-    padding: 12px 0 12px 20px;
+    margin: 48px auto 0;
+    text-align: center;
   }
 
-  .sample-callout p {
+  .sample-callout__text {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
     margin: 0;
-    line-height: 1.6;
   }
 
-  .sample-callout a {
+  .sample-callout__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 8px;
     color: var(--color-primary);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem;
     text-decoration: none;
-    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease;
   }
 
-  .sample-callout a:hover {
-    text-decoration: underline;
+  .sample-callout__btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
   }
 
 </style>
