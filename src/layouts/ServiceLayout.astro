@@ -8,11 +8,13 @@ interface Props {
   description: string;
   heroTitle: string;
   heroSubtitle: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
   canonicalUrl?: string;
 }
 
-const { title, description, heroTitle, heroSubtitle, ogImage, canonicalUrl } = Astro.props;
+const { title, description, heroTitle, heroSubtitle, ogTitle, ogDescription, ogImage, canonicalUrl } = Astro.props;
 
 const serviceName = title.replace(/ \| Nimzo Data$/, '');
 
@@ -30,7 +32,7 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout {title} {description} {ogImage} {canonicalUrl} structuredData={serviceSchema}>
+<BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage} {canonicalUrl} structuredData={serviceSchema}>
   <HeroStandard
     title={heroTitle}
     subtitle={heroSubtitle}

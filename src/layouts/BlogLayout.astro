@@ -5,13 +5,15 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 interface Props {
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage } = Astro.props;
 ---
 
-<BaseLayout {title} {description} {ogImage}>
+<BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
   <SectionWrapper py="lg">
     <article class="blog-article">
       <slot />

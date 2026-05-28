@@ -13,6 +13,8 @@ interface Props {
   toolLogo?: string;
   toolCategory: string;
   heroPositioning: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
 }
 
@@ -23,6 +25,8 @@ const {
   toolLogo,
   toolCategory,
   heroPositioning,
+  ogTitle,
+  ogDescription,
   ogImage,
 } = Astro.props;
 
@@ -30,7 +34,7 @@ const resolvedLogo =
   toolLogo ?? technologies.find((t) => t.name === toolName)?.logoPath;
 ---
 
-<BaseLayout {title} {description} {ogImage}>
+<BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
   <HeroTech
     toolName={toolName}
     toolLogo={resolvedLogo}
