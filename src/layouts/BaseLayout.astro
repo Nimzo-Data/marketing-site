@@ -7,6 +7,8 @@ import Footer from '../components/layout/Footer.astro';
 interface Props {
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
   canonicalUrl?: string;
   structuredData?: object | object[];
@@ -15,6 +17,8 @@ interface Props {
 const {
   title,
   description,
+  ogTitle,
+  ogDescription,
   ogImage = '/og-image.png',
   canonicalUrl,
   structuredData,
@@ -22,6 +26,8 @@ const {
 
 const canonical = canonicalUrl || Astro.url.href;
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).href;
+const resolvedOgTitle = ogTitle || title;
+const resolvedOgDescription = ogDescription || description;
 
 // Organization JSON-LD (every page)
 const organizationSchema = {
@@ -85,8 +91,8 @@ const extraSchemas: object[] = structuredData
     <meta name="description" content={description} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
     <meta property="og:image" content={absoluteOgImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -96,8 +102,8 @@ const extraSchemas: object[] = structuredData
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={resolvedOgTitle} />
+    <meta name="twitter:description" content={resolvedOgDescription} />
     <meta name="twitter:image" content={absoluteOgImage} />
 
     <!-- Canonical -->
