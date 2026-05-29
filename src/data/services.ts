@@ -17,7 +17,7 @@ export const services: Service[] = [
   {
     name: 'Data Platform Implementation',
     slug: 'data-platform-implementation',
-    shortDescription: 'Build your data platform from scratch — ingestion, transformation, and reporting — on a modern GCP stack.',
+    shortDescription: 'Build your data platform from scratch (ingestion, transformation, and reporting) on a modern GCP stack.',
     priceRange: '€15,000 – €35,000',
     timeline: '8–14 weeks',
   },
@@ -31,7 +31,7 @@ export const services: Service[] = [
   {
     name: 'Expert Implementation Services',
     slug: 'expert-implementation-services',
-    shortDescription: 'Targeted help with a specific layer of your stack — BigQuery, Dataform, ETL, or BI tooling.',
+    shortDescription: 'Targeted help with a specific layer of your stack: BigQuery, Dataform, ETL, or BI tooling.',
     priceRange: '€3,000 – €15,000',
     timeline: 'Varies by scope',
   },

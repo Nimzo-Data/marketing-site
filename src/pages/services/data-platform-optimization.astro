@@ -30,16 +30,18 @@ import { technologiesForGrid } from '../../data/technologies';
         "Pipelines break weekly. You hear about it from tickets.",
         "You inherited a platform. Nobody knows what half of it does.",
         "Finance says revenue is X. Product says Y. Leadership believes neither.",
-        "Nobody uses the BI tool — the data isn't trusted.",
+        "Nobody uses the BI tool. The data isn't trusted.",
+        "You want AI features but your data isn't structured for them.",
       ]}
       rightTitle="What you get:"
       rightItems={[
-        "A written audit you can act on — not slideware.",
+        "A written audit you can act on, not slideware.",
         "A prioritized improvement list, ranked by cost vs impact.",
         "Reliable pipelines with alerts before users notice.",
         "Queries and dashboards that load in seconds, not minutes.",
         "One definition per metric your business runs on.",
         "A BI tool people use, because the data is trustworthy.",
+        "AI features that work, querying governed metrics, not raw tables.",
       ]}
     />
   </SectionWrapper>
@@ -89,14 +91,14 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Dashboards, Reports &amp; AI-ready</h3>
-        <p class="layer-body">Migrate off BI tools your team has given up on. Rebuild trust in the numbers by rebuilding the numbers. Set up the semantic layer so when you're ready for AI features, the foundation holds up.</p>
+        <p class="layer-body">Migrate off BI tools your team has given up on. Rebuild trust in the numbers by rebuilding the numbers. Configure the AI features on top (conversational analytics, AI agents) so they query consistent definitions, not raw tables.</p>
       </div>
     </div>
   </SectionWrapper>
 
   <!-- Technologies used -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">The tools we work with — yours and ours.</h2>
+    <h2 class="section-heading">The tools we work with: yours and ours.</h2>
     <p class="intro-body">We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.</p>
     <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
     <p class="see-all-link">
@@ -111,7 +113,7 @@ import { technologiesForGrid } from '../../data/technologies';
       steps={[
         { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "Architecture, costs, pipelines, and data quality reviewed. Team interviewed. You get a written report and a prioritized improvement list. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
         { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the build, do it yourselves, or stop here. Plenty of clients take the report and execute internally." },
-        { icon: 'code-2', title: "Build (8–12 weeks, bi-weekly demos)", description: "We build the improvements from the audit — in the priority order you approved. Fixed price, agreed before we start." },
+        { icon: 'code-2', title: "Build (8–12 weeks, bi-weekly demos)", description: "We build the improvements from the audit, in the priority order you approved. Fixed price, agreed before we start." },
         { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, documentation, recorded walkthroughs. Your team owns the platform when we leave." },
         { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "30 days of reachability for questions, tweaks, edge cases." },
       ]}
@@ -123,12 +125,12 @@ import { technologiesForGrid } from '../../data/technologies';
     <h2 class="section-heading">Pricing.</h2>
     <div class="two-phase-grid">
       <div class="phase-card">
-        <div class="phase-label">Phase 1 — Audit</div>
+        <div class="phase-label">Phase 1: Audit</div>
         <div class="phase-price">€3,000 – €5,000</div>
         <p class="phase-sub">1–2 weeks, fixed price, paid 100% upfront. Written audit report and prioritized improvement list. Same audit available <a href="/services/data-platform-audit/" class="inline-link">standalone</a>.</p>
       </div>
       <div class="phase-card">
-        <div class="phase-label">Phase 2 — Build (optional)</div>
+        <div class="phase-label">Phase 2: Build (optional)</div>
         <div class="phase-price">€17,000 – €45,000</div>
         <p class="phase-sub">9–14 weeks (build + handover), priced after the audit based on scope. Fixed price, agreed before we start.</p>
       </div>
@@ -143,9 +145,9 @@ import { technologiesForGrid } from '../../data/technologies';
         { name: "BI tool migration", low: "Stay on current tool", high: "Migrate to new tool" },
       ]}
       scenarios={[
-        { label: "Example: query tuning + cost optimization", price: "€20,000 – €25,000", duration: "10–12 weeks", description: "Performance and cost optimization — schema redesign, query tuning." },
-        { label: "Example: replace legacy Python with Airbyte", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Tool modernization — move legacy Python to Airbyte or Fivetran, add Dataform." },
-        { label: "Example: multi-layer migration", price: "€40,000 – €50,000", duration: "12–16 weeks", description: "Major overhaul — multiple migrations, complex data quality issues." },
+        { label: "Example: query tuning + cost optimization", price: "€20,000 – €25,000", duration: "10–12 weeks", description: "Performance and cost optimization: schema redesign, query tuning." },
+        { label: "Example: replace legacy Python with Airbyte", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Tool modernization: move legacy Python to Airbyte or Fivetran, add Dataform." },
+        { label: "Example: multi-layer migration", price: "€40,000 – €50,000", duration: "12–16 weeks", description: "Major overhaul: multiple migrations, complex data quality issues." },
       ]}
     />
 

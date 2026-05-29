@@ -11,21 +11,21 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
   description="Airbyte implementation on GCP. Airbyte Cloud setup, Connector Builder for custom APIs, Python CDK for complex sources, and pipeline monitoring."
   toolName="Airbyte"
   toolCategory="ELT / Data Ingestion"
-  heroPositioning="Airbyte is our preferred ELT tool — managed cloud with 600+ connectors and a low-code builder for custom APIs. Self-hosted option available when you need full control."
+  heroPositioning="Airbyte is our preferred ELT tool: managed cloud with 600+ connectors and a low-code builder for custom APIs. Self-hosted option available when you need full control."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Airbyte is a data integration platform with 600+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. Our default deployment is Airbyte Cloud — managed, quick to stand up, and easy to maintain. For clients who need full control or have specific compliance requirements, Airbyte also offers a mature open-source self-hosted option.</p>
+    <p>Airbyte is a data integration platform with 600+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. Our default deployment is Airbyte Cloud, managed, quick to stand up, and easy to maintain. For clients who need full control or have specific compliance requirements, Airbyte also offers a mature open-source self-hosted option.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>Airbyte's pricing is more predictable at scale than Fivetran's per-connection MAR model, and when sources don't exist out of the box, we can build them — either with the low-code Connector Builder (good for most custom APIs) or the Python CDK for truly complex cases. That flexibility is the main reason we default to Airbyte on new implementations.</p>
+    <p>Airbyte's pricing is more predictable at scale than Fivetran's per-connection MAR model, and when sources don't exist out of the box, we can build them, either with the low-code Connector Builder (good for most custom APIs) or the Python CDK for truly complex cases. That flexibility is the main reason we default to Airbyte on new implementations.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">
     <HowWeUseIt
       title="How We Use It"
       items={[
-        "Set up Airbyte Cloud as the default deployment — managed, fast to start, easy for clients to maintain",
+        "Set up Airbyte Cloud as the default deployment: managed, fast to start, easy for clients to maintain",
         "Configure and monitor sync jobs from CRMs, marketing platforms, databases, and internal APIs",
         "Build custom connectors with the low-code Connector Builder for APIs Airbyte doesn't ship by default",
         "Fall back to the Python CDK for truly complex sources (auth flows, pagination quirks, unusual schemas)",
@@ -43,7 +43,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
           heading: 'Choose Airbyte when:',
           bullets: [
             "You want managed ELT but more predictable pricing than Fivetran at scale",
-            'You need custom connectors — the Connector Builder covers most APIs without code',
+            'You need custom connectors. The Connector Builder covers most APIs without code',
             'You want the option to self-host for compliance or cost reasons',
             'You prefer a stack where ingestion and transformation come from separate vendors',
           ],

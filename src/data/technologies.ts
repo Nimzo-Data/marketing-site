@@ -62,7 +62,7 @@ export const technologies: Technology[] = [
     name: 'Lightdash',
     slug: 'lightdash',
     category: 'bi',
-    tagline: 'BI with metrics in code — dbt or native YAML. Flat-rate pricing, unlimited users.',
+    tagline: 'BI with metrics in code, dbt or native YAML. Flat-rate pricing, unlimited users.',
     logoPath: '/logos/lightdash.svg',
   },
   {

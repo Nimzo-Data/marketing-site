@@ -11,14 +11,14 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
   description="Dagster orchestration for complex data pipelines. Asset-based modeling, data quality checks, and Dagster Cloud deployment on GCP."
   toolName="Dagster"
   toolCategory="Orchestration"
-  heroPositioning="Asset-based orchestration for data pipelines. Define dependencies, data quality checks, and schedules as code — with the best developer experience in the category."
+  heroPositioning="Asset-based orchestration for data pipelines. Define dependencies, data quality checks, and schedules as code, with the best developer experience in the category."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Dagster is a modern data orchestrator — the tool that sits on top of your pipelines and transformations to schedule them, handle dependencies, retry failures, and give you visibility into what ran, when, and why something broke. It competes with Airflow and Prefect, with a stronger focus on data quality and developer experience. Recent releases add Dagster Components (YAML-first pipeline authoring, friendly to AI coding agents) and an MCP server for direct integration with tools like Claude Code and Cursor.</p>
+    <p>Dagster is a modern data orchestrator: the tool that sits on top of your pipelines and transformations to schedule them, handle dependencies, retry failures, and give you visibility into what ran, when, and why something broke. It competes with Airflow and Prefect, with a stronger focus on data quality and developer experience. Recent releases add Dagster Components (YAML-first pipeline authoring, friendly to AI coding agents) and an MCP server for direct integration with tools like Claude Code and Cursor.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>Most of our projects don't need orchestration — Airbyte and Dataform both schedule themselves, and for simple stacks adding an orchestrator is over-engineering. When orchestration is genuinely needed (custom scripts with dependencies, complex data quality checks, cross-pipeline coordination), Dagster is the clearest improvement over Airflow. The software engineering quality is noticeably higher, the UI is actually usable, and the asset-based model matches how data teams think about pipelines.</p>
+    <p>Most of our projects don't need orchestration. Airbyte and Dataform both schedule themselves, and for simple stacks adding an orchestrator is over-engineering. When orchestration is genuinely needed (custom scripts with dependencies, complex data quality checks, cross-pipeline coordination), Dagster is the clearest improvement over Airflow. The software engineering quality is noticeably higher, the UI is actually usable, and the asset-based model matches how data teams think about pipelines.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">
@@ -26,9 +26,9 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       title="How We Use It"
       items={[
         "Orchestrate multi-step custom Python scripts with explicit dependencies and data quality checks between steps",
-        "Define and monitor \"assets\" — the actual tables and files your pipeline produces, not just the jobs that build them",
+        "Define and monitor \"assets\": the actual tables and files your pipeline produces, not just the jobs that build them",
         "Coordinate dbt Core runs alongside custom pipelines when dbt Cloud's scheduler isn't enough",
-        "Use Dagster Components and the dg CLI for YAML-driven pipeline definitions — readable for humans and friendly to AI coding agents",
+        "Use Dagster Components and the dg CLI for YAML-driven pipeline definitions, readable for humans and friendly to AI coding agents",
         "Set up Dagster Cloud for managed hosting when clients don't want to maintain GKE infrastructure",
         "Integrate Dagster alerts with Slack, PagerDuty, or email so failures surface in the tools your team already watches",
       ]}
@@ -50,7 +50,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
         {
           heading: 'Choose no orchestrator when:',
           bullets: [
-            'Your stack is Airbyte + Dataform + a BI tool — each tool self-schedules',
+            'Your stack is Airbyte + Dataform + a BI tool. Each tool self-schedules',
             "You don't have custom pipelines that need cross-tool coordination",
           ],
         },

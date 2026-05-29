@@ -11,15 +11,16 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
   description="Steep implementation for metric-based business intelligence on BigQuery. Metric definitions, Steep AI, and self-service exploration for non-technical teams."
   toolName="Steep"
   toolCategory="Business Intelligence"
-  heroPositioning="Steep is metric-based BI for non-technical teams — metrics defined once, explored visually or asked in natural language with Steep AI. No SQL required."
+  heroPositioning="Steep is metric-based BI for non-technical teams. Metrics defined once, explored visually or asked in natural language with Steep AI. No SQL required."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Steep is a metric-based BI tool. Metrics are defined once — typically by a data lead or analyst — and business users explore them through a visual interface or Steep AI, which answers natural-language questions directly against the governed metrics. The metric-first model means every chart and every AI answer shares the same definition of "revenue" or "active user", no matter who built it. Particularly strong for companies where the primary data consumers are in marketing, sales, or operations rather than engineering.</p>
-    <p>Steep has its own native semantic layer for metric definitions. It can also plug into dbt's Semantic Layer if the client already maintains metrics there — one metrics model, two surfaces.</p>
+    <p>Steep is a metric-based BI tool. Metrics are defined once (typically by a data lead or analyst) and business users explore them through a visual interface or Steep AI, which answers natural-language questions directly against the governed metrics. The metric-first model means every chart and every AI answer shares the same definition of "revenue" or "active user", no matter who built it. Particularly strong for companies where the primary data consumers are in marketing, sales, or operations rather than engineering.</p>
+    <p>Steep has its own native semantic layer for metric definitions. It can also plug into dbt's Semantic Layer if the client already maintains metrics there: one metrics model, two surfaces.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
     <p>Not every company needs LookML's governance or dbt-driven metrics. When the audience is non-technical and the primary need is consistent, explorable metrics without training everyone on SQL, Steep delivers at a fraction of Looker's cost. Metrics stay consistent; exploration stays accessible. Steep AI credits (natural-language Q&A) are included in every paid tier.</p>
+    <p>Because every chart and every AI answer shares the same governed definitions, Steep AI can't produce numbers that contradict your dashboards. The metric layer is the AI layer.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">
@@ -27,9 +28,9 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       title="How We Use It"
       items={[
         "Connect Steep to BigQuery and configure dataset access",
-        "Define the metrics layer in Steep — revenue, active users, conversion, whatever your business runs on",
+        "Define the metrics layer in Steep: revenue, active users, conversion, whatever your business runs on",
         "Plug Steep into the dbt Semantic Layer when the client already maintains metrics there",
-        "Train business users on metric exploration, dashboard creation, and Steep AI — no SQL required",
+        "Train business users on metric exploration, dashboard creation, and Steep AI. No SQL required",
         "Set up scheduled report delivery for regular stakeholder updates",
         "Implement Steep alongside Lightdash, Metabase, or Looker in organizations with mixed technical audiences",
       ]}

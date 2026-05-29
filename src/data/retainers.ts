@@ -62,4 +62,5 @@ export const retainerRows: RetainerRow[] = [
   { label: 'Custom scripts',            maintenance: false, growth: false, partnership: true },
   { label: 'Strategic roadmap input',   maintenance: false, growth: false, partnership: true },
   { label: 'Architecture review',       maintenance: false, growth: false, partnership: true },
+  { label: 'AI agent setup & tuning',  maintenance: false, growth: false, partnership: true },
 ];

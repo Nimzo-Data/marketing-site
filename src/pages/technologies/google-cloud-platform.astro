@@ -14,12 +14,12 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
   heroPositioning="We build exclusively on GCP — not because it's what we know, but because it's the right choice for European data teams that need compliance, global reach, and a best-in-class analytics stack."
 >
   <TextSection title="What It Is" bg="white">
-    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack — from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) to AI (Vertex AI, Gemini) — all designed to work together without custom glue code.</p>
+    <p>Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack, from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) to AI (Vertex AI, Gemini), all designed to work together without custom glue code. GCP's AI features are designed to consume the semantic layers you build in Looker, Dataform, and BigQuery. A well-modeled data platform is also AI infrastructure.</p>
   </TextSection>
 
   <TextSection title="Why We Chose It" bg="white">
-    <p>GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data — serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure.</p>
-    <p>For European clients specifically, GCP now offers three levels of data sovereignty — standard regional residency, Assured Workloads for EU (EU-only storage, processing, and support), and sovereign partnerships like S3NS (Thales + Google, SecNumCloud-aligned in France) — which matter when GDPR, regulated sectors, or procurement requirements enter the picture.</p>
+    <p>GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data: serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure.</p>
+    <p>For European clients specifically, GCP now offers three levels of data sovereignty: standard regional residency, Assured Workloads for EU (EU-only storage, processing, and support), and sovereign partnerships like S3NS (Thales + Google, SecNumCloud-aligned in France). These matter when GDPR, regulated sectors, or procurement requirements enter the picture.</p>
   </TextSection>
 
   <SectionWrapper bg="white" py="lg">
@@ -31,6 +31,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
         "Set up Cloud Run Functions and Cloud Scheduler for lightweight scheduled jobs and custom API integrations",
         "Implement Cloud Storage lifecycle policies and data landing zones for ingestion pipelines",
         "Advise on GCP region selection and sovereignty options for EU data residency (GDPR, Assured Workloads, S3NS)",
+        "Set up Cloud Monitoring dashboards and alerting policies for pipeline health and BigQuery cost tracking",
       ]}
     />
   </SectionWrapper>
@@ -47,7 +48,6 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
             'You need European data residency with clean EU multi-region support',
             "You're already in the Google ecosystem (Google Ads, GA4, Workspace)",
             'AI workloads (Gemini, Vertex AI) are part of your data roadmap',
-            'You want a cohesive stack with fewer integration points',
           ],
         },
         {

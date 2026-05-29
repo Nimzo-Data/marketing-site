@@ -14,7 +14,7 @@ import { technologiesForGrid } from '../../data/technologies';
   title="Data Platform Implementation | Nimzo Data"
   description="We build end-to-end Google Cloud data platforms: ingestion, BigQuery, Dataform, and BI. Two phases: a paid audit first, then a fixed-price build."
   heroTitle="Your data is scattered across tools.<br>None of it talks to each other."
-  heroSubtitle="A proper data platform, without hiring a data team. End-to-end — ingestion to dashboards. Two phases: audit first, then a fixed-price build. Senior engineering, clean handover."
+  heroSubtitle="A proper data platform, without hiring a data team. End-to-end: ingestion to dashboards. Two phases: audit first, then a fixed-price build. Senior engineering, clean handover."
 >
   <!-- Challenges & Outcomes -->
   <SectionWrapper py="lg" bg="white">
@@ -30,18 +30,20 @@ import { technologiesForGrid } from '../../data/technologies';
         "One person is the bottleneck. Every data question routes through them.",
         "Basic questions take an afternoon. Hours of file-digging to answer.",
         "Decisions get made on gut feel. The numbers aren't trusted.",
+        "Everyone's talking about AI, but you don't know if your data can support it.",
       ]}
       rightTitle="What you get:"
       rightItems={[
         "Dashboards your team trusts and opens every morning.",
         "Reports that run automatically and email themselves.",
-        "One definition per metric — revenue, churn, LTV.",
-        "Self-service analytics — no ticket needed.",
+        "One definition per metric: revenue, churn, LTV.",
+        "Self-service analytics, no ticket needed.",
         "Decisions grounded in data, not gut feel.",
         "Docs good enough for your next hire to take over.",
+        "AI features configured for natural-language queries over trusted data.",
       ]}
     />
-    <p class="list-footer">We build the platform, we hand you the keys, and we leave — with a 30-day support window so your team lands cleanly.</p>
+    <p class="list-footer">We build the platform, we hand you the keys, and we leave, with a 30-day support window so your team lands cleanly.</p>
   </SectionWrapper>
 
   <!-- Data Platform Diagram -->
@@ -66,7 +68,7 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Automated Data Pipelines</h3>
-        <p class="layer-body">We connect your data sources — databases, APIs, SaaS tools — using Airbyte or Fivetran, depending on your needs. Data lands in BigQuery on a reliable schedule, with monitoring and alerts when something breaks.</p>
+        <p class="layer-body">We connect your data sources (databases, APIs, SaaS tools) using Airbyte or Fivetran, depending on your needs. Data lands in BigQuery on a reliable schedule, with monitoring and alerts when something breaks.</p>
       </div>
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -89,7 +91,7 @@ import { technologiesForGrid } from '../../data/technologies';
           </svg>
         </div>
         <h3 class="layer-title">Dashboards, Reports &amp; AI-ready</h3>
-        <p class="layer-body">We connect the BI tool that fits your team — Looker, Lightdash, Metabase, or Steep — and build the dashboards that matter. The platform underneath is designed so that when you're ready to add AI features, the foundation is already there.</p>
+        <p class="layer-body">We connect the BI tool that fits your team (Looker, Lightdash, Metabase, or Steep) and build the dashboards that matter. We also configure the AI features on top, so conversational analytics or AI agents query governed metrics, not raw tables.</p>
       </div>
     </div>
   </SectionWrapper>
@@ -97,7 +99,7 @@ import { technologiesForGrid } from '../../data/technologies';
   <!-- Technologies used -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">The tools we reach for.</h2>
-    <p class="intro-body">Every implementation uses some combination of these. The mix depends on your data sources, team, and budget — we explain the tradeoffs before we pick.</p>
+    <p class="intro-body">Every implementation uses some combination of these. The mix depends on your data sources, team, and budget. We explain the tradeoffs before we pick.</p>
     <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
@@ -112,7 +114,7 @@ import { technologiesForGrid } from '../../data/technologies';
         { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "Sources, volumes, and tools evaluated. Written recommendation and fixed-price build proposal. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
         { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the build, do it yourselves, or stop here. Plenty of clients take the report and execute internally." },
         { icon: 'code-2', title: "Build (6–10 weeks, bi-weekly demos)", description: "We lead the technical work. Your team joins reviews and decisions, and can take on small parts when it makes sense. Bi-weekly demos, async by default." },
-        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training sessions, full documentation, recorded walkthroughs. Your team owns it when we leave — not in theory, in practice." },
+        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training sessions, full documentation, recorded walkthroughs. Your team owns it when we leave. Not in theory, in practice." },
         { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "You have questions, small tweaks, an unexpected edge case. We're reachable for 30 days after handover at no extra cost." },
       ]}
     />
@@ -123,12 +125,12 @@ import { technologiesForGrid } from '../../data/technologies';
     <h2 class="section-heading">Pricing.</h2>
     <div class="two-phase-grid">
       <div class="phase-card">
-        <div class="phase-label">Phase 1 — Audit</div>
+        <div class="phase-label">Phase 1: Audit</div>
         <div class="phase-price">€3,000 – €5,000</div>
         <p class="phase-sub">1–2 weeks, fixed price, paid 100% upfront. Written recommendation and fixed-price build proposal. Same audit available <a href="/services/data-platform-audit/" class="inline-link">standalone</a>.</p>
       </div>
       <div class="phase-card">
-        <div class="phase-label">Phase 2 — Build (optional)</div>
+        <div class="phase-label">Phase 2: Build (optional)</div>
         <div class="phase-price">€12,000 – €30,000</div>
         <p class="phase-sub">7–12 weeks (build + handover), priced after the audit based on the real scope. Fixed price, agreed before we start.</p>
       </div>

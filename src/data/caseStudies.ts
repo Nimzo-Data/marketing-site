@@ -52,7 +52,7 @@ export const caseStudies: CaseStudyMeta[] = [
       label: 'Data Platform Optimization',
       href: '/services/data-platform-optimization/',
       shortDescription:
-        'Audit a stuck data stack, then clean, simplify, and migrate the parts that matter — without trashing what already works.',
+        'Audit a stuck data stack, then clean, simplify, and migrate the parts that matter, without trashing what already works.',
     },
     tools: [
       { name: 'Airbyte', href: '/technologies/airbyte/', logo: '/logos/airbyte.svg' },
@@ -75,7 +75,7 @@ export const caseStudies: CaseStudyMeta[] = [
     headline:
       'How Tameson turned unused BigQuery data into a foundation for analytics across 6 markets',
     subline:
-      'Pipelines were running and data was landing in BigQuery — but most of it sat unmodeled and unused.',
+      'Pipelines were running and data was landing in BigQuery, but most of it sat unmodeled and unused.',
     company: {
       flag: '🇳🇱',
       city: 'Eindhoven',
@@ -86,7 +86,7 @@ export const caseStudies: CaseStudyMeta[] = [
       label: 'Expert Implementation Services',
       href: '/services/expert-implementation-services/',
       shortDescription:
-        'Drop in as senior data engineering — modeling discipline, governance, and architecture — alongside teams that handle their own ingestion.',
+        'Drop in as senior data engineering (modeling discipline, governance, and architecture) alongside teams that handle their own ingestion.',
     },
     tools: [
       { name: 'BigQuery', href: '/technologies/bigquery/', logo: '/logos/bigquery.svg' },

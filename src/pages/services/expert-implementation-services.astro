@@ -11,13 +11,13 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
   title="Expert Implementation Services | Nimzo Data"
   description="Targeted Google Cloud data engineering help: BigQuery optimization, Dataform setup, ETL pipelines, or BI implementation. Fixed-price. Defined scope."
   heroTitle="Focused help on your data stack."
-  heroSubtitle="You know what you need. Senior data engineering expertise for focused work — a Dataform rebuild, a Looker semantic layer, BigQuery costs tamed. Fixed-price, 2–6 weeks, no long engagement."
+  heroSubtitle="You know what you need. Senior data engineering expertise for focused work: a Dataform rebuild, a Looker semantic layer, BigQuery costs tamed. Fixed-price, 2–6 weeks, no long engagement."
 >
   <!-- Who this is for — bare list -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Who this is for.</h2>
     <ul class="tick-list">
-      <li>You know exactly what you need — one specific problem solved.</li>
+      <li>You know exactly what you need. One specific problem solved.</li>
       <li>You have a GCP data stack, and one layer is broken or missing.</li>
       <li>Your team can handle most of the platform, just not this thing.</li>
       <li>You completed a platform audit and want help on the hardest fixes.</li>
@@ -45,7 +45,7 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
         timeline="3–6 weeks"
         details={[
           "Looker LookML modeling for enterprise governance",
-          "Lightdash / Metabase / Steep setup — semantic layer, dashboards, AI assistant config",
+          "Lightdash / Metabase / Steep setup: semantic layer, dashboards, AI configuration",
           "Initial dashboards and user training",
         ]}
       />
@@ -89,7 +89,7 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
       steps={[
         { icon: 'search', title: "Technical assessment", description: "Once the proposal is signed: read access to your GCP environment and a 1–2 hour technical interview with your data lead. We confirm the plan." },
         { icon: 'code-2', title: "Build (2–6 weeks, weekly check-ins)", description: "We do the work. Weekly updates. Your team joins reviews and can take on small parts when it makes sense. No daily standups." },
-        { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough session. Your team owns what we built — no trailing retainer expected." },
+        { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough session. Your team owns what we built. No trailing retainer expected." },
         { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "Questions, small tweaks, an unexpected edge case. We're reachable for 30 days after handover at no extra cost." },
       ]}
     />
@@ -207,6 +207,7 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
   @media (min-width: 1024px) {
     .expert-grid {
       grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 1fr;
     }
   }
 
