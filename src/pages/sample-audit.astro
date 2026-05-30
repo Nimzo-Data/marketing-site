@@ -266,6 +266,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
           <tr><td>Number of dashboards</td><td>8 active, 3 appear abandoned (not updated in 60+ days)</td></tr>
           <tr><td>Users</td><td>~15 people access dashboards regularly: CEO, CFO, Head of Ops, Head of Marketing, Head of Sales, 4 marketing team members, 2 sales team members, 2 product managers, Emma</td></tr>
           <tr><td>Self-service capability</td><td>None. All dashboards were built by Emma. Ad-hoc requests go to Emma, who either builds a new dashboard or exports data to a Google Sheet.</td></tr>
+          <tr><td>AI / conversational analytics</td><td>None. No AI features in use. All ad-hoc data questions go through Emma, who manually pulls data and builds one-off analyses.</td></tr>
           <tr><td>Mobile access</td><td>Data Studio reports can be viewed in a mobile browser but are not optimized for mobile. No native mobile app available on the free tier.</td></tr>
           <tr><td>Known issues</td><td>Dashboard #3 (marketing performance) is powered by Emma's GA4 consolidation Google Sheet, which aggregates data from all 5 market properties. When the GA4 add-on exports fail or return incomplete data, Dashboard #3 shows stale or partial numbers until Emma debugs the issue. Dashboard #5 (weekly revenue) shows different totals than the CFO's weekly summary spreadsheet. CEO has stopped checking dashboards and asks Emma for numbers directly.</td></tr>
         </tbody>
@@ -396,7 +397,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
           <li>Marts: the governed metrics that the business sees (revenue, attribution, margins, customer LTV), using the definitions agreed upon with leadership</li>
         </ul>
       </li>
-      <li><strong>BI:</strong> Steep reads exclusively from the mart layer, so every metric every user sees is governed by a single set of definitions. Self-service exploration replaces ad-hoc requests to Emma.</li>
+      <li><strong>BI:</strong> Steep reads exclusively from the mart layer, so every metric every user sees is governed by a single set of definitions. Self-service exploration replaces ad-hoc requests to Emma. Steep's built-in AI is configured on the governed metrics, so team members can ask questions like 'what was our ROAS by channel last month?' and get answers grounded in the agreed definitions.</li>
     </ul>
     <p>This architecture addresses all eight findings:</p>
     <ul class="doc-bullets">
@@ -408,6 +409,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <li><strong>Finding 6 (margin analysis):</strong> Dataform product-cost model joins Shopify orders to supplier costs via a maintained SKU mapping table. Real-time margin by product, category, and collection.</li>
       <li><strong>Finding 7 (email attribution):</strong> Dataform joins Klaviyo engagement events to Shopify orders by customer ID. Validated email revenue attribution and LTV by email flow.</li>
       <li><strong>Finding 8 (LTV by channel):</strong> Customer-level mart combines attribution data with Shopify order history, with a new-vs-returning flag. LTV by acquisition channel available as a self-service metric.</li>
+      <li><strong>AI-powered analytics:</strong> Steep's conversational AI is configured on top of the governed metrics, so team members can ask data questions in natural language without waiting for Emma or writing SQL.</li>
     </ul>
 
     <h3 class="doc-h2">Tool recommendations</h3>
@@ -424,7 +426,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
     <p>We considered dbt (an alternative transformation tool widely used in the industry). dbt offers more flexibility and a larger ecosystem, but introduces additional complexity: it requires either dbt Cloud (additional licensing cost) or dbt Core with a separate orchestrator. For a team without a data engineer, Dataform's zero-maintenance, GCP-native approach is the better fit. If Verdure later hires a data engineer who prefers dbt, the migration path from Dataform is straightforward.</p>
 
     <h4 class="doc-h3">BI: Steep</h4>
-    <p>Steep is a metrics-first BI platform built around a semantic layer (a shared set of metric definitions that ensures every user sees the same numbers, regardless of which view or question they're exploring). Rather than building traditional dashboards, Verdure's data team defines governed metrics once (revenue, CPA, ROAS, LTV, margin), and every user in the organization explores those metrics through an intuitive interface without needing SQL knowledge. Steep includes AI-powered analysis on all paid plans and has a native mobile app, which addresses the CEO's and CFO's preference for checking numbers on their phones.</p>
+    <p>Steep is a metrics-first BI platform built around a semantic layer (a shared set of metric definitions that ensures every user sees the same numbers, regardless of which view or question they're exploring). Rather than building traditional dashboards, Verdure's data team defines governed metrics once (revenue, CPA, ROAS, LTV, margin), and every user in the organization explores those metrics through an intuitive interface without needing SQL knowledge. Steep includes AI-powered analysis on all paid plans and has a native mobile app, which addresses the CEO's and CFO's preference for checking numbers on their phones. As part of the implementation, we configure Steep AI with the metric definitions built in Phase 2, so conversational analytics work from day one at no additional cost.</p>
     <p>At 15 users on the Business plan ($25/user/month), Steep costs approximately $375/month (€345/month). Steep directly addresses Findings 4 and 5: it replaces the untrusted Data Studio dashboards with governed, self-service analytics, and frees Emma from being the bottleneck for every data request. We evaluated three BI tools during the audit; the comparison follows below.</p>
 
     <h3 class="doc-h2">Tool comparison</h3>
@@ -502,7 +504,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
         <tbody>
           <tr><td>Phase 1: Ingestion</td><td>2 weeks</td><td>Airbyte Cloud setup for 4 sources (Shopify, Stripe, Meta Ads, Klaviyo). GA4 BigQuery export enabled on all 5 market properties. Google Ads Data Transfer Service configured. Supplier cost Google Sheet connected as BigQuery external table.</td><td>Access to Shopify, Stripe, GA4, Google Ads, Meta Ads, Klaviyo, a Google Cloud project, and an Airbyte Cloud account</td></tr>
           <tr><td>Phase 2: Transformation</td><td>3 weeks</td><td>Dataform project: staging models for all sources, intermediate models (Shopify-Stripe reconciliation, GA4 session-based attribution, product-cost matching, Klaviyo-Shopify email attribution), mart models (revenue, attribution, margins, LTV)</td><td>Phase 1 complete</td></tr>
-          <tr><td>Phase 3: BI and analytics</td><td>2 weeks</td><td>Steep setup, metric definitions, initial views for leadership/marketing/product, training session for Emma and Lisa</td><td>Phase 2 complete</td></tr>
+          <tr><td>Phase 3: BI and analytics</td><td>2 weeks</td><td>Steep setup, metric definitions, AI configuration, initial views for leadership/marketing/product, training session for Emma and Lisa</td><td>Phase 2 complete</td></tr>
           <tr><td>Handover</td><td>1 week</td><td>Documentation, architecture walkthrough, Dataform codebase review with Emma</td><td>Phase 3 complete</td></tr>
           <tr><td>Support window</td><td>30 days</td><td>Support for questions, minor adjustments, and bug fixes</td><td>Handover complete</td></tr>
         </tbody>
