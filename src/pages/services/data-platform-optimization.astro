@@ -9,6 +9,7 @@ import CTACard from '../../components/cards/CTACard.astro';
 import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
+import { crossSell } from '../../data/services';
 ---
 
 <ServiceLayout
@@ -177,26 +178,20 @@ import { technologiesForGrid } from '../../data/technologies';
     <h2 class="section-heading">Not sure this is the right fit?</h2>
     <div class="cta-cards-grid cta-cards-grid--three">
       <CTACard
+        {...crossSell.implementation}
         title="No data platform yet? Start fresh."
-        description="Build end-to-end from scratch: ingestion, transformations, dashboards. Audit first, then a fixed-price build."
-        href="/services/data-platform-implementation/"
-        buttonText="See Implementation"
         dataTrack="opt-cta-implementation"
         variant="link"
       />
       <CTACard
+        {...crossSell.expert}
         title="Scope is narrower than a full optimization?"
-        description="Focused help on one or two layers: Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks."
-        href="/services/expert-implementation-services/"
-        buttonText="See Expert Services"
         dataTrack="opt-cta-expert"
         variant="link"
       />
       <CTACard
+        {...crossSell.retainers}
         title="Already have a working platform?"
-        description="Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call."
-        href="/services/ongoing-support-retainers/"
-        buttonText="See Ongoing Support"
         dataTrack="opt-cta-retainers"
         variant="link"
       />

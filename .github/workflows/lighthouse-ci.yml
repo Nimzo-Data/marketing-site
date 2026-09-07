@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# Supersede in-flight runs when new commits land on the same ref, so a burst of
+# pushes costs one run rather than one per commit.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lighthouse:
     name: Lighthouse CI

@@ -5,6 +5,7 @@ import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import CTACard from '../../components/cards/CTACard.astro';
 import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { crossSell } from '../../data/services';
 ---
 
 <ServiceLayout
@@ -108,24 +109,18 @@ import SectionWrapper from '../../components/ui/SectionWrapper.astro';
     <h2 class="section-heading">Not the right scope for you?</h2>
     <div class="cta-cards-grid">
       <CTACard
+        {...crossSell.implementation}
         title="No data platform yet? Start fresh."
-        description="Build end-to-end from scratch: ingestion, transformations, dashboards. Audit first, then a fixed-price build."
-        href="/services/data-platform-implementation/"
-        buttonText="See Implementation"
         variant="link"
       />
       <CTACard
+        {...crossSell.optimization}
         title="Platform exists but not working?"
-        description="Audit what you have, then build the improvements. Two phases: audit first, then a fixed-price build."
-        href="/services/data-platform-optimization/"
-        buttonText="See Optimization"
         variant="link"
       />
       <CTACard
+        {...crossSell.retainers}
         title="Need ongoing support, not one-time work?"
-        description="Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call."
-        href="/services/ongoing-support-retainers/"
-        buttonText="See Ongoing Support"
         variant="link"
       />
     </div>

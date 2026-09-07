@@ -5,6 +5,7 @@ import CTACard from '../components/cards/CTACard.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologies } from '../data/technologies';
+import { crossSell } from '../data/services';
 
 interface Props {
   title: string;
@@ -45,24 +46,18 @@ const resolvedLogo =
   <SectionWrapper py="lg">
     <div class="cta-cards-grid">
       <CTACard
+        {...crossSell.implementation}
         title="No data platform yet?"
-        description="Build end-to-end from scratch: ingestion, transformations, dashboards. Audit first, then a fixed-price build."
-        href="/services/data-platform-implementation/"
-        buttonText="See Implementation"
         variant="link"
       />
       <CTACard
+        {...crossSell.optimization}
         title="Platform exists but not working?"
-        description="Audit what you have, then build the improvements. Two phases: audit first, then a fixed-price build."
-        href="/services/data-platform-optimization/"
-        buttonText="See Optimization"
         variant="link"
       />
       <CTACard
+        {...crossSell.expert}
         title={`Need help with ${toolName}?`}
-        description="Focused help on one or two layers: Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks."
-        href="/services/expert-implementation-services/"
-        buttonText="See Expert Services"
         variant="link"
       />
     </div>

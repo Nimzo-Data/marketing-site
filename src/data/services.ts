@@ -42,3 +42,43 @@ export const services: Service[] = [
     priceRange: '€1,000 – €4,500/month',
   },
 ];
+
+// Cross-sell card copy. Every service page and the technology layout link to the
+// other services with the same href, description and button label; only the
+// framing title and the analytics tag change per context. Spread one of these
+// into <CTACard> and pass title/dataTrack alongside.
+export interface CrossSell {
+  href: string;
+  description: string;
+  buttonText: string;
+}
+
+export const crossSell: Record<
+  'implementation' | 'optimization' | 'expert' | 'retainers',
+  CrossSell
+> = {
+  implementation: {
+    href: '/services/data-platform-implementation/',
+    description:
+      'Build end-to-end from scratch: ingestion, transformations, dashboards. Audit first, then a fixed-price build.',
+    buttonText: 'See Implementation',
+  },
+  optimization: {
+    href: '/services/data-platform-optimization/',
+    description:
+      'Audit what you have, then build the improvements. Two phases: audit first, then a fixed-price build.',
+    buttonText: 'See Optimization',
+  },
+  expert: {
+    href: '/services/expert-implementation-services/',
+    description:
+      'Focused help on one or two layers: Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks.',
+    buttonText: 'See Expert Services',
+  },
+  retainers: {
+    href: '/services/ongoing-support-retainers/',
+    description:
+      'Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call.',
+    buttonText: 'See Ongoing Support',
+  },
+};

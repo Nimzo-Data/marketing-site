@@ -5,23 +5,7 @@ import TextSection from '../components/content/TextSection.astro';
 import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
-
-const leftItems = [
-  "You're on Google Cloud, or planning to be.",
-  "You're past the \"spreadsheet era\" and need a real platform.",
-  "You have analysts, not data engineers. Or no team at all.",
-  "You need senior data engineering, not a full-time hire.",
-  "You want AI to answer your team's data questions accurately.",
-  "You can get a decision made. Our best engagements start in two-week sales cycles, not four-month ones.",
-];
-
-const rightItems = [
-  "You need AWS or Azure. We don't do multi-cloud.",
-  "You're pre-product-market-fit. Data isn't your bottleneck yet.",
-  "You need analysts or data scientists. We're data engineers.",
-  "You want the cheapest hourly rate available. We compete on seniority, not price.",
-  "You need real-time streaming at scale (Kafka, Flink, sub-second latency). Different specialism.",
-];
+import { isForItems, isNotForItems } from '../data/audience';
 
 type PrincipleIcon = 'compass' | 'database' | 'target' | 'tag' | 'message-square' | 'graduation-cap';
 
@@ -154,9 +138,9 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
       variant="is-for"
       bare
       leftTitle="This is for you if:"
-      leftItems={leftItems}
+      leftItems={isForItems}
       rightTitle="This isn't for you if:"
-      rightItems={rightItems}
+      rightItems={isNotForItems}
     />
   </SectionWrapper>
 
