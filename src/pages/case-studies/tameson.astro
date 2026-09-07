@@ -93,7 +93,7 @@ const cs = findCaseStudy('tameson')!;
 
     <div class="cs-prose">
       <h3 class="cs-prose__sub">1. GA4 modeling foundation</h3>
-      <p>GA4's raw export looks usable until you actually try to use it. Events are nested, custom parameters live in arrays, sessions don't exist as a concept, and across 6 properties the inconsistencies multiply.</p>
+      <p>GA4's raw export looks usable until you try to use it. Events are nested, custom parameters live in arrays, sessions don't exist as a concept, and across 6 properties the inconsistencies multiply.</p>
       <p>We built a unified events model spanning all 6 GA4 properties, reconstructing sessions from events and adding custom-window session aggregations (1-day, 7-day, 28-day) for marketing analysis. We standardized custom parameters across markets and built joins to marketing and commerce data on multiple keys: date, domain, country, transaction ID, product, channel, campaign, and click ID where available. Report-layer tables (daily stats, ecommerce product analysis, funnel analysis, page analysis) sit on top of this foundation, all multi-market by default.</p>
 
       <h3 class="cs-prose__sub">2. Multi-source modeled data layer</h3>
