@@ -1,4 +1,5 @@
 ---
+import { founder } from '../data/founder';
 import '../styles/global.css';
 import CookieConsent from '../components/ui/CookieConsent.astro';
 import Header from '../components/layout/Header.astro';
@@ -40,6 +41,13 @@ const organizationSchema = {
   email: 'hello@nimzodata.com',
   foundingDate: '2024',
   areaServed: 'Europe',
+  founder: {
+    '@type': 'Person',
+    name: founder.name,
+    jobTitle: founder.role,
+    ...(founder.linkedin ? { sameAs: [founder.linkedin] } : {}),
+    ...(founder.photo ? { image: new URL(founder.photo, 'https://nimzodata.com').href } : {}),
+  },
 };
 
 // BreadcrumbList JSON-LD (skip on homepage and 404)

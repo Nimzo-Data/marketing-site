@@ -6,6 +6,7 @@ import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { isForItems, isNotForItems } from '../data/audience';
+import FounderBlock from '../components/content/FounderBlock.astro';
 
 type PrincipleIcon = 'compass' | 'database' | 'target' | 'tag' | 'message-square' | 'graduation-cap';
 
@@ -78,6 +79,12 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
     <p>Nimzo Data is named after the Nimzo-Indian Defense, a chess opening that controls the center indirectly. It's about positioning, not force.</p>
     <p>We build data infrastructure the same way. We don't build impressive dashboards that nobody uses. We build the pipelines, models, and metrics underneath them.</p>
   </TextSection>
+
+  <!-- The person behind the firm -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">Who runs Nimzo Data.</h2>
+    <FounderBlock variant="full" />
+  </SectionWrapper>
 
   <!-- How we work -->
   <SectionWrapper bg="white" py="lg">

@@ -10,6 +10,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../data/technologies';
 import { isForItems, isNotForItems } from '../data/audience';
+import FounderBlock from '../components/content/FounderBlock.astro';
 ---
 
 <BaseLayout
@@ -155,7 +156,9 @@ import { isForItems, isNotForItems } from '../data/audience';
   </SectionWrapper>
 
   <!-- Section 8: Final CTA -->
-  <CTABanner dataTrack="homepage-cta-banner" />
+  <CTABanner dataTrack="homepage-cta-banner">
+    <FounderBlock variant="compact" tone="dark" />
+  </CTABanner>
 </BaseLayout>
 
 <style>

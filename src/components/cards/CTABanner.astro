@@ -40,10 +40,14 @@ const buttonVariant = 'primary';
     {email && (
       <a href={`mailto:${email}`} class="banner-email">{email}</a>
     )}
+    <div class="banner-slot"><slot /></div>
   </div>
 </section>
 
 <style>
+  .banner-slot:empty { display: none; }
+  .banner-slot { margin-top: 28px; }
+
   .cta-banner {
     width: 100%;
     padding-top: 96px;
