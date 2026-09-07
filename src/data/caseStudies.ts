@@ -83,7 +83,7 @@ export const caseStudies: CaseStudyMeta[] = [
       sector: 'Industrial supply e-commerce',
     },
     service: {
-      label: 'Expert Implementation Services',
+      label: 'Expert Services',
       href: '/services/expert-implementation-services/',
       shortDescription:
         'Drop in as senior data engineering (modeling discipline, governance, and architecture) alongside teams that handle their own ingestion.',

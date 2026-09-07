@@ -29,7 +29,7 @@ export const services: Service[] = [
     timeline: '10–16 weeks',
   },
   {
-    name: 'Expert Implementation Services',
+    name: 'Expert Services',
     slug: 'expert-implementation-services',
     shortDescription: 'Targeted help with a specific layer of your stack: BigQuery, Dataform, ETL, or BI tooling.',
     priceRange: '€3,000 – €15,000',

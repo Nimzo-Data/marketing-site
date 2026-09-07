@@ -43,7 +43,7 @@ export const navItems: NavItem[] = [
             href: '/services/data-platform-optimization/',
           },
           {
-            label: 'Expert Implementation Services',
+            label: 'Expert Services',
             href: '/services/expert-implementation-services/',
           },
           {
