@@ -79,11 +79,19 @@ const { name, role, photo, photoAlt, linkedin, background, seniority, ctaLine } 
     flex-shrink: 0;
   }
 
+  /* The source photo has a pure white background, which dissolves into the
+     white section behind it. A faint ground and hairline give the cutout an
+     edge so it reads as a photo rather than a floating head. */
   .founder-img,
   .founder-placeholder {
     border-radius: var(--radius-card);
     object-fit: cover;
     display: block;
+  }
+
+  .founder--full .founder-img {
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
   }
 
   .founder-placeholder {
