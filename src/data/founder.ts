@@ -26,13 +26,13 @@ export const founder: Founder = {
   linkedin: 'https://www.linkedin.com/in/antoine-anicotte/',
 
   background: [
-    'Fifteen years in analytics and data engineering, now working exclusively on Google Cloud.',
-    'Past work spans Clarins, MindsDB and Foresight Mental Health, plus the European scale-ups written up here: Aeyde and Tameson.',
+    'Fifteen years in analytics and data engineering, across Europe and the US, now working exclusively on Google Cloud.',
+    'Recent work is with European e-commerce scale-ups, consumer and industrial, including Aeyde and Tameson.',
   ],
 
   seniority:
-    'Nimzo Data is deliberately small. The senior engineer who scopes your build is the one who writes it, and the one you call when something breaks.',
+    "Nimzo Data is deliberately small. The senior engineer who scopes your project stays on it, and you're never handed to a junior team you didn't meet on the call.",
 
   ctaLine:
-    "You'll talk with Antoine, founder. The person on the call is the person who builds it.",
+    "You'll talk with Antoine, the founder. Not a salesperson, and not a junior team.",
 };
