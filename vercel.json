@@ -3,18 +3,8 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/services/data-analytics-platform-implementation",
-      "destination": "/services/data-platform-implementation/",
-      "permanent": true
-    },
-    {
       "source": "/services/data-analytics-platform-implementation/",
       "destination": "/services/data-platform-implementation/",
-      "permanent": true
-    },
-    {
-      "source": "/services/data-analytics-platform-optimization",
-      "destination": "/services/data-platform-optimization/",
       "permanent": true
     },
     {
