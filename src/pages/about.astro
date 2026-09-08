@@ -194,6 +194,12 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
       align-items: baseline;
       gap: 24px;
     }
+
+    /* Only in row mode: flex-basis follows the main axis, so leaving this on
+       the stacked layout made every label 220px tall. */
+    .fact-label {
+      flex: 0 0 220px;
+    }
   }
 
   .fact-label {
@@ -201,7 +207,6 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
     margin: 0;
-    flex: 0 0 220px;
   }
 
   .fact-value {
