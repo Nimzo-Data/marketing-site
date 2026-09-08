@@ -18,7 +18,7 @@ const { name, role, photo, photoAlt, linkedin, background, recentWork, seniority
 <div class={`founder founder--${variant} founder--${tone}`}>
   <div class="founder-photo">
     {photo ? (
-      <img src={photo} alt={photoAlt} class="founder-img" width="160" height="160" loading="lazy" />
+      <img src={photo} alt={photoAlt} class="founder-img" width="240" height="240" loading="lazy" />
     ) : (
       <div class="founder-placeholder" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
@@ -48,7 +48,7 @@ const { name, role, photo, photoAlt, linkedin, background, recentWork, seniority
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
               <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.65h.05A4.17 4.17 0 0 1 17.6 8.7c4 0 4.4 2.5 4.4 5.9V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.47-2.2 3v5.67h-4V9Z" />
             </svg>
-            <span>LinkedIn &rarr;</span>
+            <span>LinkedIn</span>
           </a>
         )}
       </>
@@ -84,6 +84,19 @@ const { name, role, photo, photoAlt, linkedin, background, recentWork, seniority
     width: 160px;
     height: 160px;
     flex-shrink: 0;
+  }
+
+  /* Sized on desktop so the photo's bottom edge lands with the LinkedIn link.
+     Deliberately a fixed size rather than stretching to the text column: the
+     photo's width feeds back into how the copy wraps, so an elastic height
+     ends up chasing itself. */
+  @media (min-width: 640px) {
+    .founder--full .founder-photo,
+    .founder--full .founder-img,
+    .founder--full .founder-placeholder {
+      width: 204px;
+      height: 204px;
+    }
   }
 
   /* The source photo has a pure white background, which dissolves into the
@@ -143,7 +156,7 @@ const { name, role, photo, photoAlt, linkedin, background, recentWork, seniority
   .founder-seniority {
     font-family: var(--font-body);
     font-size: 1rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     line-height: 1.6;
     margin: 14px 0 0;
   }

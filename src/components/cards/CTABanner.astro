@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import FounderBlock from '../content/FounderBlock.astro';
 
 interface Props {
   heading?: string;
@@ -9,16 +10,19 @@ interface Props {
   email?: string;
   dataTrack?: string;
   bg?: 'primary' | 'accent';
+  /** Set false where the page already introduces the founder elsewhere. */
+  showFounder?: boolean;
 }
 
 const {
   heading = 'Ready to talk about your data stack?',
-  subtitle = "45-minute call. No sales pitch. We tell you honestly whether we're a fit.",
+  subtitle = '45-minute call. No sales pitch.',
   buttonText = "Let's talk",
   buttonHref = '/contact/',
   email,
   dataTrack,
   bg = 'primary',
+  showFounder = true,
 } = Astro.props;
 
 const buttonVariant = 'primary';
@@ -40,13 +44,14 @@ const buttonVariant = 'primary';
     {email && (
       <a href={`mailto:${email}`} class="banner-email">{email}</a>
     )}
-    <div class="banner-slot"><slot /></div>
+    {showFounder && (
+      <div class="banner-founder"><FounderBlock variant="compact" tone="dark" /></div>
+    )}
   </div>
 </section>
 
 <style>
-  .banner-slot:empty { display: none; }
-  .banner-slot { margin-top: 28px; }
+  .banner-founder { margin-top: 28px; }
 
   .cta-banner {
     width: 100%;

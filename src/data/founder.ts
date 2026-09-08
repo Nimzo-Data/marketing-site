@@ -50,7 +50,7 @@ export const founder: Founder = {
   ],
 
   ctaLine:
-    "You'll talk with Antoine, founder. The person on the call is the person accountable for the build.",
+    "You'll talk with Antoine, the founder. The person on the call is the person accountable for the work.",
 };
 
 /** Client name + case study URL for each slug in `clientSlugs`. */
