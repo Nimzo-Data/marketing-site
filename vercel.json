@@ -11,6 +11,11 @@
       "source": "/services/data-analytics-platform-optimization/",
       "destination": "/services/data-platform-optimization/",
       "permanent": true
+    },
+    {
+      "source": "/Nimzo Data — Sample Audit Deliverable.pdf",
+      "destination": "/Nimzo-Data-Sample-Audit.pdf",
+      "permanent": true
     }
   ],
   "headers": [
