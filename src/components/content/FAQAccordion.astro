@@ -1,0 +1,136 @@
+---
+import FAQSchema from './FAQSchema.astro';
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: FAQ[];
+  /** Open the first item on load. Off by default so the list reads as a list. */
+  openFirst?: boolean;
+}
+
+const { faqs, openFirst = false } = Astro.props;
+---
+
+{/* Native details/summary: expands without JavaScript, is keyboard operable and
+    announced as expanded/collapsed by screen readers for free, and survives a
+    strict CSP. */}
+<div class="faq-accordion">
+  {faqs.map((faq, i) => (
+    <details class="faq-item" open={openFirst && i === 0}>
+      <summary class="faq-summary">
+        <span class="faq-question">{faq.question}</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer">{faq.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<FAQSchema faqs={faqs} />
+
+<style>
+  .faq-accordion {
+    max-width: 760px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .faq-summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* Remove the default disclosure triangle in both engines. */
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary::marker {
+    content: '';
+  }
+
+  .faq-summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .faq-question {
+    font-family: var(--font-heading);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.4;
+  }
+
+  /* Plus drawn from two bars; the vertical one collapses on open, so the icon
+     becomes a minus. */
+  .faq-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: var(--color-primary);
+    transform: translateY(-50%);
+    transition: transform 180ms ease;
+  }
+
+  .faq-icon::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .faq-item[open] .faq-icon::after {
+    transform: translateY(-50%) rotate(90deg) scaleX(0);
+  }
+
+  /* Tighten the summary once open so its focus ring does not crowd the answer,
+     and give the answer its own breathing room instead. */
+  .faq-item[open] .faq-summary {
+    padding-bottom: 12px;
+  }
+
+  .faq-answer-wrap {
+    padding: 4px 42px 22px 0;
+  }
+
+  .faq-answer {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon::before,
+    .faq-icon::after {
+      transition: none;
+    }
+  }
+</style>

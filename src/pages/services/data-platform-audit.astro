@@ -5,6 +5,31 @@ import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
+import FAQAccordion from '../../components/content/FAQAccordion.astro';
+
+const faqs = [
+  {
+    question: 'Why is the audit paid?',
+    answer:
+      "Because it's real work with a real deliverable. You get a written current-state assessment, a tool recommendation with the reasoning behind it, a 12-month cost estimate, and a fixed-price proposal for the build. If you decide not to continue with us, you can hand that document to another provider and it's still useful.",
+  },
+  {
+    question: 'Why can\'t you just quote me directly?',
+    answer:
+      "A fixed price is only honest if the scope is right. After a 45-minute call we'd be guessing at your data volumes, your current costs, and which tools fit your team. The audit replaces those guesses with evidence, so the number in the proposal is one we stand behind.",
+  },
+  {
+    question: "What if we don't continue with you after the audit?",
+    answer:
+      "You keep the deliverable and owe nothing more. Some clients take the report and execute internally, or hand it to another provider. That's a fine outcome. There's no obligation built into the price.",
+  },
+  {
+    question: 'How do you compare to a big consultancy or a freelancer?',
+    answer:
+      'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineering, fixed price, defined scope, and a clean handover so you own what we built.',
+  },
+];
+
 ---
 
 <ServiceLayout
@@ -88,7 +113,7 @@ import { technologiesForGrid } from '../../data/technologies';
   <!-- Tools -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Tools we evaluate against your situation.</h2>
-    <p class="intro-body">We don't have a default stack. The audit matches tools to your data volume, team skill, and budget, with the reasoning written down so you can challenge it.</p>
+    <p class="intro-body">We have defaults: BigQuery, Dataform, Airbyte. The audit tells you when your situation breaks them, and why. Tools are matched to your data volume, team skill, and budget, with the reasoning written down so you can challenge it.</p>
     <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
@@ -135,6 +160,12 @@ import { technologiesForGrid } from '../../data/technologies';
         <li><strong>You're pre-product-market-fit with no real data yet.</strong> Too early. Come back when there's something to measure.</li>
       </ul>
     </div>
+  </SectionWrapper>
+
+  <!-- Objections handled before the call -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Common questions.</h2>
+    <FAQAccordion faqs={faqs} />
   </SectionWrapper>
 
 </ServiceLayout>
