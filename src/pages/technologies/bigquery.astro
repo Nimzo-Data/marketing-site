@@ -4,6 +4,12 @@ import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
 import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
+
+// Trimmed from the full case study quote: the middle clause and the closing
+// sentence are cut, no words changed.
+const tamesonQuote =
+  "When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build turned that around completely.";
 ---
 
 <TechnologyLayout
@@ -29,7 +35,7 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
         "Write and optimize complex SQL: window functions, nested structs, JSON parsing, incremental logic",
         "Implement column-level security and row-level access policies for multi-tenant datasets",
         "Set up BigQuery reservations and slot commitments for teams moving off on-demand pricing",
-        "Audit slow or expensive queries and rewrite them, typically achieving 60–90% cost reductions",
+        "Audit slow or expensive queries and rewrite them, typically achieving 60–90% cost reductions on the rewritten queries",
         "Use Gemini in BigQuery where it fits: AI.GENERATE, AI.CLASSIFY, and other SQL-native AI functions for in-warehouse AI",
       ]}
     />
@@ -75,4 +81,14 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       ]}
     />
   </SectionWrapper>
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="10+ sources modeled into a layered Dataform platform."
+      body="Ongoing since June 2024."
+      caseStudySlug="tameson"
+      quote={tamesonQuote}
+    />
+  </SectionWrapper>
+
 </TechnologyLayout>

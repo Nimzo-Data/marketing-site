@@ -4,6 +4,7 @@ import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
 import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 ---
 
 <TechnologyLayout
@@ -78,4 +79,13 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       ]}
     />
   </SectionWrapper>
+  <!-- Proof: Aeyde result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From minutes to seconds."
+      body="Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer."
+      caseStudySlug="aeyde"
+    />
+  </SectionWrapper>
+
 </TechnologyLayout>

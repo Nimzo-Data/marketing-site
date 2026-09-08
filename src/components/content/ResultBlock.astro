@@ -5,9 +5,17 @@ interface Props {
   metric: string;
   body: string;
   caseStudySlug: string;
+  /**
+   * Overrides the shared shortQuote for this placement only. Use when a page
+   * needs a different excerpt of the same interview; the shared quote also
+   * feeds the homepage testimonials, so editing it there would move copy on
+   * pages this one has nothing to do with. Must be the client's own words,
+   * trimmed rather than reworded.
+   */
+  quote?: string;
 }
 
-const { metric, body, caseStudySlug } = Astro.props;
+const { metric, body, caseStudySlug, quote } = Astro.props;
 const cs = findCaseStudy(caseStudySlug);
 
 if (!cs) {
@@ -40,7 +48,7 @@ if (!cs) {
     />
     <div class="result-block__quote-content">
       <blockquote class="result-block__quote-text">
-        &ldquo;{cs.shortQuote.text}&rdquo;
+        &ldquo;{quote ?? cs.shortQuote.text}&rdquo;
       </blockquote>
       <p class="result-block__attribution">
         <span class="result-block__name">{cs.shortQuote.authorName}</span>

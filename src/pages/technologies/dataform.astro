@@ -4,6 +4,12 @@ import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
 import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
+
+// Trimmed from the full case study quote: the middle clause and the closing
+// sentence are cut, no words changed.
+const tamesonQuote =
+  "When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build turned that around completely.";
 ---
 
 <TechnologyLayout
@@ -67,4 +73,14 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       ]}
     />
   </SectionWrapper>
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="10+ sources modeled into a layered Dataform platform."
+      body="Ongoing since June 2024."
+      caseStudySlug="tameson"
+      quote={tamesonQuote}
+    />
+  </SectionWrapper>
+
 </TechnologyLayout>
