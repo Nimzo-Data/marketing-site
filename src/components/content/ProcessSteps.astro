@@ -250,6 +250,14 @@ const { steps } = Astro.props;
     line-height: 1.6;
   }
 
+  /* Descriptions are injected with set:html, so scoped selectors do not reach
+     markup inside them. */
+  .step-description :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   /* Horizontal connector between steps on desktop */
   .step-connector {
     display: none;
