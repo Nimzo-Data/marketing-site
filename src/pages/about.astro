@@ -10,11 +10,17 @@ import FounderBlock from '../components/content/FounderBlock.astro';
 // unsold on purpose: this block exists to clear a checklist, not to persuade.
 const procurementFacts: Array<{ label: string; value: string }> = [
   { label: 'Legal entity', value: 'Nimzo Data SARL, registered in France' },
-  { label: 'Professional liability', value: 'Insured with Beazley, €500,000 cover' },
+  { label: 'SIRET', value: '994 080 497 00013' },
+  { label: 'VAT number', value: 'FR74994080497' },
+  {
+    label: 'Professional liability',
+    value: 'Insured with Beazley, €500,000 cover. Certificate available on request.',
+  },
   { label: 'Data processing agreement', value: 'Available on request' },
   { label: 'Data residency', value: 'EU by default' },
+  { label: 'Invoicing', value: 'In euros by default, by bank transfer' },
   { label: 'Working languages', value: 'English and French' },
-  { label: 'Business hours', value: 'CET' },
+  { label: 'Business hours', value: 'Monday to Friday, Central European Time (Paris)' },
 ];
 
 type PrincipleIcon = 'compass' | 'database' | 'target' | 'tag' | 'message-square' | 'graduation-cap';
@@ -85,7 +91,7 @@ const principles: Array<{ icon: PrincipleIcon; title: string; body: string }> = 
   </SectionWrapper>
 
   <TextSection title="Why Nimzo?" bg="white">
-    <p>Nimzo Data is named after the Nimzo-Indian Defence, where Black gives up the bishop pair, the most obviously valuable asset on the board, to leave White with a structural weakness that lasts the rest of the game. We build the same way: the foundation nobody sees is worth more than the dashboard everybody does.</p>
+    <p>Nimzo Data is named after the Nimzo-Indian Defence, where Black gives up the bishop pair, a visible advantage, for a structural edge that lasts the rest of the game. We build the same way: the foundation nobody sees is worth more than the dashboard everybody does.</p>
   </TextSection>
 
   <!-- The person behind the firm -->
