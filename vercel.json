@@ -16,6 +16,11 @@
       "source": "/Nimzo Data — Sample Audit Deliverable.pdf",
       "destination": "/Nimzo-Data-Sample-Audit.pdf",
       "permanent": true
+    },
+    {
+      "source": "/Nimzo%20Data%20%E2%80%94%20Sample%20Audit%20Deliverable.pdf",
+      "destination": "/Nimzo-Data-Sample-Audit.pdf",
+      "permanent": true
     }
   ],
   "headers": [
