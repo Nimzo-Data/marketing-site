@@ -53,14 +53,15 @@ function cellContent(value: string | boolean) {
             return (
               <td class={`rt-td ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>
                 {c.kind === 'yes' && (
-                  <span class="rt-tick" aria-label="included">
+                  <span class="rt-tick">
                     <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
                       <circle cx="9" cy="9" r="9" fill="#004f4c" fill-opacity="0.12"/>
                       <path d="M5 9.5L7.5 12L13 7" stroke="#004f4c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                     </svg>
+                    <span class="rt-sr">Included</span>
                   </span>
                 )}
-                {c.kind === 'no' && (<span class="rt-dash" aria-label="not included">—</span>)}
+                {c.kind === 'no' && (<span class="rt-dash"><span aria-hidden="true">—</span><span class="rt-sr">Not included</span></span>)}
                 {c.kind === 'text' && (<span>{c.text}</span>)}
               </td>
             );
@@ -117,6 +118,22 @@ function cellContent(value: string | boolean) {
 </div>
 
 <style>
+  /* Real text rather than aria-label, so the state survives plain text
+     extraction (crawlers, LLM ingestion, copy-paste) as well as being
+     announced. aria-label is not text content, so those consumers saw an
+     empty table. */
+  .rt-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Desktop: show table from md+ */
   .rt-desktop { display: none; }
   .rt-mobile { display: grid; grid-template-columns: 1fr; gap: 20px; }
