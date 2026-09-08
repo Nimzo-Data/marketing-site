@@ -4,6 +4,7 @@ import TextSection from '../../components/content/TextSection.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import WhenToChoose from '../../components/content/WhenToChoose.astro';
 import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 ---
 
 <TechnologyLayout
@@ -66,4 +67,13 @@ import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
       ]}
     />
   </SectionWrapper>
+  <!-- Proof: Aeyde result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From a black box to pipelines the team can see into."
+      body="Panoply replaced with Airbyte and BigQuery, cutting infrastructure cost from $1,300 to about $300 a month."
+      caseStudySlug="aeyde"
+    />
+  </SectionWrapper>
+
 </TechnologyLayout>
