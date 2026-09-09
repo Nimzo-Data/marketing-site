@@ -11,8 +11,14 @@ export interface Founder {
   photoAlt: string;
   /** Null hides the link. Only set this once the profile is public. */
   linkedin: string | null;
-  /** Opening sentence of the bio paragraph. */
+  /** Opening sentence of the bio paragraph. Used by the About block. */
   background: string;
+  /**
+   * One line for the author block at the foot of a blog post. Deliberately
+   * separate from `background`: that sentence runs on into `recentWork` on
+   * About, so the two cannot share wording without one of them reading oddly.
+   */
+  bylineLine: string;
   /** Runs on from `background`; the client names are appended as links. */
   recentWork: string;
   /** Case study slugs to name and link at the end of `recentWork`. */
@@ -36,6 +42,9 @@ export const founder: Founder = {
 
   background:
     'Fifteen years in analytics and data engineering, across Europe and the US, now exclusively on Google Cloud.',
+
+  bylineLine:
+    'Fifteen years in analytics and data engineering, twelve of them on Google Cloud, in-house and freelance across Europe, Asia and the US.',
   recentWork:
     'Recent work: European e-commerce companies, consumer and industrial, including',
   clientSlugs: ['aeyde', 'tameson'],

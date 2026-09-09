@@ -1,29 +1,333 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
+import CTABanner from '../components/cards/CTABanner.astro';
+import FounderBlock from '../components/content/FounderBlock.astro';
+import { founder } from '../data/founder';
+import { formatPostDate, isoDate } from '../data/blog';
 
 interface Props {
   title: string;
   description: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogImage?: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  /** Slug only, e.g. "bigquery-slot-reservations". */
+  slug: string;
 }
 
-const { title, description, ogTitle, ogDescription, ogImage } = Astro.props;
+const { title, description, pubDate, updatedDate, slug } = Astro.props;
+
+// Built from the slug rather than the request so it always carries the
+// trailing slash, whichever form the page was reached by.
+const canonical = new URL(`/blog/${slug}/`, Astro.site).href;
+
+// Posts have no image of their own, so the site OG image is the fallback and
+// the same file backs the Article schema.
+const ogImage = new URL('/og-image.png', Astro.site).href;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: isoDate(pubDate),
+  ...(updatedDate ? { dateModified: isoDate(updatedDate) } : {}),
+  image: ogImage,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonical,
+  },
+  author: {
+    '@type': 'Person',
+    name: founder.name,
+    jobTitle: founder.role,
+    url: new URL('/about/', Astro.site).href,
+    ...(founder.linkedin ? { sameAs: [founder.linkedin] } : {}),
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nimzo Data',
+    url: 'https://nimzodata.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/brand/logo-transparent.svg', Astro.site).href,
+    },
+  },
+};
 ---
 
-<BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
-  <SectionWrapper py="lg">
-    <article class="blog-article">
-      <slot />
+<BaseLayout
+  title={`${title} | Nimzo Data`}
+  description={description}
+  ogType="article"
+  canonicalUrl={canonical}
+  structuredData={articleSchema}
+>
+  <SectionWrapper py="lg" bg="white">
+    <article class="post">
+      <header class="post-header">
+        <p class="post-dates">
+          <time datetime={isoDate(pubDate)}>{formatPostDate(pubDate)}</time>
+          {updatedDate && (
+            <>
+              <span class="post-dates-sep" aria-hidden="true">·</span>
+              <span>Updated <time datetime={isoDate(updatedDate)}>{formatPostDate(updatedDate)}</time></span>
+            </>
+          )}
+        </p>
+        <h1 class="post-title">{title}</h1>
+        <p class="post-lede">{description}</p>
+      </header>
+
+      <div class="post-prose">
+        <slot />
+      </div>
+
+      <footer class="post-author">
+        <FounderBlock variant="byline" />
+      </footer>
     </article>
   </SectionWrapper>
+
+  <!-- showFounder={false}: the author block directly above already carries
+       the photo and introduces Antoine, so repeating both in the banner a few
+       hundred pixels later reads as a duplicate. Same call as About. -->
+  <CTABanner
+    heading="Ready to talk about your data stack?"
+    subtitle="45-minute call. No sales pitch."
+    buttonText="Let's talk"
+    buttonHref="/contact/"
+    dataTrack="blog-post-cta"
+    showFounder={false}
+  />
 </BaseLayout>
 
 <style>
-  .blog-article {
-    max-width: 720px;
-    margin: 0 auto;
+  /* Same measure and body size as the case study prose, so a post and a case
+     study read as the same publication. */
+  .post {
+    max-width: 760px;
+  }
+
+  .post-header {
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .post-dates {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 14px 0;
+    line-height: 1.5;
+  }
+
+  .post-dates-sep {
+    margin: 0 8px;
+  }
+
+  .post-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+
+  .post-lede {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 1.6vw, 1.25rem);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .post-prose {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  /* Posts run longer than the case studies, so paragraphs get more air
+     between them: 24px against the 16px used elsewhere. Scoped to
+     .post-prose, so case studies and every other page are untouched. */
+  .post-prose :global(p) {
+    margin: 0 0 24px 0;
+  }
+
+  .post-prose :global(h2) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 40px 0 16px 0;
+    line-height: 1.25;
+  }
+
+  .post-prose :global(h3) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 32px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .post-prose :global(h4) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-brand-plum);
+    margin: 24px 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .post-prose :global(ul),
+  .post-prose :global(ol) {
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+  }
+
+  .post-prose :global(ul) {
+    list-style-type: disc;
+  }
+
+  .post-prose :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .post-prose :global(li) {
+    margin: 0 0 8px 0;
+    line-height: 1.6;
+  }
+
+  .post-prose :global(strong) {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .post-prose :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .post-prose :global(blockquote) {
+    margin: 24px 0;
+    padding: 8px 0 8px 20px;
+    border-left: 3px solid var(--color-brand-plum);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .post-prose :global(blockquote p) {
+    margin: 0;
+  }
+
+  .post-prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border-subtle);
+    margin: 32px 0;
+  }
+
+  .post-prose :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--color-border-subtle);
+    margin: 40px 0;
+  }
+
+  .post-prose :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9375em;
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  .post-prose :global(pre) {
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 0 0 24px 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* Inline code carries its own chrome; inside a block it would double up. */
+  .post-prose :global(pre code) {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Markdown tables. Horizontal rules only, in the same hairline as the
+     rest of the page: no filled header band, no vertical grid. */
+  .post-prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 32px 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .post-prose :global(th),
+  .post-prose :global(td) {
+    padding: 12px 16px 12px 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .post-prose :global(th:last-child),
+  .post-prose :global(td:last-child) {
+    padding-right: 0;
+  }
+
+  /* The header row reads as a header through weight and the rule under it.
+     Same body colour as the cells, so nothing is carried by colour alone. */
+  .post-prose :global(th) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-border-subtle);
+  }
+
+  /* Full width on desktop. Below 640px the table becomes its own scroll
+     container: cells stop wrapping, so the columns keep a readable width and
+     the table scrolls sideways inside the article instead of squeezing the
+     copy or pushing the page wider than the viewport. */
+  @media (max-width: 640px) {
+    .post-prose :global(table) {
+      display: block;
+      overflow-x: auto;
+    }
+
+    .post-prose :global(th),
+    .post-prose :global(td) {
+      min-width: 124px;
+      padding-right: 20px;
+    }
+  }
+
+  .post-author {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border-subtle);
   }
 </style>

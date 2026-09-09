@@ -1,3 +1,5 @@
+import { SHOW_BLOG } from './siteConfig';
+
 export interface NavLink {
   label: string;
   href: string;
@@ -108,6 +110,9 @@ export const navItems: NavItem[] = [
     groups: [
       {
         links: [
+          // Blog sits first once it has something in it. Until then SHOW_BLOG
+          // keeps it out of the menu; see src/data/siteConfig.ts.
+          ...(SHOW_BLOG ? [{ label: 'Blog', href: '/blog/' }] : []),
           { label: 'Case Studies', href: '/case-studies/' },
           { label: 'Sample Audit Deliverable', href: '/sample-audit/' },
         ],
