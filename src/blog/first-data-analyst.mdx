@@ -5,6 +5,8 @@ pubDate: 2026-09-10
 draft: false
 ---
 
+import PlatformLayersDiagram from '../components/content/PlatformLayersDiagram.astro';
+
 A company reaches 30, 50, 80 people. Reporting lives in spreadsheets, every metrics question routes through one overloaded person, and leadership decides it is time. They hire a data analyst. Capable, motivated, often the company's first data hire.
 
 Six months later the dashboards are still not there. The analyst is frustrated, and leadership quietly wonders whether they hired the wrong person.
@@ -16,6 +18,19 @@ This is the most common failure we see at companies this size, and it is rarely 
 An analyst's craft is turning modeled data into answers: metrics, dashboards, the conversation with the sales director about why a number moved. Every part of that craft assumes the data is already collected, cleaned and modeled somewhere queryable.
 
 At a first-hire company none of that exists. A data platform has five layers: the sources, the ingestion that copies them, the warehouse they land in, the transformation layer that turns raw tables into dimensions, facts and metrics, and the BI tool on top. The analyst was hired for the fifth. Handed the other four, here is what we see happen.
+
+<PlatformLayersDiagram
+  highlight="Transformation"
+  annotations={[
+    { layer: 'BI', text: 'The analyst was hired for this.' },
+    { layer: 'Transformation', text: 'This is where they stall.' },
+  ]}
+  brackets={[
+    { from: 'Sources', to: 'Warehouse', label: 'first week' },
+    { from: 'Transformation', to: 'BI', label: 'months' },
+  ]}
+  ariaLabel="The five layers of a data platform: sources, ingestion, warehouse, transformation, BI. The analyst was hired for the BI layer and stalls at the transformation layer."
+/>
 
 The warehouse is easy. BigQuery needs no cluster, no administration, no tuning; a project and a dataset exist within the hour. Ingestion is nearly as easy now: Airbyte has a connector for Shopify, Stripe, HubSpot and most of what a 50-person company runs, and the raw tables arrive within a few days. The analyst has done two layers in a week and feels the project is half done.
 
