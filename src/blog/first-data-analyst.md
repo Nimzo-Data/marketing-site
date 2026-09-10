@@ -1,0 +1,62 @@
+---
+title: "You hired your first data analyst. Don't make them build the platform."
+description: "A first analyst is the right permanent hire and the wrong person to build the data platform. Where exactly they stall, what it costs, and what to do once the hire is made."
+pubDate: 2026-09-10
+draft: false
+---
+
+A company reaches 30, 50, 80 people. Reporting lives in spreadsheets, every metrics question routes through one overloaded person, and leadership decides it is time. They hire a data analyst. Capable, motivated, often the company's first data hire.
+
+Six months later the dashboards are still not there. The analyst is frustrated, and leadership quietly wonders whether they hired the wrong person.
+
+This is the most common failure we see at companies this size, and it is rarely a hiring mistake. They usually hired the right person and gave them the wrong first year.
+
+## Where it stalls, precisely
+
+An analyst's craft is turning modeled data into answers: metrics, dashboards, the conversation with the sales director about why a number moved. Every part of that craft assumes the data is already collected, cleaned and modeled somewhere queryable.
+
+At a first-hire company none of that exists. A data platform has five layers: the sources, the ingestion that copies them, the warehouse they land in, the transformation layer that turns raw tables into dimensions, facts and metrics, and the BI tool on top. The analyst was hired for the fifth. Handed the other four, here is what we see happen.
+
+The warehouse is easy. BigQuery needs no cluster, no administration, no tuning; a project and a dataset exist within the hour. Ingestion is nearly as easy now: Airbyte has a connector for Shopify, Stripe, HubSpot and most of what a 50-person company runs, and the raw tables arrive within a few days. The analyst has done two layers in a week and feels the project is half done.
+
+Then comes the transformation layer, and it stops them. Modeling data properly is a different craft from analysing it. It means deciding the grain of every table, meaning what one row represents, naming things so the next person can find them, loading incrementally instead of rebuilding everything on each run, testing that keys are unique and joins do not multiply rows, and expressing the whole thing as a dependency graph that runs in order. Analysis teaches none of that, and analysts do learn it; a large share of the people now called analytics engineers started as analysts. What they cannot do is learn it alone, under delivery pressure, with nobody to review their first models. So they build what every tutorial and every AI assistant confirms is correct: scheduled queries, views built on views, a metric defined in the dashboard because defining it upstream needed a concept nobody had shown them. It runs, it is not a platform, and nobody can tell the difference until it breaks.
+
+The same thing happens to a junior engineer whose platform experience is a tutorial. The skill that is missing is not writing SQL. It is knowing what a transformation layer has to look like so that it survives its author.
+
+## What it costs
+
+The visible cost is time. Everyone expected the first trustworthy dashboard in weeks. It arrives in months, if it arrives.
+
+The less visible costs are larger. About a fifth of our work over the past years has been rebuilding platforms that already existed, and they share a shape: no naming conventions and views everywhere; a transformation layer made of scheduled queries with no dependency graph, so nobody knows what runs before what; tables never partitioned, reports pointing at large raw tables and scanning all of them on every refresh. The last one shows up in the BigQuery invoice, which is usually how leadership learns the platform has a problem. Cleaning this up regularly costs more than building it right would have.
+
+[Aeyde](/case-studies/aeyde/), a fashion brand whose case study is on this site, is what this looks like after a few years rather than a few months: a platform assembled over time by outside BI consultants and successive analysts, each competent, none owning the whole. Their BI lead recognised it had become too heavy for a team of one and had it audited and rebuilt rather than trying to absorb it herself. The people involved were never the problem; the absence of anyone senior owning the foundation was.
+
+The third cost is the hire. An analyst who spends a year alone fighting infrastructure instead of doing analysis leaves. Then you are recruiting again, with a half-built, undocumented platform as the onboarding gift.
+
+## The industry's answer, and why it is a year late
+
+Most of what is written about first data hires says the same thing: hire senior first. A senior analytics engineer, or a senior data engineer, who can build the foundation and do some analysis on the side. It is sound advice for the company that has not hired yet, and it has two problems.
+
+The first is price. A senior data engineer costs from €65,000 a year in base salary in Paris, more in Amsterdam or Berlin, and €90,000 or more once employer charges are added, before the recruiting fee and the three months to find one. That is a permanent budget line for what is, at a company with five or six sources, a few months of foundation work. After the build, the role is still there, and at five sources it spends month six fixing connectors and waiting for the next project.
+
+The second problem is that you have already hired. The advice describes the decision you made a year ago. What it does not tell you is what to do now.
+
+## What to do once the hire is made
+
+There are two honest options besides ours.
+
+Reset expectations and let the analyst build it slowly. This works when it is done deliberately: a year of runway before the first dashboards are expected, a training budget, and leadership that has agreed to wait. In practice the pressure that created the hire does not pause for the hire to reskill, and expectations are reset in the analyst's head but not in the board's.
+
+Add the senior hire anyway. If you are heading toward ten sources, a data product, real-time requirements or regulated data, the role will have work after the build and the price is justified. At five sources it is a permanent salary for a temporary problem.
+
+The option we sell is the third: bring in senior help for the foundation and keep the analyst on their craft. In eight to fourteen weeks the senior engineer sets up ingestion for the five or six sources, models them source to mart with conventions, tests and incremental loads, connects the BI tool and builds the first dashboards on it. The analyst is in the build from the first week: reviewing the models against how the business actually counts things, writing the later ones with the engineer reviewing, and building the dashboards themselves. What is handed over is something they helped make. On BigQuery with Dataform there is nothing to host afterwards: no server, no scheduler, no second vendor. The analyst owns SQL files in Git and a schedule Google runs, and the one thing that still needs attention is the occasional ingestion connector that breaks. They spend their first year doing the job they were hired for, on a foundation someone else is accountable for having built right.
+
+We sell this, so weigh the bias. Our Implementation runs €15,000 to €35,000 over 8 to 14 weeks, paid once, against €90,000 or more a year for the senior hire, every year: roughly a fifth to a third of the first year's cost, and nothing after that. We would argue for the structure even if you bought it elsewhere: match a temporary senior problem with temporary senior help, and let your permanent hire do their permanent job.
+
+Some analysts pull the whole thing off, and if yours might, two questions tell you. How much engineering is actually left? Three SaaS tools with managed connectors and one database is weeks of senior work; ten sources, streaming or regulated data is a headcount. And what happens to analysis while they do it? If they are your only data person, every month on plumbing is a month the company gets no answers, and that bill never appears in the build-versus-buy spreadsheet.
+
+If you have not hired yet, the same logic applies in either order. Hire the analyst for analysis, and get the foundation built by someone who has built several, before or just after they arrive. The version that fails is a single job description containing both, which is the one most companies write.
+
+## The rule
+
+The pattern is fixable, and far cheaper to fix at month two than at month fourteen. Whichever route you take, put a senior pair of eyes on the architecture before the first pipeline ships, and give your analyst the job you hired them for.
