@@ -11,7 +11,7 @@ import { glob } from 'astro/loaders';
 // The files sit outside src/content/ on purpose: a glob base inside that
 // legacy directory makes Astro warn about duplicate ids on every build.
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/blog' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

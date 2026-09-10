@@ -1,0 +1,353 @@
+---
+// The five layers of a data platform, left to right.
+//
+// Built the same way as the case study diagrams (TamesonLayersDiagram,
+// DataPlatformDiagram): HTML boxes carrying the shared card treatment rather
+// than a drawn SVG, and the same axis behaviour, a row on a wide screen that
+// becomes a stack on a narrow one. Keeping it as HTML is also what lets the
+// annotations wrap at full type size instead of scaling down with a viewBox.
+//
+// Everything specific to one post is a prop. The default stack is the generic
+// one, so a later post can drop the annotations, move the highlight, or change
+// a caption without a second copy of the component.
+
+export interface PlatformLayer {
+  label: string;
+  caption: string;
+}
+
+export interface LayerAnnotation {
+  /** Must match a layer `label` exactly. */
+  layer: string;
+  text: string;
+}
+
+export interface LayerBracket {
+  /** First and last layer of the run, matched on `label`. */
+  from: string;
+  to: string;
+  label: string;
+}
+
+interface Props {
+  layers?: PlatformLayer[];
+  /** Layer label to give the accent border. Null leaves every box neutral. */
+  highlight?: string | null;
+  /** Notes shown under their layer. */
+  annotations?: LayerAnnotation[];
+  /** Brackets over runs of consecutive layers. Empty hides them. */
+  brackets?: LayerBracket[];
+  /** Read out in place of the diagram. */
+  ariaLabel: string;
+}
+
+const defaultLayers: PlatformLayer[] = [
+  { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, a database' },
+  { label: 'Ingestion', caption: 'Airbyte' },
+  { label: 'Warehouse', caption: 'BigQuery' },
+  { label: 'Transformation', caption: 'Dataform or dbt: models, tests, lineage' },
+  { label: 'BI', caption: 'dashboards, metrics, analysis' },
+];
+
+const {
+  layers = defaultLayers,
+  highlight = null,
+  annotations = [],
+  brackets = [],
+  ariaLabel,
+} = Astro.props;
+
+const noteFor = (label: string) =>
+  annotations.find((a) => a.layer === label)?.text ?? null;
+
+// Placement is explicit in both directions, because a bracket has to span a run
+// of layers either way: across columns in the row layout, down rows in the
+// stack. Grid lines are 1-based. A bracket naming a layer that is not in
+// `layers` is dropped rather than drawn over the wrong group.
+const indexOf = (label: string) => layers.findIndex((l) => l.label === label);
+
+// Stacked, a box and its note each take a row of their own.
+let nextRow = 1;
+const rows = layers.map((layer) => {
+  const boxRow = nextRow++;
+  const noteRow = noteFor(layer.label) ? nextRow++ : null;
+  return { boxRow, noteRow };
+});
+
+const placedBrackets = brackets
+  .map((b) => ({ ...b, start: indexOf(b.from), end: indexOf(b.to) }))
+  .filter((b) => b.start >= 0 && b.end >= b.start)
+  .map((b) => {
+    // The rail runs alongside the whole group, notes included.
+    const last = rows[b.end].noteRow ?? rows[b.end].boxRow;
+    return { ...b, rowSpan: `${rows[b.start].boxRow} / ${last + 1}` };
+  });
+---
+
+<div class="pld" role="img" aria-label={ariaLabel}>
+  <div class="pld__grid" style={`--pld-count: ${layers.length};`}>
+    {layers.map((layer, i) => {
+      const note = noteFor(layer.label);
+      const opensBracket = placedBrackets.find((b) => b.start === i);
+      return (
+        <>
+          {opensBracket && (
+            <div
+              class="pld__bracket"
+              style={`--pld-col: ${opensBracket.start + 1} / ${opensBracket.end + 2}; --pld-rows: ${opensBracket.rowSpan};`}
+              aria-hidden="true"
+            >
+              <span class="pld__bracket-label">{opensBracket.label}</span>
+              <span class="pld__bracket-rule"></span>
+            </div>
+          )}
+
+          <div
+            class:list={['pld__box', highlight === layer.label && 'pld__box--accent']}
+            style={`--pld-col: ${i + 1}; --pld-row: ${rows[i].boxRow};`}
+          >
+            <p class:list={['pld__label', highlight === layer.label && 'pld__label--accent']}>
+              {layer.label}
+            </p>
+            <p class="pld__caption">{layer.caption}</p>
+          </div>
+
+          {note && (
+            <p class="pld__note" style={`--pld-col: ${i + 1}; --pld-row: ${rows[i].noteRow};`}>
+              {note}
+            </p>
+          )}
+        </>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  /* Stands apart from the copy on both sides. The top margin collapses with
+     the preceding paragraph's 24px, so both gaps settle at 48px. */
+  .pld {
+    width: 100%;
+    margin: 48px 0;
+  }
+
+  /* Stacked: a narrow rail on the left for the brackets, the layers in the
+     column beside it. Each box and note is placed on its own row so a bracket
+     can run down the full height of the group it marks. */
+  .pld__grid {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 10px;
+  }
+
+  /* From 1024px up: one column per layer, boxes on a row of equal height, with
+     the bracket above them and the notes on the row underneath. Same breakpoint
+     as TamesonLayersDiagram, which is also where the article measure leaves a
+     column wide enough for a word like TRANSFORMATION on one line. */
+  @media (min-width: 1024px) {
+    .pld__grid {
+      grid-template-columns: repeat(var(--pld-count), minmax(0, 1fr));
+      column-gap: 10px;
+      row-gap: 0;
+      align-items: stretch;
+    }
+  }
+
+  /* Box: the stage-card treatment from the case study diagrams. Column flex so
+     the caption can take the leftover height: boxes in a row stretch to the
+     tallest, and a one-word caption like "Airbyte" would otherwise hang from
+     its label with the rest of the box empty beneath it. */
+  .pld__box {
+    background-color: var(--color-bg-default);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2;
+    grid-row: var(--pld-row);
+  }
+
+  @media (min-width: 1024px) {
+    .pld__box {
+      grid-column: var(--pld-col);
+      grid-row: 2;
+      padding: 12px 8px;
+    }
+  }
+
+  /* Accent is the flagship-card treatment: a 2px plum border. Plum is never a
+     background and never clickable, so the fill stays white. Padding drops by
+     the extra border width so the box matches its neighbours. */
+  .pld__box--accent {
+    border: 2px solid var(--color-brand-plum);
+    padding: 13px 15px;
+  }
+
+  @media (min-width: 1024px) {
+    .pld__box--accent {
+      padding: 11px 7px;
+    }
+  }
+
+  /* Every text node here is a <p>, and the post layout styles .post-prose p
+     with a 24px bottom margin. That selector carries one more element than a
+     bare class, so it wins and inflates each box. Prefixing with .pld puts
+     these rules back on top without editing the layout. */
+  .pld .pld__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-teal);
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    text-align: center;
+  }
+
+  .pld .pld__label--accent {
+    color: var(--color-brand-plum);
+  }
+
+  /* Auto margins centre the caption in whatever height is left below the
+     label. The padding keeps a floor under the label rule when the box is the
+     tallest one and there is no slack to distribute. */
+  .pld .pld__caption {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: auto 0;
+    padding-top: 8px;
+    text-align: center;
+  }
+
+  @media (min-width: 1024px) {
+    /* Tracking eases off in the row: the longest label only just clears its
+       column, and the fallback face during font swap is wider than Archivo. */
+    .pld .pld__label {
+      letter-spacing: 0.06em;
+    }
+
+    /* Columns are narrow in the row, so the caption drops a step to keep a
+       sensible number of words on each line. */
+    .pld .pld__caption {
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+  }
+
+  /* Note: the annotation type used by the case study diagrams. */
+  .pld .pld__note {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .pld .pld__note {
+      /* Sits under its box, indented enough to read as a note on it. */
+      grid-column: 2;
+      grid-row: var(--pld-row);
+      margin: -4px 0 0 16px;
+      border-left: 2px solid var(--color-border-subtle);
+      padding-left: 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pld .pld__note {
+      grid-column: var(--pld-col);
+      grid-row: 3;
+      margin: 10px 0 0;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+
+    /* The same bracket as the top row, turned over: the rule sits against the
+       note with its legs reaching up to the box it belongs to. Two plain rules
+       side by side read as one line, the same way the top pair did before they
+       were closed off. */
+    .pld .pld__note::before {
+      content: '';
+      display: block;
+      height: 7px;
+      margin: 0 5px 8px;
+      border: 1px solid var(--color-border-subtle);
+      border-top: 0;
+    }
+  }
+
+  /* Bracket: a label beside a rule that spans the layers it groups, with a
+     short leg turned in at each end. Two plain rules meeting end to end read as
+     one continuous line; the legs close each span so the eye sees two groups.
+     Decorative, so it is hidden from assistive tech.
+
+     Stacked it turns on its side: a rail down the left of the group with the
+     label set vertically against it. The timing it carries is the point of the
+     diagram, so it stays on a phone rather than being dropped with the row. */
+  .pld__bracket {
+    grid-column: 1;
+    grid-row: var(--pld-rows);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pld__bracket-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    /* Reads bottom to top, the usual direction for a label on a left edge. */
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .pld__bracket-rule {
+    align-self: stretch;
+    width: 7px;
+    border: 1px solid var(--color-border-subtle);
+    border-right: 0;
+    margin: 4px 0;
+  }
+
+  @media (min-width: 1024px) {
+    .pld__bracket {
+      grid-column: var(--pld-col);
+      grid-row: 1;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 12px;
+    }
+
+    .pld__bracket-label {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+
+    .pld__bracket-rule {
+      width: auto;
+      height: 7px;
+      border: 1px solid var(--color-border-subtle);
+      border-bottom: 0;
+      /* Held just inside the columns it spans, so the gap between two
+         neighbouring brackets is wider than the gap between two boxes. */
+      margin: 0 5px;
+    }
+  }
+</style>
