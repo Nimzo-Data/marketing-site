@@ -1,0 +1,91 @@
+---
+title: "Data Studio is back. Fix the data under it before you replace it."
+description: "Google renamed Looker Studio back to Data Studio in April 2026. Most of what companies dislike about it is not the tool. Here is how to tell the two apart, and when the tool is the problem."
+pubDate: 2026-10-06
+draft: true
+---
+
+import PlatformLayersDiagram from '../components/content/PlatformLayersDiagram.astro';
+
+On 11 April 2026 Google renamed Looker Studio back to Data Studio, the name it launched with in 2016 and lost in October 2022 when Google wanted one name across its BI range. The announcement calls it strategic differentiation and the right tool for the right job: Looker is the enterprise platform with a governed semantic model, and Data Studio is, in Google's words, for personal data exploration and ad hoc reports. Nothing broke; reports, sources and permissions carried over.
+
+We should say where we stand before going further. Data Studio is free, it has no user limit, and a lot of company reporting already lives on it, marketing first. It is the tool many of our clients are using when they find us, and the one we built our early platforms with. This is not a piece telling you to leave it. It is about telling two kinds of complaint apart, because most companies leave Data Studio over the first kind, pay for another BI tool, and find the same problems waiting in it.
+
+## Two kinds of complaint
+
+Here is the list people bring to a first call:
+
+- The sixth source will not blend, and the blends that work fail without warning.
+- The report takes a minute to load.
+- The HubSpot connector hit its API limit overnight and the numbers are stale.
+- The reliable connectors cost $30 to $99 a month, so the free tool is not free.
+- Two reports show two different revenue figures.
+- Someone added a column to the Sheet and a chart went blank.
+
+None of that is Data Studio. Every item on that list is what happens when a reporting tool is pointed straight at its sources: at the ad platforms through a connector, at the CRM through another, at a spreadsheet that is doing the job of a database. You do not own the data, so you cannot fix it. You cannot join it, so you blend it. You cannot define revenue once, so you define it in each report. Put Metabase or Power BI on the same connectors and the same spreadsheet and you have the same list, with a licence fee on top. These are data problems, and they follow you into any tool.
+
+The second kind is Data Studio's own, and it is a longer list than most people expect:
+
+- It holds no relationships between sources, so the warehouse pre-joins a table for every report.
+- It has no dashboard grid, so every page is composed from parts.
+- Viewers can only explore as far as the report builder allowed.
+- Row limits that depend on the connector, and slow reports on large data.
+- No version control, no alerting, and row-level security limited to a viewer-email filter.
+
+We take the data problems first, because they are the ones a new tool will not fix.
+
+<PlatformLayersDiagram
+  layers={[
+    { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, a database' },
+    { label: 'Ingestion', caption: 'Airbyte' },
+    { label: 'Warehouse', caption: 'BigQuery' },
+    { label: 'Transformation', caption: 'Dataform or dbt: models, tests, lineage' },
+    { label: 'BI', caption: 'Data Studio' },
+  ]}
+  brackets={[
+    { from: 'Sources', to: 'Transformation', label: 'data problems live here' },
+    { from: 'BI', to: 'BI', label: 'tool problems live here' },
+  ]}
+  ariaLabel="The five layers of a data platform: sources, ingestion, warehouse, transformation, BI. Data problems live in the first four layers; tool problems live in the BI layer, here Data Studio."
+/>
+
+## Fix the data problems, whatever tool you keep
+
+The fix for the data problems is a warehouse with a modeling layer, and on Google Cloud that is BigQuery with a transformation layer on top, [Dataform in our case](/blog/dataform-not-dbt/). The sources land in BigQuery through Airbyte or a native connector. Revenue is defined once, in a model, and every report reads the same table. The Sheet becomes a source that gets loaded, not a database that gets edited. Data Studio connects to BigQuery through a native connector, which is the one kind of connector nobody complains about.
+
+What changes in the reports themselves is that blends disappear, because the joins have already happened upstream; that two reports cannot disagree, because they read one table; and that the report loads in seconds, provided the tables are built for it. That last condition matters. When we get read access to a BigQuery project, the most expensive thing we find is a report pointed at a large raw table, scanning all of it on every refresh. Two things fix it. The modeling layer produces reporting tables pre-aggregated to the grain the report needs, and those tables are partitioned by date, with that date set as the report's date range dimension in Data Studio, so that every date filter reads only the partitions it needs instead of the whole table. Do both and the whole BigQuery bill, models and reports included, runs $100 to $200 a month at a typical client of ours, about what two or three paid connectors cost. Skip them and Data Studio will make BigQuery look expensive.
+
+This is a complete, legitimate stack, and companies run on it for years. One client of ours, a company of under fifty people with an IT team of six, runs all of its reporting on Data Studio over BigQuery and Dataform today, and has done for two years. The tool is not the ceiling for them.
+
+One concession, and it is a real one: building a good report in Data Studio is a skill. Choosing the right chart, laying it out so it reads, wiring the date controls and filters, keeping the design consistent across twenty pages. Someone holds that skill, usually the person who built the marketing dashboards in the first place, and a warehouse changes what they work from, not what they do. It gives them tables they can trust.
+
+## What is left is the tool's
+
+Data Studio keeps two jobs whatever happens next. The report-style consumption it was built for, where a marketing lead opens the same page every Monday, and the monthly finance report for the board, which will always want pixel-perfect layout and which the grid-based tools do badly. What follows is not a verdict on those reports. It is the list of things the tool does not do, which the comparisons with Looker, Metabase and the others document consistently. Three of them decide the question at this company size.
+
+It holds no relationships between sources. A Data Studio data source is one table or one SQL query, and any join happens inside that query, written by whoever built the source. The tool itself has no model of how tables relate, so it cannot assemble facts and dimensions when a report runs; Power BI, Tableau, Looker and Metabase all can. The standard advice for Data Studio is therefore to pre-join. Blends exist for that, but they are capped at five sources and they are where most of the reported failures live. In practice the modeling layer ends up producing a wide table for each thing a report shows, sometimes several per report when the pages cover different domains, and a good one gets reused across reports. Either way, every new question that crosses two domains means a new table before it means a chart.
+
+It has no dashboard grid. There are themes, a snap grid and templates, but no fixed components: every chart, filter, title and block of spacing is placed and styled by hand, and a house style is a template you duplicate and then maintain across every report that used it. This is the sense in which building a report is a skill. Data Studio gives you the parts, not the page. Metabase, Looker and Lightdash give you a grid with prebuilt elements you cannot restyle, which is less flexible and much faster.
+
+Exploration stops where the builder stopped. Viewers get the date controls, filters and drill-downs the report was built with. Beyond that, someone with access to the data source can copy the report and add a page, and almost nobody does, because nothing about the tool invites it. So the person in operations who needs a number the report does not show asks the analyst, the analyst builds a table and a page, and [the question becomes a ticket](/blog/first-data-analyst/). The obvious answer in 2026 is to let people ask in plain language, and Data Studio now has that. Point it at a table and it converses with that one table, which inherits the missing model. The governed version exists too, a data agent that knows which fields mean what and which calculations are approved, but it is built in BigQuery or on a Looker model and published into Data Studio. The definitions live somewhere else.
+
+The other limits are real and decide the change for fewer teams: row limits that depend on the connector (some database connectors stop at 150,000 rows; BigQuery has no row cap, only slow reports on unoptimised queries), no version control, row-level security limited to filtering by viewer email, no alerting.
+
+Put the first three together and the ceiling has a shape, and two questions find it. How many wide tables does the modeling layer maintain for the reports, and is that number growing faster than the reports? And how many people outside the data team can answer their own question without asking the analyst? A company with eight reports, a dozen tables and one analyst is nowhere near the ceiling. A company where every new question means a new table, a new page and a week of the analyst's time has reached it, and no amount of warehouse will move it.
+
+## At the ceiling, change the top layer only
+
+When that day comes, the warehouse and the models are not what you replace. They carry over. What changes is the tool on top, and it should be one with a governed semantic layer and an explorer, because that is what turns a ticket into a question someone answers themselves. [The four we build with](/technologies/), by team profile:
+
+- **Steep**, for a small non-technical team that wants metrics first, on a phone, with AI on top. From $15 a seat.
+- **Metabase**, for a mixed team that wants dashboards, an explorer and an AI assistant, with the option to self-host for free.
+- **Lightdash**, for a team that wants metrics defined in code and Git workflows, at a flat rate for any number of users.
+- **Looker**, for fifty users and up, with LookML governance and embedded analytics, at enterprise prices.
+
+The reason Data Studio is not one of our four is the three tool problems above. We build platforms for companies at or near the ceiling, and a platform whose top layer needs a ticket for every question is not finished. But we will not tell a company to change tools while the data problems are still there, because that is the more expensive mistake, and the more common one.
+
+## Our bias, and the rule
+
+We sell [the layers underneath](/services/data-platform-implementation/): ingestion, warehouse, modeling. We do not sell Data Studio, and no partner arrangement with Google rewards a consultancy for recommending its free tool, so the first half of this advice costs us nothing to give. We do build with the four tools above, so the second half is where we earn, and you should read it with that in mind.
+
+The rule: fix the data under the tool before you replace the tool. Replace the tool when the tables and pages you maintain are growing faster than the questions they answer, and when that day comes, replace only the tool.
