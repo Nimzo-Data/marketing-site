@@ -338,6 +338,11 @@ const placedBrackets = brackets
     .pld__bracket-label {
       writing-mode: horizontal-tb;
       transform: none;
+      /* A label can be wider than the run it marks, once a bracket covers a
+         single column. Wrapping keeps it inside its span; the rotated label in
+         the stacked layout keeps nowrap, where the rail is long enough. */
+      white-space: normal;
+      text-align: center;
     }
 
     .pld__bracket-rule {
@@ -345,9 +350,12 @@ const placedBrackets = brackets
       height: 7px;
       border: 1px solid var(--color-border-subtle);
       border-bottom: 0;
-      /* Held just inside the columns it spans, so the gap between two
-         neighbouring brackets is wider than the gap between two boxes. */
-      margin: 0 5px;
+      /* Top auto pushes the rule to the foot of the row, so brackets whose
+         labels run to different numbers of lines still rest their rules on one
+         line. The 5px sides hold it just inside the columns it spans, making
+         the gap between two neighbouring brackets wider than the gap between
+         two boxes. */
+      margin: auto 5px 0;
     }
   }
 </style>
