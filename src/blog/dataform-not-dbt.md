@@ -19,7 +19,7 @@ Then there is AI. The models themselves are plain SQL in both tools, and Datafor
 
 If you employ two or three people who live in a transformation codebase all day, dbt is the right choice and we will say so on the first call.
 
-That is the comparison every dbt-versus-Dataform article runs. Feature table, ecosystem size, warehouse portability, a verdict. It is written for teams with data engineers. Most of the companies we work with have zero or one, and the one is an analyst.
+That is the comparison every dbt-versus-Dataform article runs. Feature table, ecosystem size, warehouse portability, a verdict. It is written for teams with data engineers. Most of the companies we work with have zero or one, and [the one is an analyst](/blog/first-data-analyst/).
 
 ## What a 50-person company actually does with a transformation layer
 
@@ -84,6 +84,6 @@ Fivetran and dbt Labs completed their merger on 1 June 2026. It puts ingestion a
 
 ## Our bias, and the rule
 
-We sell Dataform builds and Dataform retainers. We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
+We sell [Dataform builds](/services/data-platform-implementation/) and [Dataform retainers](/services/ongoing-support-retainers/). We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
 
 The rule we apply: default to the tool that adds no platform, no bill and no meter on top of BigQuery, and write down the reasons. When a client's situation breaks the default, the recommendation says so, with the reasoning attached.
