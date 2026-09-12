@@ -59,14 +59,14 @@ The rule that follows is about who is asking, and there are two kinds of asker.
 <ModelingLayersDiagram
   annotations={[
     { layer: 'Raw', text: 'Agent here: three answers.' },
-    { layer: 'Marts', text: 'Agent here: one table, and the analyst reads the SQL.' },
+    { layer: 'Marts', text: 'Agent here: mostly right, and the analyst reads the SQL.' },
     { layer: 'Reviewed definitions', text: 'Agent here: one answer, or an error.' },
   ]}
   groups={[
     { from: 'Raw', to: 'Marts', label: 'BigQuery + Dataform' },
     { from: 'Reviewed definitions', to: 'Reviewed definitions', label: 'BI tool', rule: false },
   ]}
-  ariaLabel="The layers between raw tables and an answer: raw, staging, intermediate and marts in BigQuery with Dataform, then reviewed metric definitions in the BI tool. An agent on raw tables gives inconsistent answers; on the marts it gives one table for the analyst to check; on reviewed definitions it gives one answer or an error."
+  ariaLabel="The layers between raw tables and an answer: raw, staging, intermediate and marts in BigQuery with Dataform, then reviewed metric definitions in the BI tool. An agent on raw tables gives inconsistent answers; on the marts it queries described facts and dimensions and the analyst checks the SQL; on reviewed definitions it gives one answer or an error."
 />
 
 An agent inherits exactly the model you give it. Give it raw tables and it inherits your inconsistencies, faster than any analyst would. Give it a modeled warehouse and reviewed definitions and it inherits those instead.
