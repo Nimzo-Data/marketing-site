@@ -6,15 +6,27 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type BlogPost = CollectionEntry<'blog'>;
 
 /**
- * Published posts, newest first.
+ * Drafts render in three places and nowhere else:
  *
- * Drafts are dropped from production builds only: `astro dev` shows them so a
- * post can be read in place before it ships. Because a draft never gets built
- * in production, it cannot reach the sitemap or the RSS feed either.
+ *  - `astro dev`, so a post can be read in place while it is written;
+ *  - Vercel preview deployments, so a branch gives a URL that can be opened on
+ *    a phone or sent to someone for a read, off the local network;
+ *  - a local build run with INCLUDE_DRAFTS=1, for checking the real production
+ *    output of a post before it ships.
+ *
+ * The production deployment is the one case that never shows them, which is
+ * what keeps a draft out of the sitemap and the RSS feed. VERCEL_ENV is set by
+ * Vercel itself to production, preview or development.
  */
+const showDrafts =
+  !import.meta.env.PROD ||
+  process.env.VERCEL_ENV === 'preview' ||
+  process.env.INCLUDE_DRAFTS === '1';
+
+/** Published posts, newest first. Drafts included where `showDrafts` says so. */
 export async function getPublishedPosts(): Promise<BlogPost[]> {
   const posts = await getCollection('blog', ({ data }) =>
-    import.meta.env.PROD ? data.draft === false : true
+    showDrafts ? true : data.draft === false
   );
 
   return posts.sort(

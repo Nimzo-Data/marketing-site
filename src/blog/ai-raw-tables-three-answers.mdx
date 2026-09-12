@@ -1,0 +1,78 @@
+---
+title: "You pointed AI at your raw tables. That's why it gives three answers."
+description: "Connecting Claude or ChatGPT to BigQuery takes an hour. Getting the same revenue figure twice takes a modeling layer. What the 2026 benchmarks say, and where the definitions have to live."
+pubDate: 2026-10-20
+draft: true
+---
+
+import ModelingLayersDiagram from '../components/content/ModelingLayersDiagram.astro';
+
+Connecting Claude or ChatGPT to a BigQuery project now takes about an hour, most of it spent checking that the agent sees only what the user is allowed to see. Google ships an open-source MCP server that exposes your tables to any agent, the agent can read the schema, and you can ask it for last month's revenue in plain language. Many companies have done this in the past year, and a pattern we keep seeing follows: the CEO asks on Monday and gets one number, asks again on Wednesday and gets another, and a third when the CFO asks the same question in a different session. All three come with SQL attached and a confident explanation. The reaction is to conclude that the model is not ready.
+
+The model is behaving like a new analyst on their first day. Give someone warehouse access, no onboarding, and the question "what was revenue last month," and they will also produce a plausible number that disagrees with the last analyst's. The agent is simply faster, and it never turns to a colleague to ask which table is the real one.
+
+## Why raw tables give three answers
+
+Look at what the agent sees when it opens a typical BigQuery project. An `orders` table and an `orders_v2`. A column called `amount`, another called `total`, a `net_revenue` in a different table, and refunds in a fourth. Timestamps in UTC in one source and local time in another. A customer key called `customer_id` in one table and `cust_ref` in the one it needs to join to. Nothing in the schema says which of these the company means by revenue, whether refunds are netted, whether a cancelled order counts, or which table is current.
+
+So the agent decides, each time, and writes SQL that runs. Gross on Monday, net on Wednesday, net minus cancellations for the CFO. Each query is reasonable. None of them is wrong in a way the tool can detect, because the SQL is valid and the number comes back. This is the failure mode that matters: a wrong figure delivered with confidence. A finance analyst reading the query might notice the missing refund join; the person who asked in plain language never sees the query.
+
+The questions a CEO actually asks, margin by channel, growth against last quarter, top customers by net revenue, all cross two or three of those tables, and every crossing is a decision the agent makes alone.
+
+## What the benchmarks say, honestly
+
+Three findings, and the first one is in the model's favour.
+
+Raw text-to-SQL is improving fast. dbt Labs has run the same benchmark since 2023: eleven business questions on an insurance dataset, twenty runs each. Against raw tables, GPT-4 answered 32.7% correctly in 2023; GPT-5.3 Codex and Claude Sonnet 4.6 answered 64.5% in 2026. Cube's benchmark from April 2026 puts the current frontier models at 46 to 51% on a hundred retail questions against the raw schema. So the honest range for an agent on undocumented tables today is somewhere between half and two thirds right, up from a third three years ago.
+
+Context does most of the work. The study that isolated the cause is independent and a little old: researchers at GlaxoSmithKline, publishing in JAMIA Open in early 2025, ran sixty real questions from their users' logs against the company's drug-safety database, five hundred tables and more. GPT-4 with the schema alone got 8.3% right; with a document written by their experts explaining what the tables meant and what the business terms referred to, 78.3%; and narrowing the schema to the essential tables without that document lifted the pass rate to only 10%, so the document was doing the work. Today's models start much higher, so the size of the effect now is better read from Cube: a four-kilobyte hand-written page describing naming conventions, how the main metrics are calculated, and which fact table to use lifted all three 2026 models by 17 to 23 points to about 68%, on a Microsoft demo dataset every model has seen in training, which if anything flatters the raw figures. The page took an afternoon of an analyst's time. And on dbt's own benchmark, adding just three models that joined the normalized tables together, before any semantic layer was involved, took the same models writing plain SQL to 84 to 90%.
+
+A document like Cube's is a temporary fix that someone maintains by hand. A modeling layer is the same knowledge, executed on the data, tested, and kept fresh every time the pipeline runs.
+
+Reviewed definitions get the last ten points, and they fail differently. By reviewed definitions we mean metrics someone has defined once, checked and approved, so that "revenue" can only mean one thing: what vendors call a semantic layer. Against dbt's, the 2026 run reached 98 to 100% on the questions the layer could answer. On the questions it could not, it returned an error instead of a number. The authors' summary is the line worth remembering: with text-to-SQL, failure looks like a plausible but incorrect answer; with reviewed definitions, failure looks like an error message.
+
+Two concessions. AI has changed how people self-serve, and that change is real: typing a question is the first self-serve interface that non-technical people actually use; the explorers that came before it were used by analysts, and the people the vendors promised they were for mostly kept sending the analyst a message. And an analyst who reads SQL can use an agent on raw tables safely for exploration. The problem starts when the person asking cannot read the query.
+
+## The fix is the one the platform always needed
+
+Nothing above is new. A BI tool pointed at raw tables with a custom query per report produced disagreeing dashboards in 2016 for the same reason: the definitions lived in each consumer instead of in one place. An agent is one more consumer, and it exposes the missing layer faster because it asks more questions.
+
+The first half of the fix is the modeling layer, and it is most of the gain. Staging tables that rename `cust_ref` to `customer_id`. One revenue table, with refunds and cancellations already handled the way the company decided, with a description on the table saying so and a description on every field. Tests on the keys. A dependency graph so the numbers are fresh together. This is what the benchmarks measured as "minimal modeling," and it is what we build on BigQuery with [Dataform](/blog/dataform-not-dbt/) whether or not an agent will ever read it. The modeling layer is for the company; the agent is the reason it finally gets budgeted. Point an agent at the marts, the final tables built for reporting, and most of the three-answers problem disappears, because there is now one table called `fct_revenue` with a description that says what it is.
+
+The second half is the reviewed definitions for the numbers that go to the board, and at this company size they live in the BI tool, because that is where the people who do not read SQL already are, and because a standalone semantic layer is a second product to run. Every tool [we build with](/technologies/) now exposes its definitions to external agents, as of September 2026:
+
+- **Metabase**: Metabot and a first-party MCP server on every plan, from the open-source edition you host yourself to the paid Cloud plans, with the agent seeing only what the user's permissions allow.
+- **Steep**: a first-party MCP server, each member connecting with their own login, every query running through Steep's semantic layer and permissions.
+- **Lightdash**: MCP on Lightdash Cloud; self-hosted instances need an Enterprise licence key.
+- **Looker**: a Looker-managed MCP server, in preview for Looker-hosted instances, and an open-source MCP Toolbox for everyone else.
+
+A year ago most of this was gated or missing. Today the gating is by plan, not by vendor, and the cheapest path is a Metabase you host yourself. Some of these servers also let the agent build a report or a dashboard, Steep's, Lightdash's and Looker's among them; treat that as a convenience, not a reason to choose a tool.
+
+## Where to point the agent
+
+The rule that follows is about who is asking, and there are two kinds of asker.
+
+**If you read SQL**, meaning you are the analyst: point the agent at the warehouse, everything included, staging and intermediate tables with their descriptions. This is where an agent on the warehouse earns its keep, and where being wrong a third of the time is fine, because you read the query.
+
+**If you do not**, meaning everyone else, from the operations lead to the board: point the agent at the BI tool, not the warehouse. It answers through the tool's own AI or through its MCP server, from the reviewed definitions, on top of the dashboards you already have. The operations lead looks at detailed mart tables and the board at aggregated ones, but the mechanism is the same: the answer comes from a definition someone reviewed, or it comes back as "I can't answer that," and both are better than a confident guess. Nothing that reaches the board should come from a query nobody read.
+
+<ModelingLayersDiagram
+  annotations={[
+    { layer: 'Raw', text: 'Agent here: three answers.' },
+    { layer: 'Marts', text: 'Agent here: one table, and the analyst reads the SQL.' },
+    { layer: 'Reviewed definitions', text: 'Agent here: one answer, or an error.' },
+  ]}
+  groups={[
+    { from: 'Raw', to: 'Marts', label: 'BigQuery + Dataform' },
+    { from: 'Reviewed definitions', to: 'Reviewed definitions', label: 'BI tool', rule: false },
+  ]}
+  ariaLabel="The layers between raw tables and an answer: raw, staging, intermediate and marts in BigQuery with Dataform, then reviewed metric definitions in the BI tool. An agent on raw tables gives inconsistent answers; on the marts it gives one table for the analyst to check; on reviewed definitions it gives one answer or an error."
+/>
+
+An agent inherits exactly the model you give it. Give it raw tables and it inherits your inconsistencies, faster than any analyst would. Give it a modeled warehouse and reviewed definitions and it inherits those instead.
+
+## Our bias, and the rule
+
+We sell [the modeling layer](/services/data-platform-implementation/), and we build with the four tools above, so weigh the argument with that in mind. What we would add is that every part of the fix predates AI and would be worth doing without it; what AI changed is that the CEO can now see the model is missing.
+
+The rule: describe before you connect, define before you trust. Point agents at modeled tables with descriptions for exploration, and at reviewed metric definitions for anything someone will act on.

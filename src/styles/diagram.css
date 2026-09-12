@@ -1,0 +1,217 @@
+/* ============================================================
+   Shared visual language for the blog diagrams.
+
+   Lifted verbatim from PlatformLayersDiagram, which established it: the
+   stage-card treatment from the case study diagrams (TamesonLayersDiagram,
+   DataPlatformDiagram), a row on a wide screen collapsing to a stack on a
+   phone, brackets grouping a run of boxes, italic notes under them.
+
+   HTML boxes rather than a drawn SVG, so type holds its real size and the
+   notes reflow instead of scaling with a viewBox.
+
+   A diagram supplies its own grid placement: which column or row each element
+   sits in differs per diagram, everything else does not.
+
+   Note on specificity: every text node here is a <p>, and the post layout
+   styles .post-prose p with a 24px bottom margin, which counts as two classes
+   plus an element. A component's scoped styles get an attribute selector added
+   and clear that on their own; rules in a plain stylesheet like this one do
+   not, so the text rules below carry three classes to outrank it. Two was not
+   enough: the layout won and every box grew by 48px.
+
+   PlatformLayersDiagram still carries its own copy of these rules. It is
+   deliberately untouched; migrating it onto this file is a separate change.
+   ============================================================ */
+
+.dgm {
+  width: 100%;
+  /* Stands apart from the copy on both sides. The top margin collapses with
+     the preceding paragraph's 24px, so both gaps settle at 48px. */
+  margin: 48px 0;
+}
+
+/* Stacked: a narrow rail on the left for the group labels, the boxes in the
+   column beside it. */
+.dgm__grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 10px;
+}
+
+/* ---- Box ---- */
+.dgm__box {
+  background-color: var(--color-bg-default);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+  /* Column flex so the caption can take the leftover height: boxes in a row
+     stretch to the tallest, and a short caption would otherwise hang from its
+     label with the rest of the box empty beneath it. */
+  display: flex;
+  flex-direction: column;
+}
+
+.dgm .dgm__box .dgm__label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-teal);
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  text-align: center;
+}
+
+/* Auto margins centre the caption in whatever height is left below the label.
+   The padding keeps a floor under the label rule when the box is the tallest
+   one and there is no slack to distribute. */
+.dgm .dgm__box .dgm__caption {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin: auto 0;
+  padding-top: 8px;
+  text-align: center;
+}
+
+/* ---- Note: the annotation type used by the case study diagrams ---- */
+.dgm .dgm__grid .dgm__note {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .dgm .dgm__grid .dgm__note {
+    /* Sits under its box, indented enough to read as a note on it. */
+    margin: -4px 0 0 16px;
+    border-left: 2px solid var(--color-border-subtle);
+    padding-left: 12px;
+  }
+}
+
+/* ---- Bracket ----
+   A label beside a rule spanning the boxes it groups, with a short leg turned
+   in at each end. Two plain rules meeting end to end read as one continuous
+   line; the legs close each span so the eye sees separate groups. Decorative,
+   so it is hidden from assistive tech.
+
+   Stacked it turns on its side: a rail down the left of the group with the
+   label set vertically against it. */
+.dgm__bracket {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.dgm__bracket-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  /* Reads bottom to top, the usual direction for a label on a left edge. */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.dgm__bracket-rule {
+  align-self: stretch;
+  width: 7px;
+  border: 1px solid var(--color-border-subtle);
+  border-right: 0;
+  margin: 4px 0;
+}
+
+/* A group of one box reads better as a bare label. The rule keeps its space so
+   the labels of neighbouring groups still sit on one line. */
+.dgm__bracket--norule .dgm__bracket-rule {
+  visibility: hidden;
+}
+
+/* ---- From 1024px up: the row ----
+   Same breakpoint as TamesonLayersDiagram, and where the article measure
+   leaves a column wide enough for a long label on one line. */
+@media (min-width: 1024px) {
+  .dgm__grid {
+    column-gap: 10px;
+    row-gap: 0;
+    align-items: stretch;
+  }
+
+  .dgm__box {
+    padding: 12px 8px;
+  }
+
+  /* Tracking eases off in the row: the longest label only just clears its
+     column, and the fallback face during font swap is wider than Archivo. */
+  .dgm .dgm__box .dgm__label {
+    letter-spacing: 0.06em;
+  }
+
+  /* Columns are narrow in the row, so the caption drops a step to keep a
+     sensible number of words on each line. */
+  .dgm .dgm__box .dgm__caption {
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .dgm .dgm__grid .dgm__note {
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  /* The bracket turned over: the rule sits against the note with its legs
+     reaching up to the box it belongs to. */
+  .dgm .dgm__grid .dgm__note::before {
+    content: '';
+    display: block;
+    height: 7px;
+    margin: 0 5px 8px;
+    border: 1px solid var(--color-border-subtle);
+    border-top: 0;
+  }
+
+  .dgm__bracket {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 12px;
+  }
+
+  .dgm__bracket-label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    /* A label can be wider than the run it marks, once a group covers a single
+       column. Wrapping keeps it inside its span. */
+    white-space: normal;
+    text-align: center;
+  }
+
+  .dgm__bracket-rule {
+    width: auto;
+    height: 7px;
+    border: 1px solid var(--color-border-subtle);
+    border-bottom: 0;
+    /* Top auto pushes the rule to the foot of the row, so groups whose labels
+       run to different numbers of lines still rest their rules on one line.
+       The 5px sides hold it just inside the columns it spans, making the gap
+       between two neighbouring brackets wider than the gap between two
+       boxes. */
+    margin: auto 5px 0;
+  }
+}

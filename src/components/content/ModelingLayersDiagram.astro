@@ -1,0 +1,176 @@
+---
+// The layers between a raw table and an answer: the modeling layers that live
+// in the warehouse, then the reviewed definitions that live in the BI tool.
+//
+// Shares its visual language with the other blog diagrams through
+// src/styles/diagram.css; only the placement below is specific to this one.
+// The split it draws is the point: a group of layers inside one system, then a
+// gap, then a layer that sits in another.
+import '../../styles/diagram.css';
+
+export interface ModelingLayer {
+  label: string;
+  caption: string;
+  /** Opens a wider gap before this layer, marking a change of system. */
+  gapBefore?: boolean;
+}
+
+export interface LayerAnnotation {
+  /** Must match a layer `label` exactly. */
+  layer: string;
+  text: string;
+}
+
+export interface LayerGroup {
+  /** First and last layer of the run, matched on `label`. */
+  from: string;
+  to: string;
+  label: string;
+  /** False draws the label alone, which reads better over a single box. */
+  rule?: boolean;
+}
+
+interface Props {
+  layers?: ModelingLayer[];
+  /** Notes shown under their layer. */
+  annotations?: LayerAnnotation[];
+  /** Labels over runs of consecutive layers. */
+  groups?: LayerGroup[];
+  /** Read out in place of the diagram. */
+  ariaLabel: string;
+}
+
+const defaultLayers: ModelingLayer[] = [
+  { label: 'Raw', caption: 'source tables as loaded' },
+  { label: 'Staging', caption: 'renamed, typed, one per source table' },
+  { label: 'Intermediate', caption: 'joins and business logic' },
+  { label: 'Marts', caption: 'facts and dimensions, described, tested' },
+  { label: 'Reviewed definitions', caption: 'metrics defined once, in the BI tool', gapBefore: true },
+];
+
+const { layers = defaultLayers, annotations = [], groups = [], ariaLabel } = Astro.props;
+
+const noteFor = (label: string) =>
+  annotations.find((a) => a.layer === label)?.text ?? null;
+
+// A layer marked `gapBefore` gets a spacer track in front of it, so the gap
+// between two systems is wider than the gap between two layers of one. The
+// spacers shift every column after them, so the track list and each layer's
+// column are worked out together rather than from the index alone.
+const GAP_TRACK = '22px';
+const tracks: string[] = [];
+const columnOf: number[] = [];
+layers.forEach((layer, i) => {
+  if (layer.gapBefore && i > 0) tracks.push(GAP_TRACK);
+  tracks.push('minmax(0, 1fr)');
+  columnOf.push(tracks.length);
+});
+
+// Stacked, a box and its note each take a row of their own.
+let nextRow = 1;
+const rows = layers.map((layer) => {
+  const boxRow = nextRow++;
+  const noteRow = noteFor(layer.label) ? nextRow++ : null;
+  return { boxRow, noteRow };
+});
+
+const indexOf = (label: string) => layers.findIndex((l) => l.label === label);
+
+// A group naming a layer that is not in `layers` is dropped rather than drawn
+// over the wrong run.
+const placedGroups = groups
+  .map((g) => ({ ...g, start: indexOf(g.from), end: indexOf(g.to) }))
+  .filter((g) => g.start >= 0 && g.end >= g.start)
+  .map((g) => ({
+    ...g,
+    // The rail runs alongside the whole group, notes included.
+    rowSpan: `${rows[g.start].boxRow} / ${(rows[g.end].noteRow ?? rows[g.end].boxRow) + 1}`,
+    colSpan: `${columnOf[g.start]} / ${columnOf[g.end] + 1}`,
+  }));
+---
+
+<div class="dgm mld" role="img" aria-label={ariaLabel}>
+  <div class="dgm__grid mld__grid" style={`--mld-cols: ${tracks.join(' ')};`}>
+    {layers.map((layer, i) => {
+      const note = noteFor(layer.label);
+      const opensGroup = placedGroups.find((g) => g.start === i);
+      return (
+        <>
+          {opensGroup && (
+            <div
+              class:list={['dgm__bracket', 'mld__bracket', opensGroup.rule === false && 'dgm__bracket--norule']}
+              style={`--mld-col: ${opensGroup.colSpan}; --mld-rows: ${opensGroup.rowSpan};`}
+              aria-hidden="true"
+            >
+              <span class="dgm__bracket-label">{opensGroup.label}</span>
+              <span class="dgm__bracket-rule"></span>
+            </div>
+          )}
+
+          <div
+            class:list={['dgm__box', 'mld__box', layer.gapBefore && i > 0 && 'mld__box--apart']}
+            style={`--mld-col: ${columnOf[i]}; --mld-row: ${rows[i].boxRow};`}
+          >
+            <p class="dgm__label">{layer.label}</p>
+            <p class="dgm__caption">{layer.caption}</p>
+          </div>
+
+          {note && (
+            <p
+              class="dgm__note mld__note"
+              style={`--mld-col: ${columnOf[i]}; --mld-row: ${rows[i].noteRow};`}
+            >
+              {note}
+            </p>
+          )}
+        </>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  /* Placement only. Everything else comes from src/styles/diagram.css. */
+  .mld__box,
+  .mld__note {
+    grid-column: 2;
+    grid-row: var(--mld-row);
+  }
+
+  .mld__bracket {
+    grid-column: 1;
+    grid-row: var(--mld-rows);
+  }
+
+  /* Stacked, the change of system reads as a wider gap above the box. */
+  .mld__box--apart {
+    margin-top: 8px;
+  }
+
+  @media (min-width: 1024px) {
+    .mld__grid {
+      grid-template-columns: var(--mld-cols);
+    }
+
+    .mld__box {
+      grid-column: var(--mld-col);
+      grid-row: 2;
+    }
+
+    .mld__note {
+      grid-column: var(--mld-col);
+      grid-row: 3;
+    }
+
+    .mld__bracket {
+      grid-column: var(--mld-col);
+      grid-row: 1;
+    }
+
+    /* The spacer track carries the gap in the row, so the margin is not
+       wanted here as well. */
+    .mld__box--apart {
+      margin-top: 0;
+    }
+  }
+</style>
