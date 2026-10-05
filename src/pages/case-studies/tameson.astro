@@ -76,7 +76,7 @@ const cs = findCaseStudy('tameson')!;
         Raw data should never be queried directly by reports.
       </blockquote>
 
-      <p>For Tameson, this meant Dataform with a layered architecture from day one: staging for 1:1 source cleaning, intermediate for in-domain joins, marts for cross-domain business logic, and reports for BI-ready tables. The goal wasn't just to make GA4 useful, it was to build a foundation the team could keep extending without it becoming a mess.</p>
+      <p>For Tameson, this meant Dataform with a layered architecture from day one: staging for 1:1 source cleaning, intermediate for in-domain joins, marts for cross-domain business logic, and reports for BI-ready tables. The goal was to make GA4 useful and, beyond that, to build a foundation the team could keep extending without it becoming a mess.</p>
     </div>
   </SectionWrapper>
 
@@ -97,7 +97,7 @@ const cs = findCaseStudy('tameson')!;
       <p>We built a unified events model spanning all 6 GA4 properties, reconstructing sessions from events and adding custom-window session aggregations (1-day, 7-day, 28-day) for marketing analysis. We standardized custom parameters across markets and built joins to marketing and commerce data on multiple keys: date, domain, country, transaction ID, product, channel, campaign, and click ID where available. Report-layer tables (daily stats, ecommerce product analysis, funnel analysis, page analysis) sit on top of this foundation, all multi-market by default.</p>
 
       <h3 class="cs-prose__sub">2. Multi-source modeled data layer</h3>
-      <p>GA4 was the starting point, not the endpoint. Over the engagement, we've modeled 10+ sources into the Dataform layered architecture, spanning marketing (Google Ads, Search Console, Google Merchant Center), commerce (Shopify, Odoo, Pimcore), and operational systems. Tameson's team handles ingestion. We handle the modeling discipline that turns raw data into analytics-ready tables.</p>
+      <p>GA4 was the starting point. Over the engagement, we've modeled 10+ sources into the Dataform layered architecture, spanning marketing (Google Ads, Search Console, Google Merchant Center), commerce (Shopify, Odoo, Pimcore), and operational systems. Tameson's team handles ingestion. We handle the modeling discipline that turns raw data into analytics-ready tables.</p>
       <p>Each source moves through the same flow: staging models do 1:1 cleaning (renaming, casting) directly from raw source tables, intermediate models join within a single domain, marts handle cross-domain business logic, and reports feed BI tools. As scope grows, the structure pays off: adding a new source becomes a routine exercise rather than a fresh greenfield problem.</p>
 
       <h3 class="cs-prose__sub">3. Production-grade governance</h3>

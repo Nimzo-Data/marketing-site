@@ -88,7 +88,7 @@ const cs = findCaseStudy('aeyde')!;
       <p>Most consultants would have proposed jumping straight to a new stack. We didn't. The stack had real problems, but it also contained unused assets, redundant models, and outdated schedules. Migrating that complexity to a new stack would simply move the problem. We cleaned first.</p>
 
       <blockquote class="cs-pull-quote">
-        Most consultants would have proposed jumping straight to a new stack. We didn't.
+        Migrating that complexity to a new stack would simply move the problem.
       </blockquote>
 
       <h3 class="cs-prose__principle">Keep transformation logic in one place.</h3>
@@ -107,13 +107,13 @@ const cs = findCaseStudy('aeyde')!;
       <p>Before touching anything new, we audited and pruned the existing setup. In Panoply: deleted 38 unused connections and the unused tables they fed. In dbt: removed obsolete models and renamed the rest with consistent conventions. In Looker: deleted inactive accounts, audited 1,013 looks and 340 dashboards (only 23% and 12% respectively were used in the last 30 days), disabled auto-refresh on dashboards that didn't need it, and redistributed 98 schedules across the day instead of all firing between 4–6am.</p>
 
       <h3 class="cs-prose__sub">Phase 2: Pre-transforming data with dbt</h3>
-      <p>The performance problem in Looker wasn't really a Looker problem. It was a "data is being transformed at query time" problem. We moved the heavy lifting into dbt. We restructured dbt around a layered architecture: staging models for 1:1 source cleaning, intermediate models for joins within a domain, marts for cross-domain business logic, reports for aggregated tables.</p>
+      <p>Looker was slow because data was being transformed at query time. We moved the heavy lifting into dbt. We restructured dbt around a layered architecture: staging models for 1:1 source cleaning, intermediate models for joins within a domain, marts for cross-domain business logic, reports for aggregated tables.</p>
       <p>We started with the most complex Looker explore (Sales — Commercial view at line level, joining 53 underlying views) and pre-built every derived table as a proper dbt model. Joins that Looker used to compute on the fly, Shopify customer/address/tax/discount data joined to order lines, were now pre-computed in dbt. Looker explores were rebuilt against the new pre-built tables. Then we repeated the pattern across the rest of the explores, in priority order.</p>
       <p>By the end of Phase 2, derived tables in Looker dropped from 119 to 0. All transformation logic lived in dbt.</p>
 
       <h3 class="cs-prose__sub">Phase 3: Migrating to BigQuery and modernizing the stack</h3>
       <p>With logic centralized and Looker simplified, the migration was the cleanest part. We replaced Panoply with Airbyte for ingestion (transparent, far cheaper) and BigQuery as the warehouse. A few Python Cloud Run Jobs covered the few unconventional sources Airbyte didn't have a connector for. Native BigQuery integrations replaced the rest: GA4 via the native export, Google Ads via the BigQuery Data Transfer Service, and Google Sheets via external tables, all landing in BigQuery directly. dbt was migrated to Dataform to consolidate on the Google Cloud ecosystem. Looker's database connection was switched to BigQuery, and the legacy Panoply stack was decommissioned.</p>
-      <p>The new stack had four pieces: Airbyte, BigQuery, Dataform, Looker. It replaced Panoply + Stitch + make.com → S3 + dbt + Looker. Less surface area, less to maintain, less to break.</p>
+      <p>The new stack had four pieces: Airbyte, BigQuery, Dataform, Looker. It replaced Panoply + Stitch + make.com → S3 + dbt + Looker. Fewer tools to maintain and fewer places for things to break.</p>
     </div>
 
     <div class="cs-diagram-wrap">
