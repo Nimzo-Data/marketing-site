@@ -1,0 +1,211 @@
+---
+interface Row {
+  /* Two sentences; they break onto separate lines on desktop */
+  problem: [string, string];
+  outcome: string;
+}
+
+interface Props {
+  rows: Row[];
+}
+
+const { rows } = Astro.props;
+---
+
+<div class="po">
+  <div class="po-card po-card--problem">
+    <h3 class="po-label">The problem</h3>
+    <ul class="po-items">
+      {rows.map((row) => (
+        <li class="po-item">
+          <span class="po-icon po-icon--cross" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="9" fill="currentColor" fill-opacity="0.14"/>
+              <path d="M6 6L12 12M12 6L6 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="po-text po-text--problem">
+            <span class="po-part">{row.problem[0]}</span>{' '}<span class="po-part">{row.problem[1]}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="po-arrow" aria-hidden="true">
+    <svg viewBox="0 0 40 24" fill="none">
+      <path d="M2 12H36M27 3L36 12L27 21" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="po-card po-card--outcome">
+    <h3 class="po-label">What you get</h3>
+    <ul class="po-items">
+      {rows.map((row) => (
+        <li class="po-item">
+          <span class="po-icon po-icon--tick" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="9" fill="var(--color-white)"/>
+              <path d="M5 9.5L7.5 12L13 7" stroke="var(--color-brand-teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="po-text po-text--outcome">{row.outcome}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  /* Mobile: cards stack, problems first, arrow between them pointing down */
+  .po {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-4);
+  }
+
+  .po-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border-radius: var(--radius-card);
+    padding: 32px;
+  }
+
+  .po-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Four equal rows: with both cards the same height, each problem's row lines up with its outcome's */
+  .po-items {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Top-aligned so first lines sit level across the two cards */
+  .po-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+  }
+
+  .po-item + .po-item {
+    border-top: 1px solid var(--po-rule);
+  }
+
+  .po-text {
+    text-wrap: balance;
+  }
+
+  /* Icon sits level with the first line of text */
+  .po-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: calc((1lh - 18px) / 2);
+  }
+
+  .po-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .po-icon--cross {
+    color: var(--color-brand-plum);
+  }
+
+  .po-arrow {
+    align-self: center;
+    color: var(--color-primary);
+    line-height: 0;
+  }
+
+  .po-arrow svg {
+    width: 40px;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+
+  /* Left card: problems */
+  .po-card--problem {
+    --po-rule: var(--color-border);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    color: var(--color-text);
+  }
+
+  .po-card--problem .po-label {
+    color: var(--color-brand-plum);
+  }
+
+  /* Right card: outcomes on teal */
+  .po-card--outcome {
+    --po-rule: rgb(255 255 255 / 0.18);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .po-card--outcome .po-label {
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  /* Desktop: two equal columns, arrow centred in the gap */
+  @media (min-width: 800px) {
+    .po {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--spacing-16);
+      position: relative;
+    }
+
+    .po-card--problem {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .po-card--outcome {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .po-arrow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .po-arrow svg {
+      transform: none;
+    }
+
+    .po-item {
+      font-size: 1.1875rem;
+    }
+
+    /* Problems already break at the sentence boundary on desktop */
+    .po-text--problem {
+      text-wrap: wrap;
+    }
+
+    .po-part {
+      display: block;
+    }
+  }
+</style>

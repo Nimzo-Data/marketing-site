@@ -4,12 +4,20 @@ import HeroLarge from '../components/heroes/HeroLarge.astro';
 import ServiceCard from '../components/cards/ServiceCard.astro';
 import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import ProcessSteps from '../components/content/ProcessSteps.astro';
+import ProblemOutcomeCards from '../components/content/ProblemOutcomeCards.astro';
 import LogoGrid from '../components/content/LogoGrid.astro';
 import HomepageTestimonials from '../components/content/HomepageTestimonials.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../data/technologies';
 import { isForItems, isNotForItems } from '../data/audience';
+
+const problemRows: { problem: [string, string]; outcome: string }[] = [
+  { problem: ["Finance says revenue is X. Marketing says Y.", "Leadership believes neither."], outcome: "One definition per metric: revenue, CAC, LTV." },
+  { problem: ["One person is the bottleneck.", "Every data question routes through them."], outcome: "Teams answer their own questions, no waiting." },
+  { problem: ["Manual reporting eats hours or days", "before every board meeting."], outcome: "Reports that run automatically and email themselves." },
+  { problem: ["You inherited a platform.", "Nobody knows what half of it does."], outcome: "Audited and documented: what to keep, fix or drop." },
+];
 ---
 
 <BaseLayout
@@ -23,6 +31,12 @@ import { isForItems, isNotForItems } from '../data/audience';
     subtitle="We build Google Cloud data platforms for growing European companies.<br>Paid audits, fixed-price builds, senior engineering, clean handover so you own what we built."
     primaryCta={{ text: "Let's talk", href: '/contact/', dataTrack: 'hero-lets-talk' }}
   />
+
+  <!-- Section 1b: Problems we solve -->
+  <SectionWrapper bg="white" py="lg" class="problems-section">
+    <h2 class="section-heading">What brings most clients here.</h2>
+    <ProblemOutcomeCards rows={problemRows} />
+  </SectionWrapper>
 
   <!-- Section 2: Services, grouped -->
   <SectionWrapper bg="white" py="lg">
@@ -180,6 +194,12 @@ import { isForItems, isNotForItems } from '../data/audience';
     color: var(--color-text);
     line-height: 1.7;
     margin: 0 0 16px 0;
+  }
+
+  /* Sits right under the hero: the hero's bottom padding already provides the gap.
+     Three classes so this outranks SectionWrapper's scoped padding rule. */
+  :global(.section-wrapper.section-py-lg.problems-section) {
+    padding-top: 0;
   }
 
   .gcp-section {
