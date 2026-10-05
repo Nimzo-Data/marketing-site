@@ -12,11 +12,11 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../data/technologies';
 import { isForItems, isNotForItems } from '../data/audience';
 
-const problemRows: { problem: [string, string]; outcome: string }[] = [
-  { problem: ["Finance says revenue is X. Marketing says Y.", "Leadership believes neither."], outcome: "One definition per metric: revenue, CAC, LTV." },
-  { problem: ["One person is the bottleneck.", "Every data question routes through them."], outcome: "Teams answer their own questions, no waiting." },
-  { problem: ["Manual reporting eats hours or days", "before every board meeting."], outcome: "Reports that run automatically and email themselves." },
-  { problem: ["You inherited a platform.", "Nobody knows what half of it does."], outcome: "Audited and documented: what to keep, fix or drop." },
+const problemRows: { problem: [string, string]; outcome: [string, string] }[] = [
+  { problem: ["Finance says revenue is X. Marketing says Y.", "Leadership believes neither."], outcome: ["One definition per metric:", "revenue, CAC, LTV."] },
+  { problem: ["One person is the bottleneck.", "Every data question routes through them."], outcome: ["Teams answer their own questions,", "no waiting."] },
+  { problem: ["Manual reporting eats hours or days", "before every board meeting."], outcome: ["Reports that run automatically", "and email themselves."] },
+  { problem: ["You inherited a platform.", "Nobody knows what half of it does."], outcome: ["Audited and documented:", "what to keep, fix or drop."] },
 ];
 ---
 
