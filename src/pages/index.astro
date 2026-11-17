@@ -220,12 +220,6 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     margin: 0 0 16px 0;
   }
 
-  /* Sits right under the hero: the hero's bottom padding already provides the gap.
-     Three classes so this outranks SectionWrapper's scoped padding rule. */
-  :global(.section-wrapper.section-py-lg.problems-section) {
-    padding-top: 0;
-  }
-
   .gcp-section {
     display: grid;
     grid-template-columns: 1fr;

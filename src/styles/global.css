@@ -176,3 +176,9 @@ button:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* The hero's bottom padding is the gap to the first section, on every page.
+   The element selector makes this outrank SectionWrapper's scoped padding. */
+:is(.hero-large, .hero-standard, .hero-tech) + section.section-wrapper {
+  padding-top: 0;
+}
