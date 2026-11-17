@@ -1,0 +1,70 @@
+---
+// Small linked pill for a service: icon + name. Used where the site shows a
+// route between services (homepage "Where to start", the audit's next step).
+import LineIcon from './LineIcon.astro';
+
+interface Props {
+  service: 'audit' | 'build' | 'improve' | 'support';
+  dataTrack?: string;
+}
+
+const hrefs = {
+  audit: '/services/data-platform-audit/',
+  build: '/services/data-platform-build/',
+  improve: '/services/data-platform-improvement/',
+  support: '/services/data-platform-support/',
+};
+const labels = { audit: 'Audit', build: 'Build', improve: 'Improve', support: 'Support' };
+
+const { service, dataTrack } = Astro.props;
+---
+
+<a href={hrefs[service]} class="svc-chip" data-track={dataTrack}><LineIcon name={service} />{labels[service]}</a>
+
+<style>
+  .svc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 6px 14px 6px 10px;
+    border: 1px solid color-mix(in srgb, var(--color-brand-teal) 45%, white);
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: var(--color-bg-default);
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .svc-chip :global(svg) {
+    width: 16px;
+    height: 16px;
+    color: var(--color-brand-teal);
+    transition: color 150ms ease;
+  }
+
+  .svc-chip:hover {
+    border-color: var(--color-brand-plum);
+    color: var(--color-brand-plum);
+  }
+
+  .svc-chip:hover :global(svg) {
+    color: var(--color-brand-plum);
+  }
+
+  .svc-chip:focus-visible {
+    outline: 2px solid var(--color-brand-teal);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 767px) {
+    .svc-chip {
+      min-height: 44px;
+      padding: 8px 16px 8px 12px;
+    }
+  }
+</style>

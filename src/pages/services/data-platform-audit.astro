@@ -2,21 +2,58 @@
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
-import LogoGrid from '../../components/content/LogoGrid.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { technologiesForGrid } from '../../data/technologies';
+import LineIcon from '../../components/ui/LineIcon.astro';
+import ServiceChip from '../../components/ui/ServiceChip.astro';
 import FAQAccordion from '../../components/content/FAQAccordion.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+
+// The four starting points. Same method and report format for each; what we
+// look at first changes. `sample` links the row to its published sample audit.
+const startingPoints = [
+  {
+    from: ['Nothing yet.', "You're about to build."],
+    look: 'Your sources and their volumes, the figures leadership needs, and what your team can run day to day.',
+  },
+  {
+    from: ['Spreadsheets and Looker Studio,', 'held together by connectors.'],
+    look: 'Which connectors feed which reports, what breaks when a sheet changes, and whether the figures match the source systems.',
+    sample: '/sample-audit/',
+  },
+  {
+    from: ['A reporting app built in-house or with AI tools like Claude,', 'reading from your sources or its own database.'],
+    look: 'Where the data comes from, whether keys sit in the code, who can change production, and whether each metric is defined once.',
+  },
+  {
+    // Non-breaking hyphen (U+2011) so "ex-employee" never splits across lines.
+    from: ['A warehouse built by an agency, an ex‑employee,', 'or your own team over the years.'],
+    look: 'What each pipeline and table does, which of it anyone still uses, who still has access, and what it costs to run.',
+  },
+] as const;
+
+// Nine areas, checked whatever the starting point; only the depth changes.
+const checks = [
+  { icon: 'security', area: 'Security and access', detail: 'Secrets in code, old accounts, database roles, personal data flows.' },
+  { icon: 'collection', area: 'Collection', detail: 'Whether each source runs, and whether it fails silently.' },
+  { icon: 'data-model', area: 'Data model', detail: 'Warehouse structure, duplicated tables, full versus incremental loads.' },
+  { icon: 'figures', area: 'Figures', detail: 'One definition per metric. Test data, refunds, currency, timezone.' },
+  { icon: 'reports', area: 'Reports and speed', detail: 'Which reports are used, official or dead, and how fast they load.' },
+  { icon: 'operations', area: 'Operations', detail: 'Freshness, test versus production, who can deploy, a tested restore.' },
+  { icon: 'maintainability', area: 'Maintainability', detail: 'Docs, tests on the figures, reviews, AI coding guardrails, one-person risk.' },
+  { icon: 'ai', area: 'AI readiness', detail: 'Governed metrics, and what AI tools can read.' },
+  { icon: 'costs', area: 'Costs', detail: 'Infrastructure, tools and licences, and what drives the bill.' },
+] as const;
 
 const faqs = [
   {
     question: 'Why is the audit paid?',
     answer:
-      "Because it's real work with a real deliverable. You get a written current-state assessment, a tool recommendation with the reasoning behind it, a 12-month cost estimate, and a fixed-price proposal for the build. If you decide not to continue with us, you can hand that document to another provider and it's still useful.",
+      "Because it's real work with a real deliverable. You get a written map of what you run, findings ranked by severity, a verdict per layer, and a fixed price for the next step. If you decide not to continue with us, you can hand that document to another provider and it's still useful.",
   },
   {
     question: 'Why can\'t you just quote me directly?',
     answer:
-      "A fixed price is only honest if the scope is right. After a 45-minute call we'd be guessing at your data volumes, your current costs, and which tools fit your team. The audit replaces those guesses with evidence, so the number in the proposal is one we stand behind.",
+      "For a platform, a fixed price is only honest if the scope is right. After a 45-minute call we'd be guessing at your data volumes, your current costs, and which tools fit your team. The audit replaces those guesses with evidence, so the number in the proposal is one we stand behind. For one well-defined fix, we do quote directly: that's an Improve project.",
   },
   {
     question: "What if we don't continue with you after the audit?",
@@ -28,17 +65,58 @@ const faqs = [
     answer:
       'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineering, fixed price, defined scope, and a clean handover so you own what we built.',
   },
+  {
+    question: 'Our reporting was built with Claude or Cursor. Is that a problem?',
+    answer:
+      "No, and it's increasingly common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the repository and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
+  },
+  {
+    question: 'Will you tell us to move to Google Cloud?',
+    answer:
+      "Only if it's the better answer. We review whatever you run. We build new platforms on Google Cloud. If something else fits better, we say so, and then we either fix what you have or review your team's work.",
+  },
+  {
+    question: 'Do you need write access?',
+    answer:
+      'No. We work from read-only access to your repo, database, BI tool and sources. Nothing we do during the audit can change your data or your production setup.',
+  },
 ];
 
 ---
 
 <ServiceLayout
   title="Data Platform Audit | Nimzo Data"
-  description="A paid 1–2 week audit: tool recommendation, 12-month cost estimate, and a fixed-price proposal you can act on. Yours to keep either way."
-  heroTitle="Before you build,<br>know what you're building."
-  heroSubtitle="A 1–2 week paid engagement to evaluate tools against your real data and requirements, and produce a fixed-price proposal for what comes next. Yours to keep, or Phase 1 of a larger build with us."
+  description="A paid 1–2 week audit of whatever your reporting runs on: findings ranked by severity, a verdict per layer, and a fixed price for the next step. Yours to keep either way."
+  heroTitle="Before you build or fix anything,<br>find out what your numbers run on."
+  heroSubtitle="A 1–2 week paid audit of whatever you run today, from spreadsheets to a warehouse someone left behind. You leave with a verdict on each layer of your platform and a fixed price for the next step. Yours to keep either way."
 >
-  <!-- Symptoms / What the audit answers -->
+  <!-- Where you're starting from -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">Where you're starting from.</h2>
+    <p class="intro-body">The method and the report format are the same whatever you run. What we look at first, and what we recommend, depend on where you start.</p>
+    <table class="start-table">
+      <thead>
+        <tr><th scope="col">If you run</th><th scope="col">What we look at first</th><th scope="col">Sample</th></tr>
+      </thead>
+      <tbody>
+        {startingPoints.map((row) => (
+          <tr>
+            <td class="start-from">{row.from[0]} {row.from[1]}</td>
+            <td class="start-look" data-label="What we look at first">{row.look}</td>
+            <td class="start-sample-cell">
+              {'sample' in row && row.sample ? (
+                <a href={row.sample} class="start-sample" data-track="audit-start-sample"><LineIcon name="sample-audit" />Sample audit <span aria-hidden="true">&rarr;</span></a>
+              ) : (
+                <span class="start-soon">Coming soon</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </SectionWrapper>
+
+  <!-- What brings most clients here -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">What brings most clients here.</h2>
     <TwoColumnSplit
@@ -46,53 +124,68 @@ const faqs = [
       bare
       leftTitle="The questions:"
       leftItems={[
-        "How many sources do we have, and how big are they?",
-        "What will our data stack cost us over 12 months, fees and infrastructure included?",
+        "Can we trust these numbers?",
+        "Is anything exposed: keys in code, old access still open?",
+        "What breaks if the person who built it leaves?",
+        "What will this cost us over 12 months?",
         "Which tools do we need, and which can we skip?",
-        "Which BI tool will our team actually use?",
-        "Can our team maintain this day-to-day?",
-        "Vendor sales calls all sound the same. Which tools fit our case?",
-        "We want to add AI features but don't know if our data is ready.",
+        "Is our data ready for AI?",
+        "Is the quote or board pack in front of us sound?",
       ]}
       rightTitle="What the audit answers:"
       rightItems={[
-        "Sources inventoried, volumes measured, current usage reviewed.",
-        "A 12-month total cost of ownership, fees plus infrastructure.",
-        "A tool recommendation matched to your data, team, and budget.",
-        "A target architecture, with reasoning you can challenge.",
-        "A written deliverable you own, even if you don't continue with us.",
-        "A fixed-price proposal for what comes next.",
-        "Whether your data is ready for conversational analytics and AI agents.",
+        "Headline figures recomputed from source.",
+        "Secrets, accounts and roles reviewed.",
+        "A map of what runs where, and who owns it.",
+        "A 12-month cost, fees plus infrastructure.",
+        "A verdict per layer, with the reasoning.",
+        "What AI tools can safely query, and what's missing.",
+        "A written second opinion, checked against your data.",
       ]}
     />
+  </SectionWrapper>
+
+  <!-- What we check -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">What we check.</h2>
+    <p class="intro-body">All nine areas, whatever you run. Only the depth changes: a spreadsheet setup has little to check under Operations, an inherited warehouse a lot.</p>
+    <ul class="check-grid" role="list">
+      {checks.map((c) => (
+        <li class="check-item">
+          <span class="check-icon"><LineIcon name={c.icon} /></span>
+          <div>
+            <h3 class="check-area">{c.area}</h3>
+            <p class="check-detail">{c.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
   </SectionWrapper>
 
   <!-- What you walk away with -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">What you walk away with.</h2>
-    <div class="deliverables-grid">
-      <div class="deliverable">
-        <h3 class="deliverable-title">Current state assessment</h3>
-        <p class="deliverable-body">Sources, volumes, current stack, current costs, current BI usage, and the gaps between where you are and where you need to be.</p>
+    <ul class="walk-list" role="list">
+      <li><strong>Summary for leadership.</strong> One page: the overall verdict, the critical risks, what to do first.</li>
+      <li><strong>Current-state map.</strong> Sources, pipelines, tables, reports, schedules and owners.</li>
+      <li><strong>Ranked findings.</strong> Each one by severity, with the evidence and the fix.</li>
+      <li><strong>Numbers check.</strong> Headline figures recomputed and compared with your reports.</li>
+      <li><strong>Verdict per layer.</strong> Collection, warehouse, modeling, BI and AI: keep, fix, add or replace.</li>
+      <li><strong>Recommendation call.</strong> Then 14 days of follow-up questions.</li>
+    </ul>
+
+    <div class="next-step">
+      <h3 class="next-step__title">Plus the next step, priced</h3>
+      <div class="next-step__grid">
+        <div class="next-step__item">
+          <p class="next-step__if">If the verdict is <ServiceChip service="build" dataTrack="audit-next-build" /></p>
+          <p class="next-step__body">Target architecture, tool choice with the reasoning, a 12-month cost, and a fixed-price build proposal.</p>
+        </div>
+        <div class="next-step__item">
+          <p class="next-step__if">If the verdict is <ServiceChip service="improve" dataTrack="audit-next-improve" /></p>
+          <p class="next-step__body">The projects in order, the first at a fixed price valid 30 days, and what your team can do itself.</p>
+        </div>
       </div>
-      <div class="deliverable">
-        <h3 class="deliverable-title">Target state recommendation</h3>
-        <p class="deliverable-body">A proposed architecture and tool selection, with the reasoning behind each pick. Includes the semantic layer design that makes AI features accurate.</p>
-      </div>
-      <div class="deliverable">
-        <h3 class="deliverable-title">12-month cost estimate</h3>
-        <p class="deliverable-body">A total cost of ownership over a year: Nimzo fees plus ongoing infrastructure. So you can plan, not guess.</p>
-      </div>
-      <div class="deliverable">
-        <h3 class="deliverable-title">Fixed-price proposal</h3>
-        <p class="deliverable-body">A fixed-price build proposal as the final artifact, if you continue with us. Scope, timeline, and price. Ready to sign.</p>
-      </div>
-    </div>
-    <div class="sample-callout">
-      <p class="sample-callout__text">Want to see what the deliverable looks like?</p>
-      <a href="/sample-audit/" class="sample-callout__btn" data-track="audit-sample-link">
-        See a sample audit
-      </a>
     </div>
   </SectionWrapper>
 
@@ -101,23 +194,13 @@ const faqs = [
     <h2 class="section-heading">How an audit runs.</h2>
     <ProcessSteps
       steps={[
-        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, read access to relevant systems, you nominate a point of contact." },
-        { icon: 'search', title: "Technical audit", description: "Sources, volumes, pipelines, costs, and BI usage reviewed.<br>For clients starting from scratch: we audit requirements and data sources instead." },
-        { icon: 'scale', title: "Tool evaluation", description: "Tools matched to your situation: BigQuery, Dataform/dbt, Fivetran/Airbyte, Lightdash/Steep/Metabase/Looker. Demos where useful." },
-        { icon: 'clipboard-list', title: "Findings & recommendation", description: "Written deliverable: current state, target state, 12-month cost estimate, recommendation with reasoning." },
-        { icon: 'mail', title: "Recommendation call & proposal", description: "Walk through findings. Fixed-price proposal as final artifact, or just the recommendation if you don't continue with us." },
+        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, then read-only access to your repo, database, BI tool and sources." },
+        { icon: 'search', title: "Technical audit", description: "The nine areas above reviewed, and your headline figures recomputed." },
+        { icon: 'scale', title: "Tool evaluation (when needed)", description: "Only when a layer is added or replaced. <a href='/technologies/' class='step-link'>The tools we work with</a>." },
+        { icon: 'clipboard-list', title: "Findings & recommendation", description: "The written report: summary, map, ranked findings, numbers check, verdict per layer." },
+        { icon: 'mail', title: "Recommendation call & proposal", description: "We walk you through it and send a fixed price for the next step." },
       ]}
     />
-  </SectionWrapper>
-
-  <!-- Tools -->
-  <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Tools we evaluate against your situation.</h2>
-    <p class="intro-body">We have defaults: BigQuery, Dataform, Airbyte. The audit tells you when your situation breaks them, and why. Tools are matched to your data volume, team skill, and budget, with the reasoning written down so you can challenge it.</p>
-    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
-    <p class="see-all-link">
-      <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
-    </p>
   </SectionWrapper>
 
   <!-- Pricing -->
@@ -126,27 +209,39 @@ const faqs = [
     <div class="pricing-lead">
       <span class="pricing-label">Fixed price</span>
       <span class="pricing-amount">€3,000 – €5,000</span>
-      <p class="pricing-sub">1–2 weeks, paid 100% upfront at kickoff. Where you land in this range depends on the number of data sources and the complexity of your current setup.</p>
+      <p class="pricing-sub">1–2 weeks, paid 100% upfront: we invoice when you sign, and work starts once it's paid. Where you land in this range depends on the number of sources and the number of metrics to recompute.</p>
     </div>
   </SectionWrapper>
 
   <!-- Where this leads -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Where this leads.</h2>
-    <p class="intro-body">An audit is a real deliverable on its own, and it's also the natural Phase 1 of a larger engagement with us.</p>
+    <p class="intro-body">The verdict per layer decides the next step. An audit is also a real deliverable on its own.</p>
     <div class="leads-grid">
-      <a href="/services/data-platform-implementation/" class="lead-card" data-track="audit-cta-implementation">
-        <div class="lead-eyebrow">Starting from scratch</div>
-        <h3 class="lead-title">Data Platform Implementation</h3>
-        <p class="lead-body">Full build from scratch. The audit produces the fixed-price proposal; you decide whether to proceed.</p>
-        <span class="lead-arrow">See Implementation <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
-      </a>
-      <a href="/services/data-platform-optimization/" class="lead-card" data-track="audit-cta-optimization">
-        <div class="lead-eyebrow">Improving what exists</div>
-        <h3 class="lead-title">Data Platform Optimization</h3>
-        <p class="lead-body">Existing platform that isn't working. The audit identifies what needs improving and produces the fixed-price build proposal. No obligation to continue.</p>
-        <span class="lead-arrow">See Optimization <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
-      </a>
+      <LeadCard
+        eyebrow="Most of the platform new or replaced"
+        icon="build"
+        title="Build"
+        body="A new platform, or a replacement for one that has to go. The audit produces the fixed-price build proposal; you decide whether to proceed."
+        href="/services/data-platform-build/"
+        linkText="See Build"
+        dataTrack="audit-cta-build"
+      />
+      <LeadCard
+        eyebrow="One piece added, or fixes"
+        icon="improve"
+        title="Improve"
+        body="The audit splits the work into projects and prices the first one. You run them one at a time and decide on each separately."
+        href="/services/data-platform-improvement/"
+        linkText="See Improve"
+        dataTrack="audit-cta-improve"
+      />
+      <LeadCard
+        eyebrow="Your team takes it from here"
+        icon="team"
+        title="Nothing more"
+        body="The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start."
+      />
     </div>
   </SectionWrapper>
 
@@ -155,9 +250,9 @@ const faqs = [
     <div class="not-fit">
       <h2 class="section-heading not-fit__heading">When this isn't the right fit.</h2>
       <ul class="not-fit__list">
-        <li><strong>You already know exactly what you want built and have a clear scope.</strong> <a href="/services/expert-implementation-services/" class="inline-link">Expert Services</a> is a better fit: fixed-price, scoped in days.</li>
-        <li><strong>You're not on GCP and not planning to be.</strong> We don't do multi-cloud. We're not the right partner.</li>
+        <li><strong>You already know exactly what you want built and have a clear scope.</strong> <a href="/services/data-platform-improvement/" class="inline-link">Improve</a> is a better fit: you describe the project on a free call, and we quote it directly.</li>
         <li><strong>You're pre-product-market-fit with no real data yet.</strong> Too early. Come back when there's something to measure.</li>
+        <li><strong>You need a penetration test or a security certification.</strong> We flag data-platform risks, including access and secrets, but this is not a formal security audit.</li>
       </ul>
     </div>
   </SectionWrapper>
@@ -180,13 +275,322 @@ const faqs = [
     line-height: 1.25;
   }
 
-  .list-footer {
+  .section-heading--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body--tight {
+    margin-bottom: 16px;
+  }
+
+  /* Where you're starting from: a two-column table; rows stack on mobile. */
+  .start-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .start-table th {
+    text-align: left;
+    padding: 0 0 12px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .start-table th:nth-child(1) {
+    width: 32%;
+  }
+
+  .start-table th:nth-child(3) {
+    width: 150px;
+  }
+
+  .start-table td {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .start-from {
+    text-wrap: balance;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.45;
+  }
+
+  .check-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    color: var(--color-brand-teal);
+  }
+
+  .check-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Two classes so the right padding beats the ".start-table td" reset. */
+  .start-table .start-from,
+  .start-table .start-look {
+    padding-right: 32px;
+  }
+
+  .start-look {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+  }
+
+  .start-sample {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    padding: 4px 12px 4px 10px;
+    border: 1px solid color-mix(in srgb, var(--color-brand-teal) 45%, white);
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .start-sample :global(svg) {
+    width: 15px;
+    height: 15px;
+    color: var(--color-brand-teal);
+  }
+
+  .start-sample:hover {
+    border-color: var(--color-brand-plum);
+    color: var(--color-brand-plum);
+  }
+
+  .start-sample:focus-visible {
+    outline: 2px solid var(--color-brand-teal);
+    outline-offset: 2px;
+  }
+
+  .start-soon {
+    display: inline-block;
+    padding-top: 2px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 767px) {
+    .start-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    .start-table,
+    .start-table tbody,
+    .start-table tr,
+    .start-table td {
+      display: block;
+    }
+
+    .start-table tbody {
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .start-table tr {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .start-table td {
+      padding: 0;
+      border: 0;
+    }
+
+    .start-table .start-from {
+      padding-right: 0;
+    }
+
+    .start-table .start-look {
+      margin-top: 10px;
+      padding-right: 0;
+    }
+
+    .start-table .start-sample-cell {
+      margin-top: 12px;
+    }
+
+    .start-table .start-sample-cell:has(.start-soon) {
+      display: none;
+    }
+
+    .start-look::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  /* What we check: icon + area + one line, 3 x 3 on desktop. */
+  /* Static cards: same look as the layer cards on Build, no hover (not links). */
+  .check-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .check-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .check-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 20px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .check-area {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.3;
+    margin: 0 0 4px 0;
+  }
+
+  .check-detail {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* What you walk away with: ticked list, then the priced next step. */
+  .walk-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px 48px;
+  }
+
+  @media (min-width: 768px) {
+    .walk-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .walk-list li {
+    position: relative;
+    padding-left: 28px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .walk-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><circle cx='9' cy='9' r='9' fill='%23004f4c' fill-opacity='0.12'/><path d='M5 9.5L7.5 12L13 7' stroke='%23004f4c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .walk-list strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .next-step {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .next-step__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .next-step__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .next-step__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+  }
+
+  .next-step__if {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px 0;
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
-    line-height: 1.7;
-    margin: 24px 0 0 0;
-    max-width: 720px;
+  }
+
+  .next-step__body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
   }
 
   .intro-body {
@@ -196,65 +600,6 @@ const faqs = [
     line-height: 1.7;
     margin: 0 0 32px 0;
     max-width: 720px;
-  }
-
-  .see-all-link {
-    text-align: center;
-    margin: 32px 0 0 0;
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-  }
-
-  .see-all-link a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .see-all-link a:hover {
-    text-decoration: underline;
-  }
-
-  /* Deliverables grid */
-  .deliverables-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  @media (min-width: 768px) {
-    .deliverables-grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 1fr;
-    }
-  }
-
-  .deliverable {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-card);
-    border-radius: var(--radius-card);
-    padding: 24px 24px;
-    box-shadow: var(--shadow-card);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .deliverable-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.0625rem;
-    color: var(--color-primary);
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  .deliverable-body {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    color: var(--color-text);
-    line-height: 1.65;
-    margin: 0;
   }
 
   /* Pricing */
@@ -302,71 +647,8 @@ const faqs = [
 
   @media (min-width: 768px) {
     .leads-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  .lead-card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-card);
-    padding: 28px 24px;
-    box-shadow: var(--shadow-card);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
-  }
-
-  .lead-card:hover {
-    box-shadow: var(--shadow-dropdown);
-    transform: translateY(-2px);
-    border-color: var(--color-brand-plum);
-  }
-
-  .lead-eyebrow {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-secondary);
-  }
-
-  .lead-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: var(--color-primary);
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  .lead-body {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    color: var(--color-text);
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  .lead-arrow {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--color-primary);
-    margin-top: auto;
-  }
-
-  .lead-arrow-icon {
-    display: inline-block;
-    transition: transform 150ms ease;
-  }
-
-  .lead-card:hover .lead-arrow-icon {
-    transform: translateX(4px);
   }
 
   /* When this isn't right */
@@ -412,46 +694,6 @@ const faqs = [
     color: var(--color-primary);
     text-decoration: underline;
     font-weight: 500;
-  }
-
-  /* Sample deliverable callout */
-  .sample-callout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    max-width: 720px;
-    margin: 48px auto 0;
-    text-align: center;
-  }
-
-  .sample-callout__text {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-
-  .sample-callout__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background-color: var(--color-white);
-    border: 1.5px solid var(--color-primary);
-    border-radius: 8px;
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .sample-callout__btn:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
   }
 
 </style>

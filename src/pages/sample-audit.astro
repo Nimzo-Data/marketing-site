@@ -15,6 +15,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
         <p class="sa-hero__eyebrow">Sample deliverable</p>
         <h1 class="sa-hero__title">The deliverable, in full.</h1>
         <p class="sa-hero__subline">A complete audit for a fictional company. Same structure every client gets, with tools, costs, and recommendations tailored to your situation. If your company is smaller, the audit would be simpler and the build cost lower.</p>
+        <p class="sa-hero__subline sa-hero__subline--note">The Verdure sample ends in a Build verdict. When the verdict is mostly fix, the deliverable is a ranked risk register plus priced <a href="/services/data-platform-improvement/" class="sa-hero__link">Improve</a> projects. A second sample showing that case is coming.</p>
       </div>
       <aside class="sa-hero__aside" aria-label="Engagement details">
         <div class="sa-snap">
@@ -412,6 +413,21 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <li><strong>AI-powered analytics:</strong> Steep's conversational AI is configured on top of the governed metrics, so team members can ask data questions in natural language without waiting for Emma or writing SQL. Steep's MCP server extends this to external AI tools, so the same governed answers are available wherever the team works.</li>
     </ul>
 
+    <h3 class="doc-h2">Verdict by layer</h3>
+    <div class="table-scroll">
+      <table class="doc-table doc-table--verdict">
+        <thead><tr><th>Layer</th><th>Verdict</th><th>What changes</th></tr></thead>
+        <tbody>
+          <tr><td>EL (collection)</td><td><strong>Add</strong></td><td>Airbyte Cloud, plus the GA4 export and the Google Ads Data Transfer Service</td></tr>
+          <tr><td>Warehouse</td><td><strong>Add</strong></td><td>BigQuery</td></tr>
+          <tr><td>Modeling</td><td><strong>Add</strong></td><td>Dataform</td></tr>
+          <tr><td>BI</td><td><strong>Replace</strong></td><td>Data Studio to Steep</td></tr>
+          <tr><td>AI</td><td><strong>Add</strong></td><td>Steep AI on governed metrics</td></tr>
+          <tr class="doc-table-total"><td>Conclusion</td><td colspan="2">Five layers added or replaced, so Build.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <h3 class="doc-h2">Tool recommendations</h3>
 
     <h4 class="doc-h3">Ingestion: Airbyte Cloud</h4>
@@ -574,7 +590,7 @@ import CTABanner from '../components/cards/CTABanner.astro';
       <a href="/services/data-platform-audit/" class="lead-card" data-track="sample-audit-cta-audit">
         <div class="lead-eyebrow">Ready to start</div>
         <h3 class="lead-title">Book a data platform audit</h3>
-        <p class="lead-body">1-2 weeks, €3,000-€5,000. You keep the deliverable regardless.</p>
+        <p class="lead-body">1–2 weeks, €3,000 – €5,000. Whatever you run today, you get a verdict per layer and a fixed price for the next step. You keep the deliverable regardless.</p>
         <span class="lead-arrow">See how it works <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
       </a>
       <a href="/case-studies/" class="lead-card" data-track="sample-audit-cta-cases">
@@ -654,6 +670,16 @@ import CTABanner from '../components/cards/CTABanner.astro';
     margin: 0;
     line-height: 1.6;
     max-width: 800px;
+  }
+
+  .sa-hero__subline--note {
+    margin-top: 12px;
+    font-size: 0.9375rem;
+  }
+
+  .sa-hero__link {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .sa-hero__aside {

@@ -1,0 +1,131 @@
+---
+// Card pointing to a next step: small label, icon + title, one short line,
+// link. Used for "Where this leads" (Audit) and "Not sure this is the right
+// fit?" (service pages). Without an href it renders as a static card with no
+// hover effect, since it isn't a link.
+import LineIcon, { type LineIconName } from '../ui/LineIcon.astro';
+
+interface Props {
+  eyebrow: string;
+  icon: LineIconName;
+  title: string;
+  body: string;
+  href?: string;
+  linkText?: string;
+  dataTrack?: string;
+}
+
+const { eyebrow, icon, title, body, href, linkText, dataTrack } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag href={href} class={`lead-card${href ? '' : ' lead-card--static'}`} data-track={dataTrack}>
+  <div class="lead-eyebrow">{eyebrow}</div>
+  <div class="lead-head">
+    <span class="lead-icon"><LineIcon name={icon} /></span>
+    <h3 class="lead-title">{title}</h3>
+  </div>
+  <p class="lead-body">{body}</p>
+  {href && linkText && (
+    <span class="lead-arrow">{linkText} <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span></span>
+  )}
+</Tag>
+
+<style>
+  .lead-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  a.lead-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .lead-card--static {
+    cursor: default;
+  }
+
+  .lead-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .lead-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lead-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    color: var(--color-brand-teal);
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .lead-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  a.lead-card:hover .lead-icon {
+    border-color: var(--color-brand-plum);
+    color: var(--color-brand-plum);
+  }
+
+  .lead-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .lead-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .lead-arrow {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .lead-arrow-icon {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  a.lead-card:hover .lead-arrow-icon {
+    transform: translateX(4px);
+  }
+</style>

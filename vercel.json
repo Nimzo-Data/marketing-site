@@ -3,13 +3,33 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/services/data-platform-implementation/",
+      "destination": "/services/data-platform-build/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/data-platform-optimization/",
+      "destination": "/services/data-platform-improvement/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/expert-implementation-services/",
+      "destination": "/services/data-platform-improvement/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/ongoing-support-retainers/",
+      "destination": "/services/data-platform-support/",
+      "statusCode": 301
+    },
+    {
       "source": "/services/data-analytics-platform-implementation/",
-      "destination": "/services/data-platform-implementation/",
+      "destination": "/services/data-platform-build/",
       "permanent": true
     },
     {
       "source": "/services/data-analytics-platform-optimization/",
-      "destination": "/services/data-platform-optimization/",
+      "destination": "/services/data-platform-improvement/",
       "permanent": true
     },
     {

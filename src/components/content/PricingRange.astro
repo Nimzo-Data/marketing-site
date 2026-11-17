@@ -57,7 +57,7 @@ const { priceRange, factors, scenarios } = Astro.props;
   {scenarios.length > 0 && (
     <div class="scenarios-section">
       <h3 class="scenarios-title">Example scenarios</h3>
-      <div class="scenarios-grid">
+      <div class={`scenarios-grid${scenarios.length % 2 === 0 ? ' scenarios-grid--even' : ''}`}>
         {scenarios.map((scenario) => (
           <div class="scenario-card">
             <div class="scenario-label">{scenario.label}</div>
@@ -168,6 +168,11 @@ const { priceRange, factors, scenarios } = Astro.props;
   @media (min-width: 768px) {
     .scenarios-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Four scenarios read as a 2×2 rather than three plus an orphan. */
+    .scenarios-grid--even {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 

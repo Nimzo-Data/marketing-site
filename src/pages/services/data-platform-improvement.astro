@@ -1,0 +1,350 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
+import type { LineIconName } from '../../components/ui/LineIcon.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+import { serviceLeads } from '../../data/services';
+import ResultBlock from '../../components/content/ResultBlock.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { technologiesForGrid } from '../../data/technologies';
+
+// Typical projects. One price range for all of them sits in the Pricing section.
+const projects: { icon: LineIconName; title: string; details: string[] }[] = [
+  { icon: 'figures', title: 'Make the numbers trustworthy', details: ['One definition per metric, reconciled with finance', 'Test data, refunds, currency and timezone handled once'] },
+  { icon: 'operations', title: 'Make it reliable', details: ['Monitoring and alerts that fire before users notice', 'Silent syncs fixed, tests on the figures'] },
+  { icon: 'security', title: 'Lock it down', details: ['Former vendors and staff removed, roles tightened', 'Secrets out of code, backups with a tested restore'] },
+  { icon: 'ai', title: 'Make it AI-ready', details: ['Governed metrics in a semantic layer', 'An MCP or API path for AI tools'] },
+  { icon: 'gauge', title: 'BigQuery Optimization', details: ['Partitioning, clustering, query rewrites', '60–90% cost cut on rewritten queries, typically'] },
+  { icon: 'data-model', title: 'Dataform / dbt Modeling', details: ['Staging and mart models, tests, CI/CD', 'Spaghetti SQL made maintainable'] },
+  { icon: 'collection', title: 'ETL / ELT Pipelines', details: ['Airbyte, Fivetran or Datastream CDC', 'Monitoring and alerts on every sync'] },
+  { icon: 'reports', title: 'BI & Analytics Development', details: ['Looker, Lightdash, Metabase or Steep', 'Semantic layer, dashboards, AI setup'] },
+  { icon: 'plug', title: 'Custom Data Integrations', details: ['API integrations on Cloud Run', "Connectors where Airbyte and Fivetran don't fit"] },
+];
+---
+
+<ServiceLayout
+  title="Data Platform Improvement | Nimzo Data"
+  description="Fix what's broken in your data platform and add what's missing: BigQuery costs, modeling, pipelines, BI, AI readiness. One fixed-price project at a time, €5,000 – €15,000 each."
+  heroTitle="Fix what's broken.<br>Add what's missing."
+  heroSubtitle="Senior data engineering on the platform you already have, one fixed-price project at a time. €5,000 – €15,000 per project, 2–6 weeks each, planned in our audit or scoped by you."
+>
+  <!-- Challenges & Outcomes -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">What brings most clients here.</h2>
+    <TwoColumnSplit
+      variant="challenges-solution"
+      bare
+      leftTitle="The problem:"
+      leftItems={[
+        "BigQuery costs tripled in six months. No one knows why.",
+        "Dashboards take 45 seconds to load. People stopped opening them.",
+        "Pipelines break weekly. You hear about it from tickets.",
+        "Data lands in the warehouse, but most of it is never modeled or used.",
+        "Finance says revenue is X. Product says Y. Leadership believes neither.",
+        "Nobody uses the BI tool. The data isn't trusted.",
+        "You want AI features but your data isn't structured for them.",
+      ]}
+      rightTitle="What you get:"
+      rightItems={[
+        "Costs cut at the source: partitioning, clustering, query rewrites.",
+        "Queries and dashboards that load in seconds, not minutes.",
+        "Reliable pipelines with alerts before users notice.",
+        "A modeled layer with tests and documentation, ready for analysis.",
+        "One definition per metric your business runs on.",
+        "A BI tool people use, because the data is trustworthy.",
+        "AI features that work, querying governed metrics, not raw tables.",
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Two ways in -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Two ways in.</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-eyebrow">01 · After our audit</div>
+        <h3 class="way-title">The plan is already split into projects.</h3>
+        <p class="way-body">The <a href="/services/data-platform-audit/" class="inline-link">audit</a> lists the projects in order and prices the first one, at a fixed price valid for 30 days. It also notes which tasks your team can do itself. You skip the technical call, so work starts when you sign.</p>
+      </div>
+      <div class="way-card">
+        <div class="way-eyebrow">02 · You already know the scope</div>
+        <h3 class="way-title">You describe it, we quote it.</h3>
+        <p class="way-body">You tell us what needs fixing or adding. We go through it on the intro call, or a second call if we need to check a few things, then send a fixed-price quote. Both calls are free. If the scope turns out bigger than one project, we say so and recommend an audit first.</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Typical projects -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Typical projects.</h2>
+    <div class="project-grid">
+      {projects.map((p) => (
+        <ServiceCardSmall
+          icon={p.icon}
+          title={p.title}
+          details={p.details}
+        />
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <!-- Stack -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">The tools we work with: yours and ours.</h2>
+    <p class="intro-body intro-body--tight">We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.</p>
+    <p class="intro-body">We review whatever you run. We build new platforms on Google Cloud. If something else fits better, we say so, and then we either fix what you have or review your team's work.</p>
+    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <p class="see-all-link">
+      <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
+    </p>
+  </SectionWrapper>
+
+  <!-- How it runs -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">How a project runs.</h2>
+    <ProcessSteps
+      steps={[
+        { icon: 'search', title: "Technical call (free)", description: "We scope it on the intro call, or a second one, then send a fixed price. After our <a href='/services/data-platform-audit/' class='step-link'>audit</a>, you skip this step." },
+        { icon: 'code-2', title: "The work (2–6 weeks, weekly check-ins)", description: "We do the work, with weekly updates. Your team joins reviews. No daily standups." },
+        { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough. No retainer expected; the next project is decided the same way." },
+        { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "Questions, tweaks, edge cases: we're reachable for 30 days at no extra cost." },
+      ]}
+    />
+  </SectionWrapper>
+
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Pricing.</h2>
+    <div class="pricing-lead">
+      <span class="pricing-label">Fixed price, per project</span>
+      <span class="pricing-amount">€5,000 – €15,000</span>
+      <p class="pricing-sub">2–6 weeks per project. Each project is priced on its scope and agreed in writing before work starts.</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-heading">Larger programs</h3>
+      <p class="sub-body">Larger programs run as several projects in sequence, each priced and decided separately, so you can stop or change course after any of them. If most of the platform needs adding or replacing at once, that's a <a href="/services/data-platform-build/" class="inline-link">Build</a>: one fixed price for the whole platform, with old and new running in parallel until the numbers match.</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-heading">Payment</h3>
+      <p class="sub-body">50% at project start, 50% on delivery. Fixed price, agreed in writing before work begins.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From unused data to modeled analytics across 6 markets."
+      body="One piece added: Dataform modeling on the BigQuery Tameson already ran. 10+ sources modeled, 6 GA4 properties unified into one events model, and CI-governed data quality from day one."
+      caseStudySlug="tameson"
+    />
+  </SectionWrapper>
+
+  <!-- Not sure this is the right fit? -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">Not sure this is the right fit?</h2>
+    <div class="leads-grid">
+      <LeadCard {...serviceLeads.build} eyebrow="Most of the platform new or replaced" dataTrack="improve-cta-build" />
+      <LeadCard {...serviceLeads.support} eyebrow="Your platform already runs" dataTrack="improve-cta-support" />
+      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what needs fixing" dataTrack="improve-cta-audit" />
+    </div>
+  </SectionWrapper>
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .intro-body--tight {
+    margin-bottom: 16px;
+  }
+
+  .inline-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  /* Two ways in */
+  .ways-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .ways-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .way-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .way-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-plum);
+  }
+
+  .way-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .way-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Typical projects */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
+  }
+
+  /* Inline link inside ProcessSteps descriptions */
+  :global(.step-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  /* Pricing (same block as the Audit and Build pages) */
+  .pricing-lead {
+    max-width: 720px;
+  }
+
+  .pricing-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-brand-plum);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .pricing-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sub-section {
+    margin-top: 40px;
+    max-width: 720px;
+  }
+
+  .sub-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .sub-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

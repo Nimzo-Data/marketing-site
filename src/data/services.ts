@@ -6,79 +6,79 @@ export interface Service {
   timeline?: string;
 }
 
+// The four services, in the order a client moves through them. The audit
+// decides between Build (two or more layers added or replaced) and Improve
+// (one layer added, or fixes across existing layers).
 export const services: Service[] = [
   {
-    name: 'Data Platform Audit',
+    name: 'Audit',
     slug: 'data-platform-audit',
-    shortDescription: 'A 1–2 week paid engagement that produces a tool recommendation, a 12-month cost estimate, and a fixed-price proposal you can act on.',
+    shortDescription: "Find out what your reporting runs on, what's wrong with it, and what to keep, fix or build.",
     priceRange: '€3,000 – €5,000',
     timeline: '1–2 weeks',
   },
   {
-    name: 'Data Platform Implementation',
-    slug: 'data-platform-implementation',
-    shortDescription: 'Build your data platform from scratch (ingestion, transformation, and reporting) on a modern GCP stack.',
-    priceRange: '€15,000 – €35,000',
-    timeline: '8–14 weeks',
+    name: 'Build',
+    slug: 'data-platform-build',
+    shortDescription: 'A new Google Cloud data platform, fixed price, handed over documented.',
+    priceRange: '€15,000 – €50,000',
+    timeline: '8–16 weeks',
   },
   {
-    name: 'Data Platform Optimization',
-    slug: 'data-platform-optimization',
-    shortDescription: 'Your pipelines exist but something\'s wrong. We find out why and improve it.',
-    priceRange: 'Audit from €3,000 · Full from €15,000',
-    timeline: '10–16 weeks',
+    name: 'Improve',
+    slug: 'data-platform-improvement',
+    shortDescription: "Fix what's broken, add what's missing. One fixed-price project at a time.",
+    priceRange: '€5,000 – €15,000 per project',
+    timeline: '2–6 weeks per project',
   },
   {
-    name: 'Expert Services',
-    slug: 'expert-implementation-services',
-    shortDescription: 'Targeted help with a specific layer of your stack: BigQuery, Dataform, ETL, or BI tooling.',
-    priceRange: '€3,000 – €15,000',
-    timeline: 'Varies by scope',
-  },
-  {
-    name: 'Ongoing Support & Retainers',
-    slug: 'ongoing-support-retainers',
-    shortDescription: 'Monthly retainers for monitoring, incident response, and continuous improvement.',
-    priceRange: '€1,000 – €4,500/month',
+    name: 'Support',
+    slug: 'data-platform-support',
+    shortDescription: 'Monthly retainer for monitoring, incidents, small improvements, and a senior engineer on call.',
+    priceRange: '€1,000 – €4,000/month',
   },
 ];
 
-// Cross-sell card copy. Every service page and the technology layout link to the
-// other services with the same href, description and button label; only the
-// framing title and the analytics tag change per context. Spread one of these
-// into <CTACard> and pass title/dataTrack alongside.
-export interface CrossSell {
+// Next-step card copy. Every "Not sure this is the right fit?" block (Build,
+// Improve, Support) and the technology pages show the other services with the
+// same icon, name, one line and link; only the small label above each card
+// changes per page. Spread one of these into <LeadCard> and pass `eyebrow` and
+// `dataTrack` alongside.
+export interface ServiceLead {
+  icon: 'audit' | 'build' | 'improve' | 'support';
+  title: string;
+  body: string;
   href: string;
-  description: string;
-  buttonText: string;
+  linkText: string;
 }
 
-export const crossSell: Record<
-  'implementation' | 'optimization' | 'expert' | 'retainers',
-  CrossSell
-> = {
-  implementation: {
-    href: '/services/data-platform-implementation/',
-    description:
-      'Build end-to-end from scratch: ingestion, transformations, dashboards. Audit first, then a fixed-price build.',
-    buttonText: 'See Implementation',
+export const serviceLeads: Record<'audit' | 'build' | 'improve' | 'support', ServiceLead> = {
+  audit: {
+    icon: 'audit',
+    title: 'Audit',
+    body: 'A verdict on each part of your platform and a fixed price for the next step.',
+    href: '/services/data-platform-audit/',
+    linkText: 'See Audit',
   },
-  optimization: {
-    href: '/services/data-platform-optimization/',
-    description:
-      'Audit what you have, then build the improvements. Two phases: audit first, then a fixed-price build.',
-    buttonText: 'See Optimization',
+  build: {
+    icon: 'build',
+    title: 'Build',
+    body: 'A new Google Cloud data platform, or a replacement for one that has to go. Priced after an audit.',
+    href: '/services/data-platform-build/',
+    linkText: 'See Build',
   },
-  expert: {
-    href: '/services/expert-implementation-services/',
-    description:
-      'Focused help on one or two layers: Dataform, Looker, BigQuery costs. Fixed-price, 2–6 weeks.',
-    buttonText: 'See Expert Services',
+  improve: {
+    icon: 'improve',
+    title: 'Improve',
+    body: "Fix what's broken or add what's missing, one fixed-price project at a time.",
+    href: '/services/data-platform-improvement/',
+    linkText: 'See Improve',
   },
-  retainers: {
-    href: '/services/ongoing-support-retainers/',
-    description:
-      'Monthly retainer for monitoring, incident response, improvements, and a senior engineer on call.',
-    buttonText: 'See Ongoing Support',
+  support: {
+    icon: 'support',
+    title: 'Support',
+    body: 'A senior engineer on call for monitoring, incidents and small improvements.',
+    href: '/services/data-platform-support/',
+    linkText: 'See Support',
   },
 };

@@ -1,14 +1,14 @@
 ---
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import RetainerGrid from '../../components/content/RetainerGrid.astro';
-import CTACard from '../../components/cards/CTACard.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { retainerTiers, retainerRows } from '../../data/retainers';
-import { crossSell } from '../../data/services';
+import { serviceLeads } from '../../data/services';
 ---
 
 <ServiceLayout
-  title="Ongoing Support & Retainers | Nimzo Data"
+  title="Data Platform Support | Nimzo Data"
   description="Monthly GCP data platform retainers: monitoring, incident response, and continuous improvement. Three tiers from €1,000 to €4,000/month. Month-to-month."
   heroTitle="Your platform is live. Someone still has to keep it running."
   heroSubtitle="Monthly retainers for monitoring, incident response, and continuous improvement so you don't need to hire a full-time data engineer to keep things healthy."
@@ -22,7 +22,7 @@ import { crossSell } from '../../data/services';
       <li>Your team can handle most things, needs backup on the hard stuff.</li>
       <li>You're growing fast and need architecture guidance as data scales.</li>
     </ul>
-    <p class="list-footer">Not the right fit if you don't have a platform yet. Retainers work best on top of a solid foundation. If you're earlier than that, start with an implementation or optimization engagement.</p>
+    <p class="list-footer">Not the right fit if you don't have a platform yet. Retainers work best on top of a solid foundation. If you're earlier than that, start with an Audit, or an Improve project if you already know the scope.</p>
   </SectionWrapper>
 
   <!-- Retainer pricing -->
@@ -73,22 +73,10 @@ import { crossSell } from '../../data/services';
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Not there yet?</h2>
     <p class="intro-body">Retainers work best on top of a working platform. If you're earlier:</p>
-    <div class="cta-cards-grid">
-      <CTACard
-        {...crossSell.implementation}
-        title="No data platform yet? Start fresh."
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.optimization}
-        title="Platform exists but not working?"
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.expert}
-        title="Need help on one specific layer?"
-        variant="link"
-      />
+    <div class="leads-grid">
+      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what you need yet" dataTrack="support-cta-audit" />
+      <LeadCard {...serviceLeads.build} eyebrow="No usable platform yet" dataTrack="support-cta-build" />
+      <LeadCard {...serviceLeads.improve} eyebrow="Something's broken or missing" dataTrack="support-cta-improve" />
     </div>
   </SectionWrapper>
 </ServiceLayout>
@@ -257,14 +245,14 @@ import { crossSell } from '../../data/services';
     max-width: 720px;
   }
 
-  .cta-cards-grid {
+  .leads-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 
   @media (min-width: 768px) {
-    .cta-cards-grid {
+    .leads-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }

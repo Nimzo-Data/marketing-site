@@ -84,6 +84,6 @@ Fivetran and dbt Labs completed their merger on 1 June 2026. It puts ingestion a
 
 ## Our bias, and the rule
 
-We sell [Dataform builds](/services/data-platform-implementation/) and [Dataform retainers](/services/ongoing-support-retainers/). We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
+We sell [Dataform projects](/services/data-platform-improvement/) and [Dataform retainers](/services/data-platform-support/). We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
 
 The rule we apply: default to the tool that adds no platform, no bill and no meter on top of BigQuery, and write down the reasons. When a client's situation breaks the default, the recommendation says so, with the reasoning attached.

@@ -49,10 +49,10 @@ export const caseStudies: CaseStudyMeta[] = [
       sector: 'Footwear & accessories (D2C + B2B)',
     },
     service: {
-      label: 'Data Platform Optimization',
-      href: '/services/data-platform-optimization/',
+      label: 'Build',
+      href: '/services/data-platform-build/',
       shortDescription:
-        'Audit a stuck data stack, then clean, simplify, and migrate the parts that matter, without trashing what already works.',
+        'A new Google Cloud data platform, or a replacement for one that has to go. Old and new run in parallel until the numbers match.',
     },
     tools: [
       { name: 'Airbyte', href: '/technologies/airbyte/', logo: '/logos/airbyte.svg' },
@@ -83,10 +83,10 @@ export const caseStudies: CaseStudyMeta[] = [
       sector: 'Industrial supply e-commerce',
     },
     service: {
-      label: 'Expert Services',
-      href: '/services/expert-implementation-services/',
+      label: 'Improve',
+      href: '/services/data-platform-improvement/',
       shortDescription:
-        'Drop in as senior data engineering (modeling discipline, governance, and architecture) alongside teams that handle their own ingestion.',
+        "Add the layer that's missing or fix the one that isn't working, one fixed-price project at a time, alongside the team you already have.",
     },
     tools: [
       { name: 'BigQuery', href: '/technologies/bigquery/', logo: '/logos/bigquery.svg' },

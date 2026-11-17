@@ -1,11 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import HeroTech from '../components/heroes/HeroTech.astro';
-import CTACard from '../components/cards/CTACard.astro';
+import LeadCard from '../components/cards/LeadCard.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { technologies } from '../data/technologies';
-import { crossSell } from '../data/services';
+import { serviceLeads } from '../data/services';
 
 interface Props {
   title: string;
@@ -45,21 +45,9 @@ const resolvedLogo =
   <slot />
   <SectionWrapper py="lg">
     <div class="cta-cards-grid">
-      <CTACard
-        {...crossSell.implementation}
-        title="No data platform yet?"
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.optimization}
-        title="Platform exists but not working?"
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.expert}
-        title={`Need help with ${toolName}?`}
-        variant="link"
-      />
+      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what you need yet" dataTrack="tech-cta-audit" />
+      <LeadCard {...serviceLeads.build} eyebrow="No data platform yet" dataTrack="tech-cta-build" />
+      <LeadCard {...serviceLeads.improve} eyebrow={`Need help with ${toolName}`} dataTrack="tech-cta-improve" />
     </div>
   </SectionWrapper>
   <CTABanner dataTrack="tech-layout-cta" />
@@ -69,7 +57,7 @@ const resolvedLogo =
   .cta-cards-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 
   @media (min-width: 768px) {

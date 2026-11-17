@@ -1,22 +1,35 @@
 ---
+import LineIcon, { type LineIconName } from '../ui/LineIcon.astro';
+
 interface Props {
+  /** Small line icon in a tile, left of the title. */
+  icon?: LineIconName;
   title: string;
-  priceRange: string;
+  priceRange?: string;
   timeline?: string;
   details: string[];
   href?: string;
 }
 
-const { title, priceRange, timeline, details } = Astro.props;
+const { icon, title, priceRange, timeline, details } = Astro.props;
 ---
 
 <article class="service-card-small">
   <div class="card-header">
-    <h3 class="card-title">{title}</h3>
-    <div class="card-badges">
-      <span class="badge badge-price">{priceRange}</span>
-      {timeline && <span class="badge badge-timeline">{timeline}</span>}
-    </div>
+    {icon ? (
+      <div class="card-head">
+        <span class="card-icon" aria-hidden="true"><LineIcon name={icon} /></span>
+        <h3 class="card-title">{title}</h3>
+      </div>
+    ) : (
+      <h3 class="card-title">{title}</h3>
+    )}
+    {(priceRange || timeline) && (
+      <div class="card-badges">
+        {priceRange && <span class="badge badge-price">{priceRange}</span>}
+        {timeline && <span class="badge badge-timeline">{timeline}</span>}
+      </div>
+    )}
   </div>
   {details.length > 0 && (
     <ul class="card-details">
@@ -43,6 +56,29 @@ const { title, priceRange, timeline, details } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    color: var(--color-brand-teal);
+  }
+
+  .card-icon :global(svg) {
+    width: 18px;
+    height: 18px;
   }
 
   .card-title {

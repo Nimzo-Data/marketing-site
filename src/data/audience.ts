@@ -12,7 +12,7 @@ export const isForItems: string[] = [
 ];
 
 export const isNotForItems: string[] = [
-  "You need AWS or Azure. We don't do multi-cloud.",
+  "You need a new platform built on AWS or Azure. We build new platforms only on Google Cloud.",
   "You're pre-product-market-fit. Data isn't your bottleneck yet.",
   "You need analysts or data scientists. We're data engineers.",
   'You want the cheapest hourly rate available. We compete on seniority, not price.',

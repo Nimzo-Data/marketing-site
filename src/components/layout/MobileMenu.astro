@@ -1,6 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
 import { navItems, ctaLink } from '../../data/navigation';
+import LineIcon from '../ui/LineIcon.astro';
 ---
 
 <!-- Overlay backdrop -->
@@ -64,7 +65,9 @@ import { navItems, ctaLink } from '../../data/navigation';
                     <ul role="list" class="mobile-sub-list">
                       {group.links.map((link) => (
                         <li>
-                          <a href={link.href} class="mobile-nav-link">
+                          <a href={link.href} class={`mobile-nav-link${link.icon || link.logo ? ' mobile-nav-link--icon' : ''}`}>
+                            {link.icon && <span class="mobile-nav-icon"><LineIcon name={link.icon} /></span>}
+                            {link.logo && <img src={link.logo} alt="" class="mobile-nav-logo" width="18" height="18" loading="lazy" />}
                             {link.label}
                           </a>
                         </li>
@@ -342,6 +345,26 @@ import { navItems, ctaLink } from '../../data/navigation';
     color: var(--color-text);
     text-decoration: none;
     transition: color 150ms ease, background-color 150ms ease;
+  }
+
+  .mobile-nav-link--icon {
+    gap: 12px;
+  }
+
+  .mobile-nav-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .mobile-nav-icon {
+    display: flex;
+    color: var(--color-brand-teal);
+  }
+
+  .mobile-nav-icon :global(svg) {
+    width: 18px;
+    height: 18px;
   }
 
   .mobile-nav-link--top {

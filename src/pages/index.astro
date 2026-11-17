@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroLarge from '../components/heroes/HeroLarge.astro';
 import ServiceCard from '../components/cards/ServiceCard.astro';
+import ServiceChip from '../components/ui/ServiceChip.astro';
 import TwoColumnSplit from '../components/content/TwoColumnSplit.astro';
 import ProcessSteps from '../components/content/ProcessSteps.astro';
 import ProblemOutcomeCards from '../components/content/ProblemOutcomeCards.astro';
@@ -16,7 +17,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
   { problem: ["Finance says revenue is X. Marketing says Y.", "Leadership believes neither."], outcome: ["One definition per metric:", "revenue, CAC, LTV."] },
   { problem: ["One person is the bottleneck.", "Every data question routes through them."], outcome: ["Teams answer their own questions,", "no waiting."] },
   { problem: ["Manual reporting eats hours or days", "before every board meeting."], outcome: ["Reports that run automatically", "and email themselves."] },
-  { problem: ["You inherited a platform.", "Nobody knows what half of it does."], outcome: ["Audited and documented:", "what to keep, fix or drop."] },
+  { problem: ["You inherited a platform, or built one fast.", "Nobody has checked it."], outcome: ["Audited and documented:", "what to keep, fix or drop."] },
 ];
 ---
 
@@ -38,63 +39,86 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     <ProblemOutcomeCards rows={problemRows} />
   </SectionWrapper>
 
-  <!-- Section 2: Services, grouped -->
+  <!-- Section 2: Services. The cards say what each service is; "Where to start"
+       shows the routes: Audit then Build or Improve, Improve directly, Support
+       directly or after either. Build is never bought without an audit. -->
   <SectionWrapper bg="white" py="lg">
     <h2 class="section-heading">How we can help.</h2>
-
-    <h3 class="svc-group-heading">Build or improve a data platform</h3>
-    <p class="svc-group-sub">Every engagement starts with a paid audit. Then a fixed-price proposal for what comes next.</p>
-    <div class="svc-row">
+    <div class="svc-grid">
       <ServiceCard
-        eyebrow="Audit"
-        title="Don't know what to build yet?"
-        description="A paid 1–2 week engagement. Tool recommendation, 12-month cost estimate, fixed-price build proposal."
+        size="compact"
+        icon="audit"
+        title="Audit"
+        description="A verdict on each part of your platform (keep, fix, add or replace) and a fixed price for the next step."
         priceRange="€3,000 – €5,000"
         timeline="1–2 weeks"
         href="/services/data-platform-audit/"
+        linkText="See Audit"
         dataTrack="home-card-audit"
       />
       <ServiceCard
-        eyebrow="Implementation"
-        title="No data platform yet?"
-        description="A full Google Cloud platform built end-to-end. Audit first, then a fixed-price build."
-        priceRange="€15,000 – €35,000"
-        timeline="8–14 weeks"
-        href="/services/data-platform-implementation/"
-        dataTrack="home-card-implementation"
+        size="compact"
+        icon="build"
+        title="Build"
+        description="A new Google Cloud data platform, or a replacement for one that has to go. Priced after an audit."
+        priceRange="€15,000 – €50,000"
+        timeline="8–16 weeks"
+        href="/services/data-platform-build/"
+        linkText="See Build"
+        dataTrack="home-card-build"
       />
       <ServiceCard
-        eyebrow="Optimization"
-        title="Platform not working?"
-        description="Costs out of control, dashboards crawling, numbers no one trusts. Audit first, then prioritized improvements."
-        priceRange="€20,000 – €50,000"
-        timeline="10–16 weeks"
-        href="/services/data-platform-optimization/"
-        dataTrack="home-card-optimization"
+        size="compact"
+        icon="improve"
+        title="Improve"
+        description="Fix what's broken or add what's missing, one fixed-price project at a time."
+        priceRange="€5,000 – €15,000 per project"
+        timeline="2–6 weeks per project"
+        href="/services/data-platform-improvement/"
+        linkText="See Improve"
+        dataTrack="home-card-improve"
+      />
+      <ServiceCard
+        size="compact"
+        icon="support"
+        title="Support"
+        description="A senior engineer on call for monitoring, incidents and small improvements."
+        priceRange="From €1,000/month"
+        timeline="Month-to-month"
+        href="/services/data-platform-support/"
+        linkText="See Support"
+        dataTrack="home-card-support"
       />
     </div>
 
-    <h3 class="svc-group-heading svc-group-heading--gap">Already know what you need</h3>
-    <p class="svc-group-sub">Clear scope, no audit needed. We send a fixed-price proposal directly.</p>
-    <div class="svc-row">
-      <ServiceCard
-        eyebrow="Expert Services"
-        title="Need focus on one thing?"
-        description="A focused build: one or two layers like Dataform, Looker, or BigQuery costs. Fixed-price, scoped in days to weeks."
-        priceRange="€5,000 – €15,000"
-        timeline="2–6 weeks"
-        href="/services/expert-implementation-services/"
-        dataTrack="home-card-expert"
-      />
-      <ServiceCard
-        eyebrow="Ongoing Support"
-        title="Have a working platform?"
-        description="Monthly retainer for monitoring, incidents, improvements, and a senior engineer on call. Three tiers."
-        priceRange="From €1,000/month"
-        timeline="Month-to-month"
-        href="/services/ongoing-support-retainers/"
-        dataTrack="home-card-retainers"
-      />
+    <div class="svc-routes">
+      <h3 class="svc-routes__title">Where to start</h3>
+      <ul class="svc-routes__list" role="list">
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">Starting from scratch, or not sure what's wrong.</p>
+            <p class="svc-route__note">The audit decides between Build and Improve, and prices it.</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label="Route: Audit, then Build or Improve">
+            <span class="svc-route__unit"><ServiceChip service="audit" dataTrack="home-route-audit" /><span class="svc-route__arrow" aria-hidden="true">&rarr;</span></span>
+            <span class="svc-route__unit"><ServiceChip service="build" dataTrack="home-route-audit-build" /><span class="svc-route__or">or</span><ServiceChip service="improve" dataTrack="home-route-audit-improve" /></span>
+          </div>
+        </li>
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">You already know the one thing to fix or add.</p>
+            <p class="svc-route__note">We quote it after a free technical call. If it looks bigger, we recommend an audit first.</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label="Route: Improve directly"><ServiceChip service="improve" dataTrack="home-route-improve-direct" /></div>
+        </li>
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">Your platform runs and you want someone on call.</p>
+            <p class="svc-route__note">On its own, or after any project.</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label="Route: Support"><ServiceChip service="support" dataTrack="home-route-support" /></div>
+        </li>
+      </ul>
     </div>
   </SectionWrapper>
 
@@ -117,8 +141,8 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     <ProcessSteps
       steps={[
         { icon: 'video', title: "The discovery call", description: "Free 45-minute conversation. We listen, you talk, we tell you whether we're a fit." },
-        { icon: 'file-text', title: "The proposal", description: "If scope isn't clear yet, we propose a paid 1–2 week audit that produces a fixed-price build proposal. If scope is already clear, we send a fixed-price proposal directly." },
-        { icon: 'code-2', title: "The build", description: "For larger builds, audit first, then the work. For focused engagements, we start directly. Weekly updates, bi-weekly demos, async by default." },
+        { icon: 'file-text', title: "The proposal", description: "Usually a paid 1–2 week audit. If you already know the scope of an Improve project, we quote it directly." },
+        { icon: 'code-2', title: "The work", description: "A Build or an Improve project. Weekly updates, bi-weekly demos, async by default." },
         { icon: 'key-round', title: "The handover", description: "Full documentation, walkthrough session, 30-day support window so your team owns what we built." },
       ]}
     />
@@ -268,38 +292,119 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     line-height: 1.5;
   }
 
-  .svc-row {
+  .svc-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
-  @media (min-width: 768px) {
-    .svc-row {
-      grid-template-columns: repeat(3, 1fr);
+  @media (min-width: 640px) {
+    .svc-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .svc-group-heading {
+  @media (min-width: 1024px) {
+    .svc-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Where to start: one row per route, situation left, service chips right. */
+  .svc-routes {
+    margin-top: 48px;
+  }
+
+  .svc-routes__title {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: 1.125rem;
-    color: var(--color-primary);
-    margin: 0 0 6px 0;
-    line-height: 1.3;
-  }
-
-  .svc-group-heading--gap {
-    margin-top: 56px;
-  }
-
-  .svc-group-sub {
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin: 0 0 24px 0;
-    max-width: 720px;
+    margin: 0 0 12px 0;
+  }
+
+  .svc-routes__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .svc-route {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .svc-route:first-child {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .svc-route {
+      /* Fixed chip column: wide enough for "Audit → Build or Improve" on one
+         line, the same in every row so the chips line up, and the rest goes to
+         the situation text so each note fits on one line on desktop. */
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 24px;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .svc-route {
+      gap: 32px;
+    }
+  }
+
+  .svc-route__situation {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.4;
+    margin: 0 0 2px 0;
+  }
+
+  .svc-route__note {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .svc-route__path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+  }
+
+  /* Wrapping only happens between units: "Audit →" | "Build or Improve". */
+  .svc-route__unit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  .svc-route__arrow {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-brand-plum);
+    font-size: 1.25rem;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  .svc-route__or {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
   }
 
   .see-all-link {

@@ -5,17 +5,18 @@ import DataPlatformDiagram from '../../components/content/DataPlatformDiagram.as
 import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
-import CTACard from '../../components/cards/CTACard.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+import { serviceLeads } from '../../data/services';
+import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import { technologiesForGrid } from '../../data/technologies';
-import { crossSell } from '../../data/services';
 ---
 
 <ServiceLayout
-  title="Data Platform Implementation | Nimzo Data"
-  description="We build end-to-end Google Cloud data platforms: ingestion, BigQuery, Dataform, and BI. Two phases: a paid audit first, then a fixed-price build."
+  title="Data Platform Build | Nimzo Data"
+  description="We build Google Cloud data platforms end to end: ingestion, BigQuery, Dataform, and BI. New platforms, or replacements for one that has to go. Fixed price, after a paid audit."
   heroTitle="Your data is scattered across tools.<br>None of it talks to each other."
-  heroSubtitle="A proper data platform, without hiring a data team. End-to-end: ingestion to dashboards. Two phases: audit first, then a fixed-price build. Senior engineering, clean handover."
+  heroSubtitle="A proper data platform, without hiring a data team. End-to-end, from ingestion to dashboards, built new or replacing a platform that has to go. Audit first, then a fixed-price build. Senior engineering, clean handover."
 >
   <!-- Challenges & Outcomes -->
   <SectionWrapper py="lg" bg="white">
@@ -25,23 +26,23 @@ import { crossSell } from '../../data/services';
       bare
       leftTitle="The problem:"
       leftItems={[
-        "Spreadsheets are your reporting layer. They break.",
-        "Manual reporting eats hours or days before every board meeting.",
-        "Teams disagree on numbers. Same metric, different answers.",
-        "One person is the bottleneck. Every data question routes through them.",
-        "Basic questions take an afternoon. Hours of file-digging to answer.",
-        "Decisions get made on gut feel. The numbers aren't trusted.",
-        "Everyone's talking about AI, but you don't know if your data can support it.",
+        "Your reporting runs on spreadsheets that break.",
+        "Board reports take days to put together by hand.",
+        "Teams get different answers to the same question.",
+        "Every data question goes through one person.",
+        "Your platform breaks weekly, and patching costs more than replacing.",
+        "It runs on tools nobody on your team knows.",
+        "You don't know if your data can support AI.",
       ]}
       rightTitle="What you get:"
       rightItems={[
-        "Dashboards your team trusts and opens every morning.",
-        "Reports that run automatically and email themselves.",
+        "Dashboards your team trusts and opens daily.",
+        "Reports that run and send themselves.",
         "One definition per metric: revenue, churn, LTV.",
         "Self-service analytics, no ticket needed.",
-        "Decisions grounded in data, not gut feel.",
-        "Docs good enough for your next hire to take over.",
-        "AI features configured for natural-language queries over trusted data.",
+        "A switchover only once the figures match.",
+        "Docs your next hire can pick up.",
+        "AI that answers questions from trusted data.",
       ]}
     />
     <p class="list-footer">We build the platform, we hand you the keys, and we leave, with a 30-day support window so your team lands cleanly.</p>
@@ -54,9 +55,9 @@ import { crossSell } from '../../data/services';
     <p class="caption">Each layer chosen for your data volume, team skill, and budget, with the reasoning written down.</p>
   </SectionWrapper>
 
-  <!-- Three layers — white cards -->
+  <!-- Each part of the platform: white cards -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Three layers. All three done right.</h2>
+    <h2 class="section-heading">Each part, done right.</h2>
     <div class="layers-grid">
       <div class="layer-card">
         <div class="layer-icon" aria-hidden="true">
@@ -100,7 +101,7 @@ import { crossSell } from '../../data/services';
   <!-- Technologies used -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">The tools we reach for.</h2>
-    <p class="intro-body">Every implementation uses some combination of these. The mix depends on your data sources, team, and budget. We explain the tradeoffs before we pick.</p>
+    <p class="intro-body">Every build uses some combination of these. The mix depends on your data sources, team, and budget. We explain the tradeoffs before we pick.</p>
     <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
@@ -109,14 +110,14 @@ import { crossSell } from '../../data/services';
 
   <!-- How it runs -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">How an implementation runs.</h2>
+    <h2 class="section-heading">How a build runs.</h2>
     <ProcessSteps
       steps={[
-        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "Sources, volumes, and tools evaluated. Written recommendation and fixed-price build proposal. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
-        { icon: 'scale', title: "Your decision (no pressure, no fees for deciding)", description: "Proceed with the build, do it yourselves, or stop here. Some clients take the report and execute internally. That's a fine outcome." },
-        { icon: 'code-2', title: "Build (6–10 weeks, bi-weekly demos)", description: "We lead the technical work. Your team joins reviews and decisions, and can take on small parts when it makes sense. Bi-weekly demos, async by default." },
-        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training sessions, full documentation, and recorded walkthroughs, so your team can run and change the platform without us." },
-        { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "You have questions, small tweaks, an unexpected edge case. We're reachable for 30 days after handover at no extra cost." },
+        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000)", description: "A verdict on each part of your platform and a fixed-price build proposal. <a href='/services/data-platform-audit/' class='step-link'>Available standalone</a>." },
+        { icon: 'scale', title: "Your decision (no fees for deciding)", description: "Build with us, do it yourselves, or stop here. Taking the report in-house is a fine outcome." },
+        { icon: 'code-2', title: "Build (6–14 weeks, bi-weekly demos)", description: "We lead the work, your team joins reviews. For a replacement, old and new run side by side until the figures match." },
+        { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, full documentation and recorded walkthroughs, so your team runs it without us." },
+        { icon: 'life-buoy', title: "Post-launch support (30 days, included)", description: "Questions, tweaks, edge cases: we're reachable for 30 days at no extra cost." },
       ]}
     />
   </SectionWrapper>
@@ -124,22 +125,15 @@ import { crossSell } from '../../data/services';
   <!-- Pricing -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Pricing.</h2>
-    <div class="two-phase-grid">
-      <div class="phase-card">
-        <div class="phase-label">Phase 1: Audit</div>
-        <div class="phase-price">€3,000 – €5,000</div>
-        <p class="phase-sub">1–2 weeks, fixed price, paid 100% upfront. Written recommendation and fixed-price build proposal. Same audit available <a href="/services/data-platform-audit/" class="inline-link">standalone</a>.</p>
-      </div>
-      <div class="phase-card">
-        <div class="phase-label">Phase 2: Build (optional)</div>
-        <div class="phase-price">€12,000 – €30,000</div>
-        <p class="phase-sub">7–12 weeks (build + handover), priced after the audit based on the real scope. Fixed price, agreed before we start.</p>
-      </div>
+    <div class="pricing-lead">
+      <span class="pricing-label">Fixed price, build only</span>
+      <span class="pricing-amount">€15,000 – €50,000</span>
+      <p class="pricing-sub">8–16 weeks from kickoff to handover. Priced after the audit on the real scope, and agreed in writing before we start. The <a href="/services/data-platform-audit/" class="inline-link">audit</a> is priced separately. New platforms usually land at €15,000 – €35,000; replacing a running platform costs more, because old and new run in parallel until the numbers match, then we switch over.</p>
     </div>
-    <p class="total-callout">Total range when clients do both phases: €15,000 – €35,000.</p>
 
     <PricingRange
       factors={[
+        { name: "Starting point", low: "Nothing in place", high: "Replacing a running platform" },
         { name: "Number of data sources", low: "2–3 simple sources", high: "6–10 mixed sources" },
         { name: "Transformation complexity", low: "Standard model", high: "Complex business logic" },
         { name: "BI tool", low: "Steep / Metabase", high: "Lightdash / Looker with LookML" },
@@ -149,36 +143,46 @@ import { crossSell } from '../../data/services';
         { label: "Example: 3 sources, Metabase", price: "€15,000 – €18,000", duration: "8–10 weeks", description: "Startup with Postgres, Stripe, and HubSpot. Metabase for dashboards." },
         { label: "Example: 6+ sources, Looker", price: "€25,000 – €35,000", duration: "10–14 weeks", description: "Scale-up with product databases, marketing APIs, and finance tools. Looker with LookML." },
         { label: "Example: Shopify + ads, Lightdash", price: "€20,000 – €25,000", duration: "8–10 weeks", description: "E-commerce business with Shopify, ad platforms (Meta, Google), and a technical team that wants metrics defined in code. Lightdash on top." },
+        { label: "Example: replacing a running platform", price: "€40,000 – €50,000", duration: "12–16 weeks", description: "Several parts migrated at once, complex data quality issues, and a parallel run before switchover." },
       ]}
     />
+
+    <div class="why-more">
+      <h3 class="why-more-title">Why does replacing a platform cost more than building from scratch?</h3>
+      <div class="why-more__grid">
+        <div class="why-more__reason">
+          <h4 class="why-more__sub">Live systems</h4>
+          <p>We replace your platform while it is in use. Migrations run in parallel, dashboards don't go dark, pipelines keep flowing while we replace them underneath. Building from scratch doesn't have that constraint.</p>
+        </div>
+        <div class="why-more__reason">
+          <h4 class="why-more__sub">Interconnection</h4>
+          <p>Most platforms have connected problems. Fixing the slow dashboard means fixing the model, which means fixing the pipeline. The scope is wider than it looks.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="payment-section">
       <h3 class="payment-heading">Payment</h3>
-      <p class="payment-body">Audit 100% at audit kickoff. Build 50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment.</p>
+      <p class="payment-body">50% at start · 30% at the mid-project milestone · 20% on final handover. Fixed price. No change orders without a signed amendment. The audit is paid 100% upfront, before it starts.</p>
     </div>
+  </SectionWrapper>
+
+  <!-- Proof: Aeyde result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock
+      metric="From minutes to seconds."
+      body="Three layers replaced: ingestion, warehouse and modeling. Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer."
+      caseStudySlug="aeyde"
+    />
   </SectionWrapper>
 
   <!-- Cross-links: not the right fit -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">Not sure this is the right fit?</h2>
-    <div class="cta-cards-grid cta-cards-grid--three">
-      <CTACard
-        {...crossSell.optimization}
-        title="Platform exists but not working?"
-        dataTrack="impl-cta-optimization"
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.expert}
-        title="Scope is narrower than a full build?"
-        dataTrack="impl-cta-expert"
-        variant="link"
-      />
-      <CTACard
-        {...crossSell.retainers}
-        title="Already have a working platform?"
-        dataTrack="impl-cta-retainers"
-        variant="link"
-      />
+    <div class="leads-grid">
+      <LeadCard {...serviceLeads.improve} eyebrow="One piece added, or fixes" dataTrack="build-cta-improve" />
+      <LeadCard {...serviceLeads.support} eyebrow="Your platform already runs" dataTrack="build-cta-support" />
+      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what you need yet" dataTrack="build-cta-audit" />
     </div>
   </SectionWrapper>
 </ServiceLayout>
@@ -292,60 +296,84 @@ import { crossSell } from '../../data/services';
     margin: 0;
   }
 
-  .two-phase-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-bottom: 16px;
+  /* Pricing */
+  .pricing-lead {
+    max-width: 720px;
+    margin-bottom: 40px;
   }
 
-  @media (min-width: 768px) {
-    .two-phase-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .phase-card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-card);
-    border-radius: var(--radius-card);
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .phase-label {
+  .pricing-label {
+    display: block;
     font-family: var(--font-heading);
-    font-weight: 600;
     font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-secondary);
+    margin-bottom: 8px;
   }
 
-  .phase-price {
+  .pricing-amount {
+    display: block;
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--color-brand-plum);
     line-height: 1.1;
+    margin-bottom: 12px;
   }
 
-  .phase-sub {
+  .pricing-sub {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text);
     line-height: 1.6;
-    margin: 4px 0 0 0;
+    margin: 0;
   }
 
-  .total-callout {
+  /* Why replacing costs more (moved from the old Optimization page) */
+  .why-more {
+    margin-top: 40px;
+  }
+
+  .why-more-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .why-more p {
     font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .why-more__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .why-more__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .why-more__sub {
+    font-family: var(--font-heading);
     font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    text-align: center;
-    margin: 0 0 40px 0;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0 0 12px 0;
+    line-height: 1.2;
   }
 
   .inline-link {
@@ -354,16 +382,15 @@ import { crossSell } from '../../data/services';
     font-weight: 500;
   }
 
-  .cta-cards-grid {
+  .leads-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 
   @media (min-width: 768px) {
-    .cta-cards-grid--three {
+    .leads-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
     }
   }
 
