@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStandard from '../../components/heroes/HeroStandard.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import CaseStudyCard from '../../components/cards/CaseStudyCard.astro';
+import { getVisibleCaseStudies } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './caseStudies.en';
+import fr from './caseStudies.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/case-studies/index');
+const visibleCaseStudies = getVisibleCaseStudies(locale);
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+>
+  <HeroStandard
+    title={c.heroTitle}
+    subtitle={c.heroSubtitle}
+  />
+
+  <SectionWrapper py="lg" bg="white">
+    <div class="cs-grid">
+      {visibleCaseStudies.map((cs) => (
+        <CaseStudyCard locale={locale} caseStudy={cs} />
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <CTABanner locale={locale}
+    heading={c.ctaHeading}
+    subtitle={c.ctaSubtitle}
+    buttonText={c.ctaButton}
+    buttonHref={href('contact', locale)}
+    dataTrack="case-studies-index-cta"
+  />
+</BaseLayout>
+
+<style>
+  .cs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .cs-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+</style>

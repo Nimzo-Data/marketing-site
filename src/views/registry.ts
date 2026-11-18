@@ -8,6 +8,9 @@ import Audit from './services/Audit.astro';
 import Build from './services/Build.astro';
 import Improve from './services/Improve.astro';
 import Support from './services/Support.astro';
+import CaseStudies from './case-studies/CaseStudies.astro';
+import Aeyde from './case-studies/Aeyde.astro';
+import Tameson from './case-studies/Tameson.astro';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type View = (props: { locale: 'en' | 'fr' }) => any;
@@ -20,4 +23,7 @@ export const views: Partial<Record<RouteId, View>> = {
   build: Build,
   improve: Improve,
   support: Support,
+  caseStudies: CaseStudies,
+  aeyde: Aeyde,
+  tameson: Tameson,
 };

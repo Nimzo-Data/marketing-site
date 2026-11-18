@@ -1,0 +1,52 @@
+import type { Metric } from '../../components/content/CaseStudyMetrics.astro';
+
+const copy = {
+  metaTitle: "Tameson: Unused Data to BI-Ready Platform | Nimzo Data",
+  ogTitle: "From unused BigQuery data to analytics across 6 markets",
+  ogDescription: "How we turned raw BigQuery data into a BI-ready platform spanning 6 markets, with layered Dataform modeling and production-grade governance.",
+  ogImage: "/og/tameson.png",
+  metaDescription: "How Tameson turned unused BigQuery data into a foundation for analytics across 6 markets, with a layered Dataform architecture and production-grade governance.",
+  metrics: [
+        { icon: 'database',     value: '10+ sources',        label: 'Modeled into the Dataform platform' },
+        { icon: 'bar-chart',    value: '6 GA4 properties',   label: 'Unified into one events model across NL, DE, FR, UK, ES, US' },
+        { icon: 'shield-check', value: 'CI-governed',        label: 'Layer rules, schema gates, partitioning checks' },
+        { icon: 'calendar',     value: '20+ months',         label: 'Of ongoing collaboration since June 2024' },
+      ] as Metric[],
+  quoteText: "When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build, and that we keep extending together, turned that around completely. It's the platform our analytics actually run on.",
+  quoteAuthorTitle: "CTO, Tameson",
+  glanceHeading: "The outcomes, at a glance.",
+  quoteHeading: "In their words.",
+  usedHeading: "What we used.",
+  s1_1: "The client",
+  s1_2: "Tameson is an Eindhoven-based industrial supply e-commerce company, founded in 2013. They started as a supplier of solenoid valves under their own brand and have grown into a catalog of more than 160,000 products, mixing their own brand with A-brands and other suppliers, across six markets: Netherlands, Germany, France, UK, Spain, and US.",
+  s1_3: "They run a small, technically strong team on a freelance-collaborative model: a CTO, a technical PM, and specialist freelancers across Shopify, Dagster, Odoo, Pimcore, and data.",
+  s2_1: "The challenge",
+  s2_2: "When Tameson reached out in May 2024, pipelines were running but most of the data wasn't being used.",
+  s2_3: "A handful of sources were already landing in BigQuery: GA4 across 6 properties, Google Ads, Search Console, Google Merchant Center, plus operational systems via Fivetran and custom pipelines. Scheduled queries handled some basic transformations, but there was no modeled analytics layer. No clean tables ready for analysis, no consistent business logic across sources, no governance. GA4 raw event data sat largely untouched. The event-based schema is hard to work with, and without proper modeling it's effectively unusable for analysis.",
+  s2_4: "The team needed someone with deep BigQuery and Dataform expertise to build a modeling foundation, knowing the platform would need to expand and evolve significantly. Ingestion was already handled internally. What was missing was the architectural discipline to turn raw data into analytics-ready tables.",
+  pullQuote: `Raw data should never be queried directly by reports.`,
+  s3_1: "The approach",
+  s3_2: "We approach data modeling in layers. Raw data should never be queried directly by reports, transformations belong in one place, and each layer has rules about what it can and can't do. In practice that's the difference between a platform that survives expansion and one that doesn't.",
+  s3_3: "For Tameson, this meant Dataform with a layered architecture from day one: staging for 1:1 source cleaning, intermediate for in-domain joins, marts for cross-domain business logic, and reports for BI-ready tables. The goal was to make GA4 useful and, beyond that, to build a foundation the team could keep extending without it becoming a mess.",
+  s4_1: "What we built",
+  s5_1: "1. GA4 modeling foundation",
+  s5_2: "GA4's raw export looks usable until you try to use it. Events are nested, custom parameters live in arrays, sessions don't exist as a concept, and across 6 properties the inconsistencies multiply.",
+  s5_3: "We built a unified events model spanning all 6 GA4 properties, reconstructing sessions from events and adding custom-window session aggregations (1-day, 7-day, 28-day) for marketing analysis. We standardized custom parameters across markets and built joins to marketing and commerce data on multiple keys: date, domain, country, transaction ID, product, channel, campaign, and click ID where available. Report-layer tables (daily stats, ecommerce product analysis, funnel analysis, page analysis) sit on top of this foundation, all multi-market by default.",
+  s5_4: "2. Multi-source modeled data layer",
+  s5_5: "GA4 was the starting point. Over the engagement, we've modeled 10+ sources into the Dataform layered architecture, spanning marketing (Google Ads, Search Console, Google Merchant Center), commerce (Shopify, Odoo, Pimcore), and operational systems. Tameson's team handles ingestion. We handle the modeling discipline that turns raw data into analytics-ready tables.",
+  s5_6: "Each source moves through the same flow: staging models do 1:1 cleaning (renaming, casting) directly from raw source tables, intermediate models join within a single domain, marts handle cross-domain business logic, and reports feed BI tools. As scope grows, the structure pays off: adding a new source becomes a routine exercise rather than a fresh greenfield problem.",
+  s5_7: "3. Production-grade governance",
+  s5_8: "Together with Paul, we put a full governance layer around the Dataform repo. Paul drove the CI/CD foundations. We contributed the Dataform-specific checks: layer rule enforcement (staging can't reference marts, reports can't skip layers, and so on), partitioning validation on large tables, schema-change classification (safe, unsafe, no-changes), and pre-operations validation for incremental models.",
+  s5_9: "The result is a Dataform platform with pre-push hooks that catch issues locally, a GitLab CI pipeline that blocks unsafe schema changes, and scheduled jobs that detect orphaned datasets and schema drift. Most teams stop well before this on Dataform. Tameson's team built it deliberately, and it scales with them.",
+  s6_1: "Results",
+  s6_2: "What was unmodeled BigQuery data is now a layered, BI-ready analytics platform spanning the sources that matter most to Tameson's analytics. The team can ship dashboards and analyses in days rather than weeks because the underlying data is already modeled, tested, and ready. Adding a new source follows the same pattern as every previous one: staging, intermediate, mart, report. And the governance layer means the platform can keep growing without accumulating technical debt.",
+  s6_3: "The engagement started as a focused modeling build that Tameson chose to keep extending, month to month, as scope grew. The collaboration is ongoing. New sources, new modeling needs, and new tooling continue to be added on the same foundation.",
+  ctaHeading: "Sound like your situation?",
+  ctaSubtitle: "Book a 45-minute call. We'll be honest about whether we can help.",
+  ctaButton: "Let's talk",
+  /** Set to 'en' in French copy: the quote is shown translated. */
+  quoteTranslatedFrom: undefined as 'en' | undefined,
+};
+
+export type Copy = typeof copy;
+export default copy;

@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import CaseStudyHero from '../../components/content/CaseStudyHero.astro';
+import CaseStudyMetrics from '../../components/content/CaseStudyMetrics.astro';
+import CaseStudyQuote from '../../components/content/CaseStudyQuote.astro';
+import CaseStudyRelated from '../../components/content/CaseStudyRelated.astro';
+import TamesonLayersDiagram from '../../components/content/TamesonLayersDiagram.astro';
+import { findCaseStudy } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './tameson.en';
+import fr from './tameson.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/case-studies/tameson');
+const cs = findCaseStudy('tameson', locale)!;
+
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  ogTitle={c.ogTitle}
+  ogDescription={c.ogDescription}
+  ogImage={c.ogImage}
+  description={c.metaDescription}
+>
+  <CaseStudyHero locale={locale} caseStudy={cs} />
+
+  <!-- At a Glance -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-glance-h">{c.glanceHeading}</h2>
+    <CaseStudyMetrics
+      metrics={c.metrics}
+    />
+  </SectionWrapper>
+
+  <!-- Quote -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">{c.quoteHeading}</h2>
+    <CaseStudyQuote locale={locale}
+      text={c.quoteText}
+      authorName="Paul van Oorschot"
+      authorTitle={c.quoteAuthorTitle}
+      authorPhoto={cs.shortQuote.authorPhoto}
+      translatedFrom={c.quoteTranslatedFrom}
+    />
+  </SectionWrapper>
+
+  <!-- 01 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      <h2 class="cs-section-h">{c.s1_1}</h2>
+      <p>{c.s1_2}</p>
+      <p>{c.s1_3}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 02 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">{c.s2_1}</h2>
+      <p>{c.s2_2}</p>
+      <p>{c.s2_3}</p>
+      <p>{c.s2_4}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 03 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">{c.s3_1}</h2>
+      <p>{c.s3_2}</p>
+
+      <blockquote class="cs-pull-quote">
+        <Fragment set:html={c.pullQuote} />
+      </blockquote>
+
+      <p>{c.s3_3}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 04 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">{c.s4_1}</h2>
+    </div>
+
+    <div class="cs-diagram-wrap">
+      <TamesonLayersDiagram locale={locale} />
+    </div>
+
+    <div class="cs-prose">
+      <h3 class="cs-prose__sub">{c.s5_1}</h3>
+      <p>{c.s5_2}</p>
+      <p>{c.s5_3}</p>
+
+      <h3 class="cs-prose__sub">{c.s5_4}</h3>
+      <p>{c.s5_5}</p>
+      <p>{c.s5_6}</p>
+
+      <h3 class="cs-prose__sub">{c.s5_7}</h3>
+      <p>{c.s5_8}</p>
+      <p>{c.s5_9}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- 05 -->
+  <SectionWrapper py="md" bg="white">
+    <div class="cs-prose">
+      
+      <h2 class="cs-section-h">{c.s6_1}</h2>
+      <p>{c.s6_2}</p>
+      <p>{c.s6_3}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Used in this engagement -->
+  <SectionWrapper py="md" bg="white">
+    <h2 class="cs-section-h">{c.usedHeading}</h2>
+    <CaseStudyRelated locale={locale} caseStudy={cs} />
+  </SectionWrapper>
+
+  <CTABanner locale={locale}
+    heading={c.ctaHeading}
+    subtitle={c.ctaSubtitle}
+    buttonText={c.ctaButton}
+    buttonHref={href('contact', locale)}
+    dataTrack="case-study-tameson-cta"
+  />
+</BaseLayout>
+
+<style>
+  .cs-prose {
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .cs-section-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.25;
+  }
+
+  .cs-glance-h {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 28px 0;
+    line-height: 1.25;
+    max-width: 760px;
+  }
+
+  .cs-prose p {
+    margin: 0 0 16px 0;
+  }
+
+  .cs-prose strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .cs-prose__sub {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 32px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .cs-pull-quote {
+    margin: 24px 0;
+    padding: 8px 0 8px 20px;
+    border-left: 3px solid var(--color-brand-plum);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .cs-diagram-wrap {
+    margin: 32px 0 48px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
