@@ -1,80 +1,168 @@
 ---
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import RetainerGrid from '../../components/content/RetainerGrid.astro';
-import LeadCard from '../../components/cards/LeadCard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { retainerTiers, retainerRows } from '../../data/retainers';
+import FAQAccordion from '../../components/content/FAQAccordion.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
 import { serviceLeads } from '../../data/services';
+
+// Columns: Run, Extend, Lead. Each tier includes everything in the one before.
+// Rows that differ by tier come first, rows every tier shares come last.
+const tiers = [
+  { name: 'Run', subtitle: 'We keep it running', price: '€950 a month', fit: 'your platform should keep running as it is' },
+  { name: 'Extend', subtitle: 'We also change it', price: '€2,250 a month', fit: 'you need regular changes: new metrics, sources, dashboards' },
+  { name: 'Lead', subtitle: 'We also lead it with you', price: '€3,950 a month', fit: 'you want someone to lead your data decisions' },
+];
+
+const rows = [
+  { label: 'Change work', values: [false, '1 day a month', '2 days a month'] },
+  { label: 'Calls', values: ['None, messages only', 'Two 1-hour calls a month', 'Up to 1 hour a week'] },
+  { label: 'Architecture, vendor and priority decisions', values: [false, false, true] },
+  { label: 'Roadmap session with your leadership team', values: [false, false, 'Quarterly, half a day'] },
+  { label: 'Monitoring and incidents, acknowledged within', values: ['2 business hours', '2 business hours', '2 business hours'] },
+  { label: 'Monthly report, including BigQuery costs', values: [true, true, true] },
+  { label: 'User and access admin', values: [true, true, true] },
+];
+
+const contractTerms = [
+  "Month to month, with 30 days' notice to cancel or downgrade. Upgrades apply from the next billing month.",
+  'Annual prepayment: 10% off. Prices revised once a year on the Syntec index.',
+  'Business hours: Monday to Friday, 9:00 to 18:00 Paris time.',
+  'If you leave, the monitoring and alerts stay in your accounts, and we hand them over.',
+  "If the same breakage keeps coming from outside our control, we propose a fix. Until it's in place, handling it uses change days.",
+];
+
+const notIncluded = [
+  "Work on components we didn't build or audit",
+  'Tool licences, which you pay directly to vendors',
+  'Work outside business hours',
+  'Training new users: not on Run; on Extend and Lead it uses change days',
+  'Real-time pipelines, data science and ML',
+];
+
+const faqs = [
+  {
+    question: 'Why days, not hours?',
+    answer:
+      'Running the platform is priced on outcomes: monitoring, incidents, the monthly report, and hearing it from us first. None of that is counted in time. Only change work has a cap, and we count it in days because that is how we estimate and plan changes.',
+  },
+  {
+    question: 'What happens to unused days?',
+    answer:
+      "They don't carry over, and neither do unused calls. If you expect a quiet stretch, move down to Run with 30 days' notice and move back up from the next billing month.",
+  },
+  {
+    question: 'What if a change grows?',
+    answer:
+      'We stop and tell you before going over the estimate. You choose: continue next month, add extra days at €1,000 each, reduce it, or make it an Improve project.',
+  },
+  {
+    question: 'What happens when something breaks?',
+    answer:
+      "Alerts reach us automatically, and you hear it from us first. We tell you the cause and keep you updated until it's fixed. When several things break at once, we fix what affects your core numbers first. This includes vendor changes that break a pipeline or are about to. If a source has to be rebuilt, we quote it as a change or an Improve project.",
+  },
+  {
+    question: 'Is it an incident or a change?',
+    answer:
+      "If it worked and broke, it's an incident, and every tier covers it. If it's new, it uses change days.",
+  },
+  {
+    question: 'Our analyst makes changes too. Can you review them?',
+    answer: "Yes, on Extend and Lead, using change days. Run doesn't include reviews.",
+  },
+  {
+    question: 'What if our budget gets cut?',
+    answer:
+      "Move down to Run with 30 days' notice. Run keeps the platform as delivered running, fresh and correct, and you can move back up from the next billing month.",
+  },
+];
 ---
 
 <ServiceLayout
   title="Data Platform Support | Nimzo Data"
-  description="Monthly GCP data platform retainers: monitoring, incident response, and continuous improvement. Three tiers from €1,000 to €4,000/month. Month-to-month."
+  description="Monthly support for a data platform we built, improved or audited. Run, Extend and Lead tiers at €950, €2,250 and €3,950 a month excl. VAT. Month to month."
   heroTitle="Your platform is live. Someone still has to keep it running."
-  heroSubtitle="Monthly retainers for monitoring, incident response, and continuous improvement so you don't need to hire a full-time data engineer to keep things healthy."
+  heroSubtitle="Monthly support for a platform we have built, improved or audited, so you don't need to hire a data engineer to keep it healthy. Three tiers, one monthly price each."
 >
-  <!-- Who this is for — bare list -->
+  <!-- Who Support is for -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Who this is for.</h2>
-    <ul class="tick-list">
-      <li>You have a working data platform and want it to stay working.</li>
-      <li>You don't want to hire full-time. You want senior support on call.</li>
-      <li>Your team can handle most things, needs backup on the hard stuff.</li>
-      <li>You're growing fast and need architecture guidance as data scales.</li>
+    <h2 class="section-heading section-heading--tight">Who Support is for.</h2>
+    <p class="intro-body intro-body--last">For companies that want their data platform kept healthy without hiring a data engineer. You own what we build and can run it without us. Support is for when you want us to stay: to keep it running, to change it as your questions change, or to lead your data decisions with you.</p>
+  </SectionWrapper>
+
+  <!-- Three tiers -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">Three tiers.</h2>
+    <p class="intro-body intro-body--tight">Each tier includes everything in the one before.</p>
+    <RetainerGrid tiers={tiers} rows={rows} />
+    <div class="notes">
+      <p>Monthly prices, excluding VAT.</p>
+      <p>Response times count in business hours: Monday to Friday, 9:00 to 18:00 Paris time.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- What you see each month -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">What you see each month.</h2>
+    <p class="intro-body">Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and, on Extend and Lead, change days used.</p>
+    <div class="boxed">
+      <h3 class="boxed-label">Our promise</h3>
+      <p>If something we monitor breaks, you hear it from us first. Alerts go to a channel we share with you, automatically.</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Change work -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">Change work.</h2>
+    <p class="intro-body intro-body--tight">On Extend and Lead.</p>
+    <ul class="dot-list dot-list--narrow" role="list">
+      <li>Every change is estimated before we start, and includes updating the documentation.</li>
+      <li>If it turns out bigger, we stop and tell you before going over. You choose: continue next month, add extra days, reduce it, or make it an <a href="/services/data-platform-improvement/" class="inline-link">Improve</a> project.</li>
+      <li>Extra days cost €1,000 each, agreed in advance.</li>
+      <li>Unused days and calls don't carry over.</li>
+      <li>A call that becomes a working session counts as change work.</li>
+      <li>New capabilities, such as a new business domain, a new BI tool or a migration, are <a href="/services/data-platform-improvement/" class="inline-link">Improve</a> projects.</li>
     </ul>
-    <p class="list-footer">Not the right fit if you don't have a platform yet. Retainers work best on top of a solid foundation. If you're earlier than that, start with an Audit, or an Improve project if you already know the scope.</p>
+    <h3 class="sub-heading sub-heading--spaced">What fits in a day</h3>
+    <p class="sub-body sub-body--narrow">Roughly one new source through a managed connector, two or three dashboard changes, or a new metric with its dashboard. Checking a number that looks wrong and AI agent setup or tuning also use change days.</p>
+    <div class="boxed boxed--spaced">
+      <h3 class="boxed-label">Example</h3>
+      <p>An Extend client asks for a Salesforce integration and a sales dashboard, about 2 days of work. We can spread it over this month and next, or add one extra day for €1,000. Anything larger becomes an Improve project.</p>
+    </div>
   </SectionWrapper>
 
-  <!-- Retainer pricing -->
+  <!-- Terms -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Three tiers.</h2>
-    <RetainerGrid tiers={retainerTiers} rows={retainerRows} />
-  </SectionWrapper>
-
-  <!-- What fits in those hours — plain subsection -->
-  <SectionWrapper py="md" bg="white">
-    <div class="fits-section">
-      <h3 class="fits-heading">What fits in those hours?</h3>
-      <div class="fits-grid">
-        <div class="fits-card">
-          <h4 class="fits-card-title">Maintenance (8 hours)</h4>
-          <p>Monitoring, incident response, and small fixes. Keeps the lights on.</p>
-        </div>
-        <div class="fits-card">
-          <h4 class="fits-card-title">Growth (16 hours)</h4>
-          <p>One new data source or two to three new dashboards a month, on top of ongoing support.</p>
-        </div>
-        <div class="fits-card">
-          <h4 class="fits-card-title">Partnership (32 hours)</h4>
-          <p>Roughly one day a week of dedicated capacity.</p>
-        </div>
+    <h2 class="section-heading">Terms.</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="sub-heading">Contract</h3>
+        <ul class="dot-list" role="list">
+          {contractTerms.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub-heading">Not included, billed separately</h3>
+        <ul class="dot-list" role="list">
+          <li><a href="/services/data-platform-improvement/" class="inline-link">Improve</a>-sized work: new business domains, new BI tools, migrations</li>
+          {notIncluded.map((item) => <li>{item}</li>)}
+        </ul>
       </div>
     </div>
   </SectionWrapper>
 
-  <!-- How the retainer works -->
+  <!-- Common questions -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">How the retainer works.</h2>
-    <ul class="lead-list">
-      <li><strong>Month-to-month.</strong> 30-day written notice to end or change tier. No minimum commitment.</li>
-      <li><strong>No rollover.</strong> Hours are tracked monthly and don't roll over.</li>
-      <li><strong>Beyond included hours.</strong> €150/hour for work above your tier.</li>
-      <li><strong>Big requests.</strong> Large requests that would use most of your monthly hours at once may be quoted as a separate mini-project, keeping your retainer hours free for smaller work.</li>
-      <li><strong>Business hours.</strong> Response times above refer to business hours, Monday to Friday (Central European Time).</li>
-    </ul>
-
-    <div class="example-card">
-      <h3 class="example-heading">Example</h3>
-      <p>You're on the Growth tier (16 hours/month). Halfway through the month you ask for a new Salesforce integration plus a sales dashboard, about 15 hours of work. We give you options: fit it this month (keep one hour for support), split it across two months, or scope it as a €2,000 mini-project so your retainer hours stay free.</p>
-    </div>
+    <h2 class="section-heading">Common questions.</h2>
+    <FAQAccordion faqs={faqs} />
   </SectionWrapper>
 
   <!-- Not there yet? -->
   <SectionWrapper py="lg" bg="white">
-    <h2 class="section-heading">Not there yet?</h2>
-    <p class="intro-body">Retainers work best on top of a working platform. If you're earlier:</p>
+    <h2 class="section-heading section-heading--tight">Not there yet?</h2>
+    <p class="intro-body">Support starts after a project with us. A Build includes its first month of Extend, then moves to Run unless you choose otherwise. An Improve project includes its first month of Run, on the work we delivered.</p>
     <div class="leads-grid">
-      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what you need yet" dataTrack="support-cta-audit" />
+      <LeadCard {...serviceLeads.audit} eyebrow="Someone else built your platform" dataTrack="support-cta-audit" />
       <LeadCard {...serviceLeads.build} eyebrow="No usable platform yet" dataTrack="support-cta-build" />
       <LeadCard {...serviceLeads.improve} eyebrow="Something's broken or missing" dataTrack="support-cta-improve" />
     </div>
@@ -91,82 +179,64 @@ import { serviceLeads } from '../../data/services';
     line-height: 1.25;
   }
 
-  .tick-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 820px;
+  .section-heading--tight {
+    margin-bottom: 12px;
   }
 
-  .tick-list li {
-    position: relative;
-    padding-left: 28px;
+  .intro-body {
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--color-text);
-    line-height: 1.6;
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
   }
 
-  .tick-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 5px;
-    width: 18px;
-    height: 18px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><circle cx='9' cy='9' r='9' fill='%23004f4c' fill-opacity='0.12'/><path d='M5 9.5L7.5 12L13 7' stroke='%23004f4c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
-    background-repeat: no-repeat;
-    background-size: contain;
+  .intro-body--last {
+    margin-bottom: 0;
   }
 
-  .list-footer {
+  .intro-body--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .inline-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .notes {
+    margin-top: 20px;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .notes p {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
-    line-height: 1.7;
-    margin: 24px 0 0 0;
-    max-width: 820px;
+    line-height: 1.6;
+    margin: 0;
   }
 
-  .fits-heading {
+  .sub-heading {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.125rem;
     color: var(--color-primary);
-    margin: 0 0 16px 0;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
   }
 
-  .fits-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  @media (min-width: 768px) {
-    .fits-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .fits-card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-card);
-    padding: 24px;
-  }
-
-  .fits-card-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.0625rem;
-    color: var(--color-primary);
-    margin: 0 0 8px 0;
-  }
-
-  .fits-card p {
+  .sub-body {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text);
@@ -174,51 +244,16 @@ import { serviceLeads } from '../../data/services';
     margin: 0;
   }
 
-  .lead-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 820px;
-  }
-
-  .lead-list li {
-    position: relative;
-    padding-left: 20px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-
-  .lead-list li::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-brand-plum);
-  }
-
-  .lead-list strong {
-    color: var(--color-primary);
-    font-weight: 600;
-  }
-
-  .example-card {
+  /* Guarantee: bordered aside with a plum label. */
+  .boxed {
     background-color: var(--color-white);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-card);
     padding: 24px;
-    max-width: 820px;
-    margin-top: 24px;
+    max-width: 720px;
   }
 
-  .example-heading {
+  .boxed-label {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 0.875rem;
@@ -228,7 +263,7 @@ import { serviceLeads } from '../../data/services';
     margin: 0 0 8px 0;
   }
 
-  .example-card p {
+  .boxed p {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text);
@@ -236,13 +271,62 @@ import { serviceLeads } from '../../data/services';
     margin: 0;
   }
 
-  .intro-body {
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .two-col {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .dot-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dot-list li {
+    position: relative;
+    padding-left: 20px;
     font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    line-height: 1.7;
-    margin: 0 0 24px 0;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .dot-list li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-brand-plum);
+  }
+
+  .dot-list--narrow {
     max-width: 720px;
+  }
+
+  .sub-heading--spaced {
+    margin-top: 32px;
+  }
+
+  .sub-body--narrow {
+    max-width: 720px;
+  }
+
+  .boxed--spaced {
+    margin-top: 24px;
   }
 
   .leads-grid {
@@ -256,4 +340,5 @@ import { serviceLeads } from '../../data/services';
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
 </style>

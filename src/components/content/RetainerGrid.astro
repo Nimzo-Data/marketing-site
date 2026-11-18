@@ -1,19 +1,36 @@
 ---
-import type { RetainerTier, RetainerRow } from '../../data/retainers';
+// Support tiers side by side. From 900px it is a table: each column header
+// carries the tier name, subtitle and monthly price, the first row says who
+// the tier is for, and the rows below compare what each tier includes.
+// Below 900px each tier becomes a card: name, price and "for you if" at the
+// top, then the first card lists everything it includes and each later card
+// only what differs from the tier before it, under "Everything in X, plus:".
+// No tier is highlighted on purpose.
+export interface RetainerTier {
+  name: string;
+  subtitle: string;
+  /** Shown as is, e.g. "€950 a month". */
+  price: string;
+  /** Completes "For you if…", lowercase start. */
+  fit: string;
+}
+
+export interface RetainerRow {
+  label: string;
+  /** One value per tier: true = included, false = not included, string = shown as is. */
+  values: (string | boolean)[];
+}
 
 interface Props {
   tiers: RetainerTier[];
   rows: RetainerRow[];
+  fitLabel?: string;
 }
 
-const { tiers, rows } = Astro.props;
+const { tiers, rows, fitLabel = 'For you if' } = Astro.props;
 
-const tierKeys: Array<'maintenance' | 'growth' | 'partnership'> = ['maintenance', 'growth', 'partnership'];
-
-function cellContent(value: string | boolean) {
-  if (typeof value === 'string') return { kind: 'text' as const, text: value };
-  return { kind: value ? 'yes' as const : 'no' as const };
-}
+const upperFirst = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 ---
 
 <!-- Desktop comparison table -->
@@ -21,98 +38,61 @@ function cellContent(value: string | boolean) {
   <table class="rt-table">
     <thead>
       <tr>
-        <th class="rt-th rt-th--label" aria-hidden="true"></th>
+        <td class="rt-th rt-th--label"></td>
         {tiers.map((tier) => (
-          <th class={`rt-th ${tier.highlighted ? 'rt-th--highlighted' : ''}`}>
+          <th scope="col" class="rt-th">
             <div class="rt-th-name">{tier.name}</div>
             <div class="rt-th-sub">{tier.subtitle}</div>
+            <div class="rt-th-price">{tier.price}</div>
           </th>
         ))}
       </tr>
     </thead>
     <tbody>
-      <tr class="rt-price-row">
-        <td class="rt-td rt-td--label">Price</td>
-        {tiers.map((tier) => (
-          <td class={`rt-td rt-td--price ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>{tier.price}</td>
-        ))}
+      <tr class="rt-fit-row">
+        <th scope="row" class="rt-td rt-td--label">{fitLabel}</th>
+        {tiers.map((tier) => <td class="rt-td">{upperFirst(tier.fit)}</td>)}
       </tr>
-      <tr>
-        <td class="rt-td rt-td--label">Hours included</td>
-        {tiers.map((tier) => (
-          <td class={`rt-td ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>{tier.hours}</td>
-        ))}
-      </tr>
-
       {rows.map((row) => (
         <tr>
-          <td class="rt-td rt-td--label">{row.label}</td>
-          {tierKeys.map((k) => {
-            const c = cellContent(row[k]);
-            const tier = tiers.find((t) => t.name.toLowerCase() === k)!;
-            return (
-              <td class={`rt-td ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>
-                {c.kind === 'yes' && (
-                  <span class="rt-tick">
-                    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-                      <circle cx="9" cy="9" r="9" fill="#004f4c" fill-opacity="0.12"/>
-                      <path d="M5 9.5L7.5 12L13 7" stroke="#004f4c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
-                    <span class="rt-sr">Included</span>
-                  </span>
-                )}
-                {c.kind === 'no' && (<span class="rt-dash"><span aria-hidden="true">—</span><span class="rt-sr">Not included</span></span>)}
-                {c.kind === 'text' && (<span>{c.text}</span>)}
-              </td>
-            );
-          })}
+          <th scope="row" class="rt-td rt-td--label">{row.label}</th>
+          {row.values.map((v) => (
+            <td class="rt-td">
+              {v === true && <span>Included</span>}
+              {v === false && (<span class="rt-dash"><span class="rt-dash-bar" aria-hidden="true"></span><span class="rt-sr">Not included</span></span>)}
+              {typeof v === 'string' && <span>{v}</span>}
+            </td>
+          ))}
         </tr>
       ))}
-
-      <tr>
-        <td class="rt-td rt-td--label">Response time</td>
-        {tiers.map((tier) => (
-          <td class={`rt-td ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>{tier.responseTime}</td>
-        ))}
-      </tr>
-      <tr>
-        <td class="rt-td rt-td--label">Check-ins</td>
-        {tiers.map((tier) => (
-          <td class={`rt-td ${tier.highlighted ? 'rt-td--highlighted' : ''}`}>{tier.checkInFrequency}</td>
-        ))}
-      </tr>
     </tbody>
   </table>
 </div>
 
 <!-- Mobile stacked tier cards -->
 <div class="rt-mobile">
-  {tiers.map((tier) => (
-    <div class={`rt-card ${tier.highlighted ? 'rt-card--highlighted' : ''}`}>
-      <div class="rt-card-head">
+  {tiers.map((tier, i) => (
+    <div class="rt-card">
+      <div>
         <h3 class="rt-card-name">{tier.name}</h3>
         <p class="rt-card-sub">{tier.subtitle}</p>
-        <div class="rt-card-price">{tier.price}</div>
-        <div class="rt-card-hours">{tier.hours} included</div>
+        <p class="rt-card-price">{tier.price}</p>
+        <p class="rt-card-fit"><span>{fitLabel}</span> {tier.fit}.</p>
       </div>
 
-      <ul class="rt-card-list">
+      {i > 0 && <p class="rt-card-lead">Everything in {tiers[i - 1].name}, plus:</p>}
+      <ul class="rt-card-list" role="list">
         {rows
-          .filter((row) => row[tier.name.toLowerCase() as 'maintenance' | 'growth' | 'partnership'] === true)
+          .filter((row) => row.values[i] !== false && (i === 0 || row.values[i] !== row.values[i - 1]))
           .map((row) => (
             <li class="rt-card-row">
               <span class="rt-tick" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#004f4c" fill-opacity="0.12"/><path d="M5 9.5L7.5 12L13 7" stroke="#004f4c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
               </span>
-              <span>{row.label}</span>
+              <span>{typeof row.values[i] === 'string' ? `${row.label}: ${lowerFirst(row.values[i] as string)}` : row.label}</span>
             </li>
           ))}
       </ul>
-
-      <div class="rt-card-meta">
-        <div class="rt-card-meta-row"><span>Response time</span><strong>{tier.responseTime}</strong></div>
-        <div class="rt-card-meta-row"><span>Check-ins</span><strong>{tier.checkInFrequency}</strong></div>
-      </div>
     </div>
   ))}
 </div>
@@ -120,8 +100,7 @@ function cellContent(value: string | boolean) {
 <style>
   /* Real text rather than aria-label, so the state survives plain text
      extraction (crawlers, LLM ingestion, copy-paste) as well as being
-     announced. aria-label is not text content, so those consumers saw an
-     empty table. */
+     announced. */
   .rt-sr {
     position: absolute;
     width: 1px;
@@ -134,12 +113,11 @@ function cellContent(value: string | boolean) {
     border: 0;
   }
 
-  /* Desktop: show table from md+ */
   .rt-desktop { display: none; }
   .rt-mobile { display: grid; grid-template-columns: 1fr; gap: 20px; }
 
   @media (min-width: 900px) {
-    .rt-desktop { display: block; overflow-x: auto; }
+    .rt-desktop { display: block; }
     .rt-mobile { display: none; }
   }
 
@@ -147,9 +125,8 @@ function cellContent(value: string | boolean) {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--color-white);
-    border-radius: var(--radius-card);
-    overflow: hidden;
     border: 1px solid var(--color-card);
+    table-layout: fixed;
   }
 
   .rt-th {
@@ -161,13 +138,7 @@ function cellContent(value: string | boolean) {
   }
 
   .rt-th--label {
-    width: 30%;
-  }
-
-  .rt-th--highlighted {
-    border: 1px solid var(--color-accent);
-    border-bottom: 1px solid var(--color-accent);
-    background-color: rgba(73, 52, 65, 0.04);
+    width: 31%;
   }
 
   .rt-th-name {
@@ -181,7 +152,21 @@ function cellContent(value: string | boolean) {
   .rt-th-sub {
     font-family: var(--font-body);
     font-size: 0.8125rem;
+    font-weight: 400;
     color: var(--color-text-secondary);
+  }
+
+  .rt-th-price,
+  .rt-card-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-brand-plum);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rt-th-price {
+    margin-top: 10px;
   }
 
   .rt-td {
@@ -189,6 +174,9 @@ function cellContent(value: string | boolean) {
     font-family: var(--font-body);
     font-size: 0.9375rem;
     color: var(--color-text);
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: top;
     border-bottom: 1px solid var(--color-card);
   }
 
@@ -197,25 +185,26 @@ function cellContent(value: string | boolean) {
     color: var(--color-primary);
   }
 
-  .rt-td--highlighted {
-    background-color: rgba(73, 52, 65, 0.04);
-    border-left: 1px solid var(--color-accent);
-    border-right: 1px solid var(--color-accent);
-  }
-
-  .rt-price-row .rt-td {
+  /* "For you if" row: set apart from the inclusions below it. */
+  .rt-fit-row .rt-td {
     background-color: var(--color-surface-subtle);
   }
 
-  .rt-td--price {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: var(--color-brand-plum);
+  .rt-tick { display: inline-flex; vertical-align: middle; }
+
+  .rt-dash {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
   }
 
-  .rt-tick { display: inline-flex; vertical-align: middle; }
-  .rt-dash { color: var(--color-text-secondary); }
+  .rt-dash-bar {
+    display: block;
+    width: 12px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: color-mix(in srgb, var(--color-text-secondary) 55%, white);
+  }
 
   /* Mobile cards */
   .rt-card {
@@ -226,10 +215,6 @@ function cellContent(value: string | boolean) {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  .rt-card--highlighted {
-    border: 2px solid var(--color-accent);
   }
 
   .rt-card-name {
@@ -248,17 +233,30 @@ function cellContent(value: string | boolean) {
   }
 
   .rt-card-price {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.375rem;
-    color: var(--color-brand-plum);
-    margin-top: 8px;
+    margin: 10px 0 0 0;
   }
 
-  .rt-card-hours {
+  .rt-card-fit {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 12px 0 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-card);
+  }
+
+  .rt-card-fit span {
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .rt-card-lead {
     font-family: var(--font-body);
     font-size: 0.875rem;
+    font-weight: 500;
     color: var(--color-text-secondary);
+    margin: 0 0 -6px 0;
   }
 
   .rt-card-list {
@@ -272,29 +270,15 @@ function cellContent(value: string | boolean) {
 
   .rt-card-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     font-size: 0.9375rem;
+    line-height: 1.5;
     color: var(--color-text);
   }
 
-  .rt-card-meta {
-    border-top: 1px solid var(--color-card);
-    padding-top: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .rt-card-meta-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-  }
-
-  .rt-card-meta-row strong {
-    color: var(--color-primary);
-    font-weight: 500;
+  .rt-card-row .rt-tick {
+    flex-shrink: 0;
+    margin-top: 3px;
   }
 </style>
