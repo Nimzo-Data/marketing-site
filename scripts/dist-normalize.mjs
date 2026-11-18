@@ -28,11 +28,13 @@ function serialize(node, depth, out) {
   if (tag === 'style') return;
   if (tag === 'link' && node.getAttribute('rel') === 'stylesheet' && node.getAttribute('href')?.startsWith('/_astro/')) return;
   if (tag) {
+    // Scope markers keep their presence (an element that loses one loses its
+    // styles) but not their hash, which changes whenever a component moves.
     const attrs = Object.entries(node.attributes)
-      .filter(([name]) => !name.startsWith('data-astro-cid-'))
       .map(([name, value]) => {
+        if (name.startsWith('data-astro-cid-')) return 'data-astro-cid';
         if (name === 'class') {
-          value = value.split(/\s+/).filter((c) => c && !SCOPE_CLASS.test(c)).join(' ');
+          value = value.split(/\s+/).filter(Boolean).map((c) => (SCOPE_CLASS.test(c) ? 'astro-cid' : c)).join(' ');
           if (!value) return null;
         }
         return `${name}=${JSON.stringify(cleanValue(value))}`;

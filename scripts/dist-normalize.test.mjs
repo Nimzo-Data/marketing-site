@@ -7,8 +7,13 @@ import { normalizeHtml, normalizeCss, diffDist } from './dist-normalize.mjs';
 describe('normalizeHtml', () => {
   it('ignores Astro scope attributes, scope classes and whitespace runs', () => {
     expect(normalizeHtml('<p data-astro-cid-abc123 class="x astro-ab12cd34">A  \n b</p>')).toBe(
-      normalizeHtml('<p class="x" data-astro-cid-zzz>A b</p>')
+      normalizeHtml('<p class="x astro-zz99yy88" data-astro-cid-zzz>A b</p>')
     );
+  });
+
+  it('detects an element that lost its scope attribute (styles would no longer apply)', () => {
+    expect(normalizeHtml('<p data-astro-cid-abc123>x</p>')).not.toBe(normalizeHtml('<p>x</p>'));
+    expect(normalizeHtml('<p class="astro-ab12cd34">x</p>')).not.toBe(normalizeHtml('<p>x</p>'));
   });
 
   it('treats an entity and its character as equal', () => {

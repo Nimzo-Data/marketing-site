@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStandard from '../../components/heroes/HeroStandard.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import CTACard from '../../components/cards/CTACard.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './contact.en';
+import fr from './contact.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/contact');
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+>
+  <HeroStandard
+    title={c.heroTitle}
+    subtitle={c.heroSubtitle}
+  />
+
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--with-sub">{c.calendarHeading}</h2>
+    <p class="section-sub">{c.calendarSub}</p>
+    <!-- Google Calendar Appointment Scheduling begin -->
+    <div class="calendar-wrap">
+      <iframe src={c.calendarUrl} class="calendar-iframe" loading="lazy"></iframe>
+    </div>
+    <!-- end Google Calendar Appointment Scheduling -->
+  </SectionWrapper>
+
+  <TextSection title={c.emailTitle} bg="white">
+    <p set:html={c.emailHtml}></p>
+  </TextSection>
+
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.stepsHeading}</h2>
+    <ProcessSteps
+      steps={c.steps}
+    />
+  </SectionWrapper>
+
+  <TextSection title={c.whereTitle} bg="white">
+    <p>{c.whereBody}</p>
+  </TextSection>
+
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.notReadyHeading}</h2>
+    <div class="cta-cards-grid">
+      <CTACard locale={locale}
+        title={c.servicesCardTitle}
+        description={c.servicesCardDescription}
+        href={href('home', locale)}
+        buttonText={c.servicesCardButton}
+        dataTrack="contact-cta-services"
+        variant="link"
+      />
+      <CTACard locale={locale}
+        title={c.techCardTitle}
+        description={c.techCardDescription}
+        href={href('technologies', locale)}
+        buttonText={c.techCardButton}
+        dataTrack="contact-cta-tech"
+        variant="link"
+      />
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--with-sub {
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 32px 0;
+    line-height: 1.6;
+  }
+
+  p :global(.email-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  p :global(.email-link:hover) { opacity: 0.75; }
+
+  .calendar-wrap {
+    width: 100%;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .calendar-iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+    height: 900px;
+  }
+
+  @media (max-width: 767px) {
+    .calendar-iframe {
+      height: 1600px;
+    }
+  }
+
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cta-cards-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+  }
+</style>
