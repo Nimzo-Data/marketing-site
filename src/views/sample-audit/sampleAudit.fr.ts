@@ -607,7 +607,8 @@ const copy: Copy = {
   diagramAudit: "/images/data-flow-audit-diagram-3x.png",
   diagramTargetAlt: "Schéma de l’architecture cible : une plateforme data en quatre couches (collecte, entrepôt, transformation et BI)",
   diagramTarget: "/images/data-flow-target-diagram-3x.png",
-  pdfHref: "/Nimzo-Data-Exemple-Audit.pdf",
+  // TODO(fr): "/Nimzo-Data-Exemple-Audit.pdf" once the French PDF is exported (plan Task 18).
+  pdfHref: "/Nimzo-Data-Sample-Audit.pdf",
   downloadPdf: "Télécharger le PDF",
 };
 
