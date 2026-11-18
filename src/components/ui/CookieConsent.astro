@@ -1,17 +1,25 @@
 ---
 // CookieConsent.astro — GDPR-compliant opt-in cookie consent banner
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const ui = t(Astro.props.locale).cookie;
 ---
 
 <div
   id="cookie-banner"
   role="dialog"
-  aria-label="Cookie consent"
+  aria-label={ui.label}
   style="display:none"
 >
-  <p>We use analytics cookies to improve your experience. You can opt out at any time.</p>
+  <p>{ui.message}</p>
   <div class="cookie-actions">
-    <button id="cookie-accept">Accept</button>
-    <button id="cookie-decline">Decline</button>
+    <button id="cookie-accept">{ui.accept}</button>
+    <button id="cookie-decline">{ui.decline}</button>
   </div>
 </div>
 

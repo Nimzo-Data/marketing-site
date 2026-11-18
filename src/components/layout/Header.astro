@@ -2,18 +2,32 @@
 import Button from '../ui/Button.astro';
 import MobileMenu from './MobileMenu.astro';
 import LineIcon from '../ui/LineIcon.astro';
-import { navItems, ctaLink } from '../../data/navigation';
+import LanguageSwitch from './LanguageSwitch.astro';
+import { getNavigation } from '../../data/navigation';
+import type { Locale } from '../../i18n/locales';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** This page in each language, for the language switch. */
+  paths?: Record<Locale, string>;
+}
+
+const { locale, paths } = Astro.props;
+const { navItems, ctaLink } = getNavigation(locale);
+const ui = t(locale).header;
 ---
 
 <header class="site-header" role="banner">
   <div class="header-inner">
     <!-- Logo -->
-    <a href="/" class="logo" aria-label="Nimzo Data — Home">
+    <a href={href('home', locale)} class="logo" aria-label={ui.logoAria}>
       <img src="/brand/logo-transparent.svg" alt="Nimzo Data" class="logo-img" width="180" height="26" />
     </a>
 
     <!-- Desktop navigation -->
-    <nav class="desktop-nav" aria-label="Main navigation">
+    <nav class="desktop-nav" aria-label={ui.mainNav}>
       <ul class="nav-list" role="list">
         {navItems.map((item) => (
           <li class={`nav-item ${item.type === 'dropdown' ? 'nav-item--dropdown' : ''}`}>
@@ -47,7 +61,7 @@ import { navItems, ctaLink } from '../../data/navigation';
                   </button>
                 )}
                 <div class="dropdown" role="region" aria-label={item.label}>
-                  {item.label === 'Technology' ? (
+                  {item.id === 'technology' ? (
                     /* Technology: two explicit columns, arranged for data-flow reading order.
                        Position-indexed against navigation.ts groups:
                          [0] Cloud & Warehouse, [1] ETL / ELT, [2] Transformation,
@@ -147,6 +161,7 @@ import { navItems, ctaLink } from '../../data/navigation';
 
     <!-- Desktop CTA -->
     <div class="header-cta">
+      <LanguageSwitch locale={locale} paths={paths} class="header-lang" />
       <Button href={ctaLink.href} variant="primary" size="sm">
         {ctaLink.label}
       </Button>
@@ -156,7 +171,7 @@ import { navItems, ctaLink } from '../../data/navigation';
     <button
       id="hamburger-btn"
       class="hamburger"
-      aria-label="Open navigation menu"
+      aria-label={ui.openMenu}
       aria-expanded="false"
       aria-controls="mobile-menu"
       type="button"
@@ -169,7 +184,7 @@ import { navItems, ctaLink } from '../../data/navigation';
 </header>
 
 <!-- Mobile menu rendered outside header to avoid stacking context issues -->
-<MobileMenu />
+<MobileMenu locale={locale} paths={paths} />
 
 <script>
   // Desktop dropdown: aria-expanded toggle
@@ -530,6 +545,12 @@ import { navItems, ctaLink } from '../../data/navigation';
     .header-cta {
       display: block;
     }
+  }
+
+  /* Language switch, left of the CTA */
+  .header-cta :global(.header-lang) {
+    margin-right: 12px;
+    vertical-align: middle;
   }
 
   /* Hamburger button */

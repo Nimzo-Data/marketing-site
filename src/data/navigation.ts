@@ -1,6 +1,11 @@
 import { SHOW_BLOG } from './siteConfig';
 import type { LineIconName } from '../components/ui/LineIcon.astro';
 import { technologies } from './technologies';
+import type { Locale } from '../i18n/locales';
+import { href, type RouteId } from '../i18n/routes';
+import { pickCopy } from '../i18n/copy';
+import en from './navigation.en';
+import fr from './navigation.fr';
 
 export interface NavLink {
   label: string;
@@ -10,11 +15,6 @@ export interface NavLink {
   description?: string;
   /** Technology menu: the tool's logo, looked up from technologies.ts. */
   logo?: string;
-}
-
-// Technology menu links carry the tool logo already used on the technology pages.
-function tech(label: string, href: string): NavLink {
-  return { label, href, logo: technologies.find((t) => t.name === label)?.logoPath };
 }
 
 export interface NavDropdownGroup {
@@ -30,6 +30,8 @@ export interface NavItemSimple {
 
 export interface NavItemDropdown {
   type: 'dropdown';
+  /** Stable id: components branch on it, never on the (translated) label. */
+  id: 'services' | 'technology' | 'resources';
   label: string;
   href?: string;
   groups: NavDropdownGroup[];
@@ -37,118 +39,97 @@ export interface NavItemDropdown {
 
 export type NavItem = NavItemSimple | NavItemDropdown;
 
-export const navItems: NavItem[] = [
-  {
-    type: 'dropdown',
-    label: 'Services',
-    groups: [
-      {
-        links: [
-          { label: 'Audit', href: '/services/data-platform-audit/', icon: 'audit', description: 'Find out what your numbers run on' },
-          { label: 'Build', href: '/services/data-platform-build/', icon: 'build', description: 'A new platform, or a replacement' },
-          { label: 'Improve', href: '/services/data-platform-improvement/', icon: 'improve', description: 'Fix or add, one project at a time' },
-          { label: 'Support', href: '/services/data-platform-support/', icon: 'support', description: 'A senior engineer on call, monthly' },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    label: 'Technology',
-    href: '/technologies/',
-    groups: [
-      {
-        groupLabel: 'Cloud & Warehouse',
-        links: [
-          tech('Google Cloud Platform', '/technologies/google-cloud-platform/'),
-          tech('BigQuery', '/technologies/bigquery/'),
-        ],
-      },
-      {
-        groupLabel: 'ETL / ELT',
-        links: [
-          tech('Airbyte', '/technologies/airbyte/'),
-          tech('Fivetran', '/technologies/fivetran/'),
-        ],
-      },
-      {
-        groupLabel: 'Transformation',
-        links: [
-          tech('Dataform', '/technologies/dataform/'),
-          tech('dbt', '/technologies/dbt/'),
-        ],
-      },
-      {
-        groupLabel: 'Business Intelligence',
-        links: [
-          tech('Looker', '/technologies/looker/'),
-          tech('Lightdash', '/technologies/lightdash/'),
-          tech('Metabase', '/technologies/metabase/'),
-          tech('Steep', '/technologies/steep/'),
-        ],
-      },
-      {
-        groupLabel: 'Orchestration',
-        links: [
-          tech('Dagster', '/technologies/dagster/'),
-        ],
-      },
-      {
-        links: [
-          { label: 'All technologies', href: '/technologies/' },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    label: 'Resources',
-    groups: [
-      {
-        links: [
-          // Blog sits first once it has something in it. Until then SHOW_BLOG
-          // keeps it out of the menu; see src/data/siteConfig.ts.
-          ...(SHOW_BLOG
-            ? [{ label: 'Blog', href: '/blog/', icon: 'blog' as const, description: 'How we think about data platforms' }]
-            : []),
-          { label: 'Case Studies', href: '/case-studies/', icon: 'case-studies', description: 'What we built, and what changed' },
-          { label: 'Sample Audit Deliverable', href: '/sample-audit/', icon: 'sample-audit', description: 'A full audit, for a fictional company' },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'link',
-    label: 'About',
-    href: '/about/',
-  },
-  {
-    type: 'link',
-    label: 'Contact',
-    href: '/contact/',
-  },
-];
-
-export const ctaLink: NavLink = {
-  label: "Let's talk",
-  href: '/contact/',
-};
-
-export const serviceLinks: NavLink[] = (navItems.find(n => n.label === 'Services') as NavItemDropdown).groups[0].links;
-
 export interface TechnologyGroup {
   category: string;
   links: NavLink[];
 }
 
-export const technologyGroups: TechnologyGroup[] = (navItems.find(n => n.label === 'Technology') as NavItemDropdown).groups.map(g => ({
-  category: g.groupLabel ?? '',
-  links: g.links,
-}));
+export interface Navigation {
+  navItems: NavItem[];
+  ctaLink: NavLink;
+  serviceLinks: NavLink[];
+  technologyGroups: TechnologyGroup[];
+  companyLinks: NavLink[];
+}
 
-export const companyLinks: NavLink[] = [
-  { label: 'About', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
-  { label: 'Privacy Policy', href: '/privacy-policy/' },
-  { label: 'Terms of Service', href: '/terms-of-service/' },
-];
+export function getNavigation(locale: Locale): Navigation {
+  const c = pickCopy({ en, fr }, locale, 'data/navigation');
+  const to = (id: RouteId) => href(id, locale);
+
+  // Technology menu links carry the tool logo already used on the technology pages.
+  const tech = (label: string, id: RouteId): NavLink => ({
+    label,
+    href: to(id),
+    logo: technologies.find((t) => t.name === label)?.logoPath,
+  });
+
+  const serviceLinks: NavLink[] = (['audit', 'build', 'improve', 'support'] as const).map((id) => ({
+    label: c.serviceItems[id].label,
+    href: to(id),
+    icon: id,
+    description: c.serviceItems[id].description,
+  }));
+
+  const techGroups: NavDropdownGroup[] = [
+    {
+      groupLabel: c.techGroups.cloud,
+      links: [tech('Google Cloud Platform', 'tech:google-cloud-platform'), tech('BigQuery', 'tech:bigquery')],
+    },
+    { groupLabel: c.techGroups.etl, links: [tech('Airbyte', 'tech:airbyte'), tech('Fivetran', 'tech:fivetran')] },
+    { groupLabel: c.techGroups.transformation, links: [tech('Dataform', 'tech:dataform'), tech('dbt', 'tech:dbt')] },
+    {
+      groupLabel: c.techGroups.bi,
+      links: [
+        tech('Looker', 'tech:looker'),
+        tech('Lightdash', 'tech:lightdash'),
+        tech('Metabase', 'tech:metabase'),
+        tech('Steep', 'tech:steep'),
+      ],
+    },
+    { groupLabel: c.techGroups.orchestration, links: [tech('Dagster', 'tech:dagster')] },
+    { links: [{ label: c.allTechnologies, href: to('technologies') }] },
+  ];
+
+  const navItems: NavItem[] = [
+    { type: 'dropdown', id: 'services', label: c.services, groups: [{ links: serviceLinks }] },
+    { type: 'dropdown', id: 'technology', label: c.technology, href: to('technologies'), groups: techGroups },
+    {
+      type: 'dropdown',
+      id: 'resources',
+      label: c.resources,
+      groups: [
+        {
+          links: [
+            // Blog sits first once it has something in it. Until then SHOW_BLOG
+            // keeps it out of the menu; see src/data/siteConfig.ts.
+            ...(SHOW_BLOG
+              ? [{ label: c.resourceItems.blog.label, href: to('blog'), icon: 'blog' as const, description: c.resourceItems.blog.description }]
+              : []),
+            { label: c.resourceItems.caseStudies.label, href: to('caseStudies'), icon: 'case-studies', description: c.resourceItems.caseStudies.description },
+            { label: c.resourceItems.sampleAudit.label, href: to('sampleAudit'), icon: 'sample-audit', description: c.resourceItems.sampleAudit.description },
+          ],
+        },
+      ],
+    },
+    { type: 'link', label: c.about, href: to('about') },
+    { type: 'link', label: c.contact, href: to('contact') },
+  ];
+
+  return {
+    navItems,
+    ctaLink: { label: c.cta, href: to('contact') },
+    serviceLinks,
+    technologyGroups: techGroups.map((g) => ({ category: g.groupLabel ?? '', links: g.links })),
+    companyLinks: [
+      { label: c.about, href: to('about') },
+      { label: c.contact, href: to('contact') },
+      { label: c.legal.privacy, href: to('privacy') },
+      { label: c.legal.terms, href: to('terms') },
+    ],
+  };
+}
+
+/** Resource and legal labels, for the footer. */
+export function getNavigationCopy(locale: Locale) {
+  return pickCopy({ en, fr }, locale, 'data/navigation');
+}
