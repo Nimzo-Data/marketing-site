@@ -1,5 +1,9 @@
 ---
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 interface Props {
+  locale: Locale;
   title: string;
   description: string;
   href: string;
@@ -8,7 +12,7 @@ interface Props {
   variant?: 'button' | 'link';
 }
 
-const { title, description, href, buttonText = 'Learn more', dataTrack, variant = 'button' } = Astro.props;
+const { title, description, href, buttonText = t(Astro.props.locale).components.learnMore, dataTrack, variant = 'button' } = Astro.props;
 ---
 
 {variant === 'link' ? (

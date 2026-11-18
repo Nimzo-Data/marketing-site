@@ -1,4 +1,7 @@
 ---
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 interface Row {
   /* Each text comes in two parts; they break onto separate lines on desktop */
   problem: [string, string];
@@ -6,15 +9,17 @@ interface Row {
 }
 
 interface Props {
+  locale: Locale;
   rows: Row[];
 }
 
-const { rows } = Astro.props;
+const { locale, rows } = Astro.props;
+const ui = t(locale).components.problemOutcome;
 ---
 
 <div class="po">
   <div class="po-card po-card--problem">
-    <h3 class="po-label">The problem</h3>
+    <h3 class="po-label">{ui.problem}</h3>
     <ul class="po-items">
       {rows.map((row) => (
         <li class="po-item">
@@ -39,7 +44,7 @@ const { rows } = Astro.props;
   </div>
 
   <div class="po-card po-card--outcome">
-    <h3 class="po-label">What you get</h3>
+    <h3 class="po-label">{ui.outcome}</h3>
     <ul class="po-items">
       {rows.map((row) => (
         <li class="po-item">

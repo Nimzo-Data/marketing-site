@@ -1,27 +1,31 @@
 ---
 import type { CaseStudyMeta } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
 
 interface Props {
   caseStudy: CaseStudyMeta;
+  locale: Locale;
 }
 
-const { caseStudy } = Astro.props;
+const { caseStudy, locale } = Astro.props;
+const ui = t(locale);
 ---
 
 <div class="cs-related">
   <div class="cs-related__col">
-    <span class="cs-related__eyebrow">Service</span>
+    <span class="cs-related__eyebrow">{ui.components.caseStudy.service}</span>
     <a href={caseStudy.service.href} class="cs-related__service" data-track={`cs-related-service-${caseStudy.slug}`}>
       <h3 class="cs-related__service-title">{caseStudy.service.label}</h3>
       <p class="cs-related__service-desc">{caseStudy.service.shortDescription}</p>
       <span class="cs-related__service-link">
-        Learn more <span class="cs-related__arrow" aria-hidden="true">&rarr;</span>
+        {ui.components.learnMore} <span class="cs-related__arrow" aria-hidden="true">&rarr;</span>
       </span>
     </a>
   </div>
 
   <div class="cs-related__col">
-    <span class="cs-related__eyebrow">Tools</span>
+    <span class="cs-related__eyebrow">{ui.components.caseStudy.tools}</span>
     <div class={`cs-related__tools cs-related__tools--${Math.min(caseStudy.tools.length, 4)}`}>
       {caseStudy.tools.map((tool) => (
         <a href={tool.href} class="cs-related__tool" data-track={`cs-related-tool-${tool.name.toLowerCase()}`}>

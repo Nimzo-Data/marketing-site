@@ -1,18 +1,21 @@
 ---
 import type { Technology } from '../../data/technologies';
+import type { Locale } from '../../i18n/locales';
+import { href, type RouteId } from '../../i18n/routes';
 
 interface Props {
+  locale: Locale;
   technologies: Technology[];
   showTaglines?: boolean;
 }
 
-const { technologies, showTaglines = false } = Astro.props;
+const { locale, technologies, showTaglines = false } = Astro.props;
 ---
 
 <div class={`logo-grid${showTaglines ? ' logo-grid--with-taglines' : ''}`}>
   {technologies.map((tech) => (
     <a
-      href={`/technologies/${tech.slug}/`}
+      href={href(`tech:${tech.slug}` as RouteId, locale)}
       class={`logo-item${showTaglines ? ' logo-item--with-tagline' : ''}`}
       aria-label={tech.name}
     >

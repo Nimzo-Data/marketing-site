@@ -2,6 +2,10 @@
 // index, the post routes and the RSS feed all read from here so they can
 // never disagree about what is published.
 import { getCollection, type CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/locales';
+import { formatDate } from '../i18n/format';
+import { SHOW_FRENCH } from './siteConfig';
+import { findUnpairedPosts } from './blog-pairs';
 
 export type BlogPost = CollectionEntry<'blog'>;
 
@@ -23,29 +27,58 @@ const showDrafts =
   process.env.VERCEL_ENV === 'preview' ||
   process.env.INCLUDE_DRAFTS === '1';
 
-/** Published posts, newest first. Drafts included where `showDrafts` says so. */
-export async function getPublishedPosts(): Promise<BlogPost[]> {
+/** 'fr' for posts under src/blog/fr/, 'en' otherwise. */
+export function postLocale(post: BlogPost): Locale {
+  return post.id.startsWith('fr/') ? 'fr' : 'en';
+}
+
+/** The URL slug: the filename, without the fr/ folder. */
+export function postSlug(post: BlogPost): string {
+  return post.id.replace(/^fr\//, '');
+}
+
+/**
+ * Published posts in one language, newest first. Drafts included where
+ * `showDrafts` says so. Once French is live, the build stops on any post whose
+ * other-language version is missing or not published at the same time.
+ */
+export async function getPublishedPosts(locale: Locale = 'en'): Promise<BlogPost[]> {
+  if (SHOW_FRENCH) {
+    const all = await getCollection('blog');
+    const unpaired = findUnpairedPosts(
+      all.map((p) => ({ id: p.id, draft: p.data.draft, translationOf: p.data.translationOf }))
+    );
+    if (unpaired.length) throw new Error(`Unpaired blog posts: ${unpaired.join(', ')}`);
+  }
+
   const posts = await getCollection('blog', ({ data }) =>
     showDrafts ? true : data.draft === false
   );
 
-  return posts.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+  return posts
+    .filter((post) => postLocale(post) === locale)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 /** Internal URL for a post. Trailing slash, like every other link on the site. */
 export function postUrl(post: BlogPost): string {
-  return `/blog/${post.id}/`;
+  return postLocale(post) === 'fr' ? `/fr/blog/${postSlug(post)}/` : `/blog/${post.id}/`;
 }
 
-/** "12 March 2026". Long month, no ordinal, no weekday. */
-export function formatPostDate(date: Date): string {
-  return date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+/** The post's URL in each language, when its other-language version exists. */
+export function postAlternates(post: BlogPost, all: BlogPost[]): Record<Locale, string> | undefined {
+  const other =
+    postLocale(post) === 'en'
+      ? all.find((p) => postLocale(p) === 'fr' && p.data.translationOf === post.id)
+      : all.find((p) => postLocale(p) === 'en' && p.id === post.data.translationOf);
+  if (!other) return undefined;
+  const [en, fr] = postLocale(post) === 'en' ? [post, other] : [other, post];
+  return { en: postUrl(en), fr: postUrl(fr) };
+}
+
+/** "12 March 2026" / "12 mars 2026". Long month, no ordinal, no weekday. */
+export function formatPostDate(date: Date, locale: Locale = 'en'): string {
+  return formatDate(date, locale);
 }
 
 /** YYYY-MM-DD, for <time datetime> and JSON-LD. */

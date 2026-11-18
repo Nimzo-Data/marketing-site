@@ -1,7 +1,19 @@
 ---
 import Button from '../ui/Button.astro';
-import { navItems, ctaLink } from '../../data/navigation';
+import LanguageSwitch from './LanguageSwitch.astro';
+import { getNavigation } from '../../data/navigation';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
 import LineIcon from '../ui/LineIcon.astro';
+
+interface Props {
+  locale: Locale;
+  paths?: Record<Locale, string>;
+}
+
+const { locale, paths } = Astro.props;
+const { navItems, ctaLink } = getNavigation(locale);
+const ui = t(locale).mobileMenu;
 ---
 
 <!-- Overlay backdrop -->
@@ -17,16 +29,17 @@ import LineIcon from '../ui/LineIcon.astro';
   class="mobile-menu"
   role="dialog"
   aria-modal="true"
-  aria-label="Navigation menu"
+  aria-label={ui.dialog}
   aria-hidden="true"
 >
   <!-- Menu header -->
   <div class="mobile-menu-header">
     <span class="mobile-logo">Nimzo Data</span>
+    <LanguageSwitch locale={locale} paths={paths} class="mobile-lang" />
     <button
       id="mobile-close-btn"
       class="mobile-close"
-      aria-label="Close navigation menu"
+      aria-label={ui.close}
       type="button"
     >
       <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -36,7 +49,7 @@ import LineIcon from '../ui/LineIcon.astro';
   </div>
 
   <!-- Nav links -->
-  <nav aria-label="Mobile navigation" class="mobile-nav">
+  <nav aria-label={ui.nav} class="mobile-nav">
     <ul class="mobile-nav-list" role="list">
       {navItems.map((item) => (
         <li class="mobile-nav-section">
@@ -49,14 +62,14 @@ import LineIcon from '../ui/LineIcon.astro';
               <button
                 type="button"
                 class="mobile-nav-toggle"
-                aria-expanded={item.label !== 'Technology' ? 'true' : 'false'}
+                aria-expanded={item.id !== 'technology' ? 'true' : 'false'}
               >
                 {item.label}
                 <svg class="mobile-nav-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class={`mobile-dropdown-body ${item.label !== 'Technology' ? 'is-expanded' : ''}`}>
+              <div class={`mobile-dropdown-body ${item.id !== 'technology' ? 'is-expanded' : ''}`}>
                 {item.groups.map((group) => (
                   <div class="mobile-group">
                     {group.groupLabel && (
@@ -218,6 +231,12 @@ import LineIcon from '../ui/LineIcon.astro';
   }
 
   /* Menu header row */
+  /* Language switch sits next to the close button. */
+  .mobile-menu-header :global(.mobile-lang) {
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
   .mobile-menu-header {
     display: flex;
     align-items: center;

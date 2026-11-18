@@ -3,6 +3,17 @@
 // Outer wrapper: BigQuery (everything lives in BigQuery).
 // Inside: Raw stage (with ingestion tools) -> Modeled-in-Dataform group (header + 4 layer cards: Staging, Intermediate, Mart, Reports).
 
+import type { Locale } from '../../i18n/locales';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = t(locale).diagrams.tameson;
+
 interface IngestionTool {
   name: string;
   logo?: string;
@@ -10,9 +21,9 @@ interface IngestionTool {
 }
 
 const ingestionTools: IngestionTool[] = [
-  { name: 'Dagster', logo: '/logos/dagster.svg', href: '/technologies/dagster/' },
+  { name: 'Dagster', logo: '/logos/dagster.svg', href: href('tech:dagster', locale) },
   { name: 'Datastream', logo: '/logos/datastream.svg' },
-  { name: 'Fivetran', logo: '/logos/fivetran.svg', href: '/technologies/fivetran/' },
+  { name: 'Fivetran', logo: '/logos/fivetran.svg', href: href('tech:fivetran', locale) },
   { name: 'Stitch', logo: '/logos/stitch.png' },
 ];
 
@@ -21,29 +32,24 @@ interface Layer {
   blurb: string;
 }
 
-const layers: Layer[] = [
-  { label: 'Staging',      blurb: '1:1 with raw. Renaming, casting, light cleaning.' },
-  { label: 'Intermediate', blurb: 'Joins and logic within a single domain.' },
-  { label: 'Mart',         blurb: 'Cross-domain business logic: facts and dimensions.' },
-  { label: 'Reports',      blurb: 'BI-ready OBT tables for Looker Studio.' },
-];
+const layers: Layer[] = ui.layers;
 ---
 
-<div class="tld" role="img" aria-label="Tameson Dataform layered architecture: raw data ingested via Dagster, Datastream, Fivetran, Stitch into BigQuery, then modeled in Dataform across staging, intermediate, mart, and reports layers.">
+<div class="tld" role="img" aria-label={ui.aria}>
   <div class="tld__bq">
     <div class="tld__bq-header">
-      <a href="/technologies/bigquery/" class="tld__bq-tag">
+      <a href={href('tech:bigquery', locale)} class="tld__bq-tag">
         <img src="/logos/bigquery.svg" alt="" class="tld__bq-logo" width="22" height="22" loading="lazy" />
         <span class="tld__bq-name">BigQuery</span>
       </a>
-      <span class="tld__bq-note">Everything lives in BigQuery</span>
+      <span class="tld__bq-note">{ui.bigQueryNote}</span>
     </div>
 
     <div class="tld__pipeline">
       <!-- Raw stage with ingestion tools inside -->
       <div class="tld__stage tld__stage--raw">
-        <p class="tld__stage-label tld__stage-label--plum">Raw</p>
-        <p class="tld__stage-blurb">Ingested via:</p>
+        <p class="tld__stage-label tld__stage-label--plum">{ui.raw}</p>
+        <p class="tld__stage-blurb">{ui.ingestedVia}</p>
         <div class="tld__tools-stack">
           {ingestionTools.map((t) => (
             t.href ? (
@@ -67,9 +73,9 @@ const layers: Layer[] = [
 
       <!-- Dataform-modeled layers -->
       <div class="tld__layers">
-        <a href="/technologies/dataform/" class="tld__layers-tag">
+        <a href={href('tech:dataform', locale)} class="tld__layers-tag">
           <img src="/logos/dataform.svg" alt="" class="tld__bq-logo" width="22" height="22" loading="lazy" />
-          <span class="tld__bq-name">Modeled in Dataform</span>
+          <span class="tld__bq-name">{ui.modeledIn}</span>
         </a>
         <div class="tld__layers-row">
           {layers.map((layer, i) => (

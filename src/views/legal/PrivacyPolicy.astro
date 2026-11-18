@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './privacy.en';
+import fr from './privacy.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/legal/privacy');
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+>
+  <SectionWrapper py="xl">
+    <div class="legal-content">
+      <h1>{c.l1}</h1>
+      <p class="meta">{c.l2}</p>
+
+      <p>
+        <Fragment set:html={c.l3Html} />
+      </p>
+
+      <h2>{c.l4}</h2>
+      <p>
+        <Fragment set:html={c.l5Html} />
+      </p>
+      <p>
+        <Fragment set:html={c.l6Html} />
+      </p>
+
+      <h2>{c.l7}</h2>
+      <p>{c.l8}</p>
+      <h3>{c.l9}</h3>
+      <ul>
+        {c.l10Html.map((html) => <li set:html={html} />)}
+      </ul>
+      <h3>{c.l11}</h3>
+      <ul>
+        {c.l12Html.map((html) => <li set:html={html} />)}
+      </ul>
+      <h3>{c.l13}</h3>
+      <p>
+        <Fragment set:html={c.l14Html} />
+      </p>
+
+      <h2>{c.l15}</h2>
+      <table class="data-table">
+        <thead>
+          <tr><th>{c.l16_1}</th><th>{c.l16_2}</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{c.l17}</td>
+            <td>{c.l18}</td>
+          </tr>
+          <tr>
+            <td>{c.l19}</td>
+            <td>{c.l20}</td>
+          </tr>
+          <tr>
+            <td>{c.l21}</td>
+            <td>{c.l22}</td>
+          </tr>
+          <tr>
+            <td>{c.l23}</td>
+            <td>{c.l24}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>{c.l25}</h2>
+      <p>
+        <Fragment set:html={c.l26Html} />
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr><th>{c.l27_1}</th><th>{c.l27_2}</th><th>{c.l27_3}</th><th>{c.l27_4}</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td set:html={c.l28Html}></td>
+            <td>{c.l29}</td>
+            <td>{c.l30}</td>
+            <td>{c.l31}</td>
+          </tr>
+          <tr>
+            <td set:html={c.l32Html}></td>
+            <td>{c.l33}</td>
+            <td>{c.l34}</td>
+            <td>{c.l35}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <Fragment set:html={c.l36Html} />
+      </p>
+      <p>
+        <Fragment set:html={c.l37Html} />
+      </p>
+
+      <h2>{c.l38}</h2>
+      <ul>
+        {c.l39Html.map((html) => <li set:html={html} />)}
+      </ul>
+
+      <h2>{c.l40}</h2>
+      <p>{c.l41}</p>
+      <ul>
+        {c.l42Html.map((html) => <li set:html={html} />)}
+      </ul>
+      <p>
+        <Fragment set:html={c.l43Html} />
+      </p>
+
+      <h2>{c.l44}</h2>
+      <p>
+        <Fragment set:html={c.l45Html} />
+      </p>
+
+      <h2>{c.l46}</h2>
+      <p>
+        <Fragment set:html={c.l47Html} />
+      </p>
+      <ul>
+        {c.l48Html.map((html) => <li set:html={html} />)}
+      </ul>
+      <p>
+        <Fragment set:html={c.l49Html} />
+      </p>
+      <p>
+        <Fragment set:html={c.l50Html} />
+      </p>
+
+      <h2>{c.l51}</h2>
+      <p>
+        <Fragment set:html={c.l52Html} />
+      </p>
+
+      <h2>{c.l53}</h2>
+      <p>
+        <Fragment set:html={c.l54Html} />
+      </p>
+
+      <h2>{c.l55}</h2>
+      <p>
+        <Fragment set:html={c.l56Html} />
+      </p>
+
+      <h2>{c.l57}</h2>
+      <p>
+        <Fragment set:html={c.l58Html} />
+      </p>
+    </div>
+  </SectionWrapper>
+</BaseLayout>
+
+<style>
+  .legal-content {
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .legal-content h1 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .legal-content h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 40px 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .legal-content h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+    margin: 24px 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .legal-content p {
+    margin: 0 0 16px 0;
+  }
+
+  .legal-content ul {
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+  }
+
+  .legal-content li {
+    margin: 0 0 8px 0;
+  }
+
+  .legal-content .meta {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin: 0 0 32px 0;
+  }
+
+  .legal-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .legal-content :global(a:hover) {
+    opacity: 0.75;
+  }
+
+  .legal-content :global(code) {
+    font-family: var(--font-mono, 'Menlo', 'Consolas', monospace);
+    font-size: 0.875rem;
+    background-color: var(--color-surface-subtle, #f3f4f6);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 24px 0;
+    font-size: 0.9375rem;
+  }
+
+  .data-table th {
+    background-color: var(--color-surface-subtle, #f3f4f6);
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  @media (max-width: 640px) {
+    .data-table {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+</style>

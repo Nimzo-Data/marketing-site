@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroLarge from '../../components/heroes/HeroLarge.astro';
+import ServiceCard from '../../components/cards/ServiceCard.astro';
+import ServiceChip from '../../components/ui/ServiceChip.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import ProblemOutcomeCards from '../../components/content/ProblemOutcomeCards.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import HomepageTestimonials from '../../components/content/HomepageTestimonials.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { getTechnologiesForGrid } from '../../data/technologies';
+import { getAudience } from '../../data/audience';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './home.en';
+import fr from './home.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/home');
+const { isFor: isForItems, isNot: isNotForItems } = getAudience(locale);
+
+const problemRows: { problem: [string, string]; outcome: [string, string] }[] = c.problemRows;
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  ogTitle={c.ogTitle}
+  description={c.metaDescription}
+>
+  <!-- Section 1: Hero -->
+  <HeroLarge
+    title={c.heroTitle}
+    subtitle={c.heroSubtitle}
+    primaryCta={{ text: c.heroCta, href: href('contact', locale), dataTrack: 'hero-lets-talk' }}
+  />
+
+  <!-- Section 1b: Problems we solve -->
+  <SectionWrapper bg="white" py="lg" class="problems-section">
+    <h2 class="section-heading">{c.problemsHeading}</h2>
+    <ProblemOutcomeCards locale={locale} rows={problemRows} />
+  </SectionWrapper>
+
+  <!-- Section 2: Services. The cards say what each service is; "Where to start"
+       shows the routes: Audit then Build or Improve, Improve directly, Support
+       directly or after either. Build is never bought without an audit. -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">{c.servicesHeading}</h2>
+    <div class="svc-grid">
+      <ServiceCard locale={locale}
+        size="compact"
+        icon="audit"
+        title={c.auditTitle}
+        description={c.auditDescription}
+        priceRange={c.auditPrice}
+        timeline={c.auditTimeline}
+        href={href('audit', locale)}
+        linkText={c.auditLink}
+        dataTrack="home-card-audit"
+      />
+      <ServiceCard locale={locale}
+        size="compact"
+        icon="build"
+        title={c.buildTitle}
+        description={c.buildDescription}
+        priceRange={c.buildPrice}
+        timeline={c.buildTimeline}
+        href={href('build', locale)}
+        linkText={c.buildLink}
+        dataTrack="home-card-build"
+      />
+      <ServiceCard locale={locale}
+        size="compact"
+        icon="improve"
+        title={c.improveTitle}
+        description={c.improveDescription}
+        priceRange={c.improvePrice}
+        timeline={c.improveTimeline}
+        href={href('improve', locale)}
+        linkText={c.improveLink}
+        dataTrack="home-card-improve"
+      />
+      <ServiceCard locale={locale}
+        size="compact"
+        icon="support"
+        title={c.supportTitle}
+        description={c.supportDescription}
+        priceRange={c.supportPrice}
+        timeline={c.supportTimeline}
+        href={href('support', locale)}
+        linkText={c.supportLink}
+        dataTrack="home-card-support"
+      />
+    </div>
+
+    <div class="svc-routes">
+      <h3 class="svc-routes__title">{c.routesTitle}</h3>
+      <ul class="svc-routes__list" role="list">
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">{c.routeScratchSituation}</p>
+            <p class="svc-route__note">{c.routeScratchNote}</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label={c.routeScratchAria}>
+            <span class="svc-route__unit"><ServiceChip locale={locale} service="audit" dataTrack="home-route-audit" /><span class="svc-route__arrow" aria-hidden="true">&rarr;</span></span>
+            <span class="svc-route__unit"><ServiceChip locale={locale} service="build" dataTrack="home-route-audit-build" /><span class="svc-route__or">{c.routeOr}</span><ServiceChip locale={locale} service="improve" dataTrack="home-route-audit-improve" /></span>
+          </div>
+        </li>
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">{c.routeKnownSituation}</p>
+            <p class="svc-route__note">{c.routeKnownNote}</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label={c.routeKnownAria}><ServiceChip locale={locale} service="improve" dataTrack="home-route-improve-direct" /></div>
+        </li>
+        <li class="svc-route">
+          <div class="svc-route__when">
+            <p class="svc-route__situation">{c.routeSupportSituation}</p>
+            <p class="svc-route__note">{c.routeSupportNote}</p>
+          </div>
+          <div class="svc-route__path" role="group" aria-label={c.routeSupportAria}><ServiceChip locale={locale} service="support" dataTrack="home-route-support" /></div>
+        </li>
+      </ul>
+    </div>
+  </SectionWrapper>
+
+  <!-- Section 3: Who we work with -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">{c.audienceHeading}</h2>
+    <TwoColumnSplit
+      variant="is-for"
+      bare
+      leftTitle={c.audienceForTitle}
+      leftItems={isForItems}
+      rightTitle={c.audienceNotTitle}
+      rightItems={isNotForItems}
+    />
+  </SectionWrapper>
+
+  <!-- Section 4: How we work -->
+  <SectionWrapper bg="white" py="lg">
+    <h2 class="section-heading">{c.processHeading}</h2>
+    <ProcessSteps
+      steps={c.processSteps}
+    />
+  </SectionWrapper>
+
+  <!-- Section 5: Why GCP only -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="gcp-section">
+      <div class="gcp-intro">
+        <img src="/logos/googlecloud.svg" alt="" aria-hidden="true" class="gcp-logo" width="48" height="48" />
+        <h2 class="section-heading gcp-heading" set:html={c.gcpHeadingHtml}></h2>
+      </div>
+      <div class="reasons">
+        <div class="reason">
+          <h3 class="reason-title">{c.gcpReason1Title}</h3>
+          <p>{c.gcpReason1Body}</p>
+        </div>
+        <div class="reason">
+          <h3 class="reason-title">{c.gcpReason2Title}</h3>
+          <p>{c.gcpReason2Body}</p>
+        </div>
+        <div class="reason">
+          <h3 class="reason-title">{c.gcpReason3Title}</h3>
+          <p>{c.gcpReason3Body}</p>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Section 6: Technology grid -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="tech-header">
+      <h2 class="section-heading">{c.toolsHeading}</h2>
+      <p class="section-sub">{c.toolsSub}</p>
+    </div>
+    <LogoGrid locale={locale} technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
+    <p class="see-all-link">
+      <a href={href('technologies', locale)} set:html={c.toolsLinkHtml}></a>
+    </p>
+  </SectionWrapper>
+
+  <!-- Section 7: Testimonials -->
+  <SectionWrapper bg="white" py="lg">
+    <div class="tech-header">
+      <h2 class="section-heading">{c.testimonialsHeading}</h2>
+    </div>
+    <HomepageTestimonials locale={locale} />
+  </SectionWrapper>
+
+  <!-- Section 8: Final CTA -->
+  <CTABanner locale={locale} dataTrack="homepage-cta-banner" />
+</BaseLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 40px 0;
+    line-height: 1.25;
+  }
+
+  .text-center-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .prose p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+  }
+
+  .gcp-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .gcp-section {
+      grid-template-columns: minmax(220px, 1fr) 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+  }
+
+  .gcp-logo {
+    display: block;
+    margin: 0 0 16px 0;
+    width: 48px;
+    height: 48px;
+  }
+
+  .gcp-heading {
+    margin: 0;
+  }
+
+  .reasons {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .reason-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .reason p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  .tech-header {
+    margin-bottom: 32px;
+  }
+
+  .tech-header .section-heading {
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .svc-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .svc-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Where to start: one row per route, situation left, service chips right. */
+  .svc-routes {
+    margin-top: 48px;
+  }
+
+  .svc-routes__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 12px 0;
+  }
+
+  .svc-routes__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .svc-route {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .svc-route:first-child {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .svc-route {
+      /* Fixed chip column: wide enough for "Audit → Build or Improve" on one
+         line, the same in every row so the chips line up, and the rest goes to
+         the situation text so each note fits on one line on desktop. */
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 24px;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .svc-route {
+      gap: 32px;
+    }
+  }
+
+  .svc-route__situation {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.4;
+    margin: 0 0 2px 0;
+  }
+
+  .svc-route__note {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .svc-route__path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+  }
+
+  /* Wrapping only happens between units: "Audit →" | "Build or Improve". */
+  .svc-route__unit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  .svc-route__arrow {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-brand-plum);
+    font-size: 1.25rem;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  .svc-route__or {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -11,6 +11,9 @@
 // one, so a later post can drop the annotations, move the highlight, or change
 // a caption without a second copy of the component.
 
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 export interface PlatformLayer {
   label: string;
   caption: string;
@@ -30,6 +33,7 @@ export interface LayerBracket {
 }
 
 interface Props {
+  locale: Locale;
   layers?: PlatformLayer[];
   /** Layer label to give the accent border. Null leaves every box neutral. */
   highlight?: string | null;
@@ -41,16 +45,9 @@ interface Props {
   ariaLabel: string;
 }
 
-const defaultLayers: PlatformLayer[] = [
-  { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, a database' },
-  { label: 'Ingestion', caption: 'Airbyte' },
-  { label: 'Warehouse', caption: 'BigQuery' },
-  { label: 'Transformation', caption: 'Dataform or dbt: models, tests, lineage' },
-  { label: 'BI', caption: 'dashboards, metrics, analysis' },
-];
 
 const {
-  layers = defaultLayers,
+  layers = t(Astro.props.locale).diagrams.platformLayers,
   highlight = null,
   annotations = [],
   brackets = [],

@@ -1,7 +1,11 @@
 ---
-import { founder, founderClients } from '../../data/founder';
+import { getFounder, getFounderClients } from '../../data/founder';
+import type { Locale } from '../../i18n/locales';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
 
 interface Props {
+  locale: Locale;
   /**
    * 'full' = the About block. 'compact' = one line beside a CTA.
    * 'byline' = the author block at the foot of a blog post: the same photo
@@ -15,8 +19,10 @@ interface Props {
 // The compact variant deliberately omits the LinkedIn link: it sits directly
 // under the primary CTA, and an outbound link at the conversion point competes
 // with it. The link belongs on the full block on About.
-const { variant = 'full', tone = 'light' } = Astro.props;
-const { name, role, photo, photoAlt, linkedin, background, bylineLine, recentWork, seniority, ctaLine } = founder;
+const { locale, variant = 'full', tone = 'light' } = Astro.props;
+const { name, role, photo, photoAlt, linkedin, background, bylineLine, recentWork, seniority, ctaLine } = getFounder(locale);
+const founderClients = getFounderClients(locale);
+const ui = t(locale).components.founder;
 ---
 
 <div class={`founder founder--${variant} founder--${tone}`}>
@@ -41,7 +47,7 @@ const { name, role, photo, photoAlt, linkedin, background, bylineLine, recentWor
           {background} {recentWork}{' '}
           {founderClients.map((c, i) => (
             <>
-              {i > 0 && (i === founderClients.length - 1 ? ' and ' : ', ')}
+              {i > 0 && (i === founderClients.length - 1 ? ui.and : ', ')}
               <a href={c.href} class="founder-client">{c.name}</a>{i === founderClients.length - 1 ? '.' : ''}
             </>
           ))}
@@ -60,8 +66,8 @@ const { name, role, photo, photoAlt, linkedin, background, bylineLine, recentWor
       <>
         <p class="founder-byline-name">{name}, {role}</p>
         <p class="founder-byline-line">{bylineLine}</p>
-        <a href="/about/" class="founder-byline-link">
-          More about Antoine
+        <a href={href('about', locale)} class="founder-byline-link">
+          {ui.moreAbout}
           <span aria-hidden="true" class="founder-byline-arrow">&rarr;</span>
         </a>
       </>

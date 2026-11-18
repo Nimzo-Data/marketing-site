@@ -2,6 +2,16 @@
 // Data Platform Diagram — v4
 // Tool cards that link to their tech page have hover (lift + plum border).
 // "+ and more" tile at the bottom of Sources spans the two-column grid.
+import type { Locale } from '../../i18n/locales';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = t(locale).diagrams.dataPlatform;
 
 interface Tool {
   name: string;
@@ -21,32 +31,32 @@ const sources: Tool[] = [
 ];
 
 const ingestionTools: Tool[] = [
-  { name: 'Airbyte', logo: '/logos/airbyte.svg', href: '/technologies/airbyte/' },
-  { name: 'Fivetran', logo: '/logos/fivetran.svg', href: '/technologies/fivetran/' },
+  { name: 'Airbyte', logo: '/logos/airbyte.svg', href: href('tech:airbyte', locale) },
+  { name: 'Fivetran', logo: '/logos/fivetran.svg', href: href('tech:fivetran', locale) },
 ];
 
 const warehouseTools: Tool[] = [
-  { name: 'BigQuery', logo: '/logos/bigquery.svg', href: '/technologies/bigquery/' },
+  { name: 'BigQuery', logo: '/logos/bigquery.svg', href: href('tech:bigquery', locale) },
 ];
 
 const transformationTools: Tool[] = [
-  { name: 'Dataform', logo: '/logos/dataform.svg', href: '/technologies/dataform/' },
-  { name: 'dbt', logo: '/logos/dbt.svg', href: '/technologies/dbt/' },
+  { name: 'Dataform', logo: '/logos/dataform.svg', href: href('tech:dataform', locale) },
+  { name: 'dbt', logo: '/logos/dbt.svg', href: href('tech:dbt', locale) },
 ];
 
 const biTools: Tool[] = [
-  { name: 'Looker', logo: '/logos/looker.svg', href: '/technologies/looker/' },
-  { name: 'Lightdash', logo: '/logos/lightdash.svg', href: '/technologies/lightdash/' },
-  { name: 'Metabase', logo: '/logos/metabase.svg', href: '/technologies/metabase/' },
-  { name: 'Steep', logo: '/logos/steep.svg', href: '/technologies/steep/' },
+  { name: 'Looker', logo: '/logos/looker.svg', href: href('tech:looker', locale) },
+  { name: 'Lightdash', logo: '/logos/lightdash.svg', href: href('tech:lightdash', locale) },
+  { name: 'Metabase', logo: '/logos/metabase.svg', href: href('tech:metabase', locale) },
+  { name: 'Steep', logo: '/logos/steep.svg', href: href('tech:steep', locale) },
 ];
 ---
 
-<div class="dpd" role="img" aria-label="Nimzo Data platform diagram: sources flow through ETL into BigQuery, are transformed, then surfaced in BI tools. Dagster orchestrates across all stages.">
+<div class="dpd" role="img" aria-label={ui.aria}>
   <div class="dpd__pipeline">
     <!-- Sources -->
     <div class="dpd__stage dpd__area-sources">
-      <p class="dpd__stage-label">Sources</p>
+      <p class="dpd__stage-label">{ui.sources}</p>
       <div class="dpd__sources-grid">
         {sources.map((s) => (
           <div class="dpd__tool">
@@ -55,7 +65,7 @@ const biTools: Tool[] = [
           </div>
         ))}
         <div class="dpd__tool dpd__tool--more">
-          <span class="dpd__tool-name">+ and more</span>
+          <span class="dpd__tool-name">{ui.andMore}</span>
         </div>
       </div>
     </div>
@@ -67,7 +77,7 @@ const biTools: Tool[] = [
 
     <!-- ETL -->
     <div class="dpd__stage dpd__area-etl">
-      <p class="dpd__stage-label">ETL / ELT</p>
+      <p class="dpd__stage-label">{ui.etl}</p>
       <div class="dpd__tools-stack">
         {ingestionTools.map((t) => (
           t.href ? (
@@ -92,7 +102,7 @@ const biTools: Tool[] = [
 
     <!-- Warehouse -->
     <div class="dpd__stage dpd__area-warehouse">
-      <p class="dpd__stage-label">Warehouse</p>
+      <p class="dpd__stage-label">{ui.warehouse}</p>
       <div class="dpd__tools-stack">
         {warehouseTools.map((t) => (
           t.href ? (
@@ -117,7 +127,7 @@ const biTools: Tool[] = [
 
     <!-- BI -->
     <div class="dpd__stage dpd__area-bi">
-      <p class="dpd__stage-label">Business Intelligence</p>
+      <p class="dpd__stage-label">{ui.bi}</p>
       <div class="dpd__tools-stack">
         {biTools.map((t) => (
           t.href ? (
@@ -147,7 +157,7 @@ const biTools: Tool[] = [
 
     <!-- Transformation -->
     <div class="dpd__stage dpd__area-transformation">
-      <p class="dpd__stage-label">Transformation</p>
+      <p class="dpd__stage-label">{ui.transformation}</p>
       <div class="dpd__tools-stack">
         {transformationTools.map((t) => (
           t.href ? (
@@ -168,9 +178,9 @@ const biTools: Tool[] = [
 
   <!-- Orchestration -->
   <div class="dpd__stage dpd__stage--orchestration">
-    <p class="dpd__stage-label dpd__stage-label--plum">Orchestration</p>
+    <p class="dpd__stage-label dpd__stage-label--plum">{ui.orchestration}</p>
     <div class="dpd__tools-stack dpd__tools-stack--centered">
-      <a href="/technologies/dagster/" class="dpd__tool dpd__tool--link dpd__tool--dagster">
+      <a href={href('tech:dagster', locale)} class="dpd__tool dpd__tool--link dpd__tool--dagster">
         <img src="/logos/dagster.svg" alt="" class="dpd__tool-logo" width="22" height="22" loading="lazy" />
         <span class="dpd__tool-name">Dagster</span>
       </a>

@@ -1,0 +1,60 @@
+---
+// Link to the same page in the other language. A plain link: no redirect, no
+// remembered preference. Renders nothing while French isn't built, or when the
+// page has no counterpart (a page shared by both languages, the 404).
+import type { Locale } from '../../i18n/locales';
+import { frenchBuilt } from '../../i18n/flags';
+
+interface Props {
+  locale: Locale;
+  paths?: Record<Locale, string>;
+  class?: string;
+}
+
+const { locale, paths, class: className } = Astro.props;
+const target: Locale = locale === 'fr' ? 'en' : 'fr';
+const show = frenchBuilt && paths && paths.en !== paths.fr;
+
+// Each label is written in the language it leads to.
+const labels: Record<Locale, { short: string; long: string }> = {
+  en: { short: 'EN', long: 'English version' },
+  fr: { short: 'FR', long: 'Version française' },
+};
+---
+
+{show && (
+  <a
+    href={paths[target]}
+    hreflang={target}
+    lang={target}
+    class:list={['lang-switch', className]}
+    aria-label={labels[target].long}
+    data-lang-switch
+  >
+    {labels[target].short}
+  </a>
+)}
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  .lang-switch:hover,
+  .lang-switch:focus-visible {
+    opacity: 1;
+  }
+</style>

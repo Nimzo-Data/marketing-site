@@ -1,7 +1,12 @@
 // Founder identity, used by the full block on About and the compact line
 // attached to the CTA on the homepage. Single source so the bio, photo and
 // LinkedIn URL are edited in one place.
-import { caseStudies } from './caseStudies';
+import { getCaseStudies } from './caseStudies';
+import type { Locale } from '../i18n/locales';
+import { pickCopy } from '../i18n/copy';
+import { href, type RouteId } from '../i18n/routes';
+import en from './founder.en';
+import fr from './founder.fr';
 
 export interface Founder {
   name: string;
@@ -29,42 +34,24 @@ export interface Founder {
   ctaLine: string;
 }
 
-export const founder: Founder = {
+const identity = {
   name: 'Antoine Anicotte',
-  role: 'Founder',
-
   photo: '/images/antoine-anicotte.jpg',
-  photoAlt: 'Antoine Anicotte, founder of Nimzo Data',
-
   // LinkedIn canonicalises to the form without a trailing slash; using it
   // directly avoids sending every visitor through a redirect.
   linkedin: 'https://www.linkedin.com/in/antoine-anicotte',
-
-  background:
-    'Fifteen years in analytics and data engineering, across Europe and the US, now exclusively on Google Cloud.',
-
-  bylineLine:
-    'Fifteen years in analytics and data engineering, twelve of them on Google Cloud, in-house and freelance across Europe, Asia and the US.',
-  recentWork:
-    'Recent work: European e-commerce companies, consumer and industrial, including',
   clientSlugs: ['aeyde', 'tameson'],
-
-  // "No handoff to a team you never saw on a call" was dropped here: it made
-  // the same promise as the sentence before it, and four sentences read heavy
-  // in the block.
-  seniority: [
-    'Nimzo Data is deliberately small.',
-    'Antoine scopes every project and stays accountable for it end to end.',
-    "Anyone who works on your platform, you've met.",
-  ],
-
-  ctaLine:
-    "You'll talk with Antoine, the founder. The person on the call is the person accountable for the work.",
 };
 
+export function getFounder(locale: Locale): Founder {
+  return { ...identity, ...pickCopy({ en, fr }, locale, 'data/founder') };
+}
+
 /** Client name + case study URL for each slug in `clientSlugs`. */
-export const founderClients = founder.clientSlugs.map((slug) => {
-  const cs = caseStudies.find((c) => c.slug === slug);
-  if (!cs) throw new Error(`founder.clientSlugs: no case study "${slug}"`);
-  return { name: cs.client, href: `/case-studies/${cs.slug}/` };
-});
+export function getFounderClients(locale: Locale): { name: string; href: string }[] {
+  return identity.clientSlugs.map((slug) => {
+    const cs = getCaseStudies(locale).find((c) => c.slug === slug);
+    if (!cs) throw new Error(`founder.clientSlugs: no case study "${slug}"`);
+    return { name: cs.client, href: href(cs.slug as RouteId, locale) };
+  });
+}
