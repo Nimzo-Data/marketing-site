@@ -17,7 +17,8 @@ The terms and rules the French site uses. Every recurring fix from review goes h
 - Type ordinary spaces before `: ; ? !` and inside « ». The site turns them into non-breaking spaces (`src/i18n/typography.ts`).
 - Use « guillemets » for quotes. Use the typographic apostrophe ’.
 - Prices: `3 000 €`, `15 000 – 50 000 €`, `950 € par mois`. Prices listed in `src/data/prices.ts` are formatted by `eur()` / `eurRange()`.
-- Write "HT" after monthly prices where the English says "excl. VAT".
+- Write « HT » after every price shown to a buyer, not only monthly ones: home service cards, audit, build and improve amounts and labels, support tier prices (`${eur(...)} HT par mois`, `${eurRange(...)} HT`). In running text, once per sentence is enough.
+- Full amounts in running text (« 200 000 € »). « k€ » only in headings. Ranges in running text use « 84 à 90 % », not an en dash.
 - Durations: "1 à 2 semaines", "8 à 16 semaines". Keep the en dash in compact ranges such as "2–3 sources".
 - Hours: "9 h – 18 h, heure de Paris".
 - Dates: "9 septembre 2026".
@@ -43,10 +44,10 @@ These names are written with a capital letter when they name the service ("un pr
 | report | rapport |
 | metric | indicateur |
 | KPI | KPI (kept) |
-| spreadsheet | tableur, or fichiers Excel / Google Sheets when it reads better |
+| spreadsheet | fichiers Excel, Google Sheets (never « tableur », which no buyer says) |
 | handover | passation |
 | retainer, monthly plan | forfait mensuel |
-| on call | d’astreinte |
+| on call, monitored | « qui surveille », « qui veille sur » (never « d’astreinte »: support is business hours only) |
 | fixed price | prix fixe, au forfait |
 | quote (noun) | devis |
 | proposal | proposition |
@@ -106,7 +107,55 @@ Give the French term and the English one in brackets the first time on a page, t
 | Learn more | En savoir plus |
 | See Audit / See Build … | Voir l’Audit / Voir la Construction … |
 | Not sure this is the right fit? | Vous hésitez ? |
-| What brings most clients here. | Ce qui amène la plupart de nos clients. |
+| What brings most clients here. | Les situations que nous rencontrons le plus souvent. |
 | Common questions. | Questions fréquentes. |
-| No sales pitch. | Sans discours commercial. |
+| No sales pitch. | Sans engagement. |
 | Based in France. Serving Europe. | Basés en France. Clients dans toute l’Europe. |
+
+## Avoid
+
+Words that read as translated or bookish to a French buyer, found in review:
+
+- « goulot » / « goulot d’étranglement » for a person: say what happens instead (« tout passe par une seule personne », « une seule personne détient tout »).
+- « tableur »: say « fichiers Excel » or « Google Sheets ».
+- « goulot » / « point de défaillance unique » for a person → « tout repose sur une seule personne ».
+- « astreinte » / « d’astreinte »: support is business hours → « qui surveille », « qui veille sur ».
+- « ingénierie senior », « data engineering senior » → « des ingénieurs seniors », « un data engineer senior ». One term: « data engineer senior », not « ingénieur senior » or « aide senior ».
+- « secrets » (in code) → « clés et mots de passe ».
+- « vit / vivent » for where data, definitions or software sit → « se trouve », « est défini », « s’exécute ».
+- « juste » for accurate (« à jour et juste ») → « fiable », « exact ».
+- « répond du travail » → « est responsable du travail ».
+- « Comment X a fait Y » case-study headlines → nominal: « Aeyde : tableaux de bord Looker qui chargent en quelques secondes ».
+- « aide sur », « besoin d’aide sur X » → « aide avec X ».
+- « verrouillé » → « sécurisé »; « en dessous » (underneath) → « en coulisses ».
+- Tier names take an article: « l’offre Maintien », « passer à l’offre Maintien », « dans les offres Évolution et Pilotage ». Never bare « au Maintien », « dans Maintien ».
+- « remonter » for moving to a higher tier → « repasser à l’offre supérieure ».
+- Layer names: « staging, intermédiaire, marts, rapports » (never « sorties », never « transformation et reporting »). « jeux de données » for datasets.
+- One term for the metric layer: « indicateurs gouvernés », not « définitions validées ».
+- « dossier du conseil », not « rapports pour le conseil »; « fuseau horaire », not « fuseau ».
+- « à la date de » (as of) → « en septembre 2026 ».
+- « coût de la prise en charge » for cost of ownership → « coût de possession ».
+- « digne de la production », « de niveau production » (production-grade) → « prêt pour la production ».
+- « de niveau grande entreprise » (enterprise-grade) → « adapté aux grandes entreprises ».
+- « très investi sur X » → « avoir beaucoup investi dans X ».
+- « propre » for clean (« passation propre », « stockage propre ») → say what it is: « passation soignée ».
+- « parties prenantes » → « décideurs », « équipes concernées ».
+- « sans cérémonie », « d’origine », « de la catégorie » → « sans lourdeur », « en standard », « du marché ».
+- « analytique embarquée » → « BI embarquée »; « sur-dimensionnement » → « surdimensionné »; « le data engineering » is masculine.
+- « onglets d’union » → « onglets de consolidation »; « dans le métier » (in the industry) → drop it or « chez les professionnels ».
+- « GCP » in prose → « Google Cloud » (« GCP » stays only in tool-page titles and slugs).
+- « frais de mise en œuvre » for our fee → « honoraires de mise en œuvre ».
+- « déboguer » for exports, connectors, breakdowns → « corriger », « dépanner ».
+- « au niveau client / produit / commande » → « par client », « par produit », « par commande »; « au-dessus de » (on top of) → « à partir de », « en plus de ».
+- « Attribut / Détails » table headers → « Élément / Détail »; « Effet : » on quick wins → « Bénéfice attendu : ».
+- « tableaux de bord » for dashboards, not a mix with « rapports Data Studio » for the same object (except in a tool name).
+- « casser / cassé / casse » for failures → « tomber en panne », « ne fonctionne plus », « dysfonctionnement ». Keep it for one or two punchy lines.
+- « un vrai X » (a real X) → « un X concret », « complet », « à part entière ».
+- « de niveau », « capacités », « asynchrone par défaut », « démo », « installation » (setup), « le livrable vous reste » → « ingénieurs seniors », « nouveaux chantiers », « par écrit par défaut », « démonstration », « dispositif actuel ».
+- « entreprises européennes en croissance » → « PME et ETI en croissance » (address the reader; Europe only in the location line).
+- « sans discours commercial », « avis franc » → « sans engagement », « avis sans détour ».
+- « plus de » for « fini le » (inverted logic): check every « plus de temps perdu ».
+- « expérience de développement » → « confort de développement »; « cela achète », « de manière fiable » → rephrase with the natural French verb.
+- Mixed terms: « ordonnanceur » (not « orchestrateur », outside the Dagster tool page), « rachat » (not « acquisition »).
+- Capitals in running text: « la présente politique de confidentialité », « les présentes conditions générales d’utilisation ». Capitals only in headings and page-name links.
+- Legal wording: « dans toute la mesure permise par la loi », « né de » / « lié à » (not « découlant de … ou s’y rapportant »), « appropriées » for « reasonable » measures, « art. 6, § 1, point f) ».

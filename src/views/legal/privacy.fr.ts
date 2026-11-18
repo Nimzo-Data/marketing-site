@@ -105,7 +105,7 @@ personnelles, notamment le chiffrement des échanges (HTTPS), le contrôle des a
   l54Html: `Nos services ne s’adressent pas aux enfants de moins de 16 ans, et nous ne collectons pas sciemment de
 données personnelles les concernant.`,
   l55: "11. Modification de la présente politique",
-  l56Html: `Nous pouvons mettre à jour la présente Politique de confidentialité pour tenir compte de l’évolution de nos pratiques ou de nos obligations légales. Toute modification substantielle sera signalée en haut de cette page, avec une
+  l56Html: `Nous pouvons mettre à jour la présente politique de confidentialité pour tenir compte de l’évolution de nos pratiques ou de nos obligations légales. Toute modification substantielle sera signalée en haut de cette page, avec une
 nouvelle date de « Dernière mise à jour ».`,
   l57: "12. Contact",
   l58Html: `Pour toute question relative à la protection de vos données personnelles, écrivez-nous à

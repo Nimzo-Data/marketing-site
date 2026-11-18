@@ -4,7 +4,7 @@ const copy: Copy = {
   title: "Consultant Metabase sur BigQuery | Nimzo Data",
   description: "Mise en place de Metabase sur BigQuery : tableaux de bord, indicateurs gouvernés, assistant IA Metabot et options de déploiement souples (cloud ou auto-hébergé).",
   toolCategory: "Business Intelligence",
-  heroPositioning: "Metabase est une BI en libre-service pour les équipes qui veulent un accès large, un vrai assistant IA, et la possibilité d’auto-héberger sans budget de grande entreprise.",
+  heroPositioning: "Metabase est une BI en libre-service pour les équipes qui veulent un accès large, un assistant IA complet, et la possibilité d’auto-héberger sans budget de grande entreprise.",
   title2: "Comment nous l’utilisons",
   items: [
         "Mettre en place Metabase : Cloud pour un service managé, ou auto-hébergé sur Cloud Run / GKE pour garder la main",
@@ -19,7 +19,7 @@ const copy: Copy = {
         {
           heading: 'Choisissez Metabase quand :',
           bullets: [
-            'Vous voulez une BI en libre-service avec un vrai assistant IA, à un prix raisonnable',
+            'Vous voulez une BI en libre-service avec un assistant IA complet, à un prix raisonnable',
             "Vous voulez pouvoir auto-héberger (Community Edition gratuite, Pro auto-hébergé payant)",
             "Vous voulez les fonctions d’IA de Metabot avec votre propre clé Anthropic, y compris en auto-hébergé",
             'Votre équipe mêle utilisateurs techniques et non techniques',

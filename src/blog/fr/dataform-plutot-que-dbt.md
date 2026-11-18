@@ -1,6 +1,6 @@
 ---
 title: "dbt est le meilleur outil. Dataform est le meilleur choix."
-description: "Pour une entreprise avec zéro ou un profil data, le coût qui compte est celui de la prise en charge, pas de la licence. Pourquoi nous choisissons Dataform par défaut sur BigQuery, où dbt l’emporte, et ce que nous répondons à un acheteur qui arrive avec dbt déjà décidé."
+description: "Pour une entreprise avec zéro ou un profil data, le coût qui compte est celui de la possession, pas de la licence. Pourquoi nous choisissons Dataform par défaut sur BigQuery, où dbt l’emporte, et ce que nous répondons à un acheteur qui arrive avec dbt déjà décidé."
 pubDate: 2026-09-09
 draft: false
 translationOf: dataform-not-dbt
@@ -18,7 +18,7 @@ Presque tout ce qui concerne le travail d’un développeur. La documentation es
 
 Il y a ensuite l’IA. Les modèles eux-mêmes sont du SQL ordinaire dans les deux outils, et Dataform a repris la structure de projet de dbt : un assistant IA écrit donc aussi bien un modèle de staging pour l’un que pour l’autre. L’écart se situe dans tout ce qui entoure le SQL : syntaxe de configuration, ligne de commande, packages, conventions de projet. Là, Claude Code, Cursor et les autres connaissent dbt bien mieux, parce qu’il y en a bien plus en ligne pour apprendre. Un analyste seul obtient aujourd’hui une meilleure aide de l’IA sur un projet dbt que sur un projet Dataform.
 
-Si vous employez deux ou trois personnes qui vivent toute la journée dans une base de code de transformation, dbt est le bon choix et nous le dirons dès le premier appel.
+Si vous employez deux ou trois personnes qui passent leurs journées dans une base de code de transformation, dbt est le bon choix et nous le dirons dès le premier appel.
 
 C’est la comparaison que propose tout article « dbt ou Dataform ». Tableau de fonctionnalités, taille de l’écosystème, portabilité entre entrepôts, verdict. Il est écrit pour des équipes qui ont des data engineers. La plupart des entreprises avec lesquelles nous travaillons en ont zéro ou un, et [ce poste est tenu par un analyste](/fr/blog/premier-data-analyst-plateforme-data/).
 
@@ -54,9 +54,9 @@ Rien de cela n’est énorme. Mais on paie alors pour un outillage de développe
 
 Nous devons formuler l’argument le plus fort contre notre propre choix par défaut, parce que des clients l’entendront de quelqu’un.
 
-Google a racheté Dataform en 2020, et son passé avec les produits rachetés ne rassure personne. Lisez les notes de version de Dataform pour 2025 et 2026 : la plupart des entrées concernent des contrôles d’accès, des politiques d’organisation, des modes de sécurité et des options de chiffrement. Utile aux administrateurs d’entreprise, invisible pour l’analyste qui écrit du SQL. L’expérience de développement a peu bougé depuis la disponibilité générale en 2023. Pendant ce temps, dbt a livré un nouveau moteur, et les outils de codage IA ont appris dbt.
+Google a racheté Dataform en 2020, et son passé avec les produits rachetés ne rassure personne. Lisez les notes de version de Dataform pour 2025 et 2026 : la plupart des entrées concernent des contrôles d’accès, des politiques d’organisation, des modes de sécurité et des options de chiffrement. Utile aux administrateurs d’entreprise, invisible pour l’analyste qui écrit du SQL. Le confort de développement a peu bougé depuis la disponibilité générale en 2023. Pendant ce temps, dbt a livré un nouveau moteur, et les outils de codage IA ont appris dbt.
 
-Ce qui nous rassure, c’est ce que Dataform est devenu. Il a cessé d’être un produit pour devenir une fonctionnalité de BigQuery. Il vit dans la console BigQuery, les notes de version décrivent désormais les workflows Dataform et les pipelines BigQuery comme un seul système, et les ajouts récents, une gestion centralisée des versions reliée à Git en juillet 2026 et un serveur MCP en août 2026 pour que des agents IA puissent piloter un dépôt Dataform, sont des investissements dans BigQuery autant que dans Dataform. Google arrête des produits autonomes. Il n’arrête pas des fonctionnalités de l’un de ses services de données centraux. Pour un rachat, celui-ci a été absorbé plutôt qu’abandonné.
+Ce qui nous rassure, c’est ce que Dataform est devenu. Il a cessé d’être un produit pour devenir une fonctionnalité de BigQuery. Il se trouve dans la console BigQuery, les notes de version décrivent désormais les workflows Dataform et les pipelines BigQuery comme un seul système, et les ajouts récents, une gestion centralisée des versions reliée à Git en juillet 2026 et un serveur MCP en août 2026 pour que des agents IA puissent piloter un dépôt Dataform, sont des investissements dans BigQuery autant que dans Dataform. Google arrête des produits autonomes. Il n’arrête pas des fonctionnalités de l’un de ses services de données centraux. Pour un rachat, celui-ci a été absorbé plutôt qu’abandonné.
 
 ## Quand un acheteur arrive avec dbt déjà choisi
 
@@ -76,7 +76,7 @@ Un projet dbt existant qui fonctionne. Une couche de transformation qui marche v
 
 Une équipe qui connaît dbt de ses emplois précédents. La familiarité est un atout, et aller à son encontre coûte de l’argent au client.
 
-Lightdash OSS avec accès pour des agents IA. C’est le seul cas où l’architecture tranche. L’édition open source de Lightdash ne peut pas exposer ses indicateurs à des agents IA externes sans clé de licence payante ; l’autre voie passe par la couche sémantique de dbt Cloud. Partout ailleurs, la couche sémantique vit dans l’outil de BI, que ce soit Steep, Metabase, Lightdash Cloud ou Looker, et Dataform en dessous n’y perd rien.
+Lightdash OSS avec accès pour des agents IA. C’est le seul cas où l’architecture tranche. L’édition open source de Lightdash ne peut pas exposer ses indicateurs à des agents IA externes sans clé de licence payante ; l’autre voie passe par la couche sémantique de dbt Cloud. Partout ailleurs, la couche sémantique se trouve dans l’outil de BI, que ce soit Steep, Metabase, Lightdash Cloud ou Looker, et Dataform, en coulisses, n’y perd rien.
 
 ## La fusion, en bref
 

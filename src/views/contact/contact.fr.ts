@@ -14,7 +14,7 @@ const copy: Copy = {
   stepsHeading: 'Les étapes, de l’appel à la proposition.',
   notReadyHeading: 'Pas encore prêt à en parler ?',
   metaTitle: 'Contact | Réserver un appel | Nimzo Data',
-  metaDescription: 'Un appel de 45 minutes sur votre plateforme data. Sans discours commercial. Nous vous disons si nous pouvons vous aider. hello@nimzodata.com.',
+  metaDescription: 'Un appel de 45 minutes sur votre plateforme data. Sans engagement. Nous vous disons si nous pouvons vous aider. hello@nimzodata.com.',
   heroTitle: 'Parlons de votre plateforme data.',
   heroSubtitle: 'Un appel gratuit de 45 minutes, sans engagement. Nous vous posons des questions sur votre dispositif actuel, ce qui ne fonctionne pas et ce que vous attendez, puis nous vous disons si nous sommes la bonne équipe pour vous.',
   // TODO(fr): replace with the French booking schedule once Antoine sends its link (plan Task 18).

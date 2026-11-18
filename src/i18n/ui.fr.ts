@@ -23,7 +23,7 @@ const ui: UiCopy = {
     nav: 'Navigation mobile',
   },
   footer: {
-    tagline: 'Plateformes data Google Cloud pour les entreprises européennes en croissance.',
+    tagline: 'Plateformes data Google Cloud pour les PME et ETI en croissance.',
     location: 'Basés en France. Clients dans toute l’Europe.',
     services: 'Services',
     technologies: 'Technologies',

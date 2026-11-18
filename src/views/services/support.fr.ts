@@ -8,8 +8,8 @@ const day = eur(prices.support.extraDay, 'fr');
 const copy: Copy = {
   tiers: [
     { name: 'Maintien', subtitle: 'Nous la faisons tourner', price: `${eur(prices.support.run, 'fr')} HT par mois`, fit: 'votre plateforme doit continuer à tourner telle quelle' },
-    { name: 'Évolution', subtitle: 'Nous la faisons aussi évoluer', price: `${eur(prices.support.extend, 'fr')} par mois`, fit: 'il vous faut des évolutions régulières : nouveaux indicateurs, sources, tableaux de bord' },
-    { name: 'Pilotage', subtitle: 'Nous la pilotons aussi avec vous', price: `${eur(prices.support.lead, 'fr')} par mois`, fit: 'vous voulez un interlocuteur pour cadrer vos choix data' },
+    { name: 'Évolution', subtitle: 'Nous la faisons aussi évoluer', price: `${eur(prices.support.extend, 'fr')} HT par mois`, fit: 'il vous faut des évolutions régulières : nouveaux indicateurs, sources, tableaux de bord' },
+    { name: 'Pilotage', subtitle: 'Nous la pilotons aussi avec vous', price: `${eur(prices.support.lead, 'fr')} HT par mois`, fit: 'vous voulez un interlocuteur pour cadrer vos choix data' },
   ],
   rows: [
     { label: 'Travaux d’évolution', values: [false, '1 jour par mois', '2 jours par mois'] },
@@ -31,7 +31,7 @@ const copy: Copy = {
     'Le travail sur des composants que nous n’avons ni construits ni audités',
     'Les licences d’outils, que vous payez directement aux éditeurs',
     'Le travail en dehors des heures ouvrées',
-    'La formation de nouveaux utilisateurs (non incluse dans l’offre Maintien ; dans Évolution et Pilotage, elle consomme des jours d’évolution)',
+    'La formation de nouveaux utilisateurs (non incluse dans l’offre Maintien ; dans les offres Évolution et Pilotage, elle consomme des jours d’évolution)',
     'Les pipelines temps réel, la data science et le machine learning',
   ],
   faqs: [
@@ -43,7 +43,7 @@ const copy: Copy = {
     {
       question: 'Que deviennent les jours non utilisés ?',
       answer:
-        'Ils ne sont pas reportés, pas plus que les appels non utilisés. Si vous prévoyez une période calme, passez au Maintien avec un préavis de 30 jours, puis repassez à l’offre supérieure dès le mois de facturation suivant.',
+        'Ils ne sont pas reportés, pas plus que les appels non utilisés. Si vous prévoyez une période calme, passez à l’offre Maintien avec un préavis de 30 jours, puis repassez à l’offre supérieure dès le mois de facturation suivant.',
     },
     {
       question: 'Et si une évolution prend de l’ampleur ?',
@@ -53,7 +53,7 @@ const copy: Copy = {
     {
       question: 'Que se passe-t-il quand quelque chose ne fonctionne plus ?',
       answer:
-        'Les alertes nous arrivent automatiquement, et c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Quand plusieurs choses cassent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Cela couvre aussi les changements d’un éditeur qui cassent un pipeline ou sont sur le point de le faire. Si une source doit être reconstruite, nous la chiffrons comme une évolution ou un projet Amélioration.',
+        'Les alertes nous arrivent automatiquement, et c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Quand plusieurs pannes arrivent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Cela couvre aussi les changements d’un éditeur qui font tomber un pipeline en panne ou sont sur le point de le faire. Si une source doit être reconstruite, nous la chiffrons comme une évolution ou un projet Amélioration.',
     },
     {
       question: 'Comment distinguer un incident d’une évolution ?',
@@ -67,21 +67,21 @@ const copy: Copy = {
     {
       question: 'Et si notre budget est réduit ?',
       answer:
-        'Passez au Maintien avec un préavis de 30 jours. Le Maintien fait tourner la plateforme telle que livrée, à jour et fiable, et vous pouvez remonter dès le mois de facturation suivant.',
+        'Passez à l’offre Maintien avec un préavis de 30 jours. Elle fait tourner la plateforme telle que livrée, à jour et fiable, et vous pouvez repasser à l’offre supérieure dès le mois de facturation suivant.',
     },
   ],
   whoHeading: 'À qui s’adresse le Support.',
-  whoBody: 'Aux entreprises qui veulent une plateforme data en bonne santé sans recruter de data engineer. Ce que nous construisons vous appartient et vous pouvez le faire tourner sans nous. Le Support, c’est quand vous voulez que nous restions : pour la faire tourner, pour la faire évoluer au rythme de vos questions, ou pour piloter vos décisions data avec vous.',
+  whoBody: 'Aux entreprises qui veulent une plateforme data en bonne santé sans recruter de data engineer. Ce que nous construisons vous appartient et vous pouvez le faire tourner sans nous. Le Support, c’est quand vous voulez que nous restions : pour la faire tourner, pour la faire évoluer au rythme de vos questions, ou pour cadrer vos choix data avec vous.',
   tiersHeading: 'Trois offres.',
   tiersIntro: 'Chaque offre comprend tout ce que contient la précédente.',
   tiersNotePrices: 'Prix mensuels en euros, hors taxes (HT).',
   tiersNoteHours: 'Les délais de prise en charge se comptent en heures ouvrées : du lundi au vendredi, 9 h – 18 h, heure de Paris.',
   monthlyHeading: 'Ce que vous voyez chaque mois.',
-  monthlyBody: 'Chaque offre reçoit un rapport d’une page par mois : traitements réussis, fraîcheur respectée, incidents détectés, modifications chez vos fournisseurs de données prises en charge, évolution des coûts BigQuery, risques ouverts, la prochaine évolution que nous recommandons et, dans Évolution et Pilotage, les jours d’évolution consommés.',
+  monthlyBody: 'Chaque offre reçoit un rapport d’une page par mois : traitements réussis, fraîcheur respectée, incidents détectés, modifications chez vos fournisseurs de données prises en charge, évolution des coûts BigQuery, risques ouverts, la prochaine évolution que nous recommandons et, dans les offres Évolution et Pilotage, les jours d’évolution consommés.',
   promiseLabel: 'Notre engagement',
-  promiseBody: 'Si quelque chose que nous surveillons casse, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal que nous partageons avec vous.',
+  promiseBody: 'Si quelque chose que nous surveillons tombe en panne, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal que nous partageons avec vous.',
   changeHeading: 'Travaux d’évolution.',
-  changeIntro: 'Dans Évolution et Pilotage.',
+  changeIntro: 'Dans les offres Évolution et Pilotage.',
   changeRulesHtml: [
     `Chaque évolution est estimée avant de commencer, mise à jour de la documentation comprise.`,
     `Si elle s’avère plus importante, nous nous arrêtons et vous prévenons avant de dépasser. Vous choisissez : continuer le mois suivant, ajouter des jours, réduire le périmètre, ou en faire un projet <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,
@@ -100,7 +100,7 @@ const copy: Copy = {
   notIncludedImproveHtml: `Le travail de la taille d’un projet <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a> : nouveaux domaines métier, nouveaux outils de BI, migrations`,
   faqHeading: 'Questions fréquentes.',
   notThereHeading: 'Ce n’est pas encore le moment ?',
-  notThereBody: 'Le Support commence après un projet avec nous. Une Construction comprend son premier mois d’Évolution, puis passe au Maintien sauf si vous choisissez autrement. Un projet Amélioration comprend son premier mois de Maintien, sur le travail livré.',
+  notThereBody: 'Le Support commence après un projet avec nous. Une Construction comprend son premier mois de l’offre Évolution, puis passe à l’offre Maintien sauf si vous choisissez autrement. Un projet Amélioration comprend son premier mois de l’offre Maintien, sur le travail livré.',
   metaTitle: 'Maintenance et support de plateforme data | Nimzo Data',
   metaDescription: `Support mensuel d’une plateforme data que nous avons construite, améliorée ou auditée. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
   heroTitle: 'Votre plateforme est en service. Reste à la maintenir en état.',

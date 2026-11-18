@@ -11,7 +11,7 @@ const copy: Copy = {
     },
     {
       from: ['Des fichiers Excel ou Google Sheets et Looker Studio,', 'reliés par des connecteurs.'],
-      look: 'Quels connecteurs alimentent quels rapports, ce qui casse quand un fichier change, et si les chiffres concordent avec les systèmes sources.',
+      look: 'Quels connecteurs alimentent quels rapports, ce qui ne fonctionne plus quand un fichier change, et si les chiffres concordent avec les systèmes sources.',
       sample: href('sampleAudit', 'fr'),
     },
     {
@@ -44,7 +44,7 @@ const copy: Copy = {
     {
       question: 'Pourquoi ne pas nous faire directement un devis ?',
       answer:
-        'Pour une plateforme, un prix fixe n’est honnête que si le périmètre est juste. Après un appel de 45 minutes, nous en serions réduits à deviner vos volumes de données, vos coûts actuels et les outils adaptés à votre équipe. L’audit remplace ces hypothèses par des faits : le prix de la proposition est alors un prix que nous pouvons tenir. Pour une correction bien définie, nous faisons un devis direct : c’est un projet Amélioration.',
+        'Pour une plateforme, un prix fixe n’est honnête que si le périmètre est bien cerné. Après un appel de 45 minutes, nous en serions réduits à deviner vos volumes de données, vos coûts actuels et les outils adaptés à votre équipe. L’audit remplace ces hypothèses par des faits : le prix de la proposition est alors un prix que nous pouvons tenir. Pour une correction bien définie, nous faisons un devis direct : c’est un projet Amélioration.',
     },
     {
       question: 'Et si nous ne continuons pas avec vous après l’audit ?',
@@ -74,7 +74,7 @@ const copy: Copy = {
   ],
   startHeading: 'Votre point de départ.',
   startIntro: 'La méthode et le format du rapport sont les mêmes pour tout le monde. Ce que nous regardons en premier, et ce que nous recommandons, dépendent de votre point de départ.',
-  problemsHeading: 'Ce qui amène la plupart de nos clients.',
+  problemsHeading: 'Les situations que nous rencontrons le plus souvent.',
   questionItems: [
     'Pouvons-nous faire confiance à ces chiffres ?',
     'Y a-t-il quelque chose d’exposé : des clés dans le code, d’anciens accès encore ouverts ?',
@@ -86,7 +86,7 @@ const copy: Copy = {
   ],
   answerItems: [
     'Les chiffres clés recalculés depuis la source.',
-    'Secrets, comptes et rôles passés en revue.',
+    'Clés et mots de passe, comptes et rôles passés en revue.',
     'Une cartographie de ce qui tourne où, et de qui en est responsable.',
     'Un coût sur 12 mois, prestations et infrastructure comprises.',
     'Un verdict par couche, argumenté.',
@@ -117,7 +117,7 @@ const copy: Copy = {
   ],
   pricingHeading: 'Prix.',
   pricingLabel: 'Prix fixe',
-  pricingAmount: eurRange(prices.audit.min, prices.audit.max, 'fr'),
+  pricingAmount: `${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT`,
   pricingSub: '1 à 2 semaines, HT, payable en totalité à la commande : nous facturons à la signature et démarrons à réception du règlement. Votre place dans cette fourchette dépend du nombre de sources et du nombre d’indicateurs à recalculer.',
   leadsHeading: 'Ce que l’audit permet ensuite.',
   leadsIntro: 'Le verdict par couche décide de la suite. Et l’audit se suffit à lui-même.',
@@ -125,7 +125,7 @@ const copy: Copy = {
   notFitItemsHtml: [
     `<strong>Vous savez exactement ce que vous voulez construire, avec un périmètre clair.</strong> L’<a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a> vous conviendra mieux : vous décrivez le projet lors d’un appel gratuit, et nous le chiffrons directement.`,
     `<strong>Votre activité n’a pas encore trouvé son marché et vous n’avez pas encore de données significatives.</strong> C’est trop tôt. Revenez quand il y aura quelque chose à mesurer.`,
-    `<strong>Il vous faut un test d’intrusion ou une certification de sécurité.</strong> Nous signalons les risques de la plateforme data, accès et secrets compris, mais ce n’est pas un audit de sécurité formel.`,
+    `<strong>Il vous faut un test d’intrusion ou une certification de sécurité.</strong> Nous signalons les risques de la plateforme data, accès, clés et mots de passe compris, mais ce n’est pas un audit de sécurité formel.`,
   ],
   faqHeading: 'Questions fréquentes.',
   metaTitle: 'Audit data Google Cloud et BigQuery | Nimzo Data',

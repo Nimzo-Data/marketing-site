@@ -4,7 +4,7 @@ const copy: Copy = {
   title: "Consultant Lightdash, BI sur dbt et BigQuery | Nimzo Data",
   description: "Mise en place de Lightdash sur dbt et BigQuery : couche sémantique dans le code, agents IA, tableaux de bord as code, Lightdash Cloud ou auto-hébergé.",
   toolCategory: "Business Intelligence",
-  heroPositioning: "Lightdash est une BI dont les indicateurs vivent dans le code, dans votre projet dbt ou dans le YAML propre à Lightdash. Tarif forfaitaire, utilisateurs illimités, et bien moins cher que Looker dès que l’équipe grandit.",
+  heroPositioning: "Lightdash est une BI dont les indicateurs sont définis dans le code, dans votre projet dbt ou dans le YAML de Lightdash. Tarif forfaitaire, utilisateurs illimités, et bien moins cher que Looker dès que l’équipe grandit.",
   title2: "Comment nous l’utilisons",
   items: [
         "Mettre en place Lightdash Cloud, ou Lightdash Core auto-hébergé sur GCP",
@@ -52,7 +52,7 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Lightdash est un outil de BI open source où les indicateurs et les dimensions vivent dans des fichiers YAML. Vous pouvez les définir dans votre projet dbt (la conception d’origine de Lightdash) ou dans la couche sémantique native de Lightdash (ajoutée pour les équipes sans dbt). Dans les deux cas, vos définitions d’indicateurs restent versionnées, au lieu d’être enfermées dans une interface de tableaux de bord.",
+  p1: "Lightdash est un outil de BI open source où les indicateurs et les dimensions sont définis dans des fichiers YAML. Vous pouvez les définir dans votre projet dbt (la conception initiale de Lightdash) ou dans la couche sémantique native de Lightdash (ajoutée pour les équipes sans dbt). Dans les deux cas, vos définitions d’indicateurs restent versionnées, au lieu d’être enfermées dans une interface de tableaux de bord.",
   p2: "Lightdash Cloud permet de créer directement dans l’interface des agents IA dédiés : un agent marketing avec accès aux indicateurs de campagne, un agent commercial relié aux données du pipeline de ventes, chacun avec son propre prompt et son propre périmètre d’indicateurs. Un serveur MCP permet aussi à des outils d’IA externes (Claude, Cursor ou des agents sur mesure) d’interroger la même couche sémantique gouvernée. Cloud propose enfin les tableaux de bord as code (définitions de tableaux de bord dans Git), qui s’accordent bien avec des agents de code IA qui écrivent les tableaux de bord directement depuis le dépôt.",
   p3: "Pour les équipes qui veulent des indicateurs versionnés et de l’IA analytique sans le budget de Looker, Lightdash Cloud est le bon compromis. Le tarif est forfaitaire, pour un nombre d’utilisateurs illimité : un modèle radicalement différent des outils facturés par utilisateur, ce qui fait pencher la balance en votre faveur au-delà de 10 à 15 utilisateurs environ. Une édition Core auto-hébergée existe aussi, pour les équipes qui veulent garder la main.",
   p4: "Le volet IA compte aussi : les agents IA dédiés et le serveur MCP interrogent tous deux la couche sémantique gouvernée, pas les tables brutes. Quand vous définissez vos indicateurs dans le code, les outils d’IA utilisent les mêmes définitions que vos tableaux de bord. Pas besoin d’une « préparation des données pour l’IA » à part.",

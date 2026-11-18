@@ -6,7 +6,7 @@ const copy: Copy = {
   metaDescription: "Conditions régissant l’utilisation de nimzodata.com et les missions de conseil de Nimzo Data.",
   l1: "Conditions générales d’utilisation",
   l2: "Dernière mise à jour : 23 avril 2026",
-  l3Html: `Les présentes Conditions générales d’utilisation (les « CGU ») régissent l’accès au site
+  l3Html: `Les présentes conditions générales d’utilisation (les « CGU ») régissent l’accès au site
 <a href="https://nimzodata.com">nimzodata.com</a> (le « Site ») édité par Nimzo Data SARL
 (« Nimzo Data », « nous ») et son utilisation. En accédant au Site ou en l’utilisant, vous reconnaissez avoir pris connaissance des présentes CGU et vous les acceptez. Si vous ne les acceptez pas, nous vous demandons de ne pas utiliser le Site.`,
   l4Html: `Les présentes CGU ne couvrent que l’utilisation du Site. Les missions de conseil entre Nimzo Data et ses clients
@@ -44,10 +44,10 @@ appartiennent à leurs propriétaires respectifs. Leur présence sur le Site n�
   l19Html: `Le Site contient des liens vers des sites tiers et intègre des services tiers (notamment le service de prise de rendez-vous de Google Calendar). Nous ne sommes pas responsables du contenu, des pratiques de ces tiers en matière de données personnelles ni de la disponibilité des sites ou services tiers. Leur utilisation est soumise aux conditions
 de chacun de ces tiers.`,
   l20: "6. Données personnelles",
-  l21Html: `L’utilisation du Site est également régie par notre <a href="${href('privacy', 'fr')}">Politique de confidentialité</a>, qui
+  l21Html: `L’utilisation du Site est également régie par notre <a href="${href('privacy', 'fr')}">politique de confidentialité</a>, qui
 explique comment nous collectons, utilisons et protégeons les données personnelles.`,
   l22: "7. Limitation de responsabilité",
-  l23Html: `Dans la mesure maximale permise par la loi applicable, Nimzo Data ne saurait être tenue responsable des
+  l23Html: `Dans toute la mesure permise par la loi applicable, Nimzo Data ne saurait être tenue responsable des
 dommages indirects, accessoires, consécutifs ou punitifs découlant de votre utilisation du Site ou s’y rapportant,
 même si nous avons été informés de la possibilité de tels dommages.`,
   l24Html: `Notre responsabilité totale au titre de toute réclamation liée au Site ou à son utilisation est limitée à cent euros (100 €).`,

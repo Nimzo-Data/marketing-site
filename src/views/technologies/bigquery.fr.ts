@@ -5,7 +5,7 @@ const copy: Copy = {
   title: "Expert BigQuery, consultant GCP | Nimzo Data",
   description: "Experts BigQuery : modélisation, optimisation des requêtes SQL, maîtrise des coûts et sécurité par colonne. Entrepôt de données sur Google Cloud.",
   toolCategory: "Entrepôt de données",
-  heroPositioning: "BigQuery, c’est là que vivent vos données. Nous construisons les schémas, optimisons les requêtes et maîtrisons les coûts pour que cela dure.",
+  heroPositioning: "BigQuery, c’est là que se trouvent vos données. Nous construisons les schémas, optimisons les requêtes et maîtrisons les coûts pour que cela dure.",
   title2: "Comment nous l’utilisons",
   items: [
         "Concevoir des tables partitionnées et clusterisées, pour garder un coût des requêtes prévisible",
