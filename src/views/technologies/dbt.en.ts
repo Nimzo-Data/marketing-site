@@ -1,0 +1,57 @@
+const copy = {
+  title: "dbt | Nimzo Data",
+  description: "dbt implementation on BigQuery. Project architecture, staging and mart layers, data tests, CI/CD, and team training.",
+  toolCategory: "SQL Transformation",
+  heroPositioning: "When clients need open-source portability or are already on a dbt workflow, we bring the same rigor: tested models, version control, and documentation as code.",
+  title2: "How We Use It",
+  items: [
+        "Build and restructure dbt projects following the staging → intermediate → marts layer convention",
+        "Write Jinja-templated SQL macros for reusable transformation logic",
+        "Implement dbt tests (not null, unique, referential integrity, custom) across critical models",
+        "Configure dbt documentation and lineage graphs so new team members understand data flow",
+        "Set up dbt Cloud jobs with CI/CD integration: run tests on PRs before merging",
+        "Connect the dbt MCP server to the client's AI tools (Claude, Cursor) for natural-language queries over governed metrics",
+      ],
+  title3: "dbt or Dataform?",
+  blocks: [
+        {
+          heading: 'Choose dbt when:',
+          bullets: [
+            'You have existing dbt investment (projects, CI/CD, team knowledge)',
+            'You need multi-cloud portability (BigQuery + Snowflake, or moving later)',
+            'Your team already works in dbt every day',
+          ],
+        },
+        {
+          heading: 'Choose dbt Cloud when:',
+          bullets: [
+            'You want managed CI/CD, documentation hosting, and the Metrics Layer without DIY',
+            "You're comfortable with the price (starts around $100/developer/month)",
+          ],
+        },
+        {
+          heading: 'Choose dbt Core when:',
+          bullets: [
+            'Your budget rules out dbt Cloud',
+            "You're willing to run orchestration yourself (usually Dagster or GitHub Actions)",
+          ],
+        },
+        {
+          heading: 'Choose Dataform instead when:',
+          bullets: [
+            "You're on GCP only, with no multi-cloud plans",
+            'Your team is new to analytics engineering',
+            'You want to skip the orchestration layer entirely',
+          ],
+        },
+      ],
+  p1: "dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. Works with BigQuery, Snowflake, Redshift, and others. Recent releases add dbt Copilot (AI SQL assistance, GA on paid plans), the Fusion engine (Rust-based, nearing GA, already the default for new dbt Cloud projects), and a GA Semantic Layer powered by MetricFlow.",
+  p2: "The dbt Semantic Layer is becoming the foundation for AI accuracy in the data stack. The official MCP server lets AI tools (Claude, Cursor) query MetricFlow definitions directly. The LLM never writes raw SQL; MetricFlow compiles governed queries from metric definitions.",
+  p3: "dbt is the most widely adopted transformation tool in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.",
+  p4: "One caveat worth noting: Fivetran and dbt Labs announced a merger in October 2025 (pending regulatory close, expected 2026). That consolidation is convenient for clients on the Fivetran + dbt path, but it's worth staying aware of vendor-lock-in risk. Pairing Airbyte with Dataform (or dbt Core) keeps the ingestion and transformation layers in separate hands.",
+  sectionTitle: "What It Is",
+  sectionTitle2: "Why We Chose It",
+};
+
+export type Copy = typeof copy;
+export default copy;

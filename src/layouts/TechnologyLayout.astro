@@ -7,9 +7,10 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import { techLogo } from '../data/technologies';
 import { getServiceLeads } from '../data/services';
 import type { Locale } from '../i18n/locales';
+import { t } from '../i18n/ui';
 
 interface Props {
-  locale?: Locale;
+  locale: Locale;
   title: string;
   description: string;
   toolName: string;
@@ -22,7 +23,7 @@ interface Props {
 }
 
 const {
-  locale = 'en',
+  locale,
   title,
   description,
   toolName,
@@ -37,6 +38,7 @@ const {
 const resolvedLogo =
   toolLogo ?? techLogo(toolName);
 const serviceLeads = getServiceLeads(locale);
+const ui = t(locale).components.techLayout;
 ---
 
 <BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
@@ -49,9 +51,9 @@ const serviceLeads = getServiceLeads(locale);
   <slot />
   <SectionWrapper py="lg">
     <div class="cta-cards-grid">
-      <LeadCard {...serviceLeads.audit} eyebrow="Not sure what you need yet" dataTrack="tech-cta-audit" />
-      <LeadCard {...serviceLeads.build} eyebrow="No data platform yet" dataTrack="tech-cta-build" />
-      <LeadCard {...serviceLeads.improve} eyebrow={`Need help with ${toolName}`} dataTrack="tech-cta-improve" />
+      <LeadCard {...serviceLeads.audit} eyebrow={ui.leadAuditEyebrow} dataTrack="tech-cta-audit" />
+      <LeadCard {...serviceLeads.build} eyebrow={ui.leadBuildEyebrow} dataTrack="tech-cta-build" />
+      <LeadCard {...serviceLeads.improve} eyebrow={ui.leadImproveEyebrow(toolName)} dataTrack="tech-cta-improve" />
     </div>
   </SectionWrapper>
   <CTABanner locale={locale} dataTrack="tech-layout-cta" />

@@ -58,6 +58,11 @@ const ui = {
       problem: 'The problem',
       outcome: 'What you get',
     },
+    techLayout: {
+      leadAuditEyebrow: 'Not sure what you need yet',
+      leadBuildEyebrow: 'No data platform yet',
+      leadImproveEyebrow: (tool: string) => `Need help with ${tool}`,
+    },
     pricing: {
       factorsTitle: 'What affects the price',
       factor: 'Factor',

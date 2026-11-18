@@ -1,0 +1,59 @@
+---
+import TechnologyLayout from '../../layouts/TechnologyLayout.astro';
+import TextSection from '../../components/content/TextSection.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import WhenToChoose from '../../components/content/WhenToChoose.astro';
+import HowWeUseIt from '../../components/content/HowWeUseIt.astro';
+import ResultBlock from '../../components/content/ResultBlock.astro';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './airbyte.en';
+import fr from './airbyte.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/technologies/airbyte');
+---
+
+<TechnologyLayout locale={locale}
+  title={c.title}
+  description={c.description}
+  toolName="Airbyte"
+  toolCategory={c.toolCategory}
+  heroPositioning={c.heroPositioning}
+>
+  <TextSection title={c.sectionTitle} bg="white">
+    <p>{c.p1}</p>
+  </TextSection>
+
+  <TextSection title={c.sectionTitle2} bg="white">
+    <p>{c.p2}</p>
+  </TextSection>
+
+  <SectionWrapper bg="white" py="lg">
+    <HowWeUseIt
+      title={c.title2}
+      items={c.items}
+    />
+  </SectionWrapper>
+
+  <SectionWrapper bg="white" py="lg">
+    <WhenToChoose
+      title={c.title3}
+      blocks={c.blocks}
+    />
+  </SectionWrapper>
+  <!-- Proof: Aeyde result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock locale={locale}
+      metric={c.metric}
+      body={c.body}
+      caseStudySlug="aeyde"
+    />
+  </SectionWrapper>
+
+</TechnologyLayout>
