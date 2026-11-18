@@ -1,0 +1,617 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import LineIcon from '../../components/ui/LineIcon.astro';
+import ServiceChip from '../../components/ui/ServiceChip.astro';
+import FAQAccordion from '../../components/content/FAQAccordion.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './audit.en';
+import fr from './audit.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/services/audit');
+
+// The four starting points. Same method and report format for each; what we
+// look at first changes. `sample` links the row to its published sample audit.
+const startingPoints = c.startingPoints;
+
+// Nine areas, checked whatever the starting point; only the depth changes.
+const checks = c.checks;
+
+const faqs = c.faqs;
+
+---
+
+<ServiceLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+  heroTitle={c.heroTitle}
+  heroSubtitle={c.heroSubtitle}
+>
+  <!-- Where you're starting from -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.startHeading}</h2>
+    <p class="intro-body">{c.startIntro}</p>
+    <table class="start-table">
+      <thead>
+        <tr><th scope="col">{c.thFrom}</th><th scope="col">{c.thLook}</th><th scope="col">{c.thSample}</th></tr>
+      </thead>
+      <tbody>
+        {startingPoints.map((row) => (
+          <tr>
+            <td class="start-from">{row.from[0]} {row.from[1]}</td>
+            <td class="start-look" data-label={c.thLook}>{row.look}</td>
+            <td class="start-sample-cell">
+              {'sample' in row && row.sample ? (
+                <a href={row.sample} class="start-sample" data-track="audit-start-sample"><LineIcon name="sample-audit" />{c.sampleLink} <span aria-hidden="true">&rarr;</span></a>
+              ) : (
+                <span class="start-soon">{c.comingSoon}</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </SectionWrapper>
+
+  <!-- What brings most clients here -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.problemsHeading}</h2>
+    <TwoColumnSplit
+      variant="challenges-solution"
+      bare
+      leftTitle={c.questionsTitle}
+      leftItems={c.questionItems}
+      rightTitle={c.answersTitle}
+      rightItems={c.answerItems}
+    />
+  </SectionWrapper>
+
+  <!-- What we check -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.checkHeading}</h2>
+    <p class="intro-body">{c.checkIntro}</p>
+    <ul class="check-grid" role="list">
+      {checks.map((c) => (
+        <li class="check-item">
+          <span class="check-icon"><LineIcon name={c.icon} /></span>
+          <div>
+            <h3 class="check-area">{c.area}</h3>
+            <p class="check-detail">{c.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </SectionWrapper>
+
+  <!-- What you walk away with -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.walkHeading}</h2>
+    <ul class="walk-list" role="list">
+      {c.walkItems.map((html) => <li set:html={html} />)}
+    </ul>
+
+    <div class="next-step">
+      <h3 class="next-step__title">{c.nextStepTitle}</h3>
+      <div class="next-step__grid">
+        <div class="next-step__item">
+          <p class="next-step__if">{c.ifVerdict} <ServiceChip locale={locale} service="build" dataTrack="audit-next-build" /></p>
+          <p class="next-step__body">{c.nextBuildBody}</p>
+        </div>
+        <div class="next-step__item">
+          <p class="next-step__if">{c.ifVerdict} <ServiceChip locale={locale} service="improve" dataTrack="audit-next-improve" /></p>
+          <p class="next-step__body">{c.nextImproveBody}</p>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- How it runs -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.processHeading}</h2>
+    <ProcessSteps
+      steps={c.processSteps}
+    />
+  </SectionWrapper>
+
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.pricingHeading}</h2>
+    <div class="pricing-lead">
+      <span class="pricing-label">{c.pricingLabel}</span>
+      <span class="pricing-amount">{c.pricingAmount}</span>
+      <p class="pricing-sub">{c.pricingSub}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Where this leads -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.leadsHeading}</h2>
+    <p class="intro-body">{c.leadsIntro}</p>
+    <div class="leads-grid">
+      <LeadCard
+        eyebrow={c.leadBuildEyebrow}
+        icon="build"
+        title={c.leadBuildTitle}
+        body={c.leadBuildBody}
+        href={href('build', locale)}
+        linkText={c.leadBuildLink}
+        dataTrack="audit-cta-build"
+      />
+      <LeadCard
+        eyebrow={c.leadImproveEyebrow}
+        icon="improve"
+        title={c.leadImproveTitle}
+        body={c.leadImproveBody}
+        href={href('improve', locale)}
+        linkText={c.leadImproveLink}
+        dataTrack="audit-cta-improve"
+      />
+      <LeadCard
+        eyebrow={c.leadNothingEyebrow}
+        icon="team"
+        title={c.leadNothingTitle}
+        body={c.leadNothingBody}
+      />
+    </div>
+  </SectionWrapper>
+
+  <!-- When this isn't the right fit -->
+  <SectionWrapper py="lg" bg="white">
+    <div class="not-fit">
+      <h2 class="section-heading not-fit__heading">{c.notFitHeading}</h2>
+      <ul class="not-fit__list">
+        {c.notFitItems.map((html) => <li set:html={html} />)}
+      </ul>
+    </div>
+  </SectionWrapper>
+
+  <!-- Objections handled before the call -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.faqHeading}</h2>
+    <FAQAccordion faqs={faqs} />
+  </SectionWrapper>
+
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body--tight {
+    margin-bottom: 16px;
+  }
+
+  /* Where you're starting from: a two-column table; rows stack on mobile. */
+  .start-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .start-table th {
+    text-align: left;
+    padding: 0 0 12px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .start-table th:nth-child(1) {
+    width: 32%;
+  }
+
+  .start-table th:nth-child(3) {
+    width: 150px;
+  }
+
+  .start-table td {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .start-from {
+    text-wrap: balance;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.45;
+  }
+
+  .check-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    color: var(--color-brand-teal);
+  }
+
+  .check-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Two classes so the right padding beats the ".start-table td" reset. */
+  .start-table .start-from,
+  .start-table .start-look {
+    padding-right: 32px;
+  }
+
+  .start-look {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+  }
+
+  .start-sample {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    padding: 4px 12px 4px 10px;
+    border: 1px solid color-mix(in srgb, var(--color-brand-teal) 45%, white);
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .start-sample :global(svg) {
+    width: 15px;
+    height: 15px;
+    color: var(--color-brand-teal);
+  }
+
+  .start-sample:hover {
+    border-color: var(--color-brand-plum);
+    color: var(--color-brand-plum);
+  }
+
+  .start-sample:focus-visible {
+    outline: 2px solid var(--color-brand-teal);
+    outline-offset: 2px;
+  }
+
+  .start-soon {
+    display: inline-block;
+    padding-top: 2px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 767px) {
+    .start-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    .start-table,
+    .start-table tbody,
+    .start-table tr,
+    .start-table td {
+      display: block;
+    }
+
+    .start-table tbody {
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .start-table tr {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .start-table td {
+      padding: 0;
+      border: 0;
+    }
+
+    .start-table .start-from {
+      padding-right: 0;
+    }
+
+    .start-table .start-look {
+      margin-top: 10px;
+      padding-right: 0;
+    }
+
+    .start-table .start-sample-cell {
+      margin-top: 12px;
+    }
+
+    .start-table .start-sample-cell:has(.start-soon) {
+      display: none;
+    }
+
+    .start-look::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  /* What we check: icon + area + one line, 3 x 3 on desktop. */
+  /* Static cards: same look as the layer cards on Build, no hover (not links). */
+  .check-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .check-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .check-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 20px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .check-area {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    line-height: 1.3;
+    margin: 0 0 4px 0;
+  }
+
+  .check-detail {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* What you walk away with: ticked list, then the priced next step. */
+  .walk-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px 48px;
+  }
+
+  @media (min-width: 768px) {
+    .walk-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .walk-list li {
+    position: relative;
+    padding-left: 28px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .walk-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><circle cx='9' cy='9' r='9' fill='%23004f4c' fill-opacity='0.12'/><path d='M5 9.5L7.5 12L13 7' stroke='%23004f4c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .walk-list :global(strong) {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .next-step {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .next-step__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .next-step__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .next-step__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+  }
+
+  .next-step__if {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .next-step__body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  /* Pricing */
+  .pricing-lead {
+    text-align: left;
+    max-width: 720px;
+  }
+
+  .pricing-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-brand-plum);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .pricing-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    max-width: 720px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Where this leads */
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* When this isn't right */
+  .not-fit {
+    max-width: 760px;
+  }
+
+  .not-fit__heading {
+    margin: 0 0 20px 0;
+  }
+
+  .not-fit__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .not-fit__list li {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .not-fit__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .not-fit__list :global(strong) {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .not-fit__list :global(.inline-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+</style>

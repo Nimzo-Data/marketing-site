@@ -1,0 +1,293 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import RetainerGrid from '../../components/content/RetainerGrid.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import FAQAccordion from '../../components/content/FAQAccordion.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+import { getServiceLeads } from '../../data/services';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './support.en';
+import fr from './support.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/services/support');
+const serviceLeads = getServiceLeads(locale);
+
+// Columns: Run, Extend, Lead. Each tier includes everything in the one before.
+// Rows that differ by tier come first, rows every tier shares come last.
+const tiers = c.tiers;
+
+const rows = c.rows;
+
+const contractTerms = c.contractTerms;
+
+const notIncluded = c.notIncluded;
+
+const faqs = c.faqs;
+---
+
+<ServiceLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+  heroTitle={c.heroTitle}
+  heroSubtitle={c.heroSubtitle}
+>
+  <!-- Who Support is for -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.whoHeading}</h2>
+    <p class="intro-body intro-body--last">{c.whoBody}</p>
+  </SectionWrapper>
+
+  <!-- Three tiers -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.tiersHeading}</h2>
+    <p class="intro-body intro-body--tight">{c.tiersIntro}</p>
+    <RetainerGrid locale={locale} tiers={tiers} rows={rows} />
+    <div class="notes">
+      <p>{c.tiersNotePrices}</p>
+      <p>{c.tiersNoteHours}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- What you see each month -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.monthlyHeading}</h2>
+    <p class="intro-body">{c.monthlyBody}</p>
+    <div class="boxed">
+      <h3 class="boxed-label">{c.promiseLabel}</h3>
+      <p>{c.promiseBody}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Change work -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.changeHeading}</h2>
+    <p class="intro-body intro-body--tight">{c.changeIntro}</p>
+    <ul class="dot-list dot-list--narrow" role="list">
+      {c.changeRules.map((html) => <li set:html={html} />)}
+    </ul>
+    <h3 class="sub-heading sub-heading--spaced">{c.dayHeading}</h3>
+    <p class="sub-body sub-body--narrow">{c.dayBody}</p>
+    <div class="boxed boxed--spaced">
+      <h3 class="boxed-label">{c.exampleLabel}</h3>
+      <p>{c.exampleBody}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Terms -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.termsHeading}</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="sub-heading">{c.contractHeading}</h3>
+        <ul class="dot-list" role="list">
+          {contractTerms.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub-heading">{c.notIncludedHeading}</h3>
+        <ul class="dot-list" role="list">
+          <li set:html={c.notIncludedImproveHtml}></li>
+          {notIncluded.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Common questions -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.faqHeading}</h2>
+    <FAQAccordion faqs={faqs} />
+  </SectionWrapper>
+
+  <!-- Not there yet? -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading section-heading--tight">{c.notThereHeading}</h2>
+    <p class="intro-body">{c.notThereBody}</p>
+    <div class="leads-grid">
+      <LeadCard {...serviceLeads.audit} eyebrow={c.leadAuditEyebrow} dataTrack="support-cta-audit" />
+      <LeadCard {...serviceLeads.build} eyebrow={c.leadBuildEyebrow} dataTrack="support-cta-build" />
+      <LeadCard {...serviceLeads.improve} eyebrow={c.leadImproveEyebrow} dataTrack="support-cta-improve" />
+    </div>
+  </SectionWrapper>
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .intro-body--last {
+    margin-bottom: 0;
+  }
+
+  .intro-body--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  li :global(.inline-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .notes {
+    margin-top: 20px;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .notes p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sub-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .sub-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Guarantee: bordered aside with a plum label. */
+  .boxed {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    max-width: 720px;
+  }
+
+  .boxed-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-plum);
+    margin: 0 0 8px 0;
+  }
+
+  .boxed p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .two-col {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .dot-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dot-list li {
+    position: relative;
+    padding-left: 20px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .dot-list li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-brand-plum);
+  }
+
+  .dot-list--narrow {
+    max-width: 720px;
+  }
+
+  .sub-heading--spaced {
+    margin-top: 32px;
+  }
+
+  .sub-body--narrow {
+    max-width: 720px;
+  }
+
+  .boxed--spaced {
+    margin-top: 24px;
+  }
+
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+</style>

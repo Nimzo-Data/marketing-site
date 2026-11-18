@@ -3,9 +3,11 @@ import BaseLayout from './BaseLayout.astro';
 import HeroStandard from '../components/heroes/HeroStandard.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import type { Locale } from '../i18n/locales';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
 
 interface Props {
-  locale?: Locale;
+  locale: Locale;
   title: string;
   description: string;
   heroTitle: string;
@@ -16,7 +18,7 @@ interface Props {
   canonicalUrl?: string;
 }
 
-const { locale = 'en', title, description, heroTitle, heroSubtitle, ogTitle, ogDescription, ogImage, canonicalUrl } = Astro.props;
+const { locale, title, description, heroTitle, heroSubtitle, ogTitle, ogDescription, ogImage, canonicalUrl } = Astro.props;
 
 const serviceName = title.replace(/ \| Nimzo Data$/, '');
 
@@ -31,6 +33,7 @@ const serviceSchema = {
   description,
   areaServed: 'Europe',
   serviceType: 'Data Consulting',
+  ...(locale === 'fr' ? { inLanguage: 'fr' } : {}),
 };
 ---
 
@@ -38,7 +41,7 @@ const serviceSchema = {
   <HeroStandard
     title={heroTitle}
     subtitle={heroSubtitle}
-    cta={{ text: "Let's talk", href: '/contact/', dataTrack: 'service-hero-cta' }}
+    cta={{ text: t(locale).components.ctaBanner.button, href: href('contact', locale), dataTrack: 'service-hero-cta' }}
   />
   <slot />
   <CTABanner locale={locale} dataTrack="service-layout-cta" />

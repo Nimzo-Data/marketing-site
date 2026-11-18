@@ -1,0 +1,333 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import TwoColumnSplit from '../../components/content/TwoColumnSplit.astro';
+import ServiceCardSmall from '../../components/cards/ServiceCardSmall.astro';
+import type { LineIconName } from '../../components/ui/LineIcon.astro';
+import ProcessSteps from '../../components/content/ProcessSteps.astro';
+import LogoGrid from '../../components/content/LogoGrid.astro';
+import LeadCard from '../../components/cards/LeadCard.astro';
+import { getServiceLeads } from '../../data/services';
+import ResultBlock from '../../components/content/ResultBlock.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { getTechnologiesForGrid } from '../../data/technologies';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './improve.en';
+import fr from './improve.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/services/improve');
+const serviceLeads = getServiceLeads(locale);
+
+// Typical projects. One price range for all of them sits in the Pricing section.
+const projects: { icon: LineIconName; title: string; details: string[] }[] = c.projects;
+---
+
+<ServiceLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+  heroTitle={c.heroTitle}
+  heroSubtitle={c.heroSubtitle}
+>
+  <!-- Challenges & Outcomes -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.problemsHeading}</h2>
+    <TwoColumnSplit
+      variant="challenges-solution"
+      bare
+      leftTitle={c.problemTitle}
+      leftItems={c.problemItems}
+      rightTitle={c.outcomeTitle}
+      rightItems={c.outcomeItems}
+    />
+  </SectionWrapper>
+
+  <!-- Two ways in -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.waysHeading}</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-eyebrow">{c.way1Eyebrow}</div>
+        <h3 class="way-title">{c.way1Title}</h3>
+        <p class="way-body" set:html={c.way1Body}></p>
+      </div>
+      <div class="way-card">
+        <div class="way-eyebrow">{c.way2Eyebrow}</div>
+        <h3 class="way-title">{c.way2Title}</h3>
+        <p class="way-body">{c.way2Body}</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Typical projects -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.projectsHeading}</h2>
+    <div class="project-grid">
+      {projects.map((p) => (
+        <ServiceCardSmall
+          icon={p.icon}
+          title={p.title}
+          details={p.details}
+        />
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <!-- Stack -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.stackHeading}</h2>
+    <p class="intro-body intro-body--tight">{c.stackIntro}</p>
+    <p class="intro-body">{c.stackBody}</p>
+    <LogoGrid technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
+    <p class="see-all-link">
+      <a href={href('technologies', locale)} set:html={c.toolsLinkHtml}></a>
+    </p>
+  </SectionWrapper>
+
+  <!-- How it runs -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.processHeading}</h2>
+    <ProcessSteps
+      steps={c.processSteps}
+    />
+  </SectionWrapper>
+
+  <!-- Pricing -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.pricingHeading}</h2>
+    <div class="pricing-lead">
+      <span class="pricing-label">{c.pricingLabel}</span>
+      <span class="pricing-amount">{c.pricingAmount}</span>
+      <p class="pricing-sub">{c.pricingSub}</p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-heading">{c.programsHeading}</h3>
+      <p class="sub-body" set:html={c.programsBody}></p>
+    </div>
+
+    <div class="sub-section">
+      <h3 class="sub-heading">{c.paymentHeading}</h3>
+      <p class="sub-body">{c.paymentBody}</p>
+    </div>
+  </SectionWrapper>
+
+  <!-- Proof: Tameson result block -->
+  <SectionWrapper py="lg" bg="white">
+    <ResultBlock locale={locale}
+      metric={c.resultMetric}
+      body={c.resultBody}
+      caseStudySlug="tameson"
+    />
+  </SectionWrapper>
+
+  <!-- Not sure this is the right fit? -->
+  <SectionWrapper py="lg" bg="white">
+    <h2 class="section-heading">{c.fitHeading}</h2>
+    <div class="leads-grid">
+      <LeadCard {...serviceLeads.build} eyebrow={c.leadBuildEyebrow} dataTrack="improve-cta-build" />
+      <LeadCard {...serviceLeads.support} eyebrow={c.leadSupportEyebrow} dataTrack="improve-cta-support" />
+      <LeadCard {...serviceLeads.audit} eyebrow={c.leadAuditEyebrow} dataTrack="improve-cta-audit" />
+    </div>
+  </SectionWrapper>
+</ServiceLayout>
+
+<style>
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.25;
+  }
+
+  .section-heading--tight {
+    margin-bottom: 12px;
+  }
+
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 720px;
+  }
+
+  .intro-body--tight {
+    margin-bottom: 16px;
+  }
+
+  .way-body :global(.inline-link),
+  .sub-body :global(.inline-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  /* Two ways in */
+  .ways-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .ways-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .way-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .way-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-plum);
+  }
+
+  .way-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .way-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Typical projects */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .see-all-link {
+    text-align: center;
+    margin: 32px 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .see-all-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .see-all-link a:hover {
+    text-decoration: underline;
+  }
+
+  /* Inline link inside ProcessSteps descriptions */
+  :global(.step-link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  /* Pricing (same block as the Audit and Build pages) */
+  .pricing-lead {
+    max-width: 720px;
+  }
+
+  .pricing-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-brand-plum);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .pricing-sub {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sub-section {
+    margin-top: 40px;
+    max-width: 720px;
+  }
+
+  .sub-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .sub-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .leads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .leads-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

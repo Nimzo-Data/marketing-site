@@ -1,0 +1,80 @@
+import { href } from '../../i18n/routes';
+import type { Step } from '../../components/content/ProcessSteps.astro';
+import type { LineIconName } from '../../components/ui/LineIcon.astro';
+import { eurRange } from '../../i18n/format';
+import { prices } from '../../data/prices';
+
+const copy = {
+  projects: [
+  { icon: 'figures', title: 'Make the numbers trustworthy', details: ['One definition per metric, reconciled with finance', 'Test data, refunds, currency and timezone handled once'] },
+  { icon: 'operations', title: 'Make it reliable', details: ['Monitoring and alerts that fire before users notice', 'Silent syncs fixed, tests on the figures'] },
+  { icon: 'security', title: 'Lock it down', details: ['Former vendors and staff removed, roles tightened', 'Secrets out of code, backups with a tested restore'] },
+  { icon: 'ai', title: 'Make it AI-ready', details: ['Governed metrics in a semantic layer', 'An MCP or API path for AI tools'] },
+  { icon: 'gauge', title: 'BigQuery Optimization', details: ['Partitioning, clustering, query rewrites', '60–90% cost cut on rewritten queries, typically'] },
+  { icon: 'data-model', title: 'Dataform / dbt Modeling', details: ['Staging and mart models, tests, CI/CD', 'Spaghetti SQL made maintainable'] },
+  { icon: 'collection', title: 'ETL / ELT Pipelines', details: ['Airbyte, Fivetran or Datastream CDC', 'Monitoring and alerts on every sync'] },
+  { icon: 'reports', title: 'BI & Analytics Development', details: ['Looker, Lightdash, Metabase or Steep', 'Semantic layer, dashboards, AI setup'] },
+  { icon: 'plug', title: 'Custom Data Integrations', details: ['API integrations on Cloud Run', "Connectors where Airbyte and Fivetran don't fit"] },
+] as { icon: LineIconName; title: string; details: string[] }[],
+  problemsHeading: "What brings most clients here.",
+  problemItems: [
+        "BigQuery costs tripled in six months. No one knows why.",
+        "Dashboards take 45 seconds to load. People stopped opening them.",
+        "Pipelines break weekly. You hear about it from tickets.",
+        "Data lands in the warehouse, but most of it is never modeled or used.",
+        "Finance says revenue is X. Product says Y. Leadership believes neither.",
+        "Nobody uses the BI tool. The data isn't trusted.",
+        "You want AI features but your data isn't structured for them.",
+      ],
+  outcomeItems: [
+        "Costs cut at the source: partitioning, clustering, query rewrites.",
+        "Queries and dashboards that load in seconds, not minutes.",
+        "Reliable pipelines with alerts before users notice.",
+        "A modeled layer with tests and documentation, ready for analysis.",
+        "One definition per metric your business runs on.",
+        "A BI tool people use, because the data is trustworthy.",
+        "AI features that work, querying governed metrics, not raw tables.",
+      ],
+  waysHeading: "Two ways in.",
+  way1Eyebrow: "01 · After our audit",
+  way1Title: "The plan is already split into projects.",
+  way1Body: `The <a href="${href('audit', 'en')}" class="inline-link">audit</a> lists the projects in order and prices the first one, at a fixed price valid for 30 days. It also notes which tasks your team can do itself. You skip the technical call, so work starts when you sign.`,
+  way2Eyebrow: "02 · You already know the scope",
+  way2Title: "You describe it, we quote it.",
+  way2Body: "You tell us what needs fixing or adding. We go through it on the intro call, or a second call if we need to check a few things, then send a fixed-price quote. Both calls are free. If the scope turns out bigger than one project, we say so and recommend an audit first.",
+  projectsHeading: "Typical projects.",
+  stackHeading: "The tools we work with: yours and ours.",
+  stackIntro: "We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.",
+  stackBody: "We review whatever you run. We build new platforms on Google Cloud. If something else fits better, we say so, and then we either fix what you have or review your team's work.",
+  toolsLinkHtml: `See all technologies and when we pick each &rarr;`,
+  processHeading: "How a project runs.",
+  processSteps: [
+        { icon: 'search', title: "Technical call (free)", description: `We scope it on the intro call, or a second one, then send a fixed price. After our <a href='${href('audit', 'en')}' class='step-link'>audit</a>, you skip this step.` },
+        { icon: 'code-2', title: "The work (2–6 weeks, weekly check-ins)", description: "We do the work, with weekly updates. Your team joins reviews. No daily standups." },
+        { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough. No retainer expected; the next project is decided the same way." },
+        { icon: 'life-buoy', title: "First month of Run (included)", description: `We watch what we delivered and handle incidents on it, as on our <a href='${href('support', 'en')}' class='step-link'>Run support tier</a>. After that, continue month to month or stop.` },
+      ] as Step[],
+  pricingHeading: "Pricing.",
+  pricingLabel: "Fixed price, per project",
+  pricingAmount: eurRange(prices.improve.min, prices.improve.max, 'en'),
+  pricingSub: "2–6 weeks per project. Each project is priced on its scope and agreed in writing before work starts.",
+  programsHeading: "Larger programs",
+  programsBody: `Larger programs run as several projects in sequence, each priced and decided separately, so you can stop or change course after any of them. If most of the platform needs adding or replacing at once, that's a <a href="${href('build', 'en')}" class="inline-link">Build</a>: one fixed price for the whole platform, with old and new running in parallel until the numbers match.`,
+  paymentHeading: "Payment",
+  paymentBody: "50% at project start, 50% on delivery. Fixed price, agreed in writing before work begins.",
+  fitHeading: "Not sure this is the right fit?",
+  metaTitle: "Data Platform Improvement | Nimzo Data",
+  metaDescription: "Fix what's broken in your data platform and add what's missing: BigQuery costs, modeling, pipelines, BI, AI readiness. One fixed-price project at a time, €5,000 – €15,000 each.",
+  heroTitle: "Fix what's broken.<br>Add what's missing.",
+  heroSubtitle: "Senior data engineering on the platform you already have, one fixed-price project at a time. €5,000 – €15,000 per project, 2–6 weeks each, planned in our audit or scoped by you.",
+  problemTitle: "The problem:",
+  outcomeTitle: "What you get:",
+  resultMetric: "From unused data to modeled analytics across 6 markets.",
+  resultBody: "One piece added: Dataform modeling on the BigQuery Tameson already ran. 10+ sources modeled, 6 GA4 properties unified into one events model, and CI-governed data quality from day one.",
+  leadBuildEyebrow: "Most of the platform new or replaced",
+  leadSupportEyebrow: "Your platform already runs",
+  leadAuditEyebrow: "Not sure what needs fixing",
+};
+
+export type Copy = typeof copy;
+export default copy;
