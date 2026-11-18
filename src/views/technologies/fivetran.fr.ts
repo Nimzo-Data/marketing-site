@@ -4,7 +4,7 @@ const copy: Copy = {
   title: "Consultant Fivetran sur BigQuery | Nimzo Data",
   description: "Mise en place et optimisation de Fivetran sur BigQuery : configuration des connecteurs, maîtrise des coûts MAR et surveillance de la fiabilité.",
   toolCategory: "ELT / Collecte de données",
-  heroPositioning: "Quand la rapidité de mise en place et la fiabilité managée comptent plus que la maîtrise des coûts, Fivetran met vos pipelines en route en quelques heures, pas en quelques semaines.",
+  heroPositioning: "Quand la rapidité de mise en place et la fiabilité d’un service entièrement géré comptent plus que la maîtrise des coûts, Fivetran met vos pipelines en route en quelques heures, pas en quelques semaines.",
   title2: "Comment nous l’utilisons",
   items: [
         "Évaluer si Fivetran ou Airbyte convient le mieux, selon vos volumes de données, la capacité de l’équipe et les connecteurs nécessaires",
@@ -41,7 +41,7 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Fivetran est une plateforme ELT entièrement managée, avec plus de 700 connecteurs. Elle gère seule l’évolution des schémas, relance les échecs et maintient le code des connecteurs quand les sources changent leurs API. Vous payez à la ligne active par mois (MAR, monthly active rows) synchronisée, avec une offre gratuite et des offres payantes Standard, Enterprise et Business Critical.",
+  p1: "Fivetran est une plateforme ELT entièrement managée, avec plus de 700 connecteurs. Elle gère seule l’évolution des schémas, relance automatiquement ce qui a échoué et maintient le code des connecteurs quand les sources changent leurs API. Vous payez au nombre de lignes actives par mois (MAR, monthly active rows) synchronisées, avec une offre gratuite et des offres payantes Standard, Enterprise et Business Critical.",
   p2: "La fiabilité managée est le principal atout de Fivetran. Pour les entreprises qui veulent des pipelines qui tournent tout seuls, sans data engineer pour surveiller les mises à jour de connecteurs, Fivetran est difficile à battre. La qualité des connecteurs pour les grands outils SaaS (Salesforce, HubSpot, Stripe, Shopify) est la meilleure du marché.",
   p3: "Un point de vigilance : Fivetran et dbt Labs ont annoncé leur fusion en octobre 2025 (en attente de validation réglementaire). Choisir Fivetran revient donc de plus en plus à confier la collecte et la transformation au même éditeur. C’est pratique pour certaines équipes, et un risque de dépendance pour d’autres. Dans les deux cas, mieux vaut en faire un choix conscient.",
   sectionTitle: "Ce que c’est",

@@ -6,16 +6,16 @@ import { prices } from '../../data/prices';
 const copy: Copy = {
   startingPoints: [
     {
-      from: ['Rien encore.', 'Vous êtes sur le point de construire.'],
+      from: ['Rien encore.', 'Vous vous apprêtez à construire.'],
       look: 'Vos sources et leurs volumes, les chiffres dont la direction a besoin, et ce que votre équipe peut faire tourner au quotidien.',
     },
     {
-      from: ['Des tableurs et Looker Studio,', 'reliés par des connecteurs.'],
+      from: ['Des fichiers Excel ou Google Sheets et Looker Studio,', 'reliés par des connecteurs.'],
       look: 'Quels connecteurs alimentent quels rapports, ce qui casse quand un fichier change, et si les chiffres concordent avec les systèmes sources.',
       sample: href('sampleAudit', 'fr'),
     },
     {
-      from: ['Une application de reporting faite maison ou avec des outils d’IA comme Claude,', 'qui lit vos sources ou sa propre base.'],
+      from: ['Une application de reporting développée en interne ou avec des outils d’IA comme Claude,', 'qui lit vos sources ou sa propre base.'],
       look: 'D’où viennent les données, si des clés traînent dans le code, qui peut modifier la production, et si chaque indicateur n’est défini qu’une fois.',
     },
     {
@@ -25,12 +25,12 @@ const copy: Copy = {
     },
   ],
   checks: [
-    { icon: 'security', area: 'Sécurité et accès', detail: 'Secrets dans le code, anciens comptes, rôles en base, flux de données personnelles.' },
-    { icon: 'collection', area: 'Collecte', detail: 'Si chaque source tourne, et si elle échoue sans prévenir.' },
+    { icon: 'security', area: 'Sécurité et accès', detail: 'Clés et mots de passe dans le code, anciens comptes, droits d’accès à la base, flux de données personnelles.' },
+    { icon: 'collection', area: 'Collecte', detail: 'Si chaque source se charge bien, et si une panne passerait inaperçue.' },
     { icon: 'data-model', area: 'Modèle de données', detail: 'Structure de l’entrepôt, tables en double, chargements complets ou incrémentaux.' },
     { icon: 'figures', area: 'Chiffres', detail: 'Une définition par indicateur. Données de test, remboursements, devises, fuseaux horaires.' },
-    { icon: 'reports', area: 'Rapports et rapidité', detail: 'Quels rapports servent, officiels ou abandonnés, et à quelle vitesse ils chargent.' },
-    { icon: 'operations', area: 'Exploitation', detail: 'Fraîcheur, test ou production, qui peut déployer, une restauration testée.' },
+    { icon: 'reports', area: 'Rapports et temps de chargement', detail: 'Quels rapports servent, officiels ou abandonnés, et à quelle vitesse ils chargent.' },
+    { icon: 'operations', area: 'Exploitation', detail: 'Fraîcheur des données, séparation test et production, droits de déploiement, sauvegardes testées.' },
     { icon: 'maintainability', area: 'Maintenabilité', detail: 'Documentation, tests sur les chiffres, revues, garde-fous pour le code écrit par l’IA, dépendance à une seule personne.' },
     { icon: 'ai', area: 'Préparation à l’IA', detail: 'Indicateurs gouvernés, et ce que les outils d’IA peuvent lire.' },
     { icon: 'costs', area: 'Coûts', detail: 'Infrastructure, outils et licences, et ce qui fait monter la facture.' },
@@ -39,22 +39,22 @@ const copy: Copy = {
     {
       question: 'Pourquoi l’audit est-il payant ?',
       answer:
-        'Parce que c’est un vrai travail, avec un vrai livrable. Vous recevez une cartographie écrite de ce que vous faites tourner, des constats classés par gravité, un verdict par couche et un prix fixe pour la suite. Si vous décidez de ne pas continuer avec nous, vous pouvez confier ce document à un autre prestataire et il reste utile.',
+        'Parce que c’est un travail concret, qui débouche sur un livrable précis. Vous recevez une cartographie écrite de ce que vous faites tourner, des constats classés par gravité, un verdict par couche et un prix fixe pour la suite. Si vous décidez de ne pas continuer avec nous, ce document reste utilisable par un autre prestataire.',
     },
     {
-      question: 'Pourquoi ne pas me faire directement un devis ?',
+      question: 'Pourquoi ne pas nous faire directement un devis ?',
       answer:
-        'Pour une plateforme, un prix fixe n’est honnête que si le périmètre est juste. Après un appel de 45 minutes, nous devinerions vos volumes de données, vos coûts actuels et les outils adaptés à votre équipe. L’audit remplace ces suppositions par des faits, pour que le chiffre de la proposition soit un chiffre que nous tenons. Pour une correction bien définie, nous faisons un devis direct : c’est un projet Amélioration.',
+        'Pour une plateforme, un prix fixe n’est honnête que si le périmètre est juste. Après un appel de 45 minutes, nous en serions réduits à deviner vos volumes de données, vos coûts actuels et les outils adaptés à votre équipe. L’audit remplace ces hypothèses par des faits : le prix de la proposition est alors un prix que nous pouvons tenir. Pour une correction bien définie, nous faisons un devis direct : c’est un projet Amélioration.',
     },
     {
       question: 'Et si nous ne continuons pas avec vous après l’audit ?',
       answer:
-        'Vous gardez le livrable et ne devez rien de plus. Certains clients mettent le rapport en œuvre en interne, ou le confient à un autre prestataire. C’est une issue tout à fait normale. Le prix n’inclut aucun engagement.',
+        'Vous gardez le livrable et ne devez rien de plus. Certains clients mettent le rapport en œuvre en interne, ou le confient à un autre prestataire. C’est une issue tout à fait normale. L’audit n’engage à rien de plus.',
     },
     {
       question: 'En quoi êtes-vous différents d’un grand cabinet ou d’un freelance ?',
       answer:
-        'Un grand cabinet vend une mission de six mois et la confie à une équipe junior. Un freelance traite le ticket qu’il a sous les yeux. Nous sommes entre les deux : ingénierie senior, prix fixe, périmètre défini, et une passation propre pour que ce que nous construisons vous appartienne.',
+        'Un grand cabinet vend une mission de six mois et la confie à une équipe junior. Un freelance traite la demande du moment. Nous sommes entre les deux : des ingénieurs seniors, un prix fixe, un périmètre défini et une passation soignée, pour que ce que nous construisons vous appartienne.',
     },
     {
       question: 'Notre reporting a été construit avec Claude ou Cursor. Est-ce un problème ?',
@@ -62,7 +62,7 @@ const copy: Copy = {
         'Non, et c’est de plus en plus courant. Beaucoup de ces applications font bien ce pour quoi elles ont été construites. Ce que nous trouvons souvent autour : des clés d’API dans le dépôt et encore dans l’historique Git, une application connectée à la base de production avec tous les droits, un même indicateur calculé de deux façons sur deux écrans, des commandes de test comptées dans le chiffre d’affaires, aucun test sur les chiffres, et des changements poussés directement en production sans relecture. L’essentiel se corrige vite une fois écrit noir sur blanc, et l’audit le classe pour que les points dangereux soient traités en premier.',
     },
     {
-      question: 'Allez-vous nous dire de passer sur Google Cloud ?',
+      question: 'Allez-vous nous imposer de passer sur Google Cloud ?',
       answer:
         'Seulement si c’est la meilleure réponse. Nous auditons ce que vous utilisez, quel qu’il soit. Nous construisons les nouvelles plateformes sur Google Cloud. Si autre chose convient mieux, nous le disons, puis nous corrigeons ce que vous avez ou relisons le travail de votre équipe.',
     },
@@ -73,7 +73,7 @@ const copy: Copy = {
     },
   ],
   startHeading: 'Votre point de départ.',
-  startIntro: 'La méthode et le format du rapport sont les mêmes, quel que soit votre outillage. Ce que nous regardons en premier, et ce que nous recommandons, dépendent de votre point de départ.',
+  startIntro: 'La méthode et le format du rapport sont les mêmes pour tout le monde. Ce que nous regardons en premier, et ce que nous recommandons, dépendent de votre point de départ.',
   problemsHeading: 'Ce qui amène la plupart de nos clients.',
   questionItems: [
     'Pouvons-nous faire confiance à ces chiffres ?',
@@ -94,7 +94,7 @@ const copy: Copy = {
     'Un second avis écrit, vérifié sur vos données.',
   ],
   checkHeading: 'Ce que nous vérifions.',
-  checkIntro: 'Les neuf domaines, quel que soit votre outillage. Seule la profondeur change : une installation sur tableurs a peu à vérifier côté exploitation, un entrepôt hérité beaucoup.',
+  checkIntro: 'Les neuf domaines, quel que soit votre outillage. Seule la profondeur change : un reporting sur fichiers Excel a peu à vérifier côté exploitation, un entrepôt hérité beaucoup.',
   walkHeading: 'Ce que vous obtenez.',
   walkItemsHtml: [
     `<strong>Synthèse pour la direction.</strong> Une page : le verdict global, les risques critiques, ce qu’il faut faire en premier.`,
@@ -102,7 +102,7 @@ const copy: Copy = {
     `<strong>Constats classés.</strong> Chacun par gravité, avec les preuves et la correction.`,
     `<strong>Vérification des chiffres.</strong> Les chiffres clés recalculés et comparés à vos rapports.`,
     `<strong>Verdict par couche.</strong> Collecte, entrepôt, modélisation, BI et IA : garder, corriger, ajouter ou remplacer.`,
-    `<strong>Appel de restitution.</strong> Puis 14 jours pour poser vos questions.`,
+    `<strong>Restitution par visioconférence.</strong> Puis 14 jours pour nous poser vos questions.`,
   ],
   nextStepTitle: 'Et la suite, chiffrée',
   nextBuildBody: 'Architecture cible, choix des outils argumenté, coût sur 12 mois et proposition de construction au forfait.',
@@ -118,20 +118,20 @@ const copy: Copy = {
   pricingHeading: 'Prix.',
   pricingLabel: 'Prix fixe',
   pricingAmount: eurRange(prices.audit.min, prices.audit.max, 'fr'),
-  pricingSub: '1 à 2 semaines, payé à 100 % à la commande : nous facturons à la signature, et le travail commence une fois le règlement reçu. Votre place dans cette fourchette dépend du nombre de sources et du nombre d’indicateurs à recalculer.',
+  pricingSub: '1 à 2 semaines, HT, payable en totalité à la commande : nous facturons à la signature et démarrons à réception du règlement. Votre place dans cette fourchette dépend du nombre de sources et du nombre d’indicateurs à recalculer.',
   leadsHeading: 'Ce que l’audit permet ensuite.',
-  leadsIntro: 'Le verdict par couche décide de la suite. Et l’audit est un vrai livrable à lui seul.',
-  notFitHeading: 'Quand ce n’est pas la bonne option.',
+  leadsIntro: 'Le verdict par couche décide de la suite. Et l’audit se suffit à lui-même.',
+  notFitHeading: 'Quand l’audit n’est pas la bonne option.',
   notFitItemsHtml: [
     `<strong>Vous savez exactement ce que vous voulez construire, avec un périmètre clair.</strong> L’<a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a> vous conviendra mieux : vous décrivez le projet lors d’un appel gratuit, et nous le chiffrons directement.`,
-    `<strong>Vous n’avez pas encore trouvé votre marché ni de vraies données.</strong> C’est trop tôt. Revenez quand il y aura quelque chose à mesurer.`,
+    `<strong>Votre activité n’a pas encore trouvé son marché et vous n’avez pas encore de données significatives.</strong> C’est trop tôt. Revenez quand il y aura quelque chose à mesurer.`,
     `<strong>Il vous faut un test d’intrusion ou une certification de sécurité.</strong> Nous signalons les risques de la plateforme data, accès et secrets compris, mais ce n’est pas un audit de sécurité formel.`,
   ],
   faqHeading: 'Questions fréquentes.',
-  metaTitle: 'Audit de plateforme data | Nimzo Data',
-  metaDescription: 'Un audit payant de 1 à 2 semaines de ce sur quoi repose votre reporting : constats classés par gravité, verdict par couche et prix fixe pour la suite. Le livrable vous reste dans tous les cas.',
+  metaTitle: 'Audit data Google Cloud et BigQuery | Nimzo Data',
+  metaDescription: 'Audit payant de votre plateforme data en 1 à 2 semaines : constats classés par gravité, verdict par couche et prix fixe pour la suite. Le rapport vous reste dans tous les cas.',
   heroTitle: 'Avant de construire ou de corriger quoi que ce soit,<br>sachez sur quoi reposent vos chiffres.',
-  heroSubtitle: 'Un audit payant de 1 à 2 semaines de ce que vous utilisez aujourd’hui, des tableurs à l’entrepôt laissé par un prestataire. Vous repartez avec un verdict sur chaque couche de votre plateforme et un prix fixe pour la suite. Le livrable vous reste dans tous les cas.',
+  heroSubtitle: 'Un audit payant de 1 à 2 semaines de ce que vous utilisez aujourd’hui, de vos fichiers Excel à l’entrepôt de données laissé par un prestataire. Vous repartez avec un verdict sur chaque couche de votre plateforme et un prix fixe pour la suite. Le livrable vous reste dans tous les cas.',
   thFrom: 'Si vous utilisez',
   thLook: 'Ce que nous regardons en premier',
   thSample: 'Exemple',
@@ -140,7 +140,7 @@ const copy: Copy = {
   questionsTitle: 'Les questions :',
   answersTitle: 'Ce que l’audit y répond :',
   ifVerdict: 'Si le verdict est',
-  leadBuildEyebrow: 'L’essentiel de la plateforme à créer ou remplacer',
+  leadBuildEyebrow: 'Une plateforme à créer ou à remplacer',
   leadBuildTitle: 'Construction',
   leadBuildBody: 'Une nouvelle plateforme, ou le remplacement de celle qui doit partir. L’audit produit la proposition de construction au forfait ; vous décidez de donner suite ou non.',
   leadBuildLink: 'Voir la Construction',

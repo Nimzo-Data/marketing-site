@@ -10,11 +10,11 @@ const copy: Copy = {
       label: 'Responsabilité civile professionnelle',
       value: `Assurée chez Beazley, couverture de ${eur(500000, 'fr')}. Attestation sur demande.`,
     },
-    { label: 'Accord de traitement des données (DPA)', value: 'Sur demande' },
+    { label: 'Accord de sous-traitance des données (DPA)', value: 'Sur demande' },
     { label: 'Hébergement des données', value: 'Dans l’UE par défaut' },
     {
       label: 'Facturation',
-      value: 'En euros par défaut, par virement. GBP et USD possibles sur demande.',
+      value: 'En euros par défaut, par virement. Livres sterling et dollars possibles sur demande.',
     },
     { label: 'Langues de travail', value: 'Français et anglais' },
     { label: 'Heures ouvrées', value: 'Du lundi au vendredi, 9 h – 18 h, heure de Paris' },
@@ -22,8 +22,8 @@ const copy: Copy = {
   principles: [
     {
       icon: 'compass',
-      title: 'Nous pilotons, sans nous installer chez vous',
-      body: 'Nous menons le travail technique. Votre équipe participe aux revues et peut prendre des parties en main quand c’est pertinent. Pas de points quotidiens, pas d’immersion à plein temps.',
+      title: 'Nous menons le travail, sans nous installer chez vous',
+      body: 'Nous menons le travail technique. Votre équipe participe aux revues et peut reprendre certaines parties quand cela a du sens. Pas de points quotidiens, pas d’immersion à plein temps.',
     },
     {
       icon: 'database',
@@ -33,12 +33,12 @@ const copy: Copy = {
     {
       icon: 'target',
       title: 'Un seul cloud, par choix',
-      body: 'Nous ne construisons que sur GCP. Un seul cloud, c’est le connaître en profondeur ; un cabinet réparti sur trois connaît moins bien chacun.',
+      body: 'Nous ne construisons que sur GCP. Se limiter à un cloud, c’est le connaître à fond ; un cabinet qui en couvre trois les connaît moins bien.',
     },
     {
       icon: 'tag',
       title: 'Prix transparents, périmètre défini',
-      body: 'Le conseil data a la réputation de missions qui gonflent. Prix fixes, fourchettes publiées sur nos pages de services, aucune vente additionnelle de travail dont vous n’avez pas besoin.',
+      body: 'Le conseil data a la réputation de missions qui dérapent en durée et en budget. Chez nous : prix fixes, fourchettes publiées sur nos pages de services, aucun travail superflu à vous vendre.',
     },
     {
       icon: 'message-square',
@@ -53,9 +53,9 @@ const copy: Copy = {
   ],
   existsHeading: 'Pourquoi Nimzo Data existe.',
   reason1Title: 'Un vide sur le marché',
-  reason1Body: 'Une entreprise de 40 personnes avec un seul analyste a besoin d’une plateforme data et n’a personne pour la construire. Les grands cabinets chiffrent ce travail pour des budgets de grands comptes, et un recrutement senior à temps plein dépasse ce que demande le poste. Nous le faisons en projet au forfait, dimensionné pour une équipe de zéro ou une personne.',
+  reason1Body: 'Une entreprise de 40 personnes avec un seul analyste a besoin d’une plateforme data et n’a personne pour la construire. Les grands cabinets facturent ce travail au tarif des grands comptes, et recruter un profil senior à temps plein serait disproportionné. Nous le faisons au forfait, dimensionné pour les entreprises qui n’ont aucun analyste, ou un seul.',
   reason2Title: 'Une seule chose, bien faite',
-  reason2Body: 'GCP, parce que BigQuery est un entrepôt qu’une entreprise peut faire tourner sans personne de la data : il n’y a pas de cluster à administrer ni à régler. Au forfait, parce que la facturation à l’heure récompense les mauvais réflexes. Pas de couche commerciale : la personne au bout du fil est celle qui répond du travail.',
+  reason2Body: 'GCP, parce que BigQuery est un entrepôt qu’une entreprise peut faire tourner sans spécialiste data : il n’y a pas de cluster à administrer ni à régler. Au forfait, parce que la facturation à l’heure récompense les mauvais réflexes. Pas d’intermédiaire commercial : la personne au bout du fil est celle qui est responsable du travail.',
   reason3Title: 'Petits, par choix',
   reason3Body: 'Moins de clients, c’est un meilleur travail pour chacun.',
   nameBody: 'Nimzo Data tient son nom de la défense Nimzo-indienne, où les Noirs cèdent la paire de fous, un avantage visible, contre un atout structurel qui dure toute la partie. Nous construisons de la même façon : les fondations que personne ne voit valent plus que le tableau de bord que tout le monde regarde.',

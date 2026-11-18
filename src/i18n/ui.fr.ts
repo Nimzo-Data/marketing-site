@@ -3,7 +3,7 @@ import type { UiCopy } from './ui.en';
 const ui: UiCopy = {
   site: {
     organizationDescription:
-      'Conseil data spécialisé Google Cloud : audit, construction, amélioration et support de plateformes data.',
+      'Conseil data spécialisé sur Google Cloud : audit, construction, amélioration et support de plateformes data.',
     breadcrumbHome: 'Accueil',
     rssTitle: 'Blog Nimzo Data',
     rssDescription:
@@ -40,7 +40,7 @@ const ui: UiCopy = {
     serviceType: 'Conseil data',
     ctaBanner: {
       heading: 'Parlons de votre plateforme data.',
-      subtitle: 'Un appel de 45 minutes. Sans discours commercial.',
+      subtitle: 'Un appel de 45 minutes. Sans engagement, sans argumentaire.',
       button: 'Parlons-en',
     },
     founder: {
@@ -65,7 +65,7 @@ const ui: UiCopy = {
     techLayout: {
       leadAuditEyebrow: 'Vous ne savez pas encore ce qu’il vous faut',
       leadBuildEyebrow: 'Pas encore de plateforme data',
-      leadImproveEyebrow: (tool: string) => `Besoin d’aide sur ${tool}`,
+      leadImproveEyebrow: (tool: string) => `Besoin d’aide avec ${tool}`,
     },
     pricing: {
       factorsTitle: 'Ce qui fait varier le prix',
@@ -75,10 +75,10 @@ const ui: UiCopy = {
       scenarios: 'Exemples',
     },
     retainer: {
-      fitLabel: 'Pour vous si',
+      fitLabel: 'Fait pour vous si',
       included: 'Inclus',
       notIncluded: 'Non inclus',
-      everythingIn: (tier: string) => `Tout ce que contient ${tier}, plus :`,
+      everythingIn: (tier: string) => `Tout ce que contient l’offre ${tier}, plus :`,
     },
   },
   diagrams: {
@@ -94,7 +94,7 @@ const ui: UiCopy = {
     },
     tameson: {
       aria: 'Architecture Dataform en couches chez Tameson : données brutes collectées via Dagster, Datastream, Fivetran et Stitch dans BigQuery, puis modélisées dans Dataform en couches staging, intermédiaire, mart et rapports.',
-      bigQueryNote: 'Tout vit dans BigQuery',
+      bigQueryNote: 'Tout est dans BigQuery',
       raw: 'Brut',
       ingestedVia: 'Collecté via :',
       modeledIn: 'Modélisé dans Dataform',
@@ -124,7 +124,7 @@ const ui: UiCopy = {
       { label: 'Staging', caption: 'renommées, typées, une par table source' },
       { label: 'Intermédiaire', caption: 'jointures et logique métier' },
       { label: 'Marts', caption: 'faits et dimensions, documentés, testés' },
-      { label: 'Définitions validées', caption: 'indicateurs définis une fois, dans l’outil de BI', gapBefore: true },
+      { label: 'Indicateurs gouvernés', caption: 'indicateurs définis une fois, dans l’outil de BI', gapBefore: true },
     ],
     platformLayers: [
       { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, une base de données' },
@@ -136,7 +136,7 @@ const ui: UiCopy = {
   },
   cookie: {
     label: 'Consentement aux cookies',
-    message: 'Nous utilisons des cookies de mesure d’audience pour améliorer le site. Vous pouvez les refuser à tout moment.',
+    message: 'Nous utilisons des cookies de mesure d’audience pour améliorer le site. Vous pouvez les accepter ou les refuser, et changer d’avis à tout moment.',
     accept: 'Accepter',
     decline: 'Refuser',
   },

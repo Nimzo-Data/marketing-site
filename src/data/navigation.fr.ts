@@ -11,7 +11,7 @@ const copy: NavigationCopy = {
     audit: { label: 'Audit', description: 'Savoir sur quoi reposent vos chiffres' },
     build: { label: 'Construction', description: 'Une nouvelle plateforme, ou un remplacement' },
     improve: { label: 'Amélioration', description: 'Corriger ou ajouter, un projet à la fois' },
-    support: { label: 'Support', description: 'Un ingénieur senior d’astreinte, au mois' },
+    support: { label: 'Support', description: 'Un ingénieur senior à vos côtés, au mois' },
   },
   techGroups: {
     cloud: 'Cloud et entrepôt',

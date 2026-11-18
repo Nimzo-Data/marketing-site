@@ -18,7 +18,7 @@ const copy: ServicesCopy = {
   },
   support: {
     title: 'Support',
-    body: 'Un ingénieur senior d’astreinte pour la surveillance, les incidents et les petites évolutions.',
+    body: 'Un ingénieur senior qui surveille votre plateforme, traite les incidents et réalise les petites évolutions.',
     linkText: 'Voir le Support',
   },
 };

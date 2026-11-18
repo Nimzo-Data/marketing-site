@@ -3,7 +3,7 @@ import type { CaseStudiesCopy } from './caseStudies.en';
 const copy: CaseStudiesCopy = {
   aeyde: {
     headline:
-      'Comment Aeyde a fait charger ses tableaux de bord Looker en quelques secondes, réduit de 77 % ses coûts d’infrastructure data et retrouvé confiance dans ses chiffres',
+      'Aeyde : des tableaux de bord Looker qui s’affichent en quelques secondes, 77 % de coûts d’infrastructure data en moins, des chiffres à nouveau fiables',
     subline:
       'Cinq ans de croissance avaient éparpillé la stack data d’Aeyde sur plusieurs systèmes, ralentissant le reporting et compliquant les décisions.',
     company: { size: '10 à 50 salariés', sector: 'Chaussures et accessoires (D2C + B2B)' },
@@ -13,14 +13,14 @@ const copy: CaseStudiesCopy = {
         'Une nouvelle plateforme data Google Cloud, ou le remplacement de celle qui doit partir. L’ancienne et la nouvelle tournent en parallèle jusqu’à ce que les chiffres concordent.',
     },
     shortQuote: {
-      text: 'Les tableaux de bord qui mettaient des minutes à charger s’affichent en quelques secondes, et toute l’équipe fait de nouveau vraiment confiance aux données.',
+      text: 'Les tableaux de bord qui mettaient des minutes à charger s’affichent en quelques secondes, et toute l’équipe a de nouveau pleinement confiance dans les données.',
       authorTitle: 'Responsable BI, Aeyde',
       translatedFrom: 'en',
     },
   },
   tameson: {
     headline:
-      'Comment Tameson a transformé des données BigQuery inexploitées en socle d’analyse pour 6 marchés',
+      'Tameson : des données BigQuery inexploitées devenues le socle d’analyse de 6 marchés',
     subline:
       'Les pipelines tournaient et les données arrivaient dans BigQuery, mais l’essentiel restait non modélisé et inutilisé.',
     company: { size: '10 à 50 salariés', sector: 'E-commerce de fournitures industrielles' },

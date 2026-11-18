@@ -2,9 +2,9 @@ import type { Copy } from './dagster.en';
 
 const copy: Copy = {
   title: "Consultant Dagster, orchestration de pipelines | Nimzo Data",
-  description: "Orchestration Dagster pour pipelines de données complexes : modélisation par assets, contrôles de qualité des données et déploiement Dagster Cloud sur GCP.",
+  description: "Consultant Dagster pour orchestrer vos pipelines de données : pipelines orientés assets, contrôles de qualité des données, alertes et déploiement sur Dagster Cloud ou GCP.",
   toolCategory: "Orchestration",
-  heroPositioning: "Une orchestration par assets pour vos pipelines. Dépendances, contrôles de qualité et planification sont définis dans le code, avec la meilleure expérience développeur de la catégorie.",
+  heroPositioning: "Une orchestration par assets pour vos pipelines. Dépendances, contrôles de qualité et planification sont définis dans le code, avec la meilleure expérience développeur du marché.",
   title2: "Comment nous l’utilisons",
   items: [
         "Orchestrer des scripts Python sur mesure en plusieurs étapes, avec des dépendances explicites et des contrôles de qualité entre chaque étape",
@@ -21,7 +21,7 @@ const copy: Copy = {
           bullets: [
             'Vous avez au moins 4 pipelines sur mesure qui dépendent les uns des autres',
             'Vous voulez des contrôles de qualité des données comme éléments à part entière du pipeline',
-            'Vous voulez la meilleure expérience développeur en orchestration',
+            'Vous voulez l’orchestrateur le plus agréable à utiliser pour vos développeurs',
           ],
         },
         {
@@ -46,8 +46,8 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Dagster est un orchestrateur de données moderne : l’outil qui chapeaute vos pipelines et vos transformations pour les planifier, gérer leurs dépendances, relancer les échecs et vous montrer ce qui a tourné, quand, et pourquoi quelque chose a cassé. Il concurrence Airflow et Prefect, avec une attention plus forte à la qualité des données et à l’expérience développeur. Les dernières versions ajoutent Dagster Components (pipelines écrits en YAML, adaptés aux agents de code IA) et un serveur MCP pour l’intégration directe avec des outils comme Claude Code et Cursor.",
-  p2: "La plupart de nos projets n’ont pas besoin d’orchestration. Airbyte et Dataform se planifient eux-mêmes, et pour une plateforme simple, ajouter un orchestrateur serait du sur-dimensionnement. Quand l’orchestration est vraiment nécessaire (scripts sur mesure avec dépendances, contrôles de qualité poussés, coordination entre pipelines), Dagster est la nette amélioration par rapport à Airflow. La qualité d’ingénierie est sensiblement supérieure, l’interface est réellement utilisable, et le modèle par assets correspond à la façon dont les équipes data pensent leurs pipelines.",
+  p1: "Dagster est un orchestrateur de données moderne : l’outil qui chapeaute vos pipelines et vos transformations pour les planifier, gérer leurs dépendances, relancer ce qui a échoué et vous montrer ce qui a tourné, quand, et pourquoi quelque chose a cassé. Il se positionne face à Airflow et Prefect, avec une attention plus soutenue à la qualité des données et à l’expérience développeur. Les dernières versions ajoutent Dagster Components (pipelines écrits en YAML, adaptés aux agents de code IA) et un serveur MCP pour l’intégration directe avec des outils comme Claude Code et Cursor.",
+  p2: "La plupart de nos projets n’ont pas besoin d’orchestration. Airbyte et Dataform se planifient eux-mêmes, et pour une plateforme simple, ajouter un orchestrateur serait surdimensionné. Quand l’orchestration est vraiment nécessaire (scripts sur mesure avec dépendances, contrôles de qualité poussés, coordination entre pipelines), Dagster est nettement supérieur à Airflow. Le produit est mieux conçu, l’interface est réellement utilisable, et le modèle par assets correspond à la façon dont les équipes data pensent leurs pipelines.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

@@ -15,7 +15,7 @@ const copy: FounderCopy = {
     'Toute personne qui travaille sur votre plateforme, vous l’avez rencontrée.',
   ],
   ctaLine:
-    'Vous parlerez à Antoine, le fondateur. La personne au bout du fil est celle qui répond du travail.',
+    'Vous parlerez à Antoine, le fondateur. La personne au bout du fil est celle qui est responsable du travail.',
 };
 
 export default copy;
