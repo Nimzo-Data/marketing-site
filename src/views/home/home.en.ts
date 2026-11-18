@@ -1,5 +1,5 @@
 import type { Step } from '../../components/content/ProcessSteps.astro';
-import { eurRange } from '../../i18n/format';
+import { eur, eurRange } from '../../i18n/format';
 import { prices } from '../../data/prices';
 
 const copy = {
@@ -60,7 +60,7 @@ const copy = {
   improveLink: "See Improve",
   supportTitle: "Support",
   supportDescription: "A senior engineer on call for monitoring, incidents and small improvements.",
-  supportPrice: "From €1,000/month",
+  supportPrice: `From ${eur(prices.support.run, 'en')}/month`,
   supportTimeline: "Month-to-month",
   supportLink: "See Support",
   routeScratchAria: "Route: Audit, then Build or Improve",
