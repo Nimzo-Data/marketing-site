@@ -1,6 +1,85 @@
-import { placeholder } from '../../i18n/copy';
-import en, { type Copy } from './build.en';
+import { href } from '../../i18n/routes';
+import type { Copy } from './build.en';
+import { eurRange } from '../../i18n/format';
+import { prices } from '../../data/prices';
 
-const copy: Copy = placeholder(en);
+const copy: Copy = {
+  problemsHeading: 'Ce qui amène la plupart de nos clients.',
+  problemItems: [
+    'Votre reporting repose sur des tableurs qui cassent.',
+    'Les rapports pour le conseil prennent des jours à assembler à la main.',
+    'Les équipes obtiennent des réponses différentes à la même question.',
+    'Chaque question data passe par une seule personne.',
+    'Votre plateforme casse chaque semaine, et la rafistoler coûte plus cher que la remplacer.',
+    'Elle repose sur des outils que personne dans l’équipe ne connaît.',
+    'Vous ne savez pas si vos données peuvent servir à l’IA.',
+  ],
+  outcomeItems: [
+    'Des tableaux de bord que votre équipe ouvre chaque jour, en confiance.',
+    'Des rapports qui se mettent à jour et s’envoient tout seuls.',
+    'Une définition par indicateur : chiffre d’affaires, churn, LTV.',
+    'Des analyses en libre-service, sans ticket.',
+    'Une bascule seulement quand les chiffres concordent.',
+    'Une documentation que votre prochaine recrue pourra reprendre.',
+    'Une IA qui répond à partir de données fiables.',
+  ],
+  listFooter: 'Nous construisons la plateforme, vous remettons les clés et nous partons, avec 30 jours de support pour que votre équipe prenne le relais sereinement.',
+  diagramHeading: 'Ce que nous construisons, de bout en bout.',
+  diagramCaption: 'Chaque couche est choisie selon vos volumes de données, les compétences de votre équipe et votre budget, avec le raisonnement écrit noir sur blanc.',
+  layersHeading: 'Chaque brique, bien faite.',
+  layer1Title: 'Pipelines de données automatisés',
+  layer1Body: 'Nous connectons vos sources (bases de données, API, outils SaaS) avec Airbyte ou Fivetran, selon vos besoins. Les données arrivent dans BigQuery à heure fixe, avec surveillance et alertes quand quelque chose casse.',
+  layer2TitleHtml: `Architecture et modélisation des données`,
+  layer2Body: 'Les données brutes sont nettoyées, modélisées et documentées dans Dataform ou dbt, en couches de staging, de transformation et de reporting. Les tests de qualité sont intégrés dès le départ, pour que les problèmes apparaissent avant d’atteindre les tableaux de bord.',
+  layer3TitleHtml: `Tableaux de bord, rapports et IA`,
+  layer3Body: 'Nous branchons l’outil de BI adapté à votre équipe (Looker, Lightdash, Metabase ou Steep) et construisons les tableaux de bord qui comptent. Nous configurons aussi les fonctions d’IA par-dessus, pour que l’analyse conversationnelle ou les agents d’IA interrogent des indicateurs gouvernés, pas des tables brutes.',
+  toolsHeading: 'Les outils que nous utilisons.',
+  toolsIntro: 'Chaque construction en combine plusieurs. Le choix dépend de vos sources, de votre équipe et de votre budget. Nous expliquons les compromis avant de trancher.',
+  toolsLinkHtml: `Voir toutes les technologies et quand nous choisissons chacune &rarr;`,
+  processHeading: 'Comment se déroule une construction.',
+  processSteps: [
+    { icon: 'search', title: `Audit (1 à 2 semaines, ${eurRange(prices.audit.min, prices.audit.max, 'fr')})`, description: `Un verdict sur chaque partie de votre plateforme et une proposition de construction au forfait. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
+    { icon: 'scale', title: 'Votre décision (sans frais)', description: 'Construire avec nous, le faire vous-mêmes, ou vous arrêter là. Mettre le rapport en œuvre en interne est une issue tout à fait normale.' },
+    { icon: 'code-2', title: 'Construction (6 à 14 semaines, démo toutes les deux semaines)', description: 'Nous menons le travail, votre équipe participe aux revues. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
+    { icon: 'key-round', title: 'Passation (1 à 2 semaines)', description: 'Formation, documentation complète et présentations commentées enregistrées, pour que votre équipe la fasse tourner sans nous.' },
+    { icon: 'life-buoy', title: 'Premier mois d’Évolution (inclus)', description: `Nous surveillons la plateforme, traitons les incidents et réalisons une journée d’évolutions, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Évolution</a>. Ensuite Maintien, sauf si vous choisissez autrement.` },
+  ],
+  pricingHeading: 'Prix.',
+  pricingLabel: 'Prix fixe, construction seule',
+  pricingAmount: eurRange(prices.build.min, prices.build.max, 'fr'),
+  pricingSubHtml: `8 à 16 semaines du lancement à la passation. Chiffré après l’audit sur le périmètre réel, et validé par écrit avant de commencer. L’<a href="${href('audit', 'fr')}" class="inline-link">audit</a> est facturé à part. Une nouvelle plateforme se situe en général entre ${eurRange(15000, 35000, 'fr')} ; remplacer une plateforme en service coûte plus cher, parce que l’ancienne et la nouvelle tournent en parallèle jusqu’à ce que les chiffres concordent, puis nous basculons.`,
+  pricingFactors: [
+    { name: 'Point de départ', low: 'Rien en place', high: 'Remplacement d’une plateforme en service' },
+    { name: 'Nombre de sources', low: '2–3 sources simples', high: '6–10 sources variées' },
+    { name: 'Complexité des transformations', low: 'Modèle standard', high: 'Logique métier complexe' },
+    { name: 'Outil de BI', low: 'Steep / Metabase', high: 'Lightdash / Looker avec LookML' },
+    { name: 'Orchestration', low: 'Pas nécessaire', high: 'Workflows avec Dagster' },
+  ],
+  pricingScenarios: [
+    { label: 'Exemple : 3 sources, Metabase', price: eurRange(15000, 18000, 'fr'), duration: '8 à 10 semaines', description: 'Une startup avec Postgres, Stripe et HubSpot. Metabase pour les tableaux de bord.' },
+    { label: 'Exemple : 6 sources ou plus, Looker', price: eurRange(25000, 35000, 'fr'), duration: '10 à 14 semaines', description: 'Une scale-up avec des bases produit, des API marketing et des outils financiers. Looker avec LookML.' },
+    { label: 'Exemple : Shopify + publicité, Lightdash', price: eurRange(20000, 25000, 'fr'), duration: '8 à 10 semaines', description: 'Un e-commerçant avec Shopify, des régies publicitaires (Meta, Google) et une équipe technique qui veut ses indicateurs définis dans le code. Lightdash par-dessus.' },
+    { label: 'Exemple : remplacement d’une plateforme en service', price: eurRange(40000, 50000, 'fr'), duration: '12 à 16 semaines', description: 'Plusieurs briques migrées en même temps, des problèmes de qualité de données complexes, et une période en parallèle avant la bascule.' },
+  ],
+  whyMoreTitle: 'Pourquoi remplacer une plateforme coûte-t-il plus cher que partir de zéro ?',
+  whyMore1Title: 'Des systèmes en service',
+  whyMore1Body: 'Nous remplaçons votre plateforme pendant qu’elle sert. Les migrations tournent en parallèle, les tableaux de bord ne s’éteignent pas, les pipelines continuent de tourner pendant que nous les remplaçons en dessous. Partir de zéro n’a pas cette contrainte.',
+  whyMore2Title: 'Des problèmes liés',
+  whyMore2Body: 'La plupart des plateformes ont des problèmes imbriqués. Réparer le tableau de bord lent, c’est réparer le modèle, donc le pipeline. Le périmètre est plus large qu’il n’y paraît.',
+  paymentHeading: 'Paiement',
+  paymentBody: '50 % au lancement · 30 % à mi-parcours · 20 % à la passation finale. Prix fixe. Aucune modification sans avenant signé. L’audit est payé à 100 % avant de commencer.',
+  fitHeading: 'Vous hésitez ?',
+  metaTitle: 'Construction de plateforme data | Nimzo Data',
+  metaDescription: 'Nous construisons des plateformes data Google Cloud de bout en bout : collecte, BigQuery, Dataform et BI. Nouvelles plateformes, ou remplacement de celle qui doit partir. Au forfait, après un audit payant.',
+  heroTitle: 'Vos données sont éparpillées dans vos outils.<br>Aucun ne parle aux autres.',
+  heroSubtitle: 'Une vraie plateforme data, sans recruter d’équipe data. De bout en bout, de la collecte aux tableaux de bord, construite de zéro ou en remplacement d’une plateforme qui doit partir. D’abord l’audit, puis une construction au forfait. Ingénierie senior, passation propre.',
+  problemTitle: 'Le problème :',
+  outcomeTitle: 'Ce que vous obtenez :',
+  resultMetric: 'De quelques minutes à quelques secondes.',
+  resultBody: 'Trois couches remplacées : collecte, entrepôt et modélisation. Avec en plus une baisse de 77 % des coûts d’infrastructure, et 119 tables dérivées Looker regroupées dans une seule couche Dataform.',
+  leadImproveEyebrow: 'Une brique à ajouter, ou des corrections',
+  leadSupportEyebrow: 'Votre plateforme tourne déjà',
+  leadAuditEyebrow: 'Vous ne savez pas encore ce qu’il vous faut',
+};
 
 export default copy;

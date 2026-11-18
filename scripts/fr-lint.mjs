@@ -5,7 +5,11 @@ export function frModuleProblems(source) {
   const code = source
     .replace(/\/\/.*$/gm, '')
     .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/^import .*$/gm, '');
+    .replace(/^import .*$/gm, '')
+    // Text inside strings is French ("en cours") or a locale code ('en'), never the module.
+    .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\\n]|\\.)*"/g, '""')
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``');
   const uses = code.match(/\ben\b/g)?.length ?? 0;
   const whole = code.match(/=\s*placeholder\(en\)\s*;/g)?.length ?? 0;
   if (uses === 0 || (uses === 1 && whole === 1)) return [];

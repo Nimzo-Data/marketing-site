@@ -1,6 +1,80 @@
-import { placeholder } from '../../i18n/copy';
-import en, { type Copy } from './improve.en';
+import { href } from '../../i18n/routes';
+import type { Copy } from './improve.en';
+import { eurRange } from '../../i18n/format';
+import { prices } from '../../data/prices';
 
-const copy: Copy = placeholder(en);
+const range = eurRange(prices.improve.min, prices.improve.max, 'fr');
+
+const copy: Copy = {
+  projects: [
+    { icon: 'figures', title: 'Des chiffres fiables', details: ['Une définition par indicateur, rapprochée avec la finance', 'Données de test, remboursements, devises et fuseaux traités une fois pour toutes'] },
+    { icon: 'operations', title: 'Une plateforme fiable', details: ['Surveillance et alertes qui se déclenchent avant que les utilisateurs ne remarquent quoi que ce soit', 'Synchronisations silencieuses corrigées, tests sur les chiffres'] },
+    { icon: 'security', title: 'Une plateforme verrouillée', details: ['Anciens prestataires et salariés retirés, rôles resserrés', 'Secrets sortis du code, sauvegardes avec une restauration testée'] },
+    { icon: 'ai', title: 'Prête pour l’IA', details: ['Des indicateurs gouvernés dans une couche sémantique', 'Un accès MCP ou API pour les outils d’IA'] },
+    { icon: 'gauge', title: 'Optimisation BigQuery', details: ['Partitionnement, clustering, réécriture des requêtes', 'En général 60 à 90 % de coûts en moins sur les requêtes réécrites'] },
+    { icon: 'data-model', title: 'Modélisation Dataform / dbt', details: ['Modèles de staging et marts, tests, CI/CD', 'Un SQL spaghetti rendu maintenable'] },
+    { icon: 'collection', title: 'Pipelines ETL / ELT', details: ['Airbyte, Fivetran ou Datastream CDC', 'Surveillance et alertes sur chaque synchronisation'] },
+    { icon: 'reports', title: 'BI et analytics', details: ['Looker, Lightdash, Metabase ou Steep', 'Couche sémantique, tableaux de bord, mise en place de l’IA'] },
+    { icon: 'plug', title: 'Intégrations sur mesure', details: ['Intégrations d’API sur Cloud Run', 'Des connecteurs là où Airbyte et Fivetran ne conviennent pas'] },
+  ],
+  problemsHeading: 'Ce qui amène la plupart de nos clients.',
+  problemItems: [
+    'Les coûts BigQuery ont triplé en six mois. Personne ne sait pourquoi.',
+    'Les tableaux de bord mettent 45 secondes à charger. Plus personne ne les ouvre.',
+    'Les pipelines cassent chaque semaine. Vous l’apprenez par des tickets.',
+    'Les données arrivent dans l’entrepôt, mais l’essentiel n’est jamais modélisé ni utilisé.',
+    'La finance annonce un chiffre d’affaires X, le produit Y. La direction ne croit ni l’un ni l’autre.',
+    'Personne n’utilise l’outil de BI. On ne fait pas confiance aux données.',
+    'Vous voulez des fonctions d’IA, mais vos données ne sont pas structurées pour.',
+  ],
+  outcomeItems: [
+    'Des coûts réduits à la source : partitionnement, clustering, réécriture des requêtes.',
+    'Des requêtes et des tableaux de bord qui chargent en secondes, pas en minutes.',
+    'Des pipelines fiables, avec des alertes avant que les utilisateurs ne remarquent quoi que ce soit.',
+    'Une couche modélisée, testée et documentée, prête pour l’analyse.',
+    'Une définition par indicateur pour tout ce qui fait tourner l’entreprise.',
+    'Un outil de BI utilisé, parce que les données sont fiables.',
+    'Des fonctions d’IA qui marchent, en interrogeant des indicateurs gouvernés, pas des tables brutes.',
+  ],
+  waysHeading: 'Deux façons de commencer.',
+  way1Eyebrow: '01 · Après notre audit',
+  way1Title: 'Le plan est déjà découpé en projets.',
+  way1BodyHtml: `L’<a href="${href('audit', 'fr')}" class="inline-link">audit</a> liste les projets dans l’ordre et chiffre le premier, à prix fixe valable 30 jours. Il indique aussi les tâches que votre équipe peut faire elle-même. Pas besoin d’appel technique : le travail commence à la signature.`,
+  way2Eyebrow: '02 · Vous connaissez déjà le périmètre',
+  way2Title: 'Vous le décrivez, nous le chiffrons.',
+  way2Body: 'Vous nous dites ce qu’il faut corriger ou ajouter. Nous le passons en revue lors du premier appel, ou d’un second si nous devons vérifier quelques points, puis nous envoyons un devis au forfait. Les deux appels sont gratuits. Si le périmètre dépasse un seul projet, nous vous le disons et recommandons d’abord un audit.',
+  projectsHeading: 'Projets types.',
+  stackHeading: 'Les outils avec lesquels nous travaillons : les vôtres et les nôtres.',
+  stackIntro: 'Nous partons d’abord de vos outils actuels. S’il faut remplacer quelque chose, nous vous disons pourquoi et ce que nous utiliserions à la place.',
+  stackBody: 'Nous auditons ce que vous utilisez, quel qu’il soit. Nous construisons les nouvelles plateformes sur Google Cloud. Si autre chose convient mieux, nous le disons, puis nous corrigeons ce que vous avez ou relisons le travail de votre équipe.',
+  toolsLinkHtml: `Voir toutes les technologies et quand nous choisissons chacune &rarr;`,
+  processHeading: 'Comment se déroule un projet.',
+  processSteps: [
+    { icon: 'search', title: 'Appel technique (gratuit)', description: `Nous cadrons le projet lors du premier appel, ou d’un second, puis envoyons un prix fixe. Après notre <a href='${href('audit', 'fr')}' class='step-link'>audit</a>, cette étape disparaît.` },
+    { icon: 'code-2', title: 'Le travail (2 à 6 semaines, point hebdomadaire)', description: 'Nous faisons le travail, avec un point chaque semaine. Votre équipe participe aux revues. Pas de points quotidiens.' },
+    { icon: 'key-round', title: 'Passation', description: 'Documentation et présentation commentée. Aucun forfait mensuel attendu ; le projet suivant se décide de la même façon.' },
+    { icon: 'life-buoy', title: 'Premier mois de Maintien (inclus)', description: `Nous surveillons ce que nous avons livré et traitons les incidents qui le touchent, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Maintien</a>. Ensuite, vous continuez au mois ou vous arrêtez.` },
+  ],
+  pricingHeading: 'Prix.',
+  pricingLabel: 'Prix fixe, par projet',
+  pricingAmount: range,
+  pricingSub: '2 à 6 semaines par projet. Chaque projet est chiffré selon son périmètre et validé par écrit avant de commencer.',
+  programsHeading: 'Programmes plus larges',
+  programsBodyHtml: `Les programmes plus larges se déroulent en plusieurs projets successifs, chacun chiffré et décidé séparément, pour pouvoir vous arrêter ou changer de cap après n’importe lequel. Si l’essentiel de la plateforme doit être ajouté ou remplacé d’un coup, c’est une <a href="${href('build', 'fr')}" class="inline-link">Construction</a> : un prix fixe pour toute la plateforme, l’ancienne et la nouvelle tournant en parallèle jusqu’à ce que les chiffres concordent.`,
+  paymentHeading: 'Paiement',
+  paymentBody: '50 % au lancement du projet, 50 % à la livraison. Prix fixe, validé par écrit avant de commencer.',
+  fitHeading: 'Vous hésitez ?',
+  metaTitle: 'Amélioration de plateforme data | Nimzo Data',
+  metaDescription: `Corrigez ce qui ne marche pas dans votre plateforme data et ajoutez ce qui manque : coûts BigQuery, modélisation, pipelines, BI, préparation à l’IA. Un projet au forfait à la fois, ${range} chacun.`,
+  heroTitle: 'Corriger ce qui ne marche pas.<br>Ajouter ce qui manque.',
+  heroSubtitle: `Du data engineering senior sur la plateforme que vous avez déjà, un projet au forfait à la fois. ${range} par projet, 2 à 6 semaines chacun, planifié dans notre audit ou cadré par vous.`,
+  problemTitle: 'Le problème :',
+  outcomeTitle: 'Ce que vous obtenez :',
+  resultMetric: 'De données inutilisées à des analyses modélisées sur 6 marchés.',
+  resultBody: 'Une brique ajoutée : la modélisation Dataform sur le BigQuery que Tameson utilisait déjà. Plus de 10 sources modélisées, 6 propriétés GA4 réunies dans un seul modèle d’événements, et une qualité des données gouvernée en CI dès le premier jour.',
+  leadBuildEyebrow: 'L’essentiel de la plateforme à créer ou remplacer',
+  leadSupportEyebrow: 'Votre plateforme tourne déjà',
+  leadAuditEyebrow: 'Vous ne savez pas quoi corriger',
+};
 
 export default copy;
