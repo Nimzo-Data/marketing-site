@@ -547,6 +547,15 @@ const ui = t(locale).header;
     }
   }
 
+  /* French labels run longer: between the desktop breakpoint and 1100px the
+     header would otherwise push the CTA into its right padding. English is
+     untouched. */
+  @media (min-width: 1024px) and (max-width: 1100px) {
+    :global(html[lang='fr']) .header-inner {
+      gap: 20px;
+    }
+  }
+
   /* Language switch, left of the CTA */
   .header-cta :global(.header-lang) {
     margin-right: 12px;
