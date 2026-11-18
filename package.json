@@ -9,7 +9,8 @@
     "check": "astro check",
     "test": "vitest run",
     "diff:dist": "node scripts/diff-dist.mjs",
-    "baseline": "astro build && rm -rf .dist-baseline && cp -r dist .dist-baseline"
+    "baseline": "astro build && rm -rf .dist-baseline && cp -r dist .dist-baseline",
+    "postbuild": "node scripts/check-dist.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",

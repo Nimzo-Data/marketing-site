@@ -31,7 +31,12 @@ import Steep from './technologies/Steep.astro';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type View = (props: { locale: 'en' | 'fr' }) => any;
 
-export const views: Partial<Record<RouteId, View>> = {
+/** Every route with a French URL of its own (the legal notice is shared). */
+export type FrenchRouteId = Exclude<RouteId, 'legalNotice'>;
+
+// A complete Record: adding a route to src/i18n/routes.ts without a view here
+// is a type error.
+export const views: Record<FrenchRouteId, View> = {
   home: Home,
   about: About,
   contact: Contact,

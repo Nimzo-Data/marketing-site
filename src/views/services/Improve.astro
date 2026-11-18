@@ -83,7 +83,7 @@ const projects: { icon: LineIconName; title: string; details: string[] }[] = c.p
     <h2 class="section-heading">{c.stackHeading}</h2>
     <p class="intro-body intro-body--tight">{c.stackIntro}</p>
     <p class="intro-body">{c.stackBody}</p>
-    <LogoGrid technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
+    <LogoGrid locale={locale} technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
     <p class="see-all-link">
       <a href={href('technologies', locale)} set:html={c.toolsLinkHtml}></a>
     </p>

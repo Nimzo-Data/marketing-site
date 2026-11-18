@@ -41,7 +41,7 @@ const serviceLeads = getServiceLeads(locale);
 const ui = t(locale).components.techLayout;
 ---
 
-<BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
+<BaseLayout {locale} {title} {description} {ogTitle} {ogDescription} {ogImage}>
   <HeroTech
     toolName={toolName}
     toolLogo={resolvedLogo}

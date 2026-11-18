@@ -99,7 +99,7 @@ const serviceLeads = getServiceLeads(locale);
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">{c.toolsHeading}</h2>
     <p class="intro-body">{c.toolsIntro}</p>
-    <LogoGrid technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
+    <LogoGrid locale={locale} technologies={getTechnologiesForGrid(locale)} showTaglines={true} />
     <p class="see-all-link">
       <a href={href('technologies', locale)} set:html={c.toolsLinkHtml}></a>
     </p>
