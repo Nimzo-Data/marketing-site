@@ -3,7 +3,8 @@
 // guard while shipping English, so it's refused (scripts/fr-lint.test.mjs).
 export function frModuleProblems(source) {
   const code = source
-    .replace(/\/\/.*$/gm, '')
+    // A comment starts with // not preceded by ":" (so "https://" in a string isn't one).
+    .replace(/(^|[^:])\/\/.*$/gm, '$1')
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/^import .*$/gm, '')
     // Text inside strings is French ("en cours") or a locale code ('en'), never the module.
