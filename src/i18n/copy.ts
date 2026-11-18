@@ -3,6 +3,7 @@
 // renders English on previews and is refused by the build once French ships.
 import { SHOW_FRENCH } from '../data/siteConfig';
 import type { Locale } from './locales';
+import { frenchTypographyDeep } from './typography';
 
 const PLACEHOLDER = Symbol.for('nimzo.fr-placeholder');
 
@@ -31,10 +32,17 @@ export function isPlaceholder(value: unknown): boolean {
   return typeof value === 'object' && value !== null && PLACEHOLDER in value;
 }
 
+const typeset = new WeakMap<object, unknown>();
+
 export function pickCopy<T>(copies: Record<Locale, T>, locale: Locale, hint = 'unknown'): T {
   const copy = copies[locale];
   if (locale === 'fr' && SHOW_FRENCH && isPlaceholder(copy)) {
     throw new Error(`French copy missing (placeholder) for ${hint}`);
+  }
+  // Written French gets its non-breaking spaces here (see typography.ts).
+  if (locale === 'fr' && !isPlaceholder(copy) && copy && typeof copy === 'object') {
+    if (!typeset.has(copy)) typeset.set(copy, frenchTypographyDeep(copy));
+    return typeset.get(copy) as T;
   }
   return copy;
 }
