@@ -7,6 +7,11 @@ const ui = {
       'Boutique GCP data consulting: data platform audits, builds, improvements, and support.',
     breadcrumbHome: 'Home',
     rssTitle: 'Nimzo Data Blog',
+    rssDescription:
+      'Data engineering articles from Nimzo Data. BigQuery optimization, Dataform modeling, GCP architecture, and lessons from real client engagements.',
+  },
+  blog: {
+    updated: 'Updated',
   },
   header: {
     logoAria: 'Nimzo Data — Home',

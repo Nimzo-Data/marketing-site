@@ -5,6 +5,8 @@ import CTABanner from '../components/cards/CTABanner.astro';
 import FounderBlock from '../components/content/FounderBlock.astro';
 import { getFounder } from '../data/founder';
 import type { Locale } from '../i18n/locales';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
 import { formatPostDate, isoDate } from '../data/blog';
 
 interface Props {
@@ -14,15 +16,17 @@ interface Props {
   updatedDate?: Date;
   /** Slug only, e.g. "bigquery-slot-reservations". */
   slug: string;
+  locale: Locale;
+  /** The post's URL in each language, when both exist. */
+  alternates?: Record<Locale, string>;
 }
 
-const { title, description, pubDate, updatedDate, slug } = Astro.props;
-const locale: Locale = 'en';
+const { title, description, pubDate, updatedDate, slug, locale, alternates } = Astro.props;
 const founder = getFounder(locale);
 
 // Built from the slug rather than the request so it always carries the
 // trailing slash, whichever form the page was reached by.
-const canonical = new URL(`/blog/${slug}/`, Astro.site).href;
+const canonical = new URL(`${href('blog', locale)}${slug}/`, Astro.site).href;
 
 // Posts have no image of their own, so the site OG image is the fallback and
 // the same file backs the Article schema.
@@ -31,6 +35,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  ...(locale === 'fr' ? { inLanguage: 'fr' } : {}),
   headline: title,
   description,
   datePublished: isoDate(pubDate),
@@ -44,7 +49,7 @@ const articleSchema = {
     '@type': 'Person',
     name: founder.name,
     jobTitle: founder.role,
-    url: new URL('/about/', Astro.site).href,
+    url: new URL(href('about', locale), Astro.site).href,
     ...(founder.linkedin ? { sameAs: [founder.linkedin] } : {}),
   },
   publisher: {
@@ -64,17 +69,19 @@ const articleSchema = {
   description={description}
   ogType="article"
   canonicalUrl={canonical}
+  locale={locale}
+  alternates={alternates}
   structuredData={articleSchema}
 >
   <SectionWrapper py="lg" bg="white">
     <article class="post">
       <header class="post-header">
         <p class="post-dates">
-          <time datetime={isoDate(pubDate)}>{formatPostDate(pubDate)}</time>
+          <time datetime={isoDate(pubDate)}>{formatPostDate(pubDate, locale)}</time>
           {updatedDate && (
             <>
               <span class="post-dates-sep" aria-hidden="true">·</span>
-              <span>Updated <time datetime={isoDate(updatedDate)}>{formatPostDate(updatedDate)}</time></span>
+              <span>{t(locale).blog.updated} <time datetime={isoDate(updatedDate)}>{formatPostDate(updatedDate, locale)}</time></span>
             </>
           )}
         </p>
@@ -96,10 +103,6 @@ const articleSchema = {
        the photo and introduces Antoine, so repeating both in the banner a few
        hundred pixels later reads as a duplicate. Same call as About. -->
   <CTABanner locale={locale}
-    heading="Ready to talk about your data stack?"
-    subtitle="45-minute call. No sales pitch."
-    buttonText="Let's talk"
-    buttonHref="/contact/"
     dataTrack="blog-post-cta"
     showFounder={false}
   />

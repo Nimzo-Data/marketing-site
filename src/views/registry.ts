@@ -13,6 +13,7 @@ import Aeyde from './case-studies/Aeyde.astro';
 import Tameson from './case-studies/Tameson.astro';
 import PrivacyPolicy from './legal/PrivacyPolicy.astro';
 import TermsOfService from './legal/TermsOfService.astro';
+import BlogIndex from './blog/BlogIndex.astro';
 import SampleAudit from './sample-audit/SampleAudit.astro';
 import TechnologiesIndex from './technologies/TechnologiesIndex.astro';
 import Airbyte from './technologies/Airbyte.astro';
@@ -43,6 +44,7 @@ export const views: Partial<Record<RouteId, View>> = {
   tameson: Tameson,
   technologies: TechnologiesIndex,
   sampleAudit: SampleAudit,
+  blog: BlogIndex,
   privacy: PrivacyPolicy,
   terms: TermsOfService,
   'tech:airbyte': Airbyte,

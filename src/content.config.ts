@@ -3,6 +3,8 @@ import { glob } from 'astro/loaders';
 
 // Posts live in src/blog/*.md. The filename is the slug, so
 // `bigquery-slot-reservations.md` renders at /blog/bigquery-slot-reservations/.
+// French versions live in src/blog/fr/<french-slug>.md and render at
+// /fr/blog/<french-slug>/; see src/data/blog-pairs.ts for the pairing rule.
 //
 // `draft` defaults to true: a new file is invisible in production until it is
 // explicitly marked draft: false. Drafts still render in `astro dev` so a post
@@ -18,6 +20,8 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     draft: z.boolean().default(true),
+    /** French posts only (src/blog/fr/): the English post's slug this translates. */
+    translationOf: z.string().optional(),
   }),
 });
 
