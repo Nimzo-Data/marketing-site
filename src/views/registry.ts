@@ -11,6 +11,7 @@ import Support from './services/Support.astro';
 import CaseStudies from './case-studies/CaseStudies.astro';
 import Aeyde from './case-studies/Aeyde.astro';
 import Tameson from './case-studies/Tameson.astro';
+import SampleAudit from './sample-audit/SampleAudit.astro';
 import TechnologiesIndex from './technologies/TechnologiesIndex.astro';
 import Airbyte from './technologies/Airbyte.astro';
 import Bigquery from './technologies/Bigquery.astro';
@@ -39,6 +40,7 @@ export const views: Partial<Record<RouteId, View>> = {
   aeyde: Aeyde,
   tameson: Tameson,
   technologies: TechnologiesIndex,
+  sampleAudit: SampleAudit,
   'tech:airbyte': Airbyte,
   'tech:bigquery': Bigquery,
   'tech:dagster': Dagster,
