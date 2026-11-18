@@ -17,7 +17,7 @@ const ui = t(locale).components.caseStudy;
     <a href={href(cs.slug as RouteId, locale)} class="ht-card">
       <img
         src={cs.logo}
-        alt={ui.logoAlt(cs.client)}
+        alt={t(Astro.props.locale).components.logoAlt(cs.client)}
         class="ht-card__logo"
         data-cs-slug={cs.slug}
         loading="lazy"

@@ -11,14 +11,31 @@ const ASSET_HASH = /\/_astro\/([\w-]+?)\.[\w-]{4,}\.(\w+)/g;
 const SCOPE_ATTR = /data-astro-cid-[a-z0-9]+/g;
 const SCOPE_CLASS = /^astro-[a-z0-9]{8}$/;
 
+// Only ASCII whitespace collapses: a non-breaking space is content.
 function cleanValue(value) {
-  return value.replace(ASSET_HASH, '/_astro/$1.$2').replace(/\s+/g, ' ').trim();
+  return value.replace(ASSET_HASH, '/_astro/$1.$2').replace(/[ \t\r\n]+/g, ' ').trim();
 }
+
+// Text keeps a single space at its edges: "Hello <b>" and "Hello<b>" differ.
+function cleanText(value) {
+  return value.replace(ASSET_HASH, '/_astro/$1.$2').replace(/[ \t\r\n]+/g, ' ');
+}
+
+const INLINE = new Set(['a', 'abbr', 'b', 'br', 'code', 'em', 'i', 'img', 'kbd', 'mark', 'q', 's', 'small', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'svg']);
+const isInline = (n) => !n || n.nodeType === NodeType.TEXT_NODE || INLINE.has(n.rawTagName?.toLowerCase());
 
 function serialize(node, depth, out) {
   const pad = '  '.repeat(depth);
   if (node.nodeType === NodeType.TEXT_NODE) {
-    const text = cleanValue(node.text);
+    // A whitespace-only node renders only between two inline neighbours.
+    if (!/[^ \t\r\n]/.test(node.text)) {
+      const siblings = node.parentNode?.childNodes ?? [];
+      const i = siblings.indexOf(node);
+      const prev = siblings[i - 1];
+      const next = siblings[i + 1];
+      if (!prev || !next || !isInline(prev) || !isInline(next)) return;
+    }
+    const text = cleanText(node.text);
     if (text) out.push(pad + JSON.stringify(text));
     return;
   }

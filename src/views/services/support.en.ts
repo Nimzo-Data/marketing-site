@@ -79,7 +79,7 @@ const copy = {
   promiseBody: "If something we monitor breaks, you hear it from us first. Alerts go to a channel we share with you, automatically.",
   changeHeading: "Change work.",
   changeIntro: "On Extend and Lead.",
-  changeRules: [
+  changeRulesHtml: [
     `Every change is estimated before we start, and includes updating the documentation.`,
     `If it turns out bigger, we stop and tell you before going over. You choose: continue next month, add extra days, reduce it, or make it an <a href="${href('improve', 'en')}" class="inline-link">Improve</a> project.`,
     `Extra days cost €1,000 each, agreed in advance.`,

@@ -31,7 +31,7 @@ if (!cs) {
 <a href={href(cs.slug as RouteId, locale)} class="result-block">
   <img
     src={cs.logo}
-    alt={`${cs.client} logo`}
+    alt={t(locale).components.logoAlt(cs.client)}
     class="result-block__logo"
     data-cs-slug={cs.slug}
     loading="lazy"

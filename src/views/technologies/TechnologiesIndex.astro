@@ -59,7 +59,7 @@ const grouped = sections.map((section) => ({
           <a href={href(`tech:${tech.slug}` as RouteId, locale)} class="tech-card">
             <div class="tech-card__head">
               {tech.logoPath ? (
-                <img src={tech.logoPath} alt={t(locale).components.caseStudy.logoAlt(tech.name)} class="tech-card__logo" width="40" height="40" loading="lazy" />
+                <img src={tech.logoPath} alt={t(locale).components.logoAlt(tech.name)} class="tech-card__logo" width="40" height="40" loading="lazy" />
               ) : (
                 <div class="tech-card__logo-placeholder" aria-hidden="true">{tech.name.slice(0, 2).toUpperCase()}</div>
               )}

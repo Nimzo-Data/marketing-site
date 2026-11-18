@@ -28,7 +28,7 @@ const posts = await getPublishedPosts(locale);
       <header class="blog-header">
         <h1 class="blog-title">{c.heading}</h1>
         <p class="blog-intro">
-          <Fragment set:html={c.intro} />
+          <Fragment set:html={c.introHtml} />
         </p>
       </header>
 

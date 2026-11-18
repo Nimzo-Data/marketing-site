@@ -18,7 +18,7 @@ const { caseStudy, eyebrow = ui.eyebrow } = Astro.props;
     <div class="cs-hero-v2__main">
       <img
         src={caseStudy.logo}
-        alt={ui.logoAlt(caseStudy.client)}
+        alt={t(Astro.props.locale).components.logoAlt(caseStudy.client)}
         class="cs-hero-v2__logo"
         data-cs-slug={caseStudy.slug}
         loading="eager"

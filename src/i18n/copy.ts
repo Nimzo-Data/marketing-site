@@ -6,8 +6,25 @@ import type { Locale } from './locales';
 
 const PLACEHOLDER = Symbol.for('nimzo.fr-placeholder');
 
+// PSEUDO_FR=1 marks every placeholder string ⟦like this⟧, so
+// `npm run check:fr:pseudo` can spot English that doesn't come from copy.
+const pseudo = typeof process !== 'undefined' && process.env.PSEUDO_FR === '1';
+
+function mark(value: unknown): unknown {
+  if (typeof value === 'string') {
+    if (/^(\/|https?:|mailto:|#)/.test(value) || !/[A-Za-z]/.test(value)) return value;
+    // Mark the text between tags, leave tags and attributes alone.
+    return value.replace(/(^|>)([^<]+)(?=<|$)/g, (_, open, text) => (/[A-Za-z]/.test(text) ? `${open}⟦${text}⟧` : `${open}${text}`));
+  }
+  if (Array.isArray(value)) return value.map(mark);
+  if (typeof value === 'function') return (...args: unknown[]) => mark((value as (...a: unknown[]) => unknown)(...args));
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, mark(v)]));
+  return value;
+}
+
 export function placeholder<T extends object>(en: T): T {
-  return Object.assign(Object.create(Object.getPrototypeOf(en)), en, { [PLACEHOLDER]: true });
+  const base = pseudo ? (mark(en) as T) : en;
+  return Object.assign(Object.create(Object.getPrototypeOf(en)), base, { [PLACEHOLDER]: true });
 }
 
 export function isPlaceholder(value: unknown): boolean {

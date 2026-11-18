@@ -32,7 +32,7 @@ const serviceSchema = {
   name: serviceName,
   description,
   areaServed: 'Europe',
-  serviceType: 'Data Consulting',
+  serviceType: t(locale).components.serviceType,
   ...(locale === 'fr' ? { inLanguage: 'fr' } : {}),
 };
 ---

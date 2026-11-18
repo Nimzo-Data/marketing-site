@@ -36,7 +36,7 @@ const copy = {
     "Looker carried 119 derived tables (64 SQL-based, 55 LookML-native). Some explores joined 50+ views. A simple business question could compile into a 500-line query.",
   ],
   s2_7: "Aeyde's BI Lead, Phoebe, knew it was the right time to audit the data stack and evolve it to better support the company's continued growth. With maternity leave approaching, the team also needed someone to step in during her absence and help drive that transition forward.",
-  pullQuote: `Migrating that complexity to a new stack would simply move the problem.`,
+  pullQuoteHtml: `Migrating that complexity to a new stack would simply move the problem.`,
   s3_1: "The approach",
   s3_2: "Two principles guided the engagement.",
   s3_3: "Clean before migrating.",

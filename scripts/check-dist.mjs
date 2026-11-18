@@ -98,6 +98,27 @@ export function checkNoFrenchLeak(pages, sitemapXml) {
   return issues;
 }
 
+/**
+ * Once French is built, every English page has a French version (shown by its
+ * hreflang set). Exceptions: the shared French legal notice, the 404 and
+ * blog posts (paired through translationOf instead).
+ * Catches a page added under src/pages/ without a route map entry.
+ */
+export function checkEveryPageHasFrench(pages) {
+  const shared = new Set(['mentions-legales/index.html', '404.html']);
+  return pages
+    .filter((p) => !isFrench(p.path) && !shared.has(p.path))
+    // Posts pair through translationOf, enforced at launch by src/data/blog-pairs.ts.
+    .filter((p) => !/^blog\/[^/]+\/index\.html$/.test(p.path))
+    .filter((p) => !hreflangs(p).some((h) => h.lang === 'fr'))
+    .map((p) => `${p.path}: no French version (add it to src/i18n/routes.ts and src/views/registry.ts)`);
+}
+
+/** French is live when the sitemap lists French URLs (astro.config.mjs adds them only with SHOW_FRENCH). */
+export function isLaunched(sitemapXml) {
+  return /<loc>[^<]*\/fr\//.test(sitemapXml);
+}
+
 export function checkCanonical(pages) {
   const issues = [];
   for (const page of pages) {
@@ -133,7 +154,7 @@ function main() {
 
   // Before launch, French pages built for review (previews, INCLUDE_FRENCH=1)
   // still hold placeholder copy with English links: report them, don't fail.
-  const launched = /export const SHOW_FRENCH = true;/.test(readFileSync('src/data/siteConfig.ts', 'utf8'));
+  const launched = isLaunched(sitemap);
   const frenchLinkIssues = frenchBuilt ? checkFrenchLinks(pages) : [];
   if (frenchLinkIssues.length && !launched) {
     console.warn(`check-dist: ${frenchLinkIssues.length} English link(s) on French pages (allowed until SHOW_FRENCH; run npm run check:fr)`);
@@ -143,7 +164,7 @@ function main() {
     ...checkLang(pages),
     ...checkCanonical(pages),
     ...(frenchBuilt
-      ? [...(launched ? frenchLinkIssues : []), ...checkAlternatesResolve(pages, exists)]
+      ? [...(launched ? frenchLinkIssues : []), ...checkAlternatesResolve(pages, exists), ...checkEveryPageHasFrench(pages)]
       : checkNoFrenchLeak(pages, sitemap)),
   ];
 

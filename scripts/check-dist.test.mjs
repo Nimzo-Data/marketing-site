@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checkLang, checkFrenchLinks, checkAlternatesResolve, checkNoFrenchLeak, checkCanonical } from './check-dist.mjs';
+import { checkLang, checkFrenchLinks, checkAlternatesResolve, checkNoFrenchLeak, checkCanonical, checkEveryPageHasFrench, isLaunched } from './check-dist.mjs';
 
 const page = (path, body, { lang = path.startsWith('fr/') ? 'fr' : 'en', head = '' } = {}) => ({
   path,
@@ -85,5 +85,28 @@ describe('checkCanonical', () => {
   });
   it('flags a French page pointing its canonical at the English page', () => {
     expect(checkCanonical([page('fr/a-propos/index.html', '', { head: canon('/about/') })])).toHaveLength(1);
+  });
+});
+
+describe('checkEveryPageHasFrench', () => {
+  const withAlts = (path) => page(path, '', { head: alt('en', '/x/') + alt('fr', '/fr/x/') });
+  it('flags an English page with no French version', () => {
+    expect(checkEveryPageHasFrench([page('sample-audit/acme/index.html', '')])).toHaveLength(1);
+  });
+  it('leaves blog posts to the pairing rule (src/data/blog-pairs.ts), but not the blog index', () => {
+    expect(checkEveryPageHasFrench([page('blog/dataform-not-dbt/index.html', '')])).toEqual([]);
+    expect(checkEveryPageHasFrench([page('blog/index.html', '')])).toHaveLength(1);
+  });
+  it('passes paired pages, French pages, the shared legal notice and the 404', () => {
+    expect(
+      checkEveryPageHasFrench([withAlts('about/index.html'), page('fr/a-propos/index.html', ''), page('mentions-legales/index.html', ''), page('404.html', '')])
+    ).toEqual([]);
+  });
+});
+
+describe('isLaunched', () => {
+  it('follows the sitemap: French URLs are listed only once SHOW_FRENCH is on', () => {
+    expect(isLaunched('<urlset><url><loc>https://nimzodata.com/fr/</loc></url></urlset>')).toBe(true);
+    expect(isLaunched('<urlset><url><loc>https://nimzodata.com/</loc></url></urlset>')).toBe(false);
   });
 });

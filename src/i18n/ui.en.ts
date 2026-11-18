@@ -37,6 +37,8 @@ const ui = {
   },
   components: {
     learnMore: 'Learn more',
+    logoAlt: (name: string) => `${name} logo`,
+    serviceType: 'Data Consulting',
     ctaBanner: {
       heading: 'Ready to talk about your data stack?',
       subtitle: '45-minute call. No sales pitch.',
@@ -55,7 +57,6 @@ const ui = {
       tools: 'Tools',
       readCaseStudy: 'Read case study',
       readClientCaseStudy: (client: string) => `Read the ${client} case study`,
-      logoAlt: (client: string) => `${client} logo`,
       photoOf: (name: string) => `Photo of ${name}`,
       translatedFromEnglish: 'Translated from English',
     },

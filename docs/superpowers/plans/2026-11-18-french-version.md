@@ -377,9 +377,9 @@ Each task: after writing, run `npm run check:fr` (the remaining list shrinks), `
 
 - [ ] **Step 1:** Push `feat/fr-copy` and share the Vercel preview URL (French is built on previews).
 - [ ] **Step 2:** Antoine reads in this order: home, services, contact, about, case studies, sample audit, technologies, blog, legal. He sends fixes, and each recurring fix goes into `docs/fr-glossary.md` and is applied everywhere.
-- [ ] **Step 3: Manual check at 375px and 1280px** on `/fr/`, one service page, `/fr/services/support-plateforme-data/` (tier cards), `/fr/contact/` and the mobile menu. Look for:
+- [ ] **Step 3: Manual check at 375px, 1024px and 1280px** on `/fr/`, one service page, `/fr/services/support-plateforme-data/` (tier cards), `/fr/contact/` and the mobile menu. Look for:
   - no clipping or horizontal scroll;
-  - buttons, chips and nav fit;
+  - buttons, chips and nav fit; at 1024px the desktop header has about 40px to spare in English, and longer French labels or CTA overflow it (final review, I-7): shorten the labels, reduce the nav gap, or move the desktop breakpoint;
   - the switch round-trips;
   - the cookie banner is in French;
   - prices and dates are in French format.

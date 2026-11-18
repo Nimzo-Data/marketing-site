@@ -23,7 +23,7 @@ const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
   <div class="cs-card__logo-wrap">
     <img
       src={caseStudy.logo}
-      alt={`${caseStudy.client} logo`}
+      alt={t(locale).components.logoAlt(caseStudy.client)}
       class="cs-card__logo"
       data-cs-slug={caseStudy.slug}
       loading="lazy"

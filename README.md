@@ -21,7 +21,8 @@ The page layout itself is `src/views/<area>/<Page>.astro`. Files under `src/page
 ### Rules
 
 - **The French file has exactly the keys of the English one.** A missing or extra key is a type error (`npx astro check`).
-- **Keys ending in `Html` hold HTML** (links, `<strong>`, `<br>`); every other key is plain text.
+- **Keys ending in `Html` hold HTML** (links, `<strong>`, `<br>`, `&nbsp;`); every other key is plain text, where you type characters as they are (a non-breaking space is the character itself, not `&nbsp;`). One exception: hero titles and subtitles and process-step descriptions are rendered as HTML by their components, so they may hold `<br>` and links too.
+- **A French file is either `placeholder(en)` as a whole, or entirely French.** Reusing English values inside a French file (`...en`, `en.faqs`) fails `npm test`.
 - **Internal links go through `href()`:** `<a href="${href('contact', 'fr')}">`, never a typed path. URLs per page are in `src/i18n/routes.ts`.
 - **Prices shown in several places** come from `src/data/prices.ts` through `eur()` / `eurRange()` (`€3,000` in English, `3 000 €` in French).
 - **French style:** *vouvoiement*, short sentences, a non-breaking space before `: ; ? !`, and the terms in `docs/fr-glossary.md`.
@@ -36,5 +37,6 @@ The page layout itself is `src/views/<area>/<Page>.astro`. Files under `src/page
 
 - `SHOW_FRENCH` in `src/data/siteConfig.ts` is the single switch. While it is `false`, production has no French page, language switch, hreflang or French sitemap entry. French pages still build in `astro dev`, on Vercel previews, and locally with `INCLUDE_FRENCH=1 npm run build`.
 - `npm run check:fr` lists what's left before launch: French files still on `placeholder(en)` and posts without a French version.
-- Every build runs `scripts/check-dist.mjs`: page language, canonicals, language links that lead nowhere, French pages linking to English ones (an error once launched), and nothing French leaking before launch.
+- `npm run check:fr:pseudo` builds French with every placeholder string marked ⟦like this⟧ and lists English on French pages that doesn't come from a copy file (text typed into a template or component).
+- Every build runs `scripts/check-dist.mjs`: page language, canonicals, language links that lead nowhere, English pages without a French version, French pages linking to English ones (an error once launched, which it reads from the sitemap), and nothing French leaking before launch.
 - `npm test` runs the unit tests (route map, formatting, copy helpers, blog pairing, build checks).

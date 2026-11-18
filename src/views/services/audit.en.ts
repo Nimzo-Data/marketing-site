@@ -97,7 +97,7 @@ const copy = {
   checkHeading: "What we check.",
   checkIntro: "All nine areas, whatever you run. Only the depth changes: a spreadsheet setup has little to check under Operations, an inherited warehouse a lot.",
   walkHeading: "What you walk away with.",
-  walkItems: [
+  walkItemsHtml: [
     `<strong>Summary for leadership.</strong> One page: the overall verdict, the critical risks, what to do first.`,
     `<strong>Current-state map.</strong> Sources, pipelines, tables, reports, schedules and owners.`,
     `<strong>Ranked findings.</strong> Each one by severity, with the evidence and the fix.`,
@@ -123,7 +123,7 @@ const copy = {
   leadsHeading: "Where this leads.",
   leadsIntro: "The verdict per layer decides the next step. An audit is also a real deliverable on its own.",
   notFitHeading: "When this isn't the right fit.",
-  notFitItems: [
+  notFitItemsHtml: [
     `<strong>You already know exactly what you want built and have a clear scope.</strong> <a href="${href('improve', 'en')}" class="inline-link">Improve</a> is a better fit: you describe the project on a free call, and we quote it directly.`,
     `<strong>You're pre-product-market-fit with no real data yet.</strong> Too early. Come back when there's something to measure.`,
     `<strong>You need a penetration test or a security certification.</strong> We flag data-platform risks, including access and secrets, but this is not a formal security audit.`,

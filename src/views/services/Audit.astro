@@ -97,7 +97,7 @@ const faqs = c.faqs;
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">{c.walkHeading}</h2>
     <ul class="walk-list" role="list">
-      {c.walkItems.map((html) => <li set:html={html} />)}
+      {c.walkItemsHtml.map((html) => <li set:html={html} />)}
     </ul>
 
     <div class="next-step">
@@ -170,7 +170,7 @@ const faqs = c.faqs;
     <div class="not-fit">
       <h2 class="section-heading not-fit__heading">{c.notFitHeading}</h2>
       <ul class="not-fit__list">
-        {c.notFitItems.map((html) => <li set:html={html} />)}
+        {c.notFitItemsHtml.map((html) => <li set:html={html} />)}
       </ul>
     </div>
   </SectionWrapper>

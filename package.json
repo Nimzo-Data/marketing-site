@@ -11,7 +11,8 @@
     "diff:dist": "node scripts/diff-dist.mjs",
     "baseline": "astro build && rm -rf .dist-baseline && cp -r dist .dist-baseline",
     "postbuild": "node scripts/check-dist.mjs",
-    "check:fr": "node scripts/check-fr-ready.mjs"
+    "check:fr": "node scripts/check-fr-ready.mjs",
+    "check:fr:pseudo": "INCLUDE_FRENCH=1 PSEUDO_FR=1 astro build && node scripts/check-fr-pseudo.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",

@@ -24,6 +24,22 @@ describe('normalizeHtml', () => {
     expect(normalizeHtml('<p>a<br>b</p>')).not.toBe(normalizeHtml('<p>a b</p>'));
   });
 
+  it('detects a space dropped at an inline element boundary', () => {
+    expect(normalizeHtml('<p>Hello <strong>w</strong> again</p>')).not.toBe(normalizeHtml('<p>Hello<strong>w</strong>again</p>'));
+  });
+
+  it('ignores whitespace between block elements, which never renders', () => {
+    expect(normalizeHtml('<ul><li>a</li> <li>b</li></ul>')).toBe(normalizeHtml('<ul><li>a</li><li>b</li></ul>'));
+  });
+
+  it('detects a space dropped between two inline elements', () => {
+    expect(normalizeHtml('<p><a>x</a> <em>y</em></p>')).not.toBe(normalizeHtml('<p><a>x</a><em>y</em></p>'));
+  });
+
+  it('detects a non-breaking space turned into a plain one', () => {
+    expect(normalizeHtml('<p>3&nbsp;000</p>')).not.toBe(normalizeHtml('<p>3 000</p>'));
+  });
+
   it('detects a changed href', () => {
     expect(normalizeHtml('<a href="/a/">x</a>')).not.toBe(normalizeHtml('<a href="/b/">x</a>'));
   });

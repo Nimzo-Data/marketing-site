@@ -70,7 +70,7 @@ const faqs = c.faqs;
     <h2 class="section-heading section-heading--tight">{c.changeHeading}</h2>
     <p class="intro-body intro-body--tight">{c.changeIntro}</p>
     <ul class="dot-list dot-list--narrow" role="list">
-      {c.changeRules.map((html) => <li set:html={html} />)}
+      {c.changeRulesHtml.map((html) => <li set:html={html} />)}
     </ul>
     <h3 class="sub-heading sub-heading--spaced">{c.dayHeading}</h3>
     <p class="sub-body sub-body--narrow">{c.dayBody}</p>

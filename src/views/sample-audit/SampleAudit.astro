@@ -26,7 +26,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
         <p class="sa-hero__eyebrow">{c.d1}</p>
         <h1 class="sa-hero__title">{c.d2}</h1>
         <p class="sa-hero__subline">{c.d3}</p>
-        <p class="sa-hero__subline sa-hero__subline--note" set:html={c.d4}></p>
+        <p class="sa-hero__subline sa-hero__subline--note" set:html={c.d4Html}></p>
       </div>
       <aside class="sa-hero__aside" aria-label={c.engagementDetails}>
         <div class="sa-snap">
@@ -40,28 +40,28 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
         <div class="sa-snap-row">
           <div class="sa-snap sa-snap--inline">
             <p class="sa-snap__label">{c.d9}</p>
-            <a href="/services/data-platform-audit/" class="sa-snap__tile">
+            <a href={href('audit', locale)} class="sa-snap__tile">
               <span class="sa-snap__tile-name">{c.d10}</span>
-              <span class="sa-snap__tile-arrow" aria-hidden="true" set:html={c.d11}></span>
+              <span class="sa-snap__tile-arrow" aria-hidden="true" set:html={c.d11Html}></span>
             </a>
           </div>
           <div class="sa-snap-divider" aria-hidden="true">{c.d12}</div>
           <div class="sa-snap sa-snap--inline">
             <p class="sa-snap__label">{c.d13}</p>
             <div class="sa-snap__tools">
-              <a href="/technologies/airbyte/" class="sa-snap__tile">
+              <a href={href('tech:airbyte', locale)} class="sa-snap__tile">
                 <img src="/logos/airbyte.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
                 <span class="sa-snap__tile-name">{c.d14}</span>
               </a>
-              <a href="/technologies/bigquery/" class="sa-snap__tile">
+              <a href={href('tech:bigquery', locale)} class="sa-snap__tile">
                 <img src="/logos/bigquery.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
                 <span class="sa-snap__tile-name">{c.d15}</span>
               </a>
-              <a href="/technologies/dataform/" class="sa-snap__tile">
+              <a href={href('tech:dataform', locale)} class="sa-snap__tile">
                 <img src="/logos/dataform.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
                 <span class="sa-snap__tile-name">{c.d16}</span>
               </a>
-              <a href="/technologies/steep/" class="sa-snap__tile">
+              <a href={href('tech:steep', locale)} class="sa-snap__tile">
                 <img src="/logos/steep.svg" alt="" class="sa-snap__tile-logo" width="20" height="20" loading="lazy" />
                 <span class="sa-snap__tile-name">{c.d17}</span>
               </a>
@@ -78,13 +78,13 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <!-- Cover -->
     <div class="doc-cover">
       <h2 class="cover-title">{c.d18}</h2>
-      <p class="cover-subtitle" set:html={c.d19}></p>
+      <p class="cover-subtitle" set:html={c.d19Html}></p>
       <div class="cover-meta">
         <p>{c.d20}</p>
         <p>{c.d21}</p>
         <p>{c.d22}</p>
       </div>
-      <p class="cover-confidential" set:html={c.d23}></p>
+      <p class="cover-confidential" set:html={c.d23Html}></p>
     </div>
 
     <!-- Executive Summary -->
@@ -92,7 +92,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <p>{c.d25}</p>
     <p>{c.d26}</p>
     <ol class="findings-list">
-      {c.d27.map((html) => <li set:html={html} />)}
+      {c.d27Html.map((html) => <li set:html={html} />)}
     </ol>
     <p>{c.d28}</p>
     <p>{c.d29}</p>
@@ -104,11 +104,11 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <div class="table-scroll">
       <table class="doc-table">
         <tbody>
-          <tr><td set:html={c.d33_1}></td><td>{c.d33_2}</td></tr>
-          <tr><td set:html={c.d34_1}></td><td>{c.d34_2}</td></tr>
-          <tr><td set:html={c.d35_1}></td><td>{c.d35_2}</td></tr>
-          <tr><td set:html={c.d36_1}></td><td>{c.d36_2}</td></tr>
-          <tr><td set:html={c.d37_1}></td><td>{c.d37_2}</td></tr>
+          <tr><td set:html={c.d33_1Html}></td><td>{c.d33_2}</td></tr>
+          <tr><td set:html={c.d34_1Html}></td><td>{c.d34_2}</td></tr>
+          <tr><td set:html={c.d35_1Html}></td><td>{c.d35_2}</td></tr>
+          <tr><td set:html={c.d36_1Html}></td><td>{c.d36_2}</td></tr>
+          <tr><td set:html={c.d37_1Html}></td><td>{c.d37_2}</td></tr>
         </tbody>
       </table>
     </div>
@@ -139,7 +139,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     </div>
 
     <h4 class="doc-h3">{c.d51}</h4>
-    <p class="doc-note" set:html={c.d52}></p>
+    <p class="doc-note" set:html={c.d52Html}></p>
     <div class="table-scroll">
       <table class="doc-table">
         <thead><tr><th>{c.d53_1}</th><th>{c.d53_2}</th></tr></thead>
@@ -238,7 +238,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <h4 class="doc-h3">{c.d106}</h4>
     <p>{c.d107}</p>
     <ul class="doc-bullets">
-      {c.d108.map((html) => <li set:html={html} />)}
+      {c.d108Html.map((html) => <li set:html={html} />)}
     </ul>
 
     <h3 class="doc-h2">{c.d109}</h3>
@@ -306,7 +306,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
         </tbody>
       </table>
     </div>
-    <p class="doc-note" set:html={c.d146}></p>
+    <p class="doc-note" set:html={c.d146Html}></p>
 
     <!-- Key Findings -->
     <h2 class="doc-h1">{c.d147}</h2>
@@ -315,66 +315,66 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <h4 class="doc-h3">{c.d149}</h4>
     <p>{c.d150}</p>
     <p>{c.d151}</p>
-    <p set:html={c.d152}></p>
+    <p set:html={c.d152Html}></p>
 
     <h4 class="doc-h3">{c.d153}</h4>
     <p>{c.d154}</p>
     <p>{c.d155}</p>
     <p>{c.d156}</p>
-    <p set:html={c.d157}></p>
+    <p set:html={c.d157Html}></p>
 
     <h4 class="doc-h3">{c.d158}</h4>
     <p>{c.d159}</p>
     <p>{c.d160}</p>
-    <p set:html={c.d161}></p>
+    <p set:html={c.d161Html}></p>
 
     <h4 class="doc-h3">{c.d162}</h4>
     <p>{c.d163}</p>
-    <p set:html={c.d164}></p>
+    <p set:html={c.d164Html}></p>
 
     <h4 class="doc-h3">{c.d165}</h4>
     <p>{c.d166}</p>
     <p>{c.d167}</p>
-    <p set:html={c.d168}></p>
+    <p set:html={c.d168Html}></p>
 
     <h4 class="doc-h3">{c.d169}</h4>
     <p>{c.d170}</p>
     <p>{c.d171}</p>
-    <p set:html={c.d172}></p>
+    <p set:html={c.d172Html}></p>
 
     <h4 class="doc-h3">{c.d173}</h4>
     <p>{c.d174}</p>
     <p>{c.d175}</p>
-    <p set:html={c.d176}></p>
+    <p set:html={c.d176Html}></p>
 
     <h4 class="doc-h3">{c.d177}</h4>
     <p>{c.d178}</p>
     <p>{c.d179}</p>
-    <p set:html={c.d180}></p>
+    <p set:html={c.d180Html}></p>
 
     <!-- Quick Wins -->
     <h2 class="doc-h1">{c.d181}</h2>
     <p>{c.d182}</p>
 
     <h4 class="doc-h3">{c.d183}</h4>
-    <p set:html={c.d184}></p>
-    <p set:html={c.d185}></p>
-    <p set:html={c.d186}></p>
+    <p set:html={c.d184Html}></p>
+    <p set:html={c.d185Html}></p>
+    <p set:html={c.d186Html}></p>
 
     <h4 class="doc-h3">{c.d187}</h4>
     <p>{c.d188}</p>
-    <p set:html={c.d189}></p>
-    <p set:html={c.d190}></p>
+    <p set:html={c.d189Html}></p>
+    <p set:html={c.d190Html}></p>
 
     <h4 class="doc-h3">{c.d191}</h4>
     <p>{c.d192}</p>
-    <p set:html={c.d193}></p>
-    <p set:html={c.d194}></p>
+    <p set:html={c.d193Html}></p>
+    <p set:html={c.d194Html}></p>
 
     <h4 class="doc-h3">{c.d195}</h4>
     <p>{c.d196}</p>
-    <p set:html={c.d197}></p>
-    <p set:html={c.d198}></p>
+    <p set:html={c.d197Html}></p>
+    <p set:html={c.d198Html}></p>
 
     <!-- Recommendation -->
     <h2 class="doc-h1">{c.d199}</h2>
@@ -383,22 +383,22 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <img src={c.diagramTarget} alt={c.diagramTargetAlt} class="doc-diagram" loading="lazy" />
     <p>{c.d201}</p>
     <ul class="doc-bullets">
-      <li><Fragment set:html={c.d202} />
+      <li><Fragment set:html={c.d202Html} />
         <ul class="doc-bullets-nested">
           {c.d203.map((text) => <li>{text}</li>)}
         </ul>
       </li>
-      {c.d204.map((html) => <li set:html={html} />)}
-      <li><Fragment set:html={c.d205} />
+      {c.d204Html.map((html) => <li set:html={html} />)}
+      <li><Fragment set:html={c.d205Html} />
         <ul class="doc-bullets-nested">
           {c.d206.map((text) => <li>{text}</li>)}
         </ul>
       </li>
-      {c.d207.map((html) => <li set:html={html} />)}
+      {c.d207Html.map((html) => <li set:html={html} />)}
     </ul>
     <p>{c.d208}</p>
     <ul class="doc-bullets">
-      {c.d209.map((html) => <li set:html={html} />)}
+      {c.d209Html.map((html) => <li set:html={html} />)}
     </ul>
 
     <h3 class="doc-h2">{c.d210}</h3>
@@ -406,11 +406,11 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
       <table class="doc-table doc-table--verdict">
         <thead><tr><th>{c.d211_1}</th><th>{c.d211_2}</th><th>{c.d211_3}</th></tr></thead>
         <tbody>
-          <tr><td>{c.d212_1}</td><td set:html={c.d212_2}></td><td>{c.d212_3}</td></tr>
-          <tr><td>{c.d213_1}</td><td set:html={c.d213_2}></td><td>{c.d213_3}</td></tr>
-          <tr><td>{c.d214_1}</td><td set:html={c.d214_2}></td><td>{c.d214_3}</td></tr>
-          <tr><td>{c.d215_1}</td><td set:html={c.d215_2}></td><td>{c.d215_3}</td></tr>
-          <tr><td>{c.d216_1}</td><td set:html={c.d216_2}></td><td>{c.d216_3}</td></tr>
+          <tr><td>{c.d212_1}</td><td set:html={c.d212_2Html}></td><td>{c.d212_3}</td></tr>
+          <tr><td>{c.d213_1}</td><td set:html={c.d213_2Html}></td><td>{c.d213_3}</td></tr>
+          <tr><td>{c.d214_1}</td><td set:html={c.d214_2Html}></td><td>{c.d214_3}</td></tr>
+          <tr><td>{c.d215_1}</td><td set:html={c.d215_2Html}></td><td>{c.d215_3}</td></tr>
+          <tr><td>{c.d216_1}</td><td set:html={c.d216_2Html}></td><td>{c.d216_3}</td></tr>
           <tr class="doc-table-total"><td>{c.d217_1}</td><td colspan="2">{c.d217_2}</td></tr>
         </tbody>
       </table>
@@ -441,22 +441,22 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
         <thead><tr><th>{c.d232_1}</th><th>{c.d232_2}</th><th>{c.d232_3}</th><th>{c.d232_4}</th></tr></thead>
         <tbody>
           <tr class="score-row"><td>{c.d233_1}</td><td class="score">{c.d233_2}</td><td class="score">{c.d233_3}</td><td class="score">{c.d233_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d234_1}</td><td set:html={c.d234_2}></td><td set:html={c.d234_3}></td><td set:html={c.d234_4}></td></tr>
+          <tr class="explanation-row"><td>{c.d234_1}</td><td set:html={c.d234_2Html}></td><td set:html={c.d234_3Html}></td><td set:html={c.d234_4Html}></td></tr>
           <tr class="score-row"><td>{c.d235_1}</td><td class="score">{c.d235_2}</td><td class="score">{c.d235_3}</td><td class="score">{c.d235_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d236_1}</td><td set:html={c.d236_2}></td><td set:html={c.d236_3}></td><td set:html={c.d236_4}></td></tr>
+          <tr class="explanation-row"><td>{c.d236_1}</td><td set:html={c.d236_2Html}></td><td set:html={c.d236_3Html}></td><td set:html={c.d236_4Html}></td></tr>
           <tr class="score-row"><td>{c.d237_1}</td><td class="score">{c.d237_2}</td><td class="score">{c.d237_3}</td><td class="score">{c.d237_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d238_1}</td><td set:html={c.d238_2}></td><td set:html={c.d238_3}></td><td set:html={c.d238_4}></td></tr>
+          <tr class="explanation-row"><td>{c.d238_1}</td><td set:html={c.d238_2Html}></td><td set:html={c.d238_3Html}></td><td set:html={c.d238_4Html}></td></tr>
           <tr class="score-row"><td>{c.d239_1}</td><td class="score">{c.d239_2}</td><td class="score">{c.d239_3}</td><td class="score">{c.d239_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d240_1}</td><td set:html={c.d240_2}></td><td set:html={c.d240_3}></td><td set:html={c.d240_4}></td></tr>
+          <tr class="explanation-row"><td>{c.d240_1}</td><td set:html={c.d240_2Html}></td><td set:html={c.d240_3Html}></td><td set:html={c.d240_4Html}></td></tr>
           <tr class="score-row"><td>{c.d241_1}</td><td class="score">{c.d241_2}</td><td class="score">{c.d241_3}</td><td class="score">{c.d241_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d242_1}</td><td set:html={c.d242_2}></td><td set:html={c.d242_3}></td><td set:html={c.d242_4}></td></tr>
+          <tr class="explanation-row"><td>{c.d242_1}</td><td set:html={c.d242_2Html}></td><td set:html={c.d242_3Html}></td><td set:html={c.d242_4Html}></td></tr>
           <tr class="score-row"><td>{c.d243_1}</td><td class="score">{c.d243_2}</td><td class="score">{c.d243_3}</td><td class="score">{c.d243_4}</td></tr>
-          <tr class="explanation-row"><td>{c.d244_1}</td><td set:html={c.d244_2}></td><td set:html={c.d244_3}></td><td set:html={c.d244_4}></td></tr>
-          <tr class="recommendation-row"><td>{c.d245_1}</td><td set:html={c.d245_2}></td><td>{c.d245_3}</td><td>{c.d245_4}</td></tr>
+          <tr class="explanation-row"><td>{c.d244_1}</td><td set:html={c.d244_2Html}></td><td set:html={c.d244_3Html}></td><td set:html={c.d244_4Html}></td></tr>
+          <tr class="recommendation-row"><td>{c.d245_1}</td><td set:html={c.d245_2Html}></td><td>{c.d245_3}</td><td>{c.d245_4}</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="doc-note" set:html={c.d246}></p>
+    <p class="doc-note" set:html={c.d246Html}></p>
 
     <!-- 12-Month Cost Estimate -->
     <h2 class="doc-h1">{c.d247}</h2>
@@ -519,7 +519,7 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <h3 class="doc-h2">{c.d280}</h3>
     <p>{c.d281}</p>
     <ul class="doc-bullets">
-      {c.d282.map((html) => <li set:html={html} />)}
+      {c.d282Html.map((html) => <li set:html={html} />)}
     </ul>
 
     <!-- Risks and Considerations -->
@@ -544,11 +544,11 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
     <h2 class="doc-h1">{c.d294}</h2>
     <p>{c.d295}</p>
     <ul class="doc-bullets">
-      {c.d296.map((html) => <li set:html={html} />)}
+      {c.d296Html.map((html) => <li set:html={html} />)}
     </ul>
 
     <div class="doc-signoff">
-      <p set:html={c.d297}></p>
+      <p set:html={c.d297Html}></p>
       <p>{c.d298}</p>
       <p>{c.d299}</p>
     </div>
@@ -575,13 +575,13 @@ const c = pickCopy({ en, fr }, locale, 'views/sample-audit');
         <div class="lead-eyebrow">{c.d302}</div>
         <h3 class="lead-title">{c.d303}</h3>
         <p class="lead-body">{c.d304}</p>
-        <span class="lead-arrow" set:html={c.d305}></span>
+        <span class="lead-arrow" set:html={c.d305Html}></span>
       </a>
       <a href={href('caseStudies', locale)} class="lead-card" data-track="sample-audit-cta-cases">
         <div class="lead-eyebrow">{c.d306}</div>
         <h3 class="lead-title">{c.d307}</h3>
         <p class="lead-body">{c.d308}</p>
-        <span class="lead-arrow" set:html={c.d309}></span>
+        <span class="lead-arrow" set:html={c.d309Html}></span>
       </a>
     </div>
   </SectionWrapper>

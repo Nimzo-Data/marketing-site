@@ -54,7 +54,7 @@ const projects: { icon: LineIconName; title: string; details: string[] }[] = c.p
       <div class="way-card">
         <div class="way-eyebrow">{c.way1Eyebrow}</div>
         <h3 class="way-title">{c.way1Title}</h3>
-        <p class="way-body" set:html={c.way1Body}></p>
+        <p class="way-body" set:html={c.way1BodyHtml}></p>
       </div>
       <div class="way-card">
         <div class="way-eyebrow">{c.way2Eyebrow}</div>
@@ -108,7 +108,7 @@ const projects: { icon: LineIconName; title: string; details: string[] }[] = c.p
 
     <div class="sub-section">
       <h3 class="sub-heading">{c.programsHeading}</h3>
-      <p class="sub-body" set:html={c.programsBody}></p>
+      <p class="sub-body" set:html={c.programsBodyHtml}></p>
     </div>
 
     <div class="sub-section">

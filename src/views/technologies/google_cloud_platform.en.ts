@@ -44,6 +44,7 @@ const copy = {
   p3: "For European clients specifically, GCP now offers three levels of data sovereignty: standard regional residency, Assured Workloads for EU (EU-only storage, processing, and support), and sovereign partnerships like S3NS (Thales + Google, SecNumCloud-aligned in France). These matter when GDPR, regulated sectors, or procurement requirements enter the picture.",
   sectionTitle: "What It Is",
   sectionTitle2: "Why We Chose It",
+  whenIntro: "We only build on GCP, but that doesn't mean GCP is right for everyone.",
 };
 
 export type Copy = typeof copy;
