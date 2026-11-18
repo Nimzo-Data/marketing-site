@@ -9,7 +9,7 @@ import CaseStudyRelated from '../../components/content/CaseStudyRelated.astro';
 import AeydeBeforeAfterDiagram from '../../components/content/AeydeBeforeAfterDiagram.astro';
 import { findCaseStudy } from '../../data/caseStudies';
 
-const cs = findCaseStudy('aeyde')!;
+const cs = findCaseStudy('aeyde', 'en')!;
 ---
 
 <BaseLayout
@@ -19,7 +19,7 @@ const cs = findCaseStudy('aeyde')!;
   ogImage="/og/aeyde.png"
   description="How Aeyde made Looker dashboards load in seconds, cut data infrastructure costs by 77%, and rebuilt trust in their numbers."
 >
-  <CaseStudyHero caseStudy={cs} />
+  <CaseStudyHero locale="en" caseStudy={cs} />
 
   <!-- At a Glance -->
   <SectionWrapper py="md" bg="white">
@@ -37,7 +37,7 @@ const cs = findCaseStudy('aeyde')!;
   <!-- Quote -->
   <SectionWrapper py="md" bg="white">
     <h2 class="cs-section-h">In their words.</h2>
-    <CaseStudyQuote
+    <CaseStudyQuote locale="en"
       text="Working with Nimzo Data made a real difference. Dashboards that used to take minutes now load in seconds, our reporting is reliable, and the whole team has real trust in the data again."
       authorName="Phoebe Pham"
       authorTitle="BI Lead, Aeyde"
@@ -117,7 +117,7 @@ const cs = findCaseStudy('aeyde')!;
     </div>
 
     <div class="cs-diagram-wrap">
-      <AeydeBeforeAfterDiagram />
+      <AeydeBeforeAfterDiagram locale="en" />
     </div>
   </SectionWrapper>
 
@@ -135,10 +135,10 @@ const cs = findCaseStudy('aeyde')!;
   <!-- Used in this engagement -->
   <SectionWrapper py="md" bg="white">
     <h2 class="cs-section-h">What we used.</h2>
-    <CaseStudyRelated caseStudy={cs} />
+    <CaseStudyRelated locale="en" caseStudy={cs} />
   </SectionWrapper>
 
-  <CTABanner
+  <CTABanner locale="en"
     heading="Sound like your situation?"
     subtitle="Book a 45-minute call. We'll be honest about whether we can help."
     buttonText="Let's talk"

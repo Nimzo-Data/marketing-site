@@ -1,5 +1,5 @@
 ---
-import { founder } from '../data/founder';
+import { getFounder } from '../data/founder';
 import '../styles/global.css';
 import CookieConsent from '../components/ui/CookieConsent.astro';
 import Header from '../components/layout/Header.astro';
@@ -42,6 +42,7 @@ const {
 } = Astro.props;
 
 const ui = t(locale);
+const founder = getFounder(locale);
 const resolvedRouteId = routeId ?? routeIdForPath(Astro.url.pathname);
 // This page in each language: drives the switch, hreflang and og:locale:alternate.
 const paths = alternates ?? (resolvedRouteId ? routes[resolvedRouteId] : undefined);

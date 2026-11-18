@@ -9,7 +9,7 @@ import CaseStudyRelated from '../../components/content/CaseStudyRelated.astro';
 import TamesonLayersDiagram from '../../components/content/TamesonLayersDiagram.astro';
 import { findCaseStudy } from '../../data/caseStudies';
 
-const cs = findCaseStudy('tameson')!;
+const cs = findCaseStudy('tameson', 'en')!;
 ---
 
 <BaseLayout
@@ -19,7 +19,7 @@ const cs = findCaseStudy('tameson')!;
   ogImage="/og/tameson.png"
   description="How Tameson turned unused BigQuery data into a foundation for analytics across 6 markets, with a layered Dataform architecture and production-grade governance."
 >
-  <CaseStudyHero caseStudy={cs} />
+  <CaseStudyHero locale="en" caseStudy={cs} />
 
   <!-- At a Glance -->
   <SectionWrapper py="md" bg="white">
@@ -37,7 +37,7 @@ const cs = findCaseStudy('tameson')!;
   <!-- Quote -->
   <SectionWrapper py="md" bg="white">
     <h2 class="cs-section-h">In their words.</h2>
-    <CaseStudyQuote
+    <CaseStudyQuote locale="en"
       text="When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build, and that we keep extending together, turned that around completely. It's the platform our analytics actually run on."
       authorName="Paul van Oorschot"
       authorTitle="CTO, Tameson"
@@ -88,7 +88,7 @@ const cs = findCaseStudy('tameson')!;
     </div>
 
     <div class="cs-diagram-wrap">
-      <TamesonLayersDiagram />
+      <TamesonLayersDiagram locale="en" />
     </div>
 
     <div class="cs-prose">
@@ -119,10 +119,10 @@ const cs = findCaseStudy('tameson')!;
   <!-- Used in this engagement -->
   <SectionWrapper py="md" bg="white">
     <h2 class="cs-section-h">What we used.</h2>
-    <CaseStudyRelated caseStudy={cs} />
+    <CaseStudyRelated locale="en" caseStudy={cs} />
   </SectionWrapper>
 
-  <CTABanner
+  <CTABanner locale="en"
     heading="Sound like your situation?"
     subtitle="Book a 45-minute call. We'll be honest about whether we can help."
     buttonText="Let's talk"

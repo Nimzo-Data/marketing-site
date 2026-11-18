@@ -29,6 +29,12 @@ describe('normalizeHtml', () => {
     );
   });
 
+  it('ignores scope hashes inside inline style blocks', () => {
+    expect(normalizeHtml('<style>.a[data-astro-cid-abc123]{color:red}</style>')).toBe(
+      normalizeHtml('<style>.a[data-astro-cid-zzz999] { color:red }</style>')
+    );
+  });
+
   it('ignores attribute order', () => {
     expect(normalizeHtml('<a href="/x/" class="c">x</a>')).toBe(normalizeHtml('<a class="c" href="/x/">x</a>'));
   });
@@ -49,6 +55,24 @@ describe('diffDist', () => {
     writeFileSync(join(b, 'new', 'index.html'), '<p>new</p>');
     const result = diffDist(a, b);
     expect(result.map((r) => r.path)).toEqual(['new/index.html']);
+  });
+
+  it('treats CSS moved between an inline style block and a stylesheet as unchanged', () => {
+    const a = mkdtempSync(join(tmpdir(), 'base-'));
+    const b = mkdtempSync(join(tmpdir(), 'dist-'));
+    writeFileSync(join(a, 'index.html'), '<style>.x[data-astro-cid-aaa]{color:red}</style><p>p</p>');
+    writeFileSync(join(b, 'index.html'), '<p>p</p>');
+    mkdirSync(join(b, '_astro'));
+    writeFileSync(join(b, '_astro', 'page.Hash1234.css'), '.x[data-astro-cid-bbb]{color:red}');
+    expect(diffDist(a, b)).toEqual([]);
+  });
+
+  it('reports a changed CSS rule', () => {
+    const a = mkdtempSync(join(tmpdir(), 'base-'));
+    const b = mkdtempSync(join(tmpdir(), 'dist-'));
+    writeFileSync(join(a, 'index.html'), '<style>.x{color:red}</style>');
+    writeFileSync(join(b, 'index.html'), '<style>.x{color:blue}</style>');
+    expect(diffDist(a, b).map((r) => r.path)).toEqual(['[all css]']);
   });
 
   it('reports changed text', () => {

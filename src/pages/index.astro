@@ -10,8 +10,9 @@ import LogoGrid from '../components/content/LogoGrid.astro';
 import HomepageTestimonials from '../components/content/HomepageTestimonials.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
-import { technologiesForGrid } from '../data/technologies';
-import { isForItems, isNotForItems } from '../data/audience';
+import { getTechnologiesForGrid } from '../data/technologies';
+import { getAudience } from '../data/audience';
+const { isFor: isForItems, isNot: isNotForItems } = getAudience('en');
 
 const problemRows: { problem: [string, string]; outcome: [string, string] }[] = [
   { problem: ["Finance says revenue is X. Marketing says Y.", "Leadership believes neither."], outcome: ["One definition per metric:", "revenue, CAC, LTV."] },
@@ -36,7 +37,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
   <!-- Section 1b: Problems we solve -->
   <SectionWrapper bg="white" py="lg" class="problems-section">
     <h2 class="section-heading">What brings most clients here.</h2>
-    <ProblemOutcomeCards rows={problemRows} />
+    <ProblemOutcomeCards locale="en" rows={problemRows} />
   </SectionWrapper>
 
   <!-- Section 2: Services. The cards say what each service is; "Where to start"
@@ -45,7 +46,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
   <SectionWrapper bg="white" py="lg">
     <h2 class="section-heading">How we can help.</h2>
     <div class="svc-grid">
-      <ServiceCard
+      <ServiceCard locale="en"
         size="compact"
         icon="audit"
         title="Audit"
@@ -56,7 +57,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
         linkText="See Audit"
         dataTrack="home-card-audit"
       />
-      <ServiceCard
+      <ServiceCard locale="en"
         size="compact"
         icon="build"
         title="Build"
@@ -67,7 +68,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
         linkText="See Build"
         dataTrack="home-card-build"
       />
-      <ServiceCard
+      <ServiceCard locale="en"
         size="compact"
         icon="improve"
         title="Improve"
@@ -78,7 +79,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
         linkText="See Improve"
         dataTrack="home-card-improve"
       />
-      <ServiceCard
+      <ServiceCard locale="en"
         size="compact"
         icon="support"
         title="Support"
@@ -100,8 +101,8 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
             <p class="svc-route__note">The audit decides between Build and Improve, and prices it.</p>
           </div>
           <div class="svc-route__path" role="group" aria-label="Route: Audit, then Build or Improve">
-            <span class="svc-route__unit"><ServiceChip service="audit" dataTrack="home-route-audit" /><span class="svc-route__arrow" aria-hidden="true">&rarr;</span></span>
-            <span class="svc-route__unit"><ServiceChip service="build" dataTrack="home-route-audit-build" /><span class="svc-route__or">or</span><ServiceChip service="improve" dataTrack="home-route-audit-improve" /></span>
+            <span class="svc-route__unit"><ServiceChip locale="en" service="audit" dataTrack="home-route-audit" /><span class="svc-route__arrow" aria-hidden="true">&rarr;</span></span>
+            <span class="svc-route__unit"><ServiceChip locale="en" service="build" dataTrack="home-route-audit-build" /><span class="svc-route__or">or</span><ServiceChip locale="en" service="improve" dataTrack="home-route-audit-improve" /></span>
           </div>
         </li>
         <li class="svc-route">
@@ -109,14 +110,14 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
             <p class="svc-route__situation">You already know the one thing to fix or add.</p>
             <p class="svc-route__note">We quote it after a free technical call. If it looks bigger, we recommend an audit first.</p>
           </div>
-          <div class="svc-route__path" role="group" aria-label="Route: Improve directly"><ServiceChip service="improve" dataTrack="home-route-improve-direct" /></div>
+          <div class="svc-route__path" role="group" aria-label="Route: Improve directly"><ServiceChip locale="en" service="improve" dataTrack="home-route-improve-direct" /></div>
         </li>
         <li class="svc-route">
           <div class="svc-route__when">
             <p class="svc-route__situation">Your platform runs and you want someone on call.</p>
             <p class="svc-route__note">On its own, or after any project.</p>
           </div>
-          <div class="svc-route__path" role="group" aria-label="Route: Support"><ServiceChip service="support" dataTrack="home-route-support" /></div>
+          <div class="svc-route__path" role="group" aria-label="Route: Support"><ServiceChip locale="en" service="support" dataTrack="home-route-support" /></div>
         </li>
       </ul>
     </div>
@@ -178,7 +179,7 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
       <h2 class="section-heading">The tools we build with.</h2>
       <p class="section-sub">A focused set of tools, used selectively, not a buzzword list.</p>
     </div>
-    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <LogoGrid technologies={getTechnologiesForGrid('en')} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
     </p>
@@ -189,11 +190,11 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     <div class="tech-header">
       <h2 class="section-heading">What clients say.</h2>
     </div>
-    <HomepageTestimonials />
+    <HomepageTestimonials locale="en" />
   </SectionWrapper>
 
   <!-- Section 8: Final CTA -->
-  <CTABanner dataTrack="homepage-cta-banner" />
+  <CTABanner locale="en" dataTrack="homepage-cta-banner" />
 </BaseLayout>
 
 <style>

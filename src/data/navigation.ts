@@ -1,6 +1,6 @@
 import { SHOW_BLOG } from './siteConfig';
 import type { LineIconName } from '../components/ui/LineIcon.astro';
-import { technologies } from './technologies';
+import { techLogo } from './technologies';
 import type { Locale } from '../i18n/locales';
 import { href, type RouteId } from '../i18n/routes';
 import { pickCopy } from '../i18n/copy';
@@ -60,7 +60,7 @@ export function getNavigation(locale: Locale): Navigation {
   const tech = (label: string, id: RouteId): NavLink => ({
     label,
     href: to(id),
-    logo: technologies.find((t) => t.name === label)?.logoPath,
+    logo: techLogo(label),
   });
 
   const serviceLinks: NavLink[] = (['audit', 'build', 'improve', 'support'] as const).map((id) => ({

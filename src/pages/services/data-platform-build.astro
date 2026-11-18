@@ -6,10 +6,11 @@ import PricingRange from '../../components/content/PricingRange.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
 import LeadCard from '../../components/cards/LeadCard.astro';
-import { serviceLeads } from '../../data/services';
+import { getServiceLeads } from '../../data/services';
+const serviceLeads = getServiceLeads('en');
 import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { technologiesForGrid } from '../../data/technologies';
+import { getTechnologiesForGrid } from '../../data/technologies';
 ---
 
 <ServiceLayout
@@ -51,7 +52,7 @@ import { technologiesForGrid } from '../../data/technologies';
   <!-- Data Platform Diagram -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">What we build, end to end.</h2>
-    <DataPlatformDiagram />
+    <DataPlatformDiagram locale="en" />
     <p class="caption">Each layer chosen for your data volume, team skill, and budget, with the reasoning written down.</p>
   </SectionWrapper>
 
@@ -102,7 +103,7 @@ import { technologiesForGrid } from '../../data/technologies';
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading">The tools we reach for.</h2>
     <p class="intro-body">Every build uses some combination of these. The mix depends on your data sources, team, and budget. We explain the tradeoffs before we pick.</p>
-    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <LogoGrid technologies={getTechnologiesForGrid('en')} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
     </p>
@@ -131,7 +132,7 @@ import { technologiesForGrid } from '../../data/technologies';
       <p class="pricing-sub">8–16 weeks from kickoff to handover. Priced after the audit on the real scope, and agreed in writing before we start. The <a href="/services/data-platform-audit/" class="inline-link">audit</a> is priced separately. New platforms usually land at €15,000 – €35,000; replacing a running platform costs more, because old and new run in parallel until the numbers match, then we switch over.</p>
     </div>
 
-    <PricingRange
+    <PricingRange locale="en"
       factors={[
         { name: "Starting point", low: "Nothing in place", high: "Replacing a running platform" },
         { name: "Number of data sources", low: "2–3 simple sources", high: "6–10 mixed sources" },
@@ -169,7 +170,7 @@ import { technologiesForGrid } from '../../data/technologies';
 
   <!-- Proof: Aeyde result block -->
   <SectionWrapper py="lg" bg="white">
-    <ResultBlock
+    <ResultBlock locale="en"
       metric="From minutes to seconds."
       body="Three layers replaced: ingestion, warehouse and modeling. Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer."
       caseStudySlug="aeyde"

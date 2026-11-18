@@ -1,12 +1,16 @@
 ---
 import type { CaseStudyMeta } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
 
 interface Props {
   caseStudy: CaseStudyMeta;
   eyebrow?: string;
+  locale: Locale;
 }
 
-const { caseStudy, eyebrow = 'Case study' } = Astro.props;
+const ui = t(Astro.props.locale).components.caseStudy;
+const { caseStudy, eyebrow = ui.eyebrow } = Astro.props;
 ---
 
 <section class="cs-hero-v2">
@@ -14,7 +18,7 @@ const { caseStudy, eyebrow = 'Case study' } = Astro.props;
     <div class="cs-hero-v2__main">
       <img
         src={caseStudy.logo}
-        alt={`${caseStudy.client} logo`}
+        alt={ui.logoAlt(caseStudy.client)}
         class="cs-hero-v2__logo"
         data-cs-slug={caseStudy.slug}
         loading="eager"
@@ -24,9 +28,9 @@ const { caseStudy, eyebrow = 'Case study' } = Astro.props;
       <p class="cs-hero-v2__subline">{caseStudy.subline}</p>
     </div>
 
-    <aside class="cs-hero-v2__aside" aria-label="Engagement details">
+    <aside class="cs-hero-v2__aside" aria-label={ui.engagementDetails}>
       <div class="cs-snap">
-        <p class="cs-snap__label">Company</p>
+        <p class="cs-snap__label">{ui.company}</p>
         <div class="cs-snap__company">
           <a href={caseStudy.clientUrl} target="_blank" rel="noopener noreferrer" class="cs-snap__company-link">
             {caseStudy.client}
@@ -44,7 +48,7 @@ const { caseStudy, eyebrow = 'Case study' } = Astro.props;
       </div>
 
       <div class="cs-snap">
-        <p class="cs-snap__label">Service</p>
+        <p class="cs-snap__label">{ui.service}</p>
         <a href={caseStudy.service.href} class="cs-snap__tile cs-snap__tile--service">
           <span class="cs-snap__tile-name">{caseStudy.service.label}</span>
           <span class="cs-snap__tile-arrow" aria-hidden="true">&rarr;</span>
@@ -52,7 +56,7 @@ const { caseStudy, eyebrow = 'Case study' } = Astro.props;
       </div>
 
       <div class="cs-snap">
-        <p class="cs-snap__label">Tools</p>
+        <p class="cs-snap__label">{ui.tools}</p>
         <div class="cs-snap__tools">
           {caseStudy.tools.map((tool) => (
             <a href={tool.href} class="cs-snap__tile">

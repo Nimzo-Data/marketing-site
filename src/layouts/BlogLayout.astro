@@ -3,7 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import FounderBlock from '../components/content/FounderBlock.astro';
-import { founder } from '../data/founder';
+import { getFounder } from '../data/founder';
+import type { Locale } from '../i18n/locales';
 import { formatPostDate, isoDate } from '../data/blog';
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const { title, description, pubDate, updatedDate, slug } = Astro.props;
+const locale: Locale = 'en';
+const founder = getFounder(locale);
 
 // Built from the slug rather than the request so it always carries the
 // trailing slash, whichever form the page was reached by.
@@ -84,7 +87,7 @@ const articleSchema = {
       </div>
 
       <footer class="post-author">
-        <FounderBlock variant="byline" />
+        <FounderBlock locale={locale} variant="byline" />
       </footer>
     </article>
   </SectionWrapper>
@@ -92,7 +95,7 @@ const articleSchema = {
   <!-- showFounder={false}: the author block directly above already carries
        the photo and introduces Antoine, so repeating both in the banner a few
        hundred pixels later reads as a duplicate. Same call as About. -->
-  <CTABanner
+  <CTABanner locale={locale}
     heading="Ready to talk about your data stack?"
     subtitle="45-minute call. No sales pitch."
     buttonText="Let's talk"

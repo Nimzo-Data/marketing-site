@@ -4,10 +4,12 @@ import HeroTech from '../components/heroes/HeroTech.astro';
 import LeadCard from '../components/cards/LeadCard.astro';
 import CTABanner from '../components/cards/CTABanner.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
-import { technologies } from '../data/technologies';
-import { serviceLeads } from '../data/services';
+import { techLogo } from '../data/technologies';
+import { getServiceLeads } from '../data/services';
+import type { Locale } from '../i18n/locales';
 
 interface Props {
+  locale?: Locale;
   title: string;
   description: string;
   toolName: string;
@@ -20,6 +22,7 @@ interface Props {
 }
 
 const {
+  locale = 'en',
   title,
   description,
   toolName,
@@ -32,7 +35,8 @@ const {
 } = Astro.props;
 
 const resolvedLogo =
-  toolLogo ?? technologies.find((t) => t.name === toolName)?.logoPath;
+  toolLogo ?? techLogo(toolName);
+const serviceLeads = getServiceLeads(locale);
 ---
 
 <BaseLayout {title} {description} {ogTitle} {ogDescription} {ogImage}>
@@ -50,7 +54,7 @@ const resolvedLogo =
       <LeadCard {...serviceLeads.improve} eyebrow={`Need help with ${toolName}`} dataTrack="tech-cta-improve" />
     </div>
   </SectionWrapper>
-  <CTABanner dataTrack="tech-layout-cta" />
+  <CTABanner locale={locale} dataTrack="tech-layout-cta" />
 </BaseLayout>
 
 <style>

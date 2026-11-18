@@ -6,10 +6,11 @@ import type { LineIconName } from '../../components/ui/LineIcon.astro';
 import ProcessSteps from '../../components/content/ProcessSteps.astro';
 import LogoGrid from '../../components/content/LogoGrid.astro';
 import LeadCard from '../../components/cards/LeadCard.astro';
-import { serviceLeads } from '../../data/services';
+import { getServiceLeads } from '../../data/services';
+const serviceLeads = getServiceLeads('en');
 import ResultBlock from '../../components/content/ResultBlock.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { technologiesForGrid } from '../../data/technologies';
+import { getTechnologiesForGrid } from '../../data/technologies';
 
 // Typical projects. One price range for all of them sits in the Pricing section.
 const projects: { icon: LineIconName; title: string; details: string[] }[] = [
@@ -96,7 +97,7 @@ const projects: { icon: LineIconName; title: string; details: string[] }[] = [
     <h2 class="section-heading">The tools we work with: yours and ours.</h2>
     <p class="intro-body intro-body--tight">We work with your existing stack first. If something needs replacing, we tell you why and what we'd use instead.</p>
     <p class="intro-body">We review whatever you run. We build new platforms on Google Cloud. If something else fits better, we say so, and then we either fix what you have or review your team's work.</p>
-    <LogoGrid technologies={technologiesForGrid} showTaglines={true} />
+    <LogoGrid technologies={getTechnologiesForGrid('en')} showTaglines={true} />
     <p class="see-all-link">
       <a href="/technologies/">See all technologies and when we pick each &rarr;</a>
     </p>
@@ -137,7 +138,7 @@ const projects: { icon: LineIconName; title: string; details: string[] }[] = [
 
   <!-- Proof: Tameson result block -->
   <SectionWrapper py="lg" bg="white">
-    <ResultBlock
+    <ResultBlock locale="en"
       metric="From unused data to modeled analytics across 6 markets."
       body="One piece added: Dataform modeling on the BigQuery Tameson already ran. 10+ sources modeled, 6 GA4 properties unified into one events model, and CI-governed data quality from day one."
       caseStudySlug="tameson"

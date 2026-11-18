@@ -4,7 +4,8 @@ import RetainerGrid from '../../components/content/RetainerGrid.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import FAQAccordion from '../../components/content/FAQAccordion.astro';
 import LeadCard from '../../components/cards/LeadCard.astro';
-import { serviceLeads } from '../../data/services';
+import { getServiceLeads } from '../../data/services';
+const serviceLeads = getServiceLeads('en');
 
 // Columns: Run, Extend, Lead. Each tier includes everything in the one before.
 // Rows that differ by tier come first, rows every tier shares come last.
@@ -94,7 +95,7 @@ const faqs = [
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading section-heading--tight">Three tiers.</h2>
     <p class="intro-body intro-body--tight">Each tier includes everything in the one before.</p>
-    <RetainerGrid tiers={tiers} rows={rows} />
+    <RetainerGrid locale="en" tiers={tiers} rows={rows} />
     <div class="notes">
       <p>Monthly prices, excluding VAT.</p>
       <p>Response times count in business hours: Monday to Friday, 9:00 to 18:00 Paris time.</p>

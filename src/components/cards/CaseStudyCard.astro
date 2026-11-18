@@ -1,11 +1,15 @@
 ---
 import type { CaseStudyMeta } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
 
 interface Props {
   caseStudy: CaseStudyMeta;
+  locale: Locale;
 }
 
-const { caseStudy } = Astro.props;
+const { caseStudy, locale } = Astro.props;
+const ui = t(locale).components.caseStudy;
 
 // Split service label into two lines: everything before the last word, then the last word
 const serviceLabel = caseStudy.service.label;
@@ -27,13 +31,13 @@ const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
   <h3 class="cs-card__headline">{caseStudy.headline}</h3>
   <div class="cs-card__meta">
     <div class="cs-card__meta-block">
-      <span class="cs-card__meta-label">Service</span>
+      <span class="cs-card__meta-label">{ui.service}</span>
       <span class="cs-card__meta-value">
         {serviceLine1}{serviceLine2 && <><br />{serviceLine2}</>}
       </span>
     </div>
     <div class="cs-card__meta-block">
-      <span class="cs-card__meta-label">Tools</span>
+      <span class="cs-card__meta-label">{ui.tools}</span>
       <span class="cs-card__tools">
         {caseStudy.tools.map((t) => (
           <span class="cs-card__tool">{t.name}</span>
@@ -42,7 +46,7 @@ const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
     </div>
   </div>
   <span class="cs-card__cta">
-    Read case study <span class="cs-card__arrow" aria-hidden="true">&rarr;</span>
+    {ui.readCaseStudy} <span class="cs-card__arrow" aria-hidden="true">&rarr;</span>
   </span>
 </a>
 

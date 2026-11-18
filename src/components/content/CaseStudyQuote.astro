@@ -1,19 +1,26 @@
 ---
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 interface Props {
+  locale: Locale;
   text: string;
   authorName: string;
   authorTitle: string;
   authorPhoto: string;
+  /** The quote was given in this language and is shown translated. */
+  translatedFrom?: Locale;
 }
 
-const { text, authorName, authorTitle, authorPhoto } = Astro.props;
+const { locale, text, authorName, authorTitle, authorPhoto, translatedFrom } = Astro.props;
+const ui = t(locale).components.caseStudy;
 ---
 
 <figure class="cs-quote">
   <figcaption class="cs-quote__attribution">
     <img
       src={authorPhoto}
-      alt={`Photo of ${authorName}`}
+      alt={ui.photoOf(authorName)}
       class="cs-quote__photo"
       loading="lazy"
       width="80"
@@ -27,6 +34,7 @@ const { text, authorName, authorTitle, authorPhoto } = Astro.props;
   <blockquote class="cs-quote__text">
     &ldquo;{text}&rdquo;
   </blockquote>
+  {translatedFrom && translatedFrom !== locale && <p class="quote-translated">{ui.translatedFromEnglish}</p>}
 </figure>
 
 <style>

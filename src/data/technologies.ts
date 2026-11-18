@@ -1,3 +1,8 @@
+import type { Locale } from '../i18n/locales';
+import { pickCopy } from '../i18n/copy';
+import en from './technologies.en';
+import fr from './technologies.fr';
+
 export interface Technology {
   name: string;
   slug: string;
@@ -7,86 +12,31 @@ export interface Technology {
   hiddenFromGrid?: boolean;
 }
 
-export const technologies: Technology[] = [
-  {
-    name: 'Google Cloud Platform',
-    slug: 'google-cloud-platform',
-    category: 'cloud',
-    tagline: 'Our foundation. AI-native data cloud with European sovereignty options.',
-    logoPath: '/logos/googlecloud.svg',
-    hiddenFromGrid: true,
-  },
-  {
-    name: 'BigQuery',
-    slug: 'bigquery',
-    category: 'warehouse',
-    tagline: 'Serverless data warehouse with built-in Gemini AI and EU data residency.',
-    logoPath: '/logos/bigquery.svg',
-  },
-  {
-    name: 'Dataform',
-    slug: 'dataform',
-    category: 'transformation',
-    tagline: 'SQL transformations built into BigQuery. Zero extra licensing. Our default.',
-    logoPath: '/logos/dataform.svg',
-  },
-  {
-    name: 'dbt',
-    slug: 'dbt',
-    category: 'transformation',
-    tagline: 'Industry-standard SQL transformations. Full support for your existing dbt projects.',
-    logoPath: '/logos/dbt.svg',
-  },
-  {
-    name: 'Airbyte',
-    slug: 'airbyte',
-    category: 'etl',
-    tagline: 'Managed ELT with 600+ connectors and a builder for custom APIs.',
-    logoPath: '/logos/airbyte.svg',
-  },
-  {
-    name: 'Fivetran',
-    slug: 'fivetran',
-    category: 'etl',
-    tagline: 'Fully managed ELT with 600+ connectors and automated schema handling.',
-    logoPath: '/logos/fivetran.svg',
-  },
-  {
-    name: 'Looker',
-    slug: 'looker',
-    category: 'bi',
-    tagline: 'Enterprise BI with LookML governance and Gemini conversational analytics.',
-    logoPath: '/logos/looker.svg',
-  },
-  {
-    name: 'Lightdash',
-    slug: 'lightdash',
-    category: 'bi',
-    tagline: 'BI with metrics in code, dbt or native YAML. Flat-rate pricing, unlimited users.',
-    logoPath: '/logos/lightdash.svg',
-  },
-  {
-    name: 'Metabase',
-    slug: 'metabase',
-    category: 'bi',
-    tagline: 'Approachable BI with dashboards, governed metrics, and Metabot AI.',
-    logoPath: '/logos/metabase.svg',
-  },
-  {
-    name: 'Steep',
-    slug: 'steep',
-    category: 'bi',
-    tagline: 'AI analytics built on governed metrics. Non-technical teams ask, get trusted answers.',
-    logoPath: '/logos/steep.svg',
-  },
-  {
-    name: 'Dagster',
-    slug: 'dagster',
-    category: 'orchestration',
-    tagline: 'Asset-based orchestration. Declare pipelines and dependencies as code.',
-    logoPath: '/logos/dagster.svg',
-  },
+const base: Omit<Technology, 'tagline'>[] = [
+  { name: 'Google Cloud Platform', slug: 'google-cloud-platform', category: 'cloud', logoPath: '/logos/googlecloud.svg', hiddenFromGrid: true },
+  { name: 'BigQuery', slug: 'bigquery', category: 'warehouse', logoPath: '/logos/bigquery.svg' },
+  { name: 'Dataform', slug: 'dataform', category: 'transformation', logoPath: '/logos/dataform.svg' },
+  { name: 'dbt', slug: 'dbt', category: 'transformation', logoPath: '/logos/dbt.svg' },
+  { name: 'Airbyte', slug: 'airbyte', category: 'etl', logoPath: '/logos/airbyte.svg' },
+  { name: 'Fivetran', slug: 'fivetran', category: 'etl', logoPath: '/logos/fivetran.svg' },
+  { name: 'Looker', slug: 'looker', category: 'bi', logoPath: '/logos/looker.svg' },
+  { name: 'Lightdash', slug: 'lightdash', category: 'bi', logoPath: '/logos/lightdash.svg' },
+  { name: 'Metabase', slug: 'metabase', category: 'bi', logoPath: '/logos/metabase.svg' },
+  { name: 'Steep', slug: 'steep', category: 'bi', logoPath: '/logos/steep.svg' },
+  { name: 'Dagster', slug: 'dagster', category: 'orchestration', logoPath: '/logos/dagster.svg' },
 ];
 
+export function getTechnologies(locale: Locale): Technology[] {
+  const { taglines } = pickCopy({ en, fr }, locale, 'data/technologies');
+  return base.map((t) => ({ ...t, tagline: taglines[t.slug as keyof typeof taglines] }));
+}
+
 // Subset used in the LogoGrid on homepage + service pages (excludes GCP — shown as a page but not as a grid tile).
-export const technologiesForGrid: Technology[] = technologies.filter((t) => !t.hiddenFromGrid);
+export function getTechnologiesForGrid(locale: Locale): Technology[] {
+  return getTechnologies(locale).filter((t) => !t.hiddenFromGrid);
+}
+
+/** Logo for a tool name, language-neutral. */
+export function techLogo(name: string): string | undefined {
+  return base.find((t) => t.name === name)?.logoPath;
+}

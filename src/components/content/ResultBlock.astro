@@ -1,7 +1,10 @@
 ---
 import { findCaseStudy } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
 
 interface Props {
+  locale: Locale;
   metric: string;
   body: string;
   caseStudySlug: string;
@@ -15,8 +18,9 @@ interface Props {
   quote?: string;
 }
 
-const { metric, body, caseStudySlug, quote } = Astro.props;
-const cs = findCaseStudy(caseStudySlug);
+const { locale, metric, body, caseStudySlug, quote } = Astro.props;
+const cs = findCaseStudy(caseStudySlug, locale);
+const ui = t(locale).components.caseStudy;
 
 if (!cs) {
   throw new Error(`ResultBlock: case study "${caseStudySlug}" not found in caseStudies data`);
@@ -40,7 +44,7 @@ if (!cs) {
   <div class="result-block__quote">
     <img
       src={cs.shortQuote.authorPhoto}
-      alt={`Photo of ${cs.shortQuote.authorName}`}
+      alt={ui.photoOf(cs.shortQuote.authorName)}
       class="result-block__photo"
       loading="lazy"
       width="64"
@@ -50,6 +54,7 @@ if (!cs) {
       <blockquote class="result-block__quote-text">
         &ldquo;{quote ?? cs.shortQuote.text}&rdquo;
       </blockquote>
+      {cs.shortQuote.translatedFrom && <p class="quote-translated">{ui.translatedFromEnglish}</p>}
       <p class="result-block__attribution">
         <span class="result-block__name">{cs.shortQuote.authorName}</span>
         <span class="result-block__title">{cs.shortQuote.authorTitle}</span>
@@ -58,7 +63,7 @@ if (!cs) {
   </div>
 
   <span class="result-block__cta">
-    Read the {cs.client} case study <span class="result-block__arrow" aria-hidden="true">&rarr;</span>
+    {ui.readClientCaseStudy(cs.client)} <span class="result-block__arrow" aria-hidden="true">&rarr;</span>
   </span>
 </a>
 

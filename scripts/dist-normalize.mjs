@@ -24,6 +24,9 @@ function serialize(node, depth, out) {
   }
   if (node.nodeType !== NodeType.ELEMENT_NODE) return;
   const tag = node.rawTagName?.toLowerCase();
+  // Styles are compared site-wide (see diffDist), so where they sit doesn't count.
+  if (tag === 'style') return;
+  if (tag === 'link' && node.getAttribute('rel') === 'stylesheet' && node.getAttribute('href')?.startsWith('/_astro/')) return;
   if (tag) {
     const attrs = Object.entries(node.attributes)
       .filter(([name]) => !name.startsWith('data-astro-cid-'))
@@ -47,6 +50,14 @@ export function normalizeHtml(html) {
   const out = [];
   serialize(root, 0, out);
   return out.join('\n');
+}
+
+/** CSS from every inline <style> block in a page. */
+export function extractInlineCss(html) {
+  return parse(html, { comment: false })
+    .querySelectorAll('style')
+    .map((el) => el.text)
+    .join('\n');
 }
 
 /** @param {string} css */
@@ -77,7 +88,6 @@ function fileKey(path) {
 
 function normalizeFile(path, content) {
   if (path.endsWith('.html')) return normalizeHtml(content);
-  if (path.endsWith('.css')) return normalizeCss(content);
   return cleanValue(content.replace(/></g, '>\n<'));
 }
 
@@ -100,11 +110,21 @@ function lineDiff(a, b) {
 export function diffDist(baselineDir, distDir) {
   const collect = (dir) => {
     const map = new Map();
+    const css = [];
     for (const path of walk(dir)) {
+      const raw = readFileSync(join(dir, path), 'utf8');
+      if (path.endsWith('.css')) {
+        css.push(raw);
+        continue;
+      }
+      if (path.endsWith('.html')) css.push(extractInlineCss(raw));
       const key = fileKey(path);
-      const content = normalizeFile(path, readFileSync(join(dir, path), 'utf8'));
+      const content = normalizeFile(path, raw);
       map.set(key, map.has(key) ? map.get(key) + '\n' + content : content);
     }
+    // Every rule on the site, as a sorted set: placement and order don't matter.
+    const rules = [...new Set(css.flatMap((c) => normalizeCss(c).split('\n')).filter(Boolean))].sort();
+    map.set('[all css]', rules.join('\n'));
     return map;
   };
   const base = collect(baselineDir);

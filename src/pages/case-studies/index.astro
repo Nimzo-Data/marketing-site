@@ -4,7 +4,8 @@ import HeroStandard from '../../components/heroes/HeroStandard.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
 import CTABanner from '../../components/cards/CTABanner.astro';
 import CaseStudyCard from '../../components/cards/CaseStudyCard.astro';
-import { visibleCaseStudies } from '../../data/caseStudies';
+import { getVisibleCaseStudies } from '../../data/caseStudies';
+const visibleCaseStudies = getVisibleCaseStudies('en');
 ---
 
 <BaseLayout
@@ -19,12 +20,12 @@ import { visibleCaseStudies } from '../../data/caseStudies';
   <SectionWrapper py="lg" bg="white">
     <div class="cs-grid">
       {visibleCaseStudies.map((cs) => (
-        <CaseStudyCard caseStudy={cs} />
+        <CaseStudyCard locale="en" caseStudy={cs} />
       ))}
     </div>
   </SectionWrapper>
 
-  <CTABanner
+  <CTABanner locale="en"
     heading="Sound like your situation?"
     subtitle="Book a 45-minute call. We'll be honest about whether we can help."
     buttonText="Let's talk"

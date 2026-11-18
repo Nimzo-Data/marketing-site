@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroStandard from '../../components/heroes/HeroStandard.astro';
 import CTABanner from '../../components/cards/CTABanner.astro';
 import SectionWrapper from '../../components/ui/SectionWrapper.astro';
-import { technologies, type Technology } from '../../data/technologies';
+import { getTechnologies, type Technology } from '../../data/technologies';
+const technologies = getTechnologies('en');
 
 interface Section {
   heading: string;
@@ -59,7 +60,7 @@ const grouped = sections.map((section) => ({
   ))}
 
   <div class="tech-to-cta-spacer" aria-hidden="true"></div>
-  <CTABanner dataTrack="technologies-index-cta" />
+  <CTABanner locale="en" dataTrack="technologies-index-cta" />
 </BaseLayout>
 
 <style>
