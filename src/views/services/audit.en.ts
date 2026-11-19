@@ -11,7 +11,7 @@ const copy = {
     look: 'Your sources and their volumes, the figures leadership needs, and what your team can run day to day.',
   },
   {
-    from: ['Spreadsheets and Looker Studio,', 'with connectors to your other tools.'],
+    from: ['Spreadsheets and Data Studio,', 'with connectors to your other tools.'],
     look: 'Which connectors feed which reports, what breaks when a sheet changes, and whether the figures match the source systems.',
     sample: href('sampleAudit', 'en'),
   },
@@ -34,7 +34,7 @@ const copy = {
   { icon: 'operations', area: 'Operations', detail: 'Freshness, test versus production, who can deploy, a tested restore.' },
   { icon: 'maintainability', area: 'Maintainability', detail: 'Docs, tests on the figures, reviews, AI coding guardrails, one-person risk.' },
   { icon: 'ai', area: 'AI readiness', detail: 'Governed metrics, and what AI tools can read.' },
-  { icon: 'costs', area: 'Costs', detail: 'Infrastructure, tools and licences, and what drives the bill.' },
+  { icon: 'costs', area: 'Costs', detail: 'Infrastructure, tools and licenses, and what drives the bill.' },
 ] as { icon: LineIconName; area: string; detail: string }[],
   faqs: [
   {
@@ -88,7 +88,7 @@ const copy = {
   answerItems: [
         "Headline figures recomputed from source.",
         "Secrets, accounts and roles reviewed.",
-        "A map of what runs where, and who owns it.",
+        "A map of what runs where, who owns it, and what depends on one person.",
         "A 12-month cost, fees plus infrastructure.",
         "Keep, fix or replace: a verdict tool by tool, with the reasoning.",
         "What AI tools can safely query, and what's missing.",
@@ -118,7 +118,7 @@ const copy = {
       ] as Step[],
   pricingHeading: "Pricing.",
   pricingLabel: "Fixed price",
-  pricingAmount: eurRange(prices.audit.min, prices.audit.max, 'en'),
+  pricingAmount: `${eurRange(prices.audit.min, prices.audit.max, 'en')} excl. VAT`,
   pricingSub: "1–2 weeks, paid 100% upfront: we invoice when you sign, and work starts once it's paid. Where you land in this range depends on the number of sources and the number of metrics to recompute.",
   leadsHeading: "Where this leads.",
   leadsIntro: "The verdicts decide the next step. An audit is also a real deliverable on its own.",
@@ -151,7 +151,7 @@ const copy = {
   leadImproveLink: "See Improve",
   leadNothingEyebrow: "Your team takes it from here",
   leadNothingTitle: "The audit alone",
-  leadNothingBody: "The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start.",
+  leadNothingBody: "The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start. If the platform is in good enough shape, we can also support it.",
 };
 
 export type Copy = typeof copy;

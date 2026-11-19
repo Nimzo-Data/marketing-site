@@ -3,7 +3,7 @@ const copy = {
   description: "dbt implementation on BigQuery. Project architecture, staging and mart layers, data tests, CI/CD, and team training.",
   toolCategory: "SQL Transformation",
   heroPositioning: "When clients need open-source portability or are already on a dbt workflow, we bring the same rigor: tested models, version control, and documentation as code.",
-  title2: "How We Use It",
+  title2: "How we use it",
   items: [
         "Build and restructure dbt projects following the staging → intermediate → marts layer convention",
         "Write Jinja-templated SQL macros for reusable transformation logic",
@@ -45,12 +45,12 @@ const copy = {
           ],
         },
       ],
-  p1: "dbt (data build tool) is the open-source standard for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. Works with BigQuery, Snowflake, Redshift, and others. Recent releases add dbt Copilot (AI SQL assistance, GA on paid plans), the Fusion engine (Rust-based, nearing GA, already the default for new dbt Cloud projects), and a GA Semantic Layer powered by MetricFlow.",
+  p1: "dbt (data build tool) is a widely used open-source tool for SQL-based data transformation. It compiles templated SQL into warehouse queries, manages dependencies, runs tests, and generates documentation automatically. Works with BigQuery, Snowflake, Redshift, and others. Recent releases add dbt Copilot (AI SQL assistance, GA on paid plans), the Fusion engine (Rust-based, still in preview on BigQuery), and a GA Semantic Layer powered by MetricFlow.",
   p2: "The dbt Semantic Layer is becoming the foundation for AI accuracy in the data stack. The official MCP server lets AI tools (Claude, Cursor) query MetricFlow definitions directly. The LLM never writes raw SQL; MetricFlow compiles governed queries from metric definitions.",
-  p3: "dbt is the most widely adopted transformation tool in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.",
+  p3: "dbt is widely adopted in modern data engineering. When clients have existing dbt projects, multi-cloud requirements, or teams with established dbt expertise, we work within that ecosystem rather than pushing a migration. dbt Cloud also offers a fully managed workflow that mirrors what Dataform provides natively on GCP.",
   p4: "One caveat: Fivetran and dbt Labs completed their merger on 1 June 2026. That consolidation is convenient for clients on the Fivetran + dbt path, but it adds some vendor lock-in risk. Pairing Airbyte with Dataform (or dbt Core) keeps the ingestion and transformation layers in separate hands.",
-  sectionTitle: "What It Is",
-  sectionTitle2: "Why We Chose It",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
 };
 
 export type Copy = typeof copy;

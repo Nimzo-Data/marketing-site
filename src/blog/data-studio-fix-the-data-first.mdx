@@ -22,7 +22,7 @@ Here is the list people bring to a first call:
 - Two reports show two different revenue figures.
 - Someone added a column to the Sheet and a chart went blank.
 
-None of that is Data Studio. Every item on that list is what happens when a reporting tool is pointed straight at its sources: at the ad platforms through a connector, at the CRM through another, at a spreadsheet that is doing the job of a database. You do not own the data, so you cannot fix it. You cannot join it, so you blend it. You cannot define revenue once, so you define it in each report. Put Metabase or Power BI on the same connectors and the same spreadsheet and you have the same list, with a licence fee on top. These are data problems, and they follow you into any tool.
+None of that is Data Studio. Every item on that list is what happens when a reporting tool is pointed straight at its sources: at the ad platforms through a connector, at the CRM through another, at a spreadsheet that is doing the job of a database. You do not own the data, so you cannot fix it. You cannot join it, so you blend it. You cannot define revenue once, so you define it in each report. Put Metabase or Power BI on the same connectors and the same spreadsheet and you have the same list, with a license fee on top. These are data problems, and they follow you into any tool.
 
 The second kind is Data Studio's own, and it is a longer list than most people expect:
 
@@ -70,7 +70,7 @@ It has no dashboard grid. There are themes, a snap grid and templates, but no fi
 
 Exploration stops where the builder stopped. Viewers get the date controls, filters and drill-downs the report was built with. Beyond that, someone with access to the data source can copy the report and add a page, and almost nobody does, because nothing about the tool invites it. So the person in operations who needs a number the report does not show asks the analyst, the analyst builds a table and a page, and [the question becomes a ticket](/blog/first-data-analyst/). The obvious answer in 2026 is to let people ask in plain language, and Data Studio now has that. Point it at a table and it converses with that one table, which inherits the missing model. The governed version exists too, a data agent that knows which fields mean what and which calculations are approved, but it is built in BigQuery or on a Looker model and published into Data Studio. The definitions live somewhere else.
 
-The other limits are real and decide the change for fewer teams: row limits that depend on the connector (some database connectors stop at 150,000 rows; BigQuery has no row cap, only slow reports on unoptimised queries), no version control, row-level security limited to filtering by viewer email, no alerting.
+The other limits are real and decide the change for fewer teams: row limits that depend on the connector (some database connectors stop at 150,000 rows; BigQuery has no row cap, only slow reports on unoptimized queries), no version control, row-level security limited to filtering by viewer email, no alerting.
 
 Put the first three together and the ceiling has a shape, and two questions find it. How many wide tables does the modeling layer maintain for the reports, and is that number growing faster than the reports? And how many people outside the data team can answer their own question without asking the analyst? A company with eight reports, a dozen tables and one analyst is nowhere near the ceiling. A company where every new question means a new table, a new page and a week of the analyst's time has reached it, and no amount of warehouse will move it.
 
@@ -81,7 +81,7 @@ When that day comes, the warehouse and the models are not what you replace. They
 - **Steep**, for a small non-technical team that wants metrics first, on a phone, with AI on top. From $15 a seat.
 - **Metabase**, for a mixed team that wants dashboards, an explorer and an AI assistant, with the option to self-host for free.
 - **Lightdash**, for a team that wants metrics defined in code and Git workflows, at a flat rate for any number of users.
-- **Looker**, for fifty users and up, with LookML governance and embedded analytics, at enterprise prices.
+- **Looker**, for twenty users and up, with LookML governance and embedded analytics, at enterprise prices.
 
 The reason Data Studio is not one of our four is the three tool problems above. We build platforms for companies at or near the ceiling, and a platform whose top layer needs a ticket for every question is not finished. But we will not tell a company to change tools while the data problems are still there, because that is the more expensive mistake, and the more common one.
 

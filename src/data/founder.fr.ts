@@ -11,7 +11,7 @@ const copy: FounderCopy = {
     'Missions récentes : des e-commerçants européens, grand public et industriels, dont',
   seniority: [
     'Nimzo Data reste petit, par choix.',
-    'Antoine suit chaque projet du début à la fin et en est responsable.',
+    'Antoine cadre chaque projet, le suit du début à la fin et en est responsable.',
     'Vous avez rencontré chaque personne qui travaille sur votre plateforme.',
   ],
   ctaLine:

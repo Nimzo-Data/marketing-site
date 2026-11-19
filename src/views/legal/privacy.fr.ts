@@ -15,13 +15,13 @@ européenne et à la loi française « Informatique et Libertés » du 6 janvier
   l6Html: `Nimzo Data SARL<br />
 36 Rue de la Convention, 93230 Romainville, France<br />
 SIRET : 994 080 497 00013<br />
-Email : <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>`,
+E-mail : <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>`,
   l7: "2. Données personnelles collectées",
   l8: "Nous collectons des données personnelles de trois manières :",
   l9: "2.1 Données que vous nous communiquez directement",
   l10Html: [
-    `<strong>Formulaire de contact / email :</strong> nom, adresse email, entreprise et toute information que vous indiquez dans votre message.`,
-    `<strong>Prise de rendez-vous :</strong> lorsque vous réservez un appel via le widget Google Calendar de prise de rendez-vous intégré au site, Google collecte pour notre compte votre nom, votre adresse email et les détails de la réservation.`,
+    `<strong>Formulaire de contact / e-mail :</strong> nom, adresse e-mail, entreprise et toute information que vous indiquez dans votre message.`,
+    `<strong>Prise de rendez-vous :</strong> lorsque vous réservez un appel via le widget Google Calendar de prise de rendez-vous intégré au site, Google collecte pour notre compte votre nom, votre adresse e-mail et les détails de la réservation.`,
   ],
   l11: "2.2 Données collectées automatiquement",
   l12Html: [
@@ -30,7 +30,7 @@ Email : <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>`,
   ],
   l13: "2.3 Données issues de nos missions de conseil",
   l14Html: `Si nous travaillons ensemble sur une mission de conseil, nous traiterons des données personnelles
-supplémentaires dans le cadre de cette mission (par exemple les noms et emails professionnels de vos
+supplémentaires dans le cadre de cette mission (par exemple les noms et e-mails professionnels de vos
 collaborateurs, ou des données d’entreprise que vous nous confiez).
 Ce traitement est régi par le contrat de prestation signé entre nous, et non par la présente politique de confidentialité.`,
   l15: "3. Finalités et bases légales",
@@ -65,7 +65,7 @@ votre choix en matière de cookies (il ne s’agit pas d’un cookie, et elle n�
 ou en effaçant les données du site dans votre navigateur.`,
   l38: "5. Durées de conservation",
   l39Html: [
-    `<strong>Échanges d’emails :</strong> jusqu’à 3 ans après le dernier échange. Si une mission de conseil débute, les données sont conservées pendant toute la durée de la mission, puis 10 ans (durée légale de conservation des pièces comptables).`,
+    `<strong>Échanges d’e-mails :</strong> jusqu’à 3 ans après le dernier échange. Si une mission de conseil débute, les données sont conservées pendant toute la durée de la mission, puis 10 ans (durée légale de conservation des pièces comptables).`,
     `<strong>Rendez-vous planifiés :</strong> conservés dans Google Calendar jusqu’à leur suppression manuelle ou jusqu’à ce que le rendez-vous remonte à plus de 12 mois.`,
     `<strong>Données de mesure d’audience :</strong> jusqu’à 14 mois dans Google Analytics 4.`,
     `<strong>Journaux serveur :</strong> 30 jours chez Vercel.`,

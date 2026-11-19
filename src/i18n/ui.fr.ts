@@ -93,7 +93,7 @@ const ui: UiCopy = {
       orchestration: 'Orchestration',
     },
     tameson: {
-      aria: 'Architecture Dataform en couches chez Tameson : données brutes collectées via Dagster, Datastream, Fivetran et Stitch dans BigQuery, puis modélisées dans Dataform en couches staging, intermédiaire, mart et rapports.',
+      aria: 'Architecture Dataform en couches chez Tameson : données brutes collectées via Dagster, Datastream, Fivetran et Stitch dans BigQuery, puis modélisées dans Dataform en couches staging, intermédiaire, marts et rapports.',
       bigQueryNote: 'Tout est dans BigQuery',
       raw: 'Brut',
       ingestedVia: 'Collecté via :',
@@ -101,8 +101,8 @@ const ui: UiCopy = {
       layers: [
         { label: 'Staging', blurb: 'Une table par table brute. Renommage, typage, nettoyage léger.' },
         { label: 'Intermédiaire', blurb: 'Jointures et logique au sein d’un même domaine.' },
-        { label: 'Mart', blurb: 'Logique métier transverse : faits et dimensions.' },
-        { label: 'Rapports', blurb: 'Tables plates prêtes pour Looker Studio.' },
+        { label: 'Marts', blurb: 'Logique métier transverse : faits et dimensions.' },
+        { label: 'Rapports', blurb: 'Tables plates prêtes pour Data Studio.' },
       ],
     },
     aeyde: {

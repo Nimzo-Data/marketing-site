@@ -2,8 +2,8 @@ const copy = {
   title: "Google Cloud Platform | Nimzo Data",
   description: "We build exclusively on GCP: BigQuery, Dataform, Cloud Storage, and the right BI tool for your team. Expert GCP data consulting for European companies.",
   toolCategory: "Cloud Platform",
-  heroPositioning: "We build exclusively on GCP. We chose it deliberately, then spent years getting deep on it: the right choice for European data teams that need compliance, global reach, and a best-in-class analytics stack.",
-  title2: "How We Use It",
+  heroPositioning: "We build exclusively on GCP. We chose it deliberately, then spent years getting deep on it: a strong choice for European data teams that need compliance, global reach, and an integrated analytics stack.",
+  title2: "How we use it",
   items: [
         "Design and provision GCP project architecture with proper IAM, VPC, and billing structure",
         "Configure BigQuery datasets, access controls, and cost governance (slot reservations, column-level security)",
@@ -17,7 +17,7 @@ const copy = {
         {
           heading: 'Choose GCP when:',
           bullets: [
-            'Your primary workload is analytics (BigQuery is the best-value warehouse in the market)',
+            'Your primary workload is analytics (BigQuery is very competitive for analytics)',
             'You need European data residency with clean EU multi-region support',
             "You're already in the Google ecosystem (Google Ads, GA4, Workspace)",
             'AI workloads (Gemini, Vertex AI) are part of your data roadmap',
@@ -40,10 +40,10 @@ const copy = {
         },
       ],
   p1: "Google Cloud Platform is Google's suite of cloud computing services. For data work, it offers an integrated stack, from storage (Cloud Storage, BigQuery) to transformation (Dataform, Dataproc) to visualization (Looker) to AI (Vertex AI, Gemini), all designed to work together without custom glue code. GCP's AI features are designed to consume the semantic layers you build in Looker, Dataform, and BigQuery, so a well-modeled data platform is also your AI infrastructure.",
-  p2: "GCP's analytics stack is the most cohesive in the market. BigQuery alone changes how you think about data: serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure.",
+  p2: "GCP's analytics stack is tightly integrated. BigQuery alone changes how you think about data: serverless, fast, and economical at the right scale. The tight integration between services means less time debugging infrastructure.",
   p3: "For European clients specifically, GCP now offers three levels of data sovereignty: standard regional residency, Assured Workloads for EU (EU-only storage, processing, and support), and sovereign partnerships like S3NS (Thales + Google, SecNumCloud-aligned in France). These matter when GDPR, regulated sectors, or procurement requirements enter the picture.",
-  sectionTitle: "What It Is",
-  sectionTitle2: "Why We Chose It",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
   whenIntro: "We only build on GCP, but that doesn't mean GCP is right for everyone.",
 };
 

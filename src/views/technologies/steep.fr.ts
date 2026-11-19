@@ -10,8 +10,8 @@ const copy: Copy = {
         "Connecter Steep à BigQuery et configurer l’accès aux jeux de données",
         "Définir la couche d’indicateurs dans Steep : chiffre d’affaires, utilisateurs actifs, conversion, tout ce qui pilote votre activité",
         "Brancher Steep sur la Semantic Layer de dbt quand le client y maintient déjà ses indicateurs",
-        "Former les équipes métier : explorer les indicateurs, faire un tableau de bord, interroger Steep AI, y compris depuis Claude ou ChatGPT",
-        "Programmer l’envoi hebdomadaire ou mensuel des rapports par e-mail aux équipes et à la direction",
+        "Former les équipes métier à explorer les indicateurs, à créer un tableau de bord et à interroger Steep AI, y compris depuis Claude ou ChatGPT",
+        "Programmer l’envoi régulier des rapports par e-mail aux équipes concernées",
         "Déployer Steep aux côtés de Lightdash, Metabase ou Looker dans les organisations aux profils techniques variés",
       ],
   title3: "Quand Steep est le bon outil de BI, et quand il ne l’est pas",
@@ -28,7 +28,7 @@ const copy: Copy = {
         {
           heading: 'Choisissez plutôt Metabase quand :',
           bullets: [
-            'Vous avez besoin de plus que l’exploration d’indicateurs (tableaux de bord, intégration, accès SQL)',
+            'Vous avez besoin de plus que l’exploration d’indicateurs (tableaux de bord, BI embarquée, accès SQL)',
             'Votre équipe mêle utilisateurs techniques et non techniques',
             'Vous voulez pouvoir auto-héberger, avec un assistant IA complet inclus',
           ],
@@ -44,14 +44,14 @@ const copy: Copy = {
           heading: 'Choisissez plutôt Looker quand :',
           bullets: [
             'Une gouvernance adaptée aux grandes entreprises et une couche sémantique centralisée sont indispensables',
-            'Vous avez plus de 20 utilisateurs dans plusieurs départements',
+            'Vous avez plus de 20 utilisateurs répartis dans plusieurs services',
           ],
         },
       ],
-  p1: "Steep est un outil de BI par indicateurs. Les indicateurs sont définis une seule fois (en général par un responsable data ou un analyste), et les équipes métier les explorent par une interface visuelle ou avec Steep AI, qui répond en langage naturel à partir des indicateurs gouvernés. Un graphique et une réponse de l’IA utilisent ainsi la même définition du « chiffre d’affaires » ou de l’« utilisateur actif ».",
-  p2: "Steep a sa propre couche sémantique native pour définir les indicateurs. Il peut aussi se brancher sur la Semantic Layer de dbt si le client y maintient déjà ses indicateurs : un seul modèle d’indicateurs, deux interfaces. Steep expose ses indicateurs via MCP (Model Context Protocol) : les mêmes données gouvernées sont interrogeables depuis des outils d’IA comme Claude ou ChatGPT, sans quitter les outils que l’équipe utilise déjà.",
+  p1: "Steep est un outil de BI par indicateurs. Les indicateurs sont définis une seule fois (en général par un responsable data ou un analyste), et les équipes métier les explorent dans une interface visuelle ou posent leurs questions à Steep AI, qui répond en langage naturel à partir des indicateurs gouvernés.",
+  p2: "Steep a sa propre couche sémantique pour définir les indicateurs. Il peut aussi se brancher sur la Semantic Layer de dbt si l’équipe y maintient déjà ses indicateurs : un seul modèle d’indicateurs, deux interfaces. Steep expose ses indicateurs via MCP (Model Context Protocol) : on peut interroger les mêmes indicateurs gouvernés depuis Claude ou ChatGPT, sans ouvrir Steep.",
   p3Html: `Si vos utilisateurs ne sont pas techniques et veulent des chiffres cohérents sans apprendre le SQL, Steep suffit, pour une fraction du prix de Looker. Les crédits Steep AI (questions-réponses en langage naturel) sont inclus dans chaque offre payante.`,
-  p4: "Steep AI s’appuie sur les mêmes indicateurs que vos tableaux de bord, donc ses chiffres ne les contredisent pas.",
+  p4: "Steep AI s’appuie sur les mêmes indicateurs que vos tableaux de bord, donc une réponse de l’IA et un graphique utilisent la même définition du « chiffre d’affaires » ou de l’« utilisateur actif ».",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

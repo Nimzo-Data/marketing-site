@@ -45,7 +45,7 @@ const copy = {
   {
     icon: 'graduation-cap',
     title: 'Capable teams over dependent clients',
-    body: "Every engagement ends with documentation, training, and a clean handover. Your team understands what we built and why. If you outgrow us, that's a success.",
+    body: "Every project ends with documentation and a clean handover. Your team understands what we built and why. If you outgrow us, that's a success.",
   },
 ] as Array<{ icon: 'compass' | 'database' | 'target' | 'tag' | 'message-square' | 'graduation-cap'; title: string; body: string }>,
   existsHeading: "Why Nimzo Data exists.",
@@ -54,7 +54,7 @@ const copy = {
   reason2Title: "A narrow focus",
   reason2Body: "GCP, because BigQuery is a warehouse a company can run with no data person: there is no cluster to administer or tune. Fixed-price, because hourly billing rewards the wrong behavior. No sales layer: the person on the call is the person accountable for the work.",
   reason3Title: "Small by choice",
-  reason3Body: "Fewer clients means better work for each one.",
+  reason3Body: "We take on few clients at a time, so we stay available to each one.",
   nameBody: "Nimzo Data is named after the Nimzo-Indian Defence, where Black gives up the bishop pair, a visible advantage, for a structural edge that lasts the rest of the game. We build the same way: the foundation nobody sees is worth more than the dashboard everybody does.",
   founderHeading: "Who runs Nimzo Data.",
   principlesHeading: "How we work.",

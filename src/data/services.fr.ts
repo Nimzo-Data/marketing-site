@@ -18,7 +18,7 @@ const copy: ServicesCopy = {
   },
   support: {
     title: 'Support',
-    body: 'Un ingénieur senior qui surveille votre plateforme, traite les incidents et fait les petits développements.',
+    body: 'Un data engineer senior qui surveille votre plateforme, traite les incidents et fait les petits développements.',
     linkText: 'Voir le Support',
   },
 };

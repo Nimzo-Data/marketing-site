@@ -11,11 +11,11 @@ const copy: NavigationCopy = {
     audit: { label: 'Audit', description: 'Savoir sur quoi reposent vos chiffres' },
     build: { label: 'Construction', description: 'Une nouvelle plateforme, ou un remplacement' },
     improve: { label: 'Amélioration', description: 'Corriger ou ajouter, un projet à la fois' },
-    support: { label: 'Support', description: 'Un ingénieur senior à vos côtés, au mois' },
+    support: { label: 'Support', description: 'Un data engineer senior qui surveille votre plateforme' },
   },
   techGroups: {
     cloud: 'Cloud et entrepôt',
-    etl: 'ETL / ELT',
+    etl: 'Collecte (ETL / ELT)',
     transformation: 'Transformation',
     bi: 'Business Intelligence',
     orchestration: 'Orchestration',
@@ -28,7 +28,7 @@ const copy: NavigationCopy = {
   },
   legal: {
     privacy: 'Politique de confidentialité',
-    terms: 'Conditions générales',
+    terms: 'CGU',
     legalNotice: 'Mentions légales',
   },
 };

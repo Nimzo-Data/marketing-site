@@ -1,6 +1,6 @@
 ---
 title: "dbt is the better tool. Dataform is the better purchase."
-description: "For a company with zero or one data person, the cost that matters is ownership, not licence. Why we default to Dataform on BigQuery, where dbt wins, and what we say when a buyer arrives with dbt already decided."
+description: "For a company with zero or one data person, the cost that matters is ownership, not license. Why we default to Dataform on BigQuery, where dbt wins, and what we say when a buyer arrives with dbt already decided."
 pubDate: 2026-09-09
 draft: false
 ---
@@ -13,7 +13,7 @@ This piece explains the reasoning, starting with the part where dbt wins.
 
 ## What dbt does better
 
-Nearly everything a developer touches. The documentation is better, the tests are richer, the package ecosystem has no equivalent. The Fusion engine, now the runtime of dbt Core v2.0, parses large projects in a fraction of the time the Python version took. The hiring pool knows dbt.
+Nearly everything a developer touches. The documentation is better, the tests are richer, the package ecosystem has no equivalent. The Fusion engine, dbt's Rust engine (still in preview on BigQuery), parses large projects in a fraction of the time the Python version took. The hiring pool knows dbt.
 
 Then there is AI. The models themselves are plain SQL in both tools, and Dataform borrowed dbt's project structure, so an AI assistant writes a staging model equally well for either. The gap is in everything around the SQL: config syntax, the command-line tool, packages, project conventions. There, Claude Code, Cursor and the rest know dbt far better, because there is far more of it online to have learned from. A lone analyst gets better AI help on a dbt project than a Dataform one today.
 
@@ -29,13 +29,13 @@ The developer experience that earns dbt its reputation pays off when several peo
 
 **A second platform, outside BigQuery.** Structurally the two projects are almost the same object. Both are SQL files with a config block at the top, a few configuration files, a folder structure of staging, intermediate and mart models, and a scheduler. Dataform adds optional JavaScript, dbt adds Jinja and YAML. Nobody who can maintain one would be lost in the other.
 
-The difference is where it lives. Dataform is a feature of BigQuery, not a separate service. You create a repository, work in workspaces, and schedule workflows, all from the BigQuery console, on the Google Cloud project where the warehouse already sits: same users, same permissions, same invoice, with a service account you set up once. A dbt project on dbt Cloud is an account on another vendor's platform, with its own users to create, its own permissions, its own data processing agreement, its own bill, and a BigQuery service account key uploaded to it that someone has to keep valid. Each item is small. For a company with no data person, each is also a thing nobody owns. At Aeyde, a fashion brand with a one-person BI team, the stack we replaced had four vendors to administer: Stitch, Panoply, dbt and Looker. The one we built has two, Google and Airbyte, and everything except ingestion is administered from the console the company already used.
+The difference is where it lives. Dataform is a feature of BigQuery, not a separate service. You create a repository, work in workspaces, and schedule workflows, all from the BigQuery console, on the Google Cloud project where the warehouse already sits: same users, same permissions, same invoice, with a service account you set up once. A dbt project on dbt Cloud is an account on another vendor's platform, with its own users to create, its own permissions, its own data processing agreement, its own bill, and a BigQuery service account key uploaded to it that someone has to keep valid. Each item is small. For a company with no data person, each is also a thing nobody owns. At Aeyde, a footwear and accessories brand with a one-person BI team, the stack we replaced had four vendors to administer: Stitch, Panoply, dbt and Looker. The one we built has two, Google and Airbyte, and everything except ingestion is administered from the console the company already used.
 
 **The meter.** dbt Cloud pricing, as of September 2026:
 
 | Plan | Price | Successful model builds included | Beyond that |
 |---|---|---|---|
-| Developer | Free, 1 seat | 3,000 a month | Scheduled runs are cancelled until next month |
+| Developer | Free, 1 seat | 3,000 a month | Scheduled runs are canceled until next month |
 | Starter | $100 per developer seat per month, up to 5 seats | 15,000 a month | Billed per build, at a rate the pricing page no longer states |
 | Enterprise | Negotiated, annual | 100,000 a month | Negotiated |
 
@@ -45,7 +45,7 @@ The free tier covers a 100-model project run once a day, with nothing left over 
 
 The amounts matter less than the unit. dbt Labs has changed its pricing model three times in four years: the seat price doubled in December 2022, the build meter arrived in August 2023, and usage-priced features came with the 2026 merger. The last two moved cost from seats to consumption. The number you budget in January is not reliably the number you pay in December, and the person who would notice is the person you don't have.
 
-**Running dbt Core yourself.** dbt Core is free software, and Fusion made it fast, but it still needs somewhere to run: a container, a scheduler, credentials, an upgrade whenever a dependency changes. Airbyte and Dataform both schedule themselves. Adding an orchestrator to run one tool is either the analyst's time or ours on a retainer.
+**Running dbt Core yourself.** dbt Core is free software, and Fusion is making it faster, but it still needs somewhere to run: a container, a scheduler, credentials, an upgrade whenever a dependency changes. Airbyte and Dataform both schedule themselves. Adding an orchestrator to run one tool is either the analyst's time or ours, in a monthly [Support](/services/data-platform-support/) plan.
 
 None of it is large. But it buys developer tooling built for teams, at a company where one person will use it, and it recurs every year at a company where data is the first budget line to be questioned when things get tight. That is the case for Dataform. It is narrower than "it's free," which is why we prefer to state it precisely.
 
@@ -53,9 +53,9 @@ None of it is large. But it buys developer tooling built for teams, at a company
 
 We should make the strongest argument against our own default, because clients will hear it from someone.
 
-Google bought Dataform in 2020, and Google's record with acquired products does not reassure anyone. Read the Dataform release notes for 2025 and 2026 and most entries are access controls, organisation policies, security modes and encryption options. Useful to enterprise administrators, invisible to the analyst writing SQL. The developer experience has moved slowly since general availability in 2023. In the same period dbt shipped a new engine, and the AI coding tools learned dbt.
+Google bought Dataform in 2020, and Google's record with acquired products does not reassure anyone. Read the Dataform release notes for 2025 and 2026 and most entries are access controls, organization policies, security modes and encryption options. Useful to enterprise administrators, invisible to the analyst writing SQL. The developer experience has moved slowly since general availability in 2023. In the same period dbt shipped a new engine, and the AI coding tools learned dbt.
 
-What makes us comfortable is what Dataform became. It stopped being a product and became a feature of BigQuery. It lives inside the BigQuery console, and the release notes now describe Dataform workflows and BigQuery pipelines as one system, and the recent additions, a centralised Git-connected way to manage releases in July 2026 and an MCP server in August 2026 so AI agents can operate a Dataform repository, are BigQuery investments as much as Dataform ones. Google retires standalone products. It does not retire features of one of its core data services. As acquisitions go, this one was absorbed into BigQuery.
+What makes us comfortable is what Dataform became. It stopped being a product and became a feature of BigQuery. It lives inside the BigQuery console, and the release notes now describe Dataform workflows and BigQuery pipelines as one system, and the recent additions, a centralized Git-connected way to manage releases in July 2026 and an MCP server in August 2026 so AI agents can operate a Dataform repository, are BigQuery investments as much as Dataform ones. Google retires standalone products. It does not retire features of one of its core data services. As acquisitions go, this one was absorbed into BigQuery.
 
 
 ## When a buyer arrives with dbt already chosen
@@ -76,7 +76,7 @@ An existing dbt project that works. A working transformation layer is worth more
 
 A team that is dbt-fluent from previous jobs. Familiarity is an asset, and fighting it wastes the client's money.
 
-Lightdash OSS with AI agent access. This is the one architectural edge case. Lightdash's open-source edition cannot expose its metrics to external AI agents without a paid licence key; the alternative path runs through dbt Cloud's semantic layer. Everywhere else, the semantic layer lives in the BI tool, whether Steep, Metabase, Lightdash Cloud or Looker, and Dataform underneath loses nothing.
+Lightdash OSS with AI agent access. This is the one architectural edge case. Lightdash's open-source edition cannot expose its metrics to external AI agents without a paid license key; the alternative path runs through dbt Cloud's semantic layer. Everywhere else, the semantic layer lives in the BI tool, whether Steep, Metabase, Lightdash Cloud or Looker, and Dataform underneath loses nothing.
 
 ## The merger, briefly
 
@@ -84,6 +84,6 @@ Fivetran and dbt Labs completed their merger on 1 June 2026. It puts ingestion a
 
 ## Our bias, and the rule
 
-We sell [Dataform projects](/services/data-platform-improvement/) and [Dataform retainers](/services/data-platform-support/). We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
+We sell [Dataform projects](/services/data-platform-improvement/) and [monthly Dataform support](/services/data-platform-support/). We also build dbt, when one of the four situations applies or when a client simply prefers it. The bias is in the default, and you should weigh the argument above with it in mind.
 
 The rule we apply: default to the tool that adds no platform, no bill and no meter on top of BigQuery, and write down the reasons. When a client's situation breaks the default, the recommendation says so, with the reasoning attached.

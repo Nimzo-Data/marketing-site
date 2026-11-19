@@ -10,12 +10,12 @@ const copy: Copy = {
       look: 'Vos sources et leurs volumes, les chiffres dont la direction a besoin, ce que votre équipe peut faire tourner au quotidien.',
     },
     {
-      from: ['Google Sheets et Looker Studio,', 'avec des connecteurs vers vos autres outils.'],
+      from: ['Google Sheets et Data Studio,', 'avec des connecteurs vers vos autres outils.'],
       look: 'Quels connecteurs alimentent quels rapports, ce qui ne fonctionne plus quand un fichier change, si les chiffres concordent avec les systèmes sources.',
       sample: href('sampleAudit', 'fr'),
     },
     {
-      from: ['Une application de reporting maison,', 'développée en interne ou avec l’IA.'],
+      from: ['Une application de reporting maison,', 'développée en interne ou avec Claude.'],
       look: 'D’où viennent les données, si des clés traînent dans le code, qui peut modifier la production, si chaque indicateur n’est défini qu’une fois.',
     },
     {
@@ -29,9 +29,9 @@ const copy: Copy = {
     { icon: 'collection', area: 'Collecte', detail: 'Si chaque source se charge bien, et si une panne passerait inaperçue.' },
     { icon: 'data-model', area: 'Modèle de données', detail: 'Structure de l’entrepôt, tables en double, chargements complets ou incrémentaux.' },
     { icon: 'figures', area: 'Chiffres', detail: 'Une définition par indicateur. Données de test, remboursements, devises, fuseaux horaires.' },
-    { icon: 'reports', area: 'Rapports et temps de chargement', detail: 'Quels rapports servent, officiels ou abandonnés, et à quelle vitesse ils chargent.' },
+    { icon: 'reports', area: 'Rapports et temps de chargement', detail: 'Quels rapports servent encore, lesquels font foi, lesquels sont abandonnés, et à quelle vitesse ils chargent.' },
     { icon: 'operations', area: 'Exploitation', detail: 'Fraîcheur des données, séparation test et production, droits de déploiement, sauvegardes testées.' },
-    { icon: 'maintainability', area: 'Maintenabilité', detail: 'Documentation, tests sur les chiffres, revues, garde-fous pour le code écrit par l’IA, dépendance à une seule personne.' },
+    { icon: 'maintainability', area: 'Maintenabilité', detail: 'Documentation, tests sur les chiffres, revues de code, garde-fous pour le code écrit par l’IA, dépendance à une seule personne.' },
     { icon: 'ai', area: 'Préparation à l’IA', detail: 'Indicateurs gouvernés, et ce que les outils d’IA peuvent lire.' },
     { icon: 'costs', area: 'Coûts', detail: 'Infrastructure, outils et licences, et ce qui fait monter la facture.' },
   ],
@@ -59,7 +59,7 @@ const copy: Copy = {
     {
       question: 'Notre reporting a été fait avec Claude ou Cursor. Est-ce un problème ?',
       answer:
-        'Non, et c’est de plus en plus courant. Beaucoup de ces applications font très bien ce pour quoi elles ont été créées. Ce que nous trouvons souvent : des clés d’API dans le code, et encore dans l’historique Git, une application connectée à la base de production avec tous les droits, des changements poussés en production sans relecture. Côté chiffres, un même indicateur calculé de deux façons sur deux écrans, des commandes de test comptées dans le chiffre d’affaires, aucun test. L’essentiel se corrige vite une fois écrit noir sur blanc. L’audit classe les points pour traiter les plus dangereux d’abord.',
+        'Non, et c’est de plus en plus courant. Beaucoup de ces applications font très bien ce pour quoi elles ont été créées. Ce que nous trouvons souvent : des clés d’API dans le code et toujours dans l’historique Git, une application connectée à la base de production avec tous les droits, des changements poussés en production sans relecture. Côté chiffres, un même indicateur calculé de deux façons sur deux écrans, des commandes de test comptées dans le chiffre d’affaires, aucun test. L’essentiel se corrige vite une fois écrit noir sur blanc. L’audit classe les constats par gravité, pour corriger les plus dangereux d’abord.',
     },
     {
       question: 'Allez-vous nous pousser vers Google Cloud ?',
@@ -73,7 +73,7 @@ const copy: Copy = {
     },
   ],
   startHeading: 'Votre point de départ.',
-  startIntro: 'Méthode et format du rapport sont les mêmes pour tous. Ce que nous regardons en premier, et ce que nous recommandons, dépendent de votre point de départ.',
+  startIntro: 'La méthode et le format du rapport sont les mêmes, quelle que soit votre plateforme. Ce que nous regardons en premier, et ce que nous recommandons, dépendent de votre point de départ.',
   problemsHeading: 'Ce que l’audit permet de trancher.',
   questionItems: [
     'Pouvons-nous faire confiance à ces chiffres ?',
@@ -88,7 +88,7 @@ const copy: Copy = {
     'Les chiffres clés recalculés depuis la source.',
     'Clés et mots de passe, comptes et rôles passés en revue.',
     'Ce qui tourne et où, qui en est responsable, et ce qui repose sur une seule personne.',
-    'Un coût sur 12 mois, prestations et infrastructure comprises.',
+    'Un coût sur 12 mois, honoraires et infrastructure compris.',
     'Garder, corriger ou remplacer : un verdict outil par outil, argumenté.',
     'Ce que les outils d’IA peuvent interroger sans risque, et ce qui manque.',
     'Ce que votre équipe peut maintenir seule, et où il lui faut de l’aide.',
@@ -98,7 +98,7 @@ const copy: Copy = {
   walkHeading: 'Ce que vous obtenez.',
   walkItemsHtml: [
     `<strong>Synthèse pour la direction.</strong> Une page : le verdict global, les risques critiques, ce qu’il faut faire en premier.`,
-    `<strong>Cartographie de l’existant.</strong> Sources, pipelines, tables, rapports, planifications et responsables.`,
+    `<strong>Cartographie de l’existant.</strong> Sources, pipelines, tables, rapports, traitements planifiés et responsables.`,
     `<strong>Constats classés.</strong> Chacun par gravité, avec les preuves et la correction.`,
     `<strong>Vérification des chiffres.</strong> Les chiffres clés recalculés et comparés à vos rapports.`,
     `<strong>Un verdict pour chaque partie.</strong> Collecte, entrepôt, modélisation, BI et IA : garder, corriger, ajouter ou remplacer.`,
@@ -140,7 +140,7 @@ const copy: Copy = {
   questionsTitle: 'Les questions :',
   answersTitle: 'Les réponses de l’audit :',
   ifVerdict: 'Si le verdict est',
-  leadBuildEyebrow: 'Une plateforme à créer ou à remplacer',
+  leadBuildEyebrow: 'L’essentiel de la plateforme à créer ou remplacer',
   leadBuildTitle: 'Construction',
   leadBuildBody: 'Une nouvelle plateforme, ou le remplacement de celle qui doit partir. L’audit débouche sur une proposition de construction à prix fixe. Vous décidez ensuite si vous la signez.',
   leadBuildLink: 'Voir la Construction',
@@ -150,7 +150,7 @@ const copy: Copy = {
   leadImproveLink: 'Voir l’Amélioration',
   leadNothingEyebrow: 'Votre équipe prend le relais',
   leadNothingTitle: 'L’audit seul',
-  leadNothingBody: 'Le rapport vous appartient. Votre équipe ou un autre prestataire peut le mettre en œuvre, et les constats classés indiquent par où commencer.',
+  leadNothingBody: 'Le rapport vous appartient. Votre équipe ou un autre prestataire peut en appliquer les recommandations, et les constats classés indiquent par où commencer. Si la plateforme est en assez bon état, nous pouvons aussi en assurer le support.',
 };
 
 export default copy;

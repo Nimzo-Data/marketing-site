@@ -2,7 +2,7 @@ import type { Copy } from './contact.en';
 
 const copy: Copy = {
   calendarHeading: 'Choisissez un créneau.',
-  calendarSub: 'Les horaires s’affichent dans votre fuseau horaire.',
+  calendarSub: 'Les horaires s’affichent dans votre fuseau horaire. 45 minutes suffisent en général pour savoir si nous pouvons vous aider.',
   emailHtml: `Écrivez à <a href="mailto:hello@nimzodata.com" class="email-link">hello@nimzodata.com</a>. Nous répondons sous un jour ouvré, souvent le jour même.`,
   steps: [
     { icon: 'mail', title: 'Réservez un appel ou écrivez-nous', description: 'Choisissez un créneau dans le calendrier, ou envoyez-nous un e-mail.' },
@@ -10,7 +10,7 @@ const copy: Copy = {
     { icon: 'video', title: 'L’appel découverte', description: '45 minutes. Nous vous écoutons, puis nous vous disons franchement si nous pouvons vous aider.' },
     { icon: 'file-text', title: 'La proposition', description: 'Sous 5 jours ouvrés, si nous pouvons vous aider. Le plus souvent, un audit payant de 1 à 2 semaines. Pour un projet Amélioration au périmètre déjà connu, nous envoyons directement un devis.' },
   ],
-  whereBody: 'Basés en France. Nous travaillons à distance dans toute l’Europe, et nous nous déplaçons pour le lancement ou des ateliers sur les gros projets.',
+  whereBody: 'Basés en France. Nous travaillons à distance dans toute l’Europe, et nous nous déplaçons parfois pour le lancement ou des ateliers sur les gros projets.',
   stepsHeading: 'Comment ça se passe.',
   notReadyHeading: 'Pas encore prêt à en parler ?',
   metaTitle: 'Contact | Réserver un appel | Nimzo Data',

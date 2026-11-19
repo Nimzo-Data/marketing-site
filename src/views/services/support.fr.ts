@@ -48,12 +48,12 @@ const copy: Copy = {
     {
       question: 'Et si un développement prend de l’ampleur ?',
       answer:
-        `Nous nous arrêtons et vous prévenons avant de dépasser l’estimation. Vous choisissez : continuer le mois suivant, ajouter des jours à ${day} le jour, réduire le périmètre, ou en faire un projet Amélioration.`,
+        `Nous nous arrêtons et vous prévenons avant de dépasser l’estimation. Vous choisissez : continuer le mois suivant, ajouter des jours à ${day} HT le jour, réduire le périmètre, ou en faire un projet Amélioration.`,
     },
     {
       question: 'Que se passe-t-il quand quelque chose ne fonctionne plus ?',
       answer:
-        'Les alertes nous arrivent automatiquement. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Si plusieurs pannes surviennent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Un éditeur modifie son outil et cela fait tomber un pipeline, ou risque de le faire ? C’est couvert aussi. Si une source doit être reconstruite, nous la chiffrons comme un développement ou un projet Amélioration.',
+        'Les alertes nous arrivent automatiquement : c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Si plusieurs pannes surviennent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Les changements d’un éditeur qui font tomber un pipeline, ou risquent de le faire, sont couverts aussi. Si une source doit être reconstruite, nous la chiffrons comme un développement ou un projet Amélioration.',
     },
     {
       question: 'Comment distinguer un incident d’un développement ?',
@@ -71,15 +71,15 @@ const copy: Copy = {
     },
   ],
   whoHeading: 'À qui s’adresse le Support.',
-  whoBody: 'Aux entreprises qui veulent une plateforme data qui tourne sans recruter de data engineer. Ce que nous construisons vous appartient : vous pouvez le faire tourner sans nous. Si vous préférez que nous restions, le Support la fait tourner, la complète selon vos demandes ou vous aide à décider de vos priorités data.',
+  whoBody: 'Aux entreprises qui veulent une plateforme data qui tourne sans recruter de data engineer. Ce que nous construisons vous appartient : vous pouvez le faire tourner sans nous. Si vous préférez que nous restions, nous faisons tourner la plateforme, nous la développons à votre demande ou nous décidons avec vous des priorités data.',
   tiersHeading: 'Trois offres.',
   tiersIntro: 'Chaque offre inclut la précédente.',
   tiersNotePrices: 'Prix mensuels en euros, hors taxes (HT).',
   tiersNoteHours: 'Les délais de prise en charge se comptent en heures ouvrées : du lundi au vendredi, 9 h – 18 h, heure de Paris.',
   monthlyHeading: 'Ce que vous voyez chaque mois.',
-  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page : traitements réussis, données à jour à l’heure prévue, incidents détectés, changements chez les éditeurs de vos sources de données, évolution des coûts BigQuery, points de vigilance, prochain chantier recommandé et, dans les offres Évolution et Pilotage, jours de développement consommés.',
+  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page. Il indique si les chargements ont réussi et si les données étaient à jour à l’heure prévue, les incidents détectés, les changements chez les éditeurs de vos sources et ce que nous en avons fait. Il donne aussi l’évolution des coûts BigQuery, les points de vigilance, le prochain chantier recommandé et, dans les offres Évolution et Pilotage, les jours de développement consommés.',
   promiseLabel: 'Notre engagement',
-  promiseBody: 'Si quelque chose que nous surveillons tombe en panne, vous l’apprenez par nous en premier. Les alertes arrivent automatiquement dans un canal partagé avec vous.',
+  promiseBody: 'Si quelque chose que nous surveillons tombe en panne, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal partagé avec vous.',
   changeHeading: 'Les jours de développement.',
   changeIntro: 'Dans les offres Évolution et Pilotage.',
   changeRulesHtml: [
@@ -91,9 +91,9 @@ const copy: Copy = {
     `Les nouveaux chantiers, comme un nouveau domaine métier, un nouvel outil de BI ou une migration, sont des projets <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,
   ],
   dayHeading: 'Ce qui tient en une journée',
-  dayBody: 'Environ une nouvelle source via un connecteur prêt à l’emploi, deux ou trois modifications de tableaux de bord, ou un nouvel indicateur avec son tableau de bord. Vérifier un chiffre qui semble faux ou paramétrer un agent d’IA consomme aussi des jours de développement.',
+  dayBody: 'Environ une nouvelle source via un connecteur prêt à l’emploi, deux ou trois modifications de tableaux de bord, ou un nouvel indicateur avec son tableau de bord. Vérifier un chiffre qui semble faux ou paramétrer et ajuster un agent d’IA consomment aussi des jours de développement.',
   exampleLabel: 'Exemple',
-  exampleBody: `Un client de l’offre Évolution demande une intégration Salesforce et un tableau de bord commercial, environ 2 jours de travail. Nous pouvons l’étaler sur ce mois-ci et le suivant, ou ajouter un jour pour ${day}. Au-delà, cela devient un projet Amélioration.`,
+  exampleBody: `Un client de l’offre Évolution demande une intégration Salesforce et un tableau de bord commercial, environ 2 jours de travail. Nous pouvons l’étaler sur ce mois-ci et le suivant, ou ajouter un jour pour ${day} HT. Au-delà, cela devient un projet Amélioration.`,
   termsHeading: 'Conditions.',
   contractHeading: 'Contrat',
   notIncludedHeading: 'Non inclus, facturé à part',
@@ -102,12 +102,12 @@ const copy: Copy = {
   notThereHeading: 'Ce n’est pas encore le moment ?',
   notThereBody: 'Le Support démarre en général après un projet avec nous. Une Construction comprend son premier mois de l’offre Évolution, puis passe à l’offre Maintien sauf si vous choisissez autrement. Un projet Amélioration comprend son premier mois de l’offre Maintien, sur le travail livré. Après un audit seul, c’est possible si votre plateforme est en assez bon état : l’audit nous le dit.',
   metaTitle: 'Maintenance et support de plateforme data | Nimzo Data',
-  metaDescription: `Support mensuel d’une plateforme data que nous avons construite, améliorée ou auditée. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
+  metaDescription: `Support mensuel d’une plateforme data, le plus souvent construite ou améliorée par nous. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
   heroTitle: 'Votre plateforme tourne. Qui la maintient ?',
-  heroSubtitle: 'Un support mensuel pour une plateforme que nous avons construite, améliorée ou auditée. Sans data engineer à recruter. Trois offres, à prix mensuel fixe.',
+  heroSubtitle: 'Un support mensuel pour une plateforme data, le plus souvent construite ou améliorée par nous, sans data engineer à recruter. Trois offres, chacune à prix mensuel fixe.',
   leadAuditEyebrow: 'Quelqu’un d’autre a construit votre plateforme',
   leadBuildEyebrow: 'Pas encore de plateforme utilisable',
-  leadImproveEyebrow: 'Un tableau de bord faux, ou qui manque',
+  leadImproveEyebrow: 'Ce qui ne marche pas, ou ce qui manque',
 };
 
 export default copy;

@@ -12,7 +12,7 @@ const copy = {
         'A new Google Cloud data platform, or a replacement for one that has to go. Old and new run in parallel until the numbers match.',
     },
     shortQuote: {
-      text: 'Dashboards that used to take minutes now load in seconds, and the whole team has real trust in the data again.',
+      text: 'Dashboards that used to take minutes now load in seconds, … and the whole team has real trust in the data again.',
       authorTitle: 'BI Lead, Aeyde',
       /** Set in French copy: the quote was given in English and is shown translated. */
       translatedFrom: undefined as 'en' | undefined,
@@ -27,10 +27,10 @@ const copy = {
     service: {
       label: 'Improve',
       shortDescription:
-        "Add the layer that's missing or fix the one that isn't working, one fixed-price project at a time, alongside the team you already have.",
+        "Fix what's broken or add what's missing, one fixed-price project at a time.",
     },
     shortQuote: {
-      text: "Most of our BigQuery data wasn't usable for analysis. Now it's the platform our analytics actually run on.",
+      text: "… most of our BigQuery data wasn't usable for analysis. … It's the platform our analytics actually run on.",
       authorTitle: 'CTO and co-founder, Tameson',
       /** Set in French copy: the quote was given in English and is shown translated. */
       translatedFrom: undefined as 'en' | undefined,

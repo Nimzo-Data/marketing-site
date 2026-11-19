@@ -18,7 +18,7 @@ const copy = {
   },
   support: {
     title: 'Support',
-    body: 'A senior engineer on call for monitoring, incidents and small improvements.',
+    body: 'A senior engineer who monitors your platform, handles incidents and makes small changes.',
     linkText: 'See Support',
   },
 };
