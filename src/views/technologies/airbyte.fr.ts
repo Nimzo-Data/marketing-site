@@ -7,12 +7,12 @@ const copy: Copy = {
   heroPositioning: "Airbyte est notre outil ELT par défaut : un service managé, plus de 700 connecteurs et un constructeur low-code pour les API sur mesure. L’auto-hébergement est possible si vous voulez garder la main.",
   title2: "Comment nous l’utilisons",
   items: [
-        "Mettre en place Airbyte Cloud, notre déploiement par défaut : managé, rapide à lancer, simple à maintenir",
+        "Mettre en place Airbyte Cloud, notre choix par défaut : rien à héberger ni à maintenir",
         "Configurer et surveiller les synchronisations de vos CRM, plateformes marketing, bases de données et API internes",
         "Construire des connecteurs sur mesure avec le Connector Builder low-code, pour les API absentes du catalogue",
         "Passer au CDK Python pour les sources complexes (authentification, pagination atypique, schémas inhabituels)",
         "Déployer Airbyte en auto-hébergé sur GKE pour les clients qui veulent maîtriser l’infrastructure",
-        "Appliquer des conventions de schéma qui se raccordent à vos modèles Dataform ou dbt",
+        "Nommer et organiser les tables chargées pour que Dataform ou dbt les reprennent sans retouche",
       ],
   title3: "Airbyte ou Fivetran ?",
   blocks: [
@@ -28,7 +28,7 @@ const copy: Copy = {
         {
           heading: 'Choisissez Fivetran quand :',
           bullets: [
-            'Vous voulez l’ELT managé le plus abouti du marché, quel qu’en soit le coût',
+            'Vous voulez l’ELT managé le plus abouti, et le budget suit',
             'Toutes vos sources sont des outils SaaS courants (Salesforce, HubSpot, Stripe, Shopify)',
             "Vous standardisez sur Fivetran + dbt, chez un seul éditeur",
           ],
@@ -41,10 +41,10 @@ const copy: Copy = {
           ],
         },
       ],
-  metric: "D’une boîte noire à des pipelines que l’équipe peut suivre.",
-  body: "Panoply remplacé par Airbyte et BigQuery : le coût d’infrastructure passe de 1 300 $ à environ 300 $ par mois.",
-  p1: "Airbyte est une plateforme d’intégration de données avec plus de 700 connecteurs prêts à l’emploi. Elle extrait les données de vos sources (API, bases de données, outils SaaS) et les charge dans une destination comme BigQuery. Notre déploiement par défaut est Airbyte Cloud : managé, rapide à mettre en place, simple à maintenir. Pour les clients qui veulent garder la main ou ont des contraintes de conformité, il existe aussi une version open source à auto-héberger, éprouvée.",
-  p2: "Dès que les volumes montent, la facturation d’Airbyte est plus prévisible que celle de Fivetran, basée sur les lignes actives par mois (MAR). Et si une source n’existe pas, nous la construisons : avec le Connector Builder low-code (suffisant pour la plupart des API sur mesure) ou avec le CDK Python pour les cas complexes. Cette souplesse est la principale raison pour laquelle nous choisissons Airbyte par défaut sur les nouveaux projets.",
+  metric: "Infrastructure : de 1 300 $ à environ 300 $ par mois.",
+  body: "Airbyte et BigQuery remplacent Panoply : l’équipe suit désormais ses pipelines au lieu de subir une boîte noire.",
+  p1: "Airbyte est une plateforme d’intégration de données avec plus de 700 connecteurs prêts à l’emploi. Elle extrait les données de vos sources (API, bases de données, outils SaaS) et les charge dans une destination comme BigQuery. Notre choix par défaut est Airbyte Cloud, sans rien à héberger ni à maintenir. Pour les clients qui veulent garder la main ou ont des contraintes de conformité, il existe aussi une version open source, éprouvée, à auto-héberger.",
+  p2: "Notre choix par défaut sur les nouveaux projets est Airbyte, pour deux raisons. À gros volume, la facture est plus facile à prévoir : Fivetran facture aux lignes actives par mois (MAR, monthly active rows). Et si une source n’existe pas, nous la construisons, avec le Connector Builder low-code (suffisant pour la plupart des API sur mesure) ou avec le CDK Python pour les cas complexes.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

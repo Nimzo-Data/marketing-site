@@ -51,7 +51,7 @@ const copy = {
   existsHeading: "Why Nimzo Data exists.",
   reason1Title: "A gap in the market",
   reason1Body: "A 40-person company with one analyst needs a data platform and has nobody to build it. Large consultancies price that work for enterprise budgets, and a full-time senior hire is more than the job requires. We do it as a fixed-price project, sized for a team of zero or one.",
-  reason2Title: "One thing, done well",
+  reason2Title: "A narrow focus",
   reason2Body: "GCP, because BigQuery is a warehouse a company can run with no data person: there is no cluster to administer or tune. Fixed-price, because hourly billing rewards the wrong behavior. No sales layer: the person on the call is the person accountable for the work.",
   reason3Title: "Small by choice",
   reason3Body: "Fewer clients means better work for each one.",
@@ -63,7 +63,7 @@ const copy = {
   metaTitle: "About | Boutique GCP Data Consultancy | Nimzo Data",
   metaDescription: "Boutique Google Cloud data consultancy based in France. Data platforms for growing European companies. Paid audits, fixed-price builds, senior engineering only.",
   heroTitle: "A boutique data consultancy.<br>That stays that way.",
-  heroSubtitle: "Small team. One cloud. Paid audits, fixed-price builds.<br>We work with a handful of clients at a time and go deep, not wide.",
+  heroSubtitle: "Small team, one cloud, paid audits and fixed-price builds.<br>We work with a handful of clients at a time and go deep.",
   heroCta: "Let's talk",
   nameTitle: "Why Nimzo?",
 };

@@ -3,9 +3,9 @@ import type { CaseStudiesCopy } from './caseStudies.en';
 const copy: CaseStudiesCopy = {
   aeyde: {
     headline:
-      'Aeyde : tableaux de bord Looker en quelques secondes, 77 % de coûts d’infrastructure data en moins, des chiffres à nouveau fiables',
+      'Aeyde : tableaux de bord Looker en quelques secondes, 77 % de coûts data en moins',
     subline:
-      'Cinq ans de croissance ont éparpillé la stack data d’Aeyde sur plusieurs systèmes : reporting ralenti, décisions compliquées.',
+      'En cinq ans, la stack data d’Aeyde a grossi sans plan : tableaux de bord lents, KPI définis en double.',
     company: { size: '10 à 50 salariés', sector: 'Chaussures et accessoires (D2C + B2B)' },
     service: {
       label: 'Construction',
@@ -27,7 +27,7 @@ const copy: CaseStudiesCopy = {
     service: {
       label: 'Amélioration',
       shortDescription:
-        'Ajouter la couche qui manque ou réparer celle qui ne marche pas : un projet à la fois, à prix fixe, avec votre équipe actuelle.',
+        'Compléter ou réparer un morceau de votre plateforme data, avec votre équipe actuelle. Un projet à la fois, à prix fixe.',
     },
     shortQuote: {
       text: 'La plupart de nos données BigQuery n’étaient pas exploitables pour l’analyse. C’est aujourd’hui la plateforme sur laquelle tournent réellement nos analyses.',

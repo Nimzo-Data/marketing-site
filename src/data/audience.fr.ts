@@ -13,7 +13,7 @@ const copy: AudienceCopy = {
     'Il vous faut une nouvelle plateforme sur AWS ou Azure. Nous ne construisons de nouvelles plateformes que sur Google Cloud.',
     'Vous cherchez encore votre marché. La data n’est pas encore ce qui freine votre croissance.',
     'Il vous faut des analystes ou des data scientists. Nous sommes data engineers.',
-    'Vous cherchez le taux horaire le plus bas. Nous nous distinguons par l’expérience, pas par le prix.',
+    'Vous cherchez le taux horaire le plus bas. Nous ne sommes pas les moins chers : notre atout est l’expérience.',
     'Il vous faut du temps réel à grande échelle (Kafka, Flink, latence sous la seconde). C’est un autre métier.',
   ],
 };

@@ -21,7 +21,7 @@ const copy = {
   s1_2: "Aeyde is a Berlin-based footwear and accessories brand for women, founded in 2015. Made in Italy, they sell direct-to-consumer on Shopify and B2B to retailers worldwide. Their data platform supports both sides of the business: D2C marketing and merchandising, plus B2B operations and reporting.",
   s2_1: "The challenge",
   s2_2: "By April 2024, Aeyde's data stack was creating growing complexity and performance bottlenecks. The platform had grown organically since 2019: Panoply for ingestion and warehousing, dbt for some transformations, Looker for BI. Complexity had grown faster than the team could manage it.",
-  s2_3: "The visible symptoms were everywhere:",
+  s2_3: "The symptoms were easy to see:",
   s2_4: [
     "Heavy dashboards took minutes to load. Some failed to load more than a few months of historical data at all.",
     "Looker schedules failed regularly because they timed out before completing.",
@@ -29,7 +29,7 @@ const copy = {
     "KPI definitions lived in dozens of LookML derived tables, often duplicated, sometimes inconsistent. Updating a metric meant tracking down every instance.",
     "Adding a new data source could take days of work.",
   ],
-  s2_5: "Behind the symptoms, the underlying technical reality was a stack pushed past its design:",
+  s2_5: "Behind them was a stack pushed past its design:",
   s2_6: [
     "Panoply (built on Redshift) was a black box: costly at $1,300/month, slow to query, opaque when things broke, and hitting storage limits.",
     "dbt held about 30% of the transformation logic. The rest lived in LookML.",
@@ -43,7 +43,7 @@ const copy = {
   s3_4: "Most consultants would have proposed jumping straight to a new stack. We didn't. The stack had real problems, but it also contained unused assets, redundant models, and outdated schedules. Migrating that complexity to a new stack would simply move the problem. We cleaned first.",
   s3_5: "Keep transformation logic in one place.",
   s3_6: "Logic split across LookML and dbt creates inconsistency and duplication. We consolidated everything into a single transformation layer, first dbt, then Dataform after the migration, with a layered architecture (staging → intermediate → mart → report). Looker became the consumption layer, not a transformation engine.",
-  s3_7: "This meant a three-phase plan, not a single migration project.",
+  s3_7: "So the plan had three phases instead of one migration project.",
   s4_1: "What we built",
   s4_2: "Phase 1: Cleaning the existing stack",
   s4_3: "Before touching anything new, we audited and pruned the existing setup. In Panoply: deleted 38 unused connections and the unused tables they fed. In dbt: removed obsolete models and renamed the rest with consistent conventions. In Looker: deleted inactive accounts, audited 1,013 looks and 340 dashboards (only 23% and 12% respectively were used in the last 30 days), disabled auto-refresh on dashboards that didn't need it, and redistributed 98 schedules across the day instead of all firing between 4–6am.",

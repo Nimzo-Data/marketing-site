@@ -55,7 +55,7 @@ We should make the strongest argument against our own default, because clients w
 
 Google bought Dataform in 2020, and Google's record with acquired products does not reassure anyone. Read the Dataform release notes for 2025 and 2026 and most entries are access controls, organisation policies, security modes and encryption options. Useful to enterprise administrators, invisible to the analyst writing SQL. The developer experience has moved slowly since general availability in 2023. In the same period dbt shipped a new engine, and the AI coding tools learned dbt.
 
-What makes us comfortable is what Dataform became. It stopped being a product and became a feature of BigQuery. It lives inside the BigQuery console, and the release notes now describe Dataform workflows and BigQuery pipelines as one system, and the recent additions, a centralised Git-connected way to manage releases in July 2026 and an MCP server in August 2026 so AI agents can operate a Dataform repository, are BigQuery investments as much as Dataform ones. Google retires standalone products. It does not retire features of one of its core data services. As acquisitions go, this one was absorbed rather than abandoned.
+What makes us comfortable is what Dataform became. It stopped being a product and became a feature of BigQuery. It lives inside the BigQuery console, and the release notes now describe Dataform workflows and BigQuery pipelines as one system, and the recent additions, a centralised Git-connected way to manage releases in July 2026 and an MCP server in August 2026 so AI agents can operate a Dataform repository, are BigQuery investments as much as Dataform ones. Google retires standalone products. It does not retire features of one of its core data services. As acquisitions go, this one was absorbed into BigQuery.
 
 
 ## When a buyer arrives with dbt already chosen
@@ -64,7 +64,7 @@ We ask one question: who on your team will open it?
 
 If the answer is "our analyst, eventually" or "the AI will," we say what is written above: a second platform and a meter, to get developer tooling built for a team, when Dataform gives the same modeled tables, tests and lineage adequate at this scale though less rich than dbt's, and the same Git history, for nothing above BigQuery.
 
-If a client hears all of that and still prefers dbt, we build dbt. It is a good tool and we like working in it. Our default is a preference, not a condition.
+If a client hears all of that and still prefers dbt, we build dbt. It is a good tool and we like working in it. Dataform is our default, not a condition of working with us.
 
 ## When we recommend dbt without being asked
 

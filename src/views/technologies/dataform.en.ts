@@ -44,7 +44,7 @@ const copy = {
   body: "Ongoing since June 2024.",
   p1: "Dataform is Google's managed SQL transformation tool, natively integrated into the GCP console. It lets you write modular SQL workflows (SQLX files), define dependencies between tables, run tests on your data, and deploy changes through a Git-based workflow, all without leaving BigQuery. Gemini assistance is built in for SQLX generation and error fixing.",
   p2: "For GCP-native teams, Dataform is the lowest-friction path to well-structured SQL. No external orchestrator needed. Dataform handles scheduling, dependencies, and retries. The GCP integration means no credentials to manage and billing tied directly to your existing BigQuery setup.",
-  p3: "The models you build in Dataform become the governed layer that downstream AI features rely on. When AI tools query your data, they're querying these models. Clean transformation is AI infrastructure.",
+  p3: "The models you build in Dataform become the governed layer that downstream AI features rely on: when AI tools query your data, they're querying these models.",
   sectionTitle: "What It Is",
   sectionTitle2: "Why We Chose It",
 };

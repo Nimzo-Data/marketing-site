@@ -4,7 +4,7 @@ const copy: Copy = {
   title: "Consultant Dagster, orchestration de pipelines | Nimzo Data",
   description: "Consultant Dagster pour orchestrer vos pipelines de données : pipelines orientés assets, contrôles de qualité des données, alertes et déploiement sur Dagster Cloud ou GCP.",
   toolCategory: "Orchestration",
-  heroPositioning: "Une orchestration par assets. Dépendances, contrôles de qualité et planification sont définis dans le code, avec le meilleur confort de développement du marché.",
+  heroPositioning: "Dagster pilote vos pipelines à partir des données qu’ils produisent (les assets). Dépendances, contrôles de qualité et planification sont écrits dans le code.",
   title2: "Comment nous l’utilisons",
   items: [
         "Orchestrer des scripts Python sur mesure en plusieurs étapes, avec dépendances explicites et contrôles de qualité entre chaque étape",
@@ -21,21 +21,21 @@ const copy: Copy = {
           bullets: [
             'Vous avez au moins 4 pipelines sur mesure qui dépendent les uns des autres',
             'Vous voulez des contrôles de qualité des données à part entière dans le pipeline',
-            'Vous voulez l’orchestrateur le plus agréable pour vos développeurs',
+            'Vos développeurs y passeront du temps et l’expérience compte',
           ],
         },
         {
           heading: 'Pas besoin d’orchestrateur quand :',
           bullets: [
             'Votre plateforme est Airbyte + Dataform + un outil de BI : chaque outil se planifie tout seul',
-            "Aucun pipeline sur mesure à coordonner entre plusieurs outils",
+            "Il n’y a pas de pipeline sur mesure à coordonner entre vos outils",
           ],
         },
         {
           heading: 'Choisissez des fonctions Cloud Run + Cloud Scheduler quand :',
           bullets: [
             'Vous avez 1 à 3 scripts planifiés simples, indépendants les uns des autres',
-            "Aucune dépendance à gérer entre eux",
+            "Vous n’avez pas besoin de relances automatiques ni d’alertes avancées",
           ],
         },
         {
@@ -46,8 +46,8 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Dagster est un orchestrateur de données moderne : l’outil qui chapeaute vos pipelines et vos transformations : il les planifie, gère leurs dépendances, relance ce qui a échoué et montre ce qui a tourné, quand, et pourquoi quelque chose est tombé en panne. Concurrent d’Airflow et de Prefect, il mise davantage sur la qualité des données et le confort de développement. Les dernières versions ajoutent Dagster Components (pipelines écrits en YAML, adaptés aux agents de code IA) et un serveur MCP pour l’intégration directe avec des outils comme Claude Code et Cursor.",
-  p2: "La plupart de nos projets n’ont pas besoin d’orchestration. Airbyte et Dataform se planifient eux-mêmes, et pour une plateforme simple, ajouter un orchestrateur serait surdimensionné. Quand l’orchestration est nécessaire (scripts sur mesure avec dépendances, contrôles de qualité poussés, coordination entre pipelines), Dagster est nettement supérieur à Airflow : produit mieux conçu, interface réellement utilisable, et un modèle par assets qui correspond à la façon dont les équipes data pensent leurs pipelines.",
+  p1: "Dagster est un orchestrateur : il planifie vos pipelines, gère leurs dépendances, relance ce qui a échoué et montre ce qui a tourné, quand et pourquoi une panne est survenue. Concurrent d’Airflow et de Prefect, il mise davantage sur la qualité des données et le confort de développement. Les dernières versions ajoutent Dagster Components (pipelines écrits en YAML, adaptés aux agents de code IA) et un serveur MCP pour l’intégration directe avec des outils comme Claude Code et Cursor.",
+  p2: "La plupart de nos projets n’ont pas besoin d’orchestration. Airbyte et Dataform se planifient eux-mêmes, et pour une plateforme simple, ajouter un orchestrateur serait surdimensionné. Quand l’orchestration est nécessaire (scripts sur mesure avec dépendances, contrôles de qualité poussés, coordination entre pipelines), nous préférons Dagster à Airflow : son interface est plus claire et son modèle par assets correspond à la façon dont les équipes data pensent leurs pipelines.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

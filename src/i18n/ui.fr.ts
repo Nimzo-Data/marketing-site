@@ -7,7 +7,7 @@ const ui: UiCopy = {
     breadcrumbHome: 'Accueil',
     rssTitle: 'Blog Nimzo Data',
     rssDescription:
-      'Articles de data engineering par Nimzo Data : optimisation BigQuery, modélisation Dataform, architecture Google Cloud et retours d’expérience de missions réelles.',
+      'Articles sur BigQuery, Dataform et l’architecture Google Cloud, tirés de nos missions.',
   },
   blog: {
     updated: 'Mis à jour le',
@@ -40,7 +40,7 @@ const ui: UiCopy = {
     serviceType: 'Conseil data',
     ctaBanner: {
       heading: 'Parlons de votre plateforme data.',
-      subtitle: 'Un appel de 45 minutes. Sans engagement, sans argumentaire.',
+      subtitle: 'Un appel de 45 minutes, sans engagement.',
       button: 'Parlons-en',
     },
     founder: {

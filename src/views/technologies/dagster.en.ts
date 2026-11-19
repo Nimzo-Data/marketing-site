@@ -45,7 +45,7 @@ const copy = {
         },
       ],
   p1: "Dagster is a modern data orchestrator: the tool that sits on top of your pipelines and transformations to schedule them, handle dependencies, retry failures, and give you visibility into what ran, when, and why something broke. It competes with Airflow and Prefect, with a stronger focus on data quality and developer experience. Recent releases add Dagster Components (YAML-first pipeline authoring, friendly to AI coding agents) and an MCP server for direct integration with tools like Claude Code and Cursor.",
-  p2: "Most of our projects don't need orchestration. Airbyte and Dataform both schedule themselves, and for simple stacks adding an orchestrator is over-engineering. When orchestration is genuinely needed (custom scripts with dependencies, complex data quality checks, cross-pipeline coordination), Dagster is the clearest improvement over Airflow. The software engineering quality is noticeably higher, the UI is actually usable, and the asset-based model matches how data teams think about pipelines.",
+  p2: "Most of our projects don't need orchestration. Airbyte and Dataform both schedule themselves, and for simple stacks adding an orchestrator is over-engineering. When orchestration is needed (custom scripts with dependencies, complex data quality checks, cross-pipeline coordination), Dagster is the clearest improvement over Airflow. The software engineering quality is noticeably higher, the UI is usable, and the asset-based model matches how data teams think about pipelines.",
   sectionTitle: "What It Is",
   sectionTitle2: "Why We Chose It",
 };

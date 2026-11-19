@@ -54,7 +54,7 @@ const copy: Copy = {
     {
       question: 'Pourquoi vous plutôt qu’un grand cabinet ou un freelance ?',
       answer:
-        'Un grand cabinet vend une mission de six mois et y met une équipe de juniors. Un freelance règle la demande du moment. Nous sommes entre les deux : ingénieurs seniors, prix fixe, périmètre défini, passation soignée. Ce que nous construisons est à vous.',
+        'Un grand cabinet vend une mission de six mois et y met une équipe de juniors. Un freelance règle la demande du moment. Nous sommes entre les deux : nous travaillons à prix fixe, sur un périmètre défini, avec des ingénieurs seniors et une passation soignée. Ce que nous construisons est à vous.',
     },
     {
       question: 'Notre reporting a été fait avec Claude ou Cursor. Est-ce un problème ?',

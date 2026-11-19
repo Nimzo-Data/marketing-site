@@ -9,9 +9,9 @@ const copy: TechnologiesCopy = {
     'airbyte': 'ELT managé, plus de 700 connecteurs et un outil pour créer les vôtres.',
     'fivetran': 'ELT entièrement managé, plus de 700 connecteurs et gestion automatique des schémas.',
     'looker': 'BI d’entreprise avec la gouvernance LookML et l’analyse conversationnelle Gemini.',
-    'lightdash': 'BI dont les indicateurs sont définis dans le code (dbt ou YAML). Prix forfaitaire, utilisateurs illimités.',
-    'metabase': 'BI accessible : tableaux de bord, indicateurs gouvernés et assistant IA Metabot.',
-    'steep': 'Analyse assistée par l’IA sur indicateurs gouvernés. Les équipes non techniques posent leurs questions et obtiennent des réponses fiables.',
+    'lightdash': 'BI dont les indicateurs sont définis dans le code (dbt ou YAML). Prix fixe, utilisateurs illimités.',
+    'metabase': 'BI en libre-service : tableaux de bord, indicateurs gouvernés, assistant IA Metabot, auto-hébergeable.',
+    'steep': 'BI par indicateurs : les équipes non techniques interrogent leurs données en langage naturel, sans SQL.',
     'dagster': 'Orchestration centrée sur les données produites (assets). Pipelines et dépendances déclarés dans le code.',
   },
 };

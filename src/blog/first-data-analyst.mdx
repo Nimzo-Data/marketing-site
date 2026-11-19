@@ -37,7 +37,7 @@ The warehouse is easy. BigQuery needs no cluster, no administration, no tuning; 
 
 Then comes the transformation layer, and it stops them. Modeling data properly is a different craft from analysing it. It means deciding the grain of every table, meaning what one row represents, naming things so the next person can find them, loading incrementally instead of rebuilding everything on each run, testing that keys are unique and joins do not multiply rows, and expressing the whole thing as a dependency graph that runs in order. Analysis teaches none of that, and analysts do learn it; a large share of the people now called analytics engineers started as analysts. What they cannot do is learn it alone, under delivery pressure, with nobody to review their first models. So they build what every tutorial and every AI assistant confirms is correct: scheduled queries, views built on views, a metric defined in the dashboard because defining it upstream needed a concept nobody had shown them. It runs, it is not a platform, and nobody can tell the difference until it breaks.
 
-The same thing happens to a junior engineer whose platform experience is a tutorial. The skill that is missing is not writing SQL. It is knowing what a transformation layer has to look like so that it survives its author.
+The same thing happens to a junior engineer whose platform experience is a tutorial. They can write SQL. What they lack is knowing what a transformation layer has to look like so that it survives its author.
 
 ## What it costs
 
@@ -45,7 +45,7 @@ The visible cost is time. Everyone expected the first trustworthy dashboard in w
 
 The less visible costs are larger. About a fifth of our work over the past years has been rebuilding platforms that already existed, and they share a shape: no naming conventions and views everywhere; a transformation layer made of scheduled queries with no dependency graph, so nobody knows what runs before what; tables never partitioned, reports pointing at large raw tables and scanning all of them on every refresh. The last one shows up in the BigQuery invoice, which is usually how leadership learns the platform has a problem. Cleaning this up regularly costs more than building it right would have.
 
-[Aeyde](/case-studies/aeyde/), a fashion brand whose case study is on this site, is what this looks like after a few years rather than a few months: a platform assembled over time by outside BI consultants and successive analysts, each competent, none owning the whole. Their BI lead recognised it had become too heavy for a team of one and had it audited and rebuilt rather than trying to absorb it herself. The people involved were never the problem; the absence of anyone senior owning the foundation was.
+[Aeyde](/case-studies/aeyde/), a fashion brand whose case study is on this site, is what this looks like after a few years rather than a few months: a platform assembled over time by outside BI consultants and successive analysts, each competent, none owning the whole. Their BI lead recognised it had become too heavy for a team of one and had it audited and rebuilt rather than trying to absorb it herself. The problem was that no senior person owned the foundation.
 
 The third cost is the hire. An analyst who spends a year alone fighting infrastructure instead of doing analysis leaves. Then you are recruiting again, with a half-built, undocumented platform as the onboarding gift.
 

@@ -55,7 +55,7 @@ const copy = {
   {
     question: 'How do you compare to a big consultancy or a freelancer?',
     answer:
-      'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineering, fixed price, defined scope, and a clean handover so you own what we built.',
+      'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineers on a fixed price and a defined scope, with a clean handover so you own what we built.',
   },
   {
     question: 'Our reporting was built with Claude or Cursor. Is that a problem?',

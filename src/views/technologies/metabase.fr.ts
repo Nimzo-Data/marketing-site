@@ -19,7 +19,7 @@ const copy: Copy = {
         {
           heading: 'Choisissez Metabase quand :',
           bullets: [
-            'Vous voulez une BI en libre-service avec un assistant IA complet, à prix raisonnable',
+            'Vous voulez des tableaux de bord en libre-service et un assistant IA sans payer le prix de Looker',
             "Vous voulez pouvoir auto-héberger (Community Edition gratuite, Pro auto-hébergé payant)",
             "Vous voulez Metabot avec votre propre clé Anthropic, y compris en auto-hébergé",
             'Votre équipe mêle utilisateurs techniques et non techniques',
@@ -36,7 +36,7 @@ const copy: Copy = {
           heading: 'Choisissez plutôt Lightdash quand :',
           bullets: [
             "Vous utilisez déjà dbt et vous voulez des indicateurs définis dans le code",
-            'Vous préférez un tarif forfaitaire qui ne grimpe pas avec les effectifs',
+            'Vous préférez un prix fixe qui ne grimpe pas avec les effectifs',
           ],
         },
         {
@@ -47,8 +47,8 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Metabase est une BI accessible : tableaux de bord, indicateurs, et questions posées directement aux données. Les équipes métier explorent les données par une interface visuelle. Les analystes construisent des Models et des Metrics réutilisables, qui imposent des définitions cohérentes. Les utilisateurs avancés passent en SQL au besoin. Metabot, l’assistant IA de Metabase (passé en open source dans la version 60), génère des graphiques, écrit du SQL, analyse les résultats et répond aux questions en langage naturel.",
-  p2: "Metabase est le juste milieu pragmatique de la BI : moins cher que Looker, plus large que Steep, plus souple que Lightdash. Vous pouvez l’auto-héberger entièrement sur Cloud Run, utiliser Metabase Cloud ou commencer gratuitement avec la Community Edition. La couche sémantique (Models + Metrics + Data Studio) a mûri vite en 2025–2026, et les fonctions d’IA de Metabot (y compris l’IA en auto-hébergé avec votre propre clé API Anthropic) en font une option solide pour une BI dopée à l’IA, sans la dépendance au cloud de Looker.",
+  p1: "Metabase est une BI en libre-service : tableaux de bord, indicateurs, et questions posées directement aux données. Les équipes métier explorent en cliquant, les analystes définissent des Models et des Metrics réutilisables, les experts écrivent du SQL au besoin. Metabot, l’assistant IA de Metabase (passé en open source dans la version 60), génère des graphiques, écrit du SQL, analyse les résultats et répond aux questions en langage naturel.",
+  p2: "Metabase coûte moins cher que Looker et couvre plus de besoins que Steep. Vous pouvez l’auto-héberger entièrement sur Cloud Run, utiliser Metabase Cloud ou commencer gratuitement avec la Community Edition. La couche sémantique (Models, Metrics, Data Studio) a beaucoup progressé en 2025–2026. Metabot ajoute un assistant IA, y compris en auto-hébergé avec votre propre clé API Anthropic.",
   p3: "La fiabilité de Metabot dépend des Models et des Metrics que vous définissez dans Data Studio, les mêmes définitions gouvernées que celles de vos tableaux de bord. Nous mettons en place les Models et les Metrics avant d’activer Metabot : plus la couche sémantique est solide, meilleures sont les réponses de l’IA.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
