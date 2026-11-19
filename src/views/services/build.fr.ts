@@ -42,7 +42,7 @@ const copy: Copy = {
     { icon: 'scale', title: 'Votre décision (sans frais)', description: 'Construire avec nous, le faire vous-mêmes, ou vous arrêter là. Mettre le rapport en œuvre en interne est une issue tout à fait normale.' },
     { icon: 'code-2', title: 'Construction (6 à 14 semaines, démonstration toutes les deux semaines)', description: 'Nous menons le travail, votre équipe participe aux revues. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
     { icon: 'key-round', title: 'Passation (1 à 2 semaines)', description: 'Formation, documentation complète et présentations commentées enregistrées : votre équipe fait tourner la plateforme sans nous.' },
-    { icon: 'life-buoy', title: 'Premier mois de l’offre Évolution (inclus)', description: `Nous surveillons la plateforme, traitons les incidents et réalisons une journée d’évolution, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Évolution</a>. Ensuite l’offre Maintien, sauf si vous choisissez autrement.` },
+    { icon: 'life-buoy', title: 'Premier mois de l’offre Évolution (inclus)', description: `Nous surveillons la plateforme, traitons les incidents et réalisons une journée de développement, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Évolution</a>. Ensuite l’offre Maintien, sauf si vous choisissez autrement.` },
   ],
   pricingHeading: 'Prix.',
   pricingLabel: 'Prix fixe, construction seule',

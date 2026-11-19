@@ -10,7 +10,7 @@ const copy: Copy = {
     { icon: 'database', value: 'Plus de 10 sources', label: 'Modélisées dans la plateforme Dataform' },
     { icon: 'bar-chart', value: '6 propriétés GA4', label: 'Réunies dans un seul modèle d’événements : NL, DE, FR, UK, ES, US' },
     { icon: 'shield-check', value: 'Gouvernance dans la CI', label: 'Règles de couches, contrôles de schéma, vérification du partitionnement' },
-    { icon: 'calendar', value: 'Plus de 20 mois', label: 'De collaboration continue depuis juin 2024' },
+    { icon: 'calendar', value: 'Depuis juin 2024', label: 'Collaboration toujours en cours' },
   ],
   quoteText: 'Quand Antoine a commencé avec nous, la plupart de nos données BigQuery n’étaient pas exploitables pour l’analyse. Le socle Dataform qu’il a aidé à construire, et que nous continuons d’étendre ensemble, a complètement changé la donne. C’est la plateforme sur laquelle tournent réellement nos analyses.',
   quoteAuthorTitle: 'CTO, Tameson',

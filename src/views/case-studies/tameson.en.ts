@@ -10,7 +10,7 @@ const copy = {
         { icon: 'database',     value: '10+ sources',        label: 'Modeled into the Dataform platform' },
         { icon: 'bar-chart',    value: '6 GA4 properties',   label: 'Unified into one events model across NL, DE, FR, UK, ES, US' },
         { icon: 'shield-check', value: 'CI-governed',        label: 'Layer rules, schema gates, partitioning checks' },
-        { icon: 'calendar',     value: '20+ months',         label: 'Of ongoing collaboration since June 2024' },
+        { icon: 'calendar',     value: 'Since June 2024',    label: 'Ongoing collaboration' },
       ] as Metric[],
   quoteText: "When Antoine started with us, most of our BigQuery data wasn't usable for analysis. The Dataform foundation he helped build, and that we keep extending together, turned that around completely. It's the platform our analytics actually run on.",
   quoteAuthorTitle: "CTO, Tameson",

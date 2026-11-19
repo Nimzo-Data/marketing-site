@@ -70,8 +70,8 @@ These names are written with a capital letter when they name the service ("un pr
 | discovery call | appel découverte |
 | kickoff | lancement |
 | walkthrough | présentation commentée |
-| change work | travaux d’évolution |
-| change day | jour d’évolution |
+| change work | développement(s) (« Seuls les développements sont plafonnés ») |
+| change day | jour de développement |
 | leadership | direction |
 | board pack, board meeting | dossier du conseil, conseil d’administration |
 | case study | étude de cas |
@@ -165,3 +165,4 @@ Words that read as translated or bookish to a French buyer, found in review:
 
 - Lines split in two in the copy (home problem/outcome rows) show each part on its own line on desktop. Keep each part to about 45 characters so it fits on one line at 1280px, and split where a reader would pause, not just at a comma.
 - Short labels that sit beside fixed-width columns (home “Par où commencer” notes) should stay close to the English length.
+- « Évolution » is the name of the second Support tier only. Change work is « développement » (« jours de développement »), never « travaux d’évolution ». Generic « évolution(s) » is fine where it can't be read as either.

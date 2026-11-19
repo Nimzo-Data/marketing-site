@@ -4,7 +4,7 @@ const copy: Copy = {
   title: "Expert Airbyte sur Google Cloud | Nimzo Data",
   description: "Consultant Airbyte sur GCP : déploiement d’Airbyte Cloud ou auto-hébergé, connecteurs sur mesure pour vos API, CDK Python et surveillance de vos pipelines ELT.",
   toolCategory: "ELT / Collecte de données",
-  heroPositioning: "Airbyte est notre outil ELT par défaut : un service managé, plus de 600 connecteurs et un constructeur low-code pour les API sur mesure. L’auto-hébergement est possible si vous voulez garder la main.",
+  heroPositioning: "Airbyte est notre outil ELT par défaut : un service managé, plus de 700 connecteurs et un constructeur low-code pour les API sur mesure. L’auto-hébergement est possible si vous voulez garder la main.",
   title2: "Comment nous l’utilisons",
   items: [
         "Mettre en place Airbyte Cloud, notre déploiement par défaut : managé, rapide à lancer, simple à maintenir",
@@ -43,7 +43,7 @@ const copy: Copy = {
       ],
   metric: "D’une boîte noire à des pipelines que l’équipe peut suivre.",
   body: "Panoply remplacé par Airbyte et BigQuery : le coût d’infrastructure passe de 1 300 $ à environ 300 $ par mois.",
-  p1: "Airbyte est une plateforme d’intégration de données avec plus de 600 connecteurs prêts à l’emploi. Elle extrait les données de vos sources (API, bases de données, outils SaaS) et les charge dans une destination comme BigQuery. Notre déploiement par défaut est Airbyte Cloud : managé, rapide à mettre en place, simple à maintenir. Pour les clients qui veulent garder la main ou ont des contraintes de conformité, il existe aussi une version open source à auto-héberger, éprouvée.",
+  p1: "Airbyte est une plateforme d’intégration de données avec plus de 700 connecteurs prêts à l’emploi. Elle extrait les données de vos sources (API, bases de données, outils SaaS) et les charge dans une destination comme BigQuery. Notre déploiement par défaut est Airbyte Cloud : managé, rapide à mettre en place, simple à maintenir. Pour les clients qui veulent garder la main ou ont des contraintes de conformité, il existe aussi une version open source à auto-héberger, éprouvée.",
   p2: "Dès que les volumes montent, la facturation d’Airbyte est plus prévisible que celle de Fivetran, basée sur les lignes actives par mois (MAR). Et si une source n’existe pas, nous la construisons : avec le Connector Builder low-code (suffisant pour la plupart des API sur mesure) ou avec le CDK Python pour les cas complexes. Cette souplesse est la principale raison pour laquelle nous choisissons Airbyte par défaut sur les nouveaux projets.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
