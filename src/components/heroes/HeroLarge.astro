@@ -13,11 +13,13 @@ interface Props {
 }
 
 const { title, subtitle, primaryCta, secondaryCta } = Astro.props;
+// One sentence per line on desktop ("Excel … ne suffisent plus." / "Tout le reste …").
+const sentences = title.split(/(?<=[.!?])[ ]+/);
 ---
 
 <section class="hero-large">
   <div class="hero-inner">
-    <h1 class="hero-title">{title}</h1>
+    <h1 class="hero-title">{sentences.map((sentence, i) => <>{i > 0 && ' '}<span class="hero-sentence">{sentence}</span></>)}</h1>
     <p class="hero-subtitle" set:html={subtitle}></p>
     <div class="hero-actions">
       <a
@@ -72,6 +74,12 @@ const { title, subtitle, primaryCta, secondaryCta } = Astro.props;
   @media (min-width: 768px) {
     .hero-title {
       font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-sentence {
+      display: block;
     }
   }
 

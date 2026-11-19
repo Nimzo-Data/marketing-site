@@ -7,7 +7,7 @@ const ui: UiCopy = {
     breadcrumbHome: 'Accueil',
     rssTitle: 'Blog Nimzo Data',
     rssDescription:
-      'Articles de data engineering par Nimzo Data : optimisation BigQuery, modélisation Dataform, architecture GCP et retours d’expérience de missions réelles.',
+      'Articles de data engineering par Nimzo Data : optimisation BigQuery, modélisation Dataform, architecture Google Cloud et retours d’expérience de missions réelles.',
   },
   blog: {
     updated: 'Mis à jour le',

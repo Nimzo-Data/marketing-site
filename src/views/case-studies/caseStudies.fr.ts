@@ -2,7 +2,7 @@ import type { Copy } from './caseStudies.en';
 
 const copy: Copy = {
   metaTitle: 'Études de cas | Nimzo Data',
-  metaDescription: 'Des missions menées chez nos clients, où nous avons construit, remplacé ou étendu des plateformes data modernes sur GCP. Le travail, nos choix, et ce qui a changé.',
+  metaDescription: 'Des missions où nous avons construit, remplacé ou étendu des plateformes data modernes sur Google Cloud : le travail, nos choix, ce qui a changé.',
   heroTitle: 'Le travail, en détail.',
   heroSubtitle: 'Ce que nous avons construit, pourquoi nous avons fait ces choix, et ce qui a changé.',
   ctaHeading: 'Votre situation ressemble à celle-ci ?',

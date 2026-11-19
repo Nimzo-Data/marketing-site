@@ -21,11 +21,11 @@ const copy: Copy = {
     { label: 'Gestion des utilisateurs et des accès', values: [true, true, true] },
   ],
   contractTerms: [
-    'Sans engagement de durée, avec un préavis de 30 jours pour résilier ou passer à une offre inférieure. Un passage à une offre supérieure s’applique dès le mois de facturation suivant.',
+    'Sans engagement de durée. Préavis de 30 jours pour résilier ou passer à une offre inférieure ; un passage à l’offre supérieure s’applique dès le mois de facturation suivant.',
     'Paiement annuel d’avance : 10 % de remise. Prix révisés une fois par an selon l’indice Syntec.',
     'Heures ouvrées : du lundi au vendredi, 9 h – 18 h, heure de Paris.',
     'Si vous nous quittez, la surveillance et les alertes restent dans vos comptes et vous sont transmises.',
-    'Si une même panne se répète à cause d’un élément qui échappe à notre contrôle, nous proposons une correction. Tant qu’elle n’est pas en place, chaque traitement consomme des jours d’évolution.',
+    'Si une même panne se répète pour une cause hors de notre contrôle, nous proposons une correction. Tant qu’elle n’est pas en place, chaque traitement consomme des jours d’évolution.',
   ],
   notIncluded: [
     'Le travail sur des composants que nous n’avons ni construits ni audités',
@@ -38,7 +38,7 @@ const copy: Copy = {
     {
       question: 'Pourquoi des jours, et pas des heures ?',
       answer:
-        'La partie « faire tourner » est au forfait : la surveillance, les incidents, le rapport mensuel, et le fait d’être prévenu par nous en premier. Rien de cela n’est compté en temps. Seuls les travaux d’évolution sont plafonnés, et nous les comptons en jours parce que c’est ainsi que nous estimons et planifions les évolutions.',
+        'Le « faire tourner » est au forfait : surveillance, incidents, rapport mensuel, et le fait d’être prévenu par nous en premier. Rien de cela n’est compté en temps. Seuls les travaux d’évolution sont plafonnés, et nous les comptons en jours, car c’est ainsi que nous les estimons et les planifions.',
     },
     {
       question: 'Que deviennent les jours non utilisés ?',
@@ -53,7 +53,7 @@ const copy: Copy = {
     {
       question: 'Que se passe-t-il quand quelque chose ne fonctionne plus ?',
       answer:
-        'Les alertes nous arrivent automatiquement, et c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Quand plusieurs pannes arrivent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Cela couvre aussi les changements d’un éditeur qui font tomber un pipeline en panne ou sont sur le point de le faire. Si une source doit être reconstruite, nous la chiffrons comme une évolution ou un projet Amélioration.',
+        'Les alertes nous arrivent automatiquement : vous l’apprenez par nous en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Si plusieurs pannes surviennent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Sont aussi couverts les changements d’un éditeur qui font tomber un pipeline, ou sont sur le point de le faire. Si une source doit être reconstruite, nous la chiffrons comme une évolution ou un projet Amélioration.',
     },
     {
       question: 'Comment distinguer un incident d’une évolution ?',
@@ -71,7 +71,7 @@ const copy: Copy = {
     },
   ],
   whoHeading: 'À qui s’adresse le Support.',
-  whoBody: 'Aux entreprises qui veulent une plateforme data en bonne santé sans recruter de data engineer. Ce que nous construisons vous appartient et vous pouvez le faire tourner sans nous. Le Support, c’est quand vous voulez que nous restions : pour la faire tourner, pour la faire évoluer au rythme de vos questions, ou pour cadrer vos choix data avec vous.',
+  whoBody: 'Aux entreprises qui veulent une plateforme data en bonne santé sans recruter de data engineer. Ce que nous construisons vous appartient : vous pouvez le faire tourner sans nous. Le Support, c’est quand vous voulez que nous restions : pour la faire tourner, la faire évoluer au rythme de vos questions, ou cadrer vos choix data avec vous.',
   tiersHeading: 'Trois offres.',
   tiersIntro: 'Chaque offre comprend tout ce que contient la précédente.',
   tiersNotePrices: 'Prix mensuels en euros, hors taxes (HT).',
@@ -79,7 +79,7 @@ const copy: Copy = {
   monthlyHeading: 'Ce que vous voyez chaque mois.',
   monthlyBody: 'Chaque offre reçoit un rapport d’une page par mois : traitements réussis, fraîcheur respectée, incidents détectés, modifications chez vos fournisseurs de données prises en charge, évolution des coûts BigQuery, risques ouverts, la prochaine évolution que nous recommandons et, dans les offres Évolution et Pilotage, les jours d’évolution consommés.',
   promiseLabel: 'Notre engagement',
-  promiseBody: 'Si quelque chose que nous surveillons tombe en panne, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal que nous partageons avec vous.',
+  promiseBody: 'Si quelque chose que nous surveillons tombe en panne, vous l’apprenez par nous en premier. Les alertes arrivent automatiquement dans un canal partagé avec vous.',
   changeHeading: 'Travaux d’évolution.',
   changeIntro: 'Dans les offres Évolution et Pilotage.',
   changeRulesHtml: [
@@ -91,7 +91,7 @@ const copy: Copy = {
     `Les nouveaux chantiers, comme un nouveau domaine métier, un nouvel outil de BI ou une migration, sont des projets <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,
   ],
   dayHeading: 'Ce qui tient en une journée',
-  dayBody: 'À peu près une nouvelle source via un connecteur managé, deux ou trois modifications de tableaux de bord, ou un nouvel indicateur avec son tableau de bord. Vérifier un chiffre qui semble faux ou paramétrer un agent d’IA consomme aussi des jours d’évolution.',
+  dayBody: 'Environ une nouvelle source via un connecteur managé, deux ou trois modifications de tableaux de bord, ou un nouvel indicateur avec son tableau de bord. Vérifier un chiffre qui semble faux ou paramétrer un agent d’IA consomme aussi des jours d’évolution.',
   exampleLabel: 'Exemple',
   exampleBody: `Un client de l’offre Évolution demande une intégration Salesforce et un tableau de bord commercial, environ 2 jours de travail. Nous pouvons l’étaler sur ce mois-ci et le suivant, ou ajouter un jour pour ${day}. Au-delà, cela devient un projet Amélioration.`,
   termsHeading: 'Conditions.',
@@ -104,7 +104,7 @@ const copy: Copy = {
   metaTitle: 'Maintenance et support de plateforme data | Nimzo Data',
   metaDescription: `Support mensuel d’une plateforme data que nous avons construite, améliorée ou auditée. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
   heroTitle: 'Votre plateforme est en service. Reste à la maintenir en état.',
-  heroSubtitle: 'Un support mensuel pour une plateforme que nous avons construite, améliorée ou auditée, sans avoir à recruter de data engineer pour la garder en bonne santé. Trois offres, un prix mensuel chacune.',
+  heroSubtitle: 'Un support mensuel pour une plateforme que nous avons construite, améliorée ou auditée, sans recruter de data engineer pour la garder en bonne santé. Trois offres, un prix mensuel chacune.',
   leadAuditEyebrow: 'Quelqu’un d’autre a construit votre plateforme',
   leadBuildEyebrow: 'Pas encore de plateforme utilisable',
   leadImproveEyebrow: 'Quelque chose ne fonctionne pas ou manque',

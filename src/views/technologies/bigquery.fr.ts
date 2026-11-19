@@ -5,15 +5,15 @@ const copy: Copy = {
   title: "Expert BigQuery, consultant GCP | Nimzo Data",
   description: "Experts BigQuery : modélisation, optimisation des requêtes SQL, maîtrise des coûts et sécurité par colonne. Entrepôt de données sur Google Cloud.",
   toolCategory: "Entrepôt de données",
-  heroPositioning: "BigQuery, c’est là que se trouvent vos données. Nous construisons les schémas, optimisons les requêtes et maîtrisons les coûts pour que cela dure.",
+  heroPositioning: "BigQuery, c’est là que se trouvent vos données. Nous construisons les schémas, optimisons les requêtes et maîtrisons les coûts, pour que cela dure.",
   title2: "Comment nous l’utilisons",
   items: [
-        "Concevoir des tables partitionnées et clusterisées, pour garder un coût des requêtes prévisible",
+        "Concevoir des tables partitionnées et clusterisées, pour un coût de requêtes prévisible",
         "Écrire et optimiser du SQL complexe : fonctions de fenêtrage, structures imbriquées, traitement de JSON, chargements incrémentaux",
-        "Mettre en place la sécurité au niveau des colonnes et des lignes pour les jeux de données multi-clients",
-        "Configurer les réservations et engagements de slots pour les équipes qui sortent de la facturation à la demande",
-        "Auditer les requêtes lentes ou coûteuses et les réécrire, avec en général 60 à 90 % de réduction de coût sur les requêtes réécrites",
-        "Utiliser Gemini dans BigQuery quand c’est pertinent : AI.GENERATE, AI.CLASSIFY et d’autres fonctions d’IA en SQL, directement dans l’entrepôt",
+        "Sécuriser par colonne et par ligne les jeux de données multi-clients",
+        "Configurer les réservations et engagements de slots pour les équipes qui quittent la facturation à la demande",
+        "Auditer et réécrire les requêtes lentes ou coûteuses : en général 60 à 90 % de réduction de coût sur les requêtes réécrites",
+        "Utiliser Gemini dans BigQuery quand c’est pertinent : AI.GENERATE, AI.CLASSIFY et d’autres fonctions d’IA en SQL, dans l’entrepôt",
       ],
   title3: "Quand BigQuery est le bon entrepôt, et quand il ne l’est pas",
   blocks: [
@@ -24,7 +24,7 @@ const copy: Copy = {
             'Vous voulez une facturation serverless qui part de zéro, sans serveur inactif à payer',
             "Vous êtes déjà sur GCP, ou vous comptez l’être",
             "Vous avez besoin de données hébergées en Europe, avec un stockage multirégion dans l’UE",
-            'Vous voulez de l’IA dans l’entrepôt, sans ajouter une plateforme de machine learning à part',
+            'Vous voulez de l’IA dans l’entrepôt, sans plateforme de machine learning à part',
           ],
         },
         {
@@ -38,7 +38,7 @@ const copy: Copy = {
         {
           heading: 'Choisissez Databricks quand :',
           bullets: [
-            'Le machine learning et la data science sont l’usage principal, plus que le reporting analytique',
+            'Le machine learning et la data science passent avant le reporting analytique',
             'Vous exploitez des pipelines Spark ou vous voulez un environnement centré sur les notebooks',
             'Une architecture lakehouse avec Delta Lake est une exigence explicite',
           ],
@@ -53,8 +53,8 @@ const copy: Copy = {
       ],
   metric: "Plus de 10 sources modélisées dans une plateforme Dataform en couches.",
   body: "En cours depuis juin 2024.",
-  p1: "BigQuery est l’entrepôt de données (data warehouse) serverless et entièrement managé de Google. Il interroge des téraoctets en quelques secondes, sans infrastructure à gérer. Son stockage en colonnes et son moteur de requêtes distribué le rendent rapide pour l’analyse, d’emblée. Les dernières versions intègrent Gemini de bout en bout : fonctions d’IA en SQL, Data Canvas pour explorer en langage naturel, analyse conversationnelle. La fiabilité de l’IA dépend de la qualité de votre modélisation : un entrepôt BigQuery bien structuré, avec une couche sémantique gouvernée, c’est ce qui sépare une IA utile d’une IA qui hallucine avec aplomb.",
-  p2: "Chaque grand cloud a son entrepôt de données. BigQuery est celui où le coût reste prévisible à grande échelle, où le partitionnement et le clustering se configurent sans lourdeur, et dont l’écosystème d’outils (Dataform, Looker, dbt) est pensé autour de lui. Pour les entreprises européennes, BigQuery propose aussi nativement un stockage multi-région dans l’UE.",
+  p1: "BigQuery est l’entrepôt de données (data warehouse) serverless et entièrement managé de Google. Il interroge des téraoctets en quelques secondes, sans infrastructure à gérer. Son stockage en colonnes et son moteur de requêtes distribué le rendent rapide pour l’analyse, d’emblée. Les dernières versions intègrent Gemini de bout en bout : fonctions d’IA en SQL, Data Canvas pour explorer en langage naturel, analyse conversationnelle. La fiabilité de l’IA dépend de votre modélisation : un entrepôt bien structuré, avec une couche sémantique gouvernée, sépare une IA utile d’une IA qui hallucine avec aplomb.",
+  p2: "Chaque grand cloud a son entrepôt de données. BigQuery est celui où le coût reste prévisible à grande échelle, où partitionnement et clustering se configurent sans lourdeur, et autour duquel l’écosystème d’outils (Dataform, Looker, dbt) est pensé. Pour les entreprises européennes, il propose aussi nativement un stockage multi-région dans l’UE.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };
