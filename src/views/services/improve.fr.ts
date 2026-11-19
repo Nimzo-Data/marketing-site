@@ -51,7 +51,7 @@ const copy: Copy = {
   processHeading: 'Comment se déroule un projet.',
   processSteps: [
     { icon: 'search', title: 'Appel découverte (gratuit)', description: `Nous cadrons le projet lors de l’appel découverte, ou d’un second appel, puis envoyons un devis à prix fixe. Après notre <a href='${href('audit', 'fr')}' class='step-link'>audit</a>, cette étape disparaît.` },
-    { icon: 'code-2', title: 'Le travail (2 à 6 semaines, point hebdomadaire)', description: 'Un point chaque semaine avec votre équipe, qui relit le travail au fil de l’eau. Pas de réunion quotidienne.' },
+    { icon: 'code-2', title: 'Le travail (2 à 6 semaines)', description: 'Un point chaque semaine avec votre équipe, qui relit le travail au fil de l’eau. Pas de réunion quotidienne.' },
     { icon: 'key-round', title: 'Passation', description: 'Documentation et présentation commentée. Rien ne vous oblige à continuer avec nous ; le projet suivant est chiffré et décidé séparément.' },
     { icon: 'life-buoy', title: 'Premier mois de l’offre Maintien (inclus)', description: `Nous surveillons ce que nous avons livré et traitons ses incidents, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Maintien</a>. Ensuite, vous continuez au mois ou vous arrêtez.` },
   ],

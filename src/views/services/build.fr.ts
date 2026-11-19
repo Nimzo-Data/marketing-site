@@ -38,7 +38,7 @@ const copy: Copy = {
   toolsLinkHtml: `Voir toutes les technologies et quand nous choisissons chacune &rarr;`,
   processHeading: 'Comment se déroule une construction.',
   processSteps: [
-    { icon: 'search', title: `Audit (1 à 2 semaines, ${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT)`, description: `Un verdict sur chaque partie de la plateforme et une proposition de construction à prix fixe. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
+    { icon: 'search', title: 'Audit (1 à 2 semaines)', description: `${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT. Un verdict sur chaque partie de la plateforme et une proposition de construction à prix fixe. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
     { icon: 'scale', title: 'Votre décision (sans frais)', description: 'Construire avec nous, le faire vous-mêmes ou vous arrêter là. Mettre le rapport en œuvre de votre côté nous convient très bien.' },
     { icon: 'code-2', title: 'Construction (7 à 14 semaines)', description: 'Nous menons le travail : point chaque semaine, démonstration toutes les deux semaines avec votre équipe. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
     { icon: 'key-round', title: 'Passation (1 à 2 semaines)', description: 'Formation, documentation complète et présentations commentées enregistrées, pour que votre équipe fasse tourner la plateforme sans nous.' },

@@ -50,7 +50,7 @@ const copy = {
   processHeading: "How a project runs.",
   processSteps: [
         { icon: 'search', title: "Discovery call (free)", description: `We scope it on the discovery call, or a second one, then send a fixed price. After our <a href='${href('audit', 'en')}' class='step-link'>audit</a>, you skip this step.` },
-        { icon: 'code-2', title: "The work (2–6 weeks, weekly check-ins)", description: "We do the work, with weekly updates. Your team joins reviews. No daily standups." },
+        { icon: 'code-2', title: "The work (2–6 weeks)", description: "We do the work, with weekly updates. Your team joins reviews. No daily standups." },
         { icon: 'key-round', title: "Handover", description: "Documentation and a walkthrough. No ongoing commitment expected; the next project is decided the same way." },
         { icon: 'life-buoy', title: "First month of Run (included)", description: `We watch what we delivered and handle incidents on it, as on our <a href='${href('support', 'en')}' class='step-link'>Run support tier</a>. After that, continue month to month or stop.` },
       ] as Step[],

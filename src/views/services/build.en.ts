@@ -38,9 +38,9 @@ const copy = {
   toolsLinkHtml: `See all technologies and when we pick each &rarr;`,
   processHeading: "How a build runs.",
   processSteps: [
-        { icon: 'search', title: "Audit (1–2 weeks, €3,000 – €5,000 excl. VAT)", description: `A verdict on each part of your platform and a fixed-price build proposal. <a href='${href('audit', 'en')}' class='step-link'>Available standalone</a>.` },
+        { icon: 'search', title: "Audit (1–2 weeks)", description: `${eurRange(prices.audit.min, prices.audit.max, 'en')} excl. VAT. A verdict on each part of your platform and a fixed-price build proposal. <a href='${href('audit', 'en')}' class='step-link'>Available standalone</a>.` },
         { icon: 'scale', title: "Your decision (no fees for deciding)", description: "Build with us, do it yourselves, or stop here. Taking the report in-house is a fine outcome." },
-        { icon: 'code-2', title: "Build (7–14 weeks, bi-weekly demos)", description: "We lead the work, with a weekly check-in and a demo every two weeks with your team. For a replacement, old and new run side by side until the figures match." },
+        { icon: 'code-2', title: "Build (7–14 weeks)", description: "We lead the work, with a weekly check-in and a demo every two weeks with your team. For a replacement, old and new run side by side until the figures match." },
         { icon: 'key-round', title: "Handover (1–2 weeks)", description: "Training, full documentation and recorded walkthroughs, so your team runs it without us." },
         { icon: 'life-buoy', title: "First month of Extend (included)", description: `We watch the platform, handle incidents and make a day of changes, as on our <a href='${href('support', 'en')}' class='step-link'>Extend support tier</a>. Then Run, unless you choose otherwise.` },
       ] as Step[],
