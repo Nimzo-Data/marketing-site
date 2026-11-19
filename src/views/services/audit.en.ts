@@ -16,7 +16,7 @@ const copy = {
     sample: href('sampleAudit', 'en'),
   },
   {
-    from: ['A reporting app built in-house or with AI tools like Claude,', 'reading from your sources or its own database.'],
+    from: ['A reporting app built in-house', 'or with AI tools like Claude.'],
     look: 'Where the data comes from, whether keys sit in the code, who can change production, and whether each metric is defined once.',
   },
   {
@@ -60,7 +60,7 @@ const copy = {
   {
     question: 'Our reporting was built with Claude or Cursor. Is that a problem?',
     answer:
-      "No, and it's increasingly common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the repository and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
+      "No, and it's increasingly common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the code and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
   },
   {
     question: 'Will you tell us to move to Google Cloud?',
@@ -70,7 +70,7 @@ const copy = {
   {
     question: 'Do you need write access?',
     answer:
-      'No. We work from read-only access to your repo, database, BI tool and sources. Nothing we do during the audit can change your data or your production setup.',
+      'No. We work from read-only access to your code, database, BI tool and sources. Nothing we do during the audit can change your data or your production setup.',
   },
 ],
   startHeading: "Where you're starting from.",
@@ -83,7 +83,7 @@ const copy = {
         "What will this cost us over 12 months?",
         "Which tools do we need, and which can we skip?",
         "Is our data ready for AI?",
-        "Is the quote or board pack in front of us sound?",
+        "Can our team run this day to day?",
       ],
   answerItems: [
         "Headline figures recomputed from source.",
@@ -92,7 +92,7 @@ const copy = {
         "A 12-month cost, fees plus infrastructure.",
         "Keep, fix or replace: a verdict tool by tool, with the reasoning.",
         "What AI tools can safely query, and what's missing.",
-        "A written second opinion, checked against your data.",
+        "What your team can maintain itself, and where it needs help.",
       ],
   checkHeading: "What we check.",
   checkIntro: "All nine areas, whatever you run. Only the depth changes: a spreadsheet setup has little to check under Operations, an inherited warehouse a lot.",
@@ -110,7 +110,7 @@ const copy = {
   nextImproveBody: "The projects in order, the first at a fixed price valid 30 days, and what your team can do itself.",
   processHeading: "How an audit runs.",
   processSteps: [
-        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, then read-only access to your repo, database, BI tool and sources." },
+        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, then read-only access to your code, database, BI tool and sources." },
         { icon: 'search', title: "Technical audit", description: "The nine areas above reviewed, and your headline figures recomputed." },
         { icon: 'scale', title: "Tool evaluation (when needed)", description: `Only when a part of the platform is added or replaced. <a href='${href('technologies', 'en')}' class='step-link'>See the tools we work with</a>.` },
         { icon: 'clipboard-list', title: "Findings & recommendation", description: "The written report: summary, map, ranked findings, numbers check, a verdict on each part." },

@@ -82,7 +82,7 @@ const copy: Copy = {
     'Combien cela va-t-il nous coûter sur 12 mois ?',
     'De quels outils avons-nous besoin, et desquels pouvons-nous nous passer ?',
     'Nos données sont-elles prêtes pour l’IA ?',
-    'Pouvons-nous nous fier au devis ou aux chiffres qu’on nous présente ?',
+    'Notre équipe peut-elle faire tourner tout ça au quotidien ?',
   ],
   answerItems: [
     'Les chiffres clés recalculés depuis la source.',
@@ -91,7 +91,7 @@ const copy: Copy = {
     'Un coût sur 12 mois, prestations et infrastructure comprises.',
     'Garder, corriger ou remplacer : un verdict outil par outil, argumenté.',
     'Ce que les outils d’IA peuvent interroger sans risque, et ce qui manque.',
-    'Un second avis écrit, vérifié sur vos données.',
+    'Ce que votre équipe peut maintenir seule, et où il lui faut de l’aide.',
   ],
   checkHeading: 'Ce que nous vérifions.',
   checkIntro: 'Les neuf domaines, quel que soit votre outillage. Seule la profondeur change : peu à vérifier côté exploitation pour un reporting sur Excel et Google Sheets, beaucoup pour un entrepôt hérité.',
