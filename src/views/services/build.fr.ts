@@ -6,7 +6,7 @@ import { prices } from '../../data/prices';
 const copy: Copy = {
   problemsHeading: 'Les situations que nous rencontrons le plus souvent.',
   problemItems: [
-    'Votre reporting repose sur des fichiers Excel fragiles.',
+    'Votre reporting repose sur des fichiers Excel ou Google Sheets fragiles.',
     'Le dossier du conseil prend des jours à assembler à la main.',
     'Les équipes obtiennent des réponses différentes à la même question.',
     'Chaque question data passe par une seule personne.',
@@ -38,7 +38,7 @@ const copy: Copy = {
   toolsLinkHtml: `Voir toutes les technologies et quand nous choisissons chacune &rarr;`,
   processHeading: 'Comment se déroule une construction.',
   processSteps: [
-    { icon: 'search', title: `Audit (1 à 2 semaines, ${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT)`, description: `Un verdict sur chaque partie de votre plateforme et une proposition de construction au forfait. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
+    { icon: 'search', title: `Audit (1 à 2 semaines, ${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT)`, description: `Un verdict sur chaque partie de votre plateforme et une proposition de construction à prix fixe. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
     { icon: 'scale', title: 'Votre décision (sans frais)', description: 'Construire avec nous, le faire vous-mêmes, ou vous arrêter là. Mettre le rapport en œuvre en interne est une issue tout à fait normale.' },
     { icon: 'code-2', title: 'Construction (6 à 14 semaines, démonstration toutes les deux semaines)', description: 'Nous menons le travail, votre équipe participe aux revues. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
     { icon: 'key-round', title: 'Passation (1 à 2 semaines)', description: 'Formation, documentation complète et présentations commentées enregistrées, pour que votre équipe la fasse tourner sans nous.' },
@@ -70,9 +70,9 @@ const copy: Copy = {
   paymentBody: '50 % au lancement · 30 % à mi-parcours · 20 % à la passation finale. Prix fixe. Aucune modification sans avenant signé. L’audit est payé à 100 % avant de commencer.',
   fitHeading: 'Vous hésitez ?',
   metaTitle: 'Construire une plateforme data sur Google Cloud | Nimzo Data',
-  metaDescription: 'Nous construisons des plateformes data Google Cloud de bout en bout : collecte, BigQuery, Dataform et BI. Nouvelles plateformes, ou remplacement de celle qui doit partir. Au forfait, après un audit payant.',
+  metaDescription: 'Nous construisons des plateformes data Google Cloud de bout en bout : collecte, BigQuery, Dataform et BI. Nouvelles plateformes, ou remplacement de celle qui doit partir. À prix fixe, après un audit payant.',
   heroTitle: 'Vos données sont éparpillées dans vos outils.<br>Ils ne se parlent pas.',
-  heroSubtitle: 'Une plateforme data complète, sans recruter d’équipe data. De bout en bout, de la collecte aux tableaux de bord, construite de zéro ou en remplacement d’une plateforme qui doit partir. D’abord l’audit, puis une construction au forfait. Des ingénieurs seniors, une passation soignée.',
+  heroSubtitle: 'Une plateforme data complète, sans recruter d’équipe data. De bout en bout, de la collecte aux tableaux de bord, construite de zéro ou en remplacement d’une plateforme qui doit partir. D’abord l’audit, puis une construction à prix fixe. Des ingénieurs seniors, une passation soignée.',
   problemTitle: 'Le problème :',
   outcomeTitle: 'Ce que vous obtenez :',
   resultMetric: 'De quelques minutes à quelques secondes.',

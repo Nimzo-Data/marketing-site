@@ -13,7 +13,7 @@ const copy: ServicesCopy = {
   },
   improve: {
     title: 'Amélioration',
-    body: 'Corriger ce qui ne marche pas ou ajouter ce qui manque, un projet au forfait à la fois.',
+    body: 'Corriger ce qui ne marche pas ou ajouter ce qui manque, un projet à la fois, à prix fixe.',
     linkText: 'Voir l’Amélioration',
   },
   support: {

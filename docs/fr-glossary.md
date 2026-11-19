@@ -44,11 +44,11 @@ These names are written with a capital letter when they name the service ("un pr
 | report | rapport |
 | metric | indicateur |
 | KPI | KPI (kept) |
-| spreadsheet | fichiers Excel, Google Sheets (never « tableur », which no buyer says) |
+| spreadsheet | « Excel et Google Sheets » (never « tableur », which no buyer says) |
 | handover | passation |
-| retainer, monthly plan | forfait mensuel |
+| retainer, monthly plan | forfait mensuel (« forfait » is kept for Support only) |
 | on call, monitored | « qui surveille », « qui veille sur » (never « d’astreinte »: support is business hours only) |
-| fixed price | prix fixe, au forfait |
+| fixed price (projects) | « à prix fixe » (« une construction à prix fixe », « un projet à la fois, à prix fixe »). Never « au forfait » for projects: it would clash with Support’s « forfait mensuel ». |
 | quote (noun) | devis |
 | proposal | proposition |
 | scope | périmètre |
@@ -117,7 +117,7 @@ Give the French term and the English one in brackets the first time on a page, t
 Words that read as translated or bookish to a French buyer, found in review:
 
 - « goulot » / « goulot d’étranglement » for a person: say what happens instead (« tout passe par une seule personne », « une seule personne détient tout »).
-- « tableur »: say « fichiers Excel » or « Google Sheets ».
+- « tableur »: say « Excel et Google Sheets ».
 - « goulot » / « point de défaillance unique » for a person → « tout repose sur une seule personne ».
 - « astreinte » / « d’astreinte »: support is business hours → « qui surveille », « qui veille sur ».
 - « ingénierie senior », « data engineering senior » → « des ingénieurs seniors », « un data engineer senior ». One term: « data engineer senior », not « ingénieur senior » or « aide senior ».
@@ -159,3 +159,9 @@ Words that read as translated or bookish to a French buyer, found in review:
 - Mixed terms: « ordonnanceur » (not « orchestrateur », outside the Dagster tool page), « rachat » (not « acquisition »).
 - Capitals in running text: « la présente politique de confidentialité », « les présentes conditions générales d’utilisation ». Capitals only in headings and page-name links.
 - Legal wording: « dans toute la mesure permise par la loi », « né de » / « lié à » (not « découlant de … ou s’y rapportant »), « appropriées » for « reasonable » measures, « art. 6, § 1, point f) ».
+- « partent tout seuls » for reports → « envoyés par e-mail », « mis à jour tout seuls ».
+
+## Layout
+
+- Lines split in two in the copy (home problem/outcome rows) show each part on its own line on desktop. Keep each part to about 45 characters so it fits on one line at 1280px, and split where a reader would pause, not just at a comma.
+- Short labels that sit beside fixed-width columns (home “Par où commencer” notes) should stay close to the English length.

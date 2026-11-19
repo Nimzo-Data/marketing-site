@@ -27,7 +27,7 @@ const copy: CaseStudiesCopy = {
     service: {
       label: 'Amélioration',
       shortDescription:
-        'Ajouter la couche qui manque ou réparer celle qui ne marche pas, un projet au forfait à la fois, avec l’équipe que vous avez déjà.',
+        'Ajouter la couche qui manque ou réparer celle qui ne marche pas, un projet à la fois, à prix fixe, avec l’équipe que vous avez déjà.',
     },
     shortQuote: {
       text: 'La plupart de nos données BigQuery n’étaient pas exploitables pour l’analyse. C’est aujourd’hui la plateforme sur laquelle tournent réellement nos analyses.',

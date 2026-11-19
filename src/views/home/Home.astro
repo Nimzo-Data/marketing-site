@@ -355,6 +355,11 @@ const problemRows: { problem: [string, string]; outcome: [string, string] }[] = 
     .svc-route {
       gap: 32px;
     }
+
+    /* "Audit → Construction ou Amélioration" needs ~445px to stay on one line. */
+    :global(html[lang='fr']) .svc-route {
+      grid-template-columns: minmax(0, 1fr) 450px;
+    }
   }
 
   .svc-route__situation {

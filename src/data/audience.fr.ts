@@ -3,7 +3,7 @@ import type { AudienceCopy } from './audience.en';
 const copy: AudienceCopy = {
   isFor: [
     'Vous êtes sur Google Cloud, ou vous comptez y aller.',
-    'Vous avez dépassé le stade des fichiers Excel et il vous faut une vraie plateforme.',
+    'Excel et Google Sheets ne suffisent plus : il vous faut une plateforme à part entière.',
     'Vous avez des analystes, pas de data engineers. Ou pas d’équipe du tout.',
     'Il vous faut un data engineer senior, sans recruter à temps plein.',
     'Vous voulez que l’IA donne des réponses fiables aux questions data de vos équipes.',
