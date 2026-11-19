@@ -72,7 +72,7 @@ const copy: Copy = {
   outcomeTitle: 'Ce que vous obtenez :',
   resultMetric: 'De données inexploitées à des analyses sur 6 marchés.',
   resultBody: 'Un seul ajout : la modélisation Dataform sur le BigQuery que Tameson utilisait déjà. Plus de 10 sources modélisées, 6 propriétés GA4 réunies dans un seul modèle d’événements, et des contrôles automatiques (CI) à chaque modification.',
-  leadBuildEyebrow: 'L’essentiel de la plateforme à créer ou remplacer',
+  leadBuildEyebrow: 'Une plateforme à créer ou remplacer',
   leadSupportEyebrow: 'Votre plateforme tourne déjà',
   leadAuditEyebrow: 'Vous ne savez pas quoi corriger',
 };

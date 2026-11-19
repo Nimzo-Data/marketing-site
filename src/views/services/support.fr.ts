@@ -7,9 +7,9 @@ const day = eur(prices.support.extraDay, 'fr');
 
 const copy: Copy = {
   tiers: [
-    { name: 'Maintien', subtitle: 'Nous la surveillons et la réparons', price: `${eur(prices.support.run, 'fr')} HT par mois`, fit: 'votre plateforme doit continuer à tourner telle quelle' },
-    { name: 'Évolution', subtitle: 'Nous la surveillons et la développons', price: `${eur(prices.support.extend, 'fr')} HT par mois`, fit: 'vous ajoutez régulièrement des indicateurs, des sources ou des tableaux de bord' },
-    { name: 'Pilotage', subtitle: 'Nous la surveillons, la développons et vous conseillons', price: `${eur(prices.support.lead, 'fr')} HT par mois`, fit: 'vous voulez quelqu’un avec qui décider des priorités et des outils data' },
+    { name: 'Maintien', subtitle: 'Nous la faisons tourner', price: `${eur(prices.support.run, 'fr')} HT par mois`, fit: 'votre plateforme doit continuer à tourner telle quelle' },
+    { name: 'Évolution', subtitle: 'Nous la développons aussi', price: `${eur(prices.support.extend, 'fr')} HT par mois`, fit: 'vous ajoutez régulièrement des indicateurs, des sources ou des tableaux de bord' },
+    { name: 'Pilotage', subtitle: 'Nous la pilotons aussi avec vous', price: `${eur(prices.support.lead, 'fr')} HT par mois`, fit: 'vous voulez quelqu’un avec qui décider des priorités et des outils data' },
   ],
   rows: [
     { label: 'Jours de développement', values: [false, '1 jour par mois', '2 jours par mois'] },
@@ -105,7 +105,7 @@ const copy: Copy = {
   metaDescription: `Support mensuel d’une plateforme data, le plus souvent construite ou améliorée par nous. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
   heroTitle: 'Votre plateforme tourne. Qui la maintient ?',
   heroSubtitle: 'Un support mensuel pour une plateforme data, le plus souvent construite ou améliorée par nous, sans data engineer à recruter. Trois offres, chacune à prix mensuel fixe.',
-  leadAuditEyebrow: 'Quelqu’un d’autre a construit votre plateforme',
+  leadAuditEyebrow: 'Construite par quelqu’un d’autre',
   leadBuildEyebrow: 'Pas encore de plateforme utilisable',
   leadImproveEyebrow: 'Ce qui ne marche pas, ou ce qui manque',
 };

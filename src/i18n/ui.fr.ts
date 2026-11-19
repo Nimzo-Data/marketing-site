@@ -63,7 +63,7 @@ const ui: UiCopy = {
       outcome: 'Ce que vous obtenez',
     },
     techLayout: {
-      leadAuditEyebrow: 'Vous ne savez pas encore ce qu’il vous faut',
+      leadAuditEyebrow: 'Vous hésitez encore',
       leadBuildEyebrow: 'Pas encore de plateforme data',
       leadImproveEyebrow: (tool: string) => `Besoin d’aide avec ${tool}`,
     },

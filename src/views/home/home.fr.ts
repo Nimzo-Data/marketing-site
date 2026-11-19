@@ -55,7 +55,7 @@ const copy: Copy = {
   buildLink: 'Voir la Construction',
   improveTitle: 'Amélioration',
   improveDescription: 'Corriger ce qui ne marche pas ou ajouter ce qui manque, un projet à la fois, à prix fixe.',
-  improvePrice: `${eurRange(prices.improve.min, prices.improve.max, 'fr')} HT par projet`,
+  improvePrice: `${eurRange(prices.improve.min, prices.improve.max, 'fr')} HT`,
   improveTimeline: '2 à 6 semaines par projet',
   improveLink: 'Voir l’Amélioration',
   supportTitle: 'Support',

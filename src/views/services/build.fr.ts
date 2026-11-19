@@ -79,7 +79,7 @@ const copy: Copy = {
   resultBody: 'Chez Aeyde, la collecte, l’entrepôt de données et la modélisation ont été remplacés. Les coûts d’infrastructure ont baissé de 77 % et 119 tables dérivées Looker tiennent maintenant dans une seule couche Dataform.',
   leadImproveEyebrow: 'Une brique à ajouter, ou des corrections',
   leadSupportEyebrow: 'Votre plateforme tourne déjà',
-  leadAuditEyebrow: 'Vous ne savez pas encore ce qu’il vous faut',
+  leadAuditEyebrow: 'Vous hésitez encore',
 };
 
 export default copy;

@@ -37,7 +37,7 @@ const copy: Copy = {
           heading: 'Choisissez plutôt Lightdash quand :',
           bullets: [
             'Vous voulez des indicateurs versionnés dans le code (YAML dbt ou YAML Lightdash)',
-            "L’accès SQL pour les utilisateurs avancés compte",
+            "Vos utilisateurs avancés ont besoin d’un accès SQL",
           ],
         },
         {

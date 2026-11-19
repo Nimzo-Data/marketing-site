@@ -55,7 +55,7 @@ const copy = {
   buildLink: "See Build",
   improveTitle: "Improve",
   improveDescription: "Fix what's broken or add what's missing, one fixed-price project at a time.",
-  improvePrice: `${eurRange(prices.improve.min, prices.improve.max, 'en')} excl. VAT per project`,
+  improvePrice: `${eurRange(prices.improve.min, prices.improve.max, 'en')} excl. VAT`,
   improveTimeline: "2–6 weeks per project",
   improveLink: "See Improve",
   supportTitle: "Support",

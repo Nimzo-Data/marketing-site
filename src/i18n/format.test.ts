@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { eur, eurRange, formatDate } from './format';
+import { eur, eurRange, usd, formatDate } from './format';
 
 describe('eur', () => {
   it('formats English prices as the site shows them today', () => {
@@ -13,13 +13,21 @@ describe('eur', () => {
   });
 });
 
+describe('usd', () => {
+  it('formats dollars the English and French way', () => {
+    expect(usd(1300, 'en')).toBe('$1,300');
+    expect(usd(1300, 'fr')).toMatch(/^1\s300\s\$$/u);
+    expect(usd(1300, 'fr')).not.toContain(' ');
+  });
+});
+
 describe('eurRange', () => {
   it('matches the current English range format', () => {
-    expect(eurRange(3000, 5000, 'en')).toBe('€3,000 – €5,000');
+    expect(eurRange(3000, 5000, 'en')).toBe('€3,000\u00a0– €5,000');
   });
 
   it('puts one euro sign at the end in French', () => {
-    expect(eurRange(3000, 5000, 'fr')).toMatch(/^3\s000 – 5\s000\s€$/u);
+    expect(eurRange(3000, 5000, 'fr')).toMatch(/^3\s000\u00a0– 5\s000\s€$/u);
   });
 });
 
