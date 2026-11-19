@@ -46,7 +46,7 @@ const copy: Copy = {
   projectsHeading: 'Projets types.',
   stackHeading: 'Les outils avec lesquels nous travaillons : les vôtres et les nôtres.',
   stackIntro: 'Nous partons d’abord de vos outils actuels. S’il faut remplacer quelque chose, nous vous disons pourquoi et par quoi.',
-  stackBody: 'Nous auditons ce que vous utilisez, quel qu’il soit. Nous construisons les nouvelles plateformes sur Google Cloud. Si autre chose convient mieux, nous le disons, puis nous corrigeons ce que vous avez ou relisons le travail de votre équipe.',
+  stackBody: 'Nous auditons tout type de plateforme. Nous construisons les nouvelles plateformes sur Google Cloud. Si autre chose convient mieux, nous le disons, puis nous corrigeons ce que vous avez ou relisons le travail de votre équipe.',
   toolsLinkHtml: `Voir toutes les technologies et quand nous choisissons chacune &rarr;`,
   processHeading: 'Comment se déroule un projet.',
   processSteps: [

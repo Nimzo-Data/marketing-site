@@ -595,7 +595,7 @@ const copy = {
   d301: "Where to go from here.",
   d302: "Ready to start",
   d303: "Book a data platform audit",
-  d304: "1–2 weeks, €3,000 – €5,000. Whatever you run today, you get a verdict per layer and a fixed price for the next step. You keep the deliverable regardless.",
+  d304: "1–2 weeks, €3,000 – €5,000. Whatever you run today, you get a verdict on each part of your platform and a fixed price for the next step. You keep the deliverable regardless.",
   d305Html: `See how it works <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span>`,
   d306: "See real results",
   d307: "Case studies",

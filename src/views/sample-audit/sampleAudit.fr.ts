@@ -596,7 +596,7 @@ const copy: Copy = {
   d301: "Et maintenant ?",
   d302: "Prêt à démarrer",
   d303: "Réserver un audit de plateforme data",
-  d304: "1 à 2 semaines, 3 000 – 5 000 €. Quelle que soit votre situation actuelle, vous obtenez un verdict par couche et un prix fixe pour la suite. Vous gardez le livrable dans tous les cas.",
+  d304: "1 à 2 semaines, 3 000 – 5 000 €. Quelle que soit votre situation actuelle, vous obtenez un verdict sur chaque partie de votre plateforme et un prix fixe pour la suite. Vous gardez le livrable dans tous les cas.",
   d305Html: `Voir comment ça se passe <span class="lead-arrow-icon" aria-hidden="true">&rarr;</span>`,
   d306: "Voir des résultats concrets",
   d307: "Études de cas",

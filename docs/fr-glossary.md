@@ -161,6 +161,17 @@ Words that read as translated or bookish to a French buyer, found in review:
 - Legal wording: « dans toute la mesure permise par la loi », « né de » / « lié à » (not « découlant de … ou s’y rapportant »), « appropriées » for « reasonable » measures, « art. 6, § 1, point f) ».
 - « partent tout seuls » for reports → « envoyés par e-mail », « mis à jour tout seuls ».
 
+- « visioconférence » → « visio » (« Restitution en visio »).
+- « votre dépôt » (code repository) → « votre code ». « dépôt Git » only on technical pages, when the repository itself is the point.
+- « le livrable / le rapport vous reste » → « le rapport est à vous, quoi que vous décidiez ».
+- « périmètre cerné » → « périmètre connu » or « défini ».
+- « quel qu’il soit » → say what it covers: « tout type de plateforme ».
+- « laissé par un prestataire » → « hérité d’un ancien prestataire ».
+- « tient-il la route ? » → « pouvons-nous nous fier à … ? ».
+- « Ce que l’audit y répond » → « Les réponses de l’audit ».
+- « verdict par couche » in sales copy: the reader hasn’t seen the layers yet → « un verdict sur chaque partie de votre plateforme », « de la collecte aux tableaux de bord », or name the parts. Keep « couche » where the layers are shown (Construction diagram, sample audit table).
+- A link standing alone after a sentence starts with a verb: « Voir les outils… ».
+
 ## Layout
 
 - Lines split in two in the copy (home problem/outcome rows) show each part on its own line on desktop. Keep each part to about 45 characters so it fits on one line at 1280px, and split where a reader would pause, not just at a comma.

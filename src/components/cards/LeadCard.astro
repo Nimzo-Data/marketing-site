@@ -57,6 +57,18 @@ const Tag = href ? 'a' : 'div';
     cursor: default;
   }
 
+  /* Side by side, cards share their row tracks (the parent is a grid), so
+     labels, titles, text and links line up even when one label wraps. */
+  @media (min-width: 768px) {
+    .lead-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 10px;
+      align-content: start;
+    }
+  }
+
   .lead-eyebrow {
     font-family: var(--font-heading);
     font-size: 0.75rem;
