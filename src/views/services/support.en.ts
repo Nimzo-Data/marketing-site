@@ -97,7 +97,7 @@ const copy = {
   notIncludedImproveHtml: `<a href="${href('improve', 'en')}" class="inline-link">Improve</a>-sized work: new business domains, new BI tools, migrations`,
   faqHeading: "Common questions.",
   notThereHeading: "Not there yet?",
-  notThereBody: "Support starts after a project with us. A Build includes its first month of Extend, then moves to Run unless you choose otherwise. An Improve project includes its first month of Run, on the work we delivered.",
+  notThereBody: "Support usually starts after a project with us. A Build includes its first month of Extend, then moves to Run unless you choose otherwise. An Improve project includes its first month of Run, on the work we delivered. After an audit alone, we can support your platform if it is in good enough shape: the audit tells us.",
   metaTitle: "Data Platform Support | Nimzo Data",
   metaDescription: "Monthly support for a data platform we built, improved or audited. Run, Extend and Lead tiers at €950, €2,250 and €3,950 a month excl. VAT. Month to month.",
   heroTitle: "Your platform is live. Someone still has to keep it running.",

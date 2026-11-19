@@ -40,7 +40,7 @@ const copy: Copy = {
   processSteps: [
     { icon: 'search', title: `Audit (1 à 2 semaines, ${eurRange(prices.audit.min, prices.audit.max, 'fr')} HT)`, description: `Un verdict sur chaque partie de la plateforme et une proposition de construction à prix fixe. <a href='${href('audit', 'fr')}' class='step-link'>Disponible seul</a>.` },
     { icon: 'scale', title: 'Votre décision (sans frais)', description: 'Construire avec nous, le faire vous-mêmes ou vous arrêter là. Appliquer le rapport en interne est un choix courant.' },
-    { icon: 'code-2', title: 'Construction (6 à 14 semaines)', description: 'Nous construisons, avec une démonstration toutes les deux semaines que votre équipe valide. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
+    { icon: 'code-2', title: 'Construction (7 à 14 semaines)', description: 'Nous construisons, avec une démonstration toutes les deux semaines que votre équipe valide. Pour un remplacement, l’ancienne et la nouvelle plateforme tournent en parallèle jusqu’à ce que les chiffres concordent.' },
     { icon: 'key-round', title: 'Passation (1 à 2 semaines)', description: 'Formation, documentation complète et présentations commentées enregistrées, pour que votre équipe fasse tourner la plateforme sans nous.' },
     { icon: 'life-buoy', title: 'Premier mois de l’offre Évolution (inclus)', description: `Nous surveillons la plateforme, traitons les incidents et faisons un jour de développement, comme dans notre <a href='${href('support', 'fr')}' class='step-link'>offre de support Évolution</a>. Ensuite, vous passez à l’offre Maintien, sauf avis contraire.` },
   ],

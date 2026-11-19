@@ -8,7 +8,7 @@ const copy: ServicesCopy = {
   },
   build: {
     title: 'Construction',
-    body: 'Une nouvelle plateforme data Google Cloud, ou le remplacement de celle qui doit partir. Chiffrée après un audit.',
+    body: 'Une nouvelle plateforme data sur Google Cloud, ou le remplacement de celle qu’il faut abandonner. Chiffrée après un audit.',
     linkText: 'Voir la Construction',
   },
   improve: {
@@ -18,7 +18,7 @@ const copy: ServicesCopy = {
   },
   support: {
     title: 'Support',
-    body: 'Un ingénieur senior qui surveille votre plateforme, traite les incidents et réalise les petites évolutions.',
+    body: 'Un ingénieur senior qui surveille votre plateforme, traite les incidents et fait les petits développements.',
     linkText: 'Voir le Support',
   },
 };

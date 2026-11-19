@@ -75,7 +75,7 @@ const copy = {
 ],
   startHeading: "Where you're starting from.",
   startIntro: "The method and the report format are the same whatever you run. What we look at first, and what we recommend, depend on where you start.",
-  problemsHeading: "What brings most clients here.",
+  problemsHeading: "What the audit settles.",
   questionItems: [
         "Can we trust these numbers?",
         "Is anything exposed: keys in code, old access still open?",
@@ -133,7 +133,7 @@ const copy = {
   metaDescription: "A paid 1–2 week audit of whatever your reporting runs on: findings ranked by severity, a verdict on each part of your platform, and a fixed price for the next step. Yours to keep either way.",
   heroTitle: "Before you build or fix anything,<br>find out what your numbers run on.",
   heroSubtitle: "A 1–2 week paid audit of whatever you run today, from spreadsheets to a warehouse someone left behind. You leave with a verdict on each part of your platform, from data collection to dashboards, and a fixed price for the next step. Yours to keep either way.",
-  thFrom: "If you run",
+  thFrom: "Your setup",
   thLook: "What we look at first",
   thSample: "Sample",
   sampleLink: "Sample audit",
@@ -150,7 +150,7 @@ const copy = {
   leadImproveBody: "The audit splits the work into projects and prices the first one. You run them one at a time and decide on each separately.",
   leadImproveLink: "See Improve",
   leadNothingEyebrow: "Your team takes it from here",
-  leadNothingTitle: "Nothing more",
+  leadNothingTitle: "The audit alone",
   leadNothingBody: "The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start.",
 };
 

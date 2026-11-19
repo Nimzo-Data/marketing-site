@@ -31,7 +31,7 @@ const copy: CaseStudiesCopy = {
     },
     shortQuote: {
       text: 'La plupart de nos données BigQuery n’étaient pas exploitables pour l’analyse. C’est aujourd’hui la plateforme sur laquelle tournent réellement nos analyses.',
-      authorTitle: 'CTO, Tameson',
+      authorTitle: 'CTO et cofondateur, Tameson',
       translatedFrom: 'en',
     },
   },

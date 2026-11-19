@@ -4,7 +4,7 @@ const copy: FounderCopy = {
   role: 'Fondateur',
   photoAlt: 'Antoine Anicotte, fondateur de Nimzo Data',
   background:
-    'Quinze ans d’analytics et de data engineering, en Europe et aux États-Unis, aujourd’hui uniquement sur Google Cloud.',
+    'Quinze ans d’analytics et de data engineering, en Europe, en Asie et aux États-Unis, aujourd’hui uniquement sur Google Cloud.',
   bylineLine:
     'Quinze ans d’analytics et de data engineering, dont douze sur Google Cloud, en interne et en freelance, en Europe, en Asie et aux États-Unis.',
   recentWork:

@@ -100,7 +100,7 @@ const copy: Copy = {
   notIncludedImproveHtml: `Le travail de la taille d’un projet <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a> : nouveaux domaines métier, nouveaux outils de BI, migrations`,
   faqHeading: 'Questions fréquentes.',
   notThereHeading: 'Ce n’est pas encore le moment ?',
-  notThereBody: 'Le Support commence après un projet avec nous. Une Construction comprend son premier mois de l’offre Évolution, puis passe à l’offre Maintien sauf si vous choisissez autrement. Un projet Amélioration comprend son premier mois de l’offre Maintien, sur le travail livré.',
+  notThereBody: 'Le Support démarre en général après un projet avec nous. Une Construction comprend son premier mois de l’offre Évolution, puis passe à l’offre Maintien sauf si vous choisissez autrement. Un projet Amélioration comprend son premier mois de l’offre Maintien, sur le travail livré. Après un audit seul, c’est possible si votre plateforme est en assez bon état : l’audit nous le dit.',
   metaTitle: 'Maintenance et support de plateforme data | Nimzo Data',
   metaDescription: `Support mensuel d’une plateforme data que nous avons construite, améliorée ou auditée. Offres Maintien, Évolution et Pilotage à ${eur(prices.support.run, 'fr')}, ${eur(prices.support.extend, 'fr')} et ${eur(prices.support.lead, 'fr')} HT par mois. Sans engagement de durée.`,
   heroTitle: 'Votre plateforme tourne. Qui la maintient ?',

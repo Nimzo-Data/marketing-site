@@ -31,7 +31,7 @@ const copy = {
     },
     shortQuote: {
       text: "Most of our BigQuery data wasn't usable for analysis. Now it's the platform our analytics actually run on.",
-      authorTitle: 'CTO, Tameson',
+      authorTitle: 'CTO and co-founder, Tameson',
       /** Set in French copy: the quote was given in English and is shown translated. */
       translatedFrom: undefined as 'en' | undefined,
     },

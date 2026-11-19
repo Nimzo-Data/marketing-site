@@ -6,7 +6,7 @@ const copy: AudienceCopy = {
     'Excel et Google Sheets ne suffisent plus : il vous faut une plateforme à part entière.',
     'Vous avez des analystes, pas de data engineers. Ou pas d’équipe du tout.',
     'Il vous faut un data engineer senior, sans recruter à temps plein.',
-    'Vous voulez que l’IA donne des réponses fiables aux questions data de vos équipes.',
+    'Vous voulez que l’IA réponde de façon fiable aux demandes data de vos équipes.',
     'Vous savez décider vite. Nos meilleures missions démarrent après deux semaines d’échanges, pas quatre mois.',
   ],
   isNot: [
