@@ -227,6 +227,11 @@ const faqs = c.faqs;
     width: 150px;
   }
 
+  /* "Exemple d’audit →" is wider than "Sample audit →". */
+  :global(html[lang='fr']) .start-table th:nth-child(3) {
+    width: 175px;
+  }
+
   .start-table td {
     padding: 20px 0;
     border-bottom: 1px solid var(--color-border-subtle);
@@ -273,6 +278,7 @@ const faqs = c.faqs;
   }
 
   .start-sample {
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 6px;

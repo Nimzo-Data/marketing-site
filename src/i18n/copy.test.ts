@@ -19,7 +19,7 @@ describe('copy helpers', () => {
   it('picks the copy for the locale', () => {
     const fr = { title: 'Bonjour' };
     expect(pickCopy({ en, fr }, 'en')).toBe(en);
-    expect(pickCopy({ en, fr }, 'fr')).toBe(fr);
+    expect(pickCopy({ en, fr }, 'fr')).toEqual(fr);
   });
 
   it('allows a placeholder while French is not launched', () => {
@@ -33,5 +33,10 @@ describe('copy helpers', () => {
       'French copy missing (placeholder) for home'
     );
     flags.SHOW_FRENCH = false;
+  });
+
+  it('applies French typography to French copy', () => {
+    const fr = { title: 'Pourquoi ?' };
+    expect(pickCopy({ en, fr }, 'fr').title).toBe('Pourquoi\u202F?');
   });
 });

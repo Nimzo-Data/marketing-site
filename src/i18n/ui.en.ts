@@ -95,7 +95,7 @@ const ui = {
       orchestration: 'Orchestration',
     },
     tameson: {
-      aria: 'Tameson Dataform layered architecture: raw data ingested via Dagster, Datastream, Fivetran, Stitch into BigQuery, then modeled in Dataform across staging, intermediate, mart, and reports layers.',
+      aria: 'Tameson Dataform layered architecture: raw data ingested via Dagster, Datastream, Fivetran, Stitch into BigQuery, then modeled in Dataform across staging, intermediate, marts, and reports layers.',
       bigQueryNote: 'Everything lives in BigQuery',
       raw: 'Raw',
       ingestedVia: 'Ingested via:',
@@ -103,8 +103,8 @@ const ui = {
       layers: [
         { label: 'Staging', blurb: '1:1 with raw. Renaming, casting, light cleaning.' },
         { label: 'Intermediate', blurb: 'Joins and logic within a single domain.' },
-        { label: 'Mart', blurb: 'Cross-domain business logic: facts and dimensions.' },
-        { label: 'Reports', blurb: 'BI-ready OBT tables for Looker Studio.' },
+        { label: 'Marts', blurb: 'Cross-domain business logic: facts and dimensions.' },
+        { label: 'Reports', blurb: 'BI-ready OBT tables for Data Studio.' },
       ],
     },
     aeyde: {
@@ -126,7 +126,7 @@ const ui = {
       { label: 'Staging', caption: 'renamed, typed, one per source table' },
       { label: 'Intermediate', caption: 'joins and business logic' },
       { label: 'Marts', caption: 'facts and dimensions, described, tested' },
-      { label: 'Reviewed definitions', caption: 'metrics defined once, in the BI tool', gapBefore: true },
+      { label: 'Governed metrics', caption: 'metrics defined once, in the BI tool', gapBefore: true },
     ] as { label: string; caption: string; gapBefore?: boolean }[],
     platformLayers: [
       { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, a database' },

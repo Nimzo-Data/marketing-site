@@ -1,0 +1,99 @@
+---
+title: "Data Studio est de retour. Corrigez les données avant de le remplacer."
+description: "En avril 2026, Google a redonné à Looker Studio son ancien nom de Data Studio. La plupart des reproches que les entreprises lui font ne viennent pas de l’outil. Voici comment faire le tri, et dans quels cas l’outil est vraiment en cause."
+pubDate: 2026-09-11
+draft: false
+translationOf: data-studio-fix-the-data-first
+---
+
+import PlatformLayersDiagram from '../../components/content/PlatformLayersDiagram.astro';
+
+Le 11 avril 2026, Google a rebaptisé Looker Studio en Data Studio, le nom qu’il avait à son lancement en 2016. Il l’avait perdu en octobre 2022, quand Google a voulu un seul nom pour toute sa gamme de BI. L’annonce parle de « différenciation stratégique » et d’un outil par usage : Looker est la plateforme adaptée aux grandes entreprises, avec une couche sémantique gouvernée, et Data Studio sert, selon Google, à explorer ses propres données et à produire des rapports ponctuels. Rien n’a cessé de fonctionner : les rapports, les sources et les permissions n’ont pas bougé.
+
+Disons d’abord d’où nous parlons. Data Studio est gratuit, sans limite d’utilisateurs, et une bonne part du reporting des entreprises s’y trouve déjà, celui du marketing en premier. Beaucoup de nos clients l’utilisent quand ils nous contactent, et c’est avec lui que nous avons construit nos premières plateformes. Nous ne vous disons pas de le quitter. Nous voulons distinguer deux sortes de reproches : ceux qui viennent des données et ceux qui viennent de l’outil. La plupart des entreprises quittent Data Studio à cause des premiers, paient un autre outil de BI et y retrouvent les mêmes problèmes.
+
+## Deux sortes de reproches
+
+Voici la liste qu’on nous apporte au premier appel :
+
+- Impossible de fusionner une sixième source, et les fusions de données (blends) qui fonctionnent peuvent échouer sans prévenir.
+- Le rapport met une minute à charger.
+- Le connecteur HubSpot a atteint sa limite d’API dans la nuit et les chiffres ne sont pas à jour.
+- Les connecteurs fiables sont payants, au mois, donc l’outil gratuit ne l’est pas.
+- Deux rapports affichent deux chiffres d’affaires différents.
+- Quelqu’un a ajouté une colonne au fichier Google Sheets et un graphique s’est vidé.
+
+Rien de cela ne vient de Data Studio. C’est ce qui arrive quand un outil de reporting est branché directement sur ses sources : sur les plateformes publicitaires par un connecteur, sur le CRM par un autre, sur un fichier Google Sheets qui tient lieu de base de données. Les données restent chez la source et vous ne pouvez pas les corriger. Vous ne les joignez pas en amont, alors vous les fusionnez dans l’outil ; vous ne définissez pas le chiffre d’affaires une fois pour toutes, alors vous le redéfinissez dans chaque rapport. Mettez Metabase ou Power BI sur les mêmes connecteurs et le même fichier Google Sheets, et vous avez la même liste, avec une licence en plus. Ce sont des problèmes de données, et ils vous suivent dans n’importe quel outil.
+
+Les reproches du second type viennent bien de l’outil, et la liste est plus longue qu’on ne le croit :
+
+- Il ne sait pas comment les sources sont liées : il faut donc préparer en amont, dans l’entrepôt de données (data warehouse), une table déjà jointe pour chaque rapport.
+- Il n’a pas de grille de tableau de bord : chaque graphique et chaque filtre se place et se met en forme à la main.
+- Les lecteurs ne peuvent explorer que ce que le concepteur du rapport a prévu.
+- Le nombre de lignes est limité selon le connecteur, et les rapports ralentissent sur de gros volumes.
+- Il n’a ni gestion de versions ni alertes, et ne peut limiter les lignes visibles qu’avec un filtre sur l’e-mail du lecteur.
+
+Nous traitons d’abord les problèmes de données, parce que ce sont ceux qu’un nouvel outil ne réglera pas.
+
+<PlatformLayersDiagram
+  locale="fr"
+  layers={[
+    { label: 'Sources', caption: 'Shopify, Stripe, CRM, GA4, une base de données' },
+    { label: 'Collecte', caption: 'Airbyte' },
+    { label: 'Entrepôt', caption: 'BigQuery' },
+    { label: 'Transformation', caption: 'Dataform ou dbt : modèles, tests, lignage' },
+    { label: 'BI', caption: 'Data Studio' },
+  ]}
+  brackets={[
+    { from: 'Sources', to: 'Transformation', label: 'problèmes de données' },
+    { from: 'BI', to: 'BI', label: 'problèmes d’outil' },
+  ]}
+  ariaLabel="Les cinq couches d’une plateforme data : sources, collecte, entrepôt, transformation, BI. Les problèmes de données se trouvent dans les quatre premières couches ; les problèmes d’outil se trouvent dans la couche BI, ici Data Studio."
+/>
+
+## Corrigez les données, quel que soit l’outil que vous gardez
+
+Pour régler les problèmes de données, il faut un entrepôt et une couche de modélisation. Sur Google Cloud, c’est BigQuery avec, par-dessus, [Dataform dans notre cas](/fr/blog/dataform-plutot-que-dbt/). Les sources arrivent dans BigQuery par Airbyte ou par un connecteur natif. Le chiffre d’affaires est défini une fois, dans un modèle, et chaque rapport lit la même table. On charge le fichier Google Sheets comme n’importe quelle autre source, et plus personne ne s’en sert comme d’une base de données. Data Studio se connecte à BigQuery par le connecteur natif, celui dont personne ne se plaint.
+
+Les rapports ne font plus de fusions de données, puisque les jointures sont déjà faites en amont. Deux rapports ne peuvent plus se contredire : ils lisent la même table. Et un rapport se charge en quelques secondes, à condition que les tables soient construites pour cela.
+
+Quand nous obtenons un accès en lecture à un projet BigQuery, le plus coûteux que nous y trouvons est un rapport branché sur une grosse table brute, qu’il relit en entier à chaque actualisation. Deux choses y remédient : des tables de reporting déjà agrégées au niveau de détail dont le rapport a besoin, et un partitionnement par date, branché sur le filtre de dates du rapport. Chaque filtre ne lit alors que les jours demandés, au lieu de toute la table. Avec les deux, la facture BigQuery complète (modèles et rapports compris) se situe entre 100 et 200 $ par mois chez un client type, soit à peu près le prix de deux ou trois connecteurs payants. Sans cela, un rapport Data Studio fera paraître BigQuery cher.
+
+C’est une plateforme complète, et des entreprises s’en servent pendant des années. L’un de nos clients, une entreprise de moins de cinquante personnes avec une équipe informatique de six, fait tout son reporting dans Data Studio, sur BigQuery et Dataform. En septembre 2026, cela dure depuis deux ans. Data Studio ne le limite pas.
+
+Il faut le reconnaître : faire un bon rapport dans Data Studio demande du métier. Il faut choisir le bon graphique, le mettre en page pour qu’il se lise, brancher les filtres et les dates, garder un design cohérent sur vingt pages. Dans la plupart des entreprises, c’est la personne qui a monté les tableaux de bord marketing qui sait le faire. Avec un entrepôt, elle fait le même travail sur des tables fiables.
+
+## Ce que Data Studio ne fait pas
+
+Data Studio reste le bon outil pour deux usages : consulter des rapports, ce pour quoi il a été conçu (le responsable marketing qui ouvre la même page chaque lundi), et le rapport financier mensuel du conseil d’administration, qui exigera toujours une mise en page au pixel près et que les outils à grille gèrent mal. Les comparatifs avec Looker, Metabase et les autres relèvent tous les mêmes limites. Trois d’entre elles suffisent à trancher pour une entreprise de votre taille.
+
+Il ne connaît aucune relation entre les sources. Une source de données Data Studio est une table ou une requête SQL, et toute jointure se fait dans cette requête, écrite par celui qui a construit la source. L’outil lui-même ne sait pas comment les tables sont liées entre elles. Il ne peut donc pas assembler faits et dimensions quand le rapport s’affiche, ce que font Power BI, Tableau, Looker et Metabase. Le conseil habituel pour Data Studio est donc de faire les jointures en amont.
+
+Les fusions de données permettent de joindre des sources dans l’outil, mais elles sont limitées à cinq sources, et c’est là que se concentrent la plupart des problèmes que les utilisateurs rapportent. En pratique, on maintient une table large par sujet de rapport, parfois plusieurs quand les pages couvrent des domaines différents, et une bonne table est réutilisée d’un rapport à l’autre. Chaque nouvelle demande qui croise deux domaines exige une nouvelle table avant même le graphique.
+
+Il n’a pas de grille de tableau de bord. Thèmes, grille d’alignement et modèles existent, mais aucun composant n’est prédéfini : chaque graphique, filtre, titre et bloc d’espacement se place et se met en forme à la main. Quant à la charte graphique, c’est un modèle que vous dupliquez, puis que vous devez maintenir dans chaque rapport qui l’utilise. C’est pour cela que construire un rapport demande du métier. Data Studio fournit les briques, il faut construire la page. Metabase, Looker et Lightdash vous donnent une grille avec des éléments prêts à l’emploi que vous ne pouvez pas remettre en forme, ce qui est moins flexible et beaucoup plus rapide.
+
+L’exploration s’arrête là où le concepteur s’est arrêté. Les lecteurs disposent des contrôles de date, des filtres et des analyses détaillées (drill-down) avec lesquels le rapport a été construit. Au-delà, quelqu’un qui a accès à la source de données peut copier le rapport et ajouter une page, et presque personne ne le fait, parce que rien dans l’outil n’y invite. Le responsable des opérations qui a besoin d’un chiffre que le rapport n’affiche pas le réclame donc à l’analyste, l’analyste construit une table et une page, et [la demande devient un ticket](/fr/blog/premier-data-analyst-plateforme-data/).
+
+La réponse évidente en septembre 2026 est de laisser les gens poser leurs questions en langage courant, et Data Studio sait le faire. Branchez-le sur une table et il dialogue avec cette seule table, ce qui nous ramène au problème du modèle manquant. Il existe aussi une version gouvernée : un agent data qui sait ce que signifie chaque champ et quels calculs sont approuvés. Mais cet agent se construit dans BigQuery ou sur un modèle Looker, puis se publie dans Data Studio : les définitions se trouvent ailleurs.
+
+Les autres limites de la liste ci-dessus justifient moins souvent un changement d’outil. Prenez le nombre de lignes : certains connecteurs de bases de données plafonnent ce qu’ils renvoient, alors que BigQuery n’a aucune limite, seulement des rapports lents quand les requêtes ne sont pas optimisées.
+
+Ces trois limites ensemble définissent le plafond, et deux questions suffisent pour savoir si vous l’avez atteint. Combien de tables larges la couche de modélisation maintient-elle pour les rapports, et ce nombre croît-il plus vite que les rapports ? Et combien de personnes hors de l’équipe data peuvent répondre à leur propre question sans solliciter l’analyste ? Une entreprise avec huit rapports, une douzaine de tables et un analyste est très loin du plafond. Une entreprise où chaque nouvelle demande exige une nouvelle table, une nouvelle page et une semaine de travail de l’analyste a atteint ce plafond, et un meilleur entrepôt n’y changera rien.
+
+## Au plafond, ne changez que la couche du dessus
+
+Ce jour-là, vous ne remplacez ni l’entrepôt ni les modèles : ils restent. Seul l’outil du dessus change. Il lui faut des indicateurs gouvernés et la possibilité d’explorer les données soi-même, pour que chacun trouve sa réponse au lieu d’ouvrir un ticket. [Les quatre outils avec lesquels nous construisons](/fr/technologies/), selon le profil de l’équipe :
+
+- **Steep**, pour une petite équipe non technique qui veut suivre ses indicateurs, surtout sur téléphone, avec une IA intégrée.
+- **Metabase**, pour une équipe mixte qui veut des tableaux de bord, un outil pour explorer les données librement et un assistant IA, avec la possibilité de l’héberger gratuitement sur ses propres serveurs.
+- **Lightdash**, pour une équipe qui veut des indicateurs définis dans le code et des workflows Git, à tarif fixe, quel que soit le nombre d’utilisateurs.
+- **Looker**, à partir de vingt utilisateurs, avec la gouvernance LookML et la BI embarquée, à des prix de grande entreprise.
+
+Si Data Studio ne fait pas partie de nos quatre outils, c’est à cause des trois limites décrites plus haut : pas de relations entre sources, pas de grille de tableau de bord, une exploration qui s’arrête là où le créateur s’est arrêté. Nous construisons des plateformes pour des entreprises qui ont atteint ce plafond ou s’en approchent, et une plateforme dont l’outil du dessus oblige à ouvrir un ticket pour chaque question n’est pas terminée. En revanche, nous ne conseillerons pas de changer d’outil tant que les problèmes de données ne sont pas réglés : c’est l’erreur la plus coûteuse, et la plus fréquente.
+
+## Notre biais, et la règle
+
+Nous vendons [les couches du dessous](/fr/services/construction-plateforme-data/) : collecte, entrepôt, modélisation. Nous ne vendons pas Data Studio, et Google ne rémunère aucun partenaire pour recommander son outil gratuit : vous conseiller de le garder ne nous rapporte rien. En revanche, nous construisons avec les quatre outils présentés plus haut : quand nous vous conseillons d’en changer, c’est là que nous gagnons notre vie. Lisez cette seconde moitié du conseil en gardant cet intérêt en tête.
+
+La règle : corrigez les données qui alimentent l’outil avant de remplacer l’outil. Remplacez-le quand les tables et les pages que vous maintenez augmentent plus vite que les questions auxquelles elles répondent, et ce jour-là, ne remplacez que lui.

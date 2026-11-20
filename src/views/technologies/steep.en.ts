@@ -3,7 +3,7 @@ const copy = {
   description: "Steep implementation for metric-based business intelligence on BigQuery. Metric definitions, Steep AI, and self-service exploration for non-technical teams.",
   toolCategory: "Business Intelligence",
   heroPositioning: "Steep is metric-based BI for non-technical teams. Metrics defined once, explored visually or asked in natural language with Steep AI. No SQL required.",
-  title2: "How We Use It",
+  title2: "How we use it",
   items: [
         "Connect Steep to BigQuery and configure dataset access",
         "Define the metrics layer in Steep: revenue, active users, conversion, whatever your business runs on",
@@ -48,10 +48,10 @@ const copy = {
       ],
   p1: "Steep is a metric-based BI tool. Metrics are defined once (typically by a data lead or analyst) and business users explore them through a visual interface or Steep AI, which answers natural-language questions directly against the governed metrics. The metric-first model means every chart and every AI answer shares the same definition of \"revenue\" or \"active user\", no matter who built it. Particularly strong for companies where the primary data consumers are in marketing, sales, or operations rather than engineering.",
   p2: "Steep has its own native semantic layer for metric definitions. It can also plug into dbt's Semantic Layer if the client already maintains metrics there: one metrics model, two surfaces. Steep exposes its metrics via MCP (Model Context Protocol), so the same governed data is queryable from AI tools like Claude or ChatGPT without leaving the tools the team already uses.",
-  p3Html: `Not every company needs LookML's governance or dbt-driven metrics. When the audience is non-technical and the primary need is consistent, explorable metrics without training everyone on SQL, Steep delivers at a fraction of Looker's cost. Metrics stay consistent; exploration stays accessible. Steep AI credits (natural-language Q&A) are included in every paid tier.`,
-  p4: "Because every chart and every AI answer shares the same governed definitions, Steep AI can't produce numbers that contradict your dashboards. The metric layer is the AI layer. And with Steep's MCP server, those governed metrics aren't locked inside Steep's UI. They're available wherever the team already works.",
-  sectionTitle: "What It Is",
-  sectionTitle2: "Why We Chose It",
+  p3Html: `Not every company needs LookML's governance or dbt-driven metrics. When the audience is non-technical and the primary need is consistent, explorable metrics without training everyone on SQL, Steep delivers at a fraction of Looker's cost. Steep AI (natural-language Q&A) is built into the product rather than sold as an add-on, within fair-use limits.`,
+  p4: "Because every chart and every AI answer shares the same governed definitions, Steep AI can't produce numbers that contradict your dashboards. And with Steep's MCP server, those governed metrics are available wherever the team already works, not only inside Steep's UI.",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
 };
 
 export type Copy = typeof copy;

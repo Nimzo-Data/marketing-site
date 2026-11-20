@@ -67,6 +67,18 @@ const serviceLine2 = lastSpace > 0 ? serviceLabel.slice(lastSpace + 1) : '';
     height: 100%;
   }
 
+  /* Side by side (the parent is a grid), cards share their row tracks, so the
+     divider, Service/Tools row and link line up even when one headline is
+     longer than the other. */
+  @media (min-width: 768px) {
+    .cs-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 20px;
+    }
+  }
+
   .cs-card:hover {
     box-shadow: var(--shadow-dropdown);
     transform: translateY(-2px);

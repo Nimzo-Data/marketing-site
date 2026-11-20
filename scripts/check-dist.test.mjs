@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checkLang, checkFrenchLinks, checkAlternatesResolve, checkNoFrenchLeak, checkCanonical, checkEveryPageHasFrench, isLaunched } from './check-dist.mjs';
+import { checkLang, checkFrenchLinks, checkAlternatesResolve, checkNoFrenchLeak, checkCanonical, checkEveryPageHasFrench, isLaunched, checkAssetLinks } from './check-dist.mjs';
 
 const page = (path, body, { lang = path.startsWith('fr/') ? 'fr' : 'en', head = '' } = {}) => ({
   path,
@@ -108,5 +108,15 @@ describe('isLaunched', () => {
   it('follows the sitemap: French URLs are listed only once SHOW_FRENCH is on', () => {
     expect(isLaunched('<urlset><url><loc>https://nimzodata.com/fr/</loc></url></urlset>')).toBe(true);
     expect(isLaunched('<urlset><url><loc>https://nimzodata.com/</loc></url></urlset>')).toBe(false);
+  });
+});
+
+describe('checkAssetLinks', () => {
+  const exists = (p) => p === 'Nimzo-Data-Sample-Audit.pdf';
+  it('flags a link to a file that is not in the build', () => {
+    expect(checkAssetLinks([page('fr/exemple-audit/index.html', '<a href="/Nimzo-Data-Exemple-Audit.pdf">PDF</a>')], exists)).toHaveLength(1);
+  });
+  it('passes links to files that exist, and ignores page links', () => {
+    expect(checkAssetLinks([page('sample-audit/index.html', '<a href="/Nimzo-Data-Sample-Audit.pdf">PDF</a><a href="/contact/">x</a>')], exists)).toEqual([]);
   });
 });

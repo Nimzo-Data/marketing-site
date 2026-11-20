@@ -11,12 +11,12 @@ const copy = {
     look: 'Your sources and their volumes, the figures leadership needs, and what your team can run day to day.',
   },
   {
-    from: ['Spreadsheets and Looker Studio,', 'held together by connectors.'],
+    from: ['Spreadsheets and Data Studio,', 'with connectors to your other tools.'],
     look: 'Which connectors feed which reports, what breaks when a sheet changes, and whether the figures match the source systems.',
     sample: href('sampleAudit', 'en'),
   },
   {
-    from: ['A reporting app built in-house or with AI tools like Claude,', 'reading from your sources or its own database.'],
+    from: ['A reporting app built in-house', 'or with AI tools like Claude.'],
     look: 'Where the data comes from, whether keys sit in the code, who can change production, and whether each metric is defined once.',
   },
   {
@@ -34,13 +34,13 @@ const copy = {
   { icon: 'operations', area: 'Operations', detail: 'Freshness, test versus production, who can deploy, a tested restore.' },
   { icon: 'maintainability', area: 'Maintainability', detail: 'Docs, tests on the figures, reviews, AI coding guardrails, one-person risk.' },
   { icon: 'ai', area: 'AI readiness', detail: 'Governed metrics, and what AI tools can read.' },
-  { icon: 'costs', area: 'Costs', detail: 'Infrastructure, tools and licences, and what drives the bill.' },
+  { icon: 'costs', area: 'Costs', detail: 'Infrastructure, tools and licenses, and what drives the bill.' },
 ] as { icon: LineIconName; area: string; detail: string }[],
   faqs: [
   {
     question: 'Why is the audit paid?',
     answer:
-      "Because it's real work with a real deliverable. You get a written map of what you run, findings ranked by severity, a verdict per layer, and a fixed price for the next step. If you decide not to continue with us, you can hand that document to another provider and it's still useful.",
+      "Because it's real work with a real deliverable. You get a written map of what you run, findings ranked by severity, a verdict on each part of your platform, and a fixed price for the next step. If you decide not to continue with us, you can hand that document to another provider and it's still useful.",
   },
   {
     question: 'Why can\'t you just quote me directly?',
@@ -55,12 +55,12 @@ const copy = {
   {
     question: 'How do you compare to a big consultancy or a freelancer?',
     answer:
-      'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineering, fixed price, defined scope, and a clean handover so you own what we built.',
+      'A big firm sells a six-month engagement and staffs it with a junior team. A freelancer solves the ticket in front of them. We sit between: senior engineers on a fixed price and a defined scope, with a clean handover so you own what we built.',
   },
   {
     question: 'Our reporting was built with Claude or Cursor. Is that a problem?',
     answer:
-      "No, and it's increasingly common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the repository and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
+      "No, and it's common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the code and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
   },
   {
     question: 'Will you tell us to move to Google Cloud?',
@@ -70,12 +70,12 @@ const copy = {
   {
     question: 'Do you need write access?',
     answer:
-      'No. We work from read-only access to your repo, database, BI tool and sources. Nothing we do during the audit can change your data or your production setup.',
+      'No. We work from read-only access to your code, database, BI tool and sources. Nothing we do during the audit can change your data or your production setup.',
   },
 ],
   startHeading: "Where you're starting from.",
   startIntro: "The method and the report format are the same whatever you run. What we look at first, and what we recommend, depend on where you start.",
-  problemsHeading: "What brings most clients here.",
+  problemsHeading: "What the audit settles.",
   questionItems: [
         "Can we trust these numbers?",
         "Is anything exposed: keys in code, old access still open?",
@@ -83,16 +83,16 @@ const copy = {
         "What will this cost us over 12 months?",
         "Which tools do we need, and which can we skip?",
         "Is our data ready for AI?",
-        "Is the quote or board pack in front of us sound?",
+        "Can our team run this day to day?",
       ],
   answerItems: [
         "Headline figures recomputed from source.",
         "Secrets, accounts and roles reviewed.",
-        "A map of what runs where, and who owns it.",
+        "A map of what runs where, who owns it, and what depends on one person.",
         "A 12-month cost, fees plus infrastructure.",
-        "A verdict per layer, with the reasoning.",
+        "Keep, fix or replace: a verdict tool by tool, with the reasoning.",
         "What AI tools can safely query, and what's missing.",
-        "A written second opinion, checked against your data.",
+        "What your team can maintain itself, and where it needs help.",
       ],
   checkHeading: "What we check.",
   checkIntro: "All nine areas, whatever you run. Only the depth changes: a spreadsheet setup has little to check under Operations, an inherited warehouse a lot.",
@@ -102,7 +102,7 @@ const copy = {
     `<strong>Current-state map.</strong> Sources, pipelines, tables, reports, schedules and owners.`,
     `<strong>Ranked findings.</strong> Each one by severity, with the evidence and the fix.`,
     `<strong>Numbers check.</strong> Headline figures recomputed and compared with your reports.`,
-    `<strong>Verdict per layer.</strong> Collection, warehouse, modeling, BI and AI: keep, fix, add or replace.`,
+    `<strong>A verdict on each part.</strong> Collection, warehouse, modeling, BI and AI: keep, fix, add or replace.`,
     `<strong>Recommendation call.</strong> Then 14 days of follow-up questions.`,
   ],
   nextStepTitle: "Plus the next step, priced",
@@ -110,18 +110,18 @@ const copy = {
   nextImproveBody: "The projects in order, the first at a fixed price valid 30 days, and what your team can do itself.",
   processHeading: "How an audit runs.",
   processSteps: [
-        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, then read-only access to your repo, database, BI tool and sources." },
+        { icon: 'video', title: "Kickoff & access", description: "Kickoff call, then read-only access to your code, database, BI tool and sources." },
         { icon: 'search', title: "Technical audit", description: "The nine areas above reviewed, and your headline figures recomputed." },
-        { icon: 'scale', title: "Tool evaluation (when needed)", description: `Only when a layer is added or replaced. <a href='${href('technologies', 'en')}' class='step-link'>The tools we work with</a>.` },
-        { icon: 'clipboard-list', title: "Findings & recommendation", description: "The written report: summary, map, ranked findings, numbers check, verdict per layer." },
+        { icon: 'scale', title: "Tool evaluation (when needed)", description: `Only when a part of the platform is added or replaced. <a href='${href('technologies', 'en')}' class='step-link'>See the tools we work with</a>.` },
+        { icon: 'clipboard-list', title: "Findings & recommendation", description: "The written report: summary, map, ranked findings, numbers check, a verdict on each part." },
         { icon: 'mail', title: "Recommendation call & proposal", description: "We walk you through it and send a fixed price for the next step." },
       ] as Step[],
   pricingHeading: "Pricing.",
   pricingLabel: "Fixed price",
-  pricingAmount: eurRange(prices.audit.min, prices.audit.max, 'en'),
+  pricingAmount: `${eurRange(prices.audit.min, prices.audit.max, 'en')} excl. VAT`,
   pricingSub: "1–2 weeks, paid 100% upfront: we invoice when you sign, and work starts once it's paid. Where you land in this range depends on the number of sources and the number of metrics to recompute.",
   leadsHeading: "Where this leads.",
-  leadsIntro: "The verdict per layer decides the next step. An audit is also a real deliverable on its own.",
+  leadsIntro: "The verdicts decide the next step. An audit is also a real deliverable on its own.",
   notFitHeading: "When this isn't the right fit.",
   notFitItemsHtml: [
     `<strong>You already know exactly what you want built and have a clear scope.</strong> <a href="${href('improve', 'en')}" class="inline-link">Improve</a> is a better fit: you describe the project on a free call, and we quote it directly.`,
@@ -130,14 +130,14 @@ const copy = {
   ],
   faqHeading: "Common questions.",
   metaTitle: "Data Platform Audit | Nimzo Data",
-  metaDescription: "A paid 1–2 week audit of whatever your reporting runs on: findings ranked by severity, a verdict per layer, and a fixed price for the next step. Yours to keep either way.",
+  metaDescription: "A paid 1–2 week audit of whatever your reporting runs on: findings ranked by severity, a verdict on each part of your platform, and a fixed price for the next step. Yours to keep either way.",
   heroTitle: "Before you build or fix anything,<br>find out what your numbers run on.",
-  heroSubtitle: "A 1–2 week paid audit of whatever you run today, from spreadsheets to a warehouse someone left behind. You leave with a verdict on each layer of your platform and a fixed price for the next step. Yours to keep either way.",
-  thFrom: "If you run",
+  heroSubtitle: "A 1–2 week paid audit of whatever you run today, from spreadsheets to a warehouse someone left behind. You leave with a verdict on each part of your platform, from data collection to dashboards, and a fixed price for the next step. Yours to keep either way.",
+  thFrom: "Your setup",
   thLook: "What we look at first",
   thSample: "Sample",
   sampleLink: "Sample audit",
-  comingSoon: "Coming soon",
+  comingSoon: "—",
   questionsTitle: "The questions:",
   answersTitle: "What the audit answers:",
   ifVerdict: "If the verdict is",
@@ -150,8 +150,8 @@ const copy = {
   leadImproveBody: "The audit splits the work into projects and prices the first one. You run them one at a time and decide on each separately.",
   leadImproveLink: "See Improve",
   leadNothingEyebrow: "Your team takes it from here",
-  leadNothingTitle: "Nothing more",
-  leadNothingBody: "The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start.",
+  leadNothingTitle: "The audit alone",
+  leadNothingBody: "The report is yours. Your team or another provider can execute it, and the ranked findings tell them where to start. If the platform is in good enough shape, we can also support it.",
 };
 
 export type Copy = typeof copy;

@@ -1,6 +1,50 @@
-import { placeholder } from '../../i18n/copy';
-import en, { type Copy } from './tameson.en';
+import type { Copy } from './tameson.en';
 
-const copy: Copy = placeholder(en);
+const copy: Copy = {
+  metaTitle: 'Tameson : des données inexploitées à une plateforme prête pour la BI | Nimzo Data',
+  ogTitle: 'Des données BigQuery inexploitées à l’analyse sur 6 marchés',
+  ogDescription: 'Des données BigQuery brutes, modélisées avec Dataform et utilisables pour l’analyse sur 6 marchés.',
+  ogImage: '/og/tameson.png',
+  metaDescription: 'Tameson : des données BigQuery inexploitées devenues un socle d’analyse pour 6 marchés, avec une architecture Dataform en couches et des contrôles automatiques à chaque modification.',
+  metrics: [
+    { icon: 'database', value: 'Plus de 10 sources', label: 'Modélisées dans la plateforme Dataform' },
+    { icon: 'bar-chart', value: '6 propriétés GA4', label: 'Réunies dans un seul modèle d’événements : NL, DE, FR, UK, ES, US' },
+    { icon: 'shield-check', value: 'Contrôles dans la CI', label: 'Règles de couches, contrôles de schéma, vérification du partitionnement' },
+    { icon: 'calendar', value: 'Depuis juin 2024', label: 'Collaboration toujours en cours' },
+  ],
+  quoteText: 'Quand Antoine a commencé avec nous, la plupart de nos données BigQuery n’étaient pas exploitables pour l’analyse. Le socle Dataform qu’il a aidé à construire, et que nous continuons d’étendre ensemble, a complètement changé la donne. C’est la plateforme sur laquelle tournent réellement nos analyses.',
+  quoteAuthorTitle: 'CTO et cofondateur, Tameson',
+  glanceHeading: 'Les résultats, en un coup d’œil.',
+  quoteHeading: 'Dans leurs mots.',
+  usedHeading: 'Ce que nous avons utilisé.',
+  s1_1: 'Le client',
+  s1_2: 'Tameson est un e-commerçant de fournitures industrielles basé à Eindhoven, fondé en 2013. D’abord fournisseur d’électrovannes sous sa propre marque, l’entreprise propose plus de 160 000 produits (sa marque, de grandes marques, d’autres fournisseurs) sur six marchés : Pays-Bas, Allemagne, France, Royaume-Uni, Espagne et États-Unis.',
+  s1_3: 'L’équipe technique est petite : un CTO, un chef de projet technique, et des freelances spécialistes de Shopify, Dagster, Odoo, Pimcore et de la data.',
+  s2_1: 'Le problème',
+  s2_2: 'Quand Tameson nous a contactés en mai 2024, les pipelines tournaient, mais l’essentiel des données restait inutilisé.',
+  s2_3: 'Plusieurs sources arrivaient déjà dans BigQuery : GA4 sur 6 propriétés, Google Ads, Search Console, Google Merchant Center, ainsi que des systèmes opérationnels via Fivetran et des pipelines sur mesure. Des requêtes planifiées assuraient quelques transformations de base, mais rien n’était modélisé pour l’analyse : pas de tables prêtes à interroger, et chaque source avait sa propre logique métier. Les événements bruts de GA4 restaient pour l’essentiel inexploités : leur structure est difficile à manipuler sans modélisation.',
+  s2_4: 'L’équipe cherchait un profil qui maîtrise BigQuery et Dataform pour bâtir la modélisation, sur une plateforme appelée à beaucoup grandir. La collecte était déjà gérée en interne ; il manquait la modélisation : transformer les données brutes en tables prêtes pour l’analyse.',
+  pullQuoteHtml: `Les rapports ne devraient jamais interroger directement les données brutes.`,
+  s3_1: 'L’approche',
+  s3_2: 'Nous modélisons les données en couches : les transformations se trouvent toutes au même endroit, et chaque couche a des règles précises sur ce qu’elle peut lire et faire. Sans cela, une plateforme devient ingérable dès qu’elle grandit.',
+  s3_3: 'Pour Tameson, nous avons utilisé Dataform avec des couches dès le premier jour : staging pour nettoyer chaque source table par table, intermédiaire pour les jointures au sein d’un domaine, marts pour la logique métier transverse, et rapports, les tables que lisent les outils de BI. Le but : rendre GA4 utilisable et laisser à l’équipe un socle qu’elle peut étendre seule.',
+  s4_1: 'Ce que nous avons construit',
+  s5_1: '1. Un socle de modélisation GA4',
+  s5_2: 'L’export brut de GA4 semble exploitable jusqu’à ce qu’on essaie de s’en servir. Chaque événement est un objet à plusieurs niveaux, les paramètres personnalisés sont rangés dans des listes (arrays), la notion de session n’existe pas, et sur 6 propriétés les incohérences s’accumulent.',
+  s5_3: 'Nous avons construit un modèle d’événements unique couvrant les 6 propriétés GA4, en reconstituant les sessions à partir des événements et en ajoutant des agrégations de sessions sur 1, 7 et 28 jours pour l’analyse marketing. Nous avons harmonisé les paramètres personnalisés entre marchés. Nous avons ensuite joint les données marketing et commerce sur plusieurs clés : date, domaine, pays, identifiant de transaction, produit, canal, campagne, et identifiant de clic quand il existe. Les tables de rapport (statistiques quotidiennes, analyse produit e-commerce, analyse des entonnoirs de conversion, analyse de pages) reposent sur ce socle, toutes multi-marchés par défaut.',
+  s5_4: '2. Plus de 10 sources modélisées',
+  s5_5: 'GA4 était le point de départ. Au fil de la mission, nous avons modélisé plus de 10 sources dans l’architecture Dataform en couches : marketing (Google Ads, Search Console, Google Merchant Center), commerce (Shopify, Odoo, Pimcore) et systèmes opérationnels. L’équipe de Tameson gère la collecte, nous nous occupons de la modélisation.',
+  s5_6: 'Chaque source passe par les mêmes étapes : les modèles de staging nettoient chaque table brute (renommage, typage), les modèles intermédiaires font les jointures au sein d’un domaine, les marts portent la logique métier transverse, et les rapports alimentent les outils de BI. Ajouter une source n’est donc plus un chantier.',
+  s5_7: '3. Des contrôles automatiques sur le code',
+  s5_8: 'Avec Paul van Oorschot, CTO et cofondateur de Tameson, nous avons mis en place des contrôles automatiques sur le code Dataform. Paul a posé les fondations CI/CD. Nous avons apporté les contrôles propres à Dataform : respect des règles de couches (le staging ne peut pas référencer les marts, les rapports ne peuvent pas sauter de couche, etc.), validation du partitionnement des grosses tables, classement des changements de schéma (sûr, risqué, sans changement) et vérification des instructions exécutées avant chaque modèle incrémental (pre_operations).',
+  s5_9: 'Concrètement : des hooks pre-push qui détectent les problèmes en local, un pipeline GitLab CI qui bloque les changements de schéma risqués, et des tâches planifiées qui repèrent les jeux de données orphelins et les dérives de schéma.',
+  s6_1: 'Les résultats',
+  s6_2: 'L’équipe de Tameson livre des tableaux de bord et des analyses bien plus vite : les données sont déjà modélisées et testées. Les sources les plus importantes sont couvertes, et chaque nouvelle source suit le même schéma : staging, intermédiaire, mart, rapport. Grâce aux contrôles automatiques, la plateforme peut continuer à grandir sans accumuler de dette technique.',
+  s6_3: 'La mission a commencé comme un travail de modélisation ciblé, que Tameson a choisi de poursuivre mois après mois à mesure que le périmètre grandissait. La collaboration continue : Tameson ajoute des sources et des besoins, nous les intégrons sur le même socle.',
+  ctaHeading: 'Votre situation ressemble à celle-ci ?',
+  ctaSubtitle: 'Réservez un appel de 45 minutes. Nous vous dirons franchement si nous pouvons vous aider.',
+  ctaButton: 'Parlons-en',
+  quoteTranslatedFrom: 'en',
+};
 
 export default copy;

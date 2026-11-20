@@ -86,6 +86,18 @@ const gridClass = `wtc-grid wtc-grid--${blocks.length}`;
     gap: 12px;
   }
 
+  /* Side by side, cards share their row tracks, so the lists start at the
+     same height even when one heading wraps to two lines. */
+  @media (min-width: 768px) {
+    .wtc-card {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      row-gap: 12px;
+      align-content: start;
+    }
+  }
+
   .wtc-card-heading {
     font-family: var(--font-heading);
     font-weight: 600;

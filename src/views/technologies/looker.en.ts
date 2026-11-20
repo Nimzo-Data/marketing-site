@@ -2,8 +2,8 @@ const copy = {
   title: "Looker | Nimzo Data",
   description: "Looker and LookML implementation on BigQuery. Semantic layer design, governed metrics, Gemini-powered conversational analytics, and access control.",
   toolCategory: "Business Intelligence",
-  heroPositioning: "Looker is the most powerful BI tool in the GCP ecosystem: LookML governance plus Gemini-powered AI. We implement it for companies that need a centralized semantic layer and are ready to invest accordingly.",
-  title2: "How We Use It",
+  heroPositioning: "Looker is Google's enterprise BI tool: LookML governance plus Gemini-powered AI. We implement it for companies that need a centralized semantic layer and are ready to invest accordingly.",
+  title2: "How we use it",
   items: [
         "Design and implement LookML models: views, explores, derived tables, and measures",
         "Build executive and operational dashboards with governed metrics",
@@ -52,11 +52,11 @@ const copy = {
   metric: "From minutes to seconds.",
   body: "Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer.",
   p1: "Looker is Google's enterprise BI platform, built around LookML, a modeling language that defines a governed semantic layer sitting between your data warehouse and your end users. Every metric, dimension, and relationship is defined once in LookML and reused consistently across all reports and dashboards.",
-  p2: "Looker's AI story is now central. Conversational Analytics lets business users ask natural-language questions against the governed LookML model; Dashboard Agents generate AI summaries and deep-dives inside dashboards; LookML-aware assistants help developers write expressions and build visualizations. The Conversational Analytics APIs also expose the same capability to embedded apps.",
-  p3: "For organizations where data governance and metric consistency matter, where finance and product can't have different definitions of \"revenue\", Looker is the right tool. The LookML semantic layer also makes Looker uniquely powerful for embedded analytics and multi-tenant reporting. The GCP native integration (Looker is now part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration and Gemini on top.",
-  p4: "LookML's semantic layer is also what makes Looker's AI features accurate. Gemini queries governed metric definitions, not raw SQL. Google's own benchmarks show LookML reduces AI query errors by 66%. The official Looker MCP Server extends this further: external AI tools (Claude, Cursor) can query the governed LookML layer directly, with OAuth pass-through and user-level permissions.",
-  sectionTitle: "What It Is",
-  sectionTitle2: "Why We Chose It",
+  p2: "AI is central to Looker. Conversational Analytics lets business users ask natural-language questions against the governed LookML model; Dashboard Agents generate AI summaries and deep-dives inside dashboards; LookML-aware assistants help developers write expressions and build visualizations. The Conversational Analytics APIs also expose the same capability to embedded apps.",
+  p3: "For organizations where data governance and metric consistency matter, where finance and product can't have different definitions of \"revenue\", Looker is the right tool. The LookML semantic layer also makes Looker well suited to embedded analytics and multi-tenant reporting. The GCP native integration (Looker is part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration and Gemini on top.",
+  p4: "LookML's semantic layer is also what makes Looker's AI features accurate. Gemini queries governed metric definitions, not raw SQL. Google's own benchmarks show that LookML substantially reduces AI query errors. The official Looker MCP Server extends this further: external AI tools (Claude, Cursor) can query the governed LookML layer directly, with OAuth pass-through and user-level permissions.",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
 };
 
 export type Copy = typeof copy;
