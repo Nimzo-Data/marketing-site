@@ -9,7 +9,7 @@ const copy = {
   { name: 'Lead', subtitle: 'We also lead it with you', price: `${eur(prices.support.lead, 'en')} a month`, fit: 'you want someone to lead your data decisions' },
 ],
   rows: [
-  { label: 'Change work', values: [false, '1 day a month', '2 days a month'] },
+  { label: 'Change work', values: [`On demand, ${eur(prices.support.extraDay, 'en')} a day`, '1 day a month', '2 days a month'] },
   { label: 'Calls', values: ['None, messages only', 'Two 1-hour calls a month', 'Up to 1 hour a week'] },
   { label: 'Architecture, vendor and priority decisions', values: [false, false, true] },
   { label: 'Roadmap session with your leadership team', values: [false, false, 'Quarterly, half a day'] },
@@ -28,7 +28,7 @@ const copy = {
   "Work on components we didn't build or audit",
   'Tool licenses, which you pay directly to vendors',
   'Work outside business hours',
-  'Training new users: not on Run; on Extend and Lead it uses change days',
+  'Training new users, which uses change days',
   'Real-time pipelines, data science and ML',
 ],
   faqs: [
@@ -59,7 +59,7 @@ const copy = {
   },
   {
     question: 'Our analyst makes changes too. Can you review them?',
-    answer: "Yes, on Extend and Lead, using change days. Run doesn't include reviews.",
+    answer: "Yes, using change days: included on Extend and Lead, or bought on demand on Run.",
   },
   {
     question: 'What if our budget gets cut?',
@@ -74,11 +74,11 @@ const copy = {
   tiersNotePrices: "Monthly prices, excluding VAT.",
   tiersNoteHours: "Response times count in business hours: Monday to Friday, 9:00 to 18:00 Paris time.",
   monthlyHeading: "What you see each month.",
-  monthlyBody: "Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and, on Extend and Lead, change days used.",
+  monthlyBody: "Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and any change days used.",
   promiseLabel: "Our promise",
   promiseBody: "If something we monitor breaks, you hear it from us first. Alerts go to a channel we share with you, automatically.",
   changeHeading: "Change work.",
-  changeIntro: "On Extend and Lead.",
+  changeIntro: "Included on Extend and Lead. On Run, you buy days on demand.",
   changeRulesHtml: [
     `Every change is estimated before we start, and includes updating the documentation.`,
     `If it turns out bigger, we stop and tell you before going over. You choose: continue next month, add extra days, reduce it, or make it an <a href="${href('improve', 'en')}" class="inline-link">Improve</a> project.`,
@@ -99,7 +99,7 @@ const copy = {
   notThereHeading: "Not there yet?",
   notThereBody: "Support usually starts after a project with us. A Build includes its first month of Extend, then moves to Run unless you choose otherwise. An Improve project includes its first month of Run, on the work we delivered. After an audit alone, we can support your platform if it is in good enough shape: the audit tells us.",
   metaTitle: "Data Platform Support | Nimzo Data",
-  metaDescription: "Monthly support for a data platform, usually one we built or improved. Run, Extend and Lead tiers at €950, €2,250 and €3,950 a month excl. VAT. Month to month.",
+  metaDescription: `Monthly support for a data platform, usually one we built or improved. Run, Extend and Lead tiers at ${eur(prices.support.run, 'en')}, ${eur(prices.support.extend, 'en')} and ${eur(prices.support.lead, 'en')} a month excl. VAT. Month to month.`,
   heroTitle: "Your platform is live. Someone still has to keep it running.",
   heroSubtitle: "Monthly support for a data platform, usually one we have built or improved, so you don't need to hire a data engineer to keep it healthy. Three tiers, one monthly price each.",
   leadAuditEyebrow: "Someone else built your platform",

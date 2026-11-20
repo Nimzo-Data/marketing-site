@@ -12,7 +12,7 @@ const copy: Copy = {
     { name: 'Pilotage', subtitle: 'Nous la pilotons aussi avec vous', price: `${eur(prices.support.lead, 'fr')} HT par mois`, fit: 'vous voulez quelqu’un avec qui décider des priorités et des outils data' },
   ],
   rows: [
-    { label: 'Jours de développement', values: [false, '1 jour par mois', '2 jours par mois'] },
+    { label: 'Jours de développement', values: [`À la demande, ${day} HT le jour`, '1 jour par mois', '2 jours par mois'] },
     { label: 'Appels', values: ['Aucun, messages uniquement', 'Deux appels d’une heure par mois', 'Jusqu’à 1 heure par semaine'] },
     { label: 'Conseil sur l’architecture, les outils et les priorités', values: [false, false, true] },
     { label: 'Atelier feuille de route avec votre direction', values: [false, false, 'Chaque trimestre, une demi-journée'] },
@@ -31,7 +31,7 @@ const copy: Copy = {
     'Le travail sur des composants que nous n’avons ni construits ni audités',
     'Les licences d’outils, que vous payez directement aux éditeurs',
     'Le travail en dehors des heures ouvrées',
-    'La formation de nouveaux utilisateurs (non incluse dans l’offre Maintien ; dans les offres Évolution et Pilotage, elle consomme des jours de développement)',
+    'La formation de nouveaux utilisateurs, qui consomme des jours de développement',
     'Les pipelines temps réel, la data science et le machine learning',
   ],
   faqs: [
@@ -62,7 +62,7 @@ const copy: Copy = {
     },
     {
       question: 'Notre analyste fait aussi des modifications. Pouvez-vous les relire ?',
-      answer: 'Oui, dans les offres Évolution et Pilotage, sur les jours de développement. L’offre Maintien n’inclut pas de relecture.',
+      answer: 'Oui, sur les jours de développement : inclus dans les offres Évolution et Pilotage, ou achetés à la demande dans l’offre Maintien.',
     },
     {
       question: 'Et si notre budget est réduit ?',
@@ -77,11 +77,11 @@ const copy: Copy = {
   tiersNotePrices: 'Prix mensuels en euros, hors taxes (HT).',
   tiersNoteHours: 'Les délais de prise en charge se comptent en heures ouvrées : du lundi au vendredi, 9 h – 18 h, heure de Paris.',
   monthlyHeading: 'Ce que vous voyez chaque mois.',
-  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page. Il indique si les chargements ont réussi et si les données étaient à jour à l’heure prévue, les incidents détectés, les changements chez les éditeurs de vos sources et ce que nous en avons fait. Il donne aussi l’évolution des coûts BigQuery, les points de vigilance, le prochain chantier recommandé et, dans les offres Évolution et Pilotage, les jours de développement consommés.',
+  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page. Il indique si les chargements ont réussi et si les données étaient à jour à l’heure prévue, les incidents détectés, les changements chez les éditeurs de vos sources et ce que nous en avons fait. Il donne aussi l’évolution des coûts BigQuery, les points de vigilance, le prochain chantier recommandé et les jours de développement consommés, le cas échéant.',
   promiseLabel: 'Notre engagement',
   promiseBody: 'Si quelque chose que nous surveillons tombe en panne, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal partagé avec vous.',
   changeHeading: 'Les jours de développement.',
-  changeIntro: 'Dans les offres Évolution et Pilotage.',
+  changeIntro: 'Inclus dans les offres Évolution et Pilotage. Dans l’offre Maintien, vous achetez des jours à la demande.',
   changeRulesHtml: [
     `Chaque développement est estimé avant de commencer, mise à jour de la documentation comprise.`,
     `Si un développement s’avère plus gros que prévu, nous nous arrêtons et vous prévenons avant de dépasser l’estimation. Vous choisissez : continuer le mois suivant, ajouter des jours, réduire le périmètre, ou en faire un projet <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,

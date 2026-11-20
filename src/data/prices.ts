@@ -5,5 +5,5 @@ export const prices = {
   audit: { min: 3000, max: 5000 },
   build: { min: 15000, max: 50000 },
   improve: { min: 5000, max: 15000 },
-  support: { run: 950, extend: 2250, lead: 3950, extraDay: 1000 },
+  support: { run: 950, extend: 1950, lead: 3950, extraDay: 1000 },
 } as const;
