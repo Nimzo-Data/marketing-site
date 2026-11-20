@@ -10,12 +10,12 @@ import { serviceLeads } from '../../data/services';
 // Rows that differ by tier come first, rows every tier shares come last.
 const tiers = [
   { name: 'Run', subtitle: 'We keep it running', price: '€950 a month', fit: 'your platform should keep running as it is' },
-  { name: 'Extend', subtitle: 'We also change it', price: '€2,250 a month', fit: 'you need regular changes: new metrics, sources, dashboards' },
+  { name: 'Extend', subtitle: 'We also change it', price: '€1,950 a month', fit: 'you need regular changes: new metrics, sources, dashboards' },
   { name: 'Lead', subtitle: 'We also lead it with you', price: '€3,950 a month', fit: 'you want someone to lead your data decisions' },
 ];
 
 const rows = [
-  { label: 'Change work', values: [false, '1 day a month', '2 days a month'] },
+  { label: 'Change work', values: ['On demand, €1,000 a day', '1 day a month', '2 days a month'] },
   { label: 'Calls', values: ['None, messages only', 'Two 1-hour calls a month', 'Up to 1 hour a week'] },
   { label: 'Architecture, vendor and priority decisions', values: [false, false, true] },
   { label: 'Roadmap session with your leadership team', values: [false, false, 'Quarterly, half a day'] },
@@ -36,7 +36,7 @@ const notIncluded = [
   "Work on components we didn't build or audit",
   'Tool licences, which you pay directly to vendors',
   'Work outside business hours',
-  'Training new users: not on Run; on Extend and Lead it uses change days',
+  'Training new users, which uses change days',
   'Real-time pipelines, data science and ML',
 ];
 
@@ -68,7 +68,7 @@ const faqs = [
   },
   {
     question: 'Our analyst makes changes too. Can you review them?',
-    answer: "Yes, on Extend and Lead, using change days. Run doesn't include reviews.",
+    answer: "Yes, using change days: included on Extend and Lead, or bought on demand on Run.",
   },
   {
     question: 'What if our budget gets cut?',
@@ -80,7 +80,7 @@ const faqs = [
 
 <ServiceLayout
   title="Data Platform Support | Nimzo Data"
-  description="Monthly support for a data platform we built, improved or audited. Run, Extend and Lead tiers at €950, €2,250 and €3,950 a month excl. VAT. Month to month."
+  description="Monthly support for a data platform we built, improved or audited. Run, Extend and Lead tiers at €950, €1,950 and €3,950 a month excl. VAT. Month to month."
   heroTitle="Your platform is live. Someone still has to keep it running."
   heroSubtitle="Monthly support for a platform we have built, improved or audited, so you don't need to hire a data engineer to keep it healthy. Three tiers, one monthly price each."
 >
@@ -104,7 +104,7 @@ const faqs = [
   <!-- What you see each month -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading section-heading--tight">What you see each month.</h2>
-    <p class="intro-body">Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and, on Extend and Lead, change days used.</p>
+    <p class="intro-body">Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and any change days used.</p>
     <div class="boxed">
       <h3 class="boxed-label">Our promise</h3>
       <p>If something we monitor breaks, you hear it from us first. Alerts go to a channel we share with you, automatically.</p>
@@ -114,7 +114,7 @@ const faqs = [
   <!-- Change work -->
   <SectionWrapper py="lg" bg="white">
     <h2 class="section-heading section-heading--tight">Change work.</h2>
-    <p class="intro-body intro-body--tight">On Extend and Lead.</p>
+    <p class="intro-body intro-body--tight">Included on Extend and Lead. On Run, you buy days on demand.</p>
     <ul class="dot-list dot-list--narrow" role="list">
       <li>Every change is estimated before we start, and includes updating the documentation.</li>
       <li>If it turns out bigger, we stop and tell you before going over. You choose: continue next month, add extra days, reduce it, or make it an <a href="/services/data-platform-improvement/" class="inline-link">Improve</a> project.</li>
