@@ -3,7 +3,7 @@ import type { Copy } from './tameson.en';
 const copy: Copy = {
   metaTitle: 'Tameson : des données inexploitées à une plateforme prête pour la BI | Nimzo Data',
   ogTitle: 'Des données BigQuery inexploitées à l’analyse sur 6 marchés',
-  ogDescription: 'Des données BigQuery brutes, désormais modélisées avec Dataform et utilisables pour l’analyse sur 6 marchés.',
+  ogDescription: 'Des données BigQuery brutes, modélisées avec Dataform et utilisables pour l’analyse sur 6 marchés.',
   ogImage: '/og/tameson.png',
   metaDescription: 'Tameson : des données BigQuery inexploitées devenues un socle d’analyse pour 6 marchés, avec une architecture Dataform en couches et des contrôles automatiques à chaque modification.',
   metrics: [
@@ -18,7 +18,7 @@ const copy: Copy = {
   quoteHeading: 'Dans leurs mots.',
   usedHeading: 'Ce que nous avons utilisé.',
   s1_1: 'Le client',
-  s1_2: 'Tameson est un e-commerçant de fournitures industrielles basé à Eindhoven, fondé en 2013. D’abord fournisseur d’électrovannes sous sa propre marque, l’entreprise propose aujourd’hui plus de 160 000 produits (sa marque, de grandes marques, d’autres fournisseurs) sur six marchés : Pays-Bas, Allemagne, France, Royaume-Uni, Espagne et États-Unis.',
+  s1_2: 'Tameson est un e-commerçant de fournitures industrielles basé à Eindhoven, fondé en 2013. D’abord fournisseur d’électrovannes sous sa propre marque, l’entreprise propose plus de 160 000 produits (sa marque, de grandes marques, d’autres fournisseurs) sur six marchés : Pays-Bas, Allemagne, France, Royaume-Uni, Espagne et États-Unis.',
   s1_3: 'L’équipe technique est petite : un CTO, un chef de projet technique, et des freelances spécialistes de Shopify, Dagster, Odoo, Pimcore et de la data.',
   s2_1: 'Le problème',
   s2_2: 'Quand Tameson nous a contactés en mai 2024, les pipelines tournaient, mais l’essentiel des données restait inutilisé.',
@@ -39,7 +39,7 @@ const copy: Copy = {
   s5_8: 'Avec Paul van Oorschot, CTO et cofondateur de Tameson, nous avons mis en place des contrôles automatiques sur le code Dataform. Paul a posé les fondations CI/CD. Nous avons apporté les contrôles propres à Dataform : respect des règles de couches (le staging ne peut pas référencer les marts, les rapports ne peuvent pas sauter de couche, etc.), validation du partitionnement des grosses tables, classement des changements de schéma (sûr, risqué, sans changement) et vérification des instructions exécutées avant chaque modèle incrémental (pre_operations).',
   s5_9: 'Concrètement : des hooks pre-push qui détectent les problèmes en local, un pipeline GitLab CI qui bloque les changements de schéma risqués, et des tâches planifiées qui repèrent les jeux de données orphelins et les dérives de schéma.',
   s6_1: 'Les résultats',
-  s6_2: 'L’équipe de Tameson livre des tableaux de bord et des analyses en quelques jours plutôt qu’en semaines : les données sont déjà modélisées et testées. Les sources les plus importantes sont couvertes, et chaque nouvelle source suit le même schéma : staging, intermédiaire, mart, rapport. Grâce aux contrôles automatiques, la plateforme peut continuer à grandir sans accumuler de dette technique.',
+  s6_2: 'L’équipe de Tameson livre des tableaux de bord et des analyses bien plus vite : les données sont déjà modélisées et testées. Les sources les plus importantes sont couvertes, et chaque nouvelle source suit le même schéma : staging, intermédiaire, mart, rapport. Grâce aux contrôles automatiques, la plateforme peut continuer à grandir sans accumuler de dette technique.',
   s6_3: 'La mission a commencé comme un travail de modélisation ciblé, que Tameson a choisi de poursuivre mois après mois à mesure que le périmètre grandissait. La collaboration continue : Tameson ajoute des sources et des besoins, nous les intégrons sur le même socle.',
   ctaHeading: 'Votre situation ressemble à celle-ci ?',
   ctaSubtitle: 'Réservez un appel de 45 minutes. Nous vous dirons franchement si nous pouvons vous aider.',

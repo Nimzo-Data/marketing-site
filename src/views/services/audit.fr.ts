@@ -59,7 +59,7 @@ const copy: Copy = {
     {
       question: 'Notre reporting a été fait avec Claude ou Cursor. Est-ce un problème ?',
       answer:
-        'Non, et c’est de plus en plus courant. Beaucoup de ces applications font très bien ce pour quoi elles ont été créées. Ce que nous trouvons souvent : des clés d’API dans le code et toujours dans l’historique Git, une application connectée à la base de production avec tous les droits, des changements poussés en production sans relecture. Côté chiffres, un même indicateur calculé de deux façons sur deux écrans, des commandes de test comptées dans le chiffre d’affaires, aucun test. L’essentiel se corrige vite une fois écrit noir sur blanc. L’audit classe les constats par gravité, pour corriger les plus dangereux d’abord.',
+        'Non, et c’est courant. Beaucoup de ces applications font très bien ce pour quoi elles ont été créées. Ce que nous trouvons souvent : des clés d’API dans le code et toujours dans l’historique Git, une application connectée à la base de production avec tous les droits, des changements poussés en production sans relecture. Côté chiffres, un même indicateur calculé de deux façons sur deux écrans, des commandes de test comptées dans le chiffre d’affaires, aucun test. L’essentiel se corrige vite une fois écrit noir sur blanc. L’audit classe les constats par gravité, pour corriger les plus dangereux d’abord.',
     },
     {
       question: 'Allez-vous nous pousser vers Google Cloud ?',
@@ -136,7 +136,7 @@ const copy: Copy = {
   thLook: 'Ce que nous regardons en premier',
   thSample: 'Exemple',
   sampleLink: 'Exemple d’audit',
-  comingSoon: 'Bientôt',
+  comingSoon: '—',
   questionsTitle: 'Les questions :',
   answersTitle: 'Les réponses de l’audit :',
   ifVerdict: 'Si le verdict est',

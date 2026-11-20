@@ -40,7 +40,7 @@ const copy: Copy = {
           bullets: [
             'Vous voulez une BI plus large qu’un outil centré sur les indicateurs : intégration dans vos propres produits, SDK',
             "Votre équipe n’a pas adopté dbt",
-            'Vous voulez auto-héberger avec les fonctions d’IA incluses : Metabot est désormais open source',
+            'Vous voulez auto-héberger avec les fonctions d’IA incluses : Metabot est open source',
           ],
         },
         {

@@ -47,10 +47,10 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "dbt (data build tool) est un outil open source très répandu pour la transformation de données en SQL. Il compile des modèles SQL (avec Jinja) en requêtes exécutées dans l’entrepôt, gère les dépendances, lance les tests et génère la documentation automatiquement. Il fonctionne avec BigQuery, Snowflake, Redshift et d’autres. Les dernières versions ajoutent dbt Copilot (assistance IA pour le SQL, disponible sur les offres payantes) et le moteur Fusion (écrit en Rust, encore en préversion sur BigQuery). La couche sémantique (Semantic Layer), qui repose sur MetricFlow, est désormais disponible pour tous.",
+  p1: "dbt (data build tool) est un outil open source très répandu pour la transformation de données en SQL. Il compile des modèles SQL (avec Jinja) en requêtes exécutées dans l’entrepôt, gère les dépendances, lance les tests et génère la documentation automatiquement. Il fonctionne avec BigQuery, Snowflake, Redshift et d’autres. Il propose aussi dbt Copilot (assistance IA pour le SQL), le moteur Fusion (écrit en Rust) et une couche sémantique (Semantic Layer) qui repose sur MetricFlow.",
   p2: "Le serveur MCP officiel de dbt laisse des outils d’IA (Claude, Cursor) interroger vos indicateurs MetricFlow. L’IA ne rédige pas le SQL : MetricFlow le génère à partir des définitions, ce qui rend les réponses fiables.",
-  p3: "Si vous avez déjà des projets dbt, des besoins multi-cloud ou une équipe qui le maîtrise, nous travaillons avec dbt, sans vous faire migrer. Avec dbt Cloud, l’exécution et le suivi des jobs sont gérés pour vous, comme Dataform le fait en standard sur Google Cloud.",
-  p4: "Une réserve : Fivetran et dbt Labs ont finalisé leur fusion le 1er juin 2026. Pour les clients qui utilisent déjà Fivetran et dbt, c’est pratique, mais cela les rend un peu plus dépendants d’un seul éditeur. Airbyte avec Dataform (ou dbt Core) garde collecte et transformation chez des éditeurs différents.",
+  p3: "Si vous avez déjà des projets dbt ou une équipe qui le maîtrise, nous travaillons avec dbt sur BigQuery, sans vous faire migrer. Sur un autre entrepôt, nous relisons et conseillons, mais nous ne construisons que sur BigQuery. Avec dbt Cloud, l’exécution et le suivi des jobs sont gérés pour vous, comme Dataform le fait en standard sur Google Cloud.",
+  p4: "Une réserve : Fivetran et dbt Labs ont fusionné. Pour les clients qui utilisent déjà Fivetran et dbt, c’est pratique, mais cela les rend un peu plus dépendants d’un seul éditeur. Airbyte avec Dataform (ou dbt Core) garde collecte et transformation chez des éditeurs différents.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

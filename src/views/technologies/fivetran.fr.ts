@@ -41,9 +41,9 @@ const copy: Copy = {
           ],
         },
       ],
-  p1: "Fivetran est une plateforme ELT entièrement managée, avec plus de 700 connecteurs. Elle gère seule l’évolution des schémas, relance automatiquement ce qui a échoué et maintient le code des connecteurs quand les sources changent leurs API. Vous payez au nombre de lignes actives par mois (MAR, monthly active rows) synchronisées, avec une offre gratuite et des offres payantes Standard, Enterprise et Business Critical.",
+  p1: "Fivetran est une plateforme ELT entièrement managée, avec plus de 700 connecteurs. Elle gère seule l’évolution des schémas, relance automatiquement ce qui a échoué et maintient le code des connecteurs quand les sources changent leurs API. Vous payez au nombre de lignes actives par mois (MAR, monthly active rows) synchronisées.",
   p2: "Son principal atout est de tourner sans surveillance, sans data engineer pour suivre les mises à jour des connecteurs. Ceux des grands outils SaaS sont parmi les plus solides du marché.",
-  p3: "Fivetran et dbt Labs ont finalisé leur fusion le 1er juin 2026. Choisir Fivetran, c’est donc de plus en plus confier la collecte et la transformation au même éditeur. C’est pratique pour certaines équipes, mais cela crée une dépendance vis-à-vis de l’éditeur, notamment sur les prix et la feuille de route : à choisir en connaissance de cause.",
+  p3: "Fivetran et dbt Labs ont fusionné. Choisir Fivetran, c’est donc confier la collecte et la transformation au même éditeur. C’est pratique pour certaines équipes, mais cela crée une dépendance vis-à-vis de l’éditeur, notamment sur les prix et la feuille de route : à choisir en connaissance de cause.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
 };

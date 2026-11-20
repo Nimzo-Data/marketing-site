@@ -18,7 +18,7 @@ Here is the list people bring to a first call:
 - The sixth source will not blend, and the blends that work fail without warning.
 - The report takes a minute to load.
 - The HubSpot connector hit its API limit overnight and the numbers are stale.
-- The reliable connectors cost $30 to $99 a month, so the free tool is not free.
+- The reliable connectors are paid, by the month, so the free tool is not free.
 - Two reports show two different revenue figures.
 - Someone added a column to the Sheet and a chart went blank.
 
@@ -56,7 +56,7 @@ The fix for the data problems is a warehouse with a modeling layer, and on Googl
 
 What changes in the reports themselves is that blends disappear, because the joins have already happened upstream; that two reports cannot disagree, because they read one table; and that the report loads in seconds, provided the tables are built for it. That last condition matters. When we get read access to a BigQuery project, the most expensive thing we find is a report pointed at a large raw table, scanning all of it on every refresh. Two things fix it. The modeling layer produces reporting tables pre-aggregated to the grain the report needs, and those tables are partitioned by date, with that date set as the report's date range dimension in Data Studio, so that every date filter reads only the partitions it needs instead of the whole table. Do both and the whole BigQuery bill, models and reports included, runs $100 to $200 a month at a typical client of ours, about what two or three paid connectors cost. Skip them and Data Studio will make BigQuery look expensive.
 
-This is a complete, legitimate stack, and companies run on it for years. One client of ours, a company of under fifty people with an IT team of six, runs all of its reporting on Data Studio over BigQuery and Dataform today, and has done for two years. The tool is not the ceiling for them.
+This is a complete, legitimate stack, and companies run on it for years. One client of ours, a company of under fifty people with an IT team of six, runs all of its reporting on Data Studio over BigQuery and Dataform and, as of September 2026, has done so for two years. The tool is not the ceiling for them.
 
 One concession, and it is a real one: building a good report in Data Studio is a skill. Choosing the right chart, laying it out so it reads, wiring the date controls and filters, keeping the design consistent across twenty pages. Someone holds that skill, usually the person who built the marketing dashboards in the first place, and a warehouse changes what they work from and gives them tables they can trust.
 
@@ -68,9 +68,9 @@ It holds no relationships between sources. A Data Studio data source is one tabl
 
 It has no dashboard grid. There are themes, a snap grid and templates, but no fixed components: every chart, filter, title and block of spacing is placed and styled by hand, and a house style is a template you duplicate and then maintain across every report that used it. This is the sense in which building a report is a skill. Data Studio gives you the parts, and you build the page. Metabase, Looker and Lightdash give you a grid with prebuilt elements you cannot restyle, which is less flexible and much faster.
 
-Exploration stops where the builder stopped. Viewers get the date controls, filters and drill-downs the report was built with. Beyond that, someone with access to the data source can copy the report and add a page, and almost nobody does, because nothing about the tool invites it. So the person in operations who needs a number the report does not show asks the analyst, the analyst builds a table and a page, and [the question becomes a ticket](/blog/first-data-analyst/). The obvious answer in 2026 is to let people ask in plain language, and Data Studio now has that. Point it at a table and it converses with that one table, which inherits the missing model. The governed version exists too, a data agent that knows which fields mean what and which calculations are approved, but it is built in BigQuery or on a Looker model and published into Data Studio. The definitions live somewhere else.
+Exploration stops where the builder stopped. Viewers get the date controls, filters and drill-downs the report was built with. Beyond that, someone with access to the data source can copy the report and add a page, and almost nobody does, because nothing about the tool invites it. So the person in operations who needs a number the report does not show asks the analyst, the analyst builds a table and a page, and [the question becomes a ticket](/blog/first-data-analyst/). The obvious answer in September 2026 is to let people ask in plain language, and Data Studio has that. Point it at a table and it converses with that one table, which inherits the missing model. The governed version exists too, a data agent that knows which fields mean what and which calculations are approved, but it is built in BigQuery or on a Looker model and published into Data Studio. The definitions live somewhere else.
 
-The other limits are real and decide the change for fewer teams: row limits that depend on the connector (some database connectors stop at 150,000 rows; BigQuery has no row cap, only slow reports on unoptimized queries), no version control, row-level security limited to filtering by viewer email, no alerting.
+The other limits are real and decide the change for fewer teams: row limits that depend on the connector (some database connectors cap the rows they return; BigQuery has no row cap, only slow reports on unoptimized queries), no version control, row-level security limited to filtering by viewer email, no alerting.
 
 Put the first three together and the ceiling has a shape, and two questions find it. How many wide tables does the modeling layer maintain for the reports, and is that number growing faster than the reports? And how many people outside the data team can answer their own question without asking the analyst? A company with eight reports, a dozen tables and one analyst is nowhere near the ceiling. A company where every new question means a new table, a new page and a week of the analyst's time has reached it, and no amount of warehouse will move it.
 
@@ -78,7 +78,7 @@ Put the first three together and the ceiling has a shape, and two questions find
 
 When that day comes, the warehouse and the models are not what you replace. They carry over. What changes is the tool on top, and it should be one with a governed semantic layer and an explorer, because that is what turns a ticket into a question someone answers themselves. [The four we build with](/technologies/), by team profile:
 
-- **Steep**, for a small non-technical team that wants metrics first, on a phone, with AI on top. From $15 a seat.
+- **Steep**, for a small non-technical team that wants metrics first, on a phone, with AI on top.
 - **Metabase**, for a mixed team that wants dashboards, an explorer and an AI assistant, with the option to self-host for free.
 - **Lightdash**, for a team that wants metrics defined in code and Git workflows, at a flat rate for any number of users.
 - **Looker**, for twenty users and up, with LookML governance and embedded analytics, at enterprise prices.

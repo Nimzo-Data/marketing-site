@@ -3,7 +3,7 @@ const copy = {
   role: 'Founder',
   photoAlt: 'Antoine Anicotte, founder of Nimzo Data',
   background:
-    'Fifteen years in analytics and data engineering, across Europe, Asia and the US, now exclusively on Google Cloud.',
+    'Fifteen years in analytics and data engineering, across Europe, Asia and the US, and exclusively on Google Cloud.',
   bylineLine:
     'Fifteen years in analytics and data engineering, twelve of them on Google Cloud, in-house and freelance across Europe, Asia and the US.',
   recentWork:

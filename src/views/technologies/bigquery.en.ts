@@ -51,7 +51,7 @@ const copy = {
       ],
   metric: "10+ sources modeled into a layered Dataform platform.",
   body: "Ongoing since June 2024.",
-  p1: "BigQuery is Google's serverless, fully managed data warehouse. It can query terabytes in seconds without any infrastructure to manage. Its columnar storage format and distributed query engine make it fast for analytics workloads by default. Recent releases add first-class Gemini integration: SQL-native AI functions, Data Canvas for natural-language exploration, and conversational analytics. AI accuracy depends on how well your data is modeled. A well-structured BigQuery warehouse with governed semantic layers gives you useful answers instead of confident hallucinations.",
+  p1: "BigQuery is Google's serverless, fully managed data warehouse. It can query terabytes in seconds without any infrastructure to manage. Its columnar storage format and distributed query engine make it fast for analytics workloads by default. It integrates with Gemini, with SQL-native AI functions, Data Canvas for natural-language exploration, and conversational analytics. AI accuracy depends on how well your data is modeled. A well-structured BigQuery warehouse with governed semantic layers gives you useful answers instead of confident hallucinations.",
   p2: "Every major cloud has a data warehouse. BigQuery is the one where cost at scale is predictable, partitioning and clustering work without ceremony, and the ecosystem of tools (Dataform, Looker, dbt) is purpose-built around it. For European companies, BigQuery also supports EU multi-region storage natively.",
   sectionTitle: "What it is",
   sectionTitle2: "Why we chose it",

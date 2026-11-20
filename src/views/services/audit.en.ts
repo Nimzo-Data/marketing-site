@@ -60,7 +60,7 @@ const copy = {
   {
     question: 'Our reporting was built with Claude or Cursor. Is that a problem?',
     answer:
-      "No, and it's increasingly common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the code and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
+      "No, and it's common. Many of these apps work well for what they were built to do. What we typically find around them: API keys committed to the code and still in the Git history, an app connecting to the production database with full rights, the same metric computed two different ways on two screens, test orders counted in revenue, no tests on the figures, and changes pushed straight to production with no review. Most of it is quick to fix once it's written down, and the audit ranks it so the dangerous items get fixed first.",
   },
   {
     question: 'Will you tell us to move to Google Cloud?',
@@ -137,7 +137,7 @@ const copy = {
   thLook: "What we look at first",
   thSample: "Sample",
   sampleLink: "Sample audit",
-  comingSoon: "Coming soon",
+  comingSoon: "—",
   questionsTitle: "The questions:",
   answersTitle: "What the audit answers:",
   ifVerdict: "If the verdict is",

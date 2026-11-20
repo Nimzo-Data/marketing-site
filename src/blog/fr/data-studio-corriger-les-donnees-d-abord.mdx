@@ -19,7 +19,7 @@ Voici la liste qu’on nous apporte au premier appel :
 - Impossible de fusionner une sixième source, et les fusions de données (blends) qui fonctionnent peuvent échouer sans prévenir.
 - Le rapport met une minute à charger.
 - Le connecteur HubSpot a atteint sa limite d’API dans la nuit et les chiffres ne sont pas à jour.
-- Les connecteurs fiables coûtent 30 à 99 $ par mois, donc l’outil gratuit ne l’est pas.
+- Les connecteurs fiables sont payants, au mois, donc l’outil gratuit ne l’est pas.
 - Deux rapports affichent deux chiffres d’affaires différents.
 - Quelqu’un a ajouté une colonne au fichier Google Sheets et un graphique s’est vidé.
 
@@ -59,7 +59,7 @@ Les rapports ne font plus de fusions de données, puisque les jointures sont dé
 
 Quand nous obtenons un accès en lecture à un projet BigQuery, ce qui coûte le plus cher est presque toujours un rapport branché sur une grosse table brute, relue en entier à chaque actualisation. Deux choses y remédient : des tables de reporting déjà agrégées au niveau de détail dont le rapport a besoin, et un partitionnement par date, branché sur le filtre de dates du rapport. Chaque filtre ne lit alors que les jours demandés, au lieu de toute la table. Avec les deux, la facture BigQuery complète (modèles et rapports compris) tourne entre 100 et 200 $ par mois chez un client type, soit à peu près le prix de deux ou trois connecteurs payants. Sans eux, un rapport Data Studio fera paraître BigQuery cher.
 
-C’est une plateforme complète, et des entreprises l’utilisent pendant des années. L’un de nos clients, moins de cinquante personnes dont six à l’informatique, fait tout son reporting dans Data Studio, sur BigQuery et Dataform, depuis deux ans. Data Studio ne le limite pas.
+C’est une plateforme complète, et des entreprises l’utilisent pendant des années. En septembre 2026, l’un de nos clients, moins de cinquante personnes dont six à l’informatique, fait tout son reporting dans Data Studio, sur BigQuery et Dataform, depuis deux ans. Data Studio ne le limite pas.
 
 Il faut le reconnaître : faire un bon rapport dans Data Studio demande du métier. Il faut choisir le bon graphique, le mettre en page pour qu’il se lise, brancher les filtres et les dates, garder un design cohérent sur vingt pages. Dans la plupart des entreprises, c’est la personne qui a monté les tableaux de bord marketing qui sait le faire. Avec un entrepôt, elle fait le même travail sur des tables fiables.
 
@@ -75,9 +75,9 @@ Il n’a pas de grille de tableau de bord. Thèmes, grille d’alignement et mod
 
 L’exploration s’arrête là où le concepteur s’est arrêté. Les lecteurs disposent des contrôles de date, des filtres et des analyses détaillées (drill-down) avec lesquels le rapport a été construit. Au-delà, quelqu’un qui a accès à la source de données peut copier le rapport et ajouter une page, et presque personne ne le fait, parce que rien dans l’outil n’y invite. Le responsable des opérations qui a besoin d’un chiffre que le rapport n’affiche pas le réclame donc à l’analyste, l’analyste construit une table et une page, et [la demande devient un ticket](/fr/blog/premier-data-analyst-plateforme-data/).
 
-La réponse évidente en 2026 est de laisser les gens poser leurs questions en langage courant, et Data Studio sait maintenant le faire. Branchez-le sur une table et il dialogue avec cette seule table, ce qui nous ramène au problème du modèle manquant. Une version fiable existe aussi : un agent data qui sait ce que signifie chaque champ et quels calculs sont approuvés. Mais ses définitions se construisent dans BigQuery ou sur un modèle Looker ; Data Studio ne fait que l’afficher.
+La réponse évidente en septembre 2026 est de laisser les gens poser leurs questions en langage courant, et Data Studio sait le faire. Branchez-le sur une table et il dialogue avec cette seule table, ce qui nous ramène au problème du modèle manquant. Une version fiable existe aussi : un agent data qui sait ce que signifie chaque champ et quels calculs sont approuvés. Mais ses définitions se construisent dans BigQuery ou sur un modèle Looker ; Data Studio ne fait que l’afficher.
 
-Les autres limites de la liste ci-dessus justifient moins souvent un changement d’outil. Pour les lignes, certains connecteurs de bases de données s’arrêtent à 150 000 lignes ; BigQuery n’a pas de limite, seulement des rapports lents sur des requêtes non optimisées.
+Les autres limites de la liste ci-dessus justifient moins souvent un changement d’outil. Pour les lignes, certains connecteurs de bases de données plafonnent le nombre de lignes ; BigQuery n’a pas de limite, seulement des rapports lents sur des requêtes non optimisées.
 
 Ensemble, ces trois points dessinent le plafond ; deux questions permettent de le repérer. Combien de tables larges la couche de modélisation maintient-elle pour les rapports, et ce nombre croît-il plus vite que les rapports ? Et combien de personnes hors de l’équipe data peuvent répondre à leur propre question sans solliciter l’analyste ? Une entreprise avec huit rapports, une douzaine de tables et un analyste est très loin du plafond. Une entreprise où chaque nouvelle demande exige une nouvelle table, une nouvelle page et une semaine de l’analyste l’a atteint, et aucun entrepôt n’y changera rien.
 
@@ -85,7 +85,7 @@ Ensemble, ces trois points dessinent le plafond ; deux questions permettent de l
 
 Ce jour-là, vous ne remplacez ni l’entrepôt ni les modèles : ils restent. Seul l’outil du dessus change. Il lui faut des indicateurs gouvernés et la possibilité d’explorer les données soi-même, pour que chacun trouve sa réponse au lieu d’ouvrir un ticket. [Les quatre outils avec lesquels nous construisons](/fr/technologies/), selon le profil de l’équipe :
 
-- **Steep**, pour une petite équipe non technique qui veut suivre ses indicateurs, surtout sur téléphone, avec une IA intégrée. À partir de 15 $ par licence.
+- **Steep**, pour une petite équipe non technique qui veut suivre ses indicateurs, surtout sur téléphone, avec une IA intégrée.
 - **Metabase**, pour une équipe mixte qui veut des tableaux de bord, un explorateur et un assistant IA, avec la possibilité de l’héberger soi-même gratuitement.
 - **Lightdash**, pour une équipe qui veut des indicateurs définis dans le code et des workflows Git, à tarif fixe, quel que soit le nombre d’utilisateurs.
 - **Looker**, pour une entreprise de vingt utilisateurs ou plus, avec la gouvernance LookML et la BI embarquée, à des tarifs d’entreprise.

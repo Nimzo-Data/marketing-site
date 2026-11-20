@@ -39,9 +39,9 @@ const copy = {
           ],
         },
       ],
-  p1: "Fivetran is a fully managed ELT platform with 700+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced, with a Free tier and paid Standard / Enterprise / Business Critical plans.",
+  p1: "Fivetran is a fully managed ELT platform with 700+ connectors. It handles schema evolution automatically, retries failures, and maintains connector code as sources change their APIs. You pay per monthly active row (MAR) synced.",
   p2: "Fivetran's managed reliability is its main selling point. For companies that want pipelines that simply work without a data engineer babysitting connector updates, Fivetran is a safe choice. The connector quality for major SaaS tools (Salesforce, HubSpot, Stripe, Shopify) is among the strongest.",
-  p3: "One thing to watch: Fivetran and dbt Labs completed their merger on 1 June 2026, so choosing Fivetran increasingly means committing to the same vendor across ingestion and transformation. That's convenient for some teams and a lock-in concern for others, so make the choice deliberately.",
+  p3: "One thing to watch: Fivetran and dbt Labs have merged, so choosing Fivetran means committing to the same vendor across ingestion and transformation. That's convenient for some teams and a lock-in concern for others, so make the choice deliberately.",
   sectionTitle: "What it is",
   sectionTitle2: "Why we chose it",
 };

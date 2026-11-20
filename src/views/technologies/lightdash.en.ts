@@ -38,7 +38,7 @@ const copy = {
           bullets: [
             'You need broader BI (dashboards, embedding, SDK) beyond metric-first',
             "Your team isn't committed to dbt-native workflows",
-            'You want self-host optionality with AI features included. Metabot is now open-source',
+            'You want self-host optionality with AI features included. Metabot is open source',
           ],
         },
         {

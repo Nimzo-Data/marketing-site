@@ -63,7 +63,7 @@ const copy = {
   metaTitle: "About | Boutique GCP Data Consultancy | Nimzo Data",
   metaDescription: "Boutique Google Cloud data consultancy based in France. Data platforms for growing European companies. Paid audits, fixed-price builds, senior engineering only.",
   heroTitle: "A boutique data consultancy.<br>That stays that way.",
-  heroSubtitle: "Small team, one cloud, paid audits and fixed-price builds.<br>We work with a handful of clients at a time and go deep.",
+  heroSubtitle: "Small firm, one cloud, paid audits and fixed-price builds.<br>We work with a handful of clients at a time and go deep.",
   heroCta: "Let's talk",
   nameTitle: "Why Nimzo?",
 };

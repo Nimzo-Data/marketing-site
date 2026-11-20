@@ -50,7 +50,7 @@ const copy: Copy = {
       ],
   p1: "Steep est un outil de BI par indicateurs. Les indicateurs sont définis une seule fois (en général par un responsable data ou un analyste), et les équipes métier les explorent dans une interface visuelle ou posent leurs questions à Steep AI, qui répond en langage naturel à partir des indicateurs gouvernés.",
   p2: "Steep a sa propre couche sémantique pour définir les indicateurs. Il peut aussi se brancher sur la Semantic Layer de dbt si l’équipe y maintient déjà ses indicateurs : un seul modèle d’indicateurs, deux interfaces. Steep expose ses indicateurs via MCP (Model Context Protocol) : on peut interroger les mêmes indicateurs gouvernés depuis Claude ou ChatGPT, sans ouvrir Steep.",
-  p3Html: `Si vos utilisateurs ne sont pas techniques et veulent des chiffres cohérents sans apprendre le SQL, Steep suffit, pour une fraction du prix de Looker. Les crédits Steep AI (questions-réponses en langage naturel) sont inclus dans chaque offre payante.`,
+  p3Html: `Si vos utilisateurs ne sont pas techniques et veulent des chiffres cohérents sans apprendre le SQL, Steep suffit, pour une fraction du prix de Looker. Steep AI (questions-réponses en langage naturel) est intégré au produit, et non vendu en option, dans des limites d’usage raisonnables.`,
   p4: "Steep AI s’appuie sur les mêmes indicateurs que vos tableaux de bord, donc une réponse de l’IA et un graphique utilisent la même définition du « chiffre d’affaires » ou de l’« utilisateur actif ».",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",

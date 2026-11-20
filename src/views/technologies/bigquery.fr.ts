@@ -53,7 +53,7 @@ const copy: Copy = {
       ],
   metric: "Plus de 10 sources modélisées dans une plateforme Dataform en couches.",
   body: "En cours depuis juin 2024.",
-  p1: "BigQuery est l’entrepôt de données (data warehouse) serverless et entièrement géré de Google. Il interroge des téraoctets en quelques secondes, sans infrastructure à gérer. Les dernières versions intègrent Gemini : on peut utiliser l’IA directement en SQL et explorer vos données en langage naturel (Data Canvas). La fiabilité des réponses de l’IA dépend de la qualité de votre modélisation : un entrepôt bien structuré, avec une couche sémantique gouvernée, donne des réponses utiles plutôt que des erreurs présentées avec aplomb.",
+  p1: "BigQuery est l’entrepôt de données (data warehouse) serverless et entièrement géré de Google. Il interroge des téraoctets en quelques secondes, sans infrastructure à gérer. Il intègre Gemini : on peut utiliser l’IA directement en SQL et explorer vos données en langage naturel (Data Canvas). La fiabilité des réponses de l’IA dépend de la qualité de votre modélisation : un entrepôt bien structuré, avec une couche sémantique gouvernée, donne des réponses utiles plutôt que des erreurs présentées avec aplomb.",
   p2: "Nous l’avons choisi parce que son coût reste prévisible quand les volumes grandissent. Le partitionnement et le clustering s’y mettent en place simplement, et Dataform, Looker et dbt s’y branchent directement. Pour une entreprise européenne, le stockage multirégion dans l’UE est natif.",
   sectionTitle: "Ce que c’est",
   sectionTitle2: "Pourquoi nous l’avons choisi",
