@@ -17,8 +17,8 @@ const copy: Copy = {
   metaDescription: 'Un appel gratuit de 45 minutes sur votre plateforme data, sans engagement. Nous vous disons si nous pouvons vous aider. Ou écrivez à hello@nimzodata.com.',
   heroTitle: 'Parlons de votre plateforme data.',
   heroSubtitle: 'Un appel gratuit de 45 minutes, sans engagement. Vous nous racontez ce qui ne va pas dans vos données, nous vous disons si nous pouvons vous aider.',
-  // TODO(fr): replace with the French booking schedule once Antoine sends its link (plan Task 18).
-  calendarUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1WUIRsRks4hxf6-nWhuq942Xpp7WNKM1rKJHUqthdkdPUKyq7QICNNAZ-F72XLef1Pj_h3FSVu?gv=true',
+  // French booking schedule (« Appel découverte — Nimzo Data »).
+  calendarUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ22uTdiAFHl_L29C1Xcgx6HbFZiry53aJIV2jkRUXQbp8_quoBLG8_YdxOWObRxtxH5Ecp22fEq?gv=true',
   emailTitle: 'Vous préférez écrire ?',
   whereTitle: 'Où nous sommes.',
   servicesCardTitle: 'Nos services',
