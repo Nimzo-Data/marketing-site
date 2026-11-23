@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStandard from '../../components/heroes/HeroStandard.astro';
+import CTABanner from '../../components/cards/CTABanner.astro';
+import SectionWrapper from '../../components/ui/SectionWrapper.astro';
+import { getTechnologies, type Technology } from '../../data/technologies';
+import { t } from '../../i18n/ui';
+import type { RouteId } from '../../i18n/routes';
+import type { Locale } from '../../i18n/locales';
+import { pickCopy } from '../../i18n/copy';
+import { href } from '../../i18n/routes';
+import en from './technologies.en';
+import fr from './technologies.fr';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = pickCopy({ en, fr }, locale, 'views/technologies/index');
+const technologies = getTechnologies(locale);
+
+interface Section {
+  heading: string;
+  categories: Technology['category'][];
+  perRow: 2 | 3;
+}
+
+const sections: Section[] = [
+  { heading: c.headingCloud, categories: ['cloud', 'warehouse'], perRow: 2 },
+  { heading: c.headingTransformation, categories: ['transformation'], perRow: 2 },
+  { heading: c.headingEtl, categories: ['etl'], perRow: 2 },
+  { heading: c.headingBi, categories: ['bi'], perRow: 2 },
+  { heading: c.headingOrchestration, categories: ['orchestration'], perRow: 2 },
+];
+
+const grouped = sections.map((section) => ({
+  heading: section.heading,
+  perRow: section.perRow,
+  items: technologies.filter((t) => section.categories.includes(t.category)),
+}));
+---
+
+<BaseLayout locale={locale}
+  title={c.metaTitle}
+  description={c.metaDescription}
+>
+  <HeroStandard
+    title={c.heroTitle}
+    subtitle={c.heroSubtitle}
+    cta={{ text: t(locale).components.ctaBanner.button, href: href('contact', locale) }}
+  />
+
+  {grouped.map((group) => (
+    <SectionWrapper py="md" bg="white">
+      <h2 class="group-heading">{group.heading}</h2>
+      <div class={`tech-grid tech-grid--${group.perRow}`}>
+        {group.items.map((tech) => (
+          <a href={href(`tech:${tech.slug}` as RouteId, locale)} class="tech-card">
+            <div class="tech-card__head">
+              {tech.logoPath ? (
+                <img src={tech.logoPath} alt={t(locale).components.logoAlt(tech.name)} class="tech-card__logo" width="40" height="40" loading="lazy" />
+              ) : (
+                <div class="tech-card__logo-placeholder" aria-hidden="true">{tech.name.slice(0, 2).toUpperCase()}</div>
+              )}
+              <h3 class="tech-card__name">{tech.name}</h3>
+            </div>
+            <p class="tech-card__tagline">{tech.tagline}</p>
+            <span class="tech-card__link">{t(locale).components.learnMore} <span class="tech-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        ))}
+      </div>
+    </SectionWrapper>
+  ))}
+
+  <div class="tech-to-cta-spacer" aria-hidden="true"></div>
+  <CTABanner locale={locale} dataTrack="technologies-index-cta" />
+</BaseLayout>
+
+<style>
+  .group-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    color: var(--color-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.2;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .tech-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .tech-grid--3 { grid-template-columns: repeat(3, 1fr); }
+    /* When a perRow=2 grid has only 1 child (e.g. Orchestration), center it at half-width */
+    .tech-grid--2:has(> .tech-card:only-child) {
+      grid-template-columns: 1fr;
+      max-width: calc((100% - 24px) / 2);
+    }
+  }
+
+  .tech-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px;
+    height: 100%;
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  }
+
+  .tech-card:hover {
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-2px);
+    border-color: var(--color-brand-plum);
+  }
+
+  .tech-card__arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .tech-card:hover .tech-card__arrow {
+    transform: translateX(4px);
+  }
+
+  .tech-card__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .tech-card__logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .tech-card__logo-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .tech-card__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .tech-card__tagline {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+    flex: 1;
+    min-height: 3rem;
+  }
+
+  .tech-card__link {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .tech-to-cta-spacer {
+    height: 32px;
+  }
+</style>

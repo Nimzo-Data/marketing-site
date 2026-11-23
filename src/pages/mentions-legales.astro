@@ -8,7 +8,9 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
   description="Mentions légales du site nimzodata.com. Éditeur, hébergeur, et informations légales."
 >
   <SectionWrapper py="xl">
-    <div class="legal-content">
+    <!-- French-only legal notice, shared by both languages: the chrome follows
+         the default locale, the content declares its own language. -->
+    <div class="legal-content" lang="fr">
       <h1>Mentions légales</h1>
       <p class="meta">Dernière mise à jour : 23 avril 2026</p>
 
@@ -25,7 +27,7 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
         Société à responsabilité limitée<br />
         36 Rue de la Convention, 93230 Romainville, France<br />
         SIRET : 994 080 497 00013<br />
-        Email : <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>
+        E-mail : <a href="mailto:hello@nimzodata.com">hello@nimzodata.com</a>
       </p>
 
       <h2>Directeur de la publication</h2>

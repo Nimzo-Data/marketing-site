@@ -6,6 +6,9 @@
 // top, then the first card lists everything it includes and each later card
 // only what differs from the tier before it, under "Everything in X, plus:".
 // No tier is highlighted on purpose.
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 export interface RetainerTier {
   name: string;
   subtitle: string;
@@ -22,12 +25,14 @@ export interface RetainerRow {
 }
 
 interface Props {
+  locale: Locale;
   tiers: RetainerTier[];
   rows: RetainerRow[];
   fitLabel?: string;
 }
 
-const { tiers, rows, fitLabel = 'For you if' } = Astro.props;
+const ui = t(Astro.props.locale).components.retainer;
+const { tiers, rows, fitLabel = ui.fitLabel } = Astro.props;
 
 const upperFirst = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -58,8 +63,8 @@ const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
           <th scope="row" class="rt-td rt-td--label">{row.label}</th>
           {row.values.map((v) => (
             <td class="rt-td">
-              {v === true && <span>Included</span>}
-              {v === false && (<span class="rt-dash"><span class="rt-dash-bar" aria-hidden="true"></span><span class="rt-sr">Not included</span></span>)}
+              {v === true && <span>{ui.included}</span>}
+              {v === false && (<span class="rt-dash"><span class="rt-dash-bar" aria-hidden="true"></span><span class="rt-sr">{ui.notIncluded}</span></span>)}
               {typeof v === 'string' && <span>{v}</span>}
             </td>
           ))}
@@ -80,7 +85,7 @@ const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
         <p class="rt-card-fit"><span>{fitLabel}</span> {tier.fit}.</p>
       </div>
 
-      {i > 0 && <p class="rt-card-lead">Everything in {tiers[i - 1].name}, plus:</p>}
+      {i > 0 && <p class="rt-card-lead">{ui.everythingIn(tiers[i - 1].name)}</p>}
       <ul class="rt-card-list" role="list">
         {rows
           .filter((row) => row.values[i] !== false && (i === 0 || row.values[i] !== row.values[i - 1]))

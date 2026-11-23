@@ -1,0 +1,63 @@
+const copy = {
+  title: "Looker | Nimzo Data",
+  description: "Looker and LookML implementation on BigQuery. Semantic layer design, governed metrics, Gemini-powered conversational analytics, and access control.",
+  toolCategory: "Business Intelligence",
+  heroPositioning: "Looker is Google's enterprise BI tool: LookML governance plus Gemini-powered AI. We implement it for companies that need a centralized semantic layer and are ready to invest accordingly.",
+  title2: "How we use it",
+  items: [
+        "Design and implement LookML models: views, explores, derived tables, and measures",
+        "Build executive and operational dashboards with governed metrics",
+        "Configure Conversational Analytics and Dashboard Agents for natural-language queries against governed LookML",
+        "Set up scheduled dashboard and Look deliveries via email and Slack",
+        "Implement user access controls and group-level permissions",
+        "Connect the Looker MCP Server to the client's AI tools (Claude, Cursor) for natural-language queries over governed LookML",
+      ],
+  title3: "When Looker is the right BI tool, and when it isn't",
+  blocks: [
+        {
+          heading: 'Choose Looker when:',
+          bullets: [
+            'You need enterprise governance and consistent metrics across teams',
+            'You have 20+ BI users across multiple departments',
+            'You want embedded analytics or multi-tenant reporting at scale',
+            'You need Gemini-powered conversational analytics on top of a governed semantic layer',
+            'Budget is €5k+/month (Looker pricing is sales-quoted)',
+          ],
+        },
+        {
+          heading: 'Choose Lightdash instead when:',
+          bullets: [
+            "You want version-controlled metrics (dbt YAML or Lightdash's native semantic layer)",
+            'You prefer flat-rate pricing that does not scale with headcount',
+            "You don't need the full LookML semantic layer",
+          ],
+        },
+        {
+          heading: 'Choose Metabase instead when:',
+          bullets: [
+            'Budget is below Looker tier but you still need broad BI (dashboards, embedding, SQL access)',
+            'You want the option to self-host the BI layer',
+            'You want a real AI assistant without Looker-tier commitment',
+          ],
+        },
+        {
+          heading: 'Choose Steep instead when:',
+          bullets: [
+            'Primary users are non-technical',
+            'The goal is broad self-service access for business users',
+            'Budget is under €500/month',
+          ],
+        },
+      ],
+  metric: "From minutes to seconds.",
+  body: "Plus a 77% drop in infrastructure costs and 119 Looker derived tables collapsed into a single Dataform layer.",
+  p1: "Looker is Google's enterprise BI platform, built around LookML, a modeling language that defines a governed semantic layer sitting between your data warehouse and your end users. Every metric, dimension, and relationship is defined once in LookML and reused consistently across all reports and dashboards.",
+  p2: "AI is central to Looker. Conversational Analytics lets business users ask natural-language questions against the governed LookML model; Dashboard Agents generate AI summaries and deep-dives inside dashboards; LookML-aware assistants help developers write expressions and build visualizations. The Conversational Analytics APIs also expose the same capability to embedded apps.",
+  p3: "For organizations where data governance and metric consistency matter, where finance and product can't have different definitions of \"revenue\", Looker is the right tool. The LookML semantic layer also makes Looker well suited to embedded analytics and multi-tenant reporting. The GCP native integration (Looker is part of Google Cloud) also means tighter BigQuery integration, including BI Engine acceleration and Gemini on top.",
+  p4: "LookML's semantic layer is also what makes Looker's AI features accurate. Gemini queries governed metric definitions, not raw SQL. Google's own benchmarks show that LookML substantially reduces AI query errors. The official Looker MCP Server extends this further: external AI tools (Claude, Cursor) can query the governed LookML layer directly, with OAuth pass-through and user-level permissions.",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
+};
+
+export type Copy = typeof copy;
+export default copy;

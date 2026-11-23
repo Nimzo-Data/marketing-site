@@ -1,7 +1,11 @@
 ---
 import LineIcon, { type LineIconName } from '../ui/LineIcon.astro';
 
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 interface Props {
+  locale: Locale;
   eyebrow?: string;
   /** Small line icon shown left of the title. */
   icon?: LineIconName;
@@ -25,7 +29,7 @@ const {
   timeline,
   href,
   dataTrack,
-  linkText = 'Learn more',
+  linkText = t(Astro.props.locale).components.learnMore,
   size = 'default',
 } = Astro.props;
 ---

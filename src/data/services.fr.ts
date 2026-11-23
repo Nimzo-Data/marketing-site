@@ -1,0 +1,26 @@
+import type { ServicesCopy } from './services.en';
+
+const copy: ServicesCopy = {
+  audit: {
+    title: 'Audit',
+    body: 'Un verdict sur chaque partie de votre plateforme et un prix fixe pour la suite.',
+    linkText: 'Voir l’Audit',
+  },
+  build: {
+    title: 'Construction',
+    body: 'Une nouvelle plateforme data sur Google Cloud, ou le remplacement de celle qu’il faut abandonner. Chiffrée après un audit.',
+    linkText: 'Voir la Construction',
+  },
+  improve: {
+    title: 'Amélioration',
+    body: 'Corriger ce qui ne marche pas ou ajouter ce qui manque, un projet à la fois, à prix fixe.',
+    linkText: 'Voir l’Amélioration',
+  },
+  support: {
+    title: 'Support',
+    body: 'Un data engineer senior qui surveille votre plateforme, traite les incidents et fait les petits développements.',
+    linkText: 'Voir le Support',
+  },
+};
+
+export default copy;

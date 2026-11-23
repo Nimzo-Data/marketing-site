@@ -1,0 +1,92 @@
+---
+// Link to the same page in the other language. A plain link: no redirect, no
+// remembered preference. Renders nothing while French isn't built, or when the
+// page has no counterpart (a page shared by both languages, the 404).
+import type { Locale } from '../../i18n/locales';
+import { frenchBuilt } from '../../i18n/flags';
+
+interface Props {
+  locale: Locale;
+  paths?: Record<Locale, string>;
+  class?: string;
+  /** Show the two-letter code below 1200px, where the header has no room for the word. */
+  compact?: boolean;
+}
+
+const { locale, paths, class: className, compact = false } = Astro.props;
+const target: Locale = locale === 'fr' ? 'en' : 'fr';
+const show = frenchBuilt && paths && paths.en !== paths.fr;
+
+// Each label is written in the language it leads to. No flag: a flag names a
+// country, not a language. Screen readers always get the full word.
+const labels: Record<Locale, { short: string; long: string }> = {
+  en: { short: 'EN', long: 'English' },
+  fr: { short: 'FR', long: 'Français' },
+};
+---
+
+{show && (
+  <a
+    href={paths[target]}
+    hreflang={target}
+    lang={target}
+    class:list={['lang-switch', { 'lang-switch--compact': compact }, className]}
+    data-lang-switch
+  >
+    <span class="lang-switch__long">{labels[target].long}</span>
+    <span class="lang-switch__short" aria-hidden="true">{labels[target].short}</span>
+  </a>
+)}
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  .lang-switch:hover,
+  .lang-switch:focus-visible {
+    opacity: 1;
+  }
+
+  .lang-switch__long {
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+  }
+
+  .lang-switch__short {
+    display: none;
+  }
+
+  /* Compact (header below 1200px): the code is shown, the word stays for
+     screen readers. */
+  @media (max-width: 1199px) {
+    .lang-switch--compact .lang-switch__short {
+      display: inline;
+    }
+
+    .lang-switch--compact .lang-switch__long {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+</style>

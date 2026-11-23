@@ -1,7 +1,7 @@
 ---
-type IconName = 'video' | 'file-text' | 'code-2' | 'key-round' | 'life-buoy' | 'search' | 'scale' | 'mail' | 'clipboard-list' | 'rocket';
+export type IconName = 'video' | 'file-text' | 'code-2' | 'key-round' | 'life-buoy' | 'search' | 'scale' | 'mail' | 'clipboard-list' | 'rocket';
 
-interface Step {
+export interface Step {
   number?: number;
   icon?: IconName;
   title: string;
@@ -13,9 +13,13 @@ interface Props {
 }
 
 const { steps } = Astro.props;
+// In a row, a title longer than about this many characters wraps to two lines.
+// When one does, every title gets two lines so the descriptions start level.
+const oneLineMax = steps.length >= 5 ? 20 : 26;
+const tallTitles = steps.some((s) => s.title.length > oneLineMax);
 ---
 
-<div class="process-steps">
+<div class:list={['process-steps', { 'process-steps--tall-titles': tallTitles }]}>
   {steps.map((step, index) => (
     <div class="step-wrapper">
       <div class="step">
@@ -239,6 +243,10 @@ const { steps } = Astro.props;
   @media (min-width: 768px) {
     .step-title {
       margin-top: 12px;
+    }
+
+    .process-steps--tall-titles .step-title {
+      min-height: 2lh;
     }
   }
 

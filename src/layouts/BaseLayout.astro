@@ -1,9 +1,14 @@
 ---
-import { founder } from '../data/founder';
+import { getFounder } from '../data/founder';
 import '../styles/global.css';
 import CookieConsent from '../components/ui/CookieConsent.astro';
 import Header from '../components/layout/Header.astro';
+import FrenchOffer from '../components/layout/FrenchOffer.astro';
 import Footer from '../components/layout/Footer.astro';
+import type { Locale } from '../i18n/locales';
+import { ogLocale } from '../i18n/locales';
+import { routes, routeIdForPath, alternateLinks, href, type RouteId } from '../i18n/routes';
+import { t } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -15,6 +20,12 @@ interface Props {
   ogType?: string;
   canonicalUrl?: string;
   structuredData?: object | object[];
+  /** Page language. Defaults to English. */
+  locale?: Locale;
+  /** Route map id; derived from the URL when omitted. */
+  routeId?: RouteId;
+  /** This page's URL in each language, for pages outside the route map (blog posts). */
+  alternates?: Record<Locale, string>;
 }
 
 const {
@@ -26,7 +37,17 @@ const {
   ogType = 'website',
   canonicalUrl,
   structuredData,
+  locale = 'en',
+  routeId,
+  alternates,
 } = Astro.props;
+
+const ui = t(locale);
+const founder = getFounder(locale);
+const resolvedRouteId = routeId ?? routeIdForPath(Astro.url.pathname);
+// This page in each language: drives the switch, hreflang and og:locale:alternate.
+const paths = alternates ?? (resolvedRouteId ? routes[resolvedRouteId] : undefined);
+const hreflangs = paths ? alternateLinks(paths, Astro.site!) : [];
 
 const canonical = canonicalUrl || Astro.url.href;
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).href;
@@ -39,8 +60,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Nimzo Data',
   url: 'https://nimzodata.com',
-  description:
-    'Boutique GCP data consulting: data platform audits, builds, improvements, and support.',
+  description: ui.site.organizationDescription,
   email: 'hello@nimzodata.com',
   foundingDate: '2024',
   areaServed: 'Europe',
@@ -54,19 +74,21 @@ const organizationSchema = {
 };
 
 // BreadcrumbList JSON-LD (skip on homepage and 404)
-const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '/404/';
+const isHomepage = ['/', '/fr/', '/404/'].includes(Astro.url.pathname);
 const breadcrumbLabel = title.replace(/ \| Nimzo Data$/, '');
 
 const breadcrumbSchema = !isHomepage
   ? {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
+      // English is the default reading; only French pages say so explicitly.
+      ...(locale === 'fr' ? { inLanguage: 'fr' } : {}),
       itemListElement: [
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
-          item: 'https://nimzodata.com/',
+          name: ui.site.breadcrumbHome,
+          item: new URL(href('home', locale), 'https://nimzodata.com').href,
         },
         {
           '@type': 'ListItem',
@@ -94,7 +116,7 @@ const extraSchemas: object[] = structuredData
   : [];
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,6 +132,12 @@ const extraSchemas: object[] = structuredData
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Nimzo Data" />
+    {hreflangs.length > 0 && (
+      <>
+        <meta property="og:locale" content={ogLocale(locale)} />
+        <meta property="og:locale:alternate" content={ogLocale(locale === 'fr' ? 'en' : 'fr')} />
+      </>
+    )}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -120,8 +148,11 @@ const extraSchemas: object[] = structuredData
     <!-- Canonical -->
     <link rel="canonical" href={canonical} />
 
+    <!-- Language alternates (only once French is built) -->
+    {hreflangs.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="Nimzo Data Blog" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={ui.site.rssTitle} href={locale === 'fr' ? '/fr/rss.xml' : '/rss.xml'} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -181,11 +212,12 @@ const extraSchemas: object[] = structuredData
   <body>
     <!-- GA4 container — injected after consent -->
     <div id="ga4-container"></div>
-    <Header />
+    <FrenchOffer locale={locale} paths={paths} />
+    <Header locale={locale} paths={paths} />
     <main>
       <slot />
     </main>
-    <Footer />
-    <CookieConsent />
+    <Footer locale={locale} />
+    <CookieConsent locale={locale} />
   </body>
 </html>

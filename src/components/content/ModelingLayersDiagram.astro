@@ -8,6 +8,9 @@
 // gap, then a layer that sits in another.
 import '../../styles/diagram.css';
 
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 export interface ModelingLayer {
   label: string;
   caption: string;
@@ -31,6 +34,7 @@ export interface LayerGroup {
 }
 
 interface Props {
+  locale: Locale;
   layers?: ModelingLayer[];
   /** Notes shown under their layer. */
   annotations?: LayerAnnotation[];
@@ -40,15 +44,8 @@ interface Props {
   ariaLabel: string;
 }
 
-const defaultLayers: ModelingLayer[] = [
-  { label: 'Raw', caption: 'source tables as loaded' },
-  { label: 'Staging', caption: 'renamed, typed, one per source table' },
-  { label: 'Intermediate', caption: 'joins and business logic' },
-  { label: 'Marts', caption: 'facts and dimensions, described, tested' },
-  { label: 'Reviewed definitions', caption: 'metrics defined once, in the BI tool', gapBefore: true },
-];
 
-const { layers = defaultLayers, annotations = [], groups = [], ariaLabel } = Astro.props;
+const { layers = t(Astro.props.locale).diagrams.modelingLayers, annotations = [], groups = [], ariaLabel } = Astro.props;
 
 const noteFor = (label: string) =>
   annotations.find((a) => a.layer === label)?.text ?? null;
@@ -171,6 +168,16 @@ const placedGroups = groups
        wanted here as well. */
     .mld__box--apart {
       margin-top: 0;
+    }
+
+    /* Every label gets room for two lines, set on the rule, so the rules
+       line up across the row when one label ("Indicateurs gouvernés")
+       wraps. */
+    .mld__box :global(.dgm__label) {
+      min-height: calc(2lh + 8px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
   }
 </style>

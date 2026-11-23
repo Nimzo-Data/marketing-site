@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionWrapper from '../components/ui/SectionWrapper.astro';
+import { frenchBuilt } from '../i18n/flags';
+
+// Vercel serves one 404 for every URL, so it speaks both languages: the French
+// line appears once French pages exist. Copy here on purpose, it is the only
+// bilingual page.
 ---
 
 <BaseLayout
@@ -12,6 +17,11 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
       <h1 class="not-found-heading">This page doesn't exist.</h1>
       <p class="not-found-body">You might have followed a broken link or mistyped the URL. Either way, there's nothing here. Let's get you somewhere useful.</p>
       <a href="/" class="not-found-link">Go to the homepage &rarr;</a>
+      {frenchBuilt && (
+        <p class="not-found-body not-found-body--fr" lang="fr">
+          Cette page n’existe pas. <a href="/fr/" hreflang="fr" class="not-found-link">Aller à l’accueil &rarr;</a>
+        </p>
+      )}
     </div>
   </SectionWrapper>
 </BaseLayout>
@@ -42,6 +52,10 @@ import SectionWrapper from '../components/ui/SectionWrapper.astro';
     color: var(--color-text-secondary);
     margin: 0;
     line-height: 1.6;
+  }
+
+  .not-found-body--fr {
+    margin-top: 24px;
   }
 
   .not-found-link {

@@ -1,0 +1,21 @@
+---
+// Every French page except blog posts: /fr/, /fr/a-propos/, ... The route map
+// (src/i18n/routes.ts) gives the URL, the registry (src/views/registry.ts) the
+// view. Nothing is generated where French isn't built; see src/i18n/flags.ts.
+import { frenchPaths, type RouteId } from '../../i18n/routes';
+import { frenchBuilt } from '../../i18n/flags';
+import { views, type FrenchRouteId } from '../../views/registry';
+
+export function getStaticPaths() {
+  if (!frenchBuilt) return [];
+  return frenchPaths().map(({ id, path }) => ({ params: { path }, props: { id } }));
+}
+
+interface Props {
+  id: RouteId;
+}
+
+const View = views[Astro.props.id as FrenchRouteId];
+---
+
+<View locale="fr" />

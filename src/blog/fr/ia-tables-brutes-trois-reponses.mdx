@@ -1,0 +1,84 @@
+---
+title: "Vous avez branché l’IA sur vos tables brutes. Voici pourquoi elle donne trois réponses."
+description: "Connecter Claude ou ChatGPT à BigQuery prend une heure. Obtenir deux fois le même chiffre d’affaires demande une couche de modélisation. Ce que disent les benchmarks 2026, et où les définitions doivent se trouver."
+pubDate: 2026-10-21
+draft: false
+translationOf: ai-raw-tables-three-answers
+---
+
+import ModelingLayersDiagram from '../../components/content/ModelingLayersDiagram.astro';
+
+En octobre 2026, connecter Claude ou ChatGPT à un projet BigQuery prend environ une heure, dont l’essentiel sert à vérifier que l’agent ne voit que ce que l’utilisateur a le droit de voir. Google fournit un serveur MCP open source qui expose vos tables à n’importe quel agent, l’agent lit le schéma, et vous pouvez lui demander le chiffre d’affaires du mois dernier en langage courant. Beaucoup d’entreprises l’ont fait, et la scène se répète presque à chaque fois : le dirigeant pose la question le lundi et obtient un chiffre, la repose le mercredi et en obtient un autre, puis un troisième quand le directeur financier pose la même question dans une autre session. Chaque réponse arrive avec son SQL et une explication pleine d’aplomb. On en conclut d’ordinaire que le modèle n’est pas prêt.
+
+Le modèle se comporte comme un nouvel analyste le jour de son arrivée. Donnez à quelqu’un l’accès à l’entrepôt de données (data warehouse), sans lui expliquer comment l’entreprise fonctionne, et demandez-lui « quel a été le chiffre d’affaires le mois dernier ». Il produira lui aussi un chiffre plausible, qui contredit celui de l’analyste précédent. L’agent est simplement plus rapide, et il ne demande jamais à un collègue quelle table fait foi.
+
+## Pourquoi des tables brutes donnent trois réponses
+
+Voici ce que voit l’agent dans un projet BigQuery ordinaire. Une table `orders` et une table `orders_v2`. Une colonne `amount`, une autre `total`, un `net_revenue` dans une autre table, et les remboursements dans une quatrième. Des horodatages en UTC dans une source et en heure locale dans l’autre. Une clé client appelée `customer_id` dans une table et `cust_ref` dans celle avec laquelle il faut la joindre. Rien dans le schéma n’indique ce que l’entreprise entend par chiffre d’affaires : les remboursements sont-ils déduits, une commande annulée compte-t-elle, quelle table est à jour ?
+
+L’agent tranche donc à chaque fois, et écrit du SQL qui s’exécute. Brut le lundi, net le mercredi, net moins les annulations pour le directeur financier. Chaque requête est raisonnable, et l’outil ne détecte aucune erreur : le SQL est valide et un chiffre s’affiche. Un analyste financier remarquerait peut-être la jointure manquante sur les remboursements ; la personne qui a posé sa question en langage courant ne voit jamais la requête.
+
+Les questions d’un dirigeant, comme la marge par canal, la croissance par rapport au trimestre dernier ou les meilleurs clients en chiffre d’affaires net, croisent chacune deux ou trois de ces tables, et chaque croisement est une décision que l’agent prend seul.
+
+## Ce que disent les benchmarks
+
+Trois constats, et le premier joue en faveur du modèle.
+
+Le text-to-SQL sur tables brutes progresse vite. dbt Labs fait tourner le même benchmark depuis 2023 : onze questions métier sur un jeu de données d’assurance, vingt exécutions chacune. Sur tables brutes, GPT-4 répondait juste dans 32,7 % des cas en 2023 ; GPT-5.3 Codex et Claude Sonnet 4.6 atteignent 64,5 % en 2026. Le benchmark de Cube d’avril 2026 place les modèles les plus avancés entre 46 et 51 % sur cent questions de commerce de détail posées sur le schéma brut. Sur des tables non documentées, un agent donne donc en 2026 entre la moitié et les deux tiers de bonnes réponses, contre un tiers en 2023.
+
+Le contexte fait l’essentiel du travail. L’étude qui l’a montré est indépendante et un peu ancienne. Début 2025, des chercheurs de GlaxoSmithKline (JAMIA Open) ont posé soixante vraies questions, tirées des historiques de leurs utilisateurs, à la base de pharmacovigilance de l’entreprise, qui compte plus de cinq cents tables. GPT-4 n’obtenait que 8,3 % de bonnes réponses avec le seul schéma, et 78,3 % avec un document rédigé par leurs experts, qui expliquait le contenu des tables et ce que recouvraient les termes métier. Réduire le schéma aux seules tables essentielles, sans ce document, ne faisait monter le taux qu’à 10 % : c’était bien le document qui faisait le travail.
+
+Les modèles de 2026 partent bien plus haut ; pour mesurer l’effet, mieux vaut regarder Cube. Une page de 4 Ko rédigée à la main, décrivant les conventions de nommage, le calcul des principaux indicateurs et la table de faits à utiliser, a fait gagner 17 à 23 points aux trois modèles de 2026, jusqu’à environ 68 %. Ce jeu de démonstration, publié par Microsoft, figurait déjà dans les données d’entraînement des modèles : il avantage plutôt les scores sur tables brutes, ce qui rend l’écart d’autant plus net. Cette page a demandé un après-midi à un analyste.
+
+Sur le benchmark de dbt, les mêmes modèles, avec du SQL ordinaire, atteignent 84 à 90 % de bonnes réponses dès qu’on leur donne trois tables pré-jointes, construites à partir des tables normalisées et sans aucune couche sémantique.
+
+Un document comme celui de Cube est un palliatif que quelqu’un entretient à la main. Une couche de modélisation, c’est la même connaissance, exécutée sur les données, testée et remise à jour à chaque exécution du pipeline.
+
+Les dix derniers points viennent des indicateurs gouvernés, c’est-à-dire définis une fois, vérifiés et approuvés, pour que « chiffre d’affaires » ne puisse vouloir dire qu’une seule chose (ce que les éditeurs appellent une couche sémantique). Avec la couche sémantique de dbt, le test de 2026 atteint 98 à 100 % sur les questions auxquelles elle pouvait répondre. Pour les autres, elle renvoyait une erreur plutôt qu’un chiffre. La phrase des auteurs est celle qu’il faut retenir : avec le text-to-SQL, l’échec prend la forme d’une réponse plausible mais fausse ; avec des indicateurs gouvernés, il prend la forme d’un message d’erreur.
+
+Deux concessions. D’abord, l’IA a vraiment changé le libre-service : poser sa question en langage courant est la première interface que les équipes métier utilisent pour de bon. Les outils d’exploration qui existaient avant ne servaient qu’aux analystes ; les équipes métier, pour qui les éditeurs les présentaient, continuaient surtout à écrire à l’analyste. Ensuite, un analyste qui lit le SQL peut sans risque utiliser un agent sur des tables brutes pour explorer les données. Le problème commence quand la personne qui pose la question ne sait pas lire la requête.
+
+## Le remède est celui dont la plateforme avait toujours besoin
+
+Rien de tout cela n’est nouveau. Dès 2016, un outil de BI branché sur des tables brutes, avec une requête sur mesure pour chaque rapport, produisait des tableaux de bord qui se contredisaient, pour la même raison : les définitions étaient écrites dans chaque outil qui lit les données, au lieu d’être réunies à un seul endroit. Un agent n’est qu’un outil de plus, et il révèle plus vite la couche manquante parce qu’il pose plus de questions.
+
+Première moitié du remède : la couche de modélisation, qui apporte l’essentiel du gain. Elle comprend des tables de staging qui renomment `cust_ref` en `customer_id`, une seule table de chiffre d’affaires où remboursements et annulations sont déjà traités comme l’entreprise l’a décidé, décrite en détail (la table et chacun de ses champs), des tests sur les clés et un graphe de dépendances qui met les chiffres à jour ensemble. Les benchmarks l’ont mesuré sous le nom de « modélisation minimale ». C’est ce que nous mettons en place sur BigQuery avec [Dataform](/fr/blog/dataform-plutot-que-dbt/), qu’un agent la lise un jour ou non. Cette couche sert d’abord l’entreprise ; l’agent est surtout la raison pour laquelle elle obtient enfin un budget. Branchez un agent sur les marts, les tables finales construites pour le reporting, et la plus grande partie du problème des trois réponses disparaît : il n’existe plus qu’une seule table `fct_revenue`, dont la description dit ce qu’elle contient.
+
+La seconde moitié, ce sont les indicateurs gouvernés pour les chiffres qui vont au conseil d’administration. Pour des PME et ETI, on les définit dans l’outil de BI, parce que c’est là que travaillent déjà les personnes qui ne lisent pas le SQL, et parce qu’une couche sémantique autonome est un second produit à faire tourner. En septembre 2026, tous les outils de BI [avec lesquels nous travaillons](/fr/technologies/) permettent à des agents externes d’accéder à leurs définitions :
+
+- **Metabase** : Metabot et un serveur MCP officiel sur toutes les offres, de l’édition open source que vous hébergez vous-même aux offres Cloud payantes. L’agent ne voit que ce que les droits de l’utilisateur autorisent.
+- **Steep** : un serveur MCP officiel ; chaque membre se connecte avec son propre compte et chaque requête passe par la couche sémantique et les permissions de Steep.
+- **Lightdash** : MCP sur Lightdash Cloud ; les instances auto-hébergées exigent une clé de licence Enterprise.
+- **Looker** : un serveur MCP géré par Looker, en préversion pour les instances hébergées par Looker, et une MCP Toolbox open source pour toutes les autres.
+
+En 2025, la plupart de ces accès étaient réservés à certaines offres, ou n’existaient pas. En septembre 2026, c’est l’offre qui décide de l’accès, bien plus que l’éditeur, et la solution la moins chère reste Metabase hébergé par vos soins. Certains de ces serveurs, dont ceux de Steep, de Lightdash et de Looker, permettent aussi à l’agent de construire un rapport ou un tableau de bord. C’est un plus, pas une raison de choisir un outil.
+
+## Où brancher l’agent
+
+Tout dépend de qui pose la question, et il y en a deux sortes.
+
+**Si vous lisez le SQL**, c’est-à-dire si vous êtes l’analyste : branchez l’agent sur l’entrepôt, y compris les tables de staging et intermédiaires, avec leurs descriptions. C’est là qu’il vous rendra le plus service : qu’il se trompe une fois sur trois n’a pas d’importance, puisque vous relisez la requête.
+
+**Si vous ne la lisez pas**, c’est-à-dire tous les autres, du responsable des opérations au conseil d’administration : branchez l’agent sur l’outil de BI, pas sur l’entrepôt. Il répond avec l’IA intégrée à l’outil ou par son serveur MCP, à partir des indicateurs gouvernés et de vos tableaux de bord existants. Le responsable des opérations consulte des marts détaillés et le conseil des marts agrégés, mais le mécanisme est le même : la réponse vient d’un indicateur gouverné, ou l’agent répond « je ne peux pas répondre à cette question ». Les deux valent mieux qu’une supposition faite avec aplomb. Rien de ce qui parvient au conseil ne devrait venir d’une requête que personne n’a lue.
+
+<ModelingLayersDiagram
+  locale="fr"
+  annotations={[
+    { layer: 'Brut', text: 'Agent ici : trois réponses différentes.' },
+    { layer: 'Marts', text: 'Agent ici : le plus souvent juste, et l’analyste lit le SQL.' },
+    { layer: 'Indicateurs gouvernés', text: 'Agent ici : une seule réponse, ou une erreur.' },
+  ]}
+  groups={[
+    { from: 'Brut', to: 'Marts', label: 'BigQuery + Dataform' },
+    { from: 'Indicateurs gouvernés', to: 'Indicateurs gouvernés', label: 'Outil de BI', rule: false },
+  ]}
+  ariaLabel="Les couches entre les tables brutes et une réponse : brut, staging, intermédiaire et marts dans BigQuery avec Dataform, puis les indicateurs gouvernés dans l’outil de BI. Un agent sur les tables brutes donne des réponses incohérentes ; sur les marts, il interroge des faits et des dimensions décrits et l’analyste vérifie le SQL ; sur les indicateurs gouvernés, il donne une seule réponse ou une erreur."
+/>
+
+Un agent vaut ce que valent les tables qu’on lui donne. Sur des tables brutes, il reproduit vos incohérences, et plus vite qu’un analyste ; sur un entrepôt modélisé et des indicateurs gouvernés, il s’appuie sur des chiffres fiables.
+
+## Notre biais, et la règle
+
+Nous vendons [la couche de modélisation](/fr/services/amelioration-plateforme-data/) et nous construisons avec les quatre outils ci-dessus : gardez ce biais en tête. Chaque élément du remède existait avant l’IA et vaudrait la peine sans elle ; avec l’IA, le dirigeant voit maintenant que cette modélisation n’existe pas.
+
+La règle : décrire avant de connecter, définir avant de faire confiance. Branchez les agents sur des tables modélisées et décrites pour explorer, et sur des indicateurs gouvernés pour tout ce qui sert à décider.

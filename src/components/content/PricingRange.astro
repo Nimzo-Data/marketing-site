@@ -1,4 +1,7 @@
 ---
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
 interface PriceFactor {
   name: string;
   low: string;
@@ -13,12 +16,14 @@ interface PriceScenario {
 }
 
 interface Props {
+  locale: Locale;
   priceRange?: string;
   factors: PriceFactor[];
   scenarios: PriceScenario[];
 }
 
-const { priceRange, factors, scenarios } = Astro.props;
+const { locale, priceRange, factors, scenarios } = Astro.props;
+const ui = t(locale).components.pricing;
 ---
 
 <div class="pricing-range">
@@ -30,14 +35,14 @@ const { priceRange, factors, scenarios } = Astro.props;
 
   {factors.length > 0 && (
     <div class="factors-section">
-      <h3 class="factors-title">What affects the price</h3>
+      <h3 class="factors-title">{ui.factorsTitle}</h3>
       <div class="table-scroll">
         <table class="factors-table">
           <thead>
             <tr>
-              <th class="th-factor">Factor</th>
-              <th class="th-low">Lower price</th>
-              <th class="th-high">Higher price</th>
+              <th class="th-factor">{ui.factor}</th>
+              <th class="th-low">{ui.lower}</th>
+              <th class="th-high">{ui.higher}</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +61,7 @@ const { priceRange, factors, scenarios } = Astro.props;
 
   {scenarios.length > 0 && (
     <div class="scenarios-section">
-      <h3 class="scenarios-title">Example scenarios</h3>
+      <h3 class="scenarios-title">{ui.scenarios}</h3>
       <div class={`scenarios-grid${scenarios.length % 2 === 0 ? ' scenarios-grid--even' : ''}`}>
         {scenarios.map((scenario) => (
           <div class="scenario-card">

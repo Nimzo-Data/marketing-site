@@ -8,3 +8,5 @@ dist/
 .gstack/
 .worktrees/
 .claude/settings.local.json
+.superpowers/
+.dist-baseline/

@@ -1,0 +1,51 @@
+const copy = {
+  title: "Airbyte | Nimzo Data",
+  description: "Airbyte implementation on GCP. Airbyte Cloud setup, Connector Builder for custom APIs, Python CDK for complex sources, and pipeline monitoring.",
+  toolCategory: "ELT / Data Ingestion",
+  heroPositioning: "Airbyte is our preferred ELT tool: managed cloud with 700+ connectors and a low-code builder for custom APIs. Self-hosted option available when you need full control.",
+  title2: "How we use it",
+  items: [
+        "Set up Airbyte Cloud as the default deployment: managed, fast to start, easy for clients to maintain",
+        "Configure and monitor sync jobs from CRMs, marketing platforms, databases, and internal APIs",
+        "Build custom connectors with the low-code Connector Builder for APIs Airbyte doesn't ship by default",
+        "Fall back to the Python CDK for complex sources (auth flows, pagination quirks, unusual schemas)",
+        "Deploy self-hosted Airbyte on GKE for clients who need full infrastructure control",
+        "Implement normalized schema conventions that work cleanly with downstream Dataform or dbt models",
+      ],
+  title3: "Airbyte or Fivetran?",
+  blocks: [
+        {
+          heading: 'Choose Airbyte when:',
+          bullets: [
+            "You want managed ELT but more predictable pricing than Fivetran at scale",
+            'You need custom connectors. The Connector Builder covers most APIs without code',
+            'You want the option to self-host for compliance or cost reasons',
+            'You prefer a stack where ingestion and transformation come from separate vendors',
+          ],
+        },
+        {
+          heading: 'Choose Fivetran when:',
+          bullets: [
+            'You want a very polished managed ELT and cost is secondary',
+            'Your sources are all mainstream SaaS (Salesforce, HubSpot, Stripe, Shopify)',
+            "You're standardizing on the Fivetran + dbt stack and want the vendor consolidation",
+          ],
+        },
+        {
+          heading: 'Choose custom Cloud Run functions when:',
+          bullets: [
+            'The source is unusual, volume is small, and neither Airbyte nor Fivetran has a connector',
+            'You already use Cloud Run functions heavily and a full ELT tool is overkill for one pipeline',
+          ],
+        },
+      ],
+  metric: "From a black box to pipelines the team can see into.",
+  body: "Panoply replaced with Airbyte and BigQuery, cutting infrastructure cost from $1,300 to about $300 a month.",
+  p1: "Airbyte is a data integration platform with 700+ pre-built connectors. It handles extraction from sources (APIs, databases, SaaS tools) and loading into destinations like BigQuery. Our default deployment is Airbyte Cloud, managed, quick to stand up, and easy to maintain. For clients who need full control or have specific compliance requirements, Airbyte also offers a mature open-source self-hosted option.",
+  p2: "Airbyte's pricing is more predictable at scale than Fivetran's per-connection MAR model, and when sources don't exist out of the box, we can build them, either with the low-code Connector Builder (good for most custom APIs) or the Python CDK for complex cases. That flexibility is the main reason we default to Airbyte on new implementations.",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
+};
+
+export type Copy = typeof copy;
+export default copy;

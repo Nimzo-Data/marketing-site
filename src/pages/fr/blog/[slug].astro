@@ -1,0 +1,38 @@
+---
+// French posts: src/blog/fr/<slug>.md at /fr/blog/<slug>/. Built only where
+// French is built; see src/i18n/flags.ts.
+import { render } from 'astro:content';
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import { getPublishedPosts, postAlternates, postSlug, type BlogPost } from '../../../data/blog';
+import { frenchBuilt } from '../../../i18n/flags';
+
+export async function getStaticPaths() {
+  if (!frenchBuilt) return [];
+  const posts = await getPublishedPosts('fr');
+  const english = await getPublishedPosts('en');
+  return posts.map((post) => ({
+    params: { slug: postSlug(post) },
+    props: { post, alternates: postAlternates(post, english) },
+  }));
+}
+
+interface Props {
+  post: BlogPost;
+  alternates?: Record<'en' | 'fr', string>;
+}
+
+const { post, alternates } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout
+  locale="fr"
+  title={post.data.title}
+  description={post.data.description}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  slug={postSlug(post)}
+  alternates={alternates}
+>
+  <Content />
+</BlogLayout>

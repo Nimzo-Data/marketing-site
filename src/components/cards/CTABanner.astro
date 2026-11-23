@@ -1,8 +1,12 @@
 ---
 import Button from '../ui/Button.astro';
 import FounderBlock from '../content/FounderBlock.astro';
+import type { Locale } from '../../i18n/locales';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
 
 interface Props {
+  locale: Locale;
   heading?: string;
   subtitle?: string;
   buttonText?: string;
@@ -14,11 +18,13 @@ interface Props {
   showFounder?: boolean;
 }
 
+const ui = t(Astro.props.locale).components.ctaBanner;
 const {
-  heading = 'Ready to talk about your data stack?',
-  subtitle = '45-minute call. No sales pitch.',
-  buttonText = "Let's talk",
-  buttonHref = '/contact/',
+  locale,
+  heading = ui.heading,
+  subtitle = ui.subtitle,
+  buttonText = ui.button,
+  buttonHref = href('contact', Astro.props.locale),
   email,
   dataTrack,
   bg = 'primary',
@@ -45,7 +51,7 @@ const buttonVariant = 'primary';
       <a href={`mailto:${email}`} class="banner-email">{email}</a>
     )}
     {showFounder && (
-      <div class="banner-founder"><FounderBlock variant="compact" tone="dark" /></div>
+      <div class="banner-founder"><FounderBlock locale={locale} variant="compact" tone="dark" /></div>
     )}
   </div>
 </section>

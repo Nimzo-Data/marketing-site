@@ -1,22 +1,33 @@
 ---
-import { visibleCaseStudies } from '../../data/caseStudies';
+import { getVisibleCaseStudies } from '../../data/caseStudies';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+import { href, type RouteId } from '../../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = t(locale).components.caseStudy;
 ---
 
 <div class="homepage-testimonials">
-  {visibleCaseStudies.map((cs) => (
-    <a href={`/case-studies/${cs.slug}/`} class="ht-card">
+  {getVisibleCaseStudies(locale).map((cs) => (
+    <a href={href(cs.slug as RouteId, locale)} class="ht-card">
       <img
         src={cs.logo}
-        alt={`${cs.client} logo`}
+        alt={t(Astro.props.locale).components.logoAlt(cs.client)}
         class="ht-card__logo"
         data-cs-slug={cs.slug}
         loading="lazy"
       />
       <blockquote class="ht-card__text">&ldquo;{cs.shortQuote.text}&rdquo;</blockquote>
+      {cs.shortQuote.translatedFrom && <p class="quote-translated">{ui.translatedFromEnglish}</p>}
       <div class="ht-card__attribution">
         <img
           src={cs.shortQuote.authorPhoto}
-          alt={`Photo of ${cs.shortQuote.authorName}`}
+          alt={ui.photoOf(cs.shortQuote.authorName)}
           class="ht-card__photo"
           loading="lazy"
           width="80"
@@ -28,7 +39,7 @@ import { visibleCaseStudies } from '../../data/caseStudies';
         </div>
       </div>
       <span class="ht-card__cta">
-        Read the {cs.client} case study <span class="ht-card__arrow" aria-hidden="true">&rarr;</span>
+        {ui.readClientCaseStudy(cs.client)} <span class="ht-card__arrow" aria-hidden="true">&rarr;</span>
       </span>
     </a>
   ))}

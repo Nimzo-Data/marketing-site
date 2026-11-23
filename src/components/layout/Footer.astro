@@ -1,20 +1,33 @@
 ---
-import { serviceLinks } from '../../data/navigation';
+import { getNavigation, getNavigationCopy } from '../../data/navigation';
 import { SHOW_BLOG } from '../../data/siteConfig';
+import type { Locale } from '../../i18n/locales';
+import { href, type RouteId } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { serviceLinks } = getNavigation(locale);
+const nav = getNavigationCopy(locale);
+const ui = t(locale).footer;
+const to = (id: RouteId) => href(id, locale);
 
 const currentYear = new Date().getFullYear();
 
 const footerTechnologies: { label: string; href: string }[] = [
-  { label: 'BigQuery', href: '/technologies/bigquery/' },
-  { label: 'Dataform', href: '/technologies/dataform/' },
-  { label: 'Airbyte', href: '/technologies/airbyte/' },
-  { label: 'Lightdash', href: '/technologies/lightdash/' },
-  { label: 'Metabase', href: '/technologies/metabase/' },
+  { label: 'BigQuery', href: to('tech:bigquery') },
+  { label: 'Dataform', href: to('tech:dataform') },
+  { label: 'Airbyte', href: to('tech:airbyte') },
+  { label: 'Lightdash', href: to('tech:lightdash') },
+  { label: 'Metabase', href: to('tech:metabase') },
 ];
 
 const companyLinks: { label: string; href: string }[] = [
-  { label: 'About', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
+  { label: nav.about, href: to('about') },
+  { label: nav.contact, href: to('contact') },
 ];
 ---
 
@@ -25,14 +38,14 @@ const companyLinks: { label: string; href: string }[] = [
       <div class="footer-col footer-col--brand">
         <img src="/brand/logo-transparent.svg" alt="Nimzo Data" class="footer-logo-img" width="200" height="30" />
         <p class="footer-tagline">
-          Google Cloud data platforms for growing European companies.
+          {ui.tagline}
         </p>
-        <p class="footer-location">Based in France. Serving Europe.</p>
+        <p class="footer-location">{ui.location}</p>
       </div>
 
       <!-- Column 2: Services -->
       <div class="footer-col">
-        <h4 class="footer-heading">Services</h4>
+        <h4 class="footer-heading">{ui.services}</h4>
         <ul class="footer-links" role="list">
           {serviceLinks.map((link) => (
             <li>
@@ -44,7 +57,7 @@ const companyLinks: { label: string; href: string }[] = [
 
       <!-- Column 3: Technologies -->
       <div class="footer-col">
-        <h4 class="footer-heading">Technologies</h4>
+        <h4 class="footer-heading">{ui.technologies}</h4>
         <ul class="footer-links" role="list">
           {footerTechnologies.map((link) => (
             <li>
@@ -52,7 +65,7 @@ const companyLinks: { label: string; href: string }[] = [
             </li>
           ))}
           <li>
-            <a href="/technologies/" class="footer-link footer-link--view-all">View all &rarr;</a>
+            <a href={to('technologies')} class="footer-link footer-link--view-all">{ui.viewAll} &rarr;</a>
           </li>
         </ul>
       </div>
@@ -60,23 +73,23 @@ const companyLinks: { label: string; href: string }[] = [
       <!-- Column 4: Resources + Company (stacked) -->
       <div class="footer-col footer-col--stack">
         <div>
-          <h4 class="footer-heading">Resources</h4>
+          <h4 class="footer-heading">{ui.resources}</h4>
           <ul class="footer-links" role="list">
             {SHOW_BLOG && (
               <li>
-                <a href="/blog/" class="footer-link">Blog</a>
+                <a href={to('blog')} class="footer-link">{nav.resourceItems.blog.label}</a>
               </li>
             )}
             <li>
-              <a href="/case-studies/" class="footer-link">Case Studies</a>
+              <a href={to('caseStudies')} class="footer-link">{nav.resourceItems.caseStudies.label}</a>
             </li>
             <li>
-              <a href="/sample-audit/" class="footer-link">Sample Audit Deliverable</a>
+              <a href={to('sampleAudit')} class="footer-link">{nav.resourceItems.sampleAudit.label}</a>
             </li>
           </ul>
         </div>
         <div>
-          <h4 class="footer-heading">Company</h4>
+          <h4 class="footer-heading">{ui.company}</h4>
           <ul class="footer-links" role="list">
             {companyLinks.map((link) => (
               <li>
@@ -89,13 +102,13 @@ const companyLinks: { label: string; href: string }[] = [
 
       <!-- Column 5: Get in touch -->
       <div class="footer-col">
-        <h4 class="footer-heading">Get in touch</h4>
+        <h4 class="footer-heading">{ui.getInTouch}</h4>
         <ul class="footer-links" role="list">
           <li>
             <a href="mailto:hello@nimzodata.com" class="footer-link">hello@nimzodata.com</a>
           </li>
           <li>
-            <a href="/contact/" class="footer-link footer-link--view-all">Let's talk &rarr;</a>
+            <a href={to('contact')} class="footer-link footer-link--view-all">{ui.letsTalk} &rarr;</a>
           </li>
         </ul>
       </div>
@@ -107,10 +120,10 @@ const companyLinks: { label: string; href: string }[] = [
         &copy; {currentYear} Nimzo Data
       </p>
       <ul class="footer-bottom-links" role="list">
-        <li><a href="/privacy-policy/" class="footer-bottom-link">Privacy Policy</a></li>
-        <li><a href="/terms-of-service/" class="footer-bottom-link">Terms of Service</a></li>
-        <li><a href="/mentions-legales/" class="footer-bottom-link">Mentions légales</a></li>
-        <li><button type="button" class="footer-bottom-link footer-bottom-link--button" data-cookie-reopen>Cookie preferences</button></li>
+        <li><a href={to('privacy')} class="footer-bottom-link">{nav.legal.privacy}</a></li>
+        <li><a href={to('terms')} class="footer-bottom-link">{nav.legal.terms}</a></li>
+        <li><a href={to('legalNotice')} class="footer-bottom-link">{nav.legal.legalNotice}</a></li>
+        <li><button type="button" class="footer-bottom-link footer-bottom-link--button" data-cookie-reopen>{ui.cookiePreferences}</button></li>
       </ul>
     </div>
   </div>

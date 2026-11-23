@@ -6,7 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "vitest run",
+    "diff:dist": "node scripts/diff-dist.mjs",
+    "baseline": "astro build && rm -rf .dist-baseline && cp -r dist .dist-baseline",
+    "postbuild": "node scripts/check-dist.mjs",
+    "check:fr": "node scripts/check-fr-ready.mjs",
+    "check:fr:pseudo": "INCLUDE_FRENCH=1 PSEUDO_FR=1 astro build && node scripts/check-fr-pseudo.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
@@ -17,7 +23,9 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
     "@tailwindcss/vite": "^4.0.0",
+    "node-html-parser": "^9.0.7",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^5.1.1"
   }
 }

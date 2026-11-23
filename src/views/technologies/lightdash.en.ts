@@ -1,0 +1,63 @@
+const copy = {
+  title: "Lightdash | Nimzo Data",
+  description: "Lightdash implementation on dbt and BigQuery. Semantic layer in code, AI agents, dashboards-as-code, and Lightdash Cloud or self-hosted deployment.",
+  toolCategory: "Business Intelligence",
+  heroPositioning: "Lightdash is BI with metrics in code, in your dbt project or in Lightdash's own YAML. Flat-rate pricing for unlimited users, and cheaper than Looker once the team grows.",
+  title2: "How we use it",
+  items: [
+        "Set up Lightdash Cloud or self-hosted Core deployment on GCP",
+        "Connect Lightdash to BigQuery with dbt YAML integration or Lightdash's native semantic layer",
+        "Define explores, metrics, and dimensions in dbt models or Lightdash's own YAML",
+        "Build dashboards for operational and executive reporting",
+        "Configure scheduled dashboard deliveries via Slack and email",
+        "Set up scoped AI agents per team (marketing, sales, finance), each with its own prompt and metric access",
+        "Connect Lightdash's MCP server to the client's AI tools (Claude, Cursor) for natural-language queries over governed data",
+        "Use Lightdash's dashboards-as-code workflow so coding agents can build and iterate on dashboards directly in Git",
+      ],
+  title3: "When Lightdash is the right BI tool, and when it isn't",
+  blocks: [
+        {
+          heading: 'Choose Lightdash when:',
+          bullets: [
+            "You want metrics defined in code, in dbt YAML or Lightdash's native semantic layer",
+            "You want flat-rate pricing that doesn't scale with headcount (cheaper than Looker past ~10–15 users)",
+            'You want to connect your own AI tools (Claude, Cursor) to governed analytics via MCP',
+            'Dashboards-as-code fits your team. AI coding agents can work the dashboard layer directly',
+          ],
+        },
+        {
+          heading: 'Choose Looker instead when:',
+          bullets: [
+            'You need enterprise governance and 20+ users across departments',
+            "You need LookML's full semantic layer capabilities or deep BI Engine tie-in",
+            'Embedded analytics or multi-tenant reporting at scale is on your roadmap',
+          ],
+        },
+        {
+          heading: 'Choose Metabase instead when:',
+          bullets: [
+            'You need broader BI (dashboards, embedding, SDK) beyond metric-first',
+            "Your team isn't committed to dbt-native workflows",
+            'You want self-host optionality with AI features included. Metabot is open source',
+          ],
+        },
+        {
+          heading: 'Choose Steep instead when:',
+          bullets: [
+            'Primary audience is non-technical users',
+            'A metric-first UX matters more than version control',
+            'Budget is under €500/month for a small team',
+          ],
+        },
+      ],
+  p1: "Lightdash is an open-source BI tool where metrics and dimensions live in YAML. You can define them in your dbt project (Lightdash's original design) or in Lightdash's own native semantic layer (added for teams without dbt). Either way, your metric definitions stay in version control, not locked inside a dashboarding UI.",
+  p2: "Lightdash Cloud lets you create scoped AI agents directly in the UI: a marketing agent with access to campaign metrics, a sales agent tied to pipeline data, each with its own prompt and metric scope. An MCP server also lets external AI tools (Claude, Cursor, or custom agents) query the same governed semantic layer. Cloud also ships dashboards-as-code (dashboard definitions in Git) which pairs well with AI coding agents writing dashboards directly from the repo.",
+  p3: "For teams that want version-controlled metrics plus AI analytics without Looker-tier spend, Lightdash Cloud is a good fit. Pricing is flat-rate for unlimited users, a different model from per-seat tools, which makes the economics flip in your favor once you're past ~10–15 users. A self-hosted Core edition is also available for teams that want full control.",
+  p4: "Scoped AI agents and the MCP server both query the governed semantic layer, not raw tables. When you define metrics in code, AI tools get the same definitions your dashboards use, with no separate \"AI data prep\".",
+  p5: "Worth knowing: most of Lightdash's AI features (scoped AI agents, MCP server, dashboards-as-code, Slack assistant) are in the paid Cloud product rather than the open-source Core. The open-source Agent Skills are a separate feature: they teach coding agents how to write Lightdash YAML config, not query data.",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
+};
+
+export type Copy = typeof copy;
+export default copy;

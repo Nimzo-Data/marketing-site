@@ -6,6 +6,18 @@
 // AND warehouse" etc. Per-stage badges (split logic, one place, derived
 // tables) live inside the stage cards.
 
+import type { Locale } from '../../i18n/locales';
+import { usd } from '../../i18n/format';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = t(locale).diagrams.aeyde;
+
 interface Tool {
   name: string;
   logo?: string;
@@ -31,7 +43,7 @@ interface CostSpan {
 
 const beforeStages: Stage[] = [
   {
-    label: 'ETL',
+    label: ui.etl,
     tools: [
       { name: 'Panoply', logo: '/logos/panoply.png' },
       { name: 'Stitch', logo: '/logos/stitch.png' },
@@ -39,59 +51,59 @@ const beforeStages: Stage[] = [
     ],
   },
   {
-    label: 'Warehouse',
+    label: ui.warehouse,
     tools: [{ name: 'Panoply', logo: '/logos/panoply.png' }],
   },
   {
-    label: 'Transformation',
+    label: ui.transformation,
     tools: [
-      { name: 'dbt', logo: '/logos/dbt.svg', href: '/technologies/dbt/' },
-      { name: 'LookML', logo: '/logos/looker.svg', href: '/technologies/looker/' },
+      { name: 'dbt', logo: '/logos/dbt.svg', href: href('tech:dbt', locale) },
+      { name: 'LookML', logo: '/logos/looker.svg', href: href('tech:looker', locale) },
     ],
-    badge: 'split logic',
+    badge: ui.splitLogic,
     badgeKind: 'pain',
   },
   {
-    label: 'BI',
-    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: '/technologies/looker/' }],
-    badge: '119 derived tables',
+    label: ui.bi,
+    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: href('tech:looker', locale) }],
+    badge: ui.derivedTablesBefore,
     badgeKind: 'pain',
   },
 ];
 
 const beforeCostSpans: CostSpan[] = [
-  { text: '$1,300/mo', kind: 'pain', from: 0, to: 1 },
+  { text: ui.perMonth(usd(1300, locale)), kind: 'pain', from: 0, to: 1 },
 ];
 
 const afterStages: Stage[] = [
   {
-    label: 'ETL',
+    label: ui.etl,
     tools: [
-      { name: 'Airbyte', logo: '/logos/airbyte.svg', href: '/technologies/airbyte/' },
-      { name: 'Cloud Run', logo: '/logos/googlecloudrun.png', href: '/technologies/google-cloud-platform/' },
+      { name: 'Airbyte', logo: '/logos/airbyte.svg', href: href('tech:airbyte', locale) },
+      { name: 'Cloud Run', logo: '/logos/googlecloudrun.png', href: href('tech:google-cloud-platform', locale) },
     ],
   },
   {
-    label: 'Warehouse',
-    tools: [{ name: 'BigQuery', logo: '/logos/bigquery.svg', href: '/technologies/bigquery/' }],
+    label: ui.warehouse,
+    tools: [{ name: 'BigQuery', logo: '/logos/bigquery.svg', href: href('tech:bigquery', locale) }],
   },
   {
-    label: 'Transformation',
-    tools: [{ name: 'Dataform', logo: '/logos/dataform.svg', href: '/technologies/dataform/' }],
-    badge: 'one place',
+    label: ui.transformation,
+    tools: [{ name: 'Dataform', logo: '/logos/dataform.svg', href: href('tech:dataform', locale) }],
+    badge: ui.onePlace,
     badgeKind: 'win',
   },
   {
-    label: 'BI',
-    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: '/technologies/looker/' }],
-    badge: '0 derived tables',
+    label: ui.bi,
+    tools: [{ name: 'Looker', logo: '/logos/looker.svg', href: href('tech:looker', locale) }],
+    badge: ui.derivedTablesAfter,
     badgeKind: 'win',
   },
 ];
 
 const afterCostSpans: CostSpan[] = [
-  { text: '$150/mo', kind: 'win', from: 0, to: 0 },
-  { text: '$150/mo', kind: 'win', from: 1, to: 2, renderAfter: 1 },
+  { text: ui.perMonth(usd(150, locale)), kind: 'win', from: 0, to: 0 },
+  { text: ui.perMonth(usd(150, locale)), kind: 'win', from: 1, to: 2, renderAfter: 1 },
 ];
 
 // Stage idx N → grid column 1 + 2*N (1, 3, 5, 7).
@@ -104,11 +116,11 @@ function spanCols(from: number, to: number): string {
 }
 ---
 
-<div class="csd" role="img" aria-label="Aeyde stack: before vs after the engagement.">
+<div class="csd" role="img" aria-label={ui.aria}>
   <!-- BEFORE row -->
   <div class="csd__row csd__row--before">
     <div class="csd__row-label">
-      <span class="csd__row-tag csd__row-tag--before">Before</span>
+      <span class="csd__row-tag csd__row-tag--before">{ui.before}</span>
     </div>
     <div class="csd__pipeline">
       {beforeStages.map((stage, i) => (
@@ -152,7 +164,7 @@ function spanCols(from: number, to: number): string {
   <!-- AFTER row -->
   <div class="csd__row csd__row--after">
     <div class="csd__row-label">
-      <span class="csd__row-tag csd__row-tag--after">After</span>
+      <span class="csd__row-tag csd__row-tag--after">{ui.after}</span>
     </div>
     <div class="csd__pipeline">
       {afterStages.map((stage, i) => (
