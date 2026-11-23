@@ -50,7 +50,7 @@ const copy = {
   {
     question: 'What happens when something breaks?',
     answer:
-      "Alerts reach us automatically, and you hear it from us first. We tell you the cause and keep you updated until it's fixed. When several things break at once, we fix what affects your core numbers first. This includes vendor changes that break a pipeline or are about to. If a source has to be rebuilt, we quote it as a change or an Improve project.",
+      "Alerts reach us automatically, and you hear it from us first. We tell you the cause and keep you updated until it's fixed. When several things break at once, we fix what affects your core numbers first. If a source has to be rebuilt, we quote it as a change or an Improve project.",
   },
   {
     question: 'Is it an incident or a change?',
@@ -74,7 +74,7 @@ const copy = {
   tiersNotePrices: "Monthly prices, excluding VAT.",
   tiersNoteHours: "Response times count in business hours: Monday to Friday, 9:00 to 18:00 Paris time.",
   monthlyHeading: "What you see each month.",
-  monthlyBody: "Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, upstream changes absorbed, BigQuery cost trend, open risks, the next change we recommend and any change days used.",
+  monthlyBody: "Every tier gets a one-page report each month: runs succeeded, freshness on time, incidents caught, changes announced by your source vendors, BigQuery cost trend, open risks, the next change we recommend and any change days used.",
   promiseLabel: "Our promise",
   promiseBody: "If something we monitor breaks, you hear it from us first. Alerts go to a channel we share with you, automatically.",
   changeHeading: "Change work.",

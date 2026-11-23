@@ -57,7 +57,7 @@ const copy: Copy = {
   s5_1: 'Les résultats',
   s5_2: 'Les tableaux de bord qui mettaient des minutes à charger s’affichent en quelques secondes. Les envois planifiés de Looker qui échouaient tournent sans accroc. La file de requêtes n’est plus saturée : les requêtes répondent assez vite pour la vider. Les définitions de KPI sont à un seul endroit, Dataform, et non plus éparpillées dans 119 tables dérivées LookML. Modifier un KPI ou ajouter une source prend une demi-heure pour les changements courants, quelques heures pour les plus complexes, contre plusieurs jours auparavant.',
   s5_3: 'Le coût d’infrastructure est passé de 1 300 $ par mois (Panoply) à environ 300 $ par mois (Airbyte + BigQuery), soit 77 % de moins. L’équipe voit ce qui se passe et peut agir, ce que la boîte noire Panoply ne permettait pas. Elle fait de nouveau confiance aux chiffres : la logique qui les produit est au même endroit, et chacun peut la relire.',
-  s5_4: 'Des sujets plus ponctuels se sont ajoutés sur ce socle, au fil des besoins data d’Aeyde.',
+  s5_4: 'Aeyde revient de temps en temps avec des demandes plus ponctuelles, sur ce socle.',
   ctaHeading: 'Votre situation ressemble à celle-ci ?',
   ctaSubtitle: 'Réservez un appel de 45 minutes. Nous vous dirons franchement si nous pouvons vous aider.',
   ctaButton: 'Parlons-en',

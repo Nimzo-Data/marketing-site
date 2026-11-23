@@ -53,7 +53,7 @@ const copy: Copy = {
     {
       question: 'Que se passe-t-il quand quelque chose ne fonctionne plus ?',
       answer:
-        'Les alertes nous arrivent automatiquement : c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Si plusieurs pannes surviennent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Les changements d’un éditeur qui font tomber un pipeline, ou risquent de le faire, sont couverts aussi. Si une source doit être reconstruite, nous la chiffrons comme un développement ou un projet Amélioration.',
+        'Les alertes nous arrivent automatiquement : c’est nous qui vous prévenons en premier. Nous vous donnons la cause et vous tenons informé jusqu’à la résolution. Si plusieurs pannes surviennent en même temps, nous réparons d’abord ce qui touche vos chiffres clés. Si une source doit être reconstruite, nous la chiffrons comme un développement ou un projet Amélioration.',
     },
     {
       question: 'Comment distinguer un incident d’un développement ?',
@@ -77,7 +77,7 @@ const copy: Copy = {
   tiersNotePrices: 'Prix mensuels en euros, hors taxes (HT).',
   tiersNoteHours: 'Les délais de prise en charge se comptent en heures ouvrées : du lundi au vendredi, 9 h – 18 h, heure de Paris.',
   monthlyHeading: 'Ce que vous voyez chaque mois.',
-  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page. Il indique si les chargements ont réussi et si les données étaient à jour à l’heure prévue, les incidents détectés, les changements chez les éditeurs de vos sources et ce que nous en avons fait. Il donne aussi l’évolution des coûts BigQuery, les points de vigilance, le prochain chantier recommandé et les jours de développement consommés, le cas échéant.',
+  monthlyBody: 'Chaque mois, vous recevez un rapport d’une page. Il indique si les chargements ont réussi et si les données étaient à jour à l’heure prévue, les incidents détectés, les changements annoncés par les éditeurs de vos sources. Il donne aussi l’évolution des coûts BigQuery, les points de vigilance, le prochain chantier recommandé et les jours de développement consommés, le cas échéant.',
   promiseLabel: 'Notre engagement',
   promiseBody: 'Si quelque chose que nous surveillons tombe en panne, c’est nous qui vous prévenons en premier. Les alertes arrivent automatiquement dans un canal partagé avec vous.',
   changeHeading: 'Les jours de développement.',

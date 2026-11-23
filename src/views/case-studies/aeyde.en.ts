@@ -57,7 +57,7 @@ const copy = {
   s5_1: "Results",
   s5_2: "Dashboards that used to take minutes load in seconds. The Looker schedules that kept failing run reliably. The query queue isn't saturated anymore because queries return fast enough to clear. KPI definitions live in one place, Dataform, instead of scattered across 119 LookML derived tables. Editing a KPI or adding a source went from a multi-day project to a half-hour exercise for routine changes, a few hours for complex ones.",
   s5_3: "The infrastructure cost dropped from $1,300/month (Panoply) to about $300/month (Airbyte + BigQuery), a 77% reduction. The team has visibility and control they never had with Panoply's black-box backend. The team trusts the numbers again, because the logic that produces them is centralized, reviewable, and consistent.",
-  s5_4: "Smaller follow-up items built on that foundation as Aeyde's data needs evolved.",
+  s5_4: "Aeyde comes back from time to time with smaller requests built on that foundation.",
   ctaHeading: "Sound like your situation?",
   ctaSubtitle: "Book a 45-minute call. We'll be honest about whether we can help.",
   ctaButton: "Let's talk",
