@@ -13,7 +13,7 @@ const copy: Copy = {
   ],
   rows: [
     { label: 'Jours de développement', values: [`À la demande, ${day} HT le jour`, '1 jour par mois', '2 jours par mois'] },
-    { label: 'Appels', values: ['Aucun, messages uniquement', 'Deux appels d’une heure par mois', 'Jusqu’à 1 heure par semaine'] },
+    { label: 'Appels', values: ['Un appel de 30 minutes par mois', 'Deux appels d’une heure par mois', 'Jusqu’à 1 heure par semaine'] },
     { label: 'Conseil sur l’architecture, les outils et les priorités', values: [false, false, true] },
     { label: 'Atelier feuille de route avec votre direction', values: [false, false, 'Chaque trimestre, une demi-journée'] },
     { label: 'Surveillance et incidents, délai de prise en charge', values: ['2 heures ouvrées', '2 heures ouvrées', '2 heures ouvrées'] },

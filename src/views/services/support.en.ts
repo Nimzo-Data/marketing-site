@@ -10,7 +10,7 @@ const copy = {
 ],
   rows: [
   { label: 'Change work', values: [`On demand, ${eur(prices.support.extraDay, 'en')} a day`, '1 day a month', '2 days a month'] },
-  { label: 'Calls', values: ['None, messages only', 'Two 1-hour calls a month', 'Up to 1 hour a week'] },
+  { label: 'Calls', values: ['One 30-minute call a month', 'Two 1-hour calls a month', 'Up to 1 hour a week'] },
   { label: 'Architecture, vendor and priority decisions', values: [false, false, true] },
   { label: 'Roadmap session with your leadership team', values: [false, false, 'Quarterly, half a day'] },
   { label: 'Monitoring and incidents, acknowledged within', values: ['2 business hours', '2 business hours', '2 business hours'] },
