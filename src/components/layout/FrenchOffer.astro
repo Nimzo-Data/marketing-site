@@ -1,0 +1,113 @@
+---
+// Thin bar above the header on English pages, offering the French version to
+// visitors whose browser's main language is French. Shown by the script below
+// (never server-side, so search engines never see it), never redirects, and
+// stays closed once dismissed. Renders nothing while French isn't built or
+// when the page has no French counterpart.
+import type { Locale } from '../../i18n/locales';
+import { frenchBuilt } from '../../i18n/flags';
+
+interface Props {
+  locale: Locale;
+  paths?: Record<Locale, string>;
+}
+
+const { locale, paths } = Astro.props;
+const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
+---
+
+{show && (
+  <div class="fr-offer" lang="fr" role="region" aria-label="Version française" data-fr-offer hidden>
+    <div class="fr-offer__inner">
+      <p class="fr-offer__text">
+        Ce site existe aussi en français.
+        <a href={paths.fr} hreflang="fr" class="fr-offer__link" data-lang-switch>Voir cette page en français <span aria-hidden="true">&rarr;</span></a>
+      </p>
+      <button type="button" class="fr-offer__close" aria-label="Fermer" data-fr-offer-close>
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+  </div>
+)}
+
+<script>
+  import { offerFrench, FRENCH_OFFER_DISMISSED_KEY } from '../../i18n/french-offer';
+
+  const offer = document.querySelector<HTMLElement>('[data-fr-offer]');
+  if (offer) {
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(FRENCH_OFFER_DISMISSED_KEY) === '1';
+    } catch {
+      // Storage blocked: the offer simply shows again next time.
+    }
+    const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
+    if (offerFrench(languages, dismissed)) offer.hidden = false;
+    offer.querySelector('[data-fr-offer-close]')?.addEventListener('click', () => {
+      offer.hidden = true;
+      try {
+        localStorage.setItem(FRENCH_OFFER_DISMISSED_KEY, '1');
+      } catch {
+        // Nothing to remember it in; closing still works for this page.
+      }
+    });
+  }
+</script>
+
+<style>
+  .fr-offer {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .fr-offer[hidden] {
+    display: none;
+  }
+
+  .fr-offer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .fr-offer__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .fr-offer__link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+  }
+
+  .fr-offer__close {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+
+  .fr-offer__close:hover,
+  .fr-offer__close:focus-visible {
+    color: var(--color-primary);
+    background-color: var(--color-border-subtle);
+  }
+</style>
