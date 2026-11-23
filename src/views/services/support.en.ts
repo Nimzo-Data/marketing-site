@@ -40,7 +40,7 @@ const copy = {
   {
     question: 'What happens to unused days?',
     answer:
-      "They don't carry over, and neither do unused calls. If you expect a quiet stretch, move down to Run with 30 days' notice and move back up from the next billing month.",
+      "Included change days carry over one month, then expire: a day left unused in March can be used in April, not in May. Unused calls don't carry over. If you expect a quiet stretch, move down to Run with 30 days' notice and move back up from the next billing month.",
   },
   {
     question: 'What if a change grows?',
@@ -83,7 +83,7 @@ const copy = {
     `Every change is estimated before we start, and includes updating the documentation.`,
     `If it turns out bigger, we stop and tell you before going over. You choose: continue next month, add extra days, reduce it, or make it an <a href="${href('improve', 'en')}" class="inline-link">Improve</a> project.`,
     `Extra days cost €1,000 each, agreed in advance.`,
-    `Unused days and calls don't carry over.`,
+    `Unused included days carry over one month, then expire. Unused calls don't carry over.`,
     `A call that becomes a working session counts as change work.`,
     `New capabilities, such as a new business domain, a new BI tool or a migration, are <a href="${href('improve', 'en')}" class="inline-link">Improve</a> projects.`,
   ],

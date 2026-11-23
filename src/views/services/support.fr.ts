@@ -43,7 +43,7 @@ const copy: Copy = {
     {
       question: 'Que deviennent les jours non utilisés ?',
       answer:
-        'Ils ne sont pas reportés, pas plus que les appels non utilisés. Si vous prévoyez une période calme, passez à l’offre Maintien avec un préavis de 30 jours, puis repassez à l’offre supérieure dès le mois de facturation suivant.',
+        'Les jours de développement inclus sont reportés d’un mois, puis expirent : un jour non utilisé en mars peut servir en avril, pas en mai. Les appels non utilisés ne sont pas reportés. Si vous prévoyez une période calme, passez à l’offre Maintien avec un préavis de 30 jours, puis repassez à l’offre supérieure dès le mois de facturation suivant.',
     },
     {
       question: 'Et si un développement prend de l’ampleur ?',
@@ -86,7 +86,7 @@ const copy: Copy = {
     `Chaque développement est estimé avant de commencer, mise à jour de la documentation comprise.`,
     `Si un développement s’avère plus gros que prévu, nous nous arrêtons et vous prévenons avant de dépasser l’estimation. Vous choisissez : continuer le mois suivant, ajouter des jours, réduire le périmètre, ou en faire un projet <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,
     `Les jours supplémentaires sont facturés ${day} HT le jour, après votre accord préalable.`,
-    `Les jours et les appels non utilisés ne sont pas reportés.`,
+    `Les jours inclus non utilisés sont reportés d’un mois, puis expirent. Les appels non utilisés ne sont pas reportés.`,
     `Un appel qui devient une séance de travail compte comme du développement.`,
     `Les nouveaux chantiers, comme un nouveau domaine métier, un nouvel outil de BI ou une migration, sont des projets <a href="${href('improve', 'fr')}" class="inline-link">Amélioration</a>.`,
   ],
