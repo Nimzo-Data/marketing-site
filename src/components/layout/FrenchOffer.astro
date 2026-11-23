@@ -17,13 +17,13 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
 ---
 
 {show && (
-  <div class="fr-offer" lang="fr" role="region" aria-label="Version française" data-fr-offer hidden>
-    <div class="fr-offer__inner">
-      <p class="fr-offer__text">
+  <div class="lang-hint" lang="fr" role="region" aria-label="Version française" data-lang-hint hidden>
+    <div class="lang-hint__inner">
+      <p class="lang-hint__text">
         Ce site existe aussi en français.
-        <a href={paths.fr} hreflang="fr" class="fr-offer__link" data-lang-switch>Voir cette page en français <span aria-hidden="true">&rarr;</span></a>
+        <a href={paths.fr} hreflang="fr" class="lang-hint__link" data-lang-switch>Voir cette page en français <span aria-hidden="true">&rarr;</span></a>
       </p>
-      <button type="button" class="fr-offer__close" aria-label="Fermer" data-fr-offer-close>
+      <button type="button" class="lang-hint__close" aria-label="Fermer" data-lang-hint-close>
         <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
       </button>
     </div>
@@ -33,7 +33,7 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
 <script>
   import { offerFrench, FRENCH_OFFER_DISMISSED_KEY } from '../../i18n/french-offer';
 
-  const offer = document.querySelector<HTMLElement>('[data-fr-offer]');
+  const offer = document.querySelector<HTMLElement>('[data-lang-hint]');
   if (offer) {
     let dismissed = false;
     try {
@@ -43,7 +43,7 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
     }
     const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
     if (offerFrench(languages, dismissed)) offer.hidden = false;
-    offer.querySelector('[data-fr-offer-close]')?.addEventListener('click', () => {
+    offer.querySelector('[data-lang-hint-close]')?.addEventListener('click', () => {
       offer.hidden = true;
       try {
         localStorage.setItem(FRENCH_OFFER_DISMISSED_KEY, '1');
@@ -55,16 +55,16 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
 </script>
 
 <style>
-  .fr-offer {
+  .lang-hint {
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border-subtle);
   }
 
-  .fr-offer[hidden] {
+  .lang-hint[hidden] {
     display: none;
   }
 
-  .fr-offer__inner {
+  .lang-hint__inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px 24px;
@@ -74,7 +74,7 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
     gap: 16px;
   }
 
-  .fr-offer__text {
+  .lang-hint__text {
     margin: 0;
     font-family: var(--font-body);
     font-size: 0.875rem;
@@ -83,14 +83,14 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
     text-align: center;
   }
 
-  .fr-offer__link {
+  .lang-hint__link {
     color: var(--color-primary);
     font-weight: 600;
     text-underline-offset: 3px;
     white-space: nowrap;
   }
 
-  .fr-offer__close {
+  .lang-hint__close {
     flex: none;
     display: inline-flex;
     align-items: center;
@@ -105,8 +105,8 @@ const show = frenchBuilt && locale === 'en' && paths && paths.en !== paths.fr;
     cursor: pointer;
   }
 
-  .fr-offer__close:hover,
-  .fr-offer__close:focus-visible {
+  .lang-hint__close:hover,
+  .lang-hint__close:focus-visible {
     color: var(--color-primary);
     background-color: var(--color-border-subtle);
   }

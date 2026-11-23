@@ -6,4 +6,4 @@ export function offerFrench(languages: readonly string[], dismissed: boolean): b
 }
 
 /** localStorage key remembering that the visitor closed the offer. */
-export const FRENCH_OFFER_DISMISSED_KEY = 'nimzo-fr-offer-dismissed';
+export const FRENCH_OFFER_DISMISSED_KEY = 'nimzo-lang-hint-dismissed';
