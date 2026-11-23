@@ -7,7 +7,7 @@ const copy = {
     "You're on Google Cloud, or planning to be.",
     'You\'re past the "spreadsheet era" and need a real platform.',
     'You have analysts, not data engineers. Or no team at all.',
-    'You need senior data engineering, not a full-time hire.',
+    'You need senior data engineers without a full-time hire.',
     "You want AI to answer your team's data questions accurately.",
     'You can get a decision made. Our best engagements start in two-week sales cycles, not four-month ones.',
   ],

@@ -12,11 +12,16 @@ export function eur(amount: number, locale: Locale): string {
   return currency(locale).format(amount);
 }
 
+/** $1,300 in English, 1 300 $ in French (vendor prices quoted in dollars). */
+export function usd(amount: number, locale: Locale): string {
+  return new Intl.NumberFormat(intlLocale[locale], { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 }).format(amount);
+}
+
 /** €3,000 – €5,000 in English, 3 000 – 5 000 € in French. */
 export function eurRange(min: number, max: number, locale: Locale): string {
   return locale === 'fr'
-    ? `${number(locale).format(min)} – ${eur(max, locale)}`
-    : `${eur(min, locale)} – ${eur(max, locale)}`;
+    ? `${number(locale).format(min)}\u00a0– ${eur(max, locale)}`
+    : `${eur(min, locale)}\u00a0– ${eur(max, locale)}`;
 }
 
 /** "9 September 2026" / "9 septembre 2026". */

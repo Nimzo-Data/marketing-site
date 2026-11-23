@@ -114,6 +114,19 @@ export function checkEveryPageHasFrench(pages) {
     .map((p) => `${p.path}: no French version (add it to src/i18n/routes.ts and src/views/registry.ts)`);
 }
 
+/** Every link to a file (PDF, image…) on the site points at a file in the build. */
+export function checkAssetLinks(pages, exists) {
+  const issues = [];
+  for (const page of pages) {
+    for (const a of dom(page).querySelectorAll('a[href^="/"]')) {
+      const path = a.getAttribute('href').split('#')[0].split('?')[0];
+      if (!/\.\w+$/.test(path)) continue;
+      if (!exists(decodeURIComponent(path.replace(/^\//, '')))) issues.push(`${page.path}: links to missing file ${path}`);
+    }
+  }
+  return issues;
+}
+
 /** French is live when the sitemap lists French URLs (astro.config.mjs adds them only with SHOW_FRENCH). */
 export function isLaunched(sitemapXml) {
   return /<loc>[^<]*\/fr\//.test(sitemapXml);
@@ -163,6 +176,7 @@ function main() {
   const issues = [
     ...checkLang(pages),
     ...checkCanonical(pages),
+    ...checkAssetLinks(pages, exists),
     ...(frenchBuilt
       ? [...(launched ? frenchLinkIssues : []), ...checkAlternatesResolve(pages, exists), ...checkEveryPageHasFrench(pages)]
       : checkNoFrenchLeak(pages, sitemap)),

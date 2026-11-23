@@ -161,7 +161,7 @@ const ui = t(locale).header;
 
     <!-- Desktop CTA -->
     <div class="header-cta">
-      <LanguageSwitch locale={locale} paths={paths} class="header-lang" />
+      <LanguageSwitch locale={locale} paths={paths} class="header-lang" compact />
       <Button href={ctaLink.href} variant="primary" size="sm">
         {ctaLink.label}
       </Button>
@@ -544,6 +544,15 @@ const ui = t(locale).header;
   @media (min-width: 1024px) {
     .header-cta {
       display: block;
+    }
+  }
+
+  /* French labels run longer: between the desktop breakpoint and 1100px the
+     header would otherwise push the CTA into its right padding. English is
+     untouched. */
+  @media (min-width: 1024px) and (max-width: 1100px) {
+    :global(html[lang='fr']) .header-inner {
+      gap: 20px;
     }
   }
 

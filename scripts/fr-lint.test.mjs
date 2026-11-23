@@ -9,6 +9,14 @@ describe('frModuleProblems', () => {
     expect(frModuleProblems("import type { Copy } from './x.en';\nconst copy: Copy = { title: 'Bonjour' };")).toEqual([]);
   });
 
+  it('ignores the French word "en" and the locale code inside strings', () => {
+    expect(frModuleProblems("import type { Copy } from './x.en';\nconst copy: Copy = { a: 'Payé en euros', b: \"en cours\", c: `en ${x}`, lang: 'en' };")).toEqual([]);
+  });
+
+  it('does not mistake // inside a URL for a comment', () => {
+    expect(frModuleProblems("import type { Copy } from './x.en';\nconst copy: Copy = {\n  a: 'Voir https://nimzodata.com',\n  b: 'Payé en euros',\n};")).toEqual([]);
+  });
+
   it('flags English spread into a French module', () => {
     expect(frModuleProblems("import en, { type Copy } from './x.en';\nconst copy: Copy = { ...en, title: 'Bonjour' };")).toHaveLength(1);
   });

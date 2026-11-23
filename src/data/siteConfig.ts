@@ -12,4 +12,4 @@ export const SHOW_BLOG = true;
 // Vercel previews, and locally with INCLUDE_FRENCH=1, so it can be reviewed.
 // Flipping it to true also makes the build refuse any French copy that is
 // still a placeholder, and any blog post without its French pair.
-export const SHOW_FRENCH = false;
+export const SHOW_FRENCH = true;

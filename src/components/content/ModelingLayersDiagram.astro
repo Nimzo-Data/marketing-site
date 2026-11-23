@@ -169,5 +169,15 @@ const placedGroups = groups
     .mld__box--apart {
       margin-top: 0;
     }
+
+    /* Every label gets room for two lines, set on the rule, so the rules
+       line up across the row when one label ("Indicateurs gouvernés")
+       wraps. */
+    .mld__box :global(.dgm__label) {
+      min-height: calc(2lh + 8px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
   }
 </style>

@@ -7,6 +7,7 @@
 // tables) live inside the stage cards.
 
 import type { Locale } from '../../i18n/locales';
+import { usd } from '../../i18n/format';
 import { href } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 
@@ -71,7 +72,7 @@ const beforeStages: Stage[] = [
 ];
 
 const beforeCostSpans: CostSpan[] = [
-  { text: ui.perMonth('$1,300'), kind: 'pain', from: 0, to: 1 },
+  { text: ui.perMonth(usd(1300, locale)), kind: 'pain', from: 0, to: 1 },
 ];
 
 const afterStages: Stage[] = [
@@ -101,8 +102,8 @@ const afterStages: Stage[] = [
 ];
 
 const afterCostSpans: CostSpan[] = [
-  { text: ui.perMonth('$150'), kind: 'win', from: 0, to: 0 },
-  { text: ui.perMonth('$150'), kind: 'win', from: 1, to: 2, renderAfter: 1 },
+  { text: ui.perMonth(usd(150, locale)), kind: 'win', from: 0, to: 0 },
+  { text: ui.perMonth(usd(150, locale)), kind: 'win', from: 1, to: 2, renderAfter: 1 },
 ];
 
 // Stage idx N → grid column 1 + 2*N (1, 3, 5, 7).

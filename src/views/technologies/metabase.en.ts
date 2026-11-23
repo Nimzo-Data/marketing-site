@@ -3,7 +3,7 @@ const copy = {
   description: "Metabase implementation on BigQuery. Dashboards, governed metrics, Metabot AI, and flexible deployment options.",
   toolCategory: "Business Intelligence",
   heroPositioning: "Metabase is self-service BI for teams that want broad access, a real AI assistant, and the flexibility to self-host without enterprise-tier spend.",
-  title2: "How We Use It",
+  title2: "How we use it",
   items: [
         "Stand up Metabase: Cloud for managed, or self-hosted on Cloud Run / GKE for full control",
         "Define Models and Metrics so business users get consistent definitions across dashboards and AI queries",
@@ -18,7 +18,7 @@ const copy = {
           heading: 'Choose Metabase when:',
           bullets: [
             'You want self-service BI with a real AI assistant, at a reasonable price',
-            'You want the option to self-host (Community Edition free, Pro self-host paid)',
+            'You want the option to self-host (a free open-source edition is available)',
             "You want Metabot AI features with BYO Anthropic key, available even in self-hosted",
             'Your team mixes technical and non-technical users',
           ],
@@ -27,7 +27,7 @@ const copy = {
           heading: 'Choose Looker instead when:',
           bullets: [
             'You need enterprise LookML governance and embedded analytics at scale',
-            'Budget is €5k+/month and you are scaling across 50+ users',
+            'Budget is €5k+/month and you have 20+ users across departments',
           ],
         },
         {
@@ -45,11 +45,11 @@ const copy = {
           ],
         },
       ],
-  p1: "Metabase is approachable BI with a full dashboarding, metric, and question-building surface. Business users explore data through a visual interface; analysts build reusable Models and Metrics that enforce consistent definitions; power users drop into SQL when they need it. Metabot (Metabase's AI assistant, open-sourced in version 60) generates charts, writes SQL, analyzes results, and answers questions in natural language.",
-  p2: "Metabase is the pragmatic middle of the BI market. It's cheaper than Looker, broader than Steep, and more flexible than Lightdash. You can run it fully self-hosted on Cloud Run, use Metabase Cloud, or start free on the Community Edition. The semantic layer (Models + Metrics + Data Studio) matured fast in 2025–2026, and Metabot's AI features (including self-hosted AI with your own Anthropic API key) make it a strong option for AI-powered BI without the cloud-only lock-in of Looker.",
+  p1: "Metabase is approachable BI with a full dashboarding, metric, and question-building surface. Business users explore data through a visual interface; analysts build reusable Models and Metrics that enforce consistent definitions; power users drop into SQL when they need it. Metabot (Metabase's AI assistant, which is open source) generates charts, writes SQL, analyzes results, and answers questions in natural language.",
+  p2: "Metabase costs less than Looker and covers more needs than Steep. You can run it fully self-hosted on Cloud Run, use Metabase Cloud, or start free with the open-source edition. The semantic layer (Models + Metrics + Data Studio) and Metabot's AI features (including self-hosted AI with your own Anthropic API key) make it a strong option for AI-powered BI without the cloud-only lock-in of Looker.",
   p3: "Metabot's accuracy depends on the Models and Metrics you define in Data Studio, the same governed definitions your dashboards use. We set up Models and Metrics before enabling Metabot because the better the semantic layer, the better the AI answers.",
-  sectionTitle: "What It Is",
-  sectionTitle2: "Why We Chose It",
+  sectionTitle: "What it is",
+  sectionTitle2: "Why we chose it",
 };
 
 export type Copy = typeof copy;
